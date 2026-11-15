@@ -1,0 +1,11 @@
+# Temporary analysis outputs
+__pycache__/
+*.py[cod]
+*.tmp
+*.bak
+*.swp
+*.log
+
+# Local IDE/database state unless explicitly selected for archival
+*.idb
+*.i64
