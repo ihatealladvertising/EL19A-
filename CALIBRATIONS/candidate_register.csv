@@ -1,0 +1,19 @@
+address,candidate_name,dimensions,storage,axis_or_reader,conversion,status
+F3D6,TVO curve A,8,UBYTE,F3C6 / sub_22EFC,data x0.3575,THEORY
+F3DE,TVO curve B,8,UBYTE,F3CE / sub_22EFC,data x0.3575,THEORY
+E678,airflow lookup A,16,UBYTE,sub_403D8 via sub_22E10,value x2,THEORY
+E688,airflow lookup B,16,UBYTE,sub_403D8 via sub_22E10,value x2,THEORY
+EFA4,additional lookup,16,unknown,sub_403D8 via sub_22E10,unknown,THEORY
+E8C0,unity/neutral correction curve,8,unknown,F53E candidate axis,unity-like arithmetic,THEORY
+A0E2,unknown 2D map,4x4,unknown,E002/E006 candidate axes,unknown,THEORY
+A342,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+A382,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+A452,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+AB72,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+AB62,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+9C2E,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+9DAE,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+AC12,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+A652,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+AB22,unknown 2D map,unknown,unknown,unknown,unknown,THEORY
+A552,possible target-equivalent-ratio/AFR map,16x16,UBYTE,unknown,unknown,THEORY
