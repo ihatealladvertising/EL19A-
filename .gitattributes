@@ -1,0 +1,11 @@
+*.xlsx binary
+*.xlsm binary
+*.bin binary
+*.lst binary
+*.idb binary
+*.i64 binary
+*.xml text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.ipynb text eol=lf
