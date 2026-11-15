@@ -1,42 +1,45 @@
 # Work Order Status — Reconciled Migration Snapshot
 
-**Snapshot date:** 2026-11-15
+**Snapshot date:** 2026-11-15 (WO64827 closeout update)
 
 ## Current chat continuation
-- **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok) is the active task. Status: **PARTIAL**.
-- Prior WO64825 remains PARTIAL and is the direct predecessor.
+- **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok): **TECHNICAL SCOPE COMPLETE**. Authoritative Control Notebook lifecycle synchronization remains pending because exact Notebook read-back is unavailable (403).
+- Prior WO64825 remains PARTIAL and is the direct predecessor. WO64827's bounded scope is complete; WO64825's separate unresolved items are not silently closed.
 
-## WO64827 register entry (2026-11-15)
+## WO64827 closeout (2026-11-15)
 - **WO ID / Title:** WO64827 — E974 Downstream Gating and Consumer XREF Investigation
 - **Agent:** Grok
-- **Status:** PARTIAL
+- **Technical status:** COMPLETE (bounded investigation / stop condition met)
+- **Depends on:** WO64825 (PARTIAL; preserved)
 - **Investigation date:** 2026-11-15
-- **Depends on:** WO64825 (PARTIAL)
-- **sub_223FE findings:**
-  - Pure arithmetic helper: R0 ← (signed) R0 >> 6. Five `shar` + delay-slot `shar` after `rts`.
-  - No RAM access, no side effects, no branches.
-  - Does **not** read `FFFF1F0C` or `FFFF1F0D`.
-  - Confidence: confirmed.
-- **Paired result paths:**
-  - Both `FFFF1F0C` (`0x3BBE4`) and `FFFF1F0D` (`0x3C104`) act solely as boolean enable gates (`tst` / `bt`).
-  - Value actually scaled by `sub_223FE` is the word at `FFFF8594+2` (extu.w).
-  - Post-scale comparison against a threshold derived from ROM + other bytes; then local status-bit updates on the `FFFF1E54` object.
-  - Paths converge on the same helper and operand; remain distinct only in the status bits they affect.
-  - Confidence: confirmed.
-- **Additional XREF consumers (bounded, same GBR object):**
-  - Further enable-style reads of `+0xB8` / `+0xB9` under GBR=`FFFF1E54` in the `0x55xxx` region (`0x5599A`, `0x55A24`, `0x55C82` and nearby).
-  - These feed multi-condition aggregators that write status fields on the same object and related bases (`FFFF2150` family).
-  - Other `@(h'B8/B9,gbr)` sites exist under different GBR roots and were not expanded.
-  - Confidence: confirmed for presence and enable role; moderate for exact aggregation semantics.
-- **Furthest confirmed downstream endpoints:**
-  - Enable decision admitting a scaled comparison of `(FFFF8594+2)>>6`.
-  - Local status-bit updates on the `FFFF1E54` object.
-  - No actuator / timer-output / peripheral write linked from these two bytes in the examined windows.
-- **Decisions / corrections:** E974 paired outputs are enable gates only, not numeric inputs to `sub_223FE`. No semantic or XML promotion. No Workbook / Notebook edit.
-- **Unresolved / blockers:** producer and meaning of `FFFF8594+2`; full consumer set of the post-gate status bits; whether the `0x55xxx` aggregators reach an actuator path.
-- **Recommended next action:** (1) producer/scaling of `FFFF8594+2`; (2) follow status bits written on the `FFFF1E54` object after the gated paths.
-- **Artifact locations:** this CONTROL file; chat report of 2026-11-15; annotated LST `EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_WO64683_64684_CHECKPOINT_2026-11-11.lst`.
-- **Integration note:** Investigation PARTIAL. Master Workbook / Control Notebook integration still pending explicit request. WO64825 history preserved below.
+
+### Confirmed findings
+- **Timer-derived operand producer:** `sub_257AC → FFFF85E4 → sub_34476 → FFFF8596 → sub_344A4 → FFFF85D6`.
+  - `sub_257AC` supplies the timer-derived `FFFF85E4) value; downstream conversion uses `48,000,000 / FFFF85E4`.
+  - Saturation/fallback behavior observed: saturates at `0xFFFF`; fallback `0x044E`.
+  - `sub_34476` forms `FFFF8596`; `sub_344A4` stores the shifted/scaled result to `FFFF85D6`.
+  - The query path uses `FFFF8596 >> 7`, capped at 255.
+  - Physical units and semantic name remain unresolved; do not assign a semantic XML name.
+- **E974 output `FFFF1F0C):** drives `FFFF8626.bit2`; this affects `FFFF1C93` and downstream `FFFF19BF` / `FFFF85E0), optional ADC channel 9 aggregation, and `FFFF8494) threshold state (including the `FFFF2F00` path).
+  - Furthest confirmed endpoint is internal status/threshold and ADC aggregation. No terminal physical sensor or actuator was established.
+- **E974 output `FFFF1F0D):** gates a hysteretic update of `FFFF1E54.byte0 bit 0x20`. No separate direct consumer beyond the traced status behavior was established.
+- **`sub_223FE` correction:** pure signed arithmetic helper, effectively `R0 >>= 6`; no RAM access, no side effects, no branches, and it does not read `FFFF1F0C` or `FFFF1F0D`. The word at `FFFF8594+2` is the scaled operand; E974 outputs are boolean enable gates, not numeric inputs.
+- **0x55xxx correction:** earlier same-GBR interpretation was overbroad. Sites `0x5599A`, `0x55A24`, and `0x55C82` resolve to `FFFF8AF0/FFFF8AF1), not the E974 bytes at `FFFF1F0C/FFFF1F0D`. Do not count them as additional direct E974 consumers.
+- **Decision:** keep physical semantics and XML promotion unresolved. No calibration/XML promotion is justified by this trace.
+
+### Stop condition / unresolved boundaries
+- Producer and conversion chain for the timer-derived operand are traced to the furthest supported point; physical units/name remain unknown.
+- E974 downstream effects are traced to internal status, threshold, and ADC aggregation; terminal physical sensor/actuator remains unproven.
+- The separate `0x55xxx` sites are not direct E974 consumers.
+- These unresolved semantic/physical endpoints are explicit boundaries, not unfinished searches within WO64827's bounded scope. Further work requires a new concrete lead or separately authorized scope.
+
+### Integration and lifecycle
+- GitHub migration register updated from the previous PARTIAL snapshot using the completed investigation report.
+- Master Workbook: **not edited**.
+- Stable Control Notebook: **not edited / not read-back verified**; exact item `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd` previously returned 403 `serviceReadOnly`.
+- Therefore this GitHub record reports technical completion only; it does not claim authoritative Notebook lifecycle closure or reciprocal save verification.
+- **Completed work not to repeat:** timer producer chain; E974 `FFFF1F0C` / `FFFF1F0D` downstream status paths; `sub_223FE` operand-vs-enable distinction; correction of the three `0x55xxx` addresses.
+- **Next action:** when exact Control Notebook access is restored, reconcile this closeout and update the Notebook's WO lifecycle state. Do not repeat bounded traces absent a new lead.
 
 ## WO64825 register entry (2026-11-15, preserved)
 - **WO ID / Title:** WO64825 — E974 Output-Chain Investigation
@@ -45,7 +48,7 @@
 - **Findings (instruction-level from annotated LST):**
   - Callsite 1 (`0x3BB1A` / `sub_3BA88`): GBR=`FFFF1E54`; query = `(FFFF85C4+0x12)>>1` clamped; result → `GBR+0xB8` (`FFFF1F0C`); read-back `0x3BBE4`; non-zero gates `sub_223FE` path. Confirmed.
   - Callsite 2 (`0x3C042` / `sub_3BFC8`): identical GBR and query construction; result → `GBR+0xB9` (`FFFF1F0D`); read-back `0x3C104`; likewise gates `sub_223FE`. Confirmed. Paired with callsite 1.
-  - Callsite 3 (`0x4130E` / `sub_412B8`): distinct GBR=`FFFF1D80`; query from `FFFF859C+0x12`; result → `FFFF1F0E`; local read-back and bit tests only; no shared `sub_223FE` path observed. Confirmed distinct.
+  - Callsite 3 (`0x4130E` / `sub_412B8`): distinct GBR=`FFFF1D80`; query from `FFFF859C+0x12`; output `FFFF1F0E`; local read-back and bit tests only; no shared `sub_223FE` path observed. Confirmed distinct.
 - **Evidence addresses:** `0xE974`, `0x3BB1A`, `0x3BB32`, `0x3BBE4`, `0x3BC0E`, `0x3C042`, `0x3C052`, `0x3C104`, `0x3C118`, `0x4130E`, `0x41318`, `0x41330`.
 - **Integration note:** Investigation PARTIAL; predecessor to WO64827.
 
@@ -62,4 +65,4 @@
 Stable Control Notebook item: `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd`. Exact OneDrive fetch returned 403 `serviceReadOnly` during migration. Treat V53, Library Notebook copies and chat context as separately sourced snapshots; do not silently merge them.
 
 ## Next reconciliation requirement
-When the exact stable Notebook becomes readable, compare its `CONTROL`, standing instructions, work-order ledger, latest continuation and V53 pointer against this file. Update this file only from verified current state. No WO allocation or lifecycle mutation is implied by this migration.
+When the exact stable Notebook becomes readable, compare its `CONTROL`, standing instructions, work-order ledger, latest continuation and V53 pointer against this file. Update the Notebook from verified state and verify read-back. No further WO allocation is implied by this closeout.
