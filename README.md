@@ -16,6 +16,7 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - [Operating protocol v3](CONTROL/protocol_v3.md)
 - [Authority and snapshot conflicts](CONTROL/authority_and_conflicts.md)
 - [V53 workbook source manifest](WORKBOOK/V53_SOURCE_MANIFEST.md)
+- [Artifact migration queue](MIGRATION_QUEUE.md)
 - [Calibration register guide](CALIBRATIONS/README.md)
 
 ## Authority and evidence policy
