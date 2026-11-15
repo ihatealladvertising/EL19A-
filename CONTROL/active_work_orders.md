@@ -3,15 +3,17 @@
 - **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok): **TECHNICAL SCOPE COMPLETE**. Authoritative Control Notebook lifecycle synchronization remains pending because exact Notebook read-back is unavailable (403).
 - Prior WO64825 remains PARTIAL. WO64827's bounded scope is complete; WO64825's separate unresolved items are not silently closed.
 
-## WO64828 issue / initial checkpoint (2026-11-15)
-- **Objective:** trace upstream writers/conditions for `FFFF1C93`, `FFFF1CD6`, `FFFF1CAE`, `FFFF1CCC`; decode `prepare_85DF_and_19BF` / `callback_update_85E0`; verify or exclude an actual dependency on E974 gate `FFFF8626.bit2`; continue `FFFF19BF`, `FFFF85DF`, `FFFF85E0` to the first decisive ADC/threshold boundary.
-- **Source:** read-only Library listing `EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS.lst` (27,045,080 bytes). Source was not modified.
-- **Confirmed initial observations:** at `0x59B58), GBR=`FFFF1C78`; UWORD `FFFF1CAE` / `FFFF1CCC` maximum is retained, high byte capped at `0x7F). UBYTE `FFFF1C93` + `FFFF1CD6` then subtract `0x80), bounded to 0..255, and stored at `FFFF19BF` at `0x59BB6` after helper `calculate_and_update_1C01`.
-- `0x59BF2/0x59C04` conditionally store a selected byte to `FFFF85DF`; callback `0x59CAE` runs this producer and continues to update `FFFF85E0` at `0x59CA6), either from `FFFF1CCC)-derived calculation or prior `FFFF85DF`.
-- **Candidate input writers:** `0x28D04` writes `FFFF1C78+0x1B) from stack byte initialized as `0x80` at `0x28C90); `0x56EB2` writes a UWORD at `FFFF1C78+0x5E), selected from `FFFF1000+0x24` or `FFFF8494`. Conditions, other writers and complete upstream caller contexts remain under investigation.
-- **No semantic promotion:** relation to E974 gate, ADC channel 9 and `FFFF2F00) remains unproven pending actual xref/control dependence.
-- **Integration:** WO file created at [CONTROL/WO64828.md](https://github.com/ihatealladvertising/EL19A-/blob/main/CONTROL/WO64828.md). This register is being updated. Master Workbook and Stable Control Notebook unchanged; Notebook exact read-back remains unavailable (403).
-- **Next actions:** verify candidate writer roots/conditions; determine writers of `FFFF1CAE)/`FFFF1CCC); trace the helper and the callback's decisive consumers; then adjudicate E974 dependency.
+## WO64828 issue / checkpoint 1 (2026-11-15)
+- **Status:** ACTIVE. Full scope and boundaries: `CONTROL/WO64828.md`.
+- **Source:** read-only Library listing `EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS.lst` (27,045,080 bytes; modified 2026-11-07).
+- **Confirmed E974 dependency:** `0x3C37C) sets GBR=`FFFF1C78`, reads `FFFF8626) and tests mask `0x04`; if this and `FFFF1D7C.bit4` are set, branch `0x3C394) loads `0x80) and `0x3C454) writes it to `FFFF1C93). Otherwise the alternative arithmetic path also writes its result to `FFFF1C93). Composite sequence at `0x3C45E–0x3C476` invokes this after five other routines. With WO64827's verified `FFFF1F0C → FFFF8626.bit2` path, E974 control-dependency into a callback input is confirmed.
+- **Second `FFFF1C93` writer:** `loc_28C5A` via `sub_24F42`; initializes a stack byte to `0x80) at `0x28C90` and writes it through pointer `FFFF1C78+0x1B) at `0x28D04`.
+- **Callback:** `prepare_85DF_and_19BF` at `0x59B58` sets GBR=`FFFF1C78`, reads UWORDs `FFFF1CAE`/`FFFF1CCC` (max, high byte capped at `0x7F`), reads UBYTEs `FFFF1C93`/`FFFF1CD6`, forms bounded `1C93+1CD6-0x80`, passes this to `calculate_and_update_1C01`, then stores the helper-returned `r2` to `FFFF19BF` at `0x59BB6`. Helper modifies the value; it is not merely the raw clamped sum.
+- **Output:** callback wrapper `0x59CAE` calls the producer then conditionally derives `FFFF85E0` from `FFFF1CCC` if `FFFF1E68.bit2` is set; otherwise copies `FFFF85DF`. The selected max UWORD and `FFFF1990+0x41) also contribute to `FFFF85DF), subject to `FFFF3616)/`FFFF1E68` gates.
+- **Writer correction:** earlier candidate `0x56EB2` is not a writer to `FFFF1CD6`: it stores a UWORD under GBR=`FFFF8B64` (set at `0x56B50`), destination `FFFF8BC2`. Another apparent byte offset +0x5E store at `0xB1FCA` is under GBR=`FFFF2F00), destination `FFFF2F5E`.
+- **Bounded negative result:** direct store pattern inventory finds 5 byte stores at GBR+0x5E, 8 word stores at GBR+0x36 and 4 word stores at GBR+0x54 in the LST; all resolve to other GBR roots. Producers for `FFFF1CD6`, `FFFF1CAE), and `FFFF1CCC` remain unidentified; indirect/register-pointer writers are not excluded.
+- **Integration:** `CONTROL/WO64828.md` checkpoint 1 committed. Master Workbook and Control Notebook unchanged; stable Notebook exact read-back remains unavailable (403). No XML or source-listing edits.
+- **Next:** pursue indirect/register-pointer producers for remaining three inputs, then trace callback outputs to their first decisive ADC/threshold consumers; verify channel 9 / `FFFF8494)/`FFFF2F00` claims by exact dataflow. Do not repeat the completed callsite traces.
 
 ## WO64827 closeout (2026-11-15)
 - **WO ID / Title:** WO64827 — E974 Downstream Gating and Consumer XREF Investigation
