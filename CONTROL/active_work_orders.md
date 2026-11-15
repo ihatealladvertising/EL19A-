@@ -1,10 +1,17 @@
-# Work Order Status — Reconciled Migration Snapshot
-
-**Snapshot date:** 2026-11-15 (WO64827 closeout update)
-
 ## Current chat continuation
+- **WO64828 — E974 Input Provenance and ADC/Threshold Endpoint Trace** (Agent: ChatGPT): **ACTIVE**. Issued 2026-11-15; targeted follow-through from WO64827.
 - **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok): **TECHNICAL SCOPE COMPLETE**. Authoritative Control Notebook lifecycle synchronization remains pending because exact Notebook read-back is unavailable (403).
-- Prior WO64825 remains PARTIAL and is the direct predecessor. WO64827's bounded scope is complete; WO64825's separate unresolved items are not silently closed.
+- Prior WO64825 remains PARTIAL. WO64827's bounded scope is complete; WO64825's separate unresolved items are not silently closed.
+
+## WO64828 issue / initial checkpoint (2026-11-15)
+- **Objective:** trace upstream writers/conditions for `FFFF1C93`, `FFFF1CD6`, `FFFF1CAE`, `FFFF1CCC`; decode `prepare_85DF_and_19BF` / `callback_update_85E0`; verify or exclude an actual dependency on E974 gate `FFFF8626.bit2`; continue `FFFF19BF`, `FFFF85DF`, `FFFF85E0` to the first decisive ADC/threshold boundary.
+- **Source:** read-only Library listing `EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS.lst` (27,045,080 bytes). Source was not modified.
+- **Confirmed initial observations:** at `0x59B58), GBR=`FFFF1C78`; UWORD `FFFF1CAE` / `FFFF1CCC` maximum is retained, high byte capped at `0x7F). UBYTE `FFFF1C93` + `FFFF1CD6` then subtract `0x80), bounded to 0..255, and stored at `FFFF19BF` at `0x59BB6` after helper `calculate_and_update_1C01`.
+- `0x59BF2/0x59C04` conditionally store a selected byte to `FFFF85DF`; callback `0x59CAE` runs this producer and continues to update `FFFF85E0` at `0x59CA6), either from `FFFF1CCC)-derived calculation or prior `FFFF85DF`.
+- **Candidate input writers:** `0x28D04` writes `FFFF1C78+0x1B) from stack byte initialized as `0x80` at `0x28C90); `0x56EB2` writes a UWORD at `FFFF1C78+0x5E), selected from `FFFF1000+0x24` or `FFFF8494`. Conditions, other writers and complete upstream caller contexts remain under investigation.
+- **No semantic promotion:** relation to E974 gate, ADC channel 9 and `FFFF2F00) remains unproven pending actual xref/control dependence.
+- **Integration:** WO file created at [CONTROL/WO64828.md](https://github.com/ihatealladvertising/EL19A-/blob/main/CONTROL/WO64828.md). This register is being updated. Master Workbook and Stable Control Notebook unchanged; Notebook exact read-back remains unavailable (403).
+- **Next actions:** verify candidate writer roots/conditions; determine writers of `FFFF1CAE)/`FFFF1CCC); trace the helper and the callback's decisive consumers; then adjudicate E974 dependency.
 
 ## WO64827 closeout (2026-11-15)
 - **WO ID / Title:** WO64827 — E974 Downstream Gating and Consumer XREF Investigation
