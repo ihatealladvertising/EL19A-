@@ -1,0 +1,21 @@
+id,address_or_topic,best_current_interpretation,status,confidence_or_note,source_context
+OL-001,F3D6,TVO curve A,THEORY,strong screenshot match; 8-point UBYTE; axis F3C6; reader sub_22EFC; data conversion x0.3575,project context candidate register
+OL-002,F3DE,TVO curve B,THEORY,strong screenshot match; 8-point UBYTE; axis F3CE; reader sub_22EFC; data conversion x0.3575,project context candidate register
+OL-003,E678,airflow-related lookup A,THEORY,16-point UBYTE; reader sub_403D8 via sub_22E10; values 00 12 12 12 2F 2F 2F 19 03 then zeros; value conversion x2,project context candidate register
+OL-004,E688,airflow-related lookup B,THEORY,byte-identical to E678; reader sub_403D8; value conversion x2,project context candidate register
+OL-005,EFA4,additional QDSPT-related lookup,THEORY,16-point lookup use structurally observed; functional identity unresolved,project context candidate register
+OL-006,E8C0,unity/neutral correction curve,THEORY,8 values all 0x80; caller arithmetic appears unity-preserving; axis candidate F53E,project context candidate register
+OL-007,A0E2,4x4 calibration map,THEORY,axis candidates E002/E006; function unknown,project context candidate register
+OL-008,A342,2D calibration map,THEORY,structural candidate,function unknown
+OL-009,A382,2D calibration map,THEORY,structural candidate,function unknown
+OL-010,A452,2D calibration map,THEORY,structural candidate,function unknown
+OL-011,AB72,2D calibration map,THEORY,structural candidate,function unknown
+OL-012,AB62,2D calibration map,THEORY,structural candidate,function unknown
+OL-013,9C2E,2D calibration map,THEORY,structural candidate,function unknown
+OL-014,9DAE,2D calibration map,THEORY,structural candidate,function unknown
+OL-015,AC12,2D calibration map,THEORY,structural candidate,function unknown
+OL-016,A652,2D calibration map,THEORY,structural candidate,function unknown
+OL-017,AB22,2D calibration map,THEORY,structural candidate; output-chain work remains distinct from map semantics,project context candidate register
+OL-018,A552,possible target-equivalent-ratio / AFR map,THEORY,16x16 UBYTE candidate; semantics unconfirmed,project context candidate register
+OL-019,E2AD,possible RPM-related axis,THEORY,axis hypothesis for E678/E688; implicit query grid currently used,project context candidate register
+OL-020,FFFF37AE,RAM structure member +0x90,UNRESOLVED,CP18 cancelled; no actual access at +0x90 demonstrated,WO64819 CP18 adjudication
