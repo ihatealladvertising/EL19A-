@@ -1,8 +1,8 @@
 # EL19A Project State
 
-**Snapshot:** 2026-11-15  
+**Snapshot:** 2026-11-15 (V54 E974 integration)  
 **Repository:** private `ihatealladvertising/EL19A-`  
-**Migration:** bootstrap committed; V53 source fetched and fingerprinted; raw binary import still pending.
+**Migration:** V53 binary is committed to GitHub; V54 successor is uploaded to OneDrive and exact raw read-back verified; GitHub binary migration remains pending.
 
 ## Target identity
 - 2008 Nissan Versa / Sentra C11X, manual transmission
@@ -14,23 +14,26 @@
 - IDA ROM base: `0x00000000`
 
 ## Engineering archive
-Current deployed master baseline: **V53** — `EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
-- OneDrive item: `F6DEFBD470240AE6!sdc8e67e089974ba8a8f69d02828315be`
-- Browser URL: https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=dc8e67e0-8997-4ba8-a8f6-9d02828315be&cid=f6defbd470240ae6
-- Size: 1,333,108 bytes; 139 sheets
-- MD5: `144522e97117f3d6b2fa9f7b71c98502`
-- SHA256: `3130c65164bbe7276e66eaf1df843a007cf2faf21086bde33478ed5f63169cc4`
-- Exact source URL fetched in this migration session; workbook is available locally at `/mnt/data/EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
-- The workbook's V53 checkpoint says it was deployed additively from V52 and exact-item read-back verified, with reciprocal stable Notebook pointers.
-- The raw XLSX has not yet been committed to GitHub. See `WORKBOOK/V53_SOURCE_MANIFEST.md`.
+**Current OneDrive master:** V54 — `EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`.
+- OneDrive item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`
+- Browser URL: https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=67636be3-3e09-417e-abca-44b75955d417&cid=f6defbd470240ae6
+- Size: 1350922 bytes; 144 sheets
+- MD5: `49491a933e31f11bce0b859d8b4c376e`
+- SHA-256: `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`
+- Exact raw read-back was materialized and compared byte-for-byte with the final local export: MATCH.
+- Additive successor from V53; V53 predecessor remains unchanged.
+- V54 adds five sheets: WO64827 E974 Gate Trace; WO64828 E974 Input Audit; WO64829 E974 Feedback Trace; E974 Integrated Checkpoint; V54 Checkpoint. It also updates Session Control, WO Continuity Ledger, Batch Checkpoint Manifest and Project Index.
+- V54 integrates WO64827–WO64829 technical closeouts; WO64825 remains PARTIAL. No XML edits, calibration promotions, or donor scale transfers.
+- GitHub repository still contains the V53 XLSX binary at `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`. V54's exact binary currently resides in OneDrive; GitHub text records/CSV are synchronized to it, but GitHub binary migration remains pending.
 
-## Operational state — conflicting snapshots, do not silently merge
-1. **V53 checkpoint (durable workbook snapshot):** WO64817 PARTIAL/PAUSED at CP16; WO64819 ACTIVE (PAIR-01); WO64820 and WO64821 QUEUED; WO64816/WO64818 PARTIAL/PAUSED; WO64795 proposed/not issued.
-2. **Later Library Notebook draft/snapshot (2026-11-15 17:55 paste):** records a subsequent user-authorized reprioritization to WO64822 ACTIVE, after WO64819 was paused at CP18; WO64820/WO64821 deferred; WO64817/WO64816/WO64818 paused. Its master pointer remains V53.
-3. **Latest chat continuation context:** identifies WO64824 — E974 output-chain investigation. This WO is not present in the retrieved V53 checkpoint or the later Library snapshot searched in this migration. Treat it as current chat-level task context, not yet reconciled to the authoritative stable Notebook.
-4. Stable Control Notebook item: `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd`. A direct OneDrive fetch during this migration returned 403 `serviceReadOnly`; available Library snapshots are not equivalent to a successful current read-back of that exact item.
+## Operational state — separate technical and lifecycle authorities
+1. V53 checkpoint and its exact Control Notebook reciprocal save remain a historical snapshot: WO64817 PARTIAL/PAUSED at CP16; WO64819 ACTIVE (PAIR-01); WO64820/WO64821 QUEUED; WO64816/WO64818 PARTIAL/PAUSED; WO64795 proposed/not issued.
+2. Later Library Notebook paste (2026-11-15 17:55) recorded WO64822 ACTIVE and WO64819 paused at CP18; this was a separate snapshot and must not be silently merged.
+3. GitHub chat-level control records now record WO64827, WO64828 and WO64829 as TECHNICAL SCOPE COMPLETE. V54 incorporates all three. WO64825 remains PARTIAL.
+4. The stable Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd` could not be read back in the latest continuation (403 `serviceReadOnly`). V54 does not update that Notebook and does not claim lifecycle closure or a current global active WO.
+5. WO64829's remaining callback conversion/gating work is a concrete next lead only, **not issued as a new WO**.
 
-**Until the stable Notebook is retrieved and reconciled, do not claim one globally verified active WO.** For the current chat, preserve WO64824/E974 as the requested continuation, while retaining the durable V53 and Library-snapshot histories above.
+**Do not claim one globally verified active WO until the exact Stable Control Notebook is retrieved and reconciled.** Preserve the V53, Library snapshot and later chat/GitHub records as separately sourced state.
 
 ## Technical authority and evidence
 - V53 workbook is the authoritative engineering archive baseline available for migration.
@@ -48,4 +51,4 @@ Current deployed master baseline: **V53** — `EL19A_Master_Reverse_Engineering_
 - Do not resume cancelled WO64819 CP18 unless explicitly requested; the latest chat-level WO64824 context is separate.
 
 ## Migration boundary
-GitHub currently contains text bootstrap/control files only. V53 XLSX, ROM, annotated LST, XMLs, scripts and reports have not been imported as binary/source artifacts. Large files should be added through a local Git clone; use Git LFS for large LSTs if needed. OneDrive remains the verified source location until each artifact is committed and read back from GitHub.
+GitHub contains the V53 workbook binary and the updated text control records / CSV supplement. The current V54 binary is the verified OneDrive master linked above; V54's GitHub binary migration is still pending. The Stable Control Notebook has not been updated because exact live read-back returned 403. OneDrive remains the verified source location for V54 until any later binary repository migration is completed and read back.
