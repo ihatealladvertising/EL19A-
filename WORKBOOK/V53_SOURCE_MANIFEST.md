@@ -25,3 +25,11 @@
 
 ## GitHub migration status
 The XLSX is not yet committed as a binary Git object. This manifest preserves its exact source pointer and fingerprints. Add the unchanged file from a local Git clone in a separate commit; verify the committed file by downloading it from GitHub and recomputing both hashes. Do not re-save/rewrite the workbook merely to migrate it. Use Git LFS only if later large source files require it; this workbook is below GitHub's ordinary per-file limit.
+
+
+## Additive progress checkpoint — WO64828 / WO64829 (2026-11-15)
+A compact, Excel-readable evidence table is committed as `WORKBOOK/WO64828_WO64829_E974_CHECKPOINT_2026-11-15.csv`. It records the bounded technical closeouts, exact reader and caller PCs, raw table bytes, query equations, feedback-state selection, status transfer, confidence, and unresolved boundaries.
+
+**Important correction:** the checkpoint's final branch audit establishes `C=0x0A` when `FFFF1E54+5.bit4` is SET; when clear, `C=0x00`. This supersedes the opposite selector polarity in the original WO64829 checkpoint summary. The formulas for `FFFF19D1_next` and `FFFF19BF_next` are otherwise unchanged.
+
+This is a GitHub workbook-archive supplement, not a replacement or modification of the V53 XLSX binary. The V53 binary remains the exact OneDrive source identified above and is still not committed to GitHub; the connected GitHub file actions cannot upload a local XLSX binary. No claim is made that the full XLSX has been updated in GitHub.
