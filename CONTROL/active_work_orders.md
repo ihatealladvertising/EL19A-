@@ -27,6 +27,9 @@
 - **Completed batch:** WO64920–WO64922 — reconciled 104EC/12B0E 8-point UWORD curves and axes; completed eight 16-point UWORD curve placement/axis relationships across Families A/B; harvested the adjacent 108B4–10B64 UWORD group, recording fixed 8/16-point grids separately from explicit FC10/FC30 axes. No semantic promotions; no source artifact changed.
 
 - **Completed batch:** WO64923–WO64925 — revisited start-related UWORD candidates and exact adjacent vector morphology; added 10266 as a fixed-grid 16-point UWORD candidate and completed existing 10286→1072C axis association; reconciled reciprocal table/axis roles for 10F8A/F712 and 12D58/128FE plus 12B9E/12C7E and 12BDE/12CBE; classified F406 as a 32-point UBYTE fixed-grid curve (0,8,…,248), no ROM axis. No semantic promotions or source artifact changes.
+
+- **Completed batch:** WO64926–WO64928 — completed the four physical placements of two reciprocal 32-point UWORD vector pairs; verified two 16-point UWORD curves (10EAA/10ECA) and their copies (12B3E/12B5E) with explicit shared axis copies 105DC/12B7E; completed B956/C0D6 16×16 UWORD map axis arrays and dual-query caller arguments. No semantic promotions; no source artifact changed.
+- **Active work order:** None — next step should return to rapid small-map and curve candidate harvesting, then reconcile any new axis pointers; avoid further depth on the closed UWORD groups.
 - **Active work order:** None — next batch should take remaining 16-point UWORD pairs and unresolved axis/vector candidates, then shift back to small UBYTE map/curve morphology.
 - **Active work order:** None — next batch should move to the remaining start-fuel UWORD candidates and any unmapped axis/descriptor candidates, stopping quickly where no target caller or axis pointer exists.
 - **Active work order:** None — next pass should continue rapid candidate harvesting and axis gap completion using the available target ROM and current register.
