@@ -3,9 +3,10 @@
 **Source:** user-directed standing-instruction update in the 2026-11-15 Control Notebook snapshot. This supersedes the older Dispatcher/Worker role split and separate dispatcher-delta workflow.
 
 ## Architecture
-1. **Control Notebook:** sole operational authority for active/paused work orders, allocation, standing instructions, continuation state and exact master pointers.
+1. **GitHub `CONTROL/active_work_orders.md`:** sole operational authority for current work-order lifecycle, allocation, standing instructions, continuation and handoff.
 2. **Master Workbook:** authoritative engineering archive for accepted technical findings, evidence, decisions, dependencies, registers and checkpoints.
-3. **Chat:** temporary working space; reconcile with the durable sources at batch start.
+3. **Chat:** temporary working space; reconcile with the GitHub register at batch start.
+4. **Former OneDrive Control Notebook:** superseded historical archive; leave unchanged and do not use for current operational decisions.
 
 ## Autonomous management
 The assistant manages work orders end-to-end: preflight, prioritization, bounded investigation, evidence review, ledger update, technical integration and handoff. No separate Dispatcher/Worker role labels or transitions are required.
@@ -20,11 +21,10 @@ The assistant manages work orders end-to-end: preflight, prioritization, bounded
 - Keep responses delta-only and economical.
 
 ## Save protocol
-- Save the same main Control Notebook at the user-directed mid-work and end-of-work checkpoints; replace the exact existing OneDrive item and verify read-back.
-- For every deployed Master Workbook successor, update that same Notebook in the same save batch with actual filename, browser URL, WebDAV path, Drive Item ID, version and date.
-- The successor must contain the `Workbook Save Protocol` sheet.
-- Read back both exact files and verify reciprocal pointers before closing the batch.
-- Never label a local draft remotely saved or read-back verified.
+- Update the existing GitHub `CONTROL/active_work_orders.md` in place at user-directed checkpoints; fetch its current blob SHA, commit the complete updated file, then read back and verify.
+- Keep its Master Workbook pointer accurate, including version, exact filename/location and whether the GitHub XLSX binary is actually present.
+- Do not claim a workbook or other artifact was integrated unless the exact destination was updated and read-back verified.
+- Never create a parallel operational control notebook.
 
 ## Superseded workflow
 - The older Dispatcher/Worker separation and mandatory role-transition labels are superseded.
