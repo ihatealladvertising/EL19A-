@@ -6,8 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** [WO64832 — F3D6/F3DE TVO-Curve Fingerprint and Behaviour Discrimination](WO64832.md). Apply the four-stage SPECULATE → CONFIGURE → TEST → ELIMINATE/REFINE process. Keep structural/fingerprint fit separate from target behaviour/function fit. No XML or workbook edits are authorized by this WO.
-- **Queued:** [WO64833 — EFA4 vs. mTFVAPO 16-Point Reference Fingerprint Test](WO64833.md), priority 2, dependent on WO64832 closure or explicit reprioritization.
+- **Active work order:** [WO64833 — EFA4 vs. mTFVAPO 16-Point Reference Fingerprint Test](WO64833.md). Apply SPECULATE → CONFIGURE → TEST → ELIMINATE/REFINE; separate structural fit from target behaviour. No XML or workbook edits.
+- **Completed:** WO64832 — bounded structural/behaviour test complete; retain F3D6/F3DE as generic schedule candidates only. No donor conversion or TVO semantic promotion.
 - **Completed:** WO64830 remains TECHNICAL SCOPE COMPLETE at the bounded internal-state endpoint; do not repeat its completed trace.
 - **Completed technical work:** WO64827, WO64828 and WO64829 — technical scopes complete. Detailed evidence remains in `CONTROL/WO64828.md`, `CONTROL/WO64829.md`; WO64827 closeout is preserved below.
 - **Partial / paused:** WO64825 remains PARTIAL. Preserve its unresolved scope; do not resume without explicit authorization and a concrete lead.
@@ -26,7 +26,7 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
-WO64832 is ACTIVE. It compares the F3D6/F3DE 8-point UBYTE curves with the JUKE `mTTVOULM/mTTVOULMS` A2L configuration, and separately tests target query provenance, selection, limits and downstream behaviour. Existing reader/data/axis/interpolation traces are not to be repeated. WO64833 (EFA4 vs `mTFVAPO`) is queued behind it. The four-stage process is mandatory; structural fit and behaviour fit receive independent conclusions. No XML or workbook edits are included. V55 is the current GitHub Master Workbook.
+WO64832 closed at a bounded internal software-event endpoint. Structural fit to the JUKE `mTTVOULM/mTTVOULMS` architecture is STRONG PARTIAL; target TVO-angle semantics are WEAK. The target query comes from `UWORD[FFFF85CE] >> 4`; its upstream writer and the dynamic-bound producers remain unresolved. The target calculates two bounded UWORD schedules and compares them to trigger internal event/status handling; no physical throttle endpoint is proven. WO64833 (EFA4 vs `mTFVAPO`) is now ACTIVE. The four-stage process and independent scorecards are mandatory. No XML or Master Workbook edits. V55 is the current GitHub Master Workbook.
 
 ## Previous checkpoint — 2026-11-15
 
