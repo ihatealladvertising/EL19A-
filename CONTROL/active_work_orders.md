@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. WO64840 closed: F2B2 is exact 16/16 Juke mTTNKAS raw match; FFFF85A8 and FFFF85A9 share current timer-derived index `min(UWORD[FFFF8596]>>7,255)`. Target uses F2B2 result in a three-UBYTE product divided by 64, then accumulates/saturates to internal UWORD FFFF12F0. Rotation/RPM axis and donor post-start semantics remain unproven.
+- **Active work order:** [WO64841 — A342/A382 vs mMITANDA/mMITANDD Selector and Behaviour Test](WO64841.md). Existing 8×8 UBYTE target objects, axes and reader are known. Test axis binding, bit7 selector provenance, and output behaviour; no XML or Workbook edits.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
