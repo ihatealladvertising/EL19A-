@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64851 — E678/E688 timer-capture source and engine-speed relationship (user-authorized 2026-11-16). See [WO64851](WO64851.md). Scope: trace ATU02/ATU12 capture setup and determine whether the timer-derived query has a target-proven RPM conversion.
+- **Active work order:** WO64852 — E678/E688 FFFF1018 downstream consumer trace (user-authorized 2026-11-16). See [WO64852](WO64852.md). Scope: trace direct/indirect readers and determine the furthest supported software or physical endpoint.
+- **Completed:** WO64851 — ATU02/ATU12 interrupt paths call sub_2088C → sub_257AC; timer-delta arithmetic and Timer-1A register involvement confirmed, but FFFF14E0 producer, physical event, clock/cadence and RPM conversion remain unresolved. See [WO64851](WO64851.md).
 - **Paused:** WO64850 — independent 52.34% throttle-reduction scalar discovery. Paused by user-prioritized E678/E688 follow-up; retain its existing findings and resume only after this bounded batch or further user direction. See [WO64850](WO64850.md).
 - **New E678/E688 follow-up:** after WO64851, issue a separate bounded WO for downstream consumers of FFFF1018; then, only if useful, a final reconciliation WO. User authorized up to three completed work orders. No workbook/XML/source edits.
 - **Completed:** WO64849 — A0E2 runtime role and correction convergence. Periodic path calls A0E2 reader then sub_44054; FFFF120A × UBYTE FFFF1466 contributes to bounded FFFF1D3B. sub_44E78/sub_59F46 derive FFFF14BC/14BD, sub_45114 selects FFFF1D4C, and difference-driven E2ED/DE6E lookup paths write FFFF10CE and FFFF2150+0x558 / FFFF1D18+6. Physical spark/coil endpoint and MBT semantics remain unproven; 52.34% scalar remains unrelated/unidentified. See [WO64849](WO64849.md).
