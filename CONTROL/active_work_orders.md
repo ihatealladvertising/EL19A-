@@ -7,6 +7,11 @@
 ## Current operational state
 ## Current operational state
 
+- **Completed batch:** WO64890–WO64892 are closed; see [WO64890](WO64890.md), [WO64891](WO64891.md), and [WO64892](WO64892.md). WO64890 compared the donor A2L's FFFF8A87 masks: fNEUT=bit 0x08, fNEUTD=bit 0x04, fPOSLP=bit 0x02; the target direct-reference inventory showed no bit-0x08 test and one bit-0x04 gated read. WO64891 bounded that bit-0x04 reader to a separate service chain and found sub_56AAA initializes FFFF8A86/87 to zero. WO64892 found no direct relationship from either flag to the sub_5611C/FFFF11F3 QDSPT selector chain. Drive/Neutral orientation remains provisional.
+- **Completed:** WO64892 — compared FFFF8A87 bit-0x08/0x04 paths against the FFFF11F3 producer and sub_5611C reader; no direct selector link established. See [WO64892](WO64892.md).
+- **Completed:** WO64891 — bounded the bit-0x04 read in sub_94B3E to a separate service chain; sub_56AAA initializes the FFFF8A86/87 word to zero. Upstream switch source remains unresolved. See [WO64891](WO64891.md).
+- **Completed:** WO64890 — crosswalked donor fNEUT (bit 0x08) and fNEUTD (bit 0x04) at FFFF8A87; target direct references do not establish fNEUT/Neutral semantics. See [WO64890](WO64890.md).
+
 - **Completed batch:** WO64887–WO64889 are closed; see [WO64887](WO64887.md), [WO64888](WO64888.md), and [WO64889](WO64889.md). WO64887 established `0x83EB/0x83EC) as the strongest cross-ROM `mDDSHPTD/N` address/function-family match; the same V6 A2L assigns `0x848A/0x848B` to unrelated symbols/functions. WO64888 traced the `sub_5611C` multiplier to the low byte of caller pointer `FFFF8AA4`, giving fixed `R12=0xA4). WO64889 traced `FFFF1054+0x19F` as a multi-state enum (0–4), with state >=2 routing directly to the `0x83EC` reader, but no D/N mapping established.
 - **Completed:** WO64889 — `FFFF1054+0x19F` is a derived 0–4 state enum written by `sub_491BC`; `sub_5611C` uses >=2 as a direct route to `0x83EC), but enum codes are not proven Drive/Neutral. See [WO64889](WO64889.md).
 - **Completed:** WO64888 — `sub_5611C` receives its multiplier through a stack argument formed as `GBR+0x70`; with GBR=`FFFF8A34`, `EXTU.B` yields fixed `R12=0xA4). Physical scaling meaning unresolved. See [WO64888](WO64888.md).
@@ -21,7 +26,7 @@
 
 - **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
 
-- **Active work order:** None — user-authorized batch WO64887–WO64889 completed. Await the next three-WO batch.
+- **Active work order:** None — user-authorized batch WO64890–WO64892 completed. Await the next three-WO batch.
 - **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
 - **Completed:** WO64876 — bounded direct writer audit; its original copy-direction statement is superseded by correction WO64878 (actual copy is FFFF8602→FFFF85FF). See [WO64876](WO64876.md) and [WO64878](WO64878.md).
 - **Completed:** WO64875 — no direct FFFF85F8.bit4 writer found; nearby timer/status routine modifies FFFF85F9, not the branch bit. See [WO64875](WO64875.md).
