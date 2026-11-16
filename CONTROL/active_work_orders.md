@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** [WO64833 — EFA4 vs. mTFVAPO 16-Point Reference Fingerprint Test](WO64833.md). Apply SPECULATE → CONFIGURE → TEST → ELIMINATE/REFINE; separate structural fit from target behaviour. No XML or workbook edits.
+- **Active work order:** [WO64834 — E678/E688 vs. Juke QDSPT 16-Point Curve Fingerprint and Behaviour Test](WO64834.md). Apply the four-stage process and separate structure from behaviour. No XML or workbook edits.
+- **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
 - **Completed:** WO64832 — bounded structural/behaviour test complete; retain F3D6/F3DE as generic schedule candidates only. No donor conversion or TVO semantic promotion.
 - **Completed:** WO64830 remains TECHNICAL SCOPE COMPLETE at the bounded internal-state endpoint; do not repeat its completed trace.
 - **Completed technical work:** WO64827, WO64828 and WO64829 — technical scopes complete. Detailed evidence remains in `CONTROL/WO64828.md`, `CONTROL/WO64829.md`; WO64827 closeout is preserved below.
@@ -26,7 +27,7 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
-WO64832 closed at a bounded internal software-event endpoint. Structural fit to the JUKE `mTTVOULM/mTTVOULMS` architecture is STRONG PARTIAL; target TVO-angle semantics are WEAK. The target query comes from `UWORD[FFFF85CE] >> 4`; its upstream writer and the dynamic-bound producers remain unresolved. The target calculates two bounded UWORD schedules and compares them to trigger internal event/status handling; no physical throttle endpoint is proven. WO64833 (EFA4 vs `mTFVAPO`) is now ACTIVE. The four-stage process and independent scorecards are mandatory. No XML or Master Workbook edits. V55 is the current GitHub Master Workbook.
+WO64832 closed at a bounded internal software-event endpoint. Structural fit to the JUKE `mTTVOULM/mTTVOULMS` architecture is STRONG PARTIAL; target TVO-angle semantics are WEAK. The target query comes from `UWORD[FFFF85CE] >> 4`; its upstream writer and the dynamic-bound producers remain unresolved. The target calculates two bounded UWORD schedules and compares them to trigger internal event/status handling; no physical throttle endpoint is proven. WO64833 completed: EFA4→mTFVAPO is eliminated by 0/16 raw-byte equality across three Juke ROM variants; its implicit timer-derived query and internal FFFF1014 dataflow contradict the donor fixed-RPM/angle configuration. WO64834 is now ACTIVE for E678/E688 vs Juke QDSPT reference curves. Apply four stages and independent scorecards. No XML or Master Workbook edits. V55 remains the current GitHub Master Workbook.
 
 ## Previous checkpoint — 2026-11-15
 
