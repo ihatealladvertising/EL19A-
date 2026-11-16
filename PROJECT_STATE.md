@@ -1,9 +1,9 @@
 # EL19A Project State
 
-**Snapshot:** 2026-11-15 (V54 E974 integration)  
+**Snapshot:** 2026-11-16 (V55 WO64830 integration; WO64832 active)  
 **Repository:** private `ihatealladvertising/EL19A-`  
 **Operational control:** GitHub `CONTROL/active_work_orders.md` is the sole current authority (cutover commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). Former OneDrive Control Notebook is a historical archive and remains unchanged.
-**Migration:** V54 XLSX is committed in GitHub and verified against the previously verified V54 bytes by exact Git blob SHA. V53 is retained in GitHub with an `OLD_` prefix as the predecessor. Local V55 successor (WO64830 closeout / Timer-11 pin-mux supplement) is exported; GitHub upload/read-back is pending.
+**Migration:** V55 XLSX is present on GitHub `main` at `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`; Git blob SHA `83a065db94c0945d352aac86f2d55353c547cebd`, upload commit `b9793eee8d09f25c8315175a1ce4af1bc01900f6` (2026-11-16T02:19:47Z). V54 is its predecessor; V53 remains retained with an `OLD_` prefix.
 
 ## Target identity
 - 2008 Nissan Versa / Sentra C11X, manual transmission
@@ -15,7 +15,7 @@
 - IDA ROM base: `0x00000000`
 
 ## Engineering archive
-**Current GitHub Master Workbook:** V54 — [`EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`](WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx).
+**Current GitHub Master Workbook:** V55 — [`EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`](WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx). Git blob SHA `83a065db94c0945d352aac86f2d55353c547cebd`; upload commit `b9793eee8d09f25c8315175a1ce4af1bc01900f6`. V54 is predecessor.
 - Previous OneDrive source item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417` (raw V54 source previously read-back verified).
 - GitHub blob SHA: `20a304effc7656596e1bd19c65b623140ec511d2` (matches the previously verified V54 bytes exactly).
 - Size: 1350922 bytes; 144 sheets
@@ -35,7 +35,7 @@
 4. On 2026-11-15 the user designated GitHub `CONTROL/active_work_orders.md` as the sole operational authority. The existing file was updated in place and read-back verified. The former OneDrive Control Notebook is historical only; do not wait for it or update it.
 5. WO64829's remaining callback conversion/gating work is a concrete next lead only, **not issued as a new WO**.
 
-The GitHub register now records no active WO, WO64827–WO64829 technical scopes complete, and WO64825 PARTIAL. Older V53 and Library snapshots remain preserved as historical records, not current lifecycle state.
+The GitHub register now records WO64832 ACTIVE and WO64833 QUEUED; WO64827–WO64830 technical scopes complete, and WO64825 PARTIAL. Older V53 and Library snapshots remain preserved as historical records, not current lifecycle state.
 
 ## Technical authority and evidence
 - V54 workbook is the current authoritative engineering archive; V53 is retained as an unchanged historical predecessor.
@@ -53,4 +53,4 @@ The GitHub register now records no active WO, WO64827–WO64829 technical scopes
 - Do not resume cancelled WO64819 CP18 unless explicitly requested; the latest chat-level WO64824 context is separate.
 
 ## Migration boundary
-GitHub contains the V54 Master Workbook binary and text control records / CSV supplement. V53 is retained in the repository as the renamed historical predecessor. The V54 binary identity is verified by exact Git blob SHA match to the previously verified raw V54 file. The former OneDrive Control Notebook is superseded and intentionally unchanged; GitHub `CONTROL/active_work_orders.md` is the sole operational control.
+GitHub contains the V55 Master Workbook binary and text control records / CSV supplement. V54 and V53 are retained as historical predecessors. V55 presence and Git blob/commit identity are verified; its local content hashes are recorded in the integration summary. The former OneDrive Control Notebook is superseded and intentionally unchanged; GitHub `CONTROL/active_work_orders.md` is the sole operational control.
