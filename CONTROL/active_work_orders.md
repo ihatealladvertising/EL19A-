@@ -11,7 +11,11 @@
 - **Completed:** WO64975 — DAD8–DB57 contains four adjacent 16-point strictly increasing UWORD BE vectors with terminal FFFF; DB20 is the fifth word inside DB18, not a map base. Proposed DC10–DE0F 16×16 UWORD map is rejected as a varying-map candidate (480/512 bytes zero). Reader/axes unknown. See [WO64975](WO64975.md).
 - **Completed:** WO64976 — D056–D155 contains eight adjacent 16-point nondecreasing UWORD BE vectors at 0x20 spacing; D116/D136 are duplicate payload placements. No reader or axes found; L1 morphology only. See [WO64976](WO64976.md).
 - **Completed:** WO64977 — DE70–DE7F is a strictly increasing 16-point UBYTE vector (06,09,0C,0F,12,15,18,1B,1E,21,24,27,2A,2D,32,64); no reader/axis found; L1 only. See [WO64977](WO64977.md).
-- **Next:** scan E000–EFFF, after excluding the extensive existing 1D candidate catalogue and known axes.
+- **Completed:** WO64978 — new 9B19–9B28 4×4 UBYTE manual lookup; E062/E066 are explicit raw 4-point axes; index offset is 4×index(E062)+index(E066). Reader callsite 0x4DEE4–0x4DF24. Separate from 9B2E. See [WO64978](WO64978.md).
+- **Completed:** WO64979 — new EBC0–EBC7 8-point UBYTE curve via sub_22EFC at 0xA960A; explicit raw UBYTE axis E11C–E123. See [WO64979](WO64979.md).
+- **Completed:** WO64980 — new EA5C–EA63 8-point UBYTE zero curve via sub_22EFC at 0xAEE94; explicit raw UBYTE axis E12C–E133. Retain as constant/structural, not varying calibration. See [WO64980](WO64980.md).
+- **Previously registered, not new:** EBD8–EBDF is an 8-point UBYTE curve using E092–E099 via sub_22EFC at 0x4DB0C; XML axis mapping already exists. Do not duplicate.
+- **Next:** one F000–FFFF micro-scan, excluding registered curves, axes and vectors; stop if only constants/sentinel objects remain.
 - **Completed:** WO64972 — new CD56–CF55 16×16 UWORD BE table candidate; sub_22D68 caller confirms R4=CD56, R5=E2C9 (16 UBYTE ×16), R6=FEC0 (16 UWORD raw), two UWORD query inputs. FEC0 also used as 1D values with CD56 as UWORD axis via sub_22F80. Structural confidence high; semantics unassigned. See [WO64972](WO64972.md).
 - **Completed:** WO64973 — C6D6–C755 is an L1 morphology-only 8×8 UWORD BE candidate immediately preceding C756; no direct reader, pointer, or axes found. Do not promote. See [WO64973](WO64973.md).
 - **Completed:** WO64974 — CC56–CD55 contains eight adjacent 16-point descending UWORD BE vectors at 0x20 spacing; no direct reader/axis reference found. Keep as L1 curve/vector group, separate from CD56. See [WO64974](WO64974.md).
