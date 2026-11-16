@@ -28,7 +28,7 @@ The GitHub blob SHA matches the Git blob SHA calculated from the previously veri
 - WO64825 remains PARTIAL.
 - Final conversion/gating from `max(FFFF1CAE,FFFF1CCC)` plus `FFFF19D1` into `FFFF85DF` is a next lead, not an issued WO.
 - No semantic calibration/XML promotion, donor scaling transfer or physical signal assignment.
-- Stable Control Notebook exact read-back still 403 `serviceReadOnly`; no lifecycle sync or globally verified active WO is claimed.
+- Former OneDrive Control Notebook remains unchanged as a historical archive. GitHub `CONTROL/active_work_orders.md` is the sole operational control and currently records no active WO; older snapshots remain historical.
 
 ## GitHub binary status
 V54 is now the committed and hash-verified GitHub XLSX master. V53 is retained under the `OLD_` filename as the historical predecessor.
