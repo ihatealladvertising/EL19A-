@@ -22,8 +22,9 @@
 - WO64794: PARTIAL; Timer-11 service purpose and other external output routes remain unresolved.
 - No injector, ignition coil, sensor or other physical actuator identity is promoted.
 
-## GitHub promotion gate
-Upload this exact file to:
-`WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`
-
-Then read back from GitHub and verify exact file identity/hash before changing the current-master pointer. Until that occurs, V54 remains the current GitHub master.
+## GitHub publication record
+- Repository: `ihatealladvertising/EL19A-`, branch `main`.
+- Path: `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`.
+- Git blob SHA: `83a065db94c0945d352aac86f2d55353c547cebd`.
+- Upload commit: `b9793eee8d09f25c8315175a1ce4af1bc01900f6` (2026-11-16T02:19:47Z).
+- V55 is the current GitHub Master Workbook; V54 is predecessor. Binary presence and commit are verified. The connector cannot return XLSX bytes as UTF-8, so a fresh raw-byte hash comparison was not performed in this check.
