@@ -26,7 +26,13 @@
 
 - **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
 
-- **Active work order:** None — batch WO64893–WO64895 completed; await next three-WO batch.
+- **Active work order:** None — batch WO64896–WO64898 completed; await next three-WO batch.
+
+- **Completed batch:** WO64896–WO64898 are closed; see [WO64896](WO64896.md), [WO64897](WO64897.md), and [WO64898](WO64898.md). WO64896 verified six adjacent 16-point UBYTE curves at ECCE/ECDE/ECEE/ECFE/ED0E/ED1E; corrected aggregate extent to ECCE–ED2D (the historical ECCE–ED1D covers only five curves), with a two-byte overlap at dword_ED2C preserved as a label/alias boundary. WO64897 traced ECEE–ED1E as four fixed-grid lookups using q=min(2×max(U8[FFFF859C+8]−8,0),255), producing five-state internal selector FFFF2150+0x1FA. WO64898 traced ECCE/ECDE using the same query shape with caller-local R9 cap and threshold status bits 0x08/0x04 at FFFF3501. All three stop at internal state; idle/coolant meanings and physical endpoints remain unproven. Raw-ROM verification covered 422 instructions / 844 bytes with zero mismatches. No workbook/XML/source edits.
+
+- **Completed:** WO64898 — ECCE/ECDE lookup pair and two-bit internal status update at FFFF3501 verified; R9 cap/query producers and semantic identity unresolved. See [WO64898](WO64898.md).
+- **Completed:** WO64897 — ECEE/ECFE/ED0E/ED1E query and five-state FFFF234A result traced; physical meaning/consumer unresolved. See [WO64897](WO64897.md).
+- **Completed:** WO64896 — six 16-byte curve extents verified; corrected aggregate range ECCE–ED2D; ED2C label overlap preserved. See [WO64896](WO64896.md).
 
 - **Completed batch:** WO64893–WO64895 are closed; see [WO64893](WO64893.md), [WO64894](WO64894.md), and [WO64895](WO64895.md). WO64893 raw-ROM verification disproved the claimed MOV.W at 0x47686 (actual bytes 8B 4A = BF loc_4771E). WO64894 mapped the 0x28-byte FFFF85C4→FFFF859C copy and traced +0x0D to FFFF85CE-derived FFFF85D1; producers for +0x08, +0x16 and FFFF849A remain unresolved. WO64895 raw-ROM-verified distinct 0x80 behavior: RP-004 propagates bit 7 from the first sampled cell while interpolating low 7 bits; RP-006 returns 0x80 if any participating cell is >=0x80. All scopes are technical-scope complete at these boundaries; no workbook/XML/source edits.
 
