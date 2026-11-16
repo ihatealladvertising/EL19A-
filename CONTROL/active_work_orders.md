@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64861 — independent ETC actuator hardware-output path discriminator. Trace runtime ATU-II/MTU/PWM/GPIO output writes and test backward dataflow from FFFF2446/FFFF1018; do not repeat completed E678/E688, timer-capture or FFFF1018 consumer audits. See [WO64861](WO64861.md).
+- **Active work order:** WO64862 — separate FFFF12EA UWORD producer/consumer trace. Reconstruct sub_5C220 and test only bounded direct/alias/copy consumers and any supported relationship to the 52.34% screenshot scalar. See [WO64862](WO64862.md).
+- **Completed:** WO64861 — bounded ATU-II/GPIO output audit found Timer-5 compare scheduling and Timer-7 setup, but no TIOR5 runtime output configuration, no Timer-7 output routing, Timer-11 pin mux remains disabled, and no direct PDR output write or FFFF2446/FFFF1018 hardware dataflow. ETC endpoint not established. See [WO64861](WO64861.md).
 - **Completed:** WO64860 — corrected the output base: sub_403D8 writes UBYTE FFFF2446 (not FFFF12EA), reads it internally, compares/subtracts against UWORD FFFF1042 and stores bounded UWORD/sentinel to FFFF1018. No physical actuator endpoint; no 52.34% linkage. See [WO64860](WO64860.md).
 - **Completed:** WO64859 — FFFF860B/E refresh copies FFFF860D/E into FFFF860B/C; FFFF860B.bit3 therefore inherits FFFF860D.bit3. Upstream writer/coolant comparator remains unresolved; no donor mDSHCUT address/scale transfer. See [WO64859](WO64859.md).
 - **Completed batch:** callback/FFFF85DF consumer WOs WO64856–WO64858 are closed.
@@ -53,6 +54,9 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
+WO64861 closed as a bounded negative ETC hardware-output discriminator: Timer-5 compare registers schedule interrupts, TIOR5 output mode was not configured in the inspected code, Timer-7 output routing was not established, Timer-11 pin mux remains disabled, and no direct PDR output write/dataflow from FFFF2446/FFFF1018 was found. WO64862 is active to resolve the separate sub_5C220 UWORD writer at FFFF12EA. V55 remains current; no XML/workbook edits.
+
+## Prior checkpoint — 2026-11-16
 WO64860 closed after correcting the objective's address error: R14 is FFFF2150, so the selected QDSPT byte is FFFF2446, not FFFF12EA; it is read within sub_403D8 and contributes to UWORD FFFF1018. No actuator endpoint or 52.34% linkage. WO64861 is active for independent ETC hardware-output discovery. V55 remains current; no XML/workbook edits.
 
 ## Prior checkpoint — 2026-11-16
