@@ -42,6 +42,9 @@
 
 - **Completed batch:** WO64941–WO64943 — added explicit-axis 8-point UWORD curves 10F6A/10F7A on shared axis 112EA; reconciled duplicate 14FDC/14FFC curves with duplicate axes 14FCC/14FEC; added 1007E/1008E/10984/1040C with explicit axes 112AA/112BA/FBC8/1046C. No semantic promotions; no source artifact changed.
 - **Active work order:** None — next step should continue the sub_22F54 explicit-axis pointer inventory, distinguishing constant/sentinel objects and any repeated payloads, then switch to the next helper family.
+
+- **Completed batch:** WO64944–WO64946 — reconciled duplicate 10A54/10A64 UWORD payloads and their distinct R5 pointer arguments (FB22 monotonic; 14EFC irregular); classified 1074C/1075C all-0x8000 objects with duplicate axis arrays 112FA/1130A; classified 10E8A/10C08/10D02 as all-zero UWORD structures with explicit axis pointer arrays FAA2/1131A/1132A. No semantic promotions; no source artifact changed.
+- **Active work order:** None — continue the remaining sub_22F54 caller set, prioritizing varying payloads with explicit or derivable axes; stop and move on once objects are constant/structural.
 - **Active work order:** None — next batch should take remaining 16-point UWORD pairs and unresolved axis/vector candidates, then shift back to small UBYTE map/curve morphology.
 - **Active work order:** None — next batch should move to the remaining start-fuel UWORD candidates and any unmapped axis/descriptor candidates, stopping quickly where no target caller or axis pointer exists.
 - **Active work order:** None — next pass should continue rapid candidate harvesting and axis gap completion using the available target ROM and current register.
