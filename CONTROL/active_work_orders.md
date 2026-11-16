@@ -31,6 +31,9 @@
 - **Completed batch:** WO64926–WO64928 — completed the four physical placements of two reciprocal 32-point UWORD vector pairs; verified two 16-point UWORD curves (10EAA/10ECA) and their copies (12B3E/12B5E) with explicit shared axis copies 105DC/12B7E; completed B956/C0D6 16×16 UWORD map axis arrays and dual-query caller arguments. No semantic promotions; no source artifact changed.
 
 - **Completed batch:** WO64938–WO64940 — reconciled reciprocal 16-point UBYTE vectors DE6E/E2ED and their reversed helper roles; verified EB78 as a varying 16-point UBYTE curve on explicit axis 1500C and EE9E/EEAE as all-zero structural objects; completed four sub_22CF8 8×8 UWORD reader structures and eight axis pointers, classifying B622/C2D6/C3D6/D856 as constant/sentinel-heavy rather than varying maps. No semantic promotions or source artifact changes.
+
+- **Completed:** WO64956 — closed the residual sub_22EFC caller set. Eight unregistered 8-point UBYTE objects are all-zero, all-FF or constant; axes are explicit but several are degenerate. F4C2/F49E was already verified in WO64811; no new varying candidate admitted. This helper family is now exhausted for the current discovery pass.
+- **Active work order:** None — next batch should audit remaining sub_22DF8 fixed-grid UBYTE callers against the current candidate register, recording only unregistered varying objects and their duplicate placements; constants remain structural-only.
 - **Active work order:** None — next step should move to the remaining UBYTE 16-point helper group and audit the unregistered 8×8 / 4×4 caller regions only for direct structural gaps.
 - **Active work order:** None — next step should return to rapid small-map and curve candidate harvesting, then reconcile any new axis pointers; avoid further depth on the closed UWORD groups.
 
