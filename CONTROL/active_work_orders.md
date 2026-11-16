@@ -6,7 +6,10 @@
 
 ## Current operational state
 
-- **Active work order:** None — user-authorized batch WO64872–WO64874 completed; stop here pending new authorization.
+- **Active work order:** None — user-authorized batch WO64875–WO64877 completed; stop here pending new authorization.
+- **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
+- **Completed:** WO64876 — no direct FFFF8600.bit6 writer found; initialization mirrors three bytes from FFFF85FF to FFFF8602, but source semantics remain unknown. See [WO64876](WO64876.md).
+- **Completed:** WO64875 — no direct FFFF85F8.bit4 writer found; nearby timer/status routine modifies FFFF85F9, not the branch bit. See [WO64875](WO64875.md).
 - **Completed:** WO64874 — traced selected 0x848A/0x848B scalar through FFFF2446 and the bounded UWORD FFFF1018 internal-state calculation. No physical throttle actuator/command endpoint established. See [WO64874](WO64874.md).
 - **Completed:** WO64873 — confirmed E688/0x848B branch requires FFFF85F8.bit4 AND FFFF8600.bit6; flag semantics do not establish Drive/Neutral identity. See [WO64873](WO64873.md).
 - **Completed:** WO64872 — confirmed 0x848A and 0x848B are paired UBYTE operands multiplying E678/E688 lookup results with UBYTE R11+0x622; selected scalar also writes FFFF2446. Names/units remain provisional. See [WO64872](WO64872.md).
