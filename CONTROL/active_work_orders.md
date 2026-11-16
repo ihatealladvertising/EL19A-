@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64850 — independent 52.34% throttle-reduction scalar discovery, resumed by user instruction 2026-11-16. See [WO64850](WO64850.md). Resume from the first unresolved throttle-target calculation path; do not repeat rejected 0x90EA/A0E2 or completed E678/E688 work.
+- **Active work order:** WO64854 — AB22 output upstream-state producers and throttle-target relevance. See [WO64854](WO64854.md). Trace FFFF2150+0x9F8/+0x9FA producers and FFFF1054+0x2AE consumers; determine whether this path reaches a throttle target.
+- **Completed:** WO64850 — resumed scalar audit found 0x90EA is one of a 16-UWORD block feeding composite internal state FFFF2150+0xAD4; no 52.34% conversion or throttle endpoint. See [WO64850](WO64850.md).
 - **Completed:** WO64853 — bounded DMAC/DTC audit found no programmed SAR/DAR transfer or descriptor for FFFF14E0/FFFF1018; indirect provenance remains unresolved. See [WO64853](WO64853.md).
 - **Completed:** WO64852 — FFFF1018 UWORD producer confirmed at 0x4057C; no direct reader or explicit pointer alias found in the annotated listing. Bulk-copy/DMA/DTC consumer not established; physical throttle endpoint unproven. See [WO64852](WO64852.md).
 - **Completed:** WO64851 — ATU02/ATU12 interrupt paths call sub_2088C → sub_257AC; timer-delta arithmetic and Timer-1A register involvement confirmed, but FFFF14E0 producer, physical event, clock/cadence and RPM conversion remain unresolved. See [WO64851](WO64851.md).
