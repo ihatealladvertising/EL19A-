@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64862 — separate FFFF12EA UWORD producer/consumer trace. Reconstruct sub_5C220 and test only bounded direct/alias/copy consumers and any supported relationship to the 52.34% screenshot scalar. See [WO64862](WO64862.md).
+- **Active work order:** None — user-authorized batch of three work orders completed; stop here pending new authorization.
+- **Completed:** WO64862 — separate sub_5C220 UWORD writer to FFFF12EA uses ROM 0x78C2 and dynamic FFFF8494 via division helper; value feeds FFFF154A→FFFF154C→FFFF154E and FFFF1254 internal RAM branches. No direct FFFF12EA read, physical actuator endpoint or 52.34% scalar match. See [WO64862](WO64862.md).
 - **Completed:** WO64861 — bounded ATU-II/GPIO output audit found Timer-5 compare scheduling and Timer-7 setup, but no TIOR5 runtime output configuration, no Timer-7 output routing, Timer-11 pin mux remains disabled, and no direct PDR output write or FFFF2446/FFFF1018 hardware dataflow. ETC endpoint not established. See [WO64861](WO64861.md).
 - **Completed:** WO64860 — corrected the output base: sub_403D8 writes UBYTE FFFF2446 (not FFFF12EA), reads it internally, compares/subtracts against UWORD FFFF1042 and stores bounded UWORD/sentinel to FFFF1018. No physical actuator endpoint; no 52.34% linkage. See [WO64860](WO64860.md).
 - **Completed:** WO64859 — FFFF860B/E refresh copies FFFF860D/E into FFFF860B/C; FFFF860B.bit3 therefore inherits FFFF860D.bit3. Upstream writer/coolant comparator remains unresolved; no donor mDSHCUT address/scale transfer. See [WO64859](WO64859.md).
@@ -54,6 +55,9 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
+WO64862 closed: separate FFFF12EA UWORD writer in sub_5C220 divides ROM 0x78C2 by a scaled FFFF8494 operand; it flows through FFFF154A/154C to FFFF154E and FFFF1254, all internal RAM. No direct FFFF12EA reader, physical actuator endpoint or 52.34% scalar match. Three authorized WOs (64860–64862) are complete; no active work remains. Stop until new user authorization.
+
+## Prior checkpoint — 2026-11-16
 WO64861 closed as a bounded negative ETC hardware-output discriminator: Timer-5 compare registers schedule interrupts, TIOR5 output mode was not configured in the inspected code, Timer-7 output routing was not established, Timer-11 pin mux remains disabled, and no direct PDR output write/dataflow from FFFF2446/FFFF1018 was found. WO64862 is active to resolve the separate sub_5C220 UWORD writer at FFFF12EA. V55 remains current; no XML/workbook edits.
 
 ## Prior checkpoint — 2026-11-16
