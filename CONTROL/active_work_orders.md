@@ -84,3 +84,12 @@ When the exact stable Notebook becomes readable, compare its `CONTROL`, standing
 
 
 - **WO64829 selector correction (2026-11-15):** final branch audit corrects C polarity: bit4 SET selects ROM byte 0x8296 (=0x0A); bit4 CLEAR selects 0x8297 (=0x00). See `CONTROL/WO64829.md` correction note and `WORKBOOK/WO64828_WO64829_E974_CHECKPOINT_2026-11-15.csv`. Earlier opposite-polarity summary is superseded.
+
+
+## V54 workbook integration (2026-11-15)
+- **Current OneDrive Master Workbook:** [EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx](https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=67636be3-3e09-417e-abca-44b75955d417&cid=f6defbd470240ae6); item `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`; 1,350,922 bytes; 144 sheets; MD5 `49491a933e31f11bce0b859d8b4c376e`; SHA256 `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`. Exact raw read-back was materialized and compared byte-for-byte with the final local export.
+- **Integrated WOs:** WO64827, WO64828 and WO64829 are TECHNICAL SCOPE COMPLETE and now recorded in V54 sheets `WO64827 E974 Gate Trace`, `WO64828 E974 Input Audit`, `WO64829 E974 Feedback Trace`, plus `E974 Integrated Checkpoint`.
+- **Key correction:** WO64829 selector polarity is `FFFF1E54+5.bit4 SET => C=0x0A; CLEAR => C=0x00`. Earlier opposite-polarity wording is superseded.
+- **Remaining lead (not issued):** reconstruct final byte-generation/gating from `max(FFFF1CAE,FFFF1CCC)` plus `FFFF19D1` into `FFFF85DF`; physical meaning and `FFFF85E0` endpoint remain unresolved.
+- **Authority boundary:** Stable Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd` remains unchanged; exact read-back returned 403 `serviceReadOnly`. No authoritative lifecycle sync or globally verified active WO is claimed. WO64825 remains PARTIAL.
+- **GitHub binary boundary:** repository still contains the V53 XLSX binary. Text control records and CSV supplement are being synchronized to V54; V54 XLSX binary has not been uploaded to GitHub by the available GitHub file-write interface.
