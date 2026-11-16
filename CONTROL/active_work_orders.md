@@ -6,14 +6,13 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. No new work order or investigation is authorized by this cutover.
-- **Completed technical work:** WO64827, WO64828 and WO64829 — technical scopes complete. Detailed evidence remains in `CONTROL/WO64828.md` and `CONTROL/WO64829.md`; WO64827 closeout is preserved below.
+- **ACTIVE:** [WO64830 — B-Family Downstream Consumer Closure](WO64830.md). Exact next action: reconstruct the GBR context/gates around 0x7A9A4–0x7AF2E, then trace `FFFF38DF+0x111/+0x112` and GBR+0x18/+0x1A/+0x1C destinations to their direct consumers. Source: annotated LST ref `file_00000000fc2c820eb592f21d9c27911c`.
+- **Completed technical work:** WO64827, WO64828 and WO64829 — technical scopes complete. Detailed evidence remains in `CONTROL/WO64828.md`, `CONTROL/WO64829.md`; WO64827 closeout is preserved below.
 - **Partial / paused:** WO64825 remains PARTIAL. Preserve its unresolved scope; do not resume without explicit authorization and a concrete lead.
-- **Next unissued lead:** reconstruct the final conversion/gating from `max(FFFF1CAE,FFFF1CCC)` plus `FFFF19D1` into `FFFF85DF`. Physical meaning and `FFFF85E0` endpoint remain unresolved. This is not an active or issued WO.
-- **Workbook pointer:** current engineering master is V54 in GitHub: [`WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`](../WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx). Size 1,350,922 bytes; MD5 `49491a933e31f11bce0b859d8b4c376e`; SHA-256 `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`. Git blob SHA `20a304effc7656596e1bd19c65b623140ec511d2` matches the previously verified V54 bytes exactly. See `PROJECT_STATE.md` and `WORKBOOK/V54_E974_INTEGRATION_SUMMARY_2026-11-15.md`.
-- **GitHub workbook binary:** V54 is committed and hash-verified. V53 is retained as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx` for historical comparison. CSV/Markdown checkpoints supplement the actual XLSX.
-- **Former OneDrive Control Notebook:** superseded as of this cutover. Leave it unchanged as a historical archive; do not use it to determine current assignments or status.
-- **Historical conflicts:** V53 and a later Library Notebook snapshot recorded different older active work orders. They remain preserved below as historical snapshots and do not override this current register.
+- **Timer-11 supplement to WO64794 (2026-11-15):** target code at `sub_2598E` writes `PLIOR=0x37EF`, `PLCRH=0`, `PLCRL=0`, `PLIR=0`, `PLDR=0x0400`. PL1/PL2 direction bits are outputs, but the Port-L function-select bits are cleared; no PLCRL reconfiguration was found in the bounded LST text search. Thus the configured Timer-11 compare events are **not shown routed to TIO11A/B pins**; the ignition-coil hypothesis is weakened. WO64794 overall remains PARTIAL; Timer-11 interrupt purpose and other output hardware remain open.
+- **Next unissued branch after WO64830:** 9C2E/9DAE differential path (trace producers of `FFFF849A`/`FFFF85B2`, then consumers of `FFFF1C79`). Do not create it until WO64830 closes.
+- **Workbook:** current master is V54 in GitHub: `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`. Preserve V54 unchanged; any workbook integration from this work must be an additive V55 successor and separately uploaded/read-back verified.
+- **Former OneDrive Control Notebook:** superseded; leave unchanged as a historical archive.
 
 ## Operating rules
 
@@ -26,9 +25,10 @@
 
 ## Cutover record — 2026-11-15
 
-User authorized replacement of the OneDrive Control Notebook with this existing GitHub register. Current status above is adopted from the latest GitHub WO closeouts and current continuation context. Older OneDrive/Library states are retained as historical, not merged into current lifecycle state. This GitHub commit and its read-back establish the new operational control point.
+User authorized replacement of the OneDrive Control Notebook with this existing GitHub register. Older OneDrive/Library states are retained as historical, not merged into current lifecycle state. This GitHub file is the operational control point.
 
 ## Archived work-order evidence and historical snapshots
+
 
 ## WO64829 closeout / checkpoints 1–2 (2026-11-15)
 - **Status:** TECHNICAL SCOPE COMPLETE — bounded internal-state reconstruction. Full evidence: `CONTROL/WO64829.md`.
