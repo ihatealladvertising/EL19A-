@@ -48,6 +48,9 @@
 
 - **Completed batch:** WO64947–WO64949 — added 10BC8/10BD8 and 10D6A/10BB8 8-point UWORD curve/axis pairs; added 1003E/FBA8 8-point UWORD curve/axis pair with a zero-extended byte query. 10BB8 retains a final FFFF sentinel. No semantic promotions or source artifact changes.
 - **Active work order:** None — continue remaining direct UWORD helper candidates, then return to small-map and 1D candidate coverage as needed.
+
+- **Completed batch:** WO64950–WO64952 — added varying 16-point UWORD curves 1031C/F962 and 1061C/F982; classified 10A34/10246 as byte-identical all-0x8000 objects using the existing 109B4 axis; classified 10D7A as all-0x1000 with explicit axis 1005E. No semantic promotions or source artifact changes.
+- **Active work order:** None — continue the remaining sub_22F80 pointer set, then shift to any still-uncovered reader families.
 - **Active work order:** None — next batch should take remaining 16-point UWORD pairs and unresolved axis/vector candidates, then shift back to small UBYTE map/curve morphology.
 - **Active work order:** None — next batch should move to the remaining start-fuel UWORD candidates and any unmapped axis/descriptor candidates, stopping quickly where no target caller or axis pointer exists.
 - **Active work order:** None — next pass should continue rapid candidate harvesting and axis gap completion using the available target ROM and current register.
