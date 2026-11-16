@@ -32,6 +32,9 @@
 - **Active work order:** None — next step should return to rapid small-map and curve candidate harvesting, then reconcile any new axis pointers; avoid further depth on the closed UWORD groups.
 
 - **Completed batch:** WO64929–WO64931 — added fixed-grid 8-point UWORD candidates 10E6A/10FEA/1501C; added fixed-grid 16-point UWORD candidates 100BE/100DE/1109A/1033C; corrected duplicate physical placement 10D42 for 10266; classified DAD6 as a dynamic row bank with 16-UWORD row slices and an inner fixed-grid lookup. Constant/sentinel structures retained separately. No semantic promotions or source artifact changes.
+
+- **Completed batch:** WO64932–WO64934 — reconciled EC08/EC10/EC18/EC20 and EC28/EC30 UBYTE curve copies with branch-selected F0CE/F0D6 axes; classified EC38 as a 16-point constant UBYTE object on E0A6; decoded E840/E848/E858/E850/E860/E878 fixed-grid curves/structural objects; resolved EBC8 as a fixed-grid curve and retained nearby EB80–EBF8 morphology leads. No semantic promotions; no source artifact changed.
+- **Active work order:** None — continue to the next UBYTE data region and search for additional referenced/unregistered map and curve candidates; stop after structural value and axis evidence.
 - **Active work order:** None — next pass should continue a rapid UBYTE morphology/adjacency scan, then check any resulting map candidates against existing reader/axis inventories.
 - **Active work order:** None — next batch should take remaining 16-point UWORD pairs and unresolved axis/vector candidates, then shift back to small UBYTE map/curve morphology.
 - **Active work order:** None — next batch should move to the remaining start-fuel UWORD candidates and any unmapped axis/descriptor candidates, stopping quickly where no target caller or axis pointer exists.
