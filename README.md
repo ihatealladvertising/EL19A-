@@ -15,7 +15,9 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - [Operational work-order control — single source of truth](CONTROL/active_work_orders.md)
 - [Operating protocol v3](CONTROL/protocol_v3.md)
 - [Authority and snapshot conflicts](CONTROL/authority_and_conflicts.md)
-- [V53 workbook source manifest](WORKBOOK/V53_SOURCE_MANIFEST.md)
+- [Current V54 Master Workbook](WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx)
+- [V54 integration and integrity record](WORKBOOK/V54_E974_INTEGRATION_SUMMARY_2026-11-15.md)
+- [V53 historical source manifest](WORKBOOK/V53_SOURCE_MANIFEST.md)
 - [Artifact migration queue](MIGRATION_QUEUE.md)
 - [Calibration register guide](CALIBRATIONS/README.md)
 
@@ -37,7 +39,7 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - `WORKBOOK/` — workbook releases and migration manifests.
 
 ## Migration status
-GitHub operational control is established in `CONTROL/active_work_orders.md` (commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). The former OneDrive Control Notebook is retained unchanged as a historical archive. The GitHub XLSX binary remains V53; the latest known OneDrive master is V54 and its GitHub binary migration is pending. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
+GitHub operational control is established in `CONTROL/active_work_orders.md` (commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). The former OneDrive Control Notebook is retained unchanged as a historical archive. The current V54 Master Workbook is committed in GitHub. Its Git blob SHA matches the previously verified V54 bytes exactly; V53 remains archived under an `OLD_` filename. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
 
 ## Safeguards
 - Repository is private.
