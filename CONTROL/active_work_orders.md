@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64856 — FFFF85DF/85E0 structure-alias consumers and callback invocation audit. See [WO64856](WO64856.md). Determine whether the callback bytes reach a throttle target/actuator and resolve caller cadence where possible.
+- **Active work order:** WO64857 — FFFF8534+0x19 consumer and control-endpoint trace. See [WO64857](WO64857.md). Follow the new FFFF85DF consumer output; determine whether it reaches a throttle target/actuator.
+- **Completed:** WO64856 — found direct FFFF85DF reader at 0x37F82; it contributes to computed UBYTE FFFF8534+0x19. Callback 0x59CAE is entry 3 in a nine-function dispatch table; exact cadence unresolved. See [WO64856](WO64856.md).
 - **Completed batch:** WO64850, WO64854 and WO64855 are complete; their scalar/AB22 traces are not to be repeated.
 - **Completed:** WO64855 — FFFF1C78+0x24 consumer chain continues through FFFF1054+0x2AD to FFFF1054+0x468; all demonstrated endpoints are internal RAM state, no throttle actuator path proven. See [WO64855](WO64855.md).
 - **Completed:** WO64854 — corrected the suspected 9F8/9FA linkage (separate sub_6E558 state, not AB22); AB22 byte output feeds a bounded UWORD at FFFF1C78+0x24, but throttle role remains unproven. See [WO64854](WO64854.md).
