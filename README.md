@@ -39,7 +39,7 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - `WORKBOOK/` — workbook releases and migration manifests.
 
 ## Migration status
-GitHub operational control is established in `CONTROL/active_work_orders.md` (commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). The former OneDrive Control Notebook is retained unchanged as a historical archive. The current V54 Master Workbook is committed in GitHub. Its Git blob SHA matches the previously verified V54 bytes exactly; V53 remains archived under an `OLD_` filename. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
+GitHub operational control is established in `CONTROL/active_work_orders.md` (commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). The former OneDrive Control Notebook is retained unchanged as a historical archive. The current V54 Master Workbook is committed in GitHub. Its Git blob SHA matches the previously verified V54 bytes exactly; V53 remains archived under an `OLD_` filename. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
 
 ## Safeguards
 - Repository is private.
