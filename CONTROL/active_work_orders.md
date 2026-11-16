@@ -5,6 +5,20 @@
 **Update rule:** edit this existing file in place; commit to GitHub; read back and verify. Do not maintain a parallel operational OneDrive control notebook.
 
 ## Current operational state
+
+
+## Standing main priority — rapid table discovery and axis completion
+**Effective:** 2026-11-16, per user instruction. This workstream supersedes deeper semantic investigations until candidate coverage and axis gaps have diminishing returns.
+
+- **Primary objective:** rapidly harvest plausible EL19A table/curve candidates and reconcile axes for existing candidate inventory and RR-040 XML.
+- **Working method:** combine visual/data morphology, byte-pattern matching, preceding/succeeding breakpoint inspection, existing caller references and helper contracts. Treat morphology/proximity/donor fingerprints as discovery evidence, not confirmation.
+- **Depth limit:** trace only enough to establish candidate address, extent, type, likely dimensions, axis pointer(s), helper/caller arguments, ordering and scaling. Do not continue into full semantic/actuator paths unless they materially discriminate table structure.
+- **Cadence:** at most three WOs per batch. When a path stops yielding structural progress, close it with explicit unresolved items and move to the next coverage gap automatically.
+- **Output:** keep new candidates separate from existing candidates needing axis correction; distinguish explicit axes, fixed-grid readers, dynamic/descriptor axes and structural-only objects.
+- **Artifact guardrail:** update only these GitHub work-order documents and this operational register as authorized by the user. Do not modify XML, workbook, ROM, annotated listing, scripts, IDB or Library files. No outside workers.
+
+- **Completed batch:** WO64911–WO64913 — B-family/UWORD pointers, UWORD curve/fixed-grid axes, and 4×4/8×8 axis-order reconciliation completed. Main structural corrections and remaining gaps are captured in the linked WOs. No candidate promoted semantically; no source artifact changed.
+- **Active work order:** None — next batch should prioritize additional candidate harvesting from available target data regions, then reconcile only newly exposed axis candidates.
 ## Current operational state
 
 - **Completed batch:** WO64890–WO64892 are closed; see [WO64890](WO64890.md), [WO64891](WO64891.md), and [WO64892](WO64892.md). WO64890 compared the donor A2L's FFFF8A87 masks: fNEUT=bit 0x08, fNEUTD=bit 0x04, fPOSLP=bit 0x02; the target direct-reference inventory showed no bit-0x08 test and one bit-0x04 gated read. WO64891 bounded that bit-0x04 reader to a separate service chain and found sub_56AAA initializes FFFF8A86/87 to zero. WO64892 found no direct relationship from either flag to the sub_5611C/FFFF11F3 QDSPT selector chain. Drive/Neutral orientation remains provisional.
