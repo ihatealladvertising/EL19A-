@@ -1,7 +1,7 @@
-# V53 Master Workbook — Source Manifest
+# V53 Master Workbook — Historical Source Manifest
 
 **Artifact:** `EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`  
-**Role:** current deployed/verified engineering archive baseline in the retrieved project sources.
+**Role:** historical predecessor to V54. Retained for provenance and comparison; not the current master.
 
 ## Exact source
 - OneDrive Drive Item ID: `F6DEFBD470240AE6!sdc8e67e089974ba8a8f69d02828315be`
@@ -23,8 +23,8 @@
 - WO64819 initial shared-query path: UBYTE `FFFF84B8`, readers in `sub_85AF4` (F10E) and `sub_6E3CC` (F426); producer remained unresolved at that checkpoint.
 - No XML edits or semantic promotions recorded by V53 checkpoint.
 
-## GitHub migration status
-The XLSX is not yet committed as a binary Git object. This manifest preserves its exact source pointer and fingerprints. Add the unchanged file from a local Git clone in a separate commit; verify the committed file by downloading it from GitHub and recomputing both hashes. Do not re-save/rewrite the workbook merely to migrate it. Use Git LFS only if later large source files require it; this workbook is below GitHub's ordinary per-file limit.
+## GitHub archive status
+V53 is preserved in GitHub as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx` (1,333,108 bytes). It is an unchanged historical predecessor, not the current engineering master. V54 is the current master; see `WORKBOOK/V54_E974_INTEGRATION_SUMMARY_2026-11-15.md`.
 
 
 ## Additive progress checkpoint — WO64828 / WO64829 (2026-11-15)
@@ -32,12 +32,13 @@ A compact, Excel-readable evidence table is committed as `WORKBOOK/WO64828_WO648
 
 **Important correction:** the checkpoint's final branch audit establishes `C=0x0A` when `FFFF1E54+5.bit4` is SET; when clear, `C=0x00`. This supersedes the opposite selector polarity in the original WO64829 checkpoint summary. The formulas for `FFFF19D1_next` and `FFFF19BF_next` are otherwise unchanged.
 
-This is a GitHub workbook-archive supplement, not a replacement or modification of the V53 XLSX binary. The V53 binary remains the exact OneDrive source identified above and is still not committed to GitHub; the connected GitHub file actions cannot upload a local XLSX binary. No claim is made that the full XLSX has been updated in GitHub.
+This is a GitHub workbook-archive supplement, not a replacement for the XLSX. At the time of this checkpoint, V53 remained the binary predecessor; it is now archived in GitHub under the `OLD_` filename. V54 is the current GitHub master.
 
 
 ## Current master successor — V54 (2026-11-15)
-**Current OneDrive Master Workbook:** [EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx](https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=67636be3-3e09-417e-abca-44b75955d417&cid=f6defbd470240ae6)  
-- OneDrive item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`
+**Current GitHub Master Workbook:** [`EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`](EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx)  
+- Previous OneDrive source item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417` (exact raw source was read-back verified before migration).
+- GitHub Git blob SHA: `20a304effc7656596e1bd19c65b623140ec511d2` (matches the previously verified V54 bytes).
 - Size: 1350922 bytes; sheets: 144
 - MD5: `49491a933e31f11bce0b859d8b4c376e`
 - SHA-256: `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`
@@ -50,7 +51,5 @@ This is a GitHub workbook-archive supplement, not a replacement or modification 
 - Remaining unissued lead: reconstruct final conversion/gating from `max(FFFF1CAE,FFFF1CCC)` and `FFFF19D1` into `FFFF85DF`; no physical signal or `FFFF85E0` endpoint established.
 - Stable Control Notebook exact read-back remained 403 `serviceReadOnly`; V54 does not claim lifecycle sync or a globally verified active WO.
 
-## GitHub binary distinction
-The repository's binary workbook path remains the V53 predecessor:
-`WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
-The V54 XLSX is currently stored and verified in OneDrive at the exact item above. The connected GitHub write actions used for this synchronization support UTF-8 text writes, not direct binary file replacement; the GitHub XLSX binary therefore remains V53 pending a separate binary migration.
+## GitHub binary verification
+The V54 XLSX is present in GitHub at the current-master path above (1,350,922 bytes). Its Git blob SHA `20a304effc7656596e1bd19c65b623140ec511d2` was independently calculated from the previously verified raw V54 file and matches the repository blob SHA exactly. This confirms byte-identical GitHub content. V53 remains in GitHub as the renamed historical predecessor.
