@@ -1,3 +1,4 @@
+- **Completed:** WO64966 — sole sub_22BC0 call at 0x37CEA confirms A272 (4×4 UBYTE), R5=E006/Y×4, R6=E002/X raw; XML axis mapping already agrees. See [WO64966](WO64966.md). Next: sub_22B7C only.
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** this GitHub file is the single source of truth for current work-order lifecycle, assignments, priorities, continuation and handoff.
