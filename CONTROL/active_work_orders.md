@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus ``FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
+- **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
 
 - **Active work order:** None — user-authorized batch WO64878–WO64880 completed; stop here pending new authorization.
 - **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
