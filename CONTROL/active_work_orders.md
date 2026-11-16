@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** [WO64841 — A342/A382 vs mMITANDA/mMITANDD Selector and Behaviour Test](WO64841.md). Existing 8×8 UBYTE target objects, axes and reader are known. Test axis binding, bit7 selector provenance, and output behaviour; no XML or Workbook edits.
+- **Active work order:** [WO64842 — E904 / E914 vs mTHOSNTP / mTHOSRCV HOS-Curve Test](WO64842.md). Test the 16-point UBYTE curves, 16-point UWORD axes, query producers, target composite scaling and direct consumers. Do not repeat object/reader discovery; no XML or Workbook edits.
+- **Completed:** WO64841 — A342/A382 paired maps: exact 8×8 UBYTE geometry and exact donor raw X/Y axes; target map payloads differ. DFF2 uses timer-rate query FFFF85DA (RPM relation unproven); DFFA uses FFFF857A from bounded UWORD lookup/shift path. FFFF85FB.bit7 selects A382 vs A342 but writer/mode meaning remain unresolved. Target map result enters composite product and bounded internal UWORD state; no physical endpoint. Retain generic pair only; no donor percentage conversion or semantic XML promotion.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
@@ -28,8 +29,11 @@
 5. At each handoff, state the exact next action, source reference, dependencies, unresolved boundaries and completed work not to repeat.
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
-## Latest checkpoint — 2026-11-16
+## Previous checkpoint — 2026-11-16
 WO64832 closed at a bounded internal software-event endpoint. Structural fit to the JUKE `mTTVOULM/mTTVOULMS` architecture is STRONG PARTIAL; target TVO-angle semantics are WEAK. The target query comes from `UWORD[FFFF85CE] >> 4`; its upstream writer and the dynamic-bound producers remain unresolved. The target calculates two bounded UWORD schedules and compares them to trigger internal event/status handling; no physical throttle endpoint is proven. WO64833 completed: EFA4→mTFVAPO eliminated by 0/16 raw-byte equality across three Juke ROM variants; its timer-derived query and internal FFFF1014 dataflow contradict the donor fixed-RPM/angle configuration. WO64834 completed: E678/E688 retained as generic QDSPT/dashpot candidates (strong partial structure; partial family behaviour); Juke raw bytes differ, V6 raw HEX unavailable, RPM axis and ×2 L/min conversion unproven; FFFF1676 is a 0/255 runtime gate, not ×2 conversion; internal output FFFF1018 only. WO64835/WO64836 closed the F062/mTRPAMB test: exact structure remains, but HCAN1 MB12 is initialized with MBC=111 (inactive), message-control word zero, and no data-field consumer/reconfiguration found. F062 query is q=0 in the observed configuration, returning zero; live pressure semantics are rejected. No XML/Workbook edit. No XML or Master Workbook edits. V55 remains current.
+
+## Latest checkpoint — 2026-11-16
+WO64841 closed as a bounded internal software calculation. Structural fit: STRONG PARTIAL (two 8×8 UBYTE maps; both raw axes exactly match Juke mMITANDA/mMITANDD axis vectors; target 64-byte map payloads differ). Behaviour fit: PARTIAL/UNRESOLVED (DFF2 uses timer-rate-derived UWORD FFFF85DA, not a proven RPM quantity; DFFA uses FFFF857A from a UWORD lookup/shift path; FFFF85FB.bit7 chooses A382 vs A342 but its writer and mode meaning were not located; result enters a runtime composite calculation; no physical endpoint). Preserve generic A342/A382 names only. WO64842 is now ACTIVE for E904/E914 versus V6 mTHOSNTP/mTHOSRCV; reference theory is 16-point UBYTE, raw/128 data, 16-point UWORD rpm·ms axis at raw×0.1953125. The target reader is known; active work is query provenance, unit compatibility and composite downstream behaviour. V55 remains current. No XML/Workbook edits.
 
 ## Previous checkpoint — 2026-11-15
 
