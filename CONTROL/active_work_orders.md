@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. WO64838 closed: F426 raw payload is an exact 16/16 Juke mTTXNEL match, but target query source FFFF84B8 remains unproven (prior bounded writer scan found no direct writer), target uses an implicit index grid rather than a proven −40…+110°C axis, and both known FFFF2BF6 readers only feed internal status/qualification records. Retain generic F426; do not promote mTTXNEL/fuel-cut semantics.
+- **Active work order:** [WO64839 — E424 / mTA5N Query and Combined-Output Test](WO64839.md). Exact 16/16 raw match and reader are already verified. Reuse WO64832's FFFF85A9 query-source result; test only RPM-axis compatibility, target combined arithmetic and immediate FFFF1C78[0] consumers. No XML/workbook edits.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
