@@ -1,4 +1,3 @@
-- **Completed:** WO64966 — sole sub_22BC0 call at 0x37CEA confirms A272 (4×4 UBYTE), R5=E006/Y×4, R6=E002/X raw; XML axis mapping already agrees. See [WO64966](WO64966.md). Next: sub_22B7C only.
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** this GitHub file is the single source of truth for current work-order lifecycle, assignments, priorities, continuation and handoff.
@@ -9,6 +8,8 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64966 — sole sub_22BC0 call at 0x37CEA confirms A272 (4×4 UBYTE), R5=E006/Y×4, R6=E002/X raw; XML axis mapping already agrees. See [WO64966](WO64966.md). Next: sub_22B7C only.
+- **Completed:** WO64968 — static sub_22CB8 calls confirm 9C2E/9DAE (16×16 UBYTE) share R5=E4BC (Y, ×4) and R6=E4AC (X, raw); two distinct query inputs, duplicate payload but separate placements. See [WO64968](WO64968.md). Next: dynamic 9B2E only.
 - **Completed:** WO64967 — both sub_22B7C calls resolve to AB72/AB62 4×4 UBYTE maps sharing raw axes F54E/F552; query 1 is R7 from FFFF859C+8 and query 2 is stack-supplied. See [WO64967](WO64967.md). Next: static sub_22CB8 pair only.
 - **Completed:** WO64965 — single-address AFD2 check; direct R4 pointer at 0x6D7AC reaches sub_22B44 at 0x6D7DE with axes E3F3/E3EF. AFD2–AFE1 is zero-filled; branch alternatives AFE2/AFC2 share the same helper and axes. Existing XML mapping already correct. See [WO64965](WO64965.md).
 - **Completed:** WO64964 — sub_22C38 micro-census; both caller families resolve to existing A342/A382 and AB22 placements. DFF2/DFFA and E24D/E022 are confirmed pointer pairs; Y×4, X raw. See [WO64964](WO64964.md). Next: sub_22B44 only.
