@@ -39,7 +39,7 @@ The GitHub register now records no active WO, WO64827–WO64829 technical scopes
 ## Technical authority and evidence
 - V54 workbook is the current authoritative engineering archive; V53 is retained as an unchanged historical predecessor.
 - Candidate inventory: V7 / 122 unique `storageaddress` placements; screenshot-scope broader inventory is 175 (122 + 53). The full 175 membership is not freshly audited.
-- See V53 sheets: `Session Control`, `WO Continuity Ledger`, `Batch Checkpoint Manifest`, `V53 Checkpoint`, `Theory Handoff 2026-11-15`, `Project2 1D Crosswalk`, `EL19A 1D Lookup Candidates`, `P2 Candidate Register`, `P2 Handoff Log`, `Candidate Evidence Ledger`.
+- See V54 sheets: `Session Control`, `WO Continuity Ledger`, `Batch Checkpoint Manifest`, `V54 Checkpoint`, `Theory Handoff 2026-11-15`, `Project2 1D Crosswalk`, `EL19A 1D Lookup Candidates`, `P2 Candidate Register`, `P2 Handoff Log`, `Candidate Evidence Ledger`.
 - All semantic candidate names remain provisional unless target reader, lookup mechanics and downstream use establish them. Do not transfer donor scaling/units.
 
 ## Operating constraints
