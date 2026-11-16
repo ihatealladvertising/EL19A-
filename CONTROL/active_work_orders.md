@@ -81,3 +81,6 @@ Stable Control Notebook item: `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baedd
 
 ## Next reconciliation requirement
 When the exact stable Notebook becomes readable, compare its `CONTROL`, standing instructions, work-order ledger, latest continuation and V53 pointer against this file. Update the Notebook from verified state and verify read-back. No further WO allocation is implied by this closeout.
+
+
+- **WO64829 selector correction (2026-11-15):** final branch audit corrects C polarity: bit4 SET selects ROM byte 0x8296 (=0x0A); bit4 CLEAR selects 0x8297 (=0x00). See `CONTROL/WO64829.md` correction note and `WORKBOOK/WO64828_WO64829_E974_CHECKPOINT_2026-11-15.csv`. Earlier opposite-polarity summary is superseded.
