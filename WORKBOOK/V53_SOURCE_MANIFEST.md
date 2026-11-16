@@ -33,3 +33,24 @@ A compact, Excel-readable evidence table is committed as `WORKBOOK/WO64828_WO648
 **Important correction:** the checkpoint's final branch audit establishes `C=0x0A` when `FFFF1E54+5.bit4` is SET; when clear, `C=0x00`. This supersedes the opposite selector polarity in the original WO64829 checkpoint summary. The formulas for `FFFF19D1_next` and `FFFF19BF_next` are otherwise unchanged.
 
 This is a GitHub workbook-archive supplement, not a replacement or modification of the V53 XLSX binary. The V53 binary remains the exact OneDrive source identified above and is still not committed to GitHub; the connected GitHub file actions cannot upload a local XLSX binary. No claim is made that the full XLSX has been updated in GitHub.
+
+
+## Current master successor — V54 (2026-11-15)
+**Current OneDrive Master Workbook:** [EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx](https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=67636be3-3e09-417e-abca-44b75955d417&cid=f6defbd470240ae6)  
+- OneDrive item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`
+- Size: 1350922 bytes; sheets: 144
+- MD5: `49491a933e31f11bce0b859d8b4c376e`
+- SHA-256: `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`
+- Exact raw-file read-back was materialized and compared byte-for-byte with the final local export: **MATCH**.
+- Base: V53 exact baseline above. V53 remains unchanged as predecessor.
+- Additive sheets: `WO64827 E974 Gate Trace`, `WO64828 E974 Input Audit`, `WO64829 E974 Feedback Trace`, `E974 Integrated Checkpoint`, `V54 Checkpoint`.
+- Updated control areas: `Session Control`, `WO Continuity Ledger`, `Batch Checkpoint Manifest`, `Project Index`.
+- Integrated technical WOs: 64827, 64828 and 64829 COMPLETE. WO64825 remains PARTIAL. No calibration/XML promotion.
+- Corrected selector polarity: `FFFF1E54+5.bit4 SET => C=0x0A; CLEAR => C=0x00`.
+- Remaining unissued lead: reconstruct final conversion/gating from `max(FFFF1CAE,FFFF1CCC)` and `FFFF19D1` into `FFFF85DF`; no physical signal or `FFFF85E0` endpoint established.
+- Stable Control Notebook exact read-back remained 403 `serviceReadOnly`; V54 does not claim lifecycle sync or a globally verified active WO.
+
+## GitHub binary distinction
+The repository's binary workbook path remains the V53 predecessor:
+`WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
+The V54 XLSX is currently stored and verified in OneDrive at the exact item above. The connected GitHub write actions used for this synchronization support UTF-8 text writes, not direct binary file replacement; the GitHub XLSX binary therefore remains V53 pending a separate binary migration.
