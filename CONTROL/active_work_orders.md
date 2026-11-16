@@ -5,9 +5,15 @@
 **Update rule:** edit this existing file in place; commit to GitHub; read back and verify. Do not maintain a parallel operational OneDrive control notebook.
 
 ## Current operational state
+## Current operational state
+
+- **Completed batch:** WO64887–WO64889 are closed; see [WO64887](WO64887.md), [WO64888](WO64888.md), and [WO64889](WO64889.md). WO64887 established `0x83EB/0x83EC) as the strongest cross-ROM `mDDSHPTD/N` address/function-family match; the same V6 A2L assigns `0x848A/0x848B` to unrelated symbols/functions. WO64888 traced the `sub_5611C` multiplier to the low byte of caller pointer `FFFF8AA4`, giving fixed `R12=0xA4). WO64889 traced `FFFF1054+0x19F` as a multi-state enum (0–4), with state >=2 routing directly to the `0x83EC` reader, but no D/N mapping established.
+- **Completed:** WO64889 — `FFFF1054+0x19F` is a derived 0–4 state enum written by `sub_491BC`; `sub_5611C` uses >=2 as a direct route to `0x83EC), but enum codes are not proven Drive/Neutral. See [WO64889](WO64889.md).
+- **Completed:** WO64888 — `sub_5611C` receives its multiplier through a stack argument formed as `GBR+0x70`; with GBR=`FFFF8A34`, `EXTU.B` yields fixed `R12=0xA4). Physical scaling meaning unresolved. See [WO64888](WO64888.md).
+- **Completed:** WO64887 — V6 A2L maps `0x83EB/0x83EC` to `mDDSHPTD/N` in `R301.26.Dashpot_DandN_1_0_2`; it maps `0x848A/0x848B` to unrelated `mDMNRGG/mDMPNREF` in different functions. Keep `0x848A/0x848B` as separate EL19A QDSPT operands. See [WO64887](WO64887.md).
 
 - **Completed batch:** WO64884–WO64886 are closed; see [WO64884](WO64884.md), [WO64885](WO64885.md), and [WO64886](WO64886.md). WO64884 expanded the `FFFF8603` direct code-store inventory to 13 observed instructions (11 base-pointer byte+1 RMW and two GBR-relative full-byte RMW); all preserve bit 6, so its origin remains unresolved. WO64885 established a second paired UBYTE rate candidate at `0x83EB/0x83EC` (target raw `0x14/0x00`) with branch-specific reads in `sub_5611C`, while preserving ambiguity from a separate composite use and the unresolved relationship to `0x848A/0x848B`. WO64886 traced the pair to internal UWORD counter/threshold and caller-buffer updates; no physical throttle/actuator endpoint was established.
-- **Completed:** WO64886 — `sub_5611C) uses `0x83EB/0x83EC` as branch-selected UBYTE multipliers and updates internal `FFFF2150+0x8FC/+0x8FE`, `FFFF2150+0x292), and `FFFF8A50` state. No physical endpoint. See [WO64886](WO64886.md).
+- **Completed:** WO64886 — `sub_5611C` uses `0x83EB/0x83EC` as branch-selected UBYTE multipliers and updates internal `FFFF2150+0x8FC/+0x8FE`, `FFFF2150+0x292`, and `FFFF8A50` state. No physical endpoint. See [WO64886](WO64886.md).
 - **Completed:** WO64885 — established the alternate `0x83EB/0x83EC` pair (raw `0x14/0x00`) with branch-specific runtime reads and donor A2L reference fingerprint; D/N labels, scale, and relationship to `0x848A/0x848B` remain provisional. See [WO64885](WO64885.md).
 - **Completed:** WO64884 — superseded WO64883's five-site `FFFF8603` writer inventory with 13 observed direct store instructions, all preserving bit 6. Bit 6 origin remains unresolved. See [WO64884](WO64884.md).
 
@@ -15,7 +21,7 @@
 
 - **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
 
-- **Active work order:** None — user-authorized batch WO64884–WO64886 completed. Await the next three-WO batch.
+- **Active work order:** None — user-authorized batch WO64887–WO64889 completed. Await the next three-WO batch.
 - **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
 - **Completed:** WO64876 — bounded direct writer audit; its original copy-direction statement is superseded by correction WO64878 (actual copy is FFFF8602→FFFF85FF). See [WO64876](WO64876.md) and [WO64878](WO64878.md).
 - **Completed:** WO64875 — no direct FFFF85F8.bit4 writer found; nearby timer/status routine modifies FFFF85F9, not the branch bit. See [WO64875](WO64875.md).
