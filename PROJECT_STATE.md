@@ -2,7 +2,8 @@
 
 **Snapshot:** 2026-11-15 (V54 E974 integration)  
 **Repository:** private `ihatealladvertising/EL19A-`  
-**Migration:** V53 binary is committed to GitHub; V54 successor is uploaded to OneDrive and exact raw read-back verified; GitHub binary migration remains pending.
+**Operational control:** GitHub `CONTROL/active_work_orders.md` is the sole current authority (cutover commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). Former OneDrive Control Notebook is a historical archive and remains unchanged.
+**Migration:** GitHub XLSX binary remains V53; V54 successor is on OneDrive and exact raw read-back verified; V54 GitHub binary migration remains pending.
 
 ## Target identity
 - 2008 Nissan Versa / Sentra C11X, manual transmission
@@ -26,14 +27,14 @@
 - V54 integrates WO64827–WO64829 technical closeouts; WO64825 remains PARTIAL. No XML edits, calibration promotions, or donor scale transfers.
 - GitHub repository still contains the V53 XLSX binary at `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`. V54's exact binary currently resides in OneDrive; GitHub text records/CSV are synchronized to it, but GitHub binary migration remains pending.
 
-## Operational state — separate technical and lifecycle authorities
+## Operational state — GitHub control authority
 1. V53 checkpoint and its exact Control Notebook reciprocal save remain a historical snapshot: WO64817 PARTIAL/PAUSED at CP16; WO64819 ACTIVE (PAIR-01); WO64820/WO64821 QUEUED; WO64816/WO64818 PARTIAL/PAUSED; WO64795 proposed/not issued.
 2. Later Library Notebook paste (2026-11-15 17:55) recorded WO64822 ACTIVE and WO64819 paused at CP18; this was a separate snapshot and must not be silently merged.
 3. GitHub chat-level control records now record WO64827, WO64828 and WO64829 as TECHNICAL SCOPE COMPLETE. V54 incorporates all three. WO64825 remains PARTIAL.
-4. The stable Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd` could not be read back in the latest continuation (403 `serviceReadOnly`). V54 does not update that Notebook and does not claim lifecycle closure or a current global active WO.
+4. On 2026-11-15 the user designated GitHub `CONTROL/active_work_orders.md` as the sole operational authority. The existing file was updated in place and read-back verification is pending. The former OneDrive Control Notebook is historical only; do not wait for it or update it.
 5. WO64829's remaining callback conversion/gating work is a concrete next lead only, **not issued as a new WO**.
 
-**Do not claim one globally verified active WO until the exact Stable Control Notebook is retrieved and reconciled.** Preserve the V53, Library snapshot and later chat/GitHub records as separately sourced state.
+The GitHub register now records no active WO, WO64827–WO64829 technical scopes complete, and WO64825 PARTIAL. Older V53 and Library snapshots remain preserved as historical records, not current lifecycle state.
 
 ## Technical authority and evidence
 - V53 workbook is the authoritative engineering archive baseline available for migration.
@@ -47,8 +48,8 @@
 - Preserve original ROMs, LSTs, XMLs, scripts, workbooks and predecessor versions unchanged.
 - No XML or workbook edits unless specifically requested.
 - Do not upload, overwrite, move, delete, or regenerate project files without explicit authorization.
-- Lifecycle states remain distinct; never claim ledger/workbook/read-back integration without actual evidence.
+- Lifecycle states remain distinct; never claim ledger/workbook/read-back integration without actual evidence. GitHub `CONTROL/active_work_orders.md` is the sole operational lifecycle register.
 - Do not resume cancelled WO64819 CP18 unless explicitly requested; the latest chat-level WO64824 context is separate.
 
 ## Migration boundary
-GitHub contains the V53 workbook binary and the updated text control records / CSV supplement. The current V54 binary is the verified OneDrive master linked above; V54's GitHub binary migration is still pending. The Stable Control Notebook has not been updated because exact live read-back returned 403. OneDrive remains the verified source location for V54 until any later binary repository migration is completed and read back.
+GitHub contains the V53 workbook binary and text control records / CSV supplement. The current V54 binary is the verified OneDrive master linked above; V54's GitHub binary migration is still pending. The former OneDrive Control Notebook is superseded and intentionally unchanged; GitHub `CONTROL/active_work_orders.md` is the sole operational control.
