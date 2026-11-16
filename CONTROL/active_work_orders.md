@@ -8,6 +8,7 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64963 — sub_22C00 micro-census; eight call sites resolve to eight already-registered bases (A092, AC62, ACE2, ACA2, AD22, ADF2, AF72, A452); no new varying map. See [WO64963](WO64963.md). Next: sub_22C38 only.
 **Effective:** 2026-11-16, per user instruction. This workstream supersedes deeper semantic investigations until candidate coverage and axis gaps have diminishing returns.
 
 - **Primary objective:** rapidly harvest plausible EL19A table/curve candidates and reconcile axes for existing candidate inventory and RR-040 XML.
