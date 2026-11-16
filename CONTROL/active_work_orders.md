@@ -20,6 +20,9 @@
 - **Completed batch:** WO64911–WO64913 — B-family/UWORD pointers, UWORD curve/fixed-grid axes, and 4×4/8×8 axis-order reconciliation completed. Main structural corrections and remaining gaps are captured in the linked WOs. No candidate promoted semantically; no source artifact changed.
 
 - **Completed batch:** WO64914–WO64916 — ROM-hash-verified fixed-grid curves at 154D0/154D8; newly catalogued duplicate 16×16 UWORD maps CD56/11FC4 with two matching caller-specific axis pairs; exact boundaries/values for four pre-existing UWORD vector morphology leads. No semantics promoted and no source artifact changed.
+
+- **Completed batch:** WO64917–WO64919 — corrected C756/C956 reader linkage and reconciled their four identical payload placements/axis copies; mapped D456/D656 and duplicate 121C4/123C4 placements with exact axes; completed structural axis record for constant 11744. No semantic promotion; no source artifact changed.
+- **Active work order:** None — continue with remaining candidate register axis gaps and rapid map-family harvesting.
 - **Active work order:** None — next pass should continue rapid candidate harvesting and axis gap completion using the available target ROM and current register.
 - **Active work order:** None — next batch should prioritize additional candidate harvesting from available target data regions, then reconcile only newly exposed axis candidates.
 ## Current operational state
