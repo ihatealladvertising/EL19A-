@@ -8,6 +8,7 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64971 — B000–BFFF screen found one L1 morphology block, BD56–BE55: 16 adjacent 8-point UWORD BE nondecreasing vectors at 0x10 spacing. No registered identity, direct xref or literal pointer found; retain as provisional vector/possible-axis family only. See [WO64971](WO64971.md). Next: one C000–CFFF morphology screen.
 - **Completed:** WO64969 — one 9B2E call at 0x473C0 confirms R4=9B2E, R5=GBR+0x10, R6=GBR and a separate stack query. Its dynamic-axis conclusion is superseded by WO64970: loc_472DC sets GBR=E4AC, so R5 resolves to fixed E4BC (Y, ×4) and R6 to E4AC (X, raw). See [WO64969](WO64969.md) and [WO64970](WO64970.md). No dynamic axes remain in this bounded caller context. Next: candidate morphology scan of one narrow ROM region.
 - **Completed:** WO64970 — corrected 9B2E GBR root: E4AC loaded at 0x472F0 and restored at 0x4762E; 9B2E uses the same fixed E4AC/E4BC axes as 9C2E/9DAE. See [WO64970](WO64970.md).
 - **Completed:** WO64966 — sole sub_22BC0 call at 0x37CEA confirms A272 (4×4 UBYTE), R5=E006/Y×4, R6=E002/X raw; XML axis mapping already agrees. See [WO64966](WO64966.md). Next: sub_22B7C only.
