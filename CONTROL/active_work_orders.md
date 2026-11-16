@@ -6,7 +6,10 @@
 
 ## Current operational state
 
-- **Active work order:** None — user-authorized expanded batch WO64869–WO64871 completed; stop here pending new authorization.
+- **Active work order:** None — user-authorized batch WO64872–WO64874 completed; stop here pending new authorization.
+- **Completed:** WO64874 — traced selected 0x848A/0x848B scalar through FFFF2446 and the bounded UWORD FFFF1018 internal-state calculation. No physical throttle actuator/command endpoint established. See [WO64874](WO64874.md).
+- **Completed:** WO64873 — confirmed E688/0x848B branch requires FFFF85F8.bit4 AND FFFF8600.bit6; flag semantics do not establish Drive/Neutral identity. See [WO64873](WO64873.md).
+- **Completed:** WO64872 — confirmed 0x848A and 0x848B are paired UBYTE operands multiplying E678/E688 lookup results with UBYTE R11+0x622; selected scalar also writes FFFF2446. Names/units remain provisional. See [WO64872](WO64872.md).
 - **Completed:** WO64871 — traced A0E2-derived composite through `FFFF1206 → FFFF120A → FFFF1D3B`, then to internal outputs `FFFF10CE` and `FFFF26A8`. No physical throttle actuator or confirmed MBT semantic endpoint; the 52.34% match remains numerical only. See [WO64871](WO64871.md).
 - **Completed:** WO64870 — reconstructed the A0E2 local arithmetic: raw UBYTE result `FFFF1207) feeds a saturated composite UBYTE `FFFF1206`, then a multi-input UWORD `FFFF120A). No direct `raw×100/128` conversion found. See [WO64870](WO64870.md).
 - **Completed:** WO64869 — confirmed A0E2's 4×4 UBYTE reader, axes E006/E002, independent queries FFFF85A4/FFFF849A and raw output FFFF1207. The 0x43 cell is not proven to be selected at runtime; query producers remain unresolved. See [WO64869](WO64869.md).
