@@ -50,6 +50,7 @@
 - **Active work order:** None — continue remaining direct UWORD helper candidates, then return to small-map and 1D candidate coverage as needed.
 
 - **Completed batch:** WO64950–WO64952 — added varying 16-point UWORD curves 1031C/F962 and 1061C/F982; classified 10A34/10246 as byte-identical all-0x8000 objects using the existing 109B4 axis; classified 10D7A as all-0x1000 with explicit axis 1005E. No semantic promotions or source artifact changes.
+- **Completed batch:** WO64953–WO64955 — added 105FC/FA42 as a varying 16-point UWORD curve; reconciled F692/F6B2/F7F2/F6D2 as constant/plateau UWORD structures and FEC0 as a dual-role vector used with a dynamic CD56-row or stack axis; added duplicate placements 10AF4/10B14 on FC10, completed 10954→F912 axis linkage, and confirmed 10CC2/10CE2 are duplicate placements of 10206/10226 on 109B4. No semantic promotions or source artifact changes.
 - **Active work order:** None — continue the remaining sub_22F80 pointer set, then shift to any still-uncovered reader families.
 - **Active work order:** None — next batch should take remaining 16-point UWORD pairs and unresolved axis/vector candidates, then shift back to small UBYTE map/curve morphology.
 - **Active work order:** None — next batch should move to the remaining start-fuel UWORD candidates and any unmapped axis/descriptor candidates, stopping quickly where no target caller or axis pointer exists.
