@@ -8,7 +8,7 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
-- **Completed:** WO64965 — sub_22B44 micro-census; seven direct calls resolve to nine existing 4×4 UBYTE placements (A0E2, AC12, A652, AFF2, AFD2, AFE2, AFC2, A3C2, 9F7E). Explicit R5/R6 axis pointers match V56/XML; axes raw, no ×4. See [WO64965](WO64965.md). Next: sub_22BC0 only.
+- **Completed:** WO64965 — single-address AFD2 check; direct R4 pointer at 0x6D7AC reaches sub_22B44 at 0x6D7DE with axes E3F3/E3EF. AFD2–AFE1 is zero-filled; branch alternatives AFE2/AFC2 share the same helper and axes. Existing XML mapping already correct. See [WO64965](WO64965.md).
 - **Completed:** WO64964 — sub_22C38 micro-census; both caller families resolve to existing A342/A382 and AB22 placements. DFF2/DFFA and E24D/E022 are confirmed pointer pairs; Y×4, X raw. See [WO64964](WO64964.md). Next: sub_22B44 only.
 - **Completed:** WO64963 — sub_22C00 micro-census; eight call sites resolve to eight already-registered bases (A092, AC62, ACE2, ACA2, AD22, ADF2, AF72, A452); no new varying map. See [WO64963](WO64963.md). Next: sub_22C38 only.
 **Effective:** 2026-11-16, per user instruction. This workstream supersedes deeper semantic investigations until candidate coverage and axis gaps have diminishing returns.
