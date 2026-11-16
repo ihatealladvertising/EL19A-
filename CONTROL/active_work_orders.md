@@ -120,3 +120,14 @@ The former OneDrive Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a74
 - **Remaining lead (not issued):** reconstruct final byte-generation/gating from `max(FFFF1CAE,FFFF1CCC)` plus `FFFF19D1` into `FFFF85DF`; physical meaning and `FFFF85E0` endpoint remain unresolved.
 - **Authority boundary:** Stable Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a7462a1730baeddd` remains unchanged; exact read-back returned 403 `serviceReadOnly`. No authoritative lifecycle sync or globally verified active WO is claimed. WO64825 remains PARTIAL.
 - **GitHub binary boundary:** repository still contains the V53 XLSX binary. Text control records and CSV supplement are being synchronized to V54; V54 XLSX binary has not been uploaded to GitHub by the available GitHub file-write interface.
+
+
+## WO64831 closeout — 2026-11-15
+- **Status:** SCOPE COMPLETE — bounded 45-minute Dashpot/Rev-Hang evidence consolidation. Full record: `CONTROL/WO64831.md`.
+- **Confirmed/strong candidates:** E678/E688 are paired 16-point UBYTE QDSPT airflow-table candidates (`mTDSHPTD/N`); 0x848A/0x848B are paired UBYTE QDSPT reduction-rate scalar candidates (`mDDSHPTD/N`), but neither D/N selector labels nor donor scaling are proven in EL19A.
+- **Critical distinction:** screenshot's single 52.34% Throttle Reduction Rate remains unidentified; it is not established by the paired 0x848A/0x848B bytes. A0E2 is a 4×4 map, not a scalar.
+- **mDSHCUT:** V6 donor symbol is coolant-temp prohibition scalar, raw −50°C conversion; −40°C predicts raw 0x0A. EL19A `sub_403D8` tests `FFFF860B.bit3`, matching V6 `fDSHCUT` mask 0x08, but target flag meaning and threshold reader/address remain unproven. EL19A ROM 0x84C4 is pointer data, not the donor scalar.
+- **EFA4:** 16-point UBYTE lookup feeds FFFF13EA and downstream FFFF1014 path; `mTFVAPO` is only a low-confidence morphology hypothesis, not an assignment. F3D6/F3DE remain strong `mTTVOULM/S` curve candidates.
+- **No XML/workbook/source artifact edits.** No candidate promoted. Full distinctions, evidence addresses, corrections and next bounded investigation are in WO64831.md.
+- **Next:** independently trace (1) EL19A coolant-temperature comparison and writer of `FFFF860B.bit3`; (2) the screenshot's single Throttle Reduction Rate scalar and its downstream throttle-target effect. Do not repeat completed E678/E688/EFA4 initial reader traces.
+- **Operational state:** no new active WO issued; WO64831 is a completed consolidation record only.
