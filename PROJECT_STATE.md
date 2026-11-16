@@ -16,6 +16,8 @@
 
 ## Engineering archive
 **Current GitHub Master Workbook:** V55 — [`EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`](WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx). Git blob SHA `83a065db94c0945d352aac86f2d55353c547cebd`; upload commit `b9793eee8d09f25c8315175a1ce4af1bc01900f6`. V54 is predecessor.
+
+**V55 identity:** 1,357,719 bytes; local MD5 `960e88a4cb4bd3372e038db507b1ab61`; local SHA-256 `8fba20dfde97ce0f1daa71905e9ca8333c847b79a3d1f67706f25310f7d69887`. GitHub binary presence/commit is confirmed; raw XLSX byte read-back/hash recomputation was not available in the connector.
 - Previous OneDrive source item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417` (raw V54 source previously read-back verified).
 - GitHub blob SHA: `20a304effc7656596e1bd19c65b623140ec511d2` (matches the previously verified V54 bytes exactly).
 - Size: 1350922 bytes; 144 sheets
@@ -25,8 +27,8 @@
 - Additive successor from V53; V53 predecessor remains unchanged.
 - V54 adds five sheets: WO64827 E974 Gate Trace; WO64828 E974 Input Audit; WO64829 E974 Feedback Trace; E974 Integrated Checkpoint; V54 Checkpoint. It also updates Session Control, WO Continuity Ledger, Batch Checkpoint Manifest and Project Index.
 - V54 integrates WO64827–WO64829 technical closeouts; WO64825 remains PARTIAL. No XML edits, calibration promotions, or donor scale transfers.
-- GitHub contains the V54 XLSX binary at the current-master path above. V53 is retained as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`. The V54 Git blob SHA was calculated from the previously verified raw V54 file and exactly matches GitHub's repository blob SHA.
-- **Local V55 candidate:** `EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`; size 1,357,719 bytes; MD5 `960e88a4cb4bd3372e038db507b1ab61`; SHA-256 `8fba20dfde97ce0f1daa71905e9ca8333c847b79a3d1f67706f25310f7d69887`. Not yet committed to GitHub. Summary: `WORKBOOK/V55_WO64830_INTEGRATION_SUMMARY_2026-11-15.md`.
+- V54 XLSX remains in GitHub as the predecessor. V55 is the current master; V53 is retained as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
+- V55 additive checkpoint adds WO64830 closure and Timer-11 pin-mux supplement; it is committed and is the current GitHub master. Summary: `WORKBOOK/V55_WO64830_INTEGRATION_SUMMARY_2026-11-15.md`.
 
 ## Operational state — GitHub control authority
 1. V53 checkpoint and its exact Control Notebook reciprocal save remain a historical snapshot: WO64817 PARTIAL/PAUSED at CP16; WO64819 ACTIVE (PAIR-01); WO64820/WO64821 QUEUED; WO64816/WO64818 PARTIAL/PAUSED; WO64795 proposed/not issued.
@@ -35,12 +37,12 @@
 4. On 2026-11-15 the user designated GitHub `CONTROL/active_work_orders.md` as the sole operational authority. The existing file was updated in place and read-back verified. The former OneDrive Control Notebook is historical only; do not wait for it or update it.
 5. WO64829's remaining callback conversion/gating work is a concrete next lead only, **not issued as a new WO**.
 
-The GitHub register now records WO64832 ACTIVE and WO64833 QUEUED; WO64827–WO64830 technical scopes complete, and WO64825 PARTIAL. Older V53 and Library snapshots remain preserved as historical records, not current lifecycle state.
+The GitHub register now records WO64832 ACTIVE and WO64833 QUEUED; WO64827–WO64830 technical scopes complete, and WO64825 PARTIAL. WO64832 is the current task under the four-stage reference-to-target process. Older V53 and Library snapshots remain preserved as historical records, not current lifecycle state.
 
 ## Technical authority and evidence
-- V54 workbook is the current authoritative engineering archive; V53 is retained as an unchanged historical predecessor.
+- V55 workbook is the current authoritative engineering archive; V54 and V53 are retained as historical predecessors.
 - Candidate inventory: V7 / 122 unique `storageaddress` placements; screenshot-scope broader inventory is 175 (122 + 53). The full 175 membership is not freshly audited.
-- See V54 sheets: `Session Control`, `WO Continuity Ledger`, `Batch Checkpoint Manifest`, `V54 Checkpoint`, `Theory Handoff 2026-11-15`, `Project2 1D Crosswalk`, `EL19A 1D Lookup Candidates`, `P2 Candidate Register`, `P2 Handoff Log`, `Candidate Evidence Ledger`.
+- See V55 sheets (plus unchanged V54 predecessor sheets): `Session Control`, `WO Continuity Ledger`, `Batch Checkpoint Manifest`, `V54 Checkpoint`, `Theory Handoff 2026-11-15`, `Project2 1D Crosswalk`, `EL19A 1D Lookup Candidates`, `P2 Candidate Register`, `P2 Handoff Log`, `Candidate Evidence Ledger`.
 - All semantic candidate names remain provisional unless target reader, lookup mechanics and downstream use establish them. Do not transfer donor scaling/units.
 
 ## Operating constraints
