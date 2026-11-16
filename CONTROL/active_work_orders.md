@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **No active work order.** User-authorized three-WO scalar/throttle-path batch WO64850, WO64854 and WO64855 is complete; stop after these three closeouts.
+- **Active work order:** WO64856 — FFFF85DF/85E0 structure-alias consumers and callback invocation audit. See [WO64856](WO64856.md). Determine whether the callback bytes reach a throttle target/actuator and resolve caller cadence where possible.
+- **Completed batch:** WO64850, WO64854 and WO64855 are complete; their scalar/AB22 traces are not to be repeated.
 - **Completed:** WO64855 — FFFF1C78+0x24 consumer chain continues through FFFF1054+0x2AD to FFFF1054+0x468; all demonstrated endpoints are internal RAM state, no throttle actuator path proven. See [WO64855](WO64855.md).
 - **Completed:** WO64854 — corrected the suspected 9F8/9FA linkage (separate sub_6E558 state, not AB22); AB22 byte output feeds a bounded UWORD at FFFF1C78+0x24, but throttle role remains unproven. See [WO64854](WO64854.md).
 - **Completed:** WO64850 — resumed scalar audit found 0x90EA is one of a 16-UWORD block feeding composite internal state FFFF2150+0xAD4; no 52.34% conversion or throttle endpoint. See [WO64850](WO64850.md).
