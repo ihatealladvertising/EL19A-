@@ -15,7 +15,7 @@
 - The former OneDrive Notebook previously returned 403 `serviceReadOnly`; this access limitation is now historical and does not block GitHub operational control.
 
 ## Master Workbook boundary
-- V54 is the latest known OneDrive Master Workbook and was previously exact-raw-read-back verified.
-- GitHub's XLSX binary remains V53. V54 binary migration is pending.
-- CSV and Markdown supplements are not a substitute for the Master Workbook binary.
-- Do not claim V54 is committed to GitHub until the actual XLSX is uploaded and read-back verified.
+- V54 is the current GitHub Master Workbook at `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`.
+- File size is 1,350,922 bytes. Git blob SHA `20a304effc7656596e1bd19c65b623140ec511d2` matches the Git blob SHA calculated from the previously verified raw V54 bytes, confirming byte-identical content.
+- V53 is retained in GitHub as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`.
+- CSV and Markdown checkpoints supplement V54; they do not replace it.
