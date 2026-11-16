@@ -36,6 +36,9 @@
 
 - **Completed WOs:** WO64957 and WO64958 already existed in the repository and were preserved; WO64957 completed E520/E668 axis/reader work, WO64958 completed constant / degenerate sub_22EFC objects.
 - **Completed batch:** WO64959–WO64961 — audited the remaining direct sub_22DF8 R4 pointers in NEXT6_16. Added three varying candidates E4CC/E590/E634, seven E7xx–EAxx varying/duplicate placements (E7D8/E7E0/E828/E898/E984/E9DC/E8B0), and EDE8; recorded constant/sentinel objects and duplicate physical placements separately. Excluded existing WO64914/WO64929/WO64932–64937 and RR-040 entries. No ROM axes fabricated; no semantics promoted.
+
+- **Completed:** WO64962 — audited all 84 NEXT6_16 sub_22E10 calls and reconciled 71 unique table bases exactly to V56's 71-entry 1D UBYTE catalogue. E434 and EDC8/EDD8 include caller-register forms but were already registered. Confirmed generated query grid 0,16,…,240; no ROM axes. Recorded duplicate payload and constant/sentinel groups. No new candidate or source artifact change.
+- **Active work order:** None — next batch should census explicit 4×4 / 8×8 / 16×16 map helper callers against existing register and XML, beginning with sub_22C00 / sub_22C38 and then sub_22BC0 / sub_22B44 family.
 - **Active work order:** None — next priority is the sub_22E10 16-point UBYTE caller census against the 71-entry V56 catalogue, checking missing physical placements and repeated payloads, then any remaining explicit map gaps.
 - **Active work order:** None — next batch should audit remaining sub_22DF8 fixed-grid UBYTE callers against the current candidate register, recording only unregistered varying objects and their duplicate placements; constants remain structural-only.
 - **Active work order:** None — next step should move to the remaining UBYTE 16-point helper group and audit the unregistered 8×8 / 4×4 caller regions only for direct structural gaps.
