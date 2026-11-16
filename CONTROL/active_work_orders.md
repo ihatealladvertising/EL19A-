@@ -280,3 +280,7 @@ The former OneDrive Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a74
 - **No XML/workbook/source artifact edits.** No candidate promoted. Full distinctions, evidence addresses, corrections and next bounded investigation are in WO64831.md.
 - **Next:** independently trace (1) EL19A coolant-temperature comparison and writer of `FFFF860B.bit3`; (2) the screenshot's single Throttle Reduction Rate scalar and its downstream throttle-target effect. Do not repeat completed E678/E688/EFA4 initial reader traces.
 - **Operational state:** no new active WO issued; WO64831 is a completed consolidation record only.
+
+
+- **Completed batch:** WO64935–WO64937 — harvested 17 additional directly referenced 8-point UBYTE placements through fixed-grid sub_22DF8 across E6xx–F5xx; recorded exact bytes/hashes and caller sites; separated two constant structural objects and duplicate 0x80 payload placement. No ROM axes expected; no semantics promoted; no source artifact changed.
+- **Active work order:** None — next step should return to small-map reader pointer coverage and 16-point UBYTE candidates outside the already inventoried sub_22E10 71-entry set, then test any remaining explicit-axis 8-point entries for duplicates.
