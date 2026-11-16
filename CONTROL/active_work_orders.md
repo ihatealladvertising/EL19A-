@@ -8,6 +8,10 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64972 — new CD56–CF55 16×16 UWORD BE table candidate; sub_22D68 caller confirms R4=CD56, R5=E2C9 (16 UBYTE ×16), R6=FEC0 (16 UWORD raw), two UWORD query inputs. FEC0 also used as 1D values with CD56 as UWORD axis via sub_22F80. Structural confidence high; semantics unassigned. See [WO64972](WO64972.md).
+- **Completed:** WO64973 — C6D6–C755 is an L1 morphology-only 8×8 UWORD BE candidate immediately preceding C756; no direct reader, pointer, or axes found. Do not promote. See [WO64973](WO64973.md).
+- **Completed:** WO64974 — CC56–CD55 contains eight adjacent 16-point descending UWORD BE vectors at 0x20 spacing; no direct reader/axis reference found. Keep as L1 curve/vector group, separate from CD56. See [WO64974](WO64974.md).
+- **Next:** scan D000–DFFF as one isolated bank, excluding registered extents; switch regions/helper when candidate yield drops.
 - **Completed:** WO64971 — B000–BFFF screen found one L1 morphology block, BD56–BE55: 16 adjacent 8-point UWORD BE nondecreasing vectors at 0x10 spacing. No registered identity, direct xref or literal pointer found; retain as provisional vector/possible-axis family only. See [WO64971](WO64971.md). Next: one C000–CFFF morphology screen.
 - **Completed:** WO64969 — one 9B2E call at 0x473C0 confirms R4=9B2E, R5=GBR+0x10, R6=GBR and a separate stack query. Its dynamic-axis conclusion is superseded by WO64970: loc_472DC sets GBR=E4AC, so R5 resolves to fixed E4BC (Y, ×4) and R6 to E4AC (X, raw). See [WO64969](WO64969.md) and [WO64970](WO64970.md). No dynamic axes remain in this bounded caller context. Next: candidate morphology scan of one narrow ROM region.
 - **Completed:** WO64970 — corrected 9B2E GBR root: E4AC loaded at 0x472F0 and restored at 0x4762E; 9B2E uses the same fixed E4AC/E4BC axes as 9C2E/9DAE. See [WO64970](WO64970.md).
