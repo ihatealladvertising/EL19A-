@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64852 — E678/E688 FFFF1018 downstream consumer trace (user-authorized 2026-11-16). See [WO64852](WO64852.md). Scope: trace direct/indirect readers and determine the furthest supported software or physical endpoint.
+- **Active work order:** WO64853 — indirect transfer / DMA-DTC provenance audit for FFFF1018 and FFFF14E0 (user-authorized 2026-11-16). See [WO64853](WO64853.md). Scope: inspect only plausible descriptors, transfer setup and structure-copy paths.
+- **Completed:** WO64852 — FFFF1018 UWORD producer confirmed at 0x4057C; no direct reader or explicit pointer alias found in the annotated listing. Bulk-copy/DMA/DTC consumer remains untested; physical throttle endpoint unproven. See [WO64852](WO64852.md).
 - **Completed:** WO64851 — ATU02/ATU12 interrupt paths call sub_2088C → sub_257AC; timer-delta arithmetic and Timer-1A register involvement confirmed, but FFFF14E0 producer, physical event, clock/cadence and RPM conversion remain unresolved. See [WO64851](WO64851.md).
 - **Paused:** WO64850 — independent 52.34% throttle-reduction scalar discovery. Paused by user-prioritized E678/E688 follow-up; retain its existing findings and resume only after this bounded batch or further user direction. See [WO64850](WO64850.md).
 - **New E678/E688 follow-up:** after WO64851, issue a separate bounded WO for downstream consumers of FFFF1018; then, only if useful, a final reconciliation WO. User authorized up to three completed work orders. No workbook/XML/source edits.
