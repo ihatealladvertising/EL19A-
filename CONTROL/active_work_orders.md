@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. WO64836 closed: MB12 is initialized MBC=111 (inactive), control/ID word zero, and no actual data-field reads/reconfiguration were found in the bounded target path. F062 therefore receives q=0 and returns zero in the observed configuration.
+- **Active work order:** [WO64837 — F39E / mTTVBHOS Query and Axis-Conversion Test](WO64837.md). Target 8-point UBYTE structure/reader already known; test the exact query formula, E124 axis units and direct output consumers. Preserve Juke/V6 A2L axis-method conflict; no XML/workbook edits.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
