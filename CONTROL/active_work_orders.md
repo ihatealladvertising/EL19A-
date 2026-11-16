@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64860 — QDSPT reduction-rate output FFFF12EA consumer trace. See [WO64860](WO64860.md). Follow the existing selected scalar output to its furthest endpoint; do not repeat E678/E688 reader work.
+- **Active work order:** WO64861 — independent ETC actuator hardware-output path discriminator. Trace runtime ATU-II/MTU/PWM/GPIO output writes and test backward dataflow from FFFF2446/FFFF1018; do not repeat completed E678/E688, timer-capture or FFFF1018 consumer audits. See [WO64861](WO64861.md).
+- **Completed:** WO64860 — corrected the output base: sub_403D8 writes UBYTE FFFF2446 (not FFFF12EA), reads it internally, compares/subtracts against UWORD FFFF1042 and stores bounded UWORD/sentinel to FFFF1018. No physical actuator endpoint; no 52.34% linkage. See [WO64860](WO64860.md).
 - **Completed:** WO64859 — FFFF860B/E refresh copies FFFF860D/E into FFFF860B/C; FFFF860B.bit3 therefore inherits FFFF860D.bit3. Upstream writer/coolant comparator remains unresolved; no donor mDSHCUT address/scale transfer. See [WO64859](WO64859.md).
 - **Completed batch:** callback/FFFF85DF consumer WOs WO64856–WO64858 are closed.
 - **Completed:** WO64858 — 0x60-byte copy in sub_2088C mirrors FFFF8534+0x19 to FFFF84ED; no further consumer/alias established. No physical throttle endpoint or 52.34% conversion. See [WO64858](WO64858.md).
@@ -52,6 +53,9 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
+WO64860 closed after correcting the objective's address error: R14 is FFFF2150, so the selected QDSPT byte is FFFF2446, not FFFF12EA; it is read within sub_403D8 and contributes to UWORD FFFF1018. No actuator endpoint or 52.34% linkage. WO64861 is active for independent ETC hardware-output discovery. V55 remains current; no XML/workbook edits.
+
+## Prior checkpoint — 2026-11-16
 WO64843 closed at a bounded internal-state endpoint. E934/E082 is a strong partial 16-point UBYTE structural match; the query is high byte 0xDA of a CAN-mailbox-related constant 0xDA80 copied into FFFFA338. Target interpolation at that query returns 0x82. The target uses the raw/128 coefficient reciprocally in signed division and as a query to a second lookup, but the mV-axis/pressure interpretation is contradicted. Retain generic E934 only. WO64844 is ACTIVE: trace FFFF860B.bit3 writer and coolant-temperature threshold source against V6 mDSHCUT/fDSHCUT; A2L conversion is X-50°C, -40°C predicts raw 0x0A. Do not repeat the sub_403D8 read test or completed QDSPT curves.
 
 ## Previous checkpoint — 2026-11-16
