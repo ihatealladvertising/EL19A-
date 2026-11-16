@@ -6,7 +6,9 @@
 
 ## Current operational state
 
-- **Active work order:** None — user-authorized batch WO64875–WO64877 completed; stop here pending new authorization.
+- **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603) is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
+
+- **Active work order:** None — user-authorized batch WO64878–WO64880 completed; stop here pending new authorization.
 - **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
 - **Completed:** WO64876 — no direct FFFF8600.bit6 writer found; initialization mirrors three bytes from FFFF85FF to FFFF8602, but source semantics remain unknown. See [WO64876](WO64876.md).
 - **Completed:** WO64875 — no direct FFFF85F8.bit4 writer found; nearby timer/status routine modifies FFFF85F9, not the branch bit. See [WO64875](WO64875.md).
@@ -70,6 +72,9 @@
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
 ## Latest checkpoint — 2026-11-16
+User-authorized semi-autonomous batch WO64878–WO64880 is complete. Corrected the copy direction at 0x20FBA–0x20FBE: sub_2245C copies R2→R1, so FFFF8602..8604 are copied to FFFF85FF..FFFF8601; FFFF8603 therefore supplies FFFF8600.bit6. Three explicit FFFF8603 update sites were found; they modify bits 0x20, 0x08 and 0x01 but preserve bit 0x40. The two routines map to selectors 0x4AA0 and 0x2EE0 in a 30-entry record dispatcher. Neither selector nor the traced status logic establishes Drive/Neutral semantics. The source of FFFF8603.bit6 remains unresolved. No workbook/XML/ROM/LST edits. Next lead: identify the non-local/initial source of FFFF8603.bit6, including any indirect or bulk-copy writer. Do not repeat WO64878–WO64880.
+
+## Previous checkpoint — 2026-11-16
 User-authorized expanded batch WO64869–WO64871 is complete; no active work remains. WO64869 confirmed A0E2 as a 4×4 UBYTE lookup via sub_22B44 with axes E006/E002, independent queries FFFF85A4/FFFF849A and raw output FFFF1207; the 0x43 cell is not proven to be selected at runtime and both query producers remain unresolved. WO64870 reconstructed the A0E2 local arithmetic: FFFF1207 contributes to saturated composite UBYTE FFFF1206, which feeds multi-input UWORD FFFF120A; no direct raw×100/128 conversion was found. WO64871 traced FFFF120A through sub_44054 to UBYTE FFFF1D3B and then through sub_5B1F4/sub_5AB20 to internal RAM outputs FFFF10CE and FFFF26A8. No physical throttle endpoint or confirmed MBT/ignition semantic was established. The 52.34% screenshot association remains provisional/numerical only; A0E2 is not a confirmed scalar definition. WO64866–WO64868 remain closed and were not repeated. V55 remains current; no XML, workbook, ROM or LST edits. Stop pending new user authorization.
 
 ## Prior checkpoint — 2026-11-16
