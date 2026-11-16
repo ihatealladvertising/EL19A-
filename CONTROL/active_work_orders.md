@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Active work order:** [WO64837 — F39E / mTTVBHOS Query and Axis-Conversion Test](WO64837.md). Target 8-point UBYTE structure/reader already known; test the exact query formula, E124 axis units and direct output consumers. Preserve Juke/V6 A2L axis-method conflict; no XML/workbook edits.
+- **Active work order:** NONE. WO64837 closed: F39E/E124 are exact 8/8 data + 8/8 axis matches to Juke mTTVBHOS/mLVBHOS across three donor ROMs. Target query is a squared-difference accumulator normalized by two integer divisions and capped to UBYTE; target output remains an internal correction/secondary-lookup path to FFFF84A6. Juke/V6 axis-method conflict unresolved; no donor scale or semantic XML promotion.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
