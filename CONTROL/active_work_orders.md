@@ -1,23 +1,25 @@
 ## Current chat continuation
-- **WO64829 — E974 Feedback-Lookup Mechanics and State-Transfer Audit** (Agent: ChatGPT): **ACTIVE / PARTIAL**. Issued 2026-11-15 after bounded technical closure of WO64828.
-- **WO64828 — E974 Input Provenance and ADC/Threshold Endpoint Trace** (Agent: ChatGPT): **TECHNICAL SCOPE COMPLETE — bounded unresolved outcome**. The only identified `sub_506A0` indexed-writer candidate is excluded for its only observed caller; unresolved input producers and physical output consumer remain explicitly open.
+- **WO64829 — E974 Feedback-Lookup Mechanics and State-Transfer Audit** (Agent: ChatGPT): **TECHNICAL SCOPE COMPLETE** (bounded internal-state reconstruction). Full evidence: `CONTROL/WO64829.md`.
+- **WO64828 — E974 Input Provenance and ADC/Threshold Endpoint Trace** (Agent: ChatGPT): **TECHNICAL SCOPE COMPLETE** (bounded unresolved outcome). Full evidence: `CONTROL/WO64828.md`.
 - **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok): **TECHNICAL SCOPE COMPLETE**. Authoritative Control Notebook lifecycle synchronization remains pending because exact Notebook read-back is unavailable (403).
-- Prior WO64825 remains PARTIAL. Its separate unresolved scope is preserved.
+- Prior WO64825 remains PARTIAL. Its separate unresolved scope is preserved. No currently active work order is represented by this GitHub snapshot; stable Control Notebook authority is still unavailable.
 
-## WO64829 issue / checkpoint 1 (2026-11-15)
-- **Status:** ACTIVE / PARTIAL. Full evidence: `CONTROL/WO64829.md`.
-- **Objective:** decode both ROM lookups in `calculate_and_update_1C01` at `0x599F0`, including reader/interpolation mechanics, query scaling, saturation/sentinel behavior, fixed-point feedback multiply, and state transfer to `FFFF19BF` / `FFFF19D1`. No physical semantic naming or XML promotion without direct evidence.
-- **Reader:** `sub_22E10` rejects queries `>=0xF0` with sentinel `0xF0`; otherwise splits query into 4-bit table index and 4-bit fraction, reads adjacent UBYTE points, and invokes `sub_231C8). Interpolation is linear from first point A toward next point B; fraction `(q&0x0F)/16`; integer change truncates rather than rounds.
-- **First lookup:** base `0xF38E); `q1=min(4×max(UBYTE(FFFF1CA8+0x29)-UBYTE(FFFF1CA8+0x3A),0),255)`; `q1>=0xF0` for delta >=60. 16 raw bytes: `7D 7C 76 6E 66 60 5A 53 4D 46 40 3A 33 2D 26 20`. Result saved at `FFFF1990+0x27D`.
-- **Feedback multiply / second lookup:** prior `FFFF19BF` × first result is passed through `sub_223FC`; this call has seven arithmetic shifts (full path `>>7`), then is capped at `0x80` as `v=min(floor(prior×first_result/128),128)`. Second query `q2=min(2×(128-v),255)); `q2>=0xF0` when v<=8. Base `0xF092); 16 raw bytes: `00 08 0C 0F 14 19 1E 23 28 2D 32 37 3C 41 46 4B`. Result saved at `FFFF1990+0x28E`; v at `+0x28D`.
-- **Boundary / next:** exact downstream combination of second result, helper input bytes, and writes to `FFFF19BF`, `FFFF19D1`, and `FFFF1D80+1` remains to be decoded at checkpoint 2. Table semantics/units remain unknown. No workbook or Notebook integration; no source artifacts edited.
+## WO64829 closeout / checkpoints 1–2 (2026-11-15)
+- **Status:** TECHNICAL SCOPE COMPLETE — bounded internal-state reconstruction. Full evidence: `CONTROL/WO64829.md`.
+- **Reader:** `sub_22E10` is a 16-point UBYTE lookup with adjacent-sample interpolation; `q>=0xF0` returns numeric sentinel 0xF0. Interpolation is linear from sample A toward B with fraction `(q&0x0F)/16), integer truncation, no rounding.
+- **First lookup:** base `0xF38E`; `q1=min(4×max(UBYTE(FFFF1CA8+0x29)-UBYTE(FFFF1CA8+0x3A),0),255)`. Delta >=60 returns sentinel 0xF0. Bytes: `7D 7C 76 6E 66 60 5A 53 4D 46 40 3A 33 2D 26 20`.
+- **Feedback multiply / second lookup:** prior `FFFF19BF` × first lookup result passes through `sub_223FC` = arithmetic `>>7`; raw result is capped at 0x80 for the second query. `q2=min(2×(128-v),255)`, where `v=min(floor(prior×first_result/128),128)`. For v<=8, second lookup returns sentinel. Base `0xF092`; bytes: `00 08 0C 0F 14 19 1E 23 28 2D 32 37 3C 41 46 4B`.
+- **State selection:** `D=clip_signed(S2-UBYTE(FFFF1990+0x1F1),-128,127)`; `K=clip_signed(UBYTE(FFFF1CA8+0x26)-(UBYTE(+0x01)+UBYTE(+0x29))+0x40,-128,127)`. `C=0x0A` when `FFFF1E54+5.bit4` is clear; `C=0` when set (ROM bytes at `0x8296/0x8297 = 0A 00`).
+- **Outputs:** `FFFF19D1_next=min(max(D,K),C)). Returned `r2) becomes `FFFF19BF_next): `C` when `D>=K), otherwise `min(K,C)`. `FFFF1D99+0x6D.bit1` reflects whether the *uncapped* scaled feedback product is >127. `FFFF1D80+1.bit0` copies that flag when D>=K, otherwise is forced set.
+- **Next lead, not issued as a new WO:** immediate caller preserves `max(FFFF1CAE,FFFF1CCC)` and combines it with `FFFF19D1` before conditional stores to `FFFF85DF` at `0x59BF2`, `0x59C02`, and `0x59C04`. The final conversion/gating equation and physical meaning remain unverified.
+- **Integration:** GitHub WO file and register updated; Master Workbook and Stable Control Notebook unchanged. Exact Notebook read-back still unavailable (403); no authoritative Notebook lifecycle closure or reciprocal save verification claimed. No source artifacts modified.
 
 ## WO64828 closeout / checkpoint 5 (2026-11-15)
 - **Status:** TECHNICAL SCOPE COMPLETE — bounded unresolved outcome. Full evidence: `CONTROL/WO64828.md`.
-- **Dynamic alias resolved:** only observed `sub_506A0` caller at `0x51C58` is preceded by `sub_5062C` (`0x51C52`). `sub_5062C` returns R4 as `FFFF357E & 0x80`, so R4 is only `0x00` or `0x80`. `sub_506A0` zero-extends R4 to R9 and stores to `FFFF1C78+0x0E+2×R9`; only destinations `FFFF1C86` / `FFFF1D86) are reachable through this call. Target indexes 0x14/0x23/0x28 (fields `FFFF1CAE/1CCC/1CD6`) are impossible here.
+- **Dynamic alias resolved:** only observed `sub_506A0` caller at `0x51C58` is preceded by `sub_5062C` (`0x51C52`). `sub_5062C` returns R4 as `FFFF357E & 0x80`, so R4 is only `0x00` or `0x80`. `sub_506A0` zero-extends R4 to R9 and stores to `FFFF1C78+0x0E+2×R9`; only destinations `FFFF1C86` / `FFFF1D86` are reachable through this call. Target indexes 0x14/0x23/0x28 (fields `FFFF1CAE/1CCC/1CD6`) are impossible here.
 - **Remaining boundary:** no producer for the three input fields, and no later explicit consumer/physical ADC or actuator endpoint for `FFFF85E0`, was established in the available LST. Other unrepresented indirect, bulk-copy, DMA or peripheral updates are not globally excluded.
 - **Integration:** GitHub closeout committed; Master Workbook unchanged; Stable Control Notebook unchanged and exact live read-back unavailable (403). No source edits.
-- **Next:** WO64829 reconstructs the already-proven callback helper's ROM lookup and internal feedback mechanics; it does not reopen completed WO64828 audits.
+- **Next:** WO64829 reconstructed the feedback lookup/state logic. The remaining callback conversion to `FFFF85DF` is a separate candidate scope; do not assume physical meaning.
 
 ## WO64827 closeout (2026-11-15)
 - **WO ID / Title:** WO64827 — E974 Downstream Gating and Consumer XREF Investigation
