@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64859 — EL19A coolant threshold and FFFF860B.bit3 provenance. See [WO64859](WO64859.md). This is a new bounded investigation; prior WO64844/64845 inventories are not to be repeated.
+- **Active work order:** WO64860 — QDSPT reduction-rate output FFFF12EA consumer trace. See [WO64860](WO64860.md). Follow the existing selected scalar output to its furthest endpoint; do not repeat E678/E688 reader work.
+- **Completed:** WO64859 — FFFF860B/E refresh copies FFFF860D/E into FFFF860B/C; FFFF860B.bit3 therefore inherits FFFF860D.bit3. Upstream writer/coolant comparator remains unresolved; no donor mDSHCUT address/scale transfer. See [WO64859](WO64859.md).
 - **Completed batch:** callback/FFFF85DF consumer WOs WO64856–WO64858 are closed.
 - **Completed:** WO64858 — 0x60-byte copy in sub_2088C mirrors FFFF8534+0x19 to FFFF84ED; no further consumer/alias established. No physical throttle endpoint or 52.34% conversion. See [WO64858](WO64858.md).
 - **Completed:** WO64857 — FFFF8534+0x19 has writers at 0x38056/0x28C2E and is mirrored to FFFF84ED by a 0x60-byte copy; no direct/GBR consumer established. Callback cadence is every two sub_2088C interrupts; wall-clock period unknown. See [WO64857](WO64857.md).
