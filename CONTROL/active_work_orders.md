@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64855 — FFFF1C78+0x24 consumer trace and throttle-target endpoint test. See [WO64855](WO64855.md). Trace the UWORD output from the AB22 path to its furthest consumer.
+- **No active work order.** User-authorized three-WO scalar/throttle-path batch WO64850, WO64854 and WO64855 is complete; stop after these three closeouts.
+- **Completed:** WO64855 — FFFF1C78+0x24 consumer chain continues through FFFF1054+0x2AD to FFFF1054+0x468; all demonstrated endpoints are internal RAM state, no throttle actuator path proven. See [WO64855](WO64855.md).
 - **Completed:** WO64854 — corrected the suspected 9F8/9FA linkage (separate sub_6E558 state, not AB22); AB22 byte output feeds a bounded UWORD at FFFF1C78+0x24, but throttle role remains unproven. See [WO64854](WO64854.md).
 - **Completed:** WO64850 — resumed scalar audit found 0x90EA is one of a 16-UWORD block feeding composite internal state FFFF2150+0xAD4; no 52.34% conversion or throttle endpoint. See [WO64850](WO64850.md).
 - **Completed:** WO64853 — bounded DMAC/DTC audit found no programmed SAR/DAR transfer or descriptor for FFFF14E0/FFFF1018; indirect provenance remains unresolved. See [WO64853](WO64853.md).
