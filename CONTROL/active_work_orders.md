@@ -26,7 +26,13 @@
 
 - **Completed batch:** WO64878–WO64880 are closed; see [WO64878](WO64878.md), [WO64879](WO64879.md), [WO64880](WO64880.md). WO64878 corrects WO64876's copy direction: `sub_2245C` copies R2→R1, so `FFFF8602..8604 → FFFF85FF..FFFF8601` at `0x20FBA–0x20FBE`; thus `FFFF8603` is copied to `FFFF8600`. WO64879 found three explicit `FFFF8603` update sites (`0xB1044`, `0xB1B7A`, `0xB1B92`), updating bits 0x20, 0x08 and 0x01 while preserving bit 0x40. WO64880 traced the update routines to a 30-entry record dispatcher: selector 0x4AA0 → `sub_B0FD8`, 0x2EE0 → `sub_B1A24`; neither establishes D/N semantics. The source of `FFFF8603.bit6` remains unresolved.
 
-- **Active work order:** None — user-authorized batch WO64890–WO64892 completed. Await the next three-WO batch.
+- **Active work order:** None — batch WO64893–WO64895 completed; await next three-WO batch.
+
+- **Completed batch:** WO64893–WO64895 are closed; see [WO64893](WO64893.md), [WO64894](WO64894.md), and [WO64895](WO64895.md). WO64893 raw-ROM verification disproved the claimed MOV.W at 0x47686 (actual bytes 8B 4A = BF loc_4771E). WO64894 mapped the 0x28-byte FFFF85C4→FFFF859C copy and traced +0x0D to FFFF85CE-derived FFFF85D1; producers for +0x08, +0x16 and FFFF849A remain unresolved. WO64895 raw-ROM-verified distinct 0x80 behavior: RP-004 propagates bit 7 from the first sampled cell while interpolating low 7 bits; RP-006 returns 0x80 if any participating cell is >=0x80. All scopes are technical-scope complete at these boundaries; no workbook/XML/source edits.
+
+- **Completed:** WO64895 — separate RP-004/RP-006 sampled-cell 0x80 contracts verified against original ROM; caller semantics remain unassigned. See [WO64895](WO64895.md).
+- **Completed:** WO64894 — FFFF859C+0x0D source traced through the 0x28-byte block copy to FFFF85D1; +0x08, +0x16 and FFFF849A producers remain unresolved. See [WO64894](WO64894.md).
+- **Completed:** WO64893 — raw ROM confirms 0x47686 is BF loc_4771E (bytes 8B 4A), not MOV.W to FFFF C006. See [WO64893](WO64893.md).
 - **Completed:** WO64877 — no defensible D/N correlation found; retain generic E678-branch scalar 0x848A and E688-branch scalar 0x848B. Next lead is the broader FFFF85FF structure producer. See [WO64877](WO64877.md).
 - **Completed:** WO64876 — bounded direct writer audit; its original copy-direction statement is superseded by correction WO64878 (actual copy is FFFF8602→FFFF85FF). See [WO64876](WO64876.md) and [WO64878](WO64878.md).
 - **Completed:** WO64875 — no direct FFFF85F8.bit4 writer found; nearby timer/status routine modifies FFFF85F9, not the branch bit. See [WO64875](WO64875.md).
