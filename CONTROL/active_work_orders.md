@@ -9,6 +9,7 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64967 — both sub_22B7C calls resolve to AB72/AB62 4×4 UBYTE maps sharing raw axes F54E/F552; query 1 is R7 from FFFF859C+8 and query 2 is stack-supplied. See [WO64967](WO64967.md). Next: static sub_22CB8 pair only.
 - **Completed:** WO64965 — single-address AFD2 check; direct R4 pointer at 0x6D7AC reaches sub_22B44 at 0x6D7DE with axes E3F3/E3EF. AFD2–AFE1 is zero-filled; branch alternatives AFE2/AFC2 share the same helper and axes. Existing XML mapping already correct. See [WO64965](WO64965.md).
 - **Completed:** WO64964 — sub_22C38 micro-census; both caller families resolve to existing A342/A382 and AB22 placements. DFF2/DFFA and E24D/E022 are confirmed pointer pairs; Y×4, X raw. See [WO64964](WO64964.md). Next: sub_22B44 only.
 - **Completed:** WO64963 — sub_22C00 micro-census; eight call sites resolve to eight already-registered bases (A092, AC62, ACE2, ACA2, AD22, ADF2, AF72, A452); no new varying map. See [WO64963](WO64963.md). Next: sub_22C38 only.
