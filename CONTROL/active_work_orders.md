@@ -6,12 +6,14 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. [WO64830 — B-Family Downstream Consumer Closure](WO64830.md) is TECHNICAL SCOPE COMPLETE at the bounded internal-state endpoint; no physical subsystem or MMIO endpoint was established. Do not repeat its completed trace.
+- **Active work order:** [WO64832 — F3D6/F3DE TVO-Curve Fingerprint and Behaviour Discrimination](WO64832.md). Apply the four-stage SPECULATE → CONFIGURE → TEST → ELIMINATE/REFINE process. Keep structural/fingerprint fit separate from target behaviour/function fit. No XML or workbook edits are authorized by this WO.
+- **Queued:** [WO64833 — EFA4 vs. mTFVAPO 16-Point Reference Fingerprint Test](WO64833.md), priority 2, dependent on WO64832 closure or explicit reprioritization.
+- **Completed:** WO64830 remains TECHNICAL SCOPE COMPLETE at the bounded internal-state endpoint; do not repeat its completed trace.
 - **Completed technical work:** WO64827, WO64828 and WO64829 — technical scopes complete. Detailed evidence remains in `CONTROL/WO64828.md`, `CONTROL/WO64829.md`; WO64827 closeout is preserved below.
 - **Partial / paused:** WO64825 remains PARTIAL. Preserve its unresolved scope; do not resume without explicit authorization and a concrete lead.
 - **Timer-11 supplement to WO64794 (2026-11-15):** target code at `sub_2598E` writes `PLIOR=0x37EF`, `PLCRH=0`, `PLCRL=0`, `PLIR=0`, `PLDR=0x0400`. PL1/PL2 direction bits are outputs, but the Port-L function-select bits are cleared; no PLCRL reconfiguration was found in the bounded LST text search. Thus the configured Timer-11 compare events are **not shown routed to TIO11A/B pins**; the ignition-coil hypothesis is weakened. WO64794 overall remains PARTIAL; Timer-11 interrupt purpose and other output hardware remain open.
-- **Next candidate (not issued):** 9C2E/9DAE differential provenance/consumer path: trace producers of `FFFF849A`/`FFFF85B2`, then consumers of `FFFF1C79`. Before issue, reconcile V54 `P2 Work Orders` entries WO64275 and WO64276 (both shown ACTIVE) and WO64435 (ACTIVE 9B2E dependency) against this GitHub register. Do not silently reactivate or duplicate them.
-- **Workbook:** current GitHub master remains V54: `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`. Local V55 successor is exported as `EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx` (1,357,719 bytes; MD5 `960e88a4cb4bd3372e038db507b1ab61`; SHA-256 `8fba20dfde97ce0f1daa71905e9ca8333c847b79a3d1f67706f25310f7d69887`). V55 records WO64830 closure and Timer-11 pin-mux update; it is not yet uploaded to GitHub. V54 remains unchanged/current until V55 is uploaded and verified.
+- **Deferred candidate (not issued):** 9C2E/9DAE differential provenance/consumer path. Before issue, reconcile legacy V54 `P2 Work Orders` entries WO64275/WO64276 and WO64435 against this register; do not silently reactivate or duplicate them.
+- **Workbook:** current GitHub master is V55: `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx` (Git blob SHA `83a065db94c0945d352aac86f2d55353c547cebd`; upload commit `b9793eee8d09f25c8315175a1ce4af1bc01900f6`, 2026-11-16T02:19:47Z). V54 is the predecessor. The V55 binary's presence/commit is verified; its local MD5/SHA-256 identity is recorded in the integration summary but was not recomputed from GitHub raw bytes in this check.
 - **Former OneDrive Control Notebook:** superseded; leave unchanged as a historical archive.
 
 ## Operating rules
@@ -23,7 +25,10 @@
 5. At each handoff, state the exact next action, source reference, dependencies, unresolved boundaries and completed work not to repeat.
 6. Preserve historical snapshots and original artifacts. Do not delete or overwrite the former OneDrive Notebook.
 
-## Latest checkpoint — 2026-11-15
+## Latest checkpoint — 2026-11-16
+WO64832 is ACTIVE. It compares the F3D6/F3DE 8-point UBYTE curves with the JUKE `mTTVOULM/mTTVOULMS` A2L configuration, and separately tests target query provenance, selection, limits and downstream behaviour. Existing reader/data/axis/interpolation traces are not to be repeated. WO64833 (EFA4 vs `mTFVAPO`) is queued behind it. The four-stage process is mandatory; structural fit and behaviour fit receive independent conclusions. No XML or workbook edits are included. V55 is the current GitHub Master Workbook.
+
+## Previous checkpoint — 2026-11-15
 
 WO64830 completed the bounded B-family downstream trace. All five B212-derived bytes (FFFF2834–FFFF2838) and the B012/B112-derived bytes (FFFF27CC–FFFF27CE) reach dynamic numeric threshold comparisons and internal state/counter updates. No physical sensor/actuator or MMIO endpoint was established. The next 9C2E/9DAE branch is not issued pending reconciliation of legacy V54 ACTIVE entries WO64275/64276/64435. Timer-11 PL1/PL2 pin-mux audit weakens its TIO11 ignition-output hypothesis; WO64794 remains PARTIAL. V55 local export exists; V54 remains current GitHub master until V55 is uploaded and verified.
 
