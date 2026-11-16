@@ -3,18 +3,13 @@
 - **WO64827 — E974 Downstream Gating and Consumer XREF Investigation** (Agent: Grok): **TECHNICAL SCOPE COMPLETE**. Authoritative Control Notebook lifecycle synchronization remains pending because exact Notebook read-back is unavailable (403).
 - Prior WO64825 remains PARTIAL. WO64827's bounded scope is complete; WO64825's separate unresolved items are not silently closed.
 
-## WO64828 issue / checkpoint 3 (2026-11-15)
-- **Status:** ACTIVE / PARTIAL. Full evidence and boundaries: `CONTROL/WO64828.md`.
-- **Primary source:** read-only `EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_WO64683_64684_CHECKPOINT_2026-11-11.lst` (27,050,057 bytes; modified 2026-11-12). Supplementary older xref archive `EL19A_IDA_Export.zip`; neither source modified.
-- **Confirmed E974→callback dependency:** `0x3C37C` tests `FFFF8626.bit2`; with `FFFF1D7C.bit4` it writes forced `0x80` to `FFFF1C93` at `0x3C454`. Otherwise alternate calculation writes `FFFF1C93). Combined with WO64827's `FFFF1F0C → FFFF8626.bit2`, direct control dependence into the callback is confirmed.
-- **Callback dataflow:** `prepare_85DF_and_19BF` (`0x59B58`) reads UWORD `FFFF1CAE/FFFF1CCC`, chooses max, caps high byte at `0x7F`; combines UBYTE `FFFF1C93/FFFF1CD6` as bounded `1C93+1CD6-0x80`; passes to `calculate_and_update_1C01`; helper reads prior `FFFF19BF`, updates `FFFF19D1`, caller stores returned result to `FFFF19BF`. Initialization sets `FFFF19BF=0x80`.
-- **Conditional output:** helper state plus selected UWORD forms `FFFF85DF); `FFFF3616 & 0x0C` forces zero, otherwise `FFFF1E68.bit2` chooses helper-derived candidate or capped max-high byte. Wrapper correction: when `FFFF1E68.bit2` SET, copy `FFFF85DF` to `FFFF85E0`; when CLEAR, derive `FFFF85E0` from `FFFF1CCC`. Conditional E974→1C93→helper→85DF→85E0 path is confirmed internally.
-- **Dynamic store exclusion:** `sub_4A912` store at `0x4A9A0` is `FFFF1CA8+0x12+2×index`; its sole caller passes loop index 0–3, thus writes only `FFFF1CBA/BC/BE/C0), not the target fields. Other reviewed 1CA8-rooted users (including `sub_46C20`, `sub_4D33C`, `sub_4D09C`, `sub_4D1D6`, `sub_4700A`, `sub_4718C/471D6`, `sub_90F7C`, `sub_B9620`) read relevant structure bytes or write other locations; no target producer confirmed.
-- **Remaining possible alias:** `sub_506A0` writes UWORD via `FFFF1C78+0x0E+2×r9) at `0x5086A`; only caller `0x51C58` follows `sub_5062C), which supplies `r9=FFFF357E) unless bit7 substitutes 0x80. Exact indices needed to hit unresolved fields: `0x14`→`FFFF1CAE`; `0x23`→`FFFF1CCC`; `0x28`→`FFFF1CD6`. Direct `FFFF357E` updates found only set/clear bit7, bit1, bit0, or clear bits2–3; no direct full-byte assignment of the required indices. Reset code inspected does not establish initial value. This remains a possible alias only, not a confirmed writer.
-- **Endpoint:** no later explicit `FFFF85E0` consumer identified. Callback chain currently stops at internal RAM staging; no proven physical ADC/actuator consumer. WO64827 ADC channel 9 / `FFFF8494/FFFF2F00` endpoint not yet directly linked to this callback.
-- **Unresolved:** producers for `FFFF1CAE/FFFF1CCC/FFFF1CD6`; runtime value domain of `FFFF357E`; further consumer/physical boundary for `FFFF85E0`.
-- **Integration:** `CONTROL/WO64828.md` checkpoint 3 committed. Master Workbook and Stable Control Notebook unchanged; Notebook exact read-back remains unavailable (403). No XML/source edits.
-- **Next bounded action:** determine only the value domain/initialization or non-literal writer path for `FFFF357E), and seek a concrete direct `FFFF85E0` consumer; stop rather than broaden to RAM-wide scanning.
+## WO64828 issue / checkpoint 4 (2026-11-15)
+- **Status:** ACTIVE / PARTIAL. Full evidence: `CONTROL/WO64828.md`.
+- **Output-member audit:** `FFFF85E0 = FFFF85C4+0x1C). The later LST contains multiple references to the base; bounded review of literal base-register accesses found no additional fixed +0x1C byte/word consumer after the callback write at `0x59CA6`. Inspected GBR-root functions at `0x257AE`, `0x34500`, `0x35108`, `0x35C1A`, `0x433BC`, `0x434C8`, and `0x470D0` address other offsets; the `0x35C1A` indexed access starts at +0x24 and cannot reach +0x1C. Register-computed/indexed aliases outside the immediate windows are not exhaustively excluded.
+- **Endpoint:** no explicit later LST consumer of `FFFF85E0` or physical ADC/actuator endpoint confirmed. Current supported endpoint is callback RAM staging.
+- **Final remaining items:** producers for `FFFF1CAE/FFFF1CCC/FFFF1CD6) unresolved; possible indexed alias through `sub_506A0` depends on unproven `FFFF357E` runtime value domain (0x14/0x23/0x28); physical consumer of `FFFF85E0` unproven.
+- **Integration:** WO checkpoint 4 committed to `CONTROL/WO64828.md`. Master Workbook and Stable Control Notebook unchanged; exact Notebook read-back remains unavailable (403). No source edits.
+- **Next:** no broad scans. Resume only upon a concrete writer/consumer lead or verified current LST/xref source. Retain status ACTIVE/PARTIAL, not COMPLETE.
 
 ## WO64827 closeout (2026-11-15)
 - **WO ID / Title:** WO64827 — E974 Downstream Gating and Consumer XREF Investigation
