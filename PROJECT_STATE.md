@@ -3,7 +3,7 @@
 **Snapshot:** 2026-11-15 (V54 E974 integration)  
 **Repository:** private `ihatealladvertising/EL19A-`  
 **Operational control:** GitHub `CONTROL/active_work_orders.md` is the sole current authority (cutover commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). Former OneDrive Control Notebook is a historical archive and remains unchanged.
-**Migration:** V54 XLSX is committed in GitHub and verified against the previously verified V54 bytes by exact Git blob SHA. V53 is retained in GitHub with an `OLD_` prefix as the predecessor.
+**Migration:** V54 XLSX is committed in GitHub and verified against the previously verified V54 bytes by exact Git blob SHA. V53 is retained in GitHub with an `OLD_` prefix as the predecessor. Local V55 successor (WO64830 closeout / Timer-11 pin-mux supplement) is exported; GitHub upload/read-back is pending.
 
 ## Target identity
 - 2008 Nissan Versa / Sentra C11X, manual transmission
@@ -26,11 +26,12 @@
 - V54 adds five sheets: WO64827 E974 Gate Trace; WO64828 E974 Input Audit; WO64829 E974 Feedback Trace; E974 Integrated Checkpoint; V54 Checkpoint. It also updates Session Control, WO Continuity Ledger, Batch Checkpoint Manifest and Project Index.
 - V54 integrates WO64827–WO64829 technical closeouts; WO64825 remains PARTIAL. No XML edits, calibration promotions, or donor scale transfers.
 - GitHub contains the V54 XLSX binary at the current-master path above. V53 is retained as `WORKBOOK/OLD_EL19A_Master_Reverse_Engineering_Workbook_V53_WO64817CP16_PAIR01_2026-11-15.xlsx`. The V54 Git blob SHA was calculated from the previously verified raw V54 file and exactly matches GitHub's repository blob SHA.
+- **Local V55 candidate:** `EL19A_Master_Reverse_Engineering_Workbook_V55_WO64830_BFamilyClosure_2026-11-15.xlsx`; size 1,357,719 bytes; MD5 `960e88a4cb4bd3372e038db507b1ab61`; SHA-256 `8fba20dfde97ce0f1daa71905e9ca8333c847b79a3d1f67706f25310f7d69887`. Not yet committed to GitHub. Summary: `WORKBOOK/V55_WO64830_INTEGRATION_SUMMARY_2026-11-15.md`.
 
 ## Operational state — GitHub control authority
 1. V53 checkpoint and its exact Control Notebook reciprocal save remain a historical snapshot: WO64817 PARTIAL/PAUSED at CP16; WO64819 ACTIVE (PAIR-01); WO64820/WO64821 QUEUED; WO64816/WO64818 PARTIAL/PAUSED; WO64795 proposed/not issued.
 2. Later Library Notebook paste (2026-11-15 17:55) recorded WO64822 ACTIVE and WO64819 paused at CP18; this was a separate snapshot and must not be silently merged.
-3. GitHub chat-level control records now record WO64827, WO64828 and WO64829 as TECHNICAL SCOPE COMPLETE. V54 incorporates all three. WO64825 remains PARTIAL.
+3. GitHub control records now record WO64827, WO64828, WO64829 and WO64830 as TECHNICAL SCOPE COMPLETE. V54 incorporates WO64827–WO64829; local V55 adds WO64830. WO64825 remains PARTIAL.
 4. On 2026-11-15 the user designated GitHub `CONTROL/active_work_orders.md` as the sole operational authority. The existing file was updated in place and read-back verified. The former OneDrive Control Notebook is historical only; do not wait for it or update it.
 5. WO64829's remaining callback conversion/gating work is a concrete next lead only, **not issued as a new WO**.
 
