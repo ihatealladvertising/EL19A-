@@ -15,7 +15,10 @@
 - **Completed:** WO64979 — new EBC0–EBC7 8-point UBYTE curve via sub_22EFC at 0xA960A; explicit raw UBYTE axis E11C–E123. See [WO64979](WO64979.md).
 - **Completed:** WO64980 — new EA5C–EA63 8-point UBYTE zero curve via sub_22EFC at 0xAEE94; explicit raw UBYTE axis E12C–E133. Retain as constant/structural, not varying calibration. See [WO64980](WO64980.md).
 - **Previously registered, not new:** EBD8–EBDF is an 8-point UBYTE curve using E092–E099 via sub_22EFC at 0x4DB0C; XML axis mapping already exists. Do not duplicate.
-- **Next:** one F000–FFFF micro-scan, excluding registered curves, axes and vectors; stop if only constants/sentinel objects remain.
+- **Completed:** WO64981 — new F21E–F225 8-point UBYTE curve via sub_22EFC at 0xA3AF8; explicit raw axis EBB8–EBBF. Values 40 40 40 4D 56 58 58 58. No semantic assignment. See [WO64981](WO64981.md).
+- **Completed:** WO64982 — new F0C2–F0C9 8-point UBYTE zero curve via sub_22EFC at 0x40AE4; explicit raw axis E3B3–E3BA. Keep structural/constant only. See [WO64982](WO64982.md).
+- **Completed:** WO64983 — new F326–F32D 8-point UBYTE zero curve via sub_22EFC at 0x40B88; explicit raw axis E2C1–E2C8. Keep structural/constant only. See [WO64983](WO64983.md).
+- **Next:** move to a single remaining open axis gap / adjacent table-pointer check from the V56 register; avoid further broad F-bank scans because the known fixed-grid 1D cohort is fully registered and new F-bank yield is now mostly zero/sentinel curves.
 - **Completed:** WO64972 — new CD56–CF55 16×16 UWORD BE table candidate; sub_22D68 caller confirms R4=CD56, R5=E2C9 (16 UBYTE ×16), R6=FEC0 (16 UWORD raw), two UWORD query inputs. FEC0 also used as 1D values with CD56 as UWORD axis via sub_22F80. Structural confidence high; semantics unassigned. See [WO64972](WO64972.md).
 - **Completed:** WO64973 — C6D6–C755 is an L1 morphology-only 8×8 UWORD BE candidate immediately preceding C756; no direct reader, pointer, or axes found. Do not promote. See [WO64973](WO64973.md).
 - **Completed:** WO64974 — CC56–CD55 contains eight adjacent 16-point descending UWORD BE vectors at 0x20 spacing; no direct reader/axis reference found. Keep as L1 curve/vector group, separate from CD56. See [WO64974](WO64974.md).
