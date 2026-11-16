@@ -6,7 +6,7 @@
 
 ## Current operational state
 
-- **Active work order:** NONE. WO64839 closed: E424 is an exact 16/16 Juke mTA5N raw match; target consumes it as one factor in a four-byte normalized product to FFFF1C78[0], then two internal correction/status outputs (FFFF12B0 and FFFF1D1A). Timer-derived query-to-RPM axis remains unproven; retain generic target meaning, no donor XML promotion.
+- **Active work order:** [WO64840 — F2B2 / mTTNKAS Adjacent-Query and Consumer Test](WO64840.md). Exact 16/16 raw fingerprint, reader and output FFFF15C5 are already recorded; investigate only FFFF85A8 source, RPM-axis compatibility and direct FFFF15C5 consumers. This is a successor to the unissued WO64820/TC-04 scope; do not reopen WO64819 or repeat E424 work.
 - **Completed:** WO64835 — F062/E0CE exact 16/16 structural match to Juke mTRPAMB/mLPAMB; query source is MB12 control/identifier, not payload; MB12 inactive in target initialization and query resolves to zero. Active pressure-table semantics rejected; keep generic exact fingerprint only. See corrections in WO64835/WO64836.
 - **Completed:** WO64834 — E678/E688 retained as generic QDSPT/dashpot candidates; strong partial structural fit, partial family-behaviour fit; no donor axis/conversion or D/N semantic promotion.
 - **Completed:** WO64833 — EFA4→mTFVAPO correspondence rejected by 0/16 byte equality across all three Juke donor ROMs; EFA4 remains generic.
