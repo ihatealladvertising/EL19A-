@@ -6,7 +6,8 @@
 
 ## Current operational state
 
-- **Active work order:** WO64858 — FFFF84D4 shadow-structure consumer test. See [WO64858](WO64858.md). Determine whether copied field FFFF84ED has a real indirect consumer.
+- **No active work order.** User-authorized callback/FFFF85DF consumer batch WO64856–WO64858 is complete; stop after these three closeouts.
+- **Completed:** WO64858 — 0x60-byte copy in sub_2088C mirrors FFFF8534+0x19 to FFFF84ED; no further consumer/alias established. No physical throttle endpoint or 52.34% conversion. See [WO64858](WO64858.md).
 - **Completed:** WO64857 — FFFF8534+0x19 has writers at 0x38056/0x28C2E and is mirrored to FFFF84ED by a 0x60-byte copy; no direct/GBR consumer established. Callback cadence is every two sub_2088C interrupts; wall-clock period unknown. See [WO64857](WO64857.md).
 - **Completed:** WO64856 — found direct FFFF85DF reader at 0x37F82; it contributes to computed UBYTE FFFF8534+0x19. Callback 0x59CAE is entry 3 in a nine-function dispatch table. See [WO64856](WO64856.md).
 - **Completed batch:** WO64850, WO64854 and WO64855 are complete; their scalar/AB22 traces are not to be repeated.
