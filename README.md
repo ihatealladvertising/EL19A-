@@ -12,7 +12,7 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 
 ## Current project pointers
 - [Project state](PROJECT_STATE.md)
-- [Work-order snapshot reconciliation](CONTROL/active_work_orders.md)
+- [Operational work-order control — single source of truth](CONTROL/active_work_orders.md)
 - [Operating protocol v3](CONTROL/protocol_v3.md)
 - [Authority and snapshot conflicts](CONTROL/authority_and_conflicts.md)
 - [V53 workbook source manifest](WORKBOOK/V53_SOURCE_MANIFEST.md)
@@ -20,7 +20,8 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - [Calibration register guide](CALIBRATIONS/README.md)
 
 ## Authority and evidence policy
-- Control Notebook: operational authority for work-order lifecycle and exact master pointers.
+- `CONTROL/active_work_orders.md` on GitHub: sole operational authority for work-order lifecycle and handoff.
+- Former OneDrive Control Notebook: superseded historical archive; leave unchanged.
 - Master Workbook: authoritative technical archive for accepted evidence, findings and decisions.
 - Original ROM/LST/XML/reports/scripts: source artifacts with their own provenance.
 - Chat: temporary working context.
@@ -36,7 +37,7 @@ Private repository for the Nissan EL19A / SH7058 ECU reverse-engineering project
 - `WORKBOOK/` — workbook releases and migration manifests.
 
 ## Migration status
-GitHub is connected and the initial text/control seed is committed and read-back verified. The V53 workbook was fetched from its exact OneDrive URL and fingerprinted, but the raw XLSX is not yet committed to GitHub. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
+GitHub operational control is established in `CONTROL/active_work_orders.md` (commit `83a9d6c36e65103f0749a26b31a13e8c4389dfc5`). The former OneDrive Control Notebook is retained unchanged as a historical archive. The GitHub XLSX binary remains V53; the latest known OneDrive master is V54 and its GitHub binary migration is pending. ROM, LST, XML, scripts and reports remain outside GitHub until added unchanged and verified.
 
 ## Safeguards
 - Repository is private.
