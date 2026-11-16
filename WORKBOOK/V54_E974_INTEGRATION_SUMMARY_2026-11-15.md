@@ -1,8 +1,14 @@
 # V54 E974 Workbook Integration — 2026-11-15
 
+**Current GitHub master:** [`EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx`](EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx)  
+**Repository:** `ihatealladvertising/EL19A-` · branch `main`  
+**File size:** 1,350,922 bytes · **Git blob SHA:** `20a304effc7656596e1bd19c65b623140ec511d2`  
+The GitHub blob SHA matches the Git blob SHA calculated from the previously verified raw V54 bytes, confirming byte-identical content.
+
 ## Current master
-- OneDrive workbook: [EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx](https://onedrive.live.com/personal/f6defbd470240ae6/_layouts/15/doc.aspx?resid=67636be3-3e09-417e-abca-44b75955d417&cid=f6defbd470240ae6)
-- Item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`
+- GitHub workbook: [EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx](EL19A_Master_Reverse_Engineering_Workbook_V54_E974_WO64827_64829_2026-11-15.xlsx)
+- GitHub blob SHA: `20a304effc7656596e1bd19c65b623140ec511d2`
+- Previous OneDrive source item: `F6DEFBD470240AE6!s67636be33e09417eabca44b75955d417`
 - Size: 1350922 bytes; 144 sheets
 - MD5: `49491a933e31f11bce0b859d8b4c376e`
 - SHA-256: `b566fe7f19066caa16928788da83442d1d217e296454dbc6d59808f97897c244`
@@ -25,4 +31,4 @@
 - Stable Control Notebook exact read-back still 403 `serviceReadOnly`; no lifecycle sync or globally verified active WO is claimed.
 
 ## GitHub binary status
-The GitHub workbook binary remains V53; V54 is currently OneDrive-hosted. The GitHub text register, manifest and CSV companion now point to V54. Separate GitHub binary migration is still required.
+V54 is now the committed and hash-verified GitHub XLSX master. V53 is retained under the `OLD_` filename as the historical predecessor.
