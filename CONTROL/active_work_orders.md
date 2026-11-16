@@ -8,6 +8,7 @@
 
 
 ## Standing main priority — rapid table discovery and axis completion
+- **Completed:** WO64969 — one 9B2E call at 0x473C0 confirms R4=9B2E, R5=GBR+0x10 (×4), R6=GBR (raw), and separate stack query. This is a dynamic-axis case; no ROM axes should be invented. See [WO64969](WO64969.md). Other 9B2E callers remain separate. Next: candidate morphology scan of one narrow ROM region.
 - **Completed:** WO64966 — sole sub_22BC0 call at 0x37CEA confirms A272 (4×4 UBYTE), R5=E006/Y×4, R6=E002/X raw; XML axis mapping already agrees. See [WO64966](WO64966.md). Next: sub_22B7C only.
 - **Completed:** WO64968 — static sub_22CB8 calls confirm 9C2E/9DAE (16×16 UBYTE) share R5=E4BC (Y, ×4) and R6=E4AC (X, raw); two distinct query inputs, duplicate payload but separate placements. See [WO64968](WO64968.md). Next: dynamic 9B2E only.
 - **Completed:** WO64967 — both sub_22B7C calls resolve to AB72/AB62 4×4 UBYTE maps sharing raw axes F54E/F552; query 1 is R7 from FFFF859C+8 and query 2 is stack-supplied. See [WO64967](WO64967.md). Next: static sub_22CB8 pair only.
