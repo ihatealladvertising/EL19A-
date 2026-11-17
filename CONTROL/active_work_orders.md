@@ -713,7 +713,15 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## WO65054 — indirect sensor-acquisition path for FFFF84BA — 2026-11-17
 
-- **ACTIVE — EXECUTING ONE BOUNDED SEGMENT:** inspect the ROM pointer lead at `0x16DA4` to `FFFF84BB`, its table/consumers, and only the directly identified descriptor/acquisition path that may populate `FFFF84B4+6 = FFFF84BA`.
+- **ACTIVE — PARKED:** original `0x16DA4` → `FFFF84BB` / `0x20C7E` indirect-dispatch trace is paused while WO65055 resolves the newly identified table/descriptor consumers. WO65054 is not closed; resume only if WO65055 establishes a direct connection or reaches its bounded stop.
 - Reuse completed direct/GBR writer, sibling-chain, caller-path, and literal-pointer checks. No global writer scan or repeated FC90/111EA work.
 - Stop at the first unresolved dispatch/peripheral/DMA boundary if no concrete source is found.
 - **Artifact boundary:** only WO65054 and this register may be updated; source artifacts, XML, workbook and Library remain read-only. See [WO65054](WO65054.md).
+
+
+## WO65055 — acquisition-table and ADC descriptor mapping — 2026-11-17
+
+- **ACTIVE — EXECUTING ONE BOUNDED SEGMENT:** resolve the consumer/traversal of ROM pointer `0x13B28 → 0x16CD0`, decode only the relevant entries around `0x16DA4`, and independently identify the consumer/record contract for the four-word patterns beginning `0x13B50`. Test whether either path maps a peripheral/ADC channel into the `FFFF84B4` structure / `FFFF84BA` field.
+- The supplied dump is discovery evidence only: descriptor meaning, record boundaries, and ADC interpretation remain unproven until the consumer is traced.
+- WO65054 is parked, not closed. Reuse all prior writer, GBR, sibling-chain, caller-path, and FC90/111EA findings; do not repeat them or ADC symbol-name grep.
+- Stop at the first unresolved dispatch/peripheral/DMA/interrupt boundary. Only WO65055 and this register may be updated; source artifacts, XML, workbook, and Library remain read-only. See [WO65055](WO65055.md).
