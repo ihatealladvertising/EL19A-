@@ -683,6 +683,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## sub_968B6 targeted sensor source check — 2026-11-17
 
-- **ACTIVE:** WO65052 — inspect only `sub_968B6` and its direct local callees for a producer/transfer or sensor-channel mapping into `FFFF84B4` / `FFFF84BA`. Caller is `sub_70880` at `0x7087A`, immediately before `sub_969C2`. No global writer scan or dashpot trace. See [WO65052](WO65052.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65052 — `sub_968B6` and direct callees contain no producer/transfer into `FFFF84BA`; `sub_962B8` reads +6 and converts to `FFFF2150+0x920`; `sub_96412` reads adjacent +3. Separate `sub_9689E` consumer copies +6 to `FFFFA378+0xEE3/+0xE9A`. No coolant identity. See [WO65052](WO65052.md).
 - **Parent:** WO65045 remains ACTIVE; WO65051 is closed.
 - **Artifact boundary:** only WO65052 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65052 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** `sub_968B6` and direct callees reviewed. No producer/copy-in to `FFFF84BA`. The chain includes the known +6 conversion consumer and adjacent +3 reader. Separate `sub_9689E` called from `sub_7432C` copies +6 into `FFFFA378+0xEE3/+0xE9A`; this is consumer-side only.
+- **Active:** WO65045 remains open. Producer and exact temperature identity unresolved; coolant plausible, not confirmed.
+- **Next:** pivot away from the exhausted `sub_70880` sibling chain to a concrete acquisition/caller/interrupt mapping for the `FFFF84B4` structure. Do not repeat direct/wider/GBR or sibling-chain scans.
+- **Artifact boundary:** only WO65052 and the operational register updated; source files remained read-only.
