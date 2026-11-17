@@ -397,3 +397,6 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 - **Active:** WO65020 — bounded provenance of RAM TRAPA vector slot `FFFF85FC` used by site `0x157E`; identify complete longword initialization/producer and handler only if supported. See [WO65020](WO65020.md). No ROM/XML/workbook/LST/IDB/script/Library edits.
+
+
+- **Bounded complete — CLOSED:** WO65020 — direct LST references show fragmented byte copies only (`85FB→85FC`, `85FE→85FD`, `8602→85FF`); no complete runtime vector or handler destination established. Indirect aliases and live values remain unresolved. See [WO65020](WO65020.md). No source artifacts modified.
