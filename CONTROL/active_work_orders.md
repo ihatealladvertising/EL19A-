@@ -506,3 +506,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Priority source:** Master Workbook V56, sheet "P2 Next Priorities" (ranked items 2, 4 and 5). The 9B2E/WO64435 dependency is not duplicated.
 - **Batch constraints:** at most three WOs; minimum chat; bounded producer/consumer tracing; preserve provisional semantics; no broad global scans.
 - **Artifact boundary:** only WO65036–WO65038 and this register may be updated. No XML, Master Workbook, ROM, annotated LST, IDB, scripts or Library modifications. The source workbook and LST were read-only inputs.
+
+
+### Active batch progress — 2026-11-17
+- WO65036: XREF checkpoint records 41 unique literal-pointer load sites for FFFF849A; FFFF85B2 is accessed as [FFFF859C+0x16], so its producer search must follow the base-plus-offset. No producer promoted yet.
+- WO65037: first paired consumer found in sub_AE9EA: reads FFFF1707/FFFF1708, selects/interpolates them through sub_21AC0 and stores a UBYTE at FFFF1CA5. Other consumers and alternate writers remain to be reconciled.
+- WO65038: target-ROM morphology ranking completed; ten candidates selected (E9FC, EB40, F072, F2F2, F256, EA3C, EA2C, E800, F01C, EDA0). Caller/query/result-consumer traces remain open.
