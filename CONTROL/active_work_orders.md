@@ -694,3 +694,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Active:** WO65045 remains open. Producer and exact temperature identity unresolved; coolant plausible, not confirmed.
 - **Next:** pivot away from the exhausted `sub_70880` sibling chain to a concrete acquisition/caller/interrupt mapping for the `FFFF84B4` structure. Do not repeat direct/wider/GBR or sibling-chain scans.
 - **Artifact boundary:** only WO65052 and the operational register updated; source files remained read-only.
+
+
+## FFFF84BA literal ROM-pointer check — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65053 — supplied scan found no even-offset big-endian literal pointer to `FFFF84BA` in ROM. The scan used a 2-byte step; odd offsets were not tested. This does not exclude calculated/indirect references or establish absence of a producer. See [WO65053](WO65053.md).
+- **Parent:** WO65045 remains ACTIVE for producer provenance, sensor identity, and dashpot linkage.
+- **Artifact boundary:** only WO65053 and this register updated. Pointer-search result was supplied by user from Claude; not independently rerun. All source files remain read-only.
