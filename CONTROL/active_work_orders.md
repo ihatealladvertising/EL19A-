@@ -440,8 +440,18 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Active indirect-call completion batch — 2026-11-17
 
-- **ACTIVE:** WO65027 — classify six stack-sourced dynamic call candidates and trace stack-slot producers. See [WO65027](WO65027.md).
-- **ACTIVE:** WO65028 — bounded classification of residual register-indirect transfers; distinguish function calls from computed jumps and unresolved runtime pointers. See [WO65028](WO65028.md).
-- **ACTIVE:** WO65029 — narrow legal index bounds for the newly identified 24-byte-stride structures and MMIO-indexed 0x13AD8 array. See [WO65029](WO65029.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65027 — six stack-sourced call sites resolve to fixed helper targets; no callback tables. See [WO65027](WO65027.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65028 — all 21 previously identified candidates classified except 0x7207A; 213 residual indirect transfers remain unresolved under the bounded scan method. See [WO65028](WO65028.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65029 — no local upper bounds established for reviewed indices; observed valid positions are not complete legal domains. See [WO65029](WO65029.md).
 - **Batch constraints:** maximum three WOs; bounded traces only; no global RAM provenance scan; do not claim ROM-wide completeness or infer task semantics/cadence from structure alone.
 - **Artifact boundary:** only WO65027–WO65029 and this register may be updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library edits.
+
+
+## Indirect-call completion batch closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65027 — six stack-sourced indirect calls resolve to fixed helper targets: `sub_21AC0` (four sites), `sub_22F80` (one), and `0xA6E1C` (one). No callback table established. See [WO65027](WO65027.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65028 — bounded 18-line pattern audit classified the 21 additional sites from WO65023; `0x7207A` remains a specific indexed-call candidate; 213 residual indirect transfers were not locally resolved and may use earlier/indirect pointer provenance. Three computed jumps remain excluded from function-call-table counts. See [WO65028](WO65028.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65029 — reviewed index producers/guards for `0x13AD8`, `0x4D84`, `0x163B0` and selected RAM records; no complete legal index domains proven. Observed static targets are recorded as positions, not maximum bounds. See [WO65029](WO65029.md).
+- **Side-project stopping point:** the three established dispatcher families (231 entries), the additional 3-entry `0x13AD8` array, the 24-byte-stride callback/descriptor families, and six fixed stack-sourced helper calls are documented. ROM-wide completeness is **not** proven. One concrete indexed site (`0x7207A`) and 213 residual indirect transfers remain unresolved; do not claim all call tables have been found.
+- **Active state:** no active WOs remain in this call-table track. WO65015–WO65017 remain paused and can be resumed only when prioritized again.
+- **Artifact boundary:** only WO65027–WO65029 and this operational register updated in this closeout. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
