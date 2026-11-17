@@ -14,7 +14,7 @@
 - **Bounded complete:** WO65017 — donor mDDPAPO 0x0086/0.390625 fingerprint validated; no EL19A counterpart identified. See [WO65017](WO65017.md).
 - **Bounded complete:** WO65036 — no direct producers found for FFFF849A or FFFF859C+0x16; paired lookup differential arithmetic and two FFFF1C79 consumers traced. Upstream alias/bulk/peripheral source remains unresolved. See [WO65036](WO65036.md).
 - **Bounded complete:** WO65037 — ADF2/AF72 paired-output interpolation, status/sentinel logic, alternate FFFF1CA5 writer and downstream arithmetic traced; physical semantics unresolved. See [WO65037](WO65037.md).
-- **Active:** WO65038 — selective top-ten sub_22E10 UBYTE curve audit. See [WO65038](WO65038.md).
+- **Bounded complete:** WO65038 — all ten selected sub_22E10 UBYTE candidates audited for caller query, result staging and immediate local use; no semantic or unit assignments promoted. The remaining 30 moderate/high-variation candidates were not audited. See [WO65038](WO65038.md).
 
 
 ## Standing main priority — rapid table discovery and axis completion
@@ -539,3 +539,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **WO65038 second caller-audit group complete (6/10):** F2F2 query `min(2×max(UBYTE[FFFF859C+8]−8,0), highbyte(UWORD[FFFF8494]))`, result retained in R11; F256 query `min(4×UBYTE[FFFF84D4+0x5D],255)`, result at `FFFF2150+0x970) and enters `sub_223FC` path; EA3C uses raw UBYTE `[FFFF84B4+4]`, result shifted ×256 to `FFFF2150+0x606) and participates in the paired EA2C/F2B2 path. Evidence in [WO65038](WO65038.md). Remaining EA2C, E800, F01C, EDA0.
 
 - **WO65038 third caller-audit group complete (9/10):** EA2C raw `[FFFF84B4+4]` → `FFFF1054+0x312`, paired with EA3C/E63C/F2B2; E800 query `min(4×UBYTE[FFFF1054+0x1C1],255)` → `FFFF1054+0x1C0); F01C raw `[FFFF84B4+4]` → stack local, paired with EE68 under the same query. Evidence in [WO65038](WO65038.md). Only EDA0 remains.
+
+
+## WO65038 top-ten caller audit closeout — 2026-11-17
+- **BOUNDED COMPLETE — CLOSED:** WO65038 — E9FC, EB40, F072, F2F2, F256, EA3C, EA2C, E800, F01C and EDA0 each have bounded caller/query/result-staging/immediate-use traces. No physical semantics or units assigned; 30 remaining moderate/high-variation candidates remain unaudited. See [WO65038](WO65038.md).
+- **Active state:** no active work orders remain in this calibration dataflow batch. Next work should be selected from the remaining candidate/axis coverage gaps, not by repeating the completed top-ten set.
+- **Artifact boundary:** only WO65038 and this register updated. ROM and V32 listing were read-only inputs; no workbook, XML, IDB, scripts or Library files modified.
