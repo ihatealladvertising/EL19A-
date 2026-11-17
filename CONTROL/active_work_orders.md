@@ -653,6 +653,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## sub_70880 sensor-chain predecessor audit — 2026-11-17
 
-- **ACTIVE:** WO65050 — inspect only the three routines immediately preceding `sub_969C2` in `sub_70880`: `sub_957BA` (call 0x70862), `sub_9595C` (0x70868), and `sub_95C1C` (0x7086E). Test for writes/transfers to `FFFF84B4` fields, especially +6, or a shared sensor-acquisition helper. This is a concrete local call-chain lead; no global scan. See [WO65050](WO65050.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65050 — predecessor group A reviewed. No writes/transfers to `FFFF84B4`/`FFFF84BA`; `sub_95C1C` routines read +6 and compare it against constants at GBR+0x26, gating other control outputs. No coolant identity or producer found. See [WO65050](WO65050.md).
 - **Parent:** WO65045 remains ACTIVE. WO65046–WO65049 are closed bounded tasks.
 - **Artifact boundary:** only WO65050 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65050 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** `sub_957BA`, `sub_9595C`, `sub_95C1C` predecessor group reviewed. No producer/transfer into `FFFF84B4` found. `sub_95C1C` independently reads `FFFF84BA` at `0x95C8E/0x95D10`, compares it to constants at GBR+0x26 (roots `0x8D36/0x8D37`), and gates writes to other state/output fields.
+- **Active:** WO65045 remains open; temperature-like identity for +6 is supported, coolant remains unconfirmed, producer unresolved.
+- **Next:** inspect only next sibling pair `sub_961E0` and `sub_968B6` before `sub_969C2`; stop if no concrete acquisition/transfer lead.
+- **Artifact boundary:** only WO65050 and the operational register updated; source files remained read-only.
