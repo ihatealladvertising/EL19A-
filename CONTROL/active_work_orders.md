@@ -12,7 +12,9 @@
 - **Bounded complete:** WO65015 — 0x848A/B pair and selector branch verified; Drive/Neutral labels remain provisional and FFFF8603.bit6 source unresolved. See [WO65015](WO65015.md).
 - **Bounded complete:** WO65016 — no EL19A mDSHCUT scalar identified; FFFF860D.bit3 producer and physical meaning unresolved. See [WO65016](WO65016.md).
 - **Bounded complete:** WO65017 — donor mDDPAPO 0x0086/0.390625 fingerprint validated; no EL19A counterpart identified. See [WO65017](WO65017.md).
-- **Active batch:** WO65036–WO65038 — 9C2E/9DAE dataflow; ADF2/AF72 paired-output arithmetic; selective top-ten sub_22E10 curve audit. See [WO65036](WO65036.md), [WO65037](WO65037.md), [WO65038](WO65038.md).
+- **Bounded complete:** WO65036 — no direct producers found for FFFF849A or FFFF859C+0x16; paired lookup differential arithmetic and two FFFF1C79 consumers traced. Upstream alias/bulk/peripheral source remains unresolved. See [WO65036](WO65036.md).
+- **Bounded complete:** WO65037 — ADF2/AF72 paired-output interpolation, status/sentinel logic, alternate FFFF1CA5 writer and downstream arithmetic traced; physical semantics unresolved. See [WO65037](WO65037.md).
+- **Active:** WO65038 — selective top-ten sub_22E10 UBYTE curve audit. See [WO65038](WO65038.md).
 
 
 ## Standing main priority — rapid table discovery and axis completion
@@ -522,3 +524,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **WO65015–WO65017:** bounded closures completed and readback verified; their unresolved leads remain documented and can be reopened only with new evidence.
 
 - **WO65037 follow-through:** sub_AE942 alternate FFFF1CA5 writer resolved. It executes after sub_AE8CE and can overwrite its result from either a status-gated direct UBYTE source (FFFF85AC or FFFFB2BC), a UWORD source FFFF847A>>2 clamped to UBYTE, or the shared interpolation/0x80 sentinel path. Downstream consumers therefore see the post-sub_AE942 value, not necessarily the map result.
+
+
+## Bounded closeouts — 2026-11-17
+- WO65036 closed at the direct-producer boundary after 41 FFFF849A pointer-load sites and known FFFF859C+0x16 readers were audited. Legacy WO64275/WO64276 documents were not found in the current main control tree; status not inferred.
+- WO65037 closed after paired output arithmetic, startup initialization writer, alternate sub_AE942 writer, sentinel and direct downstream consumers were traced. Physical semantics remain unassigned.
+- WO65038 remains the sole active item from this batch; do not reopen WO65036/WO65037 without a new specific producer/transfer or semantic evidence lead.
