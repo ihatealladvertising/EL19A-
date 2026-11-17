@@ -467,3 +467,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **ACTIVE:** WO65032 — residual indirect-transfer audit, `0x40000–0x7FFFF`; 96 unannotated sites initially, including known sites to exclude. See [WO65032](WO65032.md).
 - **Batch constraints:** maximum three WOs; bounded call-register provenance only; no global RAM-writer scan; no semantic/cadence attribution from structure alone.
 - **Artifact boundary:** only WO65030–WO65032 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
+
+
+## Residual indirect-transfer audit batch closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65031 — low-ROM segment `0x00000–0x3FFFF`: 65 unannotated indirect-transfer sites reviewed. Classified fixed ROM helpers, RAM-resident pointer slots, stack-sourced arguments, computed switch jumps, runtime record callback fields and the already-known sequential `sub_20DCE` table call. No additional static ROM pointer table established. See [WO65031](WO65031.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65032 — middle-ROM segment `0x40000–0x7FFFF`: 96 unannotated sites reviewed; 86 stack-sourced pointer arguments, three fixed calls to `sub_224A0`, and one unresolved register-provenance site. No additional static ROM pointer table established. See [WO65032](WO65032.md).
+- **Batch result:** the alleged separate 41-entry `0x219C0` vector is rejected as a suffix of the existing 122-entry `sub_20DCE` table. The bounded low/middle segment reviews found no new static ROM function-pointer vector. High-ROM residual segment `0x80000–0xFFFFF` remains for a later batch; residual stack/RAM pointer provenance is not globally resolved.
+- **Active state:** no active WOs remain in this batch.
+- **Artifact boundary:** only WO65031, WO65032 and this operational register updated in closeout. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
