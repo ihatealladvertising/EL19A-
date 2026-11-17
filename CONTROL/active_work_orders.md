@@ -605,6 +605,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## FFFF84BA GBR-alias provenance task — 2026-11-17
 
-- **ACTIVE:** WO65047 — resolve GBR roots and effective addresses at `0x9538A`, `0x95DCE`, and `0x9633C`; inspect only local stores/aliases/transfers that could reach `FFFF84BA`. Do not repeat WO65046's literal-base pass or expand to a global writer scan. See [WO65047](WO65047.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65047 — GBR roots resolve `0x9538A` and `0x95DCE` to `FFFF84B4+6`, and `0x9633C` to `FFFF8494+0x26`; all are reads of `FFFF84BA`. Eight relevant GBR-root contexts were checked for stores/RMWs overlapping the byte; none found. No local producer/transfer path established. See [WO65047](WO65047.md).
 - **Parent:** WO65045 remains ACTIVE for overall source/sensor identity and dashpot linkage; this WO is an isolated subtask.
 - **Artifact boundary:** only WO65047 and this register may be updated for this task. Inputs read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65047 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** GBR-relative alias review completed and report read-back verified. No direct GBR store/RMW or local transfer populating `FFFF84BA` found in the selected contexts. This is a bounded negative only; computed aliases, external callers, bulk transfer and peripheral/interrupt acquisition remain unresolved.
+- **Active:** WO65045 remains open for overall provenance, sensor identity and separate dashpot-linkage investigation. No coolant identity assigned.
+- **Next:** select a concrete transfer/source lead before further scans; avoid repeating direct-store and GBR-store censuses.
+- **Artifact boundary:** only WO65047 and the operational register updated. Source files remained read-only.
