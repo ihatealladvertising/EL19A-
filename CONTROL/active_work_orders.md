@@ -372,3 +372,8 @@ WO65015–WO65017 remain ACTIVE. Latest bounded updates: WO65015 confirms the co
 
 
 WO65015 additional provenance checkpoint (2026-11-16): sub_2245C at 0x20FBA–0x20FC0 copies three bytes from FFFF8602–8604 to FFFF85FF–8601, so the sub_403D8 selector condition FFFF8600.bit6 is copied from FFFF8603.bit6. FFFF8603 is rewritten at 0x34ADC by a status-composition routine that preserves bit6 while modifying bit7; upstream origin and Drive/Neutral meaning remain open. WO65015–65017 remain ACTIVE.
+
+
+
+### Active batch continuation — 2026-11-17
+WO65015–WO65017 remain ACTIVE. New bounded findings: WO65015 found a second FFFF8603 writer at 0x35100–0x3514A that modifies bit1 while preserving selector bit6; original bit6 source remains unresolved. WO65016 identified sub_B119A as a composition writer for FFFF860D bits 0x01/0x02/0x04/0x10, but it preserves bit3; coolant semantics and bit3 origin remain unresolved. WO65017 extended the target 0x90EA trace: it belongs to a multi-UWORD signed-arithmetic coefficient family consumed through sub_22A8C/sub_23004, not a direct-axis lookup; donor address transfer remains rejected and target mDDPAPO location unresolved. See individual WOs. No XML, workbook, ROM, LST, IDB, scripts or Library files changed.
