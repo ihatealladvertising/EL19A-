@@ -635,7 +635,17 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## FC90/111EA temperature-axis alignment — 2026-11-17
 
-- **ACTIVE:** WO65049 — reproduce the FC90/111EA lookup using query `FFFF84BA<<8`; resolve the axis from its actual pointer `0x111EA` (not the surrounding LST data-row start `0x111E8`); verify BE UWORD values and whether the query shift matches. Assess temperature-like behavior without assigning coolant unless uniquely corroborated. See [WO65049](WO65049.md).
-- **Discovery:** historical WO64815's `0032,0046,...` axis note appears to have started two bytes early; LST bytes at 0x111E8 and pointer at 0x111EA support a candidate sequence beginning `3200,4600,5000...`. This is provisional until WO65049 reproduces helper behavior.
+- **BOUNDED COMPLETE — CLOSED:** WO65049 — FC90/111EA pointer alignment corrected. Query is `UBYTE[FFFF84BA]×0x100`; pointer `0x111EA` yields BE UWORD axis `3200,4600,5000,6E00,7300,7800,7D00,8200` (Q8.8 = 50–130). Historical `0032,...,0082` note was two-byte misaligned. Temperature-like input confirmed; coolant plausible but not identified. See [WO65049](WO65049.md).
+- **Correction:** WO65049 reproduced the pointer-relative axis and helper; the old `0032,...,0082` note was misaligned. Use `3200,...,8200` as BE UWORD Q8.8 breakpoints.
 - **Parent:** WO65045 remains ACTIVE. WO65046–WO65048 are closed bounded tasks.
 - **Artifact boundary:** only WO65049 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65049 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** FC90/111EA reader contract reproduced. `FFFF84BA` is shifted left 8 and searched against pointer-relative BE UWORD axis `3200,4600,5000,6E00,7300,7800,7D00,8200`; this is Q8.8 50–130. Interpolated UWORD is stored at `FFFF27DC`.
+- **Historical correction:** WO64815's `0032,...,0082` axis note was two bytes misaligned because the data row begins at `0x111E8` but the actual pointer is `0x111EA`. Corrected record is in WO65049; no workbook/XML edit made.
+- **Identity:** temperature-like input confirmed; coolant plausible but not proven. Adjacent `FFFF84B8` donor temperature evidence belongs to +4 and must not be transferred to +6.
+- **Active:** WO65045 remains open for source/sensor identity and separate dashpot-flag linkage.
+- **Next:** identify a concrete acquisition/channel mapping that distinguishes `FFFF84B4+4` from `+6`; do not repeat direct/wider/GBR writer scans.
+- **Artifact boundary:** only WO65049 and the operational register updated; source files remained read-only.
