@@ -421,8 +421,8 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Active call-table continuation batch — 2026-11-17
 
-- **ACTIVE:** WO65024 — resolve ROM function-pointer-array lead at 0x13AD8, called through indexed indirect site 0x250C4. Establish index mechanics, pointer extent/count and valid targets. See [WO65024](WO65024.md).
-- **ACTIVE:** WO65025 — reconstruct indexed callback candidates at 0x35C4, 0x35F8, 0x3718, 0x384C and 0x3CCA; identify shared bases/record layouts and bounds. See [WO65025](WO65025.md).
-- **ACTIVE:** WO65026 — reconstruct indexed callback candidates at 0xB4B3C, 0xB4B70, 0xB4CB6, 0xB4DE2 and 0xB5280; determine whether these share one family. See [WO65026](WO65026.md).
+- **QUEUED:** WO65024 — resolve ROM function-pointer-array lead at 0x13AD8, called through indexed indirect site 0x250C4. Establish index mechanics, pointer extent/count and valid targets. See [WO65024](WO65024.md).
+- **QUEUED:** WO65025 — reconstruct indexed callback candidates at 0x35C4, 0x35F8, 0x3718, 0x384C and 0x3CCA; identify shared bases/record layouts and bounds. See [WO65025](WO65025.md).
+- **QUEUED:** WO65026 — reconstruct indexed callback candidates at 0xB4B3C, 0xB4B70, 0xB4CB6, 0xB4DE2 and 0xB5280; determine whether these share one family. See [WO65026](WO65026.md).
 - **Batch constraints:** maximum three WOs; bounded structural tracing only; preserve hypotheses separately from verified mechanics; do not infer cadence, task semantics or ROM-wide completeness. If a candidate stops yielding structural progress, close it with the exact method boundary and move on.
 - **Artifact boundary:** only WO65024–WO65026 and this register may be updated. No XML, workbook, ROM, LST, IDB, scripts or Library edits.
