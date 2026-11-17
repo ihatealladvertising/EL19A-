@@ -369,3 +369,6 @@ The former OneDrive Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a74
 
 ## Active batch continuation — 2026-11-16
 WO65015–WO65017 remain ACTIVE. Latest bounded updates: WO65015 confirms the consumer truth table (E688 only when FFFF85F8.bit4 and FFFF8600.bit6 are both clear; otherwise E678), while physical Drive/Neutral interpretation remains donor-family supported but not directly decoded; both selector bits also gate other status/event paths. WO65016 separates FFFF860D.bit5 readers from the mDSHCUT bit3 lead; FFFF860D/0E are copied into FFFF860B/C and separately 8611/12, but original producer/coolant semantics remain unresolved. WO65017 raw scan triage leaves aligned 0xEC9C=0x0086 only as an unassigned byte-table morphology lead; no QDSPT/APO reader or target scalar established. See individual WOs for evidence PCs. No XML, workbook, ROM, LST, IDB, scripts or Library files changed.
+
+
+WO65015 additional provenance checkpoint (2026-11-16): sub_2245C at 0x20FBA–0x20FC0 copies three bytes from FFFF8602–8604 to FFFF85FF–8601, so the sub_403D8 selector condition FFFF8600.bit6 is copied from FFFF8603.bit6. FFFF8603 is rewritten at 0x34ADC by a status-composition routine that preserves bit6 while modifying bit7; upstream origin and Drive/Neutral meaning remain open. WO65015–65017 remain ACTIVE.
