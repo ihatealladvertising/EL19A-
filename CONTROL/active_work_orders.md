@@ -368,10 +368,10 @@ The former OneDrive Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a74
 
 
 ## Active batch continuation — 2026-11-16
-WO65015–WO65017 remain ACTIVE. Latest bounded updates: WO65015 confirms the consumer truth table (E688 only when FFFF85F8.bit4 and FFFF8600.bit6 are both clear; otherwise E678), while physical Drive/Neutral interpretation remains donor-family supported but not directly decoded; both selector bits also gate other status/event paths. WO65016 separates FFFF860D.bit5 readers from the mDSHCUT bit3 lead; FFFF860D/0E are copied into FFFF860B/C and separately 8611/12, but original producer/coolant semantics remain unresolved. WO65017 raw scan triage leaves aligned 0xEC9C=0x0086 only as an unassigned byte-table morphology lead; no QDSPT/APO reader or target scalar established. See individual WOs for evidence PCs. No XML, workbook, ROM, LST, IDB, scripts or Library files changed.
+WO65015–WO65017 are PAUSED — PRIORITY DEFERRED (2026-11-17); unresolved leads preserved. See their individual WO pause notes. Latest bounded updates: WO65015 confirms the consumer truth table (E688 only when FFFF85F8.bit4 and FFFF8600.bit6 are both clear; otherwise E678), while physical Drive/Neutral interpretation remains donor-family supported but not directly decoded; both selector bits also gate other status/event paths. WO65016 separates FFFF860D.bit5 readers from the mDSHCUT bit3 lead; FFFF860D/0E are copied into FFFF860B/C and separately 8611/12, but original producer/coolant semantics remain unresolved. WO65017 raw scan triage leaves aligned 0xEC9C=0x0086 only as an unassigned byte-table morphology lead; no QDSPT/APO reader or target scalar established. See individual WOs for evidence PCs. No XML, workbook, ROM, LST, IDB, scripts or Library files changed.
 
 
-WO65015 additional provenance checkpoint (2026-11-16): sub_2245C at 0x20FBA–0x20FC0 copies three bytes from FFFF8602–8604 to FFFF85FF–8601, so the sub_403D8 selector condition FFFF8600.bit6 is copied from FFFF8603.bit6. FFFF8603 is rewritten at 0x34ADC by a status-composition routine that preserves bit6 while modifying bit7; upstream origin and Drive/Neutral meaning remain open. WO65015–65017 remain ACTIVE.
+WO65015 additional provenance checkpoint (2026-11-16): sub_2245C at 0x20FBA–0x20FC0 copies three bytes from FFFF8602–8604 to FFFF85FF–8601, so the sub_403D8 selector condition FFFF8600.bit6 is copied from FFFF8603.bit6. FFFF8603 is rewritten at 0x34ADC by a status-composition routine that preserves bit6 while modifying bit7; upstream origin and Drive/Neutral meaning remain open. WO65015–65017 are PAUSED — PRIORITY DEFERRED (2026-11-17); unresolved leads preserved. See their individual WO pause notes.
 
 
 
@@ -421,8 +421,18 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Active call-table continuation batch — 2026-11-17
 
-- **QUEUED:** WO65024 — resolve ROM function-pointer-array lead at 0x13AD8, called through indexed indirect site 0x250C4. Establish index mechanics, pointer extent/count and valid targets. See [WO65024](WO65024.md).
-- **QUEUED:** WO65025 — reconstruct indexed callback candidates at 0x35C4, 0x35F8, 0x3718, 0x384C and 0x3CCA; identify shared bases/record layouts and bounds. See [WO65025](WO65025.md).
-- **QUEUED:** WO65026 — reconstruct indexed callback candidates at 0xB4B3C, 0xB4B70, 0xB4CB6, 0xB4DE2 and 0xB5280; determine whether these share one family. See [WO65026](WO65026.md).
+- **COMPLETE — CLOSED:** WO65024 — resolve ROM function-pointer-array lead at 0x13AD8, called through indexed indirect site 0x250C4. Establish index mechanics, pointer extent/count and valid targets. See [WO65024](WO65024.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65025 — reconstruct indexed callback candidates at 0x35C4, 0x35F8, 0x3718, 0x384C and 0x3CCA; identify shared bases/record layouts and bounds. See [WO65025](WO65025.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65026 — reconstruct indexed callback candidates at 0xB4B3C, 0xB4B70, 0xB4CB6, 0xB4DE2 and 0xB5280; determine whether these share one family. See [WO65026](WO65026.md).
 - **Batch constraints:** maximum three WOs; bounded structural tracing only; preserve hypotheses separately from verified mechanics; do not infer cadence, task semantics or ROM-wide completeness. If a candidate stops yielding structural progress, close it with the exact method boundary and move on.
 - **Artifact boundary:** only WO65024–WO65026 and this register may be updated. No XML, workbook, ROM, LST, IDB, scripts or Library edits.
+
+
+## Call-table continuation batch closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65024 — `0x13AD8` contains three BE function pointers (`0x24BCC`, `0x24E50`, `0x24BD0)); indirect call at `0x250C4` indexes it using a longword read from MMIO `0xF78E`. Runtime index domain is unresolved; next longword is non-pointer. See [WO65024](WO65024.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65025 — five low-ROM indirect call sites share a 24-byte-stride ROM structure rooted at `0x4D84`; field offsets +8/+12/+16/+20 and several code targets decoded. Bounds and legal index domains remain unresolved. See [WO65025](WO65025.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65026 — five `0xB4xxx` sites divide into RAM callback records selected via `0x163A4` and ROM descriptor records rooted at `0x163B0`; 24-byte stride and field offsets verified, several targets decoded. Bounds and safe index domains remain unresolved. See [WO65026](WO65026.md).
+- **Concurrency:** WO65015–WO65017 paused (not closed) to prioritize the user-directed call-table inventory; their unresolved technical leads are preserved. Three-slot active limit now available.
+- **Artifact boundary:** only WO65015–WO65017, WO65024–WO65026 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
+
