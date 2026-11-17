@@ -721,7 +721,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## WO65055 — acquisition-table and ADC descriptor mapping — 2026-11-17
 
-- **ACTIVE — EXECUTING ONE BOUNDED SEGMENT:** resolve the consumer/traversal of ROM pointer `0x13B28 → 0x16CD0`, decode only the relevant entries around `0x16DA4`, and independently identify the consumer/record contract for the four-word patterns beginning `0x13B50`. Test whether either path maps a peripheral/ADC channel into the `FFFF84B4` structure / `FFFF84BA` field.
+- **BOUNDED COMPLETE — CLOSED:** sub_24EA8 (0x24EA8–0x24F40) copies 0x448 bytes / 274 BE32 entries from ROM 0x16CD0–0x17117 into RAM FFFFB61C–FFFFBA63. ROM 0x16DA4 value FFFF84BB lands at RAM FFFFB6F0 (source/destination offset +0xD4). No consumer of FFFFB6F0 was found in the bounded pass. The 0x13B50 records contain ADC-register-address patterns (e.g. ADCR0_B, ADCSR0_B, ADDR7H/8H/10H/11H), but reviewed direct consumers of dword_13B44 read only its +0/+4/+8 prefix; no consumer of the descriptor-like records or link to FFFF84BA was established. Sensor identity and producer remain unresolved. See [WO65055](WO65055.md).
 - The supplied dump is discovery evidence only: descriptor meaning, record boundaries, and ADC interpretation remain unproven until the consumer is traced.
 - WO65054 is parked, not closed. Reuse all prior writer, GBR, sibling-chain, caller-path, and FC90/111EA findings; do not repeat them or ADC symbol-name grep.
 - Stop at the first unresolved dispatch/peripheral/DMA/interrupt boundary. Only WO65055 and this register may be updated; source artifacts, XML, workbook, and Library remain read-only. See [WO65055](WO65055.md).
+
+
+## WO65055 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** table-consumer pass completed and saved. The 0x13B28 pointer is consumed by sub_24EA8 as the source of a 274-longword copy into FFFFB61C–FFFFBA63; 0x16DA4 → FFFF84BB becomes FFFFB6F0. No direct consumer of FFFFB6F0 or 0x13B50 ADC-looking records was identified. The dword_13B44 consumers reviewed read only prefix metadata fields. No connection to FFFF84B4/FFFF84BA, ADC channel identity, or coolant identity established.
+- **WO65054 remains PARKED, not closed.** Parent WO65045 remains ACTIVE. No follow-on WO was started.
+- **Artifact boundary:** only WO65055 and this register updated. Source artifacts, XML, workbook and Library remained read-only.
