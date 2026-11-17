@@ -391,3 +391,6 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 - **Active:** WO65019 — inspect every TRAPA #0x3E site (including the newly surfaced 0xB8766 site), per-site VBR setup/handler routing, enclosing conditions and startup/event/periodic context. Do not infer cadence without direct scheduler/timer evidence. See [WO65019](WO65019.md). No workbook/XML/ROM/LST/IDB/script/Library changes.
+
+
+- **Completed:** WO65019 — audited all four actual `trapa #0x3E` sites. Only `0x26BC` is proven to route via VBR=`0x20004`, slot `0x200FC`, to `INT_TRAPA62 → sub_20DCE`; `0x10F4` uses inherited VBR (VBR=0 slot points to `loc_26F8`), `0x157E` selects RAM slot `FFFF85FC` with target unresolved, and `0xB8766` selects ROM slot `0x6FF8` containing `FFFFFFFF`. Separate `alt_Poweron_Reset` trampoline at `0x21AA8` directly jumps to `INT_TRAPA62`. No cadence established. See [WO65019](WO65019.md). No workbook/XML/ROM/LST/IDB/script/Library changes.
