@@ -388,3 +388,6 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 - **Completed:** WO65018 — `sub_403D8` is reached through the separate 122-entry callback table at `0x2187C`: zero-based slot 35 / one-based slot 36 at `0x21908` points to `loc_3C478`, which calls `sub_403D8` via literal `0x3C504`. Dispatcher `sub_20DCE` is called by `INT_TRAPA62`; ROM vector entry `0x200FC` points to `0x25004`. This is distinct from the six `sub_209A6` callback groups; ATU-31 attribution and runtime cadence are not established. See [WO65018](WO65018.md). No workbook/XML/ROM/LST/IDB/script/Library changes.
+
+
+- **Active:** WO65019 — inspect every TRAPA #0x3E site (including the newly surfaced 0xB8766 site), per-site VBR setup/handler routing, enclosing conditions and startup/event/periodic context. Do not infer cadence without direct scheduler/timer evidence. See [WO65019](WO65019.md). No workbook/XML/ROM/LST/IDB/script/Library changes.
