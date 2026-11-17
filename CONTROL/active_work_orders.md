@@ -570,3 +570,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Next:** WO65043 — F35E result/dataflow audit only; reuse the same bounded FFFF84B8 query evidence, do not repeat producer scans.
 - **Batch method:** one candidate per saved/verified report; proceed to the next only after successful report and register readback. Maximum three WOs per batch.
 - **Artifact boundary:** only WO65042 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
+
+
+## Selective F35E caller/result audit — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65043 — F35E's two `sub_22E10` callers use raw UBYTE FFFF84B8. In `loc_4F8AC`, result R8 is passed to `sub_543CC`, whose UWORD return is stored at FFFF1D5A. In `loc_4FBC2`, result is multiplied by UWORD FFFF134E and 100, shifted right 14, capped to UWORD, staged at FFFF15A4 and copied to FFFF1D5E. Target payload verified: `85 85 85 6B 4E 41 30 23 1A 16 11 11 11 11 11 11`. Semantics/units and FFFF84B8 producer remain unresolved. See [WO65043](WO65043.md).
+- **Next:** WO65044 — F33E result/dataflow audit only; reuse the same bounded FFFF84B8 query evidence, do not repeat producer scans.
+- **Batch method:** one candidate per saved/verified report; proceed only after report and register readback. Maximum three WOs per batch.
+- **Artifact boundary:** only WO65043 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
