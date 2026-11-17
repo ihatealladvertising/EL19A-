@@ -9,8 +9,10 @@
 - **Completed:** WO65009 — `sub_6F4C0` updates `FFFF1D99+0x7A.bit3`: if `FFFF99F4+0x0D.bit7` is clear, set bit3; otherwise clear bit3 only when `FFFF860B.bit3` is clear. Called from `sub_6F89A` in callback `loc_6ECF0`. Input flag meanings/producers unresolved. See [WO65009](WO65009.md).
 - **Completed:** WO65011 — callback pointer at table slot `0x21894` enters `loc_6ECF0`; callback calls `sub_6EAAC`, then `sub_6F89A` (including selector update), then tail-jumps to `loc_66DF6`. Dispatch predicate/cadence unresolved. See [WO65011](WO65011.md).
 - **Completed batch:** WO65012–WO65014 — curve spot checks support E678/E688 and F3D6/F3DE. Scalar mapping superseded by the user's corrected evidence: EL19A `0x848A/0x848B` are leading `mDDSHPTD/N` UBYTE candidates; `mDSHCUT` target address remains unknown; `mDDPAPO` is a UWORD donor symbol with 52.34% raw fingerprint 0x0086 × 0.390625, target address unknown. WO65014's earlier dismissal of 0x848A/B as mDDPAPO candidates is retained as history but its overall scalar mapping is superseded. See [WO65012](WO65012.md), [WO65013](WO65013.md), [WO65014](WO65014.md).
-- **Paused batch:** WO65015–WO65017 — preserve unresolved leads: FFFF8603.bit6 selector source / Drive-Neutral interpretation; FFFF860D.bit3 / mDSHCUT target scalar; mDDPAPO EL19A counterpart. Paused by priority deferral, not technically closed. See [WO65015](WO65015.md), [WO65016](WO65016.md), [WO65017](WO65017.md).
-- **Active batch:** WO65036–WO65038 — 9C2E/9DAE input-producer and differential-output closure; ADF2/AF72 paired-output consumer comparison; selective top-ten sub_22E10 UBYTE curve audit. See [WO65036](WO65036.md), [WO65037](WO65037.md), [WO65038](WO65038.md).
+- **Bounded complete:** WO65015 — 0x848A/B pair and selector branch verified; Drive/Neutral labels remain provisional and FFFF8603.bit6 source unresolved. See [WO65015](WO65015.md).
+- **Bounded complete:** WO65016 — no EL19A mDSHCUT scalar identified; FFFF860D.bit3 producer and physical meaning unresolved. See [WO65016](WO65016.md).
+- **Bounded complete:** WO65017 — donor mDDPAPO 0x0086/0.390625 fingerprint validated; no EL19A counterpart identified. See [WO65017](WO65017.md).
+- **Active batch:** WO65036–WO65038 — 9C2E/9DAE dataflow; ADF2/AF72 paired-output arithmetic; selective top-ten sub_22E10 curve audit. See [WO65036](WO65036.md), [WO65037](WO65037.md), [WO65038](WO65038.md).
 
 
 ## Standing main priority — rapid table discovery and axis completion
@@ -512,3 +514,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - WO65036: XREF checkpoint records 41 unique literal-pointer load sites for FFFF849A; FFFF85B2 is accessed as [FFFF859C+0x16], so its producer search must follow the base-plus-offset. No producer promoted yet.
 - WO65037: first paired consumer found in sub_AE9EA: reads FFFF1707/FFFF1708, selects/interpolates them through sub_21AC0 and stores a UBYTE at FFFF1CA5. Other consumers and alternate writers remain to be reconciled.
 - WO65038: target-ROM morphology ranking completed; ten candidates selected (E9FC, EB40, F072, F2F2, F256, EA3C, EA2C, E800, F01C, EDA0). Caller/query/result-consumer traces remain open.
+
+
+## Priority progress — 2026-11-17
+- **WO65036:** direct provenance pass: 41 FFFF849A pointer-load sites are read-side; FFFF859C+0x16 known readers are also read-side. No direct producer found. Differential arithmetic corrected: only GBR+6.bit5 CLEAR and GBR+3.bit7 SET enter the 9C2E/9DAE differential; W = signed UWORD[FFFF10F8] + ((A−B)<<8), word staged at FFFF100A, signed-byte conversion at FFFF1C79. Two downstream readers of FFFF1C79 found. Stop at unresolved alias/bulk/peripheral source boundary; no global writer scan.
+- **WO65037:** map outputs FFFF1708/1707 feed endpoint/interpolation path to FFFF1CA5; signed interpolation, 0x80 sentinel gates, conditional signed correction, initialization writer (0x7E defaults), and three direct downstream consumer routines are documented. Physical meaning unresolved; sub_AE942 remains a possible alternate FFFF1CA5 writer/override.
+- **WO65015–WO65017:** bounded closures completed and readback verified; their unresolved leads remain documented and can be reopened only with new evidence.
