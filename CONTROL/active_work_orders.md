@@ -436,3 +436,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Concurrency:** WO65015–WO65017 paused (not closed) to prioritize the user-directed call-table inventory; their unresolved technical leads are preserved. Three-slot active limit now available.
 - **Artifact boundary:** only WO65015–WO65017, WO65024–WO65026 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
 
+
+
+## Active indirect-call completion batch — 2026-11-17
+
+- **ACTIVE:** WO65027 — classify six stack-sourced dynamic call candidates and trace stack-slot producers. See [WO65027](WO65027.md).
+- **ACTIVE:** WO65028 — bounded classification of residual register-indirect transfers; distinguish function calls from computed jumps and unresolved runtime pointers. See [WO65028](WO65028.md).
+- **ACTIVE:** WO65029 — narrow legal index bounds for the newly identified 24-byte-stride structures and MMIO-indexed 0x13AD8 array. See [WO65029](WO65029.md).
+- **Batch constraints:** maximum three WOs; bounded traces only; no global RAM provenance scan; do not claim ROM-wide completeness or infer task semantics/cadence from structure alone.
+- **Artifact boundary:** only WO65027–WO65029 and this register may be updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library edits.
