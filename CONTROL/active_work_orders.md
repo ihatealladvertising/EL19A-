@@ -649,3 +649,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Active:** WO65045 remains open for source/sensor identity and separate dashpot-flag linkage.
 - **Next:** identify a concrete acquisition/channel mapping that distinguishes `FFFF84B4+4` from `+6`; do not repeat direct/wider/GBR writer scans.
 - **Artifact boundary:** only WO65049 and the operational register updated; source files remained read-only.
+
+
+## sub_70880 sensor-chain predecessor audit — 2026-11-17
+
+- **ACTIVE:** WO65050 — inspect only the three routines immediately preceding `sub_969C2` in `sub_70880`: `sub_957BA` (call 0x70862), `sub_9595C` (0x70868), and `sub_95C1C` (0x7086E). Test for writes/transfers to `FFFF84B4` fields, especially +6, or a shared sensor-acquisition helper. This is a concrete local call-chain lead; no global scan. See [WO65050](WO65050.md).
+- **Parent:** WO65045 remains ACTIVE. WO65046–WO65049 are closed bounded tasks.
+- **Artifact boundary:** only WO65050 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
