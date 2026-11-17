@@ -365,3 +365,7 @@ The former OneDrive Control Notebook item `F6DEFBD470240AE6!sac2dd9024e574ee3a74
 
 - **Completed batch:** WO64935–WO64937 — harvested 17 additional directly referenced 8-point UBYTE placements through fixed-grid sub_22DF8 across E6xx–F5xx; recorded exact bytes/hashes and caller sites; separated two constant structural objects and duplicate 0x80 payload placement. No ROM axes expected; no semantics promoted; no source artifact changed.
 - **Active work order:** None — next step should return to small-map reader pointer coverage and 16-point UBYTE candidates outside the already inventoried sub_22E10 71-entry set, then test any remaining explicit-axis 8-point entries for duplicates.
+
+
+## Active batch continuation — 2026-11-16
+WO65015–WO65017 remain ACTIVE. Latest bounded updates: WO65015 confirms the consumer truth table (E688 only when FFFF85F8.bit4 and FFFF8600.bit6 are both clear; otherwise E678), while physical Drive/Neutral interpretation remains donor-family supported but not directly decoded; both selector bits also gate other status/event paths. WO65016 separates FFFF860D.bit5 readers from the mDSHCUT bit3 lead; FFFF860D/0E are copied into FFFF860B/C and separately 8611/12, but original producer/coolant semantics remain unresolved. WO65017 raw scan triage leaves aligned 0xEC9C=0x0086 only as an unassigned byte-table morphology lead; no QDSPT/APO reader or target scalar established. See individual WOs for evidence PCs. No XML, workbook, ROM, LST, IDB, scripts or Library files changed.
