@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EL19A ETC dashpot and limiter definitions: merge into the ROM-specific component of the NissanDefinitions build. Not load-tested in RomRaider. -->
+<tables>
+  <!-- Scaling definitions. Display = raw*factor; all sources are UBYTE (uint8, big-endian). -->
+  <scaling name="QDSPT_LitersPerMin" units="L/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big"/>
+  <scaling name="TVO_Degrees" units="degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big"/>
+  <scaling name="Percent_Raw128" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big"/>
+  <scaling name="Temp_C_Offset50" units="degC" expression="x-50" to_byte="x+50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big"/>
+  <scaling name="RPM_Static" units="rpm" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big"/>
+  <!-- E678: 16-point UBYTE. Bytes verified in ROM. Axis and L/min scaling are user-specified; ROM-resident axis not proven. Physical meaning open. -->
+  <table name="QDSPT Basic Value Table (Drive) - mTDSHPTD" category="Electronic Throttle Control - Dashpot" storageaddress="0xE678" type="2D" scaling="QDSPT_LitersPerMin" sizey="16">
+    <table name="Engine Speed" type="Static Y Axis" scaling="RPM_Static" sizey="16">
+      <data>0</data>
+      <data>400</data>
+      <data>800</data>
+      <data>1200</data>
+      <data>1600</data>
+      <data>2000</data>
+      <data>2400</data>
+      <data>2800</data>
+      <data>3200</data>
+      <data>3600</data>
+      <data>4000</data>
+      <data>4400</data>
+      <data>4800</data>
+      <data>5200</data>
+      <data>5600</data>
+      <data>6000</data>
+    </table>
+  </table>
+  <!-- E688: 16-point UBYTE, byte-identical to E678 in this ROM. Axis and L/min scaling are user-specified. -->
+  <table name="QDSPT Basic Value Table (Neutral) - mTDSHPTN" category="Electronic Throttle Control - Dashpot" storageaddress="0xE688" type="2D" scaling="QDSPT_LitersPerMin" sizey="16">
+    <table name="Engine Speed" type="Static Y Axis" scaling="RPM_Static" sizey="16">
+      <data>0</data>
+      <data>400</data>
+      <data>800</data>
+      <data>1200</data>
+      <data>1600</data>
+      <data>2000</data>
+      <data>2400</data>
+      <data>2800</data>
+      <data>3200</data>
+      <data>3600</data>
+      <data>4000</data>
+      <data>4400</data>
+      <data>4800</data>
+      <data>5200</data>
+      <data>5600</data>
+      <data>6000</data>
+    </table>
+  </table>
+  <!-- 848A: UBYTE 0x43. Code at 0x4051A-0x4052E pairs E678 with ROM[848A]. x*0.78125 shows 52.34. Scale is user-supplied, not proven. -->
+  <table name="QDSPT Reduction Rate (Drive) - mDDSHPTD" category="Electronic Throttle Control - Dashpot" storageaddress="0x848A" type="1D" scaling="Percent_Raw128"/>
+  <!-- 848B: UBYTE 0x43. Code at 0x404CA-0x404DE pairs E688 with ROM[848B]. x*0.78125 shows 52.34. -->
+  <table name="QDSPT Reduction Rate (Neutral) - mDDSHPTN" category="Electronic Throttle Control - Dashpot" storageaddress="0x848B" type="1D" scaling="Percent_Raw128"/>
+  <!-- F3D6: 8-point UBYTE. Bytes verified in ROM. Axis and 0.3575 degree scaling are user-specified; ROM-resident axis not proven. -->
+  <table name="TVO Upper Limit Main - mTTVOULM" category="Electronic Throttle Control - Limiters - Degree Based" storageaddress="0xF3D6" type="2D" scaling="TVO_Degrees" sizey="8">
+    <table name="Engine Speed" type="Static Y Axis" scaling="RPM_Static" sizey="8">
+      <data>0</data>
+      <data>25</data>
+      <data>50</data>
+      <data>700</data>
+      <data>2200</data>
+      <data>2600</data>
+      <data>2800</data>
+      <data>3200</data>
+    </table>
+  </table>
+  <!-- F3DE: 8-point UBYTE, byte-identical to F3D6 in this ROM. -->
+  <table name="TVO Upper Limit Secondary - mTTVOULMS" category="Electronic Throttle Control - Limiters - Degree Based" storageaddress="0xF3DE" type="2D" scaling="TVO_Degrees" sizey="8">
+    <table name="Engine Speed" type="Static Y Axis" scaling="RPM_Static" sizey="8">
+      <data>0</data>
+      <data>25</data>
+      <data>50</data>
+      <data>700</data>
+      <data>2200</data>
+      <data>2600</data>
+      <data>2800</data>
+      <data>3200</data>
+    </table>
+  </table>
+  <!-- 8550: UBYTE 0x0A, shows -40 degC at x-50. Only code reference is sub_403D8: it compares byte FFFF84BA (plus 3 when FFFF1DB4 bit5 is already set) against it at 0x4043E and sets or clears FFFF1DB4 bit5. A clear flag zeroes the dashpot start value (0x40548-0x40572). The x-50 offset is evidenced for FFFF84BA by sub_A94B8; that FFFF84BA is the coolant sensor is not proven. -->
+  <table name="DSPT Prohibition Coolant Temperature - mDSHCUT" category="Electronic Throttle Control - Throttle Control Decel" storageaddress="0x8550" type="1D" scaling="Temp_C_Offset50"/>
+  <!-- NOT INCLUDED (address unresolved): mDDPAPO, Throttle Reduction Rate, 52.34 percent. See report: 848A/848B match numerically but are paired with E678/E688 in code. -->
+</tables>

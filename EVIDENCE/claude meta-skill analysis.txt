@@ -1,0 +1,110 @@
+I can't measure the other worker. I've only seen its output through the ledger text, never its working process. My view is that most of the gap comes from method and tooling, and relatively little from raw model skill. That is good news, because method and tooling transfer.
+
+## What the ability breaks down into (most to least transferable)
+
+**1. A run-and-verify loop.** I run code in a sandbox and never rely on reading the listing. This matters more than anything else.
+- I confirmed all 334,126 in-ROM listing lines match the ROM bytes, so every PC I cite is real.
+- I grep and script against a 27 MB listing instead of reading it.
+- I reproduce numbers before trusting them. Your lists matched the bytes ×2 and ×0.3575, and `0x848A`/`0x848B` came out as 52.34 at ×0.78125.
+- A model without code execution has to read excerpts and reason from memory, which is where most trace errors come from.
+
+**2. A reference-resolution ladder.** A byte can be reached in many ways, and a trace only counts once each has been checked.
+- Absolute literal.
+- GBR-relative, using the actual GBR value at that instruction.
+- Base register plus displacement.
+- Base plus `r0` index.
+- Pointer tables, copy helpers and block copies.
+- This is how I found `FFFF85DF`'s readers (`mov.b @(r0,r12)` with `r0=0x1B`), which a literal/GBR-only search misses.
+
+**3. ISA fluency.** This is the part that is really model knowledge, but it fits on one page (see the cheat sheet below).
+
+**4. Pattern recognition.** I recognise common code shapes quickly, such as a compare with hysteresis (`+3` when the flag is already set), a divide-by-10 helper, or a ROM scalar copied to a RAM shadow at init. Concrete examples help any model here.
+
+**5. Claim discipline.** I label what is confirmed and what is a hypothesis, and I state how a negative result was searched.
+
+## Where I went wrong (worth passing on)
+- My resolver kept stale registers and produced a false `INT_ATU…` hit. It also lost `r0` after `extu.b`, and its 16-instruction window dropped a base register.
+- I misread `sub_25D36` at first. It is a divide-by-10, not a flag helper.
+- Listing labels mislead. `byte_85DF` in a `.data.l` pool is ROM `0x85DF`, not RAM, and a register labelled as a byte was accessed as a word.
+- My results are unreviewed. A second worker should recheck the high-impact ones.
+
+## Hierarchy for another worker
+0. **Integrity.** Check hashes and that listing bytes match the ROM.
+1. **Structure.** Find function bounds, each function's GBR value, and the dispatch and pointer tables.
+2. **Resolve.** Run the reference ladder on the exact target byte.
+3. **Dataflow.** Trace forward from writers to readers, and verify the arithmetic (width, signedness, branch polarity).
+4. **Endpoint.** Prove any hardware link by naming the register write and its configuration.
+5. **Report.** State confidence and the search methods behind any negative.
+
+## ISA and ROM cheat sheet (checked in this ROM)
+- A branch delay slot always executes (`bt/s`, `bra`, `rts`).
+- `bt` branches when T=1, and `tst #imm` sets T when the bit is **clear**.
+- `cmp/hs Rm,Rn` sets T when Rn ≥ Rm (unsigned).
+- `mov.b` and `mov.w` sign-extend. `mov #imm` sign-extends, so offsets over 0x7F need `extu.b`.
+- A 16-bit literal like `h'8xxx` becomes `FFFF8xxx`. A 32-bit `.data.l` value below 0x100000 is a ROM pointer.
+- ROM base is 0. RAM is `FFFF xxxx`. The A/D data registers are at `FFFFF800`.
+- Calibration scalars sit near `0x8000–0x9000`, reached through a pool pointer. Some are copied to RAM at init.
+- `sub_22E10` returns table[15] for query ≥ 0xF0, and otherwise interpolates with `floor((B−A)·frac/16)`.
+- The dispatcher `sub_2088C` runs the nine-entry table at `0x21A64`.
+- The flag bytes at `860D`, `860B` and `860F` form a one-pass delay chain.
+
+## Highest-return move
+Compute the structure once and share the results, so the worker's skill matters less. I'd generate these files:
+- a per-function GBR map,
+- a literal-pool reference index,
+- a reader/writer index for flag bytes,
+- a list of known false aliases.
+
+That is a one-time script, justified because the false positives and negatives above come from skipping this work.
+
+Want me to build this as a short markdown playbook plus the index files?
+
+
+These are ranked by how much time I lost re-deriving each one in this conversation. A free-tier worker probably can't run code, so everything should be precomputed, sorted by address, and split into slices small enough to paste into its context.
+
+## 1. RAM cross-reference at byte and bit level (highest value)
+- **Contents:** One record per access: RAM address, PC, enclosing function, read or write, width, the bit mask tested, set or cleared, and the access form (literal, GBR-resolved, base+displacement, base+`r0`).
+- **Evidence:** I rebuilt this by hand for `FFFF85DF` (found 2 readers), `FFFF860D` (about 35 readers of bit 3 or bit 5) and `FFFF84BA` (126 readers, no writer).
+- **Also needed:** An "unresolved access sites" list, meaning accesses where the base or index couldn't be determined. It tells a worker where the index is blind.
+
+## 2. Function and GBR map, with the scheduler
+- **Contents:** Function bounds, the GBR value inside each function, callers and callees, and the ISR → `sub_2088C` → task-table order.
+- **Evidence:** I had to read each prologue to learn its GBR, and the values differ. `sub_3BA88` uses `FFFF1E54`, `sub_46E3E` uses `0x821E` (a ROM address), and `sub_403D8` uses `FFFF1028`. A wrong GBR silently gives wrong addresses.
+
+## 3. Calibration scalar and table index
+- **Contents:** Each ROM address in the cal area: value, every pool reference, how it is used (compared, copied to a RAM shadow, or used as a table base), and the query expression and result destination for each lookup call.
+- **Evidence:** `0x8550` has a single reader. `0x8485` is only shadow-copied to `FFFF36C1`. `0x848A`/`0x848B` pair with `E678`/`E688`. E974's result is only tested for zero or non-zero.
+
+## 4. Base-register dictionary
+- **Contents:** The common struct bases (`FFFF1054`, `FFFF2150`, `FFFF1990`, `FFFF1CA8`, `FFFF85C4`, `FFFF3628`) with the offsets already seen and what each one holds, by address only.
+- **Why:** Code such as `FFFF2150+0x52F` or `FFFF85C4+0x1B` is opaque without it.
+
+## 5. False-alias and verified-facts register
+- **Contents:**
+  - Known traps: `byte_85DF` in a `.data.l` pool is ROM `0x85DF`, not RAM. A register labelled as a byte was accessed as a word. The `0x55xxx` GBR over-reach.
+  - One line per verified fact: address, claim, PCs, evidence level, how a negative was searched, who checked it.
+- **Why:** It replaces prose ledger entries, and it lets the negative-claim standard be applied mechanically.
+
+## 6. Three worked traces as few-shot examples
+- **Suggested traces:** Dashpot start (`E678` → `0x848A` → flag `FFFF1DB4` → `FFFF1018`), `FFFF85DF` → `FFFF1992` → `sub_27720` → GR11A, and a delay-chain flag.
+- **Why:** A weaker model improves most from seeing a complete trace, with the reasoning checks included.
+
+## 7. Peripheral map and interrupt entries
+- **Contents:** Register name, address, accessing PCs and configuration sites, plus the vector pointers.
+- **Evidence:** The ATU-II channel 11 and APC lead needed exactly this.
+
+## Format rules
+- TSV, sorted by address, one slice per 256-byte RAM page or 4 KB ROM block, so a worker loads only its target.
+- Every file states the ROM MD5, the listing version, and its method limits (forms covered, window sizes).
+- Raw text only, no saved web pages.
+- Pre-extract the relevant slices into each work-order packet.
+
+## What to avoid
+- No database or UI.
+- No semantic names in the index. Keep it to facts, and keep naming as a separate, evidence-gated step.
+
+## Caveats
+- One generator script produces all of it. It must pass regression cases first: the `PKIOR_W` stale-register alias, the two `FFFF85DF` readers, and the `0x55xxx → FFFF8AF0` case.
+- A static index still misses computed pointers and bulk copies, which is why list 1 carries the unresolved-sites file.
+
+I have the ROM and listing here, so I can build items 1 to 3 first. Do you want me to start there?
