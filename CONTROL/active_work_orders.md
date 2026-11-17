@@ -408,3 +408,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **ACTIVE:** WO65022 — reconcile the nine-entry `sub_2088C` table at `0x21A64`, including exact targets and loop mechanics. See [WO65022](WO65022.md).
 - **ACTIVE:** WO65023 — bounded ROM-wide triage of indirect call/jump sites for additional function-pointer dispatch tables beyond the three known dispatcher families. See [WO65023](WO65023.md).
 - **Batch rule:** at most three WOs; minimum chat; only these WO files and this register may be updated. No XML/workbook/ROM/LST/IDB/script/Library edits. Table existence/count does not establish task purpose, cadence or interrupt attribution.
+
+
+## Call-table inventory batch closeout — 2026-11-17
+
+- **COMPLETE — CLOSED:** WO65021 — six `sub_209A6` tables reconciled: bases `216EC/2170C/21744/21760/21858/21870`, counts `8/14/7/62/6/3`, 100 unique BE pointers, all targets verified as code entries; exact loop PCs and bounds recorded. See [WO65021](WO65021.md).
+- **COMPLETE — CLOSED:** WO65022 — `sub_2088C` nine-entry table at `0x21A64–0x21A87`; all nine unique BE pointers verified as code entries; exact loop mechanics recorded. See [WO65022](WO65022.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65023 — local indirect-transfer scan found 21 additional candidate sites beyond the known dispatcher loops, including a ROM function-pointer-array lead at `0x13AD8`; three computed jumps are switch dispatch, and callback/record candidate bounds remain unresolved. Therefore complete ROM-wide call-table coverage is **not established**. See [WO65023](WO65023.md).
+- **Next recommended scope:** resolve the `0x13AD8` pointer array and then reconstruct bounds/source records for indexed callback families at `0x35xx/0x37xx/0x38xx/0x3Cxx` and `0xB4xx`. Do not claim completeness from the current bounded scan.
+- **Artifact boundary:** only WO65021–WO65023 and this operational register updated. No XML, workbook, ROM, LST, IDB, scripts or Library files modified.
