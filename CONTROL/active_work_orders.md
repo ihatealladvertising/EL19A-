@@ -9,7 +9,8 @@
 - **Completed:** WO65009 — `sub_6F4C0` updates `FFFF1D99+0x7A.bit3`: if `FFFF99F4+0x0D.bit7` is clear, set bit3; otherwise clear bit3 only when `FFFF860B.bit3` is clear. Called from `sub_6F89A` in callback `loc_6ECF0`. Input flag meanings/producers unresolved. See [WO65009](WO65009.md).
 - **Completed:** WO65011 — callback pointer at table slot `0x21894` enters `loc_6ECF0`; callback calls `sub_6EAAC`, then `sub_6F89A` (including selector update), then tail-jumps to `loc_66DF6`. Dispatch predicate/cadence unresolved. See [WO65011](WO65011.md).
 - **Completed batch:** WO65012–WO65014 — curve spot checks support E678/E688 and F3D6/F3DE. Scalar mapping superseded by the user's corrected evidence: EL19A `0x848A/0x848B` are leading `mDDSHPTD/N` UBYTE candidates; `mDSHCUT` target address remains unknown; `mDDPAPO` is a UWORD donor symbol with 52.34% raw fingerprint 0x0086 × 0.390625, target address unknown. WO65014's earlier dismissal of 0x848A/B as mDDPAPO candidates is retained as history but its overall scalar mapping is superseded. See [WO65012](WO65012.md), [WO65013](WO65013.md), [WO65014](WO65014.md).
-- **Active batch:** WO65015–WO65017 — verify the 0x848A/B Drive/Neutral branch pair, locate the EL19A mDSHCUT threshold candidate, and search the mDDPAPO UWORD 52.34% fingerprint. See [WO65015](WO65015.md), [WO65016](WO65016.md), [WO65017](WO65017.md).
+- **Paused batch:** WO65015–WO65017 — preserve unresolved leads: FFFF8603.bit6 selector source / Drive-Neutral interpretation; FFFF860D.bit3 / mDSHCUT target scalar; mDDPAPO EL19A counterpart. Paused by priority deferral, not technically closed. See [WO65015](WO65015.md), [WO65016](WO65016.md), [WO65017](WO65017.md).
+- **Active batch:** WO65036–WO65038 — 9C2E/9DAE input-producer and differential-output closure; ADF2/AF72 paired-output consumer comparison; selective top-ten sub_22E10 UBYTE curve audit. See [WO65036](WO65036.md), [WO65037](WO65037.md), [WO65038](WO65038.md).
 
 
 ## Standing main priority — rapid table discovery and axis completion
@@ -495,3 +496,13 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Batch result:** No additional static ROM function-pointer vector established in the high-ROM residual population. The unresolved remainder is provenance of caller-supplied/stack pointers, two register tail jumps, and RAM-address transfer destinations—not evidence of another ROM table.
 - **Active state:** no active WOs remain in this batch.
 - **Artifact boundary:** only WO65033–WO65035 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
+
+
+## Active calibration dataflow batch — 2026-11-17
+
+- **ACTIVE:** WO65036 — 9C2E/9DAE: reconcile legacy WO64275/64276 status, trace producers of FFFF849A and FFFF85B2, then trace differential output consumers and exact signedness/scale/clamp arithmetic. See [WO65036](WO65036.md).
+- **ACTIVE:** WO65037 — ADF2/AF72: compare direct consumers of FFFF1708 and FFFF1707 and determine whether their downstream paths converge. See [WO65037](WO65037.md).
+- **ACTIVE:** WO65038 — sub_22E10: rank the existing 40 moderate/high-variation candidates, select ten and trace query source, result staging and immediate downstream use. See [WO65038](WO65038.md).
+- **Priority source:** Master Workbook V56, sheet "P2 Next Priorities" (ranked items 2, 4 and 5). The 9B2E/WO64435 dependency is not duplicated.
+- **Batch constraints:** at most three WOs; minimum chat; bounded producer/consumer tracing; preserve provisional semantics; no broad global scans.
+- **Artifact boundary:** only WO65036–WO65038 and this register may be updated. No XML, Master Workbook, ROM, annotated LST, IDB, scripts or Library modifications. The source workbook and LST were read-only inputs.
