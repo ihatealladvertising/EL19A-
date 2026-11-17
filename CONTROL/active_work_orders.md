@@ -8,7 +8,7 @@
 
 - **Completed:** WO65009 — `sub_6F4C0` updates `FFFF1D99+0x7A.bit3`: if `FFFF99F4+0x0D.bit7` is clear, set bit3; otherwise clear bit3 only when `FFFF860B.bit3` is clear. Called from `sub_6F89A` in callback `loc_6ECF0`. Input flag meanings/producers unresolved. See [WO65009](WO65009.md).
 - **Completed:** WO65011 — callback pointer at table slot `0x21894` enters `loc_6ECF0`; callback calls `sub_6EAAC`, then `sub_6F89A` (including selector update), then tail-jumps to `loc_66DF6`. Dispatch predicate/cadence unresolved. See [WO65011](WO65011.md).
-- **Active batch:** WO65012–WO65014 — user-directed spot checks of E678/E688, F3D6/F3DE, mDSHCUT and mDDPAPO using the user's supplied definitions as the accepted starting model. See [WO65012](WO65012.md), [WO65013](WO65013.md), [WO65014](WO65014.md). The previously proposed `FFFF99F4+0x0D.bit7` / `FFFF860B.bit3` producer audit is deferred; the coolant-threshold discriminator remains included in WO65014.
+- **Completed batch:** WO65012–WO65014 — bounded spot checks completed for E678/E688, F3D6/F3DE, mDSHCUT and mDDPAPO. Supplied curve definitions and donor symbol/storage assignments are supported; target query units and scalar addresses remain open. Narrow corrections: EL19A `0x8485` is not the coolant threshold; mDDPAPO uses `COMP_0085` = 0.390625 `/0.11deg`, not 25 RPM. See [WO65012](WO65012.md), [WO65013](WO65013.md), [WO65014](WO65014.md). The previously proposed `FFFF99F4+0x0D.bit7` / `FFFF860B.bit3` producer audit remains deferred.
 
 
 ## Standing main priority — rapid table discovery and axis completion
