@@ -601,3 +601,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **BOUNDED COMPLETE — CLOSED:** WO65046 inspected eleven literal-base load windows for stores through `FFFF84B4`; all apparent stores were false positives after register redefinition. No confirmed wider-width or indexed store to `FFFF84BA` found in the bounded 30-instruction windows. Explicit read-side uses include `0x9538A`, `0x95DCE`, `0x9633C`, `0x5054A`, `0x770B8`, and `0x77152`. This is not a ROM-wide no-writer proof; alias/GBR/block/peripheral paths remain open. See [WO65046](WO65046.md).
 - **Active:** WO65045 remains open for producer provenance and sensor-block identity. Next isolated task: narrow explicit pointer-offset/GBR alias check around concrete readers; stop at transfer boundaries.
 - **Artifact boundary:** only WO65046, WO65045 and this register updated. ROM/LST/XREF inputs read-only; no workbook, XML, IDB, scripts or Library changes.
+
+
+## FFFF84BA GBR-alias provenance task — 2026-11-17
+
+- **ACTIVE:** WO65047 — resolve GBR roots and effective addresses at `0x9538A`, `0x95DCE`, and `0x9633C`; inspect only local stores/aliases/transfers that could reach `FFFF84BA`. Do not repeat WO65046's literal-base pass or expand to a global writer scan. See [WO65047](WO65047.md).
+- **Parent:** WO65045 remains ACTIVE for overall source/sensor identity and dashpot linkage; this WO is an isolated subtask.
+- **Artifact boundary:** only WO65047 and this register may be updated for this task. Inputs read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
