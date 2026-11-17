@@ -562,3 +562,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - No physical semantics/units assigned. Upstream input producers and downstream system-level consumers remain outside bounded scope.
 - No active work remains in the WO65039–WO65041 batch. Next priority: another three uncovered high-variation `sub_22E10` candidates from the existing inventory, avoiding previously audited candidates and previously completed work-order targets.
 - Artifact boundary observed: only WO65039–WO65041 and this register updated; no workbook/XML/ROM/LST/IDB/scripts/Library changes.
+
+
+## Selective F34E caller/result audit — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65042 — F34E's two `sub_22E10` callers both use raw UBYTE query FFFF84B8. In `loc_4F8AC`, result remains in R11 and affects multiplication plus an upper-bound clamp. In `loc_4FBC2`, it scales UWORD FFFF134E by `F34E_result × 100 / 2^14`, capped to UWORD, staged at FFFF15A2 and copied to FFFF1D5C. Target payload verified: `6D 6D 6D 57 40 35 28 1D 16 12 0E 0E 0E 0E 0E 0E`. Semantics/units and FFFF84B8 producer remain unresolved. See [WO65042](WO65042.md).
+- **Next:** WO65043 — F35E result/dataflow audit only; reuse the same bounded FFFF84B8 query evidence, do not repeat producer scans.
+- **Batch method:** one candidate per saved/verified report; proceed to the next only after successful report and register readback. Maximum three WOs per batch.
+- **Artifact boundary:** only WO65042 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
