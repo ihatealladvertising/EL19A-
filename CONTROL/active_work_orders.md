@@ -701,3 +701,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **BOUNDED COMPLETE — CLOSED:** WO65053 — supplied scan found no even-offset big-endian literal pointer to `FFFF84BA` in ROM. The scan used a 2-byte step; odd offsets were not tested. This does not exclude calculated/indirect references or establish absence of a producer. See [WO65053](WO65053.md).
 - **Parent:** WO65045 remains ACTIVE for producer provenance, sensor identity, and dashpot linkage.
 - **Artifact boundary:** only WO65053 and this register updated. Pointer-search result was supplied by user from Claude; not independently rerun. All source files remain read-only.
+
+
+## WO65045 caller-path mapping — 2026-11-17
+
+- **BOUNDED COMPLETE — checkpoint 2 (parent remains ACTIVE):** NEXT6_16 listing maps `0x707CC → sub_77608 → 0x784F6/sub_79A78 → 0x79C92/sub_7A204`. `sub_79A78` reads `FFFF84BA` against ROM threshold `0x8ED7` and selects `0x893F/0x8940`; `sub_7A204` has four further `FFFF84BA` reads compared with `0x32` in counter-update branches. Same `sub_79A78` span reads `FFFF860B.bit3` and adjacent `FFFF860F.bit3`, compares their boolean states, but does not write `FFFF860B`; `sub_7A204` has no `FFFF860B` reference. Task-level caller path confirmed; interrupt cadence/acquisition source unresolved. No direct linkage established. See [WO65045](WO65045.md), checkpoint 2.
+- **Report verification:** WO65045 content SHA `7a2b24d47c0d7037d40153cec480c6b45e56c78b` (readback verified).
+- **Next:** parent remains ACTIVE; pivot only to a new concrete acquisition/descriptor/interrupt lead. Do not repeat this caller path or prior writer/sibling-chain scans.
+- **Artifact boundary:** only WO65045 and this operational register updated. NEXT6_16 listing read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library modifications.
