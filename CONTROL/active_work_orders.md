@@ -590,7 +590,7 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Active coolant / dashpot provenance investigation — 2026-11-17
 
-- **ACTIVE:** WO65045 — identify the source and sensor-block role of UBYTE `FFFF84BA`; reproduce the hysteresis comparison at `0x40422–0x4044C`; trace `FFFF1DB4.bit5` separately from the dashpot-tested `FFFF860B.bit3`; establish or reject a direct data/control link. See [WO65045](WO65045.md).
+- **ACTIVE:** WO65045 — identify the source and sensor-block role of UBYTE `FFFF84BA`; reproduce the hysteresis comparison at `0x40422–0x4044C`; trace `FFFF1DB4.bit5` separately from the `sub_403D8`-tested `FFFF860B.bit3`; establish or reject a direct data/control link. Initial LST check corrected hysteresis polarity: +3 is applied when `FFFF1DB4.bit5` is CLEAR, not SET; `cmp/hs` is unsigned `R5 >= 0x0A`. Coolant identity and both flag producers remain unresolved. See [WO65045](WO65045.md).
 - **Starting correction:** R2=`FFFF84B4`, displacement +6 gives effective address `FFFF84BA`. Do not use `FFFF84C0`; that was an arithmetic slip in the initial WO draft and was corrected before register activation.
 - **Bounded method:** targeted writers/transfer provenance and selected readers only; stop at alias/bulk/peripheral boundaries. No global RAM-writer scan.
 - **Artifact boundary:** only WO65045 and this register may be updated. No workbook, XML, ROM, LST, IDB, scripts or Library modifications.
