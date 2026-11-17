@@ -480,9 +480,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Next indirect-transfer provenance batch — 2026-11-17
 
-- **ACTIVE:** WO65033 — high-ROM residual indirect-transfer audit `0x80000–0xFFFFF`; 80 unannotated JSR/JMP sites identified in the current annotated listing. See [WO65033](WO65033.md).
-- **ACTIVE:** WO65034 — bounded provenance of seven RAM callback/pointer slots found in WO65031. See [WO65034](WO65034.md).
-- **ACTIVE:** WO65035 — 12 representative stack-sourced indirect-call sites, tracing one caller boundary to distinguish fixed helper, descriptor and dynamic pointer arguments. See [WO65035](WO65035.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65033 — high-ROM residual indirect-transfer audit `0x80000–0xFFFFF`; 80 sites classified. See [WO65033](WO65033.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65034 — seven direct RAM-address transfer targets reconciled to ROM literals; no callback slots established. See [WO65034](WO65034.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65035 — 12 representative stack-sourced sites classified. See [WO65035](WO65035.md).
 - **Batch limit:** three work orders; bounded traces only; no exhaustive global dataflow or broad RAM-writer scan.
 - **Artifact boundary:** only WO65033–WO65035 and this operational register may be updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
 
