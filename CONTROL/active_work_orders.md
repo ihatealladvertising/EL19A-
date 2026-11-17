@@ -417,3 +417,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **BOUNDED COMPLETE — CLOSED:** WO65023 — local indirect-transfer scan found 21 additional candidate sites beyond the known dispatcher loops, including a ROM function-pointer-array lead at `0x13AD8`; three computed jumps are switch dispatch, and callback/record candidate bounds remain unresolved. Therefore complete ROM-wide call-table coverage is **not established**. See [WO65023](WO65023.md).
 - **Next recommended scope:** resolve the `0x13AD8` pointer array and then reconstruct bounds/source records for indexed callback families at `0x35xx/0x37xx/0x38xx/0x3Cxx` and `0xB4xx`. Do not claim completeness from the current bounded scan.
 - **Artifact boundary:** only WO65021–WO65023 and this operational register updated. No XML, workbook, ROM, LST, IDB, scripts or Library files modified.
+
+
+## Active call-table continuation batch — 2026-11-17
+
+- **ACTIVE:** WO65024 — resolve ROM function-pointer-array lead at 0x13AD8, called through indexed indirect site 0x250C4. Establish index mechanics, pointer extent/count and valid targets. See [WO65024](WO65024.md).
+- **ACTIVE:** WO65025 — reconstruct indexed callback candidates at 0x35C4, 0x35F8, 0x3718, 0x384C and 0x3CCA; identify shared bases/record layouts and bounds. See [WO65025](WO65025.md).
+- **ACTIVE:** WO65026 — reconstruct indexed callback candidates at 0xB4B3C, 0xB4B70, 0xB4CB6, 0xB4DE2 and 0xB5280; determine whether these share one family. See [WO65026](WO65026.md).
+- **Batch constraints:** maximum three WOs; bounded structural tracing only; preserve hypotheses separately from verified mechanics; do not infer cadence, task semantics or ROM-wide completeness. If a candidate stops yielding structural progress, close it with the exact method boundary and move on.
+- **Artifact boundary:** only WO65024–WO65026 and this register may be updated. No XML, workbook, ROM, LST, IDB, scripts or Library edits.
