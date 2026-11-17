@@ -593,4 +593,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **ACTIVE:** WO65045 — identify the source and sensor-block role of UBYTE `FFFF84BA`; reproduce the hysteresis comparison at `0x40422–0x4044C`; trace `FFFF1DB4.bit5` separately from the `sub_403D8`-tested `FFFF860B.bit3`; establish or reject a direct data/control link. Initial LST polarity correction: +3 applies when `FFFF1DB4.bit5` is CLEAR. Task 1 direct byte-store census: two syntactic `mov.b @(6,Rn)` candidates were both false positives after register redefinition; zero confirmed literal-base byte stores to `FFFF84BA`. Wider stores/offset aliases and semantic identity remain open. See [WO65045](WO65045.md).
 - **Starting correction:** R2=`FFFF84B4`, displacement +6 gives effective address `FFFF84BA`. Do not use `FFFF84C0`; that was an arithmetic slip in the initial WO draft and was corrected before register activation.
 - **Bounded method:** targeted writers/transfer provenance and selected readers only; stop at alias/bulk/peripheral boundaries. No global RAM-writer scan.
-- **Artifact boundary:** only WO65045 and this register may be updated. No workbook, XML, ROM, LST, IDB, scripts or Library modifications.
+- **Artifact boundary:** only the authorized WO65045/WO65046 documents and this register may be updated. No workbook, XML, ROM, LST, IDB, scripts or Library modifications.
+
+
+## FFFF84BA wider-store audit — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65046 inspected eleven literal-base load windows for stores through `FFFF84B4`; all apparent stores were false positives after register redefinition. No confirmed wider-width or indexed store to `FFFF84BA` found in the bounded 30-instruction windows. Explicit read-side uses include `0x9538A`, `0x95DCE`, `0x9633C`, `0x5054A`, `0x770B8`, and `0x77152`. This is not a ROM-wide no-writer proof; alias/GBR/block/peripheral paths remain open. See [WO65046](WO65046.md).
+- **Active:** WO65045 remains open for producer provenance and sensor-block identity. Next isolated task: narrow explicit pointer-offset/GBR alias check around concrete readers; stop at transfer boundaries.
+- **Artifact boundary:** only WO65046, WO65045 and this register updated. ROM/LST/XREF inputs read-only; no workbook, XML, IDB, scripts or Library changes.
