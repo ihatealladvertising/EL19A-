@@ -400,3 +400,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 - **Bounded complete — CLOSED:** WO65020 — direct LST references show fragmented byte copies only (`85FB→85FC`, `85FE→85FD`, `8602→85FF`); no complete runtime vector or handler destination established. Indirect aliases and live values remain unresolved. See [WO65020](WO65020.md). No source artifacts modified.
+
+
+## Active call-table inventory batch — 2026-11-17
+
+- **ACTIVE:** WO65021 — reconcile exact bounds, loop mechanics and all targets of the six `sub_209A6` callback tables (8/14/7/62/6/3). See [WO65021](WO65021.md).
+- **ACTIVE:** WO65022 — reconcile the nine-entry `sub_2088C` table at `0x21A64`, including exact targets and loop mechanics. See [WO65022](WO65022.md).
+- **ACTIVE:** WO65023 — bounded ROM-wide triage of indirect call/jump sites for additional function-pointer dispatch tables beyond the three known dispatcher families. See [WO65023](WO65023.md).
+- **Batch rule:** at most three WOs; minimum chat; only these WO files and this register may be updated. No XML/workbook/ROM/LST/IDB/script/Library edits. Table existence/count does not establish task purpose, cadence or interrupt attribution.
