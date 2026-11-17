@@ -709,3 +709,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Report verification:** WO65045 content SHA `7a2b24d47c0d7037d40153cec480c6b45e56c78b` (readback verified).
 - **Next:** parent remains ACTIVE; pivot only to a new concrete acquisition/descriptor/interrupt lead. Do not repeat this caller path or prior writer/sibling-chain scans.
 - **Artifact boundary:** only WO65045 and this operational register updated. NEXT6_16 listing read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library modifications.
+
+
+## WO65054 — indirect sensor-acquisition path for FFFF84BA — 2026-11-17
+
+- **ACTIVE — EXECUTING ONE BOUNDED SEGMENT:** inspect the ROM pointer lead at `0x16DA4` to `FFFF84BB`, its table/consumers, and only the directly identified descriptor/acquisition path that may populate `FFFF84B4+6 = FFFF84BA`.
+- Reuse completed direct/GBR writer, sibling-chain, caller-path, and literal-pointer checks. No global writer scan or repeated FC90/111EA work.
+- Stop at the first unresolved dispatch/peripheral/DMA boundary if no concrete source is found.
+- **Artifact boundary:** only WO65054 and this register may be updated; source artifacts, XML, workbook and Library remain read-only. See [WO65054](WO65054.md).
