@@ -620,6 +620,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## FFFF84BA reader-role discrimination — 2026-11-17
 
-- **ACTIVE:** WO65048 — bounded audit of six known consumer contexts (`0x50546`, `0x770A6`, `0x77140`, `0x9538A`, `0x95DCE`, `0x9633C`) and only adjacent fields actually read in those routines. Determine whether observed use supports coolant identity or only a generic sensor/state-byte role. No producer scan or dashpot tracing in this task. See [WO65048](WO65048.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65048 — six reader contexts establish `FFFF84BA` as a threshold operand, clamp ceiling, numeric-conversion input and copied record field within a multi-field RAM structure rooted at `FFFF84B4`. No coolant channel/conversion evidence; physical identity remains unresolved. See [WO65048](WO65048.md).
 - **Parent:** WO65045 remains ACTIVE; WO65046/WO65047 are closed bounded provenance passes.
 - **Artifact boundary:** only WO65048 and this register may be updated. All source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65048 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** six selected readers audited. `FFFF84BA` is used as a threshold operand, clamp ceiling, conversion input and copied record field. Adjacent +1/+3/+4 reads support a multi-field structure; no coolant-specific channel or conversion identity found.
+- **Active:** WO65045 remains open for producer/sensor identity and separate dashpot linkage. No coolant label promoted.
+- **Next:** pursue only a concrete new acquisition/alias/copy/caller-pointer lead; do not repeat direct byte, wider-store or GBR-store scans.
+- **Artifact boundary:** only WO65048 and the operational register updated. Source files remained read-only.
