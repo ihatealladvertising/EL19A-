@@ -668,6 +668,14 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## sub_961E0 targeted sensor source check — 2026-11-17
 
-- **ACTIVE:** WO65051 — inspect only `sub_961E0` and its direct local callees for a producer/transfer or sensor-channel mapping into `FFFF84B4` / `FFFF84BA`. Caller is `sub_70880` at `0x70874`. No global writer scan or dashpot trace. See [WO65051](WO65051.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65051 — `sub_961E0` and direct callees contain no producer/transfer into `FFFF84BA`; `sub_95FB2` and `sub_960A8` add two read-side unsigned threshold comparisons against ROM bytes `0x8D5C/0x8D5D`, gating other state outputs. Temperature-like role reinforced; coolant unresolved. See [WO65051](WO65051.md).
 - **Parent:** WO65045 remains ACTIVE; WO65050 predecessor group A is closed.
 - **Artifact boundary:** only WO65051 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
+
+
+## WO65051 closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** `sub_961E0` and direct local callees reviewed. No writes/transfers to `FFFF84B4`/ `FFFF84BA`. Two routines read +6 and compare against ROM thresholds `0x8D5C/0x8D5D`, gating separate status/counter outputs.
+- **Active:** WO65045 remains open; producer and physical sensor identity unresolved, dashpot link not established.
+- **Next:** one isolated check of `sub_968B6` at `0x7087A`, final sibling before `sub_969C2`.
+- **Artifact boundary:** only WO65051 and the operational register updated; source files remained read-only.
