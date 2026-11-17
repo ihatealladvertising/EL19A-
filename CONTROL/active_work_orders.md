@@ -504,9 +504,9 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 ## Active calibration dataflow batch — 2026-11-17
 
-- **ACTIVE:** WO65036 — 9C2E/9DAE: reconcile legacy WO64275/64276 status, trace producers of FFFF849A and FFFF85B2, then trace differential output consumers and exact signedness/scale/clamp arithmetic. See [WO65036](WO65036.md).
-- **ACTIVE:** WO65037 — ADF2/AF72: compare direct consumers of FFFF1708 and FFFF1707 and determine whether their downstream paths converge. See [WO65037](WO65037.md).
-- **ACTIVE:** WO65038 — sub_22E10: rank the existing 40 moderate/high-variation candidates, select ten and trace query source, result staging and immediate downstream use. See [WO65038](WO65038.md).
+- **BOUNDED COMPLETE:** WO65036 — 9C2E/9DAE paired 16×16 lookups and differential arithmetic/output consumers structurally traced; input producers/physical meanings unresolved. See [WO65036](WO65036.md).
+- **BOUNDED COMPLETE:** WO65037 — ADF2/AF72 paired lookup arithmetic, alternate startup writer and downstream consumers/override paths traced; semantics unresolved. See [WO65037](WO65037.md).
+- **BOUNDED COMPLETE:** WO65038 — ten selected sub_22E10 candidates audited for query, result staging and immediate local use; remaining 30 moderate/high-variation candidates not audited. See [WO65038](WO65038.md).
 - **Priority source:** Master Workbook V56, sheet "P2 Next Priorities" (ranked items 2, 4 and 5). The 9B2E/WO64435 dependency is not duplicated.
 - **Batch constraints:** at most three WOs; minimum chat; bounded producer/consumer tracing; preserve provisional semantics; no broad global scans.
 - **Artifact boundary:** only WO65036–WO65038 and this register may be updated. No XML, Master Workbook, ROM, annotated LST, IDB, scripts or Library modifications. The source workbook and LST were read-only inputs.
@@ -548,9 +548,17 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 ## Next selective sub_22E10 caller batch — 2026-11-17
-- **ACTIVE:** WO65039 — E510 at `0x4FA02`, caller `sub_4F6DE`; verify query, result staging and immediate use. See [WO65039](WO65039.md).
-- **ACTIVE:** WO65040 — EB30 at `0x48120`, caller `sub_480A4`; verify query, result staging and immediate use. See [WO65040](WO65040.md).
-- **ACTIVE:** WO65041 — EDF0 at `0x3C776`, caller `sub_3C590`; verify query, result staging and immediate use. See [WO65041](WO65041.md).
+- **BOUNDED COMPLETE:** WO65039 — E510 at `0x4FA02` traced; correct entry is `loc_4F8AC` (not inventory label `sub_4F6DE`), query is high byte of UWORD `FFFF8518`, result staged `FFFF14CA`, immediate arithmetic traced. See [WO65039](WO65039.md).
+- **BOUNDED COMPLETE:** WO65040 — EB30 at `0x48120` traced; query `clamp_u8(ceil((FFFF85B2−96)/2))`, result contributes `(curve−0x80)` to bounded UWORD `FFFF1382`. See [WO65040](WO65040.md).
+- **BOUNDED COMPLETE:** WO65041 — EDF0 at `0x3C776` traced; raw UBYTE `FFFF84B8` query, result at `FFFF138C`, multiplied with `FFFF1387` and passed through `sub_223FC` to `FFFF1386`. See [WO65041](WO65041.md).
 - **Selection basis:** next uncovered target-ROM 16-byte candidates with distinct caller families; raw payloads and morphology are recorded in each WO. Discovery evidence only.
 - **Batch rule:** maximum three WOs; minimum chat; bounded caller traces only. At completion, recommend the next three uncovered candidates rather than opening more than three concurrently.
 - **Artifact boundary:** only WO65039–WO65041 and this register may be updated. No XML, Master Workbook, ROM, annotated LST, IDB, scripts or Library modifications.
+
+
+## Caller-audit batch WO65039–WO65041 closeout — 2026-11-17
+- All three bounded audits complete; report findings and caller-label correction are in WO65039–WO65041. E510's V32 caller label was corrected from `sub_4F6DE` to `loc_4F8AC` using the code entry and XREF pointer at `0x21928`.
+- ROM identity verified locally: 1 MiB; MD5 `46991697c502052752a2cabcb84c9e27`. All three 16-byte payloads match the target ROM.
+- No physical semantics/units assigned. Upstream input producers and downstream system-level consumers remain outside bounded scope.
+- No active work remains in the WO65039–WO65041 batch. Next priority: another three uncovered high-variation `sub_22E10` candidates from the existing inventory, avoiding previously audited candidates and previously completed work-order targets.
+- Artifact boundary observed: only WO65039–WO65041 and this register updated; no workbook/XML/ROM/LST/IDB/scripts/Library changes.
