@@ -631,3 +631,11 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Active:** WO65045 remains open for producer/sensor identity and separate dashpot linkage. No coolant label promoted.
 - **Next:** pursue only a concrete new acquisition/alias/copy/caller-pointer lead; do not repeat direct byte, wider-store or GBR-store scans.
 - **Artifact boundary:** only WO65048 and the operational register updated. Source files remained read-only.
+
+
+## FC90/111EA temperature-axis alignment — 2026-11-17
+
+- **ACTIVE:** WO65049 — reproduce the FC90/111EA lookup using query `FFFF84BA<<8`; resolve the axis from its actual pointer `0x111EA` (not the surrounding LST data-row start `0x111E8`); verify BE UWORD values and whether the query shift matches. Assess temperature-like behavior without assigning coolant unless uniquely corroborated. See [WO65049](WO65049.md).
+- **Discovery:** historical WO64815's `0032,0046,...` axis note appears to have started two bytes early; LST bytes at 0x111E8 and pointer at 0x111EA support a candidate sequence beginning `3200,4600,5000...`. This is provisional until WO65049 reproduces helper behavior.
+- **Parent:** WO65045 remains ACTIVE. WO65046–WO65048 are closed bounded tasks.
+- **Artifact boundary:** only WO65049 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
