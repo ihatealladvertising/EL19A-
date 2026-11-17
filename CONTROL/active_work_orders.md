@@ -476,3 +476,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Batch result:** the alleged separate 41-entry `0x219C0` vector is rejected as a suffix of the existing 122-entry `sub_20DCE` table. The bounded low/middle segment reviews found no new static ROM function-pointer vector. High-ROM residual segment `0x80000–0xFFFFF` remains for a later batch; residual stack/RAM pointer provenance is not globally resolved.
 - **Active state:** no active WOs remain in this batch.
 - **Artifact boundary:** only WO65031, WO65032 and this operational register updated in closeout. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
+
+
+## Next indirect-transfer provenance batch — 2026-11-17
+
+- **ACTIVE:** WO65033 — high-ROM residual indirect-transfer audit `0x80000–0xFFFFF`; 80 unannotated JSR/JMP sites identified in the current annotated listing. See [WO65033](WO65033.md).
+- **ACTIVE:** WO65034 — bounded provenance of seven RAM callback/pointer slots found in WO65031. See [WO65034](WO65034.md).
+- **ACTIVE:** WO65035 — 12 representative stack-sourced indirect-call sites, tracing one caller boundary to distinguish fixed helper, descriptor and dynamic pointer arguments. See [WO65035](WO65035.md).
+- **Batch limit:** three work orders; bounded traces only; no exhaustive global dataflow or broad RAM-writer scan.
+- **Artifact boundary:** only WO65033–WO65035 and this operational register may be updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
