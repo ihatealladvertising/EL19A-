@@ -616,3 +616,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Active:** WO65045 remains open for overall provenance, sensor identity and separate dashpot-linkage investigation. No coolant identity assigned.
 - **Next:** select a concrete transfer/source lead before further scans; avoid repeating direct-store and GBR-store censuses.
 - **Artifact boundary:** only WO65047 and the operational register updated. Source files remained read-only.
+
+
+## FFFF84BA reader-role discrimination — 2026-11-17
+
+- **ACTIVE:** WO65048 — bounded audit of six known consumer contexts (`0x50546`, `0x770A6`, `0x77140`, `0x9538A`, `0x95DCE`, `0x9633C`) and only adjacent fields actually read in those routines. Determine whether observed use supports coolant identity or only a generic sensor/state-byte role. No producer scan or dashpot tracing in this task. See [WO65048](WO65048.md).
+- **Parent:** WO65045 remains ACTIVE; WO65046/WO65047 are closed bounded provenance passes.
+- **Artifact boundary:** only WO65048 and this register may be updated. All source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
