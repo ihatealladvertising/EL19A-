@@ -587,3 +587,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Next recommended:** WO65045 — F36E result/dataflow audit, same caller family and shared query; then select the next uncovered high-variation sub_22E10 candidate from the remaining inventory (avoid E510, EB30, EDF0 and the ten WO65038 candidates).
 - **Active state:** no active WOs in this batch.
 - **Artifact boundary:** only WO65042–WO65044 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
+
+## Active coolant / dashpot provenance investigation — 2026-11-17
+
+- **ACTIVE:** WO65045 — identify the source and sensor-block role of UBYTE `FFFF84BA`; reproduce the hysteresis comparison at `0x40422–0x4044C`; trace `FFFF1DB4.bit5` separately from the dashpot-tested `FFFF860B.bit3`; establish or reject a direct data/control link. See [WO65045](WO65045.md).
+- **Starting correction:** R2=`FFFF84B4`, displacement +6 gives effective address `FFFF84BA`. Do not use `FFFF84C0`; that was an arithmetic slip in the initial WO draft and was corrected before register activation.
+- **Bounded method:** targeted writers/transfer provenance and selected readers only; stop at alias/bulk/peripheral boundaries. No global RAM-writer scan.
+- **Artifact boundary:** only WO65045 and this register may be updated. No workbook, XML, ROM, LST, IDB, scripts or Library modifications.
