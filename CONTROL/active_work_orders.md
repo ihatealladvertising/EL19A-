@@ -664,3 +664,10 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Active:** WO65045 remains open; temperature-like identity for +6 is supported, coolant remains unconfirmed, producer unresolved.
 - **Next:** inspect only next sibling pair `sub_961E0` and `sub_968B6` before `sub_969C2`; stop if no concrete acquisition/transfer lead.
 - **Artifact boundary:** only WO65050 and the operational register updated; source files remained read-only.
+
+
+## sub_961E0 targeted sensor source check — 2026-11-17
+
+- **ACTIVE:** WO65051 — inspect only `sub_961E0` and its direct local callees for a producer/transfer or sensor-channel mapping into `FFFF84B4` / `FFFF84BA`. Caller is `sub_70880` at `0x70874`. No global writer scan or dashpot trace. See [WO65051](WO65051.md).
+- **Parent:** WO65045 remains ACTIVE; WO65050 predecessor group A is closed.
+- **Artifact boundary:** only WO65051 and this register may be updated. Source files read-only; no workbook, XML, ROM, LST, XREF, IDB, scripts or Library changes.
