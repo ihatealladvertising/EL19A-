@@ -545,3 +545,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **BOUNDED COMPLETE — CLOSED:** WO65038 — E9FC, EB40, F072, F2F2, F256, EA3C, EA2C, E800, F01C and EDA0 each have bounded caller/query/result-staging/immediate-use traces. No physical semantics or units assigned; 30 remaining moderate/high-variation candidates remain unaudited. See [WO65038](WO65038.md).
 - **Active state:** no active work orders remain in this calibration dataflow batch. Next work should be selected from the remaining candidate/axis coverage gaps, not by repeating the completed top-ten set.
 - **Artifact boundary:** only WO65038 and this register updated. ROM and V32 listing were read-only inputs; no workbook, XML, IDB, scripts or Library files modified.
+
+
+## Next selective sub_22E10 caller batch — 2026-11-17
+- **ACTIVE:** WO65039 — E510 at `0x4FA02`, caller `sub_4F6DE`; verify query, result staging and immediate use. See [WO65039](WO65039.md).
+- **ACTIVE:** WO65040 — EB30 at `0x48120`, caller `sub_480A4`; verify query, result staging and immediate use. See [WO65040](WO65040.md).
+- **ACTIVE:** WO65041 — EDF0 at `0x3C776`, caller `sub_3C590`; verify query, result staging and immediate use. See [WO65041](WO65041.md).
+- **Selection basis:** next uncovered target-ROM 16-byte candidates with distinct caller families; raw payloads and morphology are recorded in each WO. Discovery evidence only.
+- **Batch rule:** maximum three WOs; minimum chat; bounded caller traces only. At completion, recommend the next three uncovered candidates rather than opening more than three concurrently.
+- **Artifact boundary:** only WO65039–WO65041 and this register may be updated. No XML, Master Workbook, ROM, annotated LST, IDB, scripts or Library modifications.
