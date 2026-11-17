@@ -578,3 +578,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **Next:** WO65044 — F33E result/dataflow audit only; reuse the same bounded FFFF84B8 query evidence, do not repeat producer scans.
 - **Batch method:** one candidate per saved/verified report; proceed only after report and register readback. Maximum three WOs per batch.
 - **Artifact boundary:** only WO65043 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
+
+
+## Selective F33E caller/result audit — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65044 — F33E's two `sub_22E10` callers use raw UBYTE FFFF84B8. In `loc_4F8AC`, result R12 enters coupled fixed-point arithmetic with the neighboring curve results; no standalone result store is established. In `loc_4FBC2`, F33E is scaled with UWORD FFFF134E and 100, shifted right 14, capped to UWORD, stored at FFFF1D58 and copied to FFFF1D5A. Target payload verified: `3F 3F 35 29 00 00 00 00 00 00 00 00 00 00 00 00`. Semantics/units and FFFF84B8 producer remain unresolved. See [WO65044](WO65044.md).
+- **Batch closeout:** WO65042–WO65044 each completed and individually readback-verified before proceeding. All three share raw query FFFF84B8; no query-producer scan was repeated. No semantic labels or units promoted.
+- **Next recommended:** WO65045 — F36E result/dataflow audit, same caller family and shared query; then select the next uncovered high-variation sub_22E10 candidate from the remaining inventory (avoid E510, EB30, EDF0 and the ten WO65038 candidates).
+- **Active state:** no active WOs in this batch.
+- **Artifact boundary:** only WO65042–WO65044 and this register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
