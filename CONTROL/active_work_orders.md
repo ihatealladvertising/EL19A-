@@ -6,6 +6,10 @@
 
 ## Current operational state
 
+- **Completed:** WO65009 — `sub_6F4C0` updates `FFFF1D99+0x7A.bit3`: if `FFFF99F4+0x0D.bit7` is clear, set bit3; otherwise clear bit3 only when `FFFF860B.bit3` is clear. Called from `sub_6F89A` in callback `loc_6ECF0`. Input flag meanings/producers unresolved. See [WO65009](WO65009.md).
+- **Completed:** WO65011 — callback pointer at table slot `0x21894` enters `loc_6ECF0`; callback calls `sub_6EAAC`, then `sub_6F89A` (including selector update), then tail-jumps to `loc_66DF6`. Dispatch predicate/cadence unresolved. See [WO65011](WO65011.md).
+- **Next:** WO65012 — bounded audit of producers for `FFFF99F4+0x0D.bit7` and `FFFF860B.bit3`; inspect direct stores and copy/initialization paths only, stop at first unresolved state-transfer boundary.
+
 
 ## Standing main priority — rapid table discovery and axis completion
 - **Completed:** WO64975 — DAD8–DB57 contains four adjacent 16-point strictly increasing UWORD BE vectors with terminal FFFF; DB20 is the fifth word inside DB18, not a map base. Proposed DC10–DE0F 16×16 UWORD map is rejected as a varying-map candidate (480/512 bytes zero). Reader/axes unknown. See [WO64975](WO64975.md).
