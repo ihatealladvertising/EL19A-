@@ -485,3 +485,13 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 - **ACTIVE:** WO65035 — 12 representative stack-sourced indirect-call sites, tracing one caller boundary to distinguish fixed helper, descriptor and dynamic pointer arguments. See [WO65035](WO65035.md).
 - **Batch limit:** three work orders; bounded traces only; no exhaustive global dataflow or broad RAM-writer scan.
 - **Artifact boundary:** only WO65033–WO65035 and this operational register may be updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library modifications.
+
+
+## Indirect-transfer provenance batch closeout — 2026-11-17
+
+- **BOUNDED COMPLETE — CLOSED:** WO65033 — all 80 unannotated high-ROM indirect-transfer sites classified: 70 fixed ROM helper calls, five previously classified callback/descriptor calls, and five unresolved register/stack provenance sites. No additional static ROM pointer vector established. See [WO65033](WO65033.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65034 — corrected seven purported RAM callback slots to direct RAM-address JSR/JMP targets sourced from ROM literals. Two addresses also have GBR-relative data references; RAM code/data initialization remains unresolved. See [WO65034](WO65034.md).
+- **BOUNDED COMPLETE — CLOSED:** WO65035 — 12 representative stack-sourced sites: seven fixed helper pointers, three shared caller-supplied pointer arguments at `SP+0x30`, and two unresolved stack producers. See [WO65035](WO65035.md).
+- **Batch result:** No additional static ROM function-pointer vector established in the high-ROM residual population. The unresolved remainder is provenance of caller-supplied/stack pointers, two register tail jumps, and RAM-address transfer destinations—not evidence of another ROM table.
+- **Active state:** no active WOs remain in this batch.
+- **Artifact boundary:** only WO65033–WO65035 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
