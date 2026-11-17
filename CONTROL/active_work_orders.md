@@ -535,3 +535,5 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 ### WO65038 caller-audit progress — 2026-11-17
 - First three of ten selected candidates traced: E9FC (query max(UBYTE[FFFF859C+0x0D]−0x10,0), result FFFF1054+0x26C; paired local multiply with F12E), EB40 (query min(2×UWORD[FFFF84D4+0x24],255), result FFFF1054+0x2B4; signed correction path to +0x2B5), F072 (multi-stage stack/RAM-derived query, result FFFF1131; paired F082 lookup follows). Evidence PCs and caveats are in [WO65038](WO65038.md).
 - Remaining seven candidates: F2F2, F256, EA3C, EA2C, E800, F01C, EDA0. Continue in bounded groups of three; keep physical semantics provisional.
+
+- **WO65038 second caller-audit group complete (6/10):** F2F2 query `min(2×max(UBYTE[FFFF859C+8]−8,0), highbyte(UWORD[FFFF8494]))`, result retained in R11; F256 query `min(4×UBYTE[FFFF84D4+0x5D],255)`, result at `FFFF2150+0x970) and enters `sub_223FC` path; EA3C uses raw UBYTE `[FFFF84B4+4]`, result shifted ×256 to `FFFF2150+0x606) and participates in the paired EA2C/F2B2 path. Evidence in [WO65038](WO65038.md). Remaining EA2C, E800, F01C, EDA0.
