@@ -458,3 +458,12 @@ WO65016: annotated LST contexts at 0x3526A–0x35282 and 0x3BFF4–0x3C00E confi
 
 
 - **Final candidate correction — 2026-11-17:** WO65028 addendum resolves `0x7207A` as a stack-preserved fixed call to `sub_2272E` (literal `0x2272E` loaded at `0x72050`, stored at `0x72058`, reloaded at `0x72076`). All 21 additional WO65023 candidates are now structurally classified. The 213 residual indirect transfers remain outside the bounded local-pattern result.
+
+
+## Residual indirect-transfer audit batch — 2026-11-17
+
+- **COMPLETE — CLOSED:** WO65030 — corrected the alleged 41-pointer vector at `0x219C0`: it is the 41-entry suffix of the existing 122-entry `sub_20DCE` table at `0x2187C–0x21A60`. Address `0x21A0C` is overall slot 100; it points to `0x70788`, which calls `sub_AAAE0`. No separate table is established. See [WO65030](WO65030.md).
+- **ACTIVE:** WO65031 — residual indirect-transfer audit, `0x00000–0x3FFFF`; 65 unannotated sites initially, including known sites to exclude. See [WO65031](WO65031.md).
+- **ACTIVE:** WO65032 — residual indirect-transfer audit, `0x40000–0x7FFFF`; 96 unannotated sites initially, including known sites to exclude. See [WO65032](WO65032.md).
+- **Batch constraints:** maximum three WOs; bounded call-register provenance only; no global RAM-writer scan; no semantic/cadence attribution from structure alone.
+- **Artifact boundary:** only WO65030–WO65032 and this operational register updated. No XML, Master Workbook, ROM, LST, IDB, scripts or Library files modified.
