@@ -1,0 +1,20 @@
+{
+  "actual_image_base": "0x00000000", 
+  "data_item_count": 29217, 
+  "expected_endianness": "big", 
+  "expected_image_base": "0x00000000", 
+  "expected_input_file": "f501.bin", 
+  "expected_md5": "46991697c502052752a2cabcb84c9e27", 
+  "expected_processor": "SH3B", 
+  "expected_size_bytes": 1048576, 
+  "function_count": 1560, 
+  "generated_local_time": "2026-11-01 20:07:34", 
+  "ida_version": "7.3", 
+  "idb_modified_by_exporter": false, 
+  "identity_check_note": "Expected binary identity is recorded, not independently verified by this exporter.", 
+  "input_file_name": "f501.bin", 
+  "input_file_path": "C:\\Users\\Vivian\\Downloads\\nissutils-master\\nissutils-master\\cli_utils\\f501.bin", 
+  "project": "EL19A", 
+  "segment_count": 2, 
+  "xref_count": 419661
+}
