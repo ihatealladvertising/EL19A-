@@ -27,6 +27,7 @@
 | [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
 | [WO65063](WO65063.md) | **ACTIVE — P1** | Checkpoint 3 closes the WO65020 dependency: `FFFF85FC–FFFF85FF` is reused as mutable state, not established as a stable vector. Continue only the assigned `FFFF8684`/`FFFF889C` slot trace; current handler values remain unresolved. Next useful evidence is a proven runtime packet/destination or independent `FFFF85FC` handler/VBR-return path. |
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 2 traced operand provenance for six flagged gates in `0x9700–0x9800`; only `0x97B2` is a true threshold, on adjacent counters. Continue with the neighboring `0x9600–0x9700` and `0x9800–0x9B00` windows and the WO's listed open producers. Do not repeat the completed absolute-pointer census or six-gate trace. |
+| [WO65072](WO65072.md) | **ACTIVE — P1 — RESERVED** | Owner: current session. Trace direct UWORD writers and local value provenance for `FFFF2BC0`/`FFFF2BC2`, the true threshold counter pair identified in WO65064. Exact producers remain uninvestigated; use only the WO's bounded methods. |
 
 ## Recent completed work
 
