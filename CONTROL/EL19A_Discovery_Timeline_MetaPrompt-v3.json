@@ -1,0 +1,337 @@
+{
+  "schema_version": "1.2.0",
+  "freeze_date": "2026-11-19",
+  "portability_design": {
+    "canonical_source": "GitHub ihatealladvertising/EL19A- (branch main)",
+    "central_handoff_bundle": "Single self-contained JSON + Markdown handoff artifact containing timeline, milestones, guardrails, and per-agent self_notes",
+    "consistency_rules": [
+      "Agents reading from GitHub should reference exact file path, commit/blob SHA, and freeze_date",
+      "Agents receiving a pasted or uploaded central file should treat it as a point-in-time snapshot and verify live CONTROL/active_work_orders.md before work-order state transitions",
+      "Append new entries to agent_self_notes rather than mutating historical entries or workbook records"
+    ]
+  },
+  "project_identity": {
+    "project_name": "EL19A Reverse Engineering",
+    "rom_designation": "EL19A",
+    "firmware_file": "VERSA f501.bin",
+    "vehicle_platform": "2008 Nissan Versa / Nissan Sentra C11X (Manual Transmission)",
+    "cpu_architecture": "Renesas SH7058 / SH705822N (big-endian)",
+    "rom_size_bytes": 1048576,
+    "fid": "8CMCKRN5",
+    "fid_offset_reported": "0x13A98",
+    "md5_reported": "46991697c502052752a2cabcb84c9e27",
+    "repository": "ihatealladvertising/EL19A-",
+    "source_workbook": {
+      "filename": "EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx",
+      "sheet_count": 149,
+      "predecessor_workbook": "EL19A_Master_Reverse_Engineering_Workbook_V56_WO64881_64883_ProcessRefinements_2026-11-16.xlsx",
+      "predecessor_sha256": "afcb0c6400d2895e662b33d94a3559db432d4c53fbfd461fe2452333c5f9de29",
+      "role": "Historical engineering archive snapshot; do not overwrite"
+    }
+  },
+  "authority_and_guardrails": {
+    "sole_work_order_authority": "GitHub ihatealladvertising/EL19A- branch main -> CONTROL/active_work_orders.md (V57 verified blob SHA 0836f878ea48528056cd0b02fc20963748c8ee6c)",
+    "evidence_levels": {
+      "A": "Identification (address, storage/width, dimensions/layout, binary candidate evidence)",
+      "B": "Functional (confirmed reader/consumer, indexing/interpolation/clamping, signedness/width, axes/scaling, software role)",
+      "C": "Physical Endpoint (required only when claiming hardware register, pin, actuator, or external output behavior)"
+    },
+    "claim_types": [
+      "VERIFIED",
+      "BOUNDED-NEGATIVE(method)",
+      "HYPOTHESIS"
+    ],
+    "negative_claim_methods": [
+      "literal_pointer",
+      "gbr_resolved",
+      "base_displacement_or_index",
+      "computed_or_indirect",
+      "bulk_copy_or_dma"
+    ],
+    "xml_yield_gate": "Never promote provisional names, units, axes, or donor A2L/XML semantics directly into confirmed XML definitions; separate candidate discovery, structural verification, semantic identification, and XML integration.",
+    "shared_resolver_rule": "DEFERRED unless recurring failure evidence, regression tests (including stale-register rejection and base/index/GBR cases), and explicit approval exist.",
+    "file_protection_rule": "Additive snapshots only; no mutation of ROM, annotated LST, XML, IDB, scripts, or GitHub control files without explicit authorization."
+  },
+  "discovery_timeline": [
+    {
+      "phase": "01_startup_and_dispatch_foundations",
+      "scope": "Firmware identity, sub_24F42 RAM initialization chunks, and sub_209A6 pointer dispatch tables",
+      "key_artifacts": [
+        "VERSA f501.bin (FID 8CMCKRN5, SH7058, 1 MiB)",
+        "sub_24F42 chunks (0x28C5A\u20130x29476) and sub_209A6 call tables (0x216EC, 0x2170C, 0x21744, 0x21760, 0x21858, 0x21870)"
+      ],
+      "outcome": "Established ROM identity, non-contiguous init/copy mechanics, and indexed 32-bit BE function pointer dispatch."
+    },
+    {
+      "phase": "02_lookup_helpers_and_qdspt_chains",
+      "scope": "sub_22E10 16-point UBYTE lookup path (71 unique pointers across 84 callsites), sub_22C78/sub_22C00 2D/3D lookups, and sub_403D8 / sub_4110C dataflow",
+      "key_artifacts": [
+        "0xE678, 0xE688, 0xEFA4 via sub_22E10 (0x00F0 load -> MOV.B 16-byte path)",
+        "Outputs FFFF13F0 -> FFFF1018 and FFFF13EA -> FFFF13DC -> FFFF1014 -> FFFF10CA/FFFF10CC"
+      ],
+      "outcome": "Separated byte vs. word/index dataflow paths and timer-delta/DIV1 (48,000,000) query derivation into FFFF85AE without assuming physical units."
+    },
+    {
+      "phase": "03_cross_variant_and_rr_reconciliation",
+      "scope": "Juke/Renault/CF48D/RomRaider crosswalks, WO64790/WO64794, and V7/122/175 candidate accounting",
+      "key_artifacts": [
+        "RR-036 90-entry XML/crosswalk (1D E424/F10E/F2B2/F426; 3D ACA2/AC62/AD22/ACE2)",
+        "V7 audit: 122 unique A2L direct-child storageaddress placements (121 candidate rows omitted AD22); 175 = 122 + 53 broader scope"
+      ],
+      "outcome": "Confirmed raw byte/structural matches while enforcing strict separation from unproven target semantics."
+    },
+    {
+      "phase": "04_e974_and_callback_batches",
+      "scope": "WO64827\u2013WO64829 (E974 chain), WO64881\u2013WO64883 (FFFF8603 / bit 6 mirror), WO65003, WO65054, WO65055, and active WO65045",
+      "key_artifacts": [
+        "WO65003: FFFF85DF (FFFF85C4+0x1B) verified at 0x46BDE/0x47014 -> FFFFF5C2; FFFF85E0 bounded-negative(method)",
+        "WO64881\u2013WO64883: 5 direct FFFF8603 RMW sites preserving bit 6; mirror sub_2245C (FFFF8602->FFFF85FF) tested at 0x40494\u20130x40498",
+        "WO65055 closed-bounded (sub_24EA8 0x16CD0\u20130x17117 -> FFFFB61C\u2013FFFFBA63); WO65054 parked; WO65045 active on 0x40532\u20130x405D8"
+      ],
+      "outcome": "Consolidated V57 reconciliation with explicit claim-type tagging and strict do-not-repeat boundaries."
+    }
+  ],
+  "milestone_register": [
+    {
+      "id": "M01",
+      "target": "FFFF85DF (via FFFF85C4 + 0x1B)",
+      "claim_type": "VERIFIED",
+      "evidence_level": "A/B/C(partial)",
+      "summary": "Consumers at 0x46BDE and 0x47014 reach ATU-II channel 11 compare write FFFFF5C2 under gates; physical pin/actuator unproven. Supersedes WO64847 negative claim on FFFF85DF."
+    },
+    {
+      "id": "M02",
+      "target": "FFFF85E0",
+      "claim_type": "BOUNDED-NEGATIVE(method)",
+      "evidence_level": "A/B",
+      "summary": "No consumer in reported literal-pool, GBR-resolved, or 16-instruction base+displacement/index searches; computed pointer, bulk copy, and DMA not excluded."
+    },
+    {
+      "id": "M03",
+      "target": "FFFF8603 & FFFF8603.bit6 mirror (FFFF8600)",
+      "claim_type": "VERIFIED / BOUNDED-NEGATIVE(method)",
+      "evidence_level": "A/B",
+      "summary": "Five direct RMW sites (0xB1044, 0xB1B7A, 0xB1B92, 0xB399C, 0xB3A66) preserve bit 6 (0x40); sub_2245C (0x20FBA\u20130x20FBE) copies FFFF8602.. to FFFF85FF..; bit 0x40 at FFFF8600 tested at 0x40494\u20130x40498; indirect/initial bit-6 source unresolved."
+    },
+    {
+      "id": "M04",
+      "target": "WO65045 Lead: 0x40532\u20130x405D8, FFFF1DB4.bit5, FFFF84BA & scalar cluster 0x8549\u20130x8556",
+      "claim_type": "HYPOTHESIS",
+      "evidence_level": "A/B(provisional)",
+      "summary": "Active priority trace on 0x40532\u20130x405D8 (selection via 0x39C, read FFFF84D4+0x10, compare, write FFFF1000+0x18; R11/R13/R14 & caller context). FFFF1DB4.bit5 is a state/decision flag distinct from FFFF860B.bit3 at 0x403EE. Scalar pointers 0x8549\u20130x8556 are unconfirmed leads (0x8550=0x0A used in FFFF84BA hysteresis at 0x40422\u20130x4044A)."
+    },
+    {
+      "id": "M05",
+      "target": "WO65054 & WO65055",
+      "claim_type": "BOUNDED-NEGATIVE(method) / PARKED",
+      "evidence_level": "A/B",
+      "summary": "WO65055 closed-bounded: sub_24EA8 copies 0x448 bytes (274 BE32) from 0x16CD0\u20130x17117 to FFFFB61C\u2013FFFFBA63 (0x16DA4->FFFF84BB at FFFFB6F0), no consumer in bounded pass; WO65054 remains parked."
+    },
+    {
+      "id": "M06",
+      "target": "E974 Chain (WO64827\u2013WO64829)",
+      "claim_type": "VERIFIED(dataflow) / HYPOTHESIS(semantics)",
+      "evidence_level": "A/B",
+      "summary": "Technical scopes complete; selector polarity finalized as FFFF1E54+5.bit4 SET->C=0x0A, CLEAR->C=0x00; final byte-generation equation to FFFF85DF from max(FFFF1CAE,FFFF1CCC) and FFFF19D1 remains an unissued lead."
+    }
+  ],
+  "open_leads_and_exclusions": {
+    "do_not_repeat_without_new_lead": [
+      "WO65045 completed direct/wider/GBR writer checks, sibling-chain checks, and 0x707CC caller path",
+      "WO65055 bounded descriptor/consumer pass",
+      "Completed CP12\u2013CP16, PAIR-01/02/TC-05 initial fingerprints/sub_22E10 width mechanics, and E974 timer/selector/literal fixes"
+    ],
+    "strictly_excluded_in_consolidation": [
+      "Overwriting V57/V56/V55 or mutating GitHub CONTROL/active_work_orders.md",
+      "Creating or authorizing new work orders",
+      "Promoting unverified ROM offsets/candidates into XML definitions"
+    ]
+  },
+  "agent_self_notes": [
+    {
+      "agent_id": "gemini_collaborator_audit_2026_11_19",
+      "model_or_runtime": "Gemini (with Python data-analysis environment in this session)",
+      "timestamp": "2026-11-19T11:23:00-03:00",
+      "capability_profile": {
+        "code_execution": true,
+        "direct_repo_or_onedrive_write": false,
+        "context_scope": "V57 workbook inspection + prior conversation/memory context; live GitHub/OneDrive files not directly fetched in-session"
+      },
+      "mental_model_and_insights": [
+        "The EL19A workflow relies on strict separation between operational WO state (GitHub CONTROL/active_work_orders.md), technical evidence (149-sheet V57 workbook), and hypothesis/XML promotion gates.",
+        "Conflating A/B/C evidence levels with VERIFIED / BOUNDED-NEGATIVE(method) / HYPOTHESIS claim types\u2014or treating donor A2L/XML symbol matches as semantic proof\u2014is the primary source of rework in multi-agent reverse engineering.",
+        "Keeping exact address boundaries (such as FFFF1DB4.bit5 vs. FFFF860B.bit3, FFFF13F0/FFFF1018 vs. FFFF13EA/FFFF1014, and byte-identical physical ROM placements) prevents false equivalence across subroutines."
+      ],
+      "blind_spots_and_warnings": [
+        "Only the V57 workbook and prior session context were inspected here; if GitHub CONTROL/active_work_orders.md changed after blob SHA 0836f878ea48528056cd0b02fc20963748c8ee6c, verify the live GitHub file before dispatching or closing work.",
+        "Code-execution capability in this session does not automatically exist in text-only or external worker chats; any script or verification note handed off must state exact input files and tool assumptions.",
+        "Do not treat this consolidated JSON/Markdown handoff as an authoritative WO register update or XML calibration release."
+      ]
+    }
+  ],
+  "portability_and_handoff_spec": {
+    "github_canonical_layout": {
+      "repository": "ihatealladvertising/EL19A-",
+      "branch": "main",
+      "recommended_paths": {
+        "json_schema_snapshot": "HANDOFF/EL19A_Discovery_Timeline_MetaPrompt.json",
+        "markdown_companion": "HANDOFF/EL19A_Discovery_Timeline_MetaPrompt.md",
+        "live_work_orders": "CONTROL/active_work_orders.md"
+      },
+      "read_protocol": [
+        "Check CONTROL/active_work_orders.md first for live WO status, priority, and authorization",
+        "Load the central JSON/Markdown handoff file for timeline context, claim-type boundaries, and prior agent_self_notes",
+        "Treat pasted or out-of-band copies as point-in-time snapshots until verified against the repo commit/blob SHA"
+      ]
+    },
+    "cross_agent_handoff_rules": {
+      "single_file_ease": "Keep timeline, guardrails, milestones, and agent_self_notes together in one self-contained JSON payload (with optional Markdown companion) for effortless paste/upload across chats",
+      "append_only_self_notes": "Each participating agent appends a new object to agent_self_notes with agent_id, model_or_runtime, timestamp, capability_profile, mental_model_and_insights, and blind_spots_and_warnings; never rewrite another agent's historical entry",
+      "capability_honesty": "Explicitly declare whether code execution, binary/LST access, or live repo/OneDrive writes are available so downstream workers do not assume unavailable tools",
+      "non_mutation_boundary": "Generating or updating the handoff schema does not alter V57/V56/V55 workbooks, mutate CONTROL/active_work_orders.md, create new WOs, or promote unverified candidates into XML"
+    },
+    "next_schema_sections_roadmap": [
+      "work_order_registry_snapshot (structured mirror of WO65045 ACTIVE, WO65054 PARKED, WO65055 CLOSED-bounded, and key historical batches with links to CONTROL/active_work_orders.md)",
+      "address_and_symbol_index (key verified RAM/ROM addresses, bit mirrors, and explicit exclusions/do-not-repeat items)",
+      "worker_task_contract_template (standardized input/output/stop-condition payload for dispatching bounded traces)"
+    ]
+  },
+  "work_order_registry_snapshot": {
+    "authority_note": "Point-in-time snapshot reconciled with V57 and GitHub CONTROL/active_work_orders.md (blob SHA 0836f878ea48528056cd0b02fc20963748c8ee6c); verify live GitHub file before changing WO states.",
+    "current_work_orders": [
+      {
+        "wo_id": "WO65045",
+        "status": "ACTIVE",
+        "priority_lead": "Routine 0x40532\u20130x405D8 (selection via 0x39C, read FFFF84D4+0x10, compare, eventual write FFFF1000+0x18; R11/R13/R14 origins and caller/entry context)",
+        "key_distinctions": [
+          "FFFF1DB4.bit5 is a state/decision flag, not a coolant measurement; keep separate from FFFF860B.bit3 tested at 0x403EE",
+          "Scalar cluster 0x8549\u20130x8556 is HYPOTHESIS only; ROM[0x8550]=0x0A is used in FFFF84BA hysteresis (0x40422\u20130x4044A)",
+          "FFFF84BA temperature-like input has Q8.8/threshold support; coolant/producer identity remains unresolved"
+        ],
+        "do_not_repeat": [
+          "Prior direct/wider/GBR writer checks",
+          "Selected sibling-chain checks",
+          "Existing 0x707CC caller path"
+        ]
+      },
+      {
+        "wo_id": "WO65054",
+        "status": "PARKED",
+        "summary": "Indirect dispatch trace 0x16DA4 -> FFFF84BB / 0x20C7E paused pending WO65055; resume only under existing authority when concrete dependency is met."
+      },
+      {
+        "wo_id": "WO65055",
+        "status": "CLOSED-BOUNDED",
+        "summary": "sub_24EA8 copies 0x448 bytes (274 BE32 entries) from ROM 0x16CD0\u20130x17117 to RAM FFFFB61C\u2013FFFFBA63 (0x16DA4 value FFFF84BB at FFFFB6F0, +0xD4); no consumer found in bounded pass; 0x13B50 descriptor-like records and FFFF84BA link not established."
+      }
+    ],
+    "completed_or_checkpointed_batches": [
+      {
+        "batch_or_wos": "WO65003",
+        "status": "COMPLETE-BOUNDED",
+        "summary": "FFFF85DF (FFFF85C4+0x1B) verified at 0x46BDE and 0x47014 reaching ATU-II channel 11 compare write FFFFF5C2 (superseding WO64847 negative claim on FFFF85DF; physical pin/actuator unproven). FFFF85E0 is BOUNDED-NEGATIVE(method) across literal-pool, GBR-resolved, and 16-instruction base+displacement/index searches (computed/indirect, bulk copy, and DMA not excluded)."
+      },
+      {
+        "batch_or_wos": "WO64881\u2013WO64883",
+        "status": "COMPLETE-BOUNDED",
+        "summary": "Five direct RMW writer sites on FFFF8603 (0xB1044, 0xB1B7A, 0xB1B92, 0xB399C, 0xB3A66) preserve bit 6 (0x40). sub_2245C (0x20FBA\u20130x20FBE) copies FFFF8602.. to FFFF85FF..; bit 0x40 at FFFF8600 is tested at 0x40494\u20130x40498. Second-stage dispatch in callback_process_records_dispatch_30 (0xB01F4) maps 0x2E80 -> sub_B3A0E and 0x4AA0 -> sub_B3924. Indirect/initial bit-6 source remains unresolved."
+      },
+      {
+        "batch_or_wos": "WO64827\u2013WO64829 (E974)",
+        "status": "TECHNICAL-SCOPE-COMPLETE",
+        "summary": "E974 output chain, input/callback audit, and feedback lookup/state transfer scopes complete. Final selector polarity: FFFF1E54+5.bit4 SET -> C=0x0A, CLEAR -> C=0x00 (superseding initial opposite-polarity note). Final byte-generation equation to FFFF85DF from max(FFFF1CAE,FFFF1CCC) and FFFF19D1 remains an unissued lead."
+      },
+      {
+        "batch_or_wos": "WO64790, WO64794, WO64816\u2013WO64821",
+        "status": "PARTIAL-PAUSED-OR-QUEUED",
+        "summary": "V7 reconciliation verified 122 unique A2L direct-child storageaddress placements (121 candidate rows omitted AD22); 175 = 122 + 53 broader scope not freshly re-audited. CP16 added FFFF3544.bit7 -> sub_5B29C -> FFFF1DCA.bit4 -> sub_5AACA and FFFF391D -> FFFF3584.bit6. Legacy WOs WO64275/WO64276/WO64435 are DEFERRED/SUPERSEDED unless explicitly reactivated."
+      }
+    ]
+  },
+  "address_and_symbol_index": {
+    "ram_addresses": [
+      {
+        "address": "0xFFFF85DF",
+        "formula_or_note": "FFFF85C4 + 0x1B",
+        "claim_type": "VERIFIED",
+        "summary": "Read at 0x46BDE and 0x47014; downstream reaches ATU-II channel 11 compare write 0xFFFFF5C2 under gates (physical pin/actuator unproven)."
+      },
+      {
+        "address": "0xFFFF85E0",
+        "formula_or_note": "Byte after FFFF85DF",
+        "claim_type": "BOUNDED-NEGATIVE(method)",
+        "summary": "No consumer found in reported literal-pool, GBR-resolved, or 16-instruction base+displacement/index searches; computed/indirect, bulk copy, and DMA not excluded."
+      },
+      {
+        "address": "0xFFFF8603",
+        "formula_or_note": "Mirrored to FFFF8600 via sub_2245C (0x20FBA\u20130x20FBE: R2=FFFF8602 -> R1=FFFF85FF)",
+        "claim_type": "VERIFIED / BOUNDED-NEGATIVE(method)",
+        "summary": "Five direct RMW sites (0xB1044, 0xB1B7A, 0xB1B92, 0xB399C, 0xB3A66) modify bits 5, 3, or 0 and preserve bit 6 (0x40); bit 0x40 of FFFF8600 tested at 0x40494\u20130x40498."
+      },
+      {
+        "address": "0xFFFF1DB4.bit5",
+        "formula_or_note": "Flag bit 5 at FFFF1DB4",
+        "claim_type": "HYPOTHESIS",
+        "summary": "State/decision flag in WO65045 0x40532\u20130x405D8 / sub_403D8 context; not a coolant measurement and distinct from FFFF860B.bit3 tested at 0x403EE."
+      },
+      {
+        "address": "0xFFFF84BA",
+        "formula_or_note": "Temperature-like / Q8.8 axis & hysteresis context",
+        "claim_type": "HYPOTHESIS",
+        "summary": "Used in hysteresis comparison at 0x40422\u20130x4044A with ROM[0x8550]=0x0A; coolant identity and producer/channel remain unproven."
+      },
+      {
+        "address": "0xFFFFB61C\u20130xFFFFBA63",
+        "formula_or_note": "Copied by sub_24EA8 from ROM 0x16CD0\u20130x17117 (0x448 bytes / 274 BE32); FFFFB6F0 holds 0x16DA4 value FFFF84BB",
+        "claim_type": "BOUNDED-NEGATIVE(method)",
+        "summary": "Closed-bounded under WO65055; no consumer established in bounded pass."
+      }
+    ],
+    "rom_regions_and_scalars": [
+      {
+        "address_or_range": "0x40532\u20130x405D8",
+        "claim_type": "HYPOTHESIS",
+        "summary": "WO65045 priority routine span: selection via 0x39C, read FFFF84D4+0x10, compare, write FFFF1000+0x18; R11/R13/R14 origins and caller/entry context under trace."
+      },
+      {
+        "address_or_range": "0x8549\u20130x8556",
+        "claim_type": "HYPOTHESIS",
+        "summary": "Candidate scalar pointer cluster (0x8550<-0x405FC, 0x8555<-0x40F10, 0x8554<-0x40F14, 0x8553<-0x486D0, 0x8556<-0x4890C, 0x854A<-0x5FCF8, 0x8549<-0x63C40, 0x854B<-0x63C44, 0x854C<-0x63C48); ROM[0x8550]=0x0A."
+      },
+      {
+        "address_or_range": "0xE678, 0xE688, 0xEFA4",
+        "claim_type": "VERIFIED(structure) / HYPOTHESIS(semantics)",
+        "summary": "16-point UBYTE lookup candidates read via sub_22E10 (0x00F0 load -> MOV.B branch); E678/E688 yield FFFF13F0 -> FFFF1018; EFA4 yields FFFF13EA -> FFFF13DC -> FFFF1014."
+      }
+    ]
+  },
+  "worker_task_contract_template": {
+    "purpose": "Standardized handoff template for dispatching a single bounded reverse-engineering trace across code-capable or text-only agents",
+    "required_fields": {
+      "work_order_ref": "Exact WO ID from live GitHub CONTROL/active_work_orders.md (or explicit unissued-lead note)",
+      "objective": "One specific technical question or trace boundary",
+      "inputs_and_artifacts": [
+        "Target ROM/LST/XML/workbook exact filenames and versions/hashes",
+        "Exact starting addresses, PCs, registers, or RAM/ROM offsets"
+      ],
+      "guardrails_applied": {
+        "evidence_levels": [
+          "A",
+          "B",
+          "C"
+        ],
+        "claim_type": "VERIFIED | BOUNDED-NEGATIVE(method) | HYPOTHESIS",
+        "xml_promotion": "FORBIDDEN without explicit promotion gate"
+      },
+      "stop_condition": "Exact condition under which worker halts (e.g., target reached, unresolved indirect/interrupt/peripheral boundary, or resource ceiling hit)",
+      "return_format": [
+        "1. Status",
+        "2. Findings (delta only)",
+        "3. Evidence & Claim Types (with method bounds for negatives)",
+        "4. Unresolved Boundary & Next Action",
+        "5. Do-Not-Repeat Items",
+        "6. Agent Self-Note Entry (to append to agent_self_notes)"
+      ]
+    }
+  }
+}
