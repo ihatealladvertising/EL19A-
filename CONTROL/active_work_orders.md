@@ -27,12 +27,12 @@
 | [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
 | [WO65063](WO65063.md) | **ACTIVE — P1** | Checkpoint 3 closes the WO65020 dependency: `FFFF85FC–FFFF85FF` is reused as mutable state, not established as a stable vector. Continue only the assigned `FFFF8684`/`FFFF889C` slot trace; current handler values remain unresolved. Next useful evidence is a proven runtime packet/destination or independent `FFFF85FC` handler/VBR-return path. |
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 2 traced operand provenance for six flagged gates in `0x9700–0x9800`; only `0x97B2` is a true threshold, on adjacent counters. Continue with the neighboring `0x9600–0x9700` and `0x9800–0x9B00` windows and the WO's listed open producers. Do not repeat the completed absolute-pointer census or six-gate trace. |
-| [WO65072](WO65072.md) | **ACTIVE — P1 — RESERVED** | Owner: current session. Trace direct UWORD writers and local value provenance for `FFFF2BC0`/`FFFF2BC2`, the true threshold counter pair identified in WO65064. Exact producers remain uninvestigated; use only the WO's bounded methods. |
 
 ## Recent completed work
 
 - [WO65071](WO65071.md) — **BOUNDED COMPLETE:** C0D6's gated UWORD at `FFFF2936` is directly consumed and contributes to a derived U32 staged at `FFFF2930`. Corrected WO65067's attribution: `FFFF1D62` is a blend selector/weight; the weighted result is stored at `FFFF156A`.
 - [WO65070](WO65070.md) — **BOUNDED COMPLETE:** B956's UWORD staged at `FFFF27DE` is directly read and copied to `FFFF9C48`; no semantic name or downstream consumer was assigned.
+- [WO65072](WO65072.md) — **BOUNDED COMPLETE:** `FFFF2BC0` and `FFFF2BC2`, read against threshold 100, are written from `FFFF937C/+2` by saturating-increment or alternate `IVECT1` paths in `sub_8CF66`. The upstream state sources and units remain unresolved.
 - [WO65061](WO65061.md) — **CLOSED — BOUNDED COMPLETE:** resolved the stale-GBR false alias and verified the bounded `FFFF85DF` reader set; the historical false-positive origin remains unrecovered.
 - [WO65020](WO65020.md) — **BOUNDED COMPLETE — CLOSED:** supplemental alias audit for the `FFFF85FC` TRAPA slot; see WO65063 checkpoint 3 for the bounded dependency result.
 - WO65045 is **CLOSED — BOUNDED COMPLETE** by WO65056/65059; WO65054 is **CLOSED**, superseded by WO65056. Detailed recent results remain in their individual WO records.
