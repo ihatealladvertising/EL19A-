@@ -1,0 +1,5 @@
+{
+  "name": "EL19A ECU Reverse-Engineering Workbench",
+  "description": "Interactive ROM, calibration map, work-order, function index, and workbook explorer for the Nissan EL19A / SH7058 ECU (VERSA f501.bin).",
+  "requestFramePermissions": []
+}
