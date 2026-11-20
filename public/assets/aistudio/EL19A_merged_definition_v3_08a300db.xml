@@ -1,0 +1,887 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<roms>
+	<rom>
+		<romid>
+			<xmlid>EL19A_Merged_Spec_v3</xmlid>
+			<internalidaddress>0x13A98</internalidaddress>
+			<internalidstring>8CMCKRN5</internalidstring>
+			<ecuid>1EL19A</ecuid>
+			<year>2008</year>
+			<market>USDM</market>
+			<make>Nissan</make>
+			<model>Versa</model>
+			<submodel>MT</submodel>
+			<memmodel>SH7058</memmodel>
+			<endian>Big</endian>
+			<flashmethod>Nisprog</flashmethod>
+			<filesize>1024kb</filesize>
+		</romid>
+		<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+		<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		<scaling name="Temp_Coolant_Min" units="Celsius" expression="x-50" to_byte="x+50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+		<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint16" endian="big" />
+		<scaling name="Axis_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Axis_RPM_x50" units="RPM" expression="x*50" to_byte="x/50" format="0" fineincrement="50" coarseincrement="200" storagetype="uint8" endian="big" />
+		<scaling name="Axis_Pct_x0p390625" units="%" expression="x*0.390625" to_byte="x/0.390625" format="0.0" fineincrement="0.39" coarseincrement="3.9" storagetype="uint8" endian="big" />
+		<scaling name="Axis_Pct_x0p78125" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.0" fineincrement="0.78" coarseincrement="7.8" storagetype="uint8" endian="big" />
+		<scaling name="Data_Pct_x0p78125" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.0" fineincrement="0.78" coarseincrement="7.8" storagetype="uint8" endian="big" />
+		<scaling name="Rpm_x25" units="RPM" expression="x*25" to_byte="x/25" format="0" fineincrement="25" coarseincrement="100" storagetype="uint8" endian="big" />
+		<scaling name="Axis_TempC" units="Celsius" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="10" storagetype="float" endian="big" />
+		<scaling name="Query_Raw" units="raw query" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="16" storagetype="uint16" endian="big" />
+		<scaling name="Percent_UWORD_100_256" units="%" expression="x*0.390625" to_byte="x/0.390625" format="0.00" fineincrement="0.390625" coarseincrement="3.90625" storagetype="uint16" endian="big" />
+		<!-- VERIFIED entries. Categories nested per the stated hierarchy: Electronic Throttle Control > Dashpot / Throttle Control Decel / Limiters > Degree Based. -->
+		<table name="Rev Hang Airflow | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE678" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<table name="Rev Hang Airflow Alt | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE688" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<table name="Throttle Reduction Rate | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x848A" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big">
+			<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		</table>
+		<table name="Throttle Reduction Rate (Neutral) | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x848B" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big">
+			<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		</table>
+		<table name="Coolant Temp Min for Rev Hang | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x8550" type="1D" scaling="Temp_Coolant_Min" storagetype="uint8" endian="big">
+			<scaling name="Temp_Coolant_Min" units="Celsius" expression="x-50" to_byte="x+50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="TVO Upper Limit Table | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0xF3D6" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+			<table name="Engine Speed (RPM) - mTTVONBP" type="Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="8">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>25</data>
+				<data>50</data>
+				<data>700</data>
+				<data>2200</data>
+				<data>2600</data>
+				<data>2800</data>
+				<data>3200</data>
+			</table>
+		</table>
+		<table name="TVO Upper Limit Table 2 | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0xF3DE" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+			<table name="Engine Speed (RPM) - mTTVONBPS" type="Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="8">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>25</data>
+				<data>50</data>
+				<data>700</data>
+				<data>2200</data>
+				<data>2600</data>
+				<data>2800</data>
+				<data>3200</data>
+			</table>
+		</table>
+		<!-- SPECULATIVE ENTRIES. [S] = speculative title. Y = RPM-like axis (x50), X = load-like axis (percent) following the common 350Z convention; basis in each comment. Orientation is a hypothesis. -->
+		<!-- B012: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 1 [S] (B012)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- B112: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 2 [S] (B112)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- B212: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 3 [S] (B212)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9B2E: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="Cold Ignition Timing Map (16x16) [S] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9C2E: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="High Octane Ignition Timing Map (16x16) [S] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9DAE: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="High Detonation Ignition Timing Map (16x16) [S] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x9DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- A452: E047 idle-spark lead; F576 x50 = 1000..5600 rpm, F57E x0.39 = 25..60 percent. Values 80-100. -->
+		<table name="Idle Ignition Advance Map [S] (A452)" category="SPEC//Ignition Timing//Main" storageaddress="0xA452" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF57E)" type="X Axis" storageaddress="0xF57E" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF576)" type="Y Axis" storageaddress="0xF576" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- A552: RR-008 matched all axes and cells. E339 x0.390625 gives 6.25 percent steps like the 350Z load axis; E291 x50 = 400..6400 rpm. Data x0.78125: 112-138 reads 87-108 percent. -->
+		<table name="Fuel Compensation Map (16x16) [S] (A552)" category="SPEC//Fuel Delivery//Main" storageaddress="0xA552" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE339)" type="X Axis" storageaddress="0xE339" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE291)" type="Y Axis" storageaddress="0xE291" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- AC62: Exact Juke fingerprint mMTEX1 copy 1; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 1A [S] (AC62)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xAC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- ACA2: Exact Juke fingerprint mMTEX1 copy 2; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 1B [S] (ACA2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- ACE2: Exact Juke fingerprint mMTEX2 copy 1; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 2A [S] (ACE2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xACE2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AD22: Exact Juke fingerprint mMTEX2 copy 2; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 2B [S] (AD22)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xAD22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AB22: E24D x50 = 2000..6000 rpm; E022 x0.39 = 25..53 percent. Function unknown. -->
+		<table name="Operating Correction Map [S] (AB22)" category="SPEC//Unassigned" storageaddress="0xAB22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xE022)" type="X Axis" storageaddress="0xE022" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xE24D)" type="Y Axis" storageaddress="0xE24D" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AB72: RR-032: exact fuel-cut-timing axis match; payload equals AB62; axes ambiguous so raw. -->
+		<table name="Fuel Cut Timing Map 1 [S] (AB72)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xAB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xF552)" type="X Axis" storageaddress="0xF552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xF54E)" type="Y Axis" storageaddress="0xF54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- AB62: Payload equals AB72. -->
+		<table name="Fuel Cut Timing Map 2 [S] (AB62)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xAB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xF552)" type="X Axis" storageaddress="0xF552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xF54E)" type="Y Axis" storageaddress="0xF54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A0E2: Cells vary strongly along rows (24->83) and weakly down columns, so columns = pedal (E002: 16/48/80/112 x0.78 = 12.5/37.5/62.5/87.5 percent), rows = rpm (E006 x50 = 800..6000). Register listed the opposite; result reaches FFFF120A. Data 24-125 read 19-98 percent at x0.78125. -->
+		<table name="Accelerator Pedal to Throttle Target Map [S] (A0E2)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0xA0E2" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE002)" type="X Axis" storageaddress="0xE002" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE006)" type="Y Axis" storageaddress="0xE006" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A272: Sibling of A0E2, same axes and orientation; values 93-128. -->
+		<table name="Accelerator Pedal to Throttle Target Map B [S] (A272)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0xA272" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE002)" type="X Axis" storageaddress="0xE002" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE006)" type="Y Axis" storageaddress="0xE006" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- AC12: E2A1 x50 = 800..3200 rpm; E0A2 x0.39 = 25..80 percent; payload equals A652. -->
+		<table name="Idle Speed Correction Map 1 [S] (AC12)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xAC12" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE0A2)" type="X Axis" storageaddress="0xE0A2" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE2A1)" type="Y Axis" storageaddress="0xE2A1" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A652: Payload equals AC12. -->
+		<table name="Idle Speed Correction Map 2 [S] (A652)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xA652" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE0A2)" type="X Axis" storageaddress="0xE0A2" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE2A1)" type="Y Axis" storageaddress="0xE2A1" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- ED64: 16 pts: 120x5 then falling to 72 (x25 = 3000 plateau to 1800 rpm). Matches the Maxima/350Z Bosch fuel cut shape. Coolant axis is the donor display axis, lookup axis unproven. -->
+		<table name="Fuel Cut Bosch [S] (ED64)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xED64" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EDA0: x25 = 3000 plateau, 2800, 2200 falling to 1400 rpm. Matches the JECS fuel cut shape. -->
+		<table name="Fuel Cut JECS [S] (EDA0)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xEDA0" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EE68: x25 = 2000 plateau falling to 1200 rpm. Matches the JECS fuel restore shape. -->
+		<table name="Fuel Restore JECS [S] (EE68)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xEE68" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- F01C: x25 = 2700 plateau falling to 1500 rpm. Matches the Bosch fuel restore shape. -->
+		<table name="Fuel Restore Bosch [S] (F01C)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xF01C" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EFA4: Read with E678/E688 by sub_403D8 via sub_22E10; rises 0-166. -->
+		<table name="QDSPT Basic Value Table (Third Mode) [S] (EFA4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0xEFA4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E904: Juke fingerprint mTHOSNTP; falls 255 to 128. -->
+		<table name="Barometric Pressure Correction [S] mTHOSNTP (E904)" category="SPEC//Airflow//Main" storageaddress="0xE904" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F062: Juke fingerprint mTRPAMB; ROM axis E0CE. -->
+		<table name="Ambient Pressure Reference Curve [S] mTRPAMB (F062)" category="SPEC//Airflow//Main" storageaddress="0xF062" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Axis (0xE0CE)" type="Y Axis" storageaddress="0xE0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- E424: Exact Juke fingerprint mTA5N; shape 0,0,0,82,192x3,225,0... -->
+		<table name="Post-Start Correction [S] mTA5N (E424)" category="SPEC//Engine Start Performance//After Start" storageaddress="0xE424" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F10E: Juke fingerprint mTSTNGTM; 250,250,150,75,60,45... decays like a start-up curve; compare 350Z Crank Fueling table. -->
+		<table name="Cranking Fuel Value vs Coolant [S] mTSTNGTM (F10E)" category="SPEC//Engine Start Performance//Cranking Control//Main" storageaddress="0xF10E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F2B2: Juke fingerprint mTTNKAS; flat 64 then decays to 0; query FFFF859C+0x0C. -->
+		<table name="After-Start Correction vs Rotations [S] mTTNKAS (F2B2)" category="SPEC//Engine Start Performance//After Start" storageaddress="0xF2B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F426: Juke fingerprint mTTXNEL; falls 102 to 76. Shape matches 350Z Bosch/JECS fuel cut and restore tables (x25 gives 1900-2550 rpm). Scaling unproven. -->
+		<table name="Engine Speed Threshold Curve [S] mTTXNEL (F426)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xF426" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E974: Only zero or non-zero tested by sub_3BA88/3BFC8/412B8; chain ends at FFFF1992 and ATU channel 11 compare. -->
+		<table name="Correction Chain Enable Gate (low-input detect) [S] (E974)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xE974" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EE08: Read by sub_3BC68, task neighbour of the E974 paths. -->
+		<table name="Throttle Correction Rate Curve A [S] (EE08)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xEE08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EE28: Read by sub_3BC68; near copy of EE08. -->
+		<table name="Throttle Correction Rate Curve B [S] (EE28)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xEE28" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F33E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 1 [S] (F33E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF33E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F34E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 2 [S] (F34E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF34E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F35E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 3 [S] (F35E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF35E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F36E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 4 [S] (F36E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF36E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E510: Read by sub_4F6DE; rises 87-128. -->
+		<table name="Operating Correction Rising Curve [S] (E510)" category="SPEC//Unassigned" storageaddress="0xE510" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EB40: Read by sub_4F6DE; falls 255 to 0. -->
+		<table name="Operating Correction Falling Curve [S] (EB40)" category="SPEC//Unassigned" storageaddress="0xEB40" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E800: Read by sub_46744; 255 then 64 falling to 10. -->
+		<table name="Warm-Up Decay Curve [S] (E800)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xE800" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EA2C: Read by sub_4DC32 pair; falls 56 to 4. -->
+		<table name="Decay Curve A [S] (EA2C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xEA2C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EA3C: Read by sub_4DC32 pair; falls 73 to 9. -->
+		<table name="Decay Curve B [S] (EA3C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xEA3C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECCE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Rise [S] (ECCE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECCE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECDE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Slow Rise [S] (ECDE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECEE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall A [S] (ECEE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECEE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECFE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall B [S] (ECFE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECFE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ED0E: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall C [S] (ED0E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xED0E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ED1E: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall D [S] (ED1E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xED1E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EDC8: 64 then 48; identical to EDD8; read at 0x3C55E. -->
+		<table name="Operating Limit Clamp Curve 1 [S] (EDC8)" category="SPEC//Unassigned" storageaddress="0xEDC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EDD8: Identical to EDC8. -->
+		<table name="Operating Limit Clamp Curve 2 [S] (EDD8)" category="SPEC//Unassigned" storageaddress="0xEDD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- 8808: sub_3BA88 gate threshold (E974 path A) -->
+		<table name="Gate Threshold A [S] (8808)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8808" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8809: sub_3BA88 set threshold (E974 path A) -->
+		<table name="Set Threshold A [S] (8809)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8809" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 82E0: sub_3BFC8 gate threshold (E974 path B) -->
+		<table name="Gate Threshold B [S] (82E0)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x82E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 82E1: sub_3BFC8 set threshold (E974 path B) -->
+		<table name="Set Threshold B [S] (82E1)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x82E1" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8231: sub_3BA88 signed limit -->
+		<table name="Integrator Lower Limit A [S] (8231)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8231" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 892D: routine 0x387B4 qualifier vs FFFF852A -->
+		<table name="Input Qualifier Minimum [S] (892D)" category="SPEC//Unassigned//Scalars" storageaddress="0x892D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8B22: routine 0x387B4 lower bound x128 -->
+		<table name="Input Valid Lower Bound x128 [S] (8B22)" category="SPEC//Unassigned//Scalars" storageaddress="0x8B22" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8367: routine 0x387B4 and sub_38592 filter coefficient /128 -->
+		<table name="Input Filter Coefficient k/128 [S] (8367)" category="SPEC//Unassigned//Scalars" storageaddress="0x8367" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 841D: sub_470CC base constant -->
+		<table name="Actuator Command Base [S] (841D)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x841D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8E5B: sub_470CC offset -->
+		<table name="Actuator Command Offset Plus [S] (8E5B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8E5B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8435: sub_470CC offset -->
+		<table name="Actuator Command Offset Minus [S] (8435)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8435" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8A9B: sub_27720 threshold -->
+		<table name="Actuator Command Active Limit [S] (8A9B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8A9B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 924E: sub_403D8 gain: factor=min(255,(peak-ROM[92C4])*ROM[924E]); donor mDDPAPO UWORD x0.390625; provisional. -->
+		<table name="QDSPT APO Compensation Change Rate [S] mDDPAPO (924E)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x924E" type="1D" scaling="Percent_UWORD_100_256" storagetype="uint16" endian="big" />
+		<!-- 92C4: sub_403D8 offset word -->
+		<table name="QDSPT APO Compensation Threshold [S] (92C4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x92C4" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" />
+		<!-- 83A4: read at 0x7BADA -->
+		<table name="Unknown Count or Flag [S] (83A4)" category="SPEC//Unassigned//Scalars" storageaddress="0x83A4" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 83B8: compared at 0x9BF4C -->
+		<table name="Unknown Threshold 83B8 [S] (83B8)" category="SPEC//Unassigned//Scalars" storageaddress="0x83B8" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8620: compared at 0x95EE0 -->
+		<table name="Unknown Threshold 8620 [S] (8620)" category="SPEC//Unassigned//Scalars" storageaddress="0x8620" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 85E0: compared with FFFF84B5 at 0x9FBF6 -->
+		<table name="Input Threshold vs FFFF84B5 [S] (85E0)" category="SPEC//Unassigned//Scalars" storageaddress="0x85E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8485: shadow-copied to FFFF36C1; tested zero or non-zero -->
+		<table name="Init-Copied Scalar to FFFF36C1 [S] (8485)" category="SPEC//Unassigned//Scalars" storageaddress="0x8485" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- REMOVED (failed ROM checks): 9B11, B421, B42A, C9C0, B547, 14B00, 14D00, 15300, 15450, 15580, 15A80, F100, 83A0, 83BC, B450, 9A00. -->
+	</rom>
+</roms>

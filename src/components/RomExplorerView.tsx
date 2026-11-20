@@ -10,6 +10,101 @@ interface RomExplorerViewProps {
 
 const TABLE_PRESETS: TablePreset[] = [
   {
+    label: '9C2E · High Octane Ignition (Deg)',
+    address: '0x9C2E',
+    rows: 16,
+    cols: 16,
+    storage: 'uint8',
+    endian: 'big',
+    mult: 1,
+    offset: 0,
+    expr: '(x%128)-64',
+    yAxisAddr: '0xE4AC',
+    yAxisStorage: 'uint8',
+    yAxisMult: 50,
+    yAxisExpr: 'x*50',
+    xAxisAddr: '0xE4BC',
+    xAxisStorage: 'uint8',
+    xAxisMult: 0.78125,
+    xAxisExpr: 'x*0.78125',
+  },
+  {
+    label: '9C2E · Knock Window Flag',
+    address: '0x9C2E',
+    rows: 16,
+    cols: 16,
+    storage: 'uint8',
+    endian: 'big',
+    mult: 1,
+    offset: 0,
+    expr: 'floor(x/128)',
+    yAxisAddr: '0xE4AC',
+    yAxisStorage: 'uint8',
+    yAxisMult: 50,
+    yAxisExpr: 'x*50',
+    xAxisAddr: '0xE4BC',
+    xAxisStorage: 'uint8',
+    xAxisMult: 0.78125,
+    xAxisExpr: 'x*0.78125',
+  },
+  {
+    label: '9B2E · Cold Ignition Timing (Deg)',
+    address: '0x9B2E',
+    rows: 16,
+    cols: 16,
+    storage: 'uint8',
+    endian: 'big',
+    mult: 1,
+    offset: 0,
+    expr: '(x%128)-64',
+    yAxisAddr: '0xE4AC',
+    yAxisStorage: 'uint8',
+    yAxisMult: 50,
+    yAxisExpr: 'x*50',
+    xAxisAddr: '0xE4BC',
+    xAxisStorage: 'uint8',
+    xAxisMult: 0.78125,
+    xAxisExpr: 'x*0.78125',
+  },
+  {
+    label: 'A552 · Fuel Compensation (%)',
+    address: '0xA552',
+    rows: 16,
+    cols: 16,
+    storage: 'uint8',
+    endian: 'big',
+    mult: 0.78125,
+    offset: 0,
+    expr: 'x*0.78125',
+    yAxisAddr: '0xE291',
+    yAxisStorage: 'uint8',
+    yAxisMult: 50,
+    yAxisExpr: 'x*50',
+    xAxisAddr: '0xE339',
+    xAxisStorage: 'uint8',
+    xAxisMult: 0.390625,
+    xAxisExpr: 'x*0.390625',
+  },
+  {
+    label: 'A0E2 · Pedal to Throttle (%)',
+    address: '0xA0E2',
+    rows: 4,
+    cols: 4,
+    storage: 'uint8',
+    endian: 'big',
+    mult: 0.78125,
+    offset: 0,
+    expr: 'x*0.78125',
+    yAxisAddr: '0xE006',
+    yAxisStorage: 'uint8',
+    yAxisMult: 50,
+    yAxisExpr: 'x*50',
+    xAxisAddr: '0xE002',
+    xAxisStorage: 'uint8',
+    xAxisMult: 0.78125,
+    xAxisExpr: 'x*0.78125',
+  },
+  {
     label: 'CD56 · 16x16 UWORD BE (WO64972)',
     address: '0xCD56',
     rows: 16,
@@ -26,49 +121,7 @@ const TABLE_PRESETS: TablePreset[] = [
     xAxisMult: 1,
   },
   {
-    label: '9C2E · 16x16 UBYTE Map (WO64968)',
-    address: '0x9C2E',
-    rows: 16,
-    cols: 16,
-    storage: 'uint8',
-    endian: 'big',
-    mult: 1,
-    offset: 0,
-    yAxisAddr: '0xE4BC',
-    yAxisStorage: 'uint8',
-    yAxisMult: 4,
-    xAxisAddr: '0xE4AC',
-    xAxisStorage: 'uint8',
-    xAxisMult: 1,
-  },
-  {
-    label: '9B19 · 4x4 UBYTE Manual Map (WO64978)',
-    address: '0x9B19',
-    rows: 4,
-    cols: 4,
-    storage: 'uint8',
-    endian: 'big',
-    mult: 1,
-    offset: 0,
-    yAxisAddr: '0xE062',
-    yAxisStorage: 'uint8',
-    yAxisMult: 1,
-    xAxisAddr: '0xE066',
-    xAxisStorage: 'uint8',
-    xAxisMult: 1,
-  },
-  {
-    label: 'A552 · 16x16 UBYTE Candidate',
-    address: '0xA552',
-    rows: 16,
-    cols: 16,
-    storage: 'uint8',
-    endian: 'big',
-    mult: 1,
-    offset: 0,
-  },
-  {
-    label: 'E678 · QDSPT Basic Curve (16x1)',
+    label: 'E678 · Rev Hang Airflow (16x1)',
     address: '0xE678',
     rows: 16,
     cols: 1,
@@ -76,9 +129,10 @@ const TABLE_PRESETS: TablePreset[] = [
     endian: 'big',
     mult: 2,
     offset: 0,
+    expr: 'x*2',
   },
   {
-    label: 'F3D6 · TVO Limit Main (8x1)',
+    label: 'F3D6 · TVO Upper Limit (8x1)',
     address: '0xF3D6',
     rows: 8,
     cols: 1,
@@ -86,21 +140,9 @@ const TABLE_PRESETS: TablePreset[] = [
     endian: 'big',
     mult: 0.3575,
     offset: 0,
+    expr: 'x*0.3575',
     yAxisAddr: '0xF3C6',
     yAxisStorage: 'uint8',
-    yAxisMult: 1,
-  },
-  {
-    label: '10954 · 16x1 UWORD BE + F912 Axis (WO65004)',
-    address: '0x10954',
-    rows: 16,
-    cols: 1,
-    storage: 'uint16',
-    endian: 'big',
-    mult: 1,
-    offset: -32768,
-    yAxisAddr: '0xF912',
-    yAxisStorage: 'uint16',
     yAxisMult: 1,
   },
 ];
@@ -128,31 +170,35 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
   const [searchError, setSearchError] = useState<string | null>(null);
 
   // Table Lab state
-  const [tblAddr, setTblAddr] = useState(initialPreset?.address || '0xCD56');
+  const [tblAddr, setTblAddr] = useState(initialPreset?.address || '0x9C2E');
   const [tblRows, setTblRows] = useState(initialPreset?.rows || 16);
   const [tblCols, setTblCols] = useState(initialPreset?.cols || 16);
   const [tblStorage, setTblStorage] = useState<'uint8' | 'uint16'>(
-    initialPreset?.storage || 'uint16'
+    initialPreset?.storage || 'uint8'
   );
   const [tblEndian, setTblEndian] = useState<'big' | 'little'>(
     initialPreset?.endian || 'big'
   );
   const [tblMult, setTblMult] = useState(String(initialPreset?.mult ?? 1));
   const [tblOffset, setTblOffset] = useState(String(initialPreset?.offset ?? 0));
-  const [yAxisAddr, setYAxisAddr] = useState(initialPreset?.yAxisAddr || '0xE2C9');
+  const [tblExpr, setTblExpr] = useState(initialPreset?.expr || '(x%128)-64');
+  const [yAxisAddr, setYAxisAddr] = useState(initialPreset?.yAxisAddr || '0xE4AC');
   const [yAxisStorage, setYAxisStorage] = useState<'uint8' | 'uint16'>(
     initialPreset?.yAxisStorage || 'uint8'
   );
-  const [yAxisMult, setYAxisMult] = useState(String(initialPreset?.yAxisMult ?? 16));
-  const [xAxisAddr, setXAxisAddr] = useState(initialPreset?.xAxisAddr || '0xFEC0');
+  const [yAxisMult, setYAxisMult] = useState(String(initialPreset?.yAxisMult ?? 50));
+  const [yAxisExpr, setYAxisExpr] = useState(initialPreset?.yAxisExpr || 'x*50');
+  const [xAxisAddr, setXAxisAddr] = useState(initialPreset?.xAxisAddr || '0xE4BC');
   const [xAxisStorage, setXAxisStorage] = useState<'uint8' | 'uint16'>(
-    initialPreset?.xAxisStorage || 'uint16'
+    initialPreset?.xAxisStorage || 'uint8'
   );
-  const [xAxisMult, setXAxisMult] = useState(String(initialPreset?.xAxisMult ?? 1));
+  const [xAxisMult, setXAxisMult] = useState(String(initialPreset?.xAxisMult ?? 0.78125));
+  const [xAxisExpr, setXAxisExpr] = useState(initialPreset?.xAxisExpr || 'x*0.78125');
   const [tableData, setTableData] = useState<RomTableResponse | null>(null);
   const [tableError, setTableError] = useState<string | null>(null);
   const [showRaw, setShowRaw] = useState(false);
   const [xmlCopied, setXmlCopied] = useState(false);
+  const [presetTick, setPresetTick] = useState(0);
 
   useEffect(() => {
     setOffsetInput(initialAddress);
@@ -200,15 +246,20 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
       mult: tblMult || '1',
       offset: tblOffset || '0',
     });
+    if (tblExpr.trim()) {
+      params.set('expr', tblExpr.trim());
+    }
     if (yAxisAddr.trim()) {
       params.set('yAxisAddr', yAxisAddr.trim());
       params.set('yAxisStorage', yAxisStorage);
       params.set('yAxisMult', yAxisMult || '1');
+      if (yAxisExpr.trim()) params.set('yAxisExpr', yAxisExpr.trim());
     }
     if (xAxisAddr.trim()) {
       params.set('xAxisAddr', xAxisAddr.trim());
       params.set('xAxisStorage', xAxisStorage);
       params.set('xAxisMult', xAxisMult || '1');
+      if (xAxisExpr.trim()) params.set('xAxisExpr', xAxisExpr.trim());
     }
     fetch(`/api/rom/table?${params.toString()}`)
       .then((r) => r.json())
@@ -227,7 +278,7 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
     if (mode === 'table') {
       loadTable();
     }
-  }, [mode, tblAddr, tblRows, tblCols, tblStorage, tblEndian]);
+  }, [mode, presetTick, tblStorage, tblEndian]);
 
   const applyPreset = (p: TablePreset) => {
     setTblAddr(p.address);
@@ -237,12 +288,16 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
     setTblEndian(p.endian);
     setTblMult(String(p.mult));
     setTblOffset(String(p.offset));
+    setTblExpr(p.expr || '');
     setYAxisAddr(p.yAxisAddr || '');
     setYAxisStorage(p.yAxisStorage || p.storage);
     setYAxisMult(String(p.yAxisMult ?? 1));
+    setYAxisExpr(p.yAxisExpr || '');
     setXAxisAddr(p.xAxisAddr || '');
     setXAxisStorage(p.xAxisStorage || p.storage);
     setXAxisMult(String(p.xAxisMult ?? 1));
+    setXAxisExpr(p.xAxisExpr || '');
+    setPresetTick((t) => t + 1);
   };
 
   const handleHexJump = (e: React.FormEvent) => {
@@ -570,7 +625,7 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7 pt-2 border-t border-slate-100">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8 pt-2 border-t border-slate-100">
               <div>
                 <label className="block text-[11px] font-medium text-slate-500">Data Addr</label>
                 <input
@@ -624,23 +679,43 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
                   <option value="little">Little-Endian</option>
                 </select>
               </div>
-              <div>
-                <label className="block text-[11px] font-medium text-slate-500">Scale Mult</label>
+              <div className="lg:col-span-2">
+                <label className="block text-[11px] font-medium text-slate-500">
+                  Expression (overrides Mult/Offset)
+                </label>
                 <input
                   type="text"
-                  value={tblMult}
-                  onChange={(e) => setTblMult(e.target.value)}
+                  value={tblExpr}
+                  onChange={(e) => setTblExpr(e.target.value)}
+                  placeholder="e.g. (x%128)-64"
                   className="mt-1 w-full rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
                 />
               </div>
-              <div>
-                <label className="block text-[11px] font-medium text-slate-500">Offset</label>
-                <input
-                  type="text"
-                  value={tblOffset}
-                  onChange={(e) => setTblOffset(e.target.value)}
-                  className="mt-1 w-full rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
-                />
+              <div className="grid grid-cols-2 gap-1.5">
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-500">Mult</label>
+                  <input
+                    type="text"
+                    value={tblMult}
+                    onChange={(e) => {
+                      setTblMult(e.target.value);
+                      setTblExpr('');
+                    }}
+                    className="mt-1 w-full rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-medium text-slate-500">Off</label>
+                  <input
+                    type="text"
+                    value={tblOffset}
+                    onChange={(e) => {
+                      setTblOffset(e.target.value);
+                      setTblExpr('');
+                    }}
+                    className="mt-1 w-full rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
+                  />
+                </div>
               </div>
             </div>
 
@@ -669,7 +744,10 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
                   <input
                     type="text"
                     value={yAxisMult}
-                    onChange={(e) => setYAxisMult(e.target.value)}
+                    onChange={(e) => {
+                      setYAxisMult(e.target.value);
+                      setYAxisExpr('');
+                    }}
                     className="w-1/2 rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
                   />
                 </div>
@@ -698,7 +776,10 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
                   <input
                     type="text"
                     value={xAxisMult}
-                    onChange={(e) => setXAxisMult(e.target.value)}
+                    onChange={(e) => {
+                      setXAxisMult(e.target.value);
+                      setXAxisExpr('');
+                    }}
                     className="w-1/2 rounded border border-slate-200 px-2 py-1.5 font-mono text-xs"
                   />
                 </div>
@@ -731,10 +812,11 @@ export const RomExplorerView: React.FC<RomExplorerViewProps> = ({
           {tableData && (
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
               <div className="lg:col-span-9 rounded-lg border border-slate-200 bg-white p-4 overflow-x-auto">
-                <div className="mb-3 flex items-center justify-between text-xs text-slate-500">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
                   <span>
                     Base <span className="font-mono font-semibold text-slate-900">{tableData.address}</span> ·{' '}
                     {tableData.rows}×{tableData.cols} {tableData.storage} ({tableData.endian})
+                    {tableData.expr ? ` · ${tableData.expr}` : ''}
                   </span>
                   <span className="font-mono tabular-nums">
                     Range: {tableData.minVal} to {tableData.maxVal}

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<roms>
+	<rom>
+		<scaling name="Ign_Degrees" units="Degrees" expression="(x%128)-64" to_byte="x+64" format="0.0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Knock_Window_Flag" units="0: Off | 1: On" expression="floor(x/128)" to_byte="x*128" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Axis_RPM_x50" units="RPM" expression="x*50" to_byte="x/50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Axis_Pct_x0p78125" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<table name="Cold Ignition Timing Map (16x16) [S decoded] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9B2E" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="Cold Ignition Timing Map Knock Window [S decoded] (9B2E)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9B2E" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Octane Ignition Timing Map (16x16) [S decoded] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9C2E" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Octane Ignition Timing Map Knock Window [S decoded] (9C2E)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9C2E" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Detonation Ignition Timing Map (16x16) [S decoded] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x9DAE" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Detonation Ignition Timing Map Knock Window [S decoded] (9DAE)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9DAE" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+	</rom>
+</roms>

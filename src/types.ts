@@ -63,9 +63,26 @@ export interface XmlScaling {
   endian: string;
 }
 
+export interface XmlAxis {
+  name: string;
+  type: string;
+  isStatic: boolean;
+  storageaddress?: string;
+  addressNum?: number;
+  scalingName: string;
+  scaling?: XmlScaling;
+  storagetype: string;
+  endian: string;
+  size: number;
+  rawValues: number[];
+  values: number[];
+}
+
 export interface XmlTable {
+  id: string;
   name: string;
   category: string;
+  isSpeculative: boolean;
   storageaddress: string;
   addressNum: number;
   type: string;
@@ -76,9 +93,34 @@ export interface XmlTable {
   axisName?: string;
   axisScaling?: string;
   axisData?: number[];
+  xAxis?: XmlAxis;
+  yAxis?: XmlAxis;
   commentNote?: string;
   rawBytes: number[];
   scaledValues: number[];
+  rawMatrix?: number[][];
+  scaledMatrix?: number[][];
+}
+
+export interface XmlDefinitionSet {
+  id: string;
+  filename: string;
+  label: string;
+  romid: Record<string, string>;
+  scalings: XmlScaling[];
+  tables: XmlTable[];
+  rawXml: string;
+}
+
+export interface CalibrationsResponse {
+  candidates: CandidateRow[];
+  openLeads: OpenLeadRow[];
+  mergedV3: XmlDefinitionSet;
+  ignitionDecoded: XmlDefinitionSet;
+  repoFragment: XmlDefinitionSet;
+  xmlScalings: XmlScaling[];
+  xmlTables: XmlTable[];
+  rawXml: string;
 }
 
 export interface CandidateRow {
@@ -158,6 +200,7 @@ export interface RomTableResponse {
   endian: 'big' | 'little';
   mult: number;
   offset: number;
+  expr?: string;
   minVal: number;
   maxVal: number;
   rawMatrix: number[][];
@@ -175,10 +218,13 @@ export interface TablePreset {
   endian: 'big' | 'little';
   mult: number;
   offset: number;
+  expr?: string;
   yAxisAddr?: string;
   yAxisStorage?: 'uint8' | 'uint16';
   yAxisMult?: number;
+  yAxisExpr?: string;
   xAxisAddr?: string;
   xAxisStorage?: 'uint8' | 'uint16';
   xAxisMult?: number;
+  xAxisExpr?: string;
 }
