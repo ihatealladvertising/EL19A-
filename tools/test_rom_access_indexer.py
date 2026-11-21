@@ -252,5 +252,34 @@ class ResolverMechanicsTests(unittest.TestCase):
                 self.assertEqual((matched, checked), (1, 1))
 
 
+    def test_sub22e10_r4_argument_is_promoted_at_helper_call_pc(self):
+        hits = [
+            ("0xED64", "rom", "0x48930", "sub_488BA", "constant", "l",
+             "pool", "0xED64", "full", "-", "mov.l pool value 0xED64")
+        ]
+        active = {4: 0}
+        changed = resolver.promote_sub22e10_r4_argument(
+            hits, active, 0x4893A, "sub_488BA", "sub_22E10"
+        )
+        self.assertTrue(changed)
+        self.assertEqual(hits[0][2], "0x4893A")
+        self.assertEqual(hits[0][4], "read")
+        self.assertEqual(hits[0][5], "b")
+        self.assertIn("query-dependent", hits[0][10])
+        self.assertEqual(active, {})
+
+    def test_unverified_helper_or_wrong_argument_register_is_not_promoted(self):
+        for active, comment in (({4: 0}, "sub_23000"), ({3: 0}, "sub_22E10")):
+            with self.subTest(active=active, comment=comment):
+                hits = [
+                    ("0xED64", "rom", "0x48930", "sub_488BA", "constant", "l",
+                     "pool", "0xED64", "full", "-", "mov.l pool value 0xED64")
+                ]
+                self.assertFalse(resolver.promote_sub22e10_r4_argument(
+                    hits, dict(active), 0x4893A, "sub_488BA", comment
+                ))
+                self.assertEqual(hits[0][4], "constant")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
