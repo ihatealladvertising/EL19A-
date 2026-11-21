@@ -24,7 +24,7 @@
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| WO65090 | **ACTIVE — P1** | Bounded 1D scalar/limiter candidate review in ROM `0x7800–0x9B00`, plus raw DTC/CID record extraction and validation. Reuse WO65066/WO65083/WO65064 and historical detached DTC/CID reports; no semantic or workbook/XML promotion. See [WO65090](WO65090.md). |
+| WO65090 | **CLOSED — BOUNDED COMPLETE** | ROM `0x829A–0x829F` signed scalar/clamp cluster traced; carried forward direct boundaries `0x913A/0x913C`, `0x91C2/0x91C4/0x91C6`, `0x97B2`. Extracted and raw-ROM-verified 197 DTC-like records (`0x12E44–0x1377F`, stride `0x0C`, U16BE code at `+6`) and 144 unique CID-like records (`0x14664–0x148A3`, stride 4, U16BE + `00 FF`). No physical semantics or workbook/XML integration. Evidence: [WO65090](WO65090.md), PR [#8](https://github.com/ihatealladvertising/EL19A-/pull/8). |
 
 
 
