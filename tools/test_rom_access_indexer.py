@@ -281,5 +281,84 @@ class ResolverMechanicsTests(unittest.TestCase):
                 self.assertEqual(hits[0][4], "constant")
 
 
+    def _run_synthetic_access_case(self, instructions, pool_bytes, target):
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = bytearray(16)
+            listing_lines = ["sub_0000:"]
+            for pc, opcode, assembly in instructions:
+                encoded = opcode.to_bytes(2, "big")
+                rom[pc:pc + 2] = encoded
+                listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}")
+            for pool_pc, data in pool_bytes:
+                rom[pool_pc:pool_pc + len(data)] = data
+            listing_text = "\\n".join(listing_lines) + "\\n"
+
+            rom_path = os.path.join(tmp, "fixture.bin")
+            listing_path = os.path.join(tmp, "fixture.lst")
+            targets_path = os.path.join(tmp, "targets.txt")
+            hits_path = os.path.join(tmp, "hits.tsv")
+            unresolved_path = os.path.join(tmp, "unresolved.tsv")
+            with open(rom_path, "wb") as f:
+                f.write(rom)
+            with open(listing_path, "w", encoding="utf-8") as f:
+                f.write(listing_text)
+            with open(targets_path, "w", encoding="utf-8") as f:
+                f.write(target + "\\n")
+
+            old_md5 = resolver.EXPECTED_ROM_MD5
+            old_listing_sha = resolver.EXPECTED_LISTING_SHA256
+            resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
+            resolver.EXPECTED_LISTING_SHA256 = hashlib.sha256(
+                listing_text.encode("utf-8")
+            ).hexdigest()
+            try:
+                result = resolver.run_indexer(
+                    rom_path, listing_path, targets_path,
+                    hits_path, unresolved_path
+                )
+            finally:
+                resolver.EXPECTED_ROM_MD5 = old_md5
+                resolver.EXPECTED_LISTING_SHA256 = old_listing_sha
+            return result
+
+    def test_synthetic_base_disp_read_and_write_direction(self):
+        instructions = [
+            (0x0000, 0xD202, "mov.l @(2,pc),r2"),
+            (0x0002, 0x8420, "mov.b @(0,r2),r0"),
+            (0x0004, 0x8020, "mov.b r0,@(0,r2)"),
+            (0x0006, 0x0009, "nop"),
+        ]
+        hits, unresolved, matched, checked = self._run_synthetic_access_case(
+            instructions, [(0x000C, bytes.fromhex("FFFF1DB4"))], "FFFF1DB4"
+        )
+        self.assertEqual(
+            [(row[2], row[4], row[5], row[7]) for row in hits],
+            [
+                ("0x2", "read", "b", "FFFF1DB4"),
+                ("0x4", "write", "b", "FFFF1DB4"),
+            ],
+        )
+        self.assertEqual(unresolved, [])
+        self.assertEqual((matched, checked), (2, 2))
+
+    def test_synthetic_base_r0_reader_with_signed_movw_pointer(self):
+        instructions = [
+            (0x0000, 0x9C04, "mov.w @(4,pc),r12"),
+            (0x0002, 0xE01B, "mov #0x1B,r0"),
+            (0x0004, 0x20CC, "mov.b @(r0,r12),r2"),
+            (0x0006, 0x0009, "nop"),
+        ]
+        hits, unresolved, matched, checked = self._run_synthetic_access_case(
+            instructions, [(0x000C, bytes.fromhex("85C4"))], "FFFF85DF"
+        )
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(
+            (hits[0][2], hits[0][4], hits[0][6], hits[0][7]),
+            ("0x4", "read", "base_r0", "FFFF85C4"),
+        )
+        self.assertEqual(unresolved, [])
+        self.assertEqual((matched, checked), (1, 1))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
