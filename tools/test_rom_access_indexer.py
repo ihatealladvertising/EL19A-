@@ -345,7 +345,7 @@ class ResolverMechanicsTests(unittest.TestCase):
         instructions = [
             (0x0000, 0x9C04, "mov.w @(4,pc),r12"),
             (0x0002, 0xE01B, "mov #0x1B,r0"),
-            (0x0004, 0x20CC, "mov.b @(r0,r12),r2"),
+            (0x0004, 0x02CC, "mov.b @(r0,r12),r2"),
             (0x0006, 0x0009, "nop"),
         ]
         hits, unresolved, matched, checked = self._run_synthetic_access_case(
@@ -358,6 +358,52 @@ class ResolverMechanicsTests(unittest.TestCase):
         )
         self.assertEqual(unresolved, [])
         self.assertEqual((matched, checked), (1, 1))
+
+
+    def test_synthetic_conditional_join_preserves_unchanged_r13_base(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = bytearray(16)
+            instructions = [
+                (0x0000, 0xDD02, "mov.l @(2,pc),r13"),
+                (0x0002, 0x8900, "bt/s loc_0008"),
+                (0x0004, 0x0009, "nop"),
+                (0x0006, 0x0009, "nop"),
+                (0x0008, 0x60D0, "mov.b @r13,r0"),
+            ]
+            listing_lines = ["sub_0000:"]
+            for pc, opcode, assembly in instructions:
+                rom[pc:pc + 2] = opcode.to_bytes(2, "big")
+                listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}")
+                if pc == 0x0006:
+                    listing_lines.append("loc_0008:")
+            rom[0x000C:0x0010] = bytes.fromhex("FFFF1DB4")
+            listing_text = "\n".join(listing_lines) + "\n"
+            rom_path = os.path.join(tmp, "fixture.bin")
+            listing_path = os.path.join(tmp, "fixture.lst")
+            targets_path = os.path.join(tmp, "targets.txt")
+            hits_path = os.path.join(tmp, "hits.tsv")
+            unresolved_path = os.path.join(tmp, "unresolved.tsv")
+            with open(rom_path, "wb") as f:
+                f.write(rom)
+            with open(listing_path, "w", encoding="utf-8") as f:
+                f.write(listing_text)
+            with open(targets_path, "w", encoding="utf-8") as f:
+                f.write("FFFF1DB4\n")
+            old_md5 = resolver.EXPECTED_ROM_MD5
+            old_listing_sha = resolver.EXPECTED_LISTING_SHA256
+            resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
+            resolver.EXPECTED_LISTING_SHA256 = hashlib.sha256(listing_text.encode("utf-8")).hexdigest()
+            try:
+                hits, unresolved, matched, checked = resolver.run_indexer(
+                    rom_path, listing_path, targets_path, hits_path, unresolved_path
+                )
+            finally:
+                resolver.EXPECTED_ROM_MD5 = old_md5
+                resolver.EXPECTED_LISTING_SHA256 = old_listing_sha
+            self.assertEqual(len(hits), 1)
+            self.assertEqual((hits[0][2], hits[0][4], hits[0][7]), ("0x8", "read", "FFFF1DB4"))
+            self.assertEqual(unresolved, [])
+            self.assertEqual((matched, checked), (1, 1))
 
 
 if __name__ == "__main__":
