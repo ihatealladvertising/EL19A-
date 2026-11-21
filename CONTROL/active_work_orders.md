@@ -26,13 +26,15 @@
 |---|---|---|
 | [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
 
-| [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
+
 
 
 
 
 
 ## Recent completed work
+
+- [WO65064](WO65064.md) — **BOUNDED COMPLETE — CLOSED:** completed the 0x9700–0x9800 absolute-pointer UWORD census, the 0x9500–0x9600 25-candidate operand provenance, the 0x9600–0x9700 54-candidate operand provenance, and the 0x9800–0x9B00 multi-width census. Corrected candidate classification: 42 direct compare sites, 7 helper-input/coefficient uses, 5 constant/tautological comparisons; no units or semantic map identity assigned. The 7500/6700/7200 record chain remains as two clamp stages plus a distinct zero-gate default. No workbook/XML/catalogue integration.
 
 - [WO65065](WO65065.md) — **BOUNDED COMPLETE — CLOSED:** traced the immediate counter-writer caller chain; identified `FFFF93F2` descriptor and `FFFF937C/FFFF937E` source initialization in `sub_90384`; a separate read of `FFFF937E` occurs at `0x9D930`. Runtime source updates and scheduler cadence remain unresolved; no workbook/XML/catalogue integration.
 
