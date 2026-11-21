@@ -149,6 +149,10 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
 
     # 2. Listing integrity
     listing_sha256 = compute_file_hash(listing_path, "sha256")
+    if EXPECTED_LISTING_SHA256 and listing_sha256.lower() != EXPECTED_LISTING_SHA256.lower():
+        raise ValueError(
+            f"Listing SHA-256 mismatch: expected {EXPECTED_LISTING_SHA256}, got {listing_sha256}"
+        )
 
     # 3. Targets
     targets_sha256 = compute_file_hash(targets_path, "sha256")
@@ -490,17 +494,31 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 else:
                     regs[n] = None
                 reg_provenance[n] = pc
+                active_rom_pool_loads.pop(n, None)
             elif disp4 == 0x8:  # sub Rm, Rn
                 if regs[n] is not None and regs[m] is not None:
                     regs[n] = (regs[n] - regs[m]) & 0xFFFFFFFF
                 else:
                     regs[n] = None
                 reg_provenance[n] = pc
+                active_rom_pool_loads.pop(n, None)
+            else:
+                # Other SH-2 group-3 ALU operations may write Rn.
+                regs[n] = None
+                reg_provenance[n] = None
+                active_rom_pool_loads.pop(n, None)
 
         elif hi == 0x4:
-            if (op & 0xFF) == 0x1E:  # ldc Rn, gbr
+            if (op & 0xFF) == 0x1E:  # ldc Rm, gbr
                 gbr = regs[m]
-            elif (op & 0xFF) == 0x17:  # ldc.l @r15+, gbr
+            elif (op & 0xFF) == 0x17:  # ldc.l @Rm+, gbr
+                gbr = None
+                regs[m] = None
+                reg_provenance[m] = None
+                active_rom_pool_loads.pop(m, None)
+            elif (op & 0xFF) not in (0x2B, 0x0B):  # jmp/jsr do not write a GPR
+                # Unmodelled group-4 instructions can read/write GPRs or GBR.
+                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 gbr = None
 
         elif hi == 0x5:
@@ -511,6 +529,13 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             regs[n] = None
             reg_provenance[n] = None
             active_rom_pool_loads.pop(n, None)
+        elif hi == 0x0 and not (op & 0xFF) in (0x23, 0x03):
+            # Unmodelled group-0 operations may write a GPR (or change GBR).
+            invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            gbr = None
+        elif hi == 0x2 and disp4 not in (0, 1, 2):
+            # Non-basic group-2 addressing/transport is not resolved here.
+            invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
         elif hi == 0x8 and (op >> 8) & 0xF in (0x4, 0x5):
             regs[0] = None
             reg_provenance[0] = None
