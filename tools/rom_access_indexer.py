@@ -132,11 +132,17 @@ def promote_pool_pointer_to_dereference(
     hit_index = active_rom_pool_loads.pop(base_reg)
     original = hits[hit_index]
     pool_load_pc = original[2]
-    hits[hit_index] = (
+    dereference_row = (
         original[0], original[1], f"0x{pc:X}", function,
         access, width, form, base, base_resolved, mask,
         f"{note}; pointer loaded at {pool_load_pc}"
     )
+    if original[4] == "constant":
+        # First observed consumer replaces the provisional pointer-constant row.
+        hits[hit_index] = dereference_row
+    else:
+        # Another register alias to the same pointer has its own access site.
+        hits.append(dereference_row)
     return True
 
 
@@ -529,8 +535,11 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             regs[n] = None
             reg_provenance[n] = None
             active_rom_pool_loads.pop(n, None)
-        elif hi == 0x0 and not (op & 0xFF) in (0x23, 0x03):
-            # Unmodelled group-0 operations may write a GPR (or change GBR).
+        elif hi == 0x0 and disp4 in (0x4, 0x5, 0x6):
+            # Indexed stores use the tracked base/index but do not write a GPR.
+            pass
+        elif hi == 0x0 and (op & 0xFF) not in (0x23, 0x03):
+            # Other unmodelled group-0 operations may write a GPR (or change GBR).
             invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
             gbr = None
         elif hi == 0x2 and disp4 not in (0, 1, 2):
@@ -594,10 +603,12 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         elif is_branch_no_delay:
             invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
 
-    # 6. PC Concordance verification
+    # 6. PC Concordance verification for both output files
     valid_hits = []
     concordance_matched = 0
     concordance_checked = 0
+    unresolved_sites = list(unresolved)
+    unresolved = []
 
     code_dict = {item[0]: item for item in code_lines}
 
@@ -605,15 +616,30 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         t_norm, t_space, pc_str, func, acc, width, form, base, base_res, mask, note = h
         pc = int(pc_str, 16)
         concordance_checked += 1
-        if pc in code_dict:
-            expected_bytes = code_dict[pc][1]
-            if pc_bytes_match(rom, pc, expected_bytes):
-                concordance_matched += 1
-                valid_hits.append(h)
-            else:
-                unresolved.append((t_norm, t_space, pc_str, func, acc, width, form, base, "none", mask, note, "PC opcode byte mismatch with ROM"))
+        if pc in code_dict and pc_bytes_match(rom, pc, code_dict[pc][1]):
+            concordance_matched += 1
+            valid_hits.append(h)
         else:
-            unresolved.append((t_norm, t_space, pc_str, func, acc, width, form, base, "none", mask, note, "PC not found in listing CODE records"))
+            reason = (
+                "PC opcode byte mismatch with ROM"
+                if pc in code_dict else "PC not found in listing CODE records"
+            )
+            unresolved.append((t_norm, t_space, pc_str, func, acc, width, form, base, "none", mask, note, reason))
+
+    # Unresolved sites are still emitted only with a byte-concordant listing PC.
+    # They remain unresolved as to effective address; this check does not promote them.
+    for row in unresolved_sites:
+        pc = int(row[2], 16)
+        concordance_checked += 1
+        if pc in code_dict and pc_bytes_match(rom, pc, code_dict[pc][1]):
+            concordance_matched += 1
+            unresolved.append(row)
+        else:
+            reason = (
+                "PC opcode byte mismatch with ROM"
+                if pc in code_dict else "PC not found in listing CODE records"
+            )
+            unresolved.append(row[:11] + (reason,))
 
     # Sort outputs: by target, then by PC
     valid_hits.sort(key=lambda x: (x[0], int(x[2], 16)))
