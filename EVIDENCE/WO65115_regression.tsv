@@ -1,0 +1,22 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: f29f89f03951b915c8ca06cc93655c32e8450cf0bd6950456c1b415c5756b3ea
+# Run date: 2026-11-21
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=29905 rows_matched=29905
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+0x388AC	rom	0x38806	sub_38592	constant	l	pool	0x388AC	full	-	pool_ea match: val=0xF100
+0x8550	rom	0x4043A	sub_403D8	read	b	base_disp	0x8550	full	-	mov.b @r3, r2; pointer loaded at 0x40436
+FFFF1DB4	ram	0x4042C	sub_403D8	read	b	base_r0	FFFF1D99	full	-	mov.b @(r0,r13)
+FFFF1DB4	ram	0x4044A	sub_403D8	write	b	base_r0	FFFF1D99	full	-	mov.b r2, @(r0,r13)
+FFFF1DB4	ram	0x4054A	sub_403D8	read	b	base_r0	FFFF1D99	full	-	mov.b @(r0,r13)
+FFFF85DF	ram	0x46BDE	sub_46744	read	b	base_r0	FFFF85C4	full	-	mov.b @(r0,r12)
+FFFF85DF	ram	0x47014	sub_46744	read	b	base_r0	FFFF85C4	full	-	mov.b @(r0,r4)
+FFFF85DF	ram	0x59BF2	sub_599AE	write	b	base_r0	FFFF85C4	full	-	mov.b r2, @(r0,r6)
+FFFF85DF	ram	0x59C02	sub_599AE	write	b	base_r0	FFFF85C4	full	-	mov.b r13, @(r0,r6)
+FFFF85DF	ram	0x59C04	sub_599AE	write	b	base_r0	FFFF85C4	full	-	mov.b r5, @(r0,r6)
+FFFF85DF	ram	0x59CA2	sub_599AE	read	b	gbr_disp	FFFF85C4	full	-	mov.b @(0x1B,gbr), r0
+FFFF85E0	ram	0x59CA6	sub_599AE	write	b	gbr_disp	FFFF85C4	full	-	mov.b r0, @(0x1C,gbr)
