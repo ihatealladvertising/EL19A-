@@ -43,7 +43,6 @@
 
 
 
-- **WO65101 — ACTIVE — P1:** bounded downstream consumer trace for `FFFF1648` and `FFFF29C4`, the two unresolved stage outputs from WO65100. Reuse prior producer evidence; stop at first independently verified next stage/decision or hardware boundary. Branch `wo65101-stage-output-consumers`.
 ## Recent completed work
 
 - [WO65101](WO65101.md) — **BOUNDED COMPLETE — CLOSED:** no direct downstream reader found for UWORD stages `FFFF1648` (`FFFF1054+0x5F4`) or `FFFF29C4` (`FFFF2150+0x874`) in exact-literal/fixed-offset searches. Correctly excludes false alias `FFFF2150+0x5F4 = FFFF2744`. Dynamic/computed aliases, bulk copies and physical meanings remain unresolved. No workbook/XML/catalogue integration. PR [#19](https://github.com/ihatealladvertising/EL19A-/pull/19).
