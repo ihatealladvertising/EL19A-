@@ -291,7 +291,7 @@ class ResolverMechanicsTests(unittest.TestCase):
                 listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}")
             for pool_pc, data in pool_bytes:
                 rom[pool_pc:pool_pc + len(data)] = data
-            listing_text = "\\n".join(listing_lines) + "\\n"
+            listing_text = "\n".join(listing_lines) + "\n"
 
             rom_path = os.path.join(tmp, "fixture.bin")
             listing_path = os.path.join(tmp, "fixture.lst")
@@ -303,7 +303,7 @@ class ResolverMechanicsTests(unittest.TestCase):
             with open(listing_path, "w", encoding="utf-8") as f:
                 f.write(listing_text)
             with open(targets_path, "w", encoding="utf-8") as f:
-                f.write(target + "\\n")
+                f.write(target + "\n")
 
             old_md5 = resolver.EXPECTED_ROM_MD5
             old_listing_sha = resolver.EXPECTED_LISTING_SHA256
