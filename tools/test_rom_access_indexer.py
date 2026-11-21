@@ -152,11 +152,11 @@ class ResolverMechanicsTests(unittest.TestCase):
 
     def test_pkior_negative_control_when_false_positive_pc_is_known(self):
         false_pc = os.environ.get("WO65115_PKIOR_FALSE_HIT_PC")
-        output_path = os.environ.get("WO65115_REGRESSION_TSV")
-        if not false_pc or not output_path:
-            self.skipTest("PKIOR_W historic false-positive PC not recovered in WO65061")
+        control_path = os.environ.get("WO65115_PKIOR_CONTROL_TSV")
+        if not false_pc or not control_path:
+            self.skipTest("PKIOR_W historic false-positive PC and dedicated control TSV not recovered")
         import csv
-        with open(output_path, "r", encoding="utf-8", newline="") as f:
+        with open(control_path, "r", encoding="utf-8", newline="") as f:
             content = [line for line in f if not line.startswith("#")]
         rows = list(csv.DictReader(content, delimiter="\t"))
         self.assertFalse(any(row["pc"].upper() == false_pc.upper() for row in rows))
