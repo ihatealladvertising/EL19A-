@@ -12,12 +12,12 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.5.0"
+VERSION = "1.6.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
 
-METHOD_LIMITS = "computed pointers, pointer tables, interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled"
+METHOD_LIMITS = "computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled"
 
 
 def parse_targets(targets_file, space_override="auto"):
@@ -151,6 +151,25 @@ def promote_pool_pointer_to_dereference(
         # Another register alias to the same pointer has its own access site.
         hits.append(dereference_row)
     return True
+
+
+def promote_sub22e10_r4_argument(
+    hits, active_rom_pool_loads, pc, function, comment
+):
+    """Index a verified sub_22E10 UBYTE table-pointer argument in R4."""
+    if "sub_22e10" not in (comment or "").lower():
+        return False
+    if 4 not in active_rom_pool_loads:
+        return False
+    hit_index = active_rom_pool_loads[4]
+    original = hits[hit_index]
+    if original[1] != "rom":
+        return False
+    return promote_pool_pointer_to_dereference(
+        hits, active_rom_pool_loads, 4, pc, function,
+        "read", "b", "pool", original[7], "full", "-",
+        "sub_22E10 fixed-grid UBYTE table lookup via R4; query-dependent helper access (see WO65041-WO65044)"
+    )
 
 
 def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, space_override="auto"):
@@ -398,19 +417,13 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 # against each supplied target without presenting it as a hit.
                 unresolved.append((t["norm"], t["space"], f"0x{pc:X}", current_func, acc_type, width, form, base_str, base_resolved, "-", note, reason))
 
-        # A pointer passed to a helper is not labelled dereferenced here.
-        # Without an interprocedural summary, that is only an unresolved consumer.
+        # sub_22E10 is a verified fixed-grid UBYTE table reader. Its
+        # caller contract passes the ROM table pointer in R4; the lookup is
+        # query-dependent (queries >= 0xF0 take the helper rejection path).
         if (hi == 0x4 and (op & 0xFF) == 0x0B) or (hi == 0xB):
-            callee = comment.lower() if comment else ""
-            if ("sub_22e10" in callee or "loc_2350c" in callee) and 4 in active_rom_pool_loads:
-                pool_hit_idx = active_rom_pool_loads[4]
-                pool_hit = hits[pool_hit_idx]
-                unresolved.append((
-                    pool_hit[0], pool_hit[1], f"0x{pc:X}", current_func,
-                    "unknown", "?", "pool", pool_hit[7], "partial", "-",
-                    f"ROM pointer from {pool_hit[2]} passed in r4 to table helper",
-                    "callee-side dereference not resolved interprocedurally"
-                ))
+            promote_sub22e10_r4_argument(
+                hits, active_rom_pool_loads, pc, current_func, comment
+            )
 
         # Literal pool loads
         if hi == 0x9:  # mov.w @(disp*2, PC), Rn
