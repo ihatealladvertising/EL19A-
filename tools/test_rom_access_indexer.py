@@ -241,5 +241,16 @@ class ResolverMechanicsTests(unittest.TestCase):
         self.assertEqual((matched, checked), (1, 1))
 
 
+    def test_synthetic_rts_and_rte_invalidate_gbr(self):
+        for opcode in (0x000B, 0x002B):
+            with self.subTest(opcode=hex(opcode)):
+                hits, unresolved, matched, checked = self._run_synthetic_gbr_path(opcode)
+                self.assertEqual(hits, [])
+                self.assertEqual(len(unresolved), 1)
+                self.assertEqual(unresolved[0][2], "0x8")
+                self.assertEqual(unresolved[0][11], "unresolved GBR register")
+                self.assertEqual((matched, checked), (1, 1))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
