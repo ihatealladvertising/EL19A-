@@ -18,14 +18,14 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65063, WO65064, and WO65065 are active under the user's concurrent-execution authorization of 2026-11-20. Their scopes remain separate.
+- **Concurrent WOs:** WO65062, WO65064, and WO65065 are active under the user's concurrent-execution authorization of 2026-11-20. Their scopes remain separate.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
 | [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
-| [WO65063](WO65063.md) | **ACTIVE — P1** | Checkpoint 3 closes the WO65020 dependency: `FFFF85FC–FFFF85FF` is reused as mutable state, not established as a stable vector. Continue only the assigned `FFFF8684`/`FFFF889C` slot trace; current handler values remain unresolved. Next useful evidence is a proven runtime packet/destination or independent `FFFF85FC` handler/VBR-return path. |
+
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
 | [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
 
@@ -38,6 +38,7 @@
 - [WO65072](WO65072.md) — **BOUNDED COMPLETE:** `FFFF2BC0` and `FFFF2BC2`, read against threshold 100, are written from `FFFF937C/+2` by saturating-increment or alternate `IVECT1` paths in `sub_8CF66`. The upstream state sources and units remain unresolved.
 - [WO65073](WO65073.md) — **BOUNDED COMPLETE — DOCUMENTATION ONLY:** preserves the user-provided stranded WO65064 update with explicit source attribution and verification limits; no ROM re-analysis or semantic promotion.
 - [WO65074](WO65074.md) — **BOUNDED COMPLETE:** traced the 7,500 and conditional 6,700 UWORD ceilings in `sub_5919A` across two parallel channels; selected pair is written to MMIO `FFFF33E6/FFFF33E8`. Physical units and peripheral function unresolved.
+- [WO65063](WO65063.md) — **BOUNDED COMPLETE:** `FFFF8684` is mutable byte state despite reset vector-like fill; `FFFF889C` has reset fill and no later overwrite established by bounded pointer-root review. Runtime packet destination, live slot values and VBR/exception ordering remain unresolved at explicit stop boundary.
 - [WO65061](WO65061.md) — **CLOSED — BOUNDED COMPLETE:** resolved the stale-GBR false alias and verified the bounded `FFFF85DF` reader set; the historical false-positive origin remains unrecovered.
 - [WO65020](WO65020.md) — **BOUNDED COMPLETE — CLOSED:** supplemental alias audit for the `FFFF85FC` TRAPA slot; see WO65063 checkpoint 3 for the bounded dependency result.
 - WO65045 is **CLOSED — BOUNDED COMPLETE** by WO65056/65059; WO65054 is **CLOSED**, superseded by WO65056. Detailed recent results remain in their individual WO records.
