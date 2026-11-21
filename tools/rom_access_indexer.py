@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.8.0"
+VERSION = "1.9.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -245,6 +245,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
     active_rom_pool_loads = {}
     last_branch_target = None
     last_branch_pc = None
+    last_call_target = None
 
     for idx, (pc, hex_bytes, instr_text, comment, current_func, current_label) in enumerate(code_lines):
         op = int.from_bytes(hex_bytes[:2], "big")
@@ -639,16 +640,28 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 last_branch_pc = pc
             else:
                 last_branch_target = None
-                last_branch_pc = None
+                last_branch_pc = pc
+            if is_call:
+                call_text = (instr_text + " " + comment).lower()
+                last_call_target = "sub_22e10" if "sub_22e10" in call_text else None
 
         if in_delay_slot:
             if delay_slot_type == "ret":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 gbr = None
             elif delay_slot_type == "call":
-                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-                # The callee may alter GBR; do not propagate a caller value blindly.
-                gbr = None
+                if last_call_target == "sub_22e10":
+                    # Bounded callee summary from sub_22E10 -> loc_2350C ->
+                    # sub_231C8: only R0-R7 are modified; GBR and R8-R14
+                    # are preserved. R15 is balanced by the nested helper.
+                    for reg in range(8):
+                        regs[reg] = None
+                        reg_provenance[reg] = None
+                        active_rom_pool_loads.pop(reg, None)
+                else:
+                    invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+                    gbr = None
+                last_call_target = None
             elif delay_slot_type in ("bra", "conditional") and last_branch_target is None:
                 # Unknown/dynamic delayed transfer: no safe local join is known.
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
