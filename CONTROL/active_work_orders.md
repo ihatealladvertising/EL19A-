@@ -18,13 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65089 active (2026-11-21). WO65085–WO65088 are closed bounded-complete; the user authorized concurrent execution on 2026-11-20.
+- **Concurrent WOs:** none active. WO65085–WO65089 are closed bounded-complete (2026-11-21); the user authorized concurrent execution on 2026-11-20.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| [WO65089](WO65089.md) | **ACTIVE / P1** | Semantic caller trace of the selected high-priority 3D map families (`0x0A342/0x0A382`, `0x0D8D6`, inline `0x0B422/0x0B4A2/0x0B522/0x0B5A2`) and 32-point curve pairs (`0x0F712/0x10F8A`, `0x10EEA/0x1100A`, `0x10F2A/0x1104A`) through caller-side queries, branch logic, result handling and first direct consumers. |
+| — | **NONE** | No active work orders. WO65085–WO65089 closed bounded-complete (2026-11-21). |
 
 
 
@@ -34,6 +34,7 @@
 
 ## Recent completed work
 
+- [WO65089](WO65089.md) — **BOUNDED COMPLETE — CLOSED:** traced three 3D groups and three 32-point UWORD curve groups through caller inputs, branch selection, helper return, RAM staging and first direct consumers. `0x0A342/0x0A382` are a bit7-selected UBYTE response pair; `0x0D8D6` is a centered UWORD correction surface; `0x0B422/0x0B4A2/0x0B522/0x0B5A2` are four same-index SWORD correction channels; `0x0F712/0x10F8A` form a bidirectional transfer pair; `0x10EEA/0x1100A` and `0x10F2A/0x1104A` form a range-selected two-piece UWORD transfer used multiplicatively. Software-role confidence high; physical domain/units unresolved. No workbook/XML/catalogue edit.
 - [WO65088](WO65088.md) — **BOUNDED COMPLETE — CLOSED:** traced the two UWORD ceiling inputs from WO65087. `FFFF3366` has two direct stores in `sub_685A6` (`0x68614`, `0x686CA`); the first stores `min(UWORD[FFFF9932], UWORD[FFFF9936])` when `FFFF1E64.bit6` and `FFFF1E6C.bit7` are clear, and the alternate writer caps a candidate by `FFFF336C`. Exact-offset reader: `0x686F6`. Twenty literal-root loads of `FFFF9858` were verified; bounded paths are reads/adjacent-field accesses, with no direct UWORD writer found. No copy/common-source path established; computed aliases/runtime/DMA routes remain unresolved. No units; no workbook/XML/catalogue edit.
 - [WO65087](WO65087.md) — **BOUNDED COMPLETE — CLOSED:** followed WO65086's 1000/800 pair to its use. Both sites apply the same operation — `min(value, 1000 | 800)` — as a **ceiling** selected by `0x8405` bit 0 (`06521A` `cmp/gt r2,r13` in `sub_65174`; `0687A0` `cmp/gt r2,r5` in `sub_685A6`), then convert the capped value by an identical `×727` (`0x2D7`) `÷800` (`0x2D7+0x49`) sequence through `sub_21BE4`, confirmed as a division (`div0u`/8×`div1`/`rotcl`). Capped value stored at `FFFF9916+0x18`/`+0xB4`, quotient at `FFFF2F00+0x468`. The bounded quantity is a runtime word (`FFFF2F00+0x466` / `FFFF9858`) minus 14 (`word[0x942E]`=8 plus 6), clamped at 0; max converted output is 908 (bit set) or 727 (clear). No units; no workbook/XML/catalogue edit. Follow-up completed by [WO65088](WO65088.md): two direct writer paths for `FFFF3366`; no direct UWORD writer established for `FFFF9858` within bounded literal-root methods.
 - [WO65085](WO65085.md) — **BOUNDED COMPLETE — CLOSED:** completed the bit-7 gate-B trace and corrected WO65084's PC `0x6F6B8` attribution (`sub_6F69E`, not `sub_6F5E8`). Both selected ROM UWORDs (`0x965C`, `0x1171E`) are `0x8000`; bit-clear routes read UBYTE `FFFF2462` and query `FFFF84EA` through different helpers. Outputs stage at `FFFF1000` and `FFFF1026`, reaching distinct direct consumers (`sub_22D30` vs `sub_230B0`); no common consumer established within scope. `0x1171E` is one field in mixed constant data, not a proven table. No units; no workbook/XML/catalogue integration.
