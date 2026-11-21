@@ -1,0 +1,28 @@
+# WO65119 false-alias and verified-facts register
+# generator_version: WO65119-FAREG-1.1.0
+# rom_path: EVIDENCE/VERSA f501.bin
+# rom_md5: 46991697c502052752a2cabcb84c9e27
+# rom_sha256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# listing_member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# listing_sha256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# listing_bytes: 27045080
+# run_date: 2026-11-21
+# pc_concordance_rows_checked: 306688
+# pc_concordance_rows_matched: 306688
+# target_file_sha256: N/A (curated register; no supplied targets)
+# method_limits: curated from closed work orders; DOCUMENTED rows are not re-derived here; mechanical checks cover only the stated tiers; no new alias search or semantic naming
+# classification: structural and negative-claim facts only; PASS on a mechanical check does not promote a DOCUMENTED conclusion
+alias_id	check	expected	observed	pass
+FA001	PKIOR_W label maps to FFFFF770	ADDR@FFFFF770	ADDR@FFFFF770	PASS
+FA001	PKIOR_W annotations are mov.w address loads, not GBR accesses	5 mov.w loads; 0 gbr accesses	5 loads; forms=['mov.w']; gbr_accesses=0	PASS
+FA002	.data.l byte_85DF value	000085DF	000085DF	PASS
+FA002	ROM bytes at 0x85DF	016EFE16	016EFE16	PASS
+FA003	no GBR+disp resolves to FFFF8AF0	0 hits	0 hits	PASS
+FA003	FFFF8AF0 appears only as data reservation	0 code annotations	0 code annotations	PASS
+FA004	0x96A4A annotation h'5F4	mov.w with h'5F4	00096A4A  90 1C                    CODE      mov.w   word_96A86, r0 ; h'5F4	PASS
+FA004	FFFF2150+0x5F4	FFFF2744	FFFF2744	PASS
+FA006	0x41196 instruction @(h'14,r2)	mov.w @(h'14,r2)	00041196  85 2A                    CODE      mov.w   @(h'14,r2), r0	PASS
+FA006	base FFFF1000 + 0x14 x2	FFFF1028	FFFF1028	PASS
+FA006	0x41204 instruction @(h'14,r5)	mov.w @(h'14,r5)	00041204  85 5A                    CODE      mov.w   @(h'14,r5), r0	PASS
+FA006	base FFFF1000 + 0x14 x2	FFFF1028	FFFF1028	PASS
+FA006	listing carries B5/B6 correction comment	present	present	PASS
