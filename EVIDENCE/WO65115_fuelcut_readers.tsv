@@ -109,7 +109,7 @@ FFFF84BA	ram	0x95D10	sub_95CDA	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5),
 FFFF84BA	ram	0x95DCE	sub_95D62	read	b	gbr_disp	FFFF84B4	full	-	mov.b @(0x6,gbr), r0
 FFFF84BA	ram	0x95FE4	sub_95FB2	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
 FFFF84BA	ram	0x960DA	sub_960A8	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
-FFFF84BA	ram	0x9633C	sub_962B8	read	b	base_disp	FFFF8494	full	-	mov.b @(0x26,gbr), r0
+FFFF84BA	ram	0x9633C	sub_962B8	read	b	gbr_disp	FFFF8494	full	-	mov.b @(0x26,gbr), r0
 FFFF84BA	ram	0x968A2	sub_9689E	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
 FFFF84BA	ram	0x969E0	sub_969C2	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
 FFFF84BA	ram	0x975E0	sub_974D0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
