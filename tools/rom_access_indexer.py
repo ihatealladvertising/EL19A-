@@ -17,7 +17,7 @@ EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
 
-METHOD_LIMITS = "computed pointers, pointer tables, block-copy and movca.l transport are not modelled"
+METHOD_LIMITS = "computed pointers, pointer tables, interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled"
 
 
 def parse_targets(targets_file, space_override="auto"):
