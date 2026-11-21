@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.6.0"
+VERSION = "1.7.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -243,6 +243,8 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
     # Track pool loads of ROM targets in the current basic block to link dereferences
     # reg_idx -> (target_dict, load_pc, pool_ea)
     active_rom_pool_loads = {}
+    last_branch_target = None
+    last_branch_pc = None
 
     for idx, (pc, hex_bytes, instr_text, comment, current_func, current_label) in enumerate(code_lines):
         op = int.from_bytes(hex_bytes[:2], "big")
@@ -265,9 +267,23 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         # Label boundary within function (if not in delay slot)
         elif current_label != prev_label and not in_delay_slot:
             prev_label = current_label
-            # A label boundary is treated conservatively as a possible join.
-            # Preserve GBR here; it is separately invalidated at calls/returns.
-            invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            if last_branch_target == current_label and last_branch_pc is not None:
+                # At a known in-function branch join, preserve only R8-R15
+                # whose definitions predate the branch. Values changed by
+                # the delay slot or linear fall-through path are not merged.
+                for reg in range(16):
+                    preserve = (reg >= 8 and reg_provenance[reg] is not None
+                                and reg_provenance[reg] < last_branch_pc)
+                    if not preserve:
+                        regs[reg] = None
+                        reg_provenance[reg] = None
+                        active_rom_pool_loads.pop(reg, None)
+                last_branch_target = None
+                last_branch_pc = None
+            else:
+                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+                last_branch_target = None
+                last_branch_pc = None
 
         mem_access = None
         unresolved_access = None
@@ -583,6 +599,11 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             regs[0] = None
             reg_provenance[0] = None
             active_rom_pool_loads.pop(0, None)
+        elif hi == 0xC and (op >> 8) & 0xF in (0x9, 0xA, 0xB):
+            # AND/XOR/OR immediate instructions modify R0.
+            regs[0] = None
+            reg_provenance[0] = None
+            active_rom_pool_loads.pop(0, None)
         elif hi == 0xF:
             # Group-F operations are not modelled (e.g. MAC variants).
             # Invalidate possible post-increment/source register effects.
@@ -613,6 +634,15 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             is_branch_delay = True
         elif hi == 0x8 and (op >> 8) & 0xF in (0x9, 0xB):  # bt, bf
             is_branch_no_delay = True
+
+        if is_branch_delay or is_branch_no_delay:
+            tokens = instr_text.split()
+            if tokens and re.match(r"^(?:loc|sub)_[A-Fa-f0-9]+$", tokens[-1]):
+                last_branch_target = tokens[-1]
+                last_branch_pc = pc
+            else:
+                last_branch_target = None
+                last_branch_pc = None
 
         if in_delay_slot:
             if delay_slot_type == "ret":
