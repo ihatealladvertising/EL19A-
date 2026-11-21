@@ -24,7 +24,7 @@
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| — | **NONE** | No active work orders. WO65085–WO65089 closed bounded-complete (2026-11-21). |
+| WO65090 | **ACTIVE — P1** | Bounded 1D scalar/limiter candidate review in ROM `0x7800–0x9B00`, plus raw DTC/CID record extraction and validation. Reuse WO65066/WO65083/WO65064 and historical detached DTC/CID reports; no semantic or workbook/XML promotion. See [WO65090](WO65090.md). |
 
 
 
