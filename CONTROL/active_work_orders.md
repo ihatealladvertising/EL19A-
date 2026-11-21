@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; owner: current session; branch `wo65109-ignition-fragment-reader-audit`. WO65085–WO65108 and WO65110–WO65112 are closed; nothing is queued; WO65113 queued-blocked.
+- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; owner: current session; branch `wo65109-ignition-fragment-reader-audit`. **Queued WOs:** WO65114 (P3) — three thin ROM/RAM reference closeout; not started. WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains queued-blocked.
 
 ## Queued work orders — allocated 2026-11-21
 
@@ -37,8 +37,9 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 | [WO65111](WO65111.md) | `0x12844` block schema and `0x8405` provenance | 3 — bounded track | Independent | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65111.md` |
 | [WO65112](WO65112.md) | Claims ledger and annotation contradiction audit | 3 — bounded track | Documentation only | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65112.md` |
 | [WO65113](WO65113.md) | V57 definition provenance (external discriminator) | 4 — blocked | User-supplied external material | QUEUED — BLOCKED |
+| [WO65114](WO65114.md) | Three thin ROM/RAM reference closeout (`0x83B8`, `0x83A4`, `FFFF8578`) | 4 — low-cost cleanup | Independent; disjoint from active WO65109 | QUEUED — NOT STARTED |
 
-No queued WO authorizes an XML, workbook, catalogue, ROM or listing edit. Concurrent claims must use disjoint scopes: 65103/65104, 65105/65106, and 65107–65112 are mutually disjoint as recorded.
+No queued WO authorizes XML, catalogue, ROM or listing edits. WO65114 expressly authorizes only the bounded Master Workbook register update described in its artifact boundary. Concurrent claims must use disjoint scopes: 65103/65104, 65105/65106, and 65107–65112 are mutually disjoint as recorded; WO65114 is disjoint from WO65109.
 
 ## Active work
 
