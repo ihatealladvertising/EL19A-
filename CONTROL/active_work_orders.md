@@ -18,12 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** none. WO65085–WO65100 are closed bounded-complete (2026-11-21); no open assignment remains.
+- **Active WOs:** WO65101 ACTIVE (P1) on `wo65101-stage-output-consumers`. Scope: bounded direct downstream-consumer trace of UWORD stages `FFFF1648` (from WO65100 Track A) and `FFFF29C4` (from `FFFF9C5C`), stopping at first independently verified subsequent RAM stage/decision or hardware boundary.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
+| WO65101 | **ACTIVE — P1** | Trace direct consumers of UWORD `FFFF1648` and `FFFF29C4`, preserving exact address derivation, width/signedness, call/gate context and downstream arithmetic. Reuse WO65100/WO65099; do not repeat their producer/map/record audits. Stop at first verified next-stage RAM write, decision or peripheral boundary; no physical label without evidence. Branch `wo65101-stage-output-consumers`. |
 | WO65100 | **CLOSED — BOUNDED COMPLETE** | `FFFFA71C` has a direct reader at `0x6CCC6` in `sub_6CC8C`; its UWORD Q15-scale gain factor feeds the signed-saturated UWORD stage `FFFF1648`. Corrects WO65099's writer clamp ceiling to `0x9999` (range `0x8000…0x9999`). `sub_969C2` record fields inventoried; most are read-before-write state/workspace, with no separate post-tail consumer found under bounded proven-base methods. `FFFF9C5C` conditionally feeds `FFFF29C4` within the same invocation. ROM/LST integrity verified; physical domains unresolved. No workbook/XML/catalogue integration. See [WO65100](WO65100.md), PR [#18](https://github.com/ihatealladvertising/EL19A-/pull/18). |
 | WO65095 | **CLOSED — BOUNDED COMPLETE** | Strong structural crosswalk: the V57 displayed values match raw×2 at two separately addressed, identical UBYTE objects `0xE678/0xE688`, both read by `sub_22E10`. EL19A query is timer-derived with no proven RPM axis; runtime factor is binary `0x00/0xFF`; downstream `FFFF1018` has no ROM/DMA consumer. V57 primary/Alt mapping and physical airflow meaning unresolved. No XML/workbook/catalogue integration. See [WO65095](WO65095.md), PR [#13](https://github.com/ihatealladvertising/EL19A-/pull/13). |
 | WO65096 | **CLOSED — BOUNDED COMPLETE** | Screened 83 catalogue `8x1` candidates (59 UBYTE, 24 UWORD BE); none matches the supplied V57 values as raw data, exact `display × 400` UWORDs, or the repeated-value/monotonic shape under linear conversion. Referenced axes do not establish the irregular V57 RPM vector. Table 1/2 mapping unresolved; no reader or throttle-output attribution. No XML/workbook/catalogue integration. See [WO65096](WO65096.md), PR [#14](https://github.com/ihatealladvertising/EL19A-/pull/14). |
@@ -42,6 +43,7 @@
 
 
 
+- **WO65101 — ACTIVE — P1:** bounded downstream consumer trace for `FFFF1648` and `FFFF29C4`, the two unresolved stage outputs from WO65100. Reuse prior producer evidence; stop at first independently verified next stage/decision or hardware boundary. Branch `wo65101-stage-output-consumers`.
 ## Recent completed work
 
 - [WO65100](WO65100.md) — **BOUNDED COMPLETE — CLOSED:** direct UWORD consumer of `FFFFA71C` at `0x6CCC6` applies a Q15-scale gain and writes `FFFF1648`; corrects upper clamp to `0x9999`. The `FFFF9C10`-relative record is mostly prior-state/workspace read-before-write; no external post-tail reader found in bounded base methods. `FFFF9C5C` is conditionally copied to `FFFF29C4`. No physical unit/domain or workbook/XML/catalogue integration. PR [#18](https://github.com/ihatealladvertising/EL19A-/pull/18).
