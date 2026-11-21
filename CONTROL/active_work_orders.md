@@ -18,13 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. The user authorized concurrent execution on 2026-11-20; WO65062, WO65064, WO65065, and WO65083 are now closed bounded-complete (2026-11-21).
+- **Concurrent WOs:** WO65085 active (2026-11-21). The user authorized concurrent execution on 2026-11-20; earlier assignments are closed or reconciled.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| — | **NONE** | No active work orders. WO65062, WO65064, WO65065, and WO65083 are closed bounded-complete. |
+| [WO65085](WO65085.md) | **ACTIVE / P1** | End-to-end bit-7 gate-B trace: establish ROM `0x1171E` object geometry, compare its selected value with the fallback stage, and determine whether the `sub_6F5E8` / `sub_6F8EC` paths converge on a common consumer. |
 
 
 
@@ -34,7 +34,7 @@
 
 ## Recent completed work
 
-- [WO65084](WO65084.md) — **BOUNDED COMPLETE — CLOSED:** completed the `0x8405` option-byte gate inventory: 21 load sites, bit 0 ×12, bit 1 ×4, bit 7 ×2, bits 2/5/6 ×1, **bits 3 and 4 never tested**; shipped value `0x0C` (`0x8404–0x8407` = `07 0C 1E 03`, bit 3 set but unread). Worked gates: bit 0 selects 1000 (`0x3E8`) vs 800 (`0x320`) in `sub_685A6` with a `FFFF3616+5` bit-2 override; bit 7 selects ROM scalars `0x965C` / `0x1171E` (trust bank) over `FFFF2150+0x312`-staged values, refining WO65080's "no bank selector" negative; bit 2 publishes GBR bit `0x20` in `sub_2BEAC`. No units; no workbook/XML/catalogue edit. Next: work gate B end to end (`0x1171E` geometry and shared consumer with `sub_6F5E8`).
+- [WO65084](WO65084.md) — **BOUNDED COMPLETE — CLOSED:** completed the `0x8405` option-byte gate inventory: 21 load sites, bit 0 ×12, bit 1 ×4, bit 7 ×2, bits 2/5/6 ×1, **bits 3 and 4 never tested**; shipped value `0x0C` (`0x8404–0x8407` = `07 0C 1E 03`, bit 3 set but unread). Worked gates: bit 0 selects 1000 (`0x3E8`) vs 800 (`0x320`) in `sub_685A6` with a `FFFF3616+5` bit-2 override; bit 7 selects ROM scalars `0x965C` / `0x1171E` (trust bank) over `FFFF2150+0x312`-staged values, refining WO65080's "no bank selector" negative; bit 2 publishes GBR bit `0x20` in `sub_2BEAC`. No units; no workbook/XML/catalogue edit. Follow-up assigned to [WO65085](WO65085.md): gate-B end-to-end (`0x1171E` geometry and shared consumer).
 - [WO65083](WO65083.md) — **BOUNDED COMPLETE — CLOSED:** completed the bounded literal-pool first-access census over ROM `0x7800–0x94FF` (3,663 first accesses from 3,962 literal-pool roots), classified repeated constants and traced direct UWORD comparison boundaries 78/956 and 60/964/1000. `0x9220`=10 is a count/record guard candidate; `0x90CC`=0x7FFF is generic saturation; `0x934C`=100 is an arithmetic bias. No units or calibration semantics assigned; no workbook/XML/catalogue integration.
 
 - [WO65062](WO65062.md) — **BOUNDED COMPLETE — CLOSED:** completed the targeted byte/bit access slice for FFFF85C4–FFFF85FF and FFFF860B–FFFF860F, corrected indexed/GBR/call-boundary cases, and classified all five FFFF85E4 writers. Static loc_1D64 copy capability and HCAN1 buffer producer are documented; actual runtime packet/destination and post-relocation VBR slots remain unproven. No exhaustive whole-ROM or semantic claim; no workbook/XML/catalogue integration.
