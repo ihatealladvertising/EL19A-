@@ -161,5 +161,12 @@ class ResolverMechanicsTests(unittest.TestCase):
         self.assertFalse(any(row["pc"].upper() == false_pc.upper() for row in rows))
 
 
+    def test_ldc_gbr_decodes_register_from_bits_8_to_11(self):
+        self.assertEqual(resolver.ldc_gbr_source_register(0x401E), 0)
+        self.assertEqual(resolver.ldc_gbr_source_register(0x4B1E), 11)
+        self.assertEqual(resolver.ldc_gbr_source_register(0x4917), 9)
+        self.assertIsNone(resolver.ldc_gbr_source_register(0x401A))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
