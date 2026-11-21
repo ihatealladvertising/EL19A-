@@ -28,10 +28,11 @@
 
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
 | [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
-| [WO65076](WO65076.md) | **ACTIVE — P1** | New concurrent assignment: trace direct readers of weighted C756/C956 result `FFFF156A` from proven `FFFF1054+0x516` accesses at `0x6A9B8/0x6A9C4/0x6A9CA/0x6AA08`, plus validate additional offset hits; follow immediate outputs only. No semantic naming or broad xref. |
 | [WO65077](WO65077.md) | **ACTIVE — P1** | Reserved: trace direct code readers of the known DTC record run at `0x12E44–0x1377F` through the shortest local lookup/result use. Reuse the already validated 197×12-byte structure; do not repeat enumeration, broad DTC/flags/CID census, global xref, or semantic promotion. |
 
 ## Recent completed work
+
+- [WO65076](WO65076.md) — **BOUNDED COMPLETE — CLOSED:** traced five direct readers of weighted C756/C956 result `FFFF156A`: secondary blend endpoint with `FFFF156C` into `FFFF1578`; difference input to `sub_22494`; selector-dependent staging into `FFFF157A`; and signed-saturating arithmetic feeding `FFFF156E`/`FFFF1576`. Physical meaning/units remain unresolved; no workbook/XML/catalog integration.
 
 
 - [WO65075](WO65075.md) — **BOUNDED COMPLETE:** no post-stage direct UWORD read of `FFFF9C48` was established by exact-address/proven `FFFF9C10+0x38` methods; the verified read at `0x96D96` precedes the new store at `0x972E0` and is prior state. Three inherited-GBR byte sites remain unresolved possible aliases; no broader xref or semantic identity assigned.
