@@ -44,7 +44,15 @@ No queued WO authorizes XML, catalogue, ROM or listing edits. WO65114 expressly 
 
 ## Branch reconciliation pending
 
-Two branch-only work packages were discovered after the last register checkpoint and are not yet reconciled into this authority file: `wo65116-function-gbr-map` (WO65116) and `wo65117-ea-dictionary` (WO65117). Each contains a work-order closeout, a stdlib generator and generated resolved/unresolved TSVs; both report ROM/listing hashes matching the register evidence and PC concordance 306,688/306,688. Their proposed status is CLOSED — BOUNDED COMPLETE, but the coordinator has not independently reproduced the generators or reviewed the outputs. Keep them unmerged and treat their rows as structural leads only until that audit is done. The two scopes are complementary to WO65115, not a replacement for its supplied-target regression contract.
+Five branch-only work packages are complete on their own branches and not yet reconciled into this authority file. Each contains a work-order closeout, a stdlib-only generator and generated TSVs; every one reports ROM/listing hashes matching the register evidence and PC concordance 306,688/306,688. Each proposes CLOSED — BOUNDED COMPLETE, but the coordinator has not independently reproduced the generators or reviewed the outputs. Keep them unmerged and treat their rows as structural leads only until that audit is done. These scopes are complementary to WO65115, not a replacement for its supplied-target regression contract.
+
+| WO | Branch | Head | Artifacts commit | Content |
+|---|---|---|---|---|
+| WO65116 | `wo65116-function-gbr-map` | `bec7f9ee5e22f2ef114f79a897bf00dc6b45daf5` | `4ec9806a124a2cbe7bb391684d7cee3369e49dd8` | Per-function GBR map (1,877 rows; 615 unresolved) |
+| WO65117 | `wo65117-ea-dictionary` | `df1b416d265f46ecb32d6d55fc416730506ae9ff` | `a9baf08484c46af8358d4cc0da48c71d262b2dc1` | Effective-address dictionary (7,731 resolved; 45,105 unresolved) |
+| WO65118 | `wo65118-ram-byte-bit-xref` | `87d1a0780a1e0fcae3d94017f9618ba129b4978c` | `ef811619a2be2ea9ccc308572262645b60282076` | RAM byte/bit cross-reference (22,308 rows; 100-page index) |
+| WO65119 | `wo65119-false-alias-register` | `cf5dc6dde816372863ed929899aade9ca9c0c012` | `50424e46700197d64c3dec3f59a7b6a216e3f56a` | False-alias / verified-facts register (14 rows; 13 checks all PASS) |
+| WO65120 | `wo65120-callgraph-scheduler` | `3a94cdb2e2efd0b57d12cb3eea17a38e5086492e` | `1ff522e28eb5eafb9514a8872aa06cb3485da0ab` | Call graph + ISR/dispatcher map (6,118 edges; 2 dispatch tables; R1–R5 PASS) |
 
 ## Active work
 
