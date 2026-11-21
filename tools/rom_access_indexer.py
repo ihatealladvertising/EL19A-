@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -541,7 +541,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             elif (op & 0xFF) not in (0x2B, 0x0B):  # jmp/jsr do not write a GPR
                 # Unmodelled group-4 instructions can read/write GPRs or GBR.
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-                gbr = None
+                # These unmodelled GPR operations do not establish a new GBR value.
 
         elif hi == 0x5:
             regs[n] = None
@@ -599,7 +599,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         if in_delay_slot:
             if delay_slot_type == "ret":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-                gbr = None
+                # These unmodelled GPR operations do not establish a new GBR value.
             elif delay_slot_type == "call":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 # The callee may alter GBR; do not propagate a caller value blindly.
