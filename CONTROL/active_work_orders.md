@@ -18,13 +18,14 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. WO65085–WO65089 are closed bounded-complete (2026-11-21); the user authorized concurrent execution on 2026-11-20.
+- **Concurrent WOs:** WO65091 active (2026-11-21). WO65085–WO65090 are closed bounded-complete; the user authorizes concurrent execution.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
 | WO65090 | **CLOSED — BOUNDED COMPLETE** | ROM `0x829A–0x829F` signed scalar/clamp cluster traced; carried forward direct boundaries `0x913A/0x913C`, `0x91C2/0x91C4/0x91C6`, `0x97B2`. Extracted and raw-ROM-verified 197 DTC-like records (`0x12E44–0x1377F`, stride `0x0C`, U16BE code at `+6`) and 144 unique CID-like records (`0x14664–0x148A3`, stride 4, U16BE + `00 FF`). No physical semantics or workbook/XML integration. Evidence: [WO65090](WO65090.md), PR [#8](https://github.com/ihatealladvertising/EL19A-/pull/8). |
+| WO65091 | **ACTIVE — P1** | Trace producer provenance of shared UWORD `FFFF85B2` (`FFFF859C+0x16`), used by paired `0x9C2E/0x9DAE`, dynamic-axis `0x9B2E`, `0xAB22`, and inline SWORD `0x0B422` family. Correct WO65089's incoming-R12 assumption; preserve runtime/transfer boundary if no static writer is proven. See [WO65091](WO65091.md). |
 
 
 
