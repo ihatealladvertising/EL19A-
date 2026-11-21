@@ -109,6 +109,13 @@ def invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads):
     active_rom_pool_loads.clear()
 
 
+def ldc_gbr_source_register(op):
+    """Return the encoded GPR index for LDC/LDC.L to GBR, else None."""
+    if (op & 0xF0FF) in (0x401E, 0x4017):
+        return (op >> 8) & 0x0F
+    return None
+
+
 def pc_bytes_match(rom, pc, expected_bytes):
     """Return True only when listing bytes exactly match ROM bytes at pc."""
     return (
@@ -523,13 +530,14 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 active_rom_pool_loads.pop(n, None)
 
         elif hi == 0x4:
-            if (op & 0xFF) == 0x1E:  # ldc Rm, gbr
-                gbr = regs[m]
-            elif (op & 0xFF) == 0x17:  # ldc.l @Rm+, gbr
+            ldc_reg = ldc_gbr_source_register(op)
+            if ldc_reg is not None and (op & 0xFF) == 0x1E:  # ldc Rm, gbr
+                gbr = regs[ldc_reg]
+            elif ldc_reg is not None and (op & 0xFF) == 0x17:  # ldc.l @Rm+, gbr
                 gbr = None
-                regs[m] = None
-                reg_provenance[m] = None
-                active_rom_pool_loads.pop(m, None)
+                regs[ldc_reg] = None
+                reg_provenance[ldc_reg] = None
+                active_rom_pool_loads.pop(ldc_reg, None)
             elif (op & 0xFF) not in (0x2B, 0x0B):  # jmp/jsr do not write a GPR
                 # Unmodelled group-4 instructions can read/write GPRs or GBR.
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
