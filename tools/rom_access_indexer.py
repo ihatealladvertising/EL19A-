@@ -402,6 +402,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
 
         # Literal pool loads
         if hi == 0x9:  # mov.w @(disp*2, PC), Rn
+            active_rom_pool_loads.pop(n, None)
             pool_ea = pc + 4 + disp * 2
             val = int.from_bytes(rom[pool_ea:pool_ea+2], "big")
             if val & 0x8000:
@@ -423,6 +424,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 active_rom_pool_loads[n] = len(hits) - 1
 
         elif hi == 0xD:  # mov.l @(disp*4, PC), Rn
+            active_rom_pool_loads.pop(n, None)
             pool_ea = ((pc + 4) & ~3) + disp * 4
             val = int.from_bytes(rom[pool_ea:pool_ea+4], "big")
             regs[n] = val
@@ -492,6 +494,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             if regs[n] is not None:
                 regs[n] = (regs[n] + imm_val) & 0xFFFFFFFF
             reg_provenance[n] = pc
+            active_rom_pool_loads.pop(n, None)
 
         elif hi == 0x3:
             if disp4 == 0xC:  # add Rm, Rn
