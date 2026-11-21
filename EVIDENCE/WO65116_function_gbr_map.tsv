@@ -1,0 +1,1892 @@
+# WO65116 verified function/GBR evidence map
+# generator_version: WO65116-GBRMAP-1.3.0
+# rom_path: EVIDENCE/VERSA f501.bin
+# rom_md5: 46991697c502052752a2cabcb84c9e27
+# rom_sha256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# listing_member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# listing_sha256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# listing_bytes: 27045080
+# run_date: 2026-11-21
+# target_file_sha256: N/A (structural map; no supplied target addresses)
+# pc_concordance_rows_checked: 306688
+# pc_concordance_rows_matched: 306688
+# method_limits: computed pointers, pointer tables, block-copy and movca.l transport are not modelled; GBR is inherited across calls and is not attributed to a callee without a local ldc
+# classification: gbr_value '?' / state partial|inherited|restored|multiple is a lead, not a confirmed base
+label	start_pc	end_pc	ret_pc	gbr_value	gbr_source_pc	gbr_instruction	gbr_state	gbr_uses	note
+sub_3A0	000003A0	0000047A	00000476	?	000003AE	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_47A	0000047A	0000048C	00000488	?			none	0	no local GBR establishment
+sub_49E	0000049E	00000528	00000524	?			none	0	no local GBR establishment
+sub_528	00000528	0000053C	00000538	?			none	0	no local GBR establishment
+memory_copy_bytes	0000053C	00000554	00000550	?			none	0	no local GBR establishment
+rotate_left_32	00000554	00000586	00000582	?			none	0	no local GBR establishment
+ripemd160_boolean_round_function	00000586	000005CA	000005C6	?			none	0	no local GBR establishment
+ripemd160_left_round_constant	000005CA	00000606	00000602	?			none	0	no local GBR establishment
+ripemd160_right_round_constant	00000606	00000638	00000634	?			none	0	no local GBR establishment
+ripemd160_compress_block	00000638	00000816	00000812	?	0000064E	ldc r0, gbr	established_partial	0	reason=control_flow_boundary
+ripemd160_calculate_digest	00000830	0000091C	00000918	?			none	0	no local GBR establishment
+sub_91C	0000091C	00000B56	00000B52	?	00000924	ldc r0, gbr	established_partial	20	reason=unprovable_source
+sub_B56	00000B56	00000B60	00000B5C	?			none	0	no local GBR establishment
+sub_B60	00000B60	00000BE2	00000BDE	?	00000B6E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_BEC	00000BEC	00000E08	00000E04	?	00000BF2	ldc r0, gbr	established_partial	23	reason=unprovable_source
+timer1a_interrupt_handler	00000E08	00000E9A	00000E96	?	00000E1E	ldc r0, gbr	established_partial	8	reason=unprovable_source
+sub_E9A	00000E9A	00000EBA	00000EB6	?			none	0	no local GBR establishment
+sub_ECA	00000ECA	00000F66	00000F62	ffff7224	00000ECE	ldc r0, gbr	established_full	3	source=r0 via 00000ECC
+sub_F66	00000F66	00001082	0000107E	ffff721c	00000F72	ldc r0, gbr	established_full	14	source=r0 via 00000F70
+sub_1082	00001082	000012E6	000012E2	ffff710a	0000108A	ldc r0, gbr	established_full	5	source=r0 via 00001088
+sub_12FC	000012FC	00001394	00001390	?			none	0	no local GBR establishment
+sub_139C	0000139C	000014C0	000014BC	?	000013A6	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_14C0	000014C0	000014DE		?			none	0	no local GBR establishment
+sub_14DE	000014DE	000015B2	000015AE	?	000014E6	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_15CC	000015CC	000016EA	000016E6	?	00001628	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_16FC	000016FC	000019C8	000019C4	?	00001706	ldc r0, gbr	established_partial	21	reason=unprovable_source
+sub_19C8	000019C8	00001AF6	00001AF2	?	000019D2	ldc r0, gbr	established_partial	14	reason=unprovable_source
+sub_1AF6	00001AF6	00001BE0	00001BDC	?	00001AFE	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_1BE8	00001BE8	00001C3A	00001C36	?	00001BEC	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_1C3A	00001C3A	00001C4A	00001C46	?			none	0	no local GBR establishment
+sub_1C4A	00001C4A	00001C5C		?			none	0	no local GBR establishment
+sub_1C5C	00001C5C	00001D90	00001D8C	?	00001C6E	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_1DA8	00001DA8	00002032	0000202E	?	00001E02	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_2040	00002040	00002082	0000207E	?			none	0	no local GBR establishment
+sub_2082	00002082	0000226E	0000226A	?	000020F2	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_226E	0000226E	0000244C	00002448	00008204	000022F4	ldc r0, gbr	established_full	0	source=r0 via 000022F2
+sub_2458	00002458	00002472	0000246E	?	0000245C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2478	00002478	00002562	0000255E	?			none	0	no local GBR establishment
+sub_2562	00002562	0000258C		?			none	0	no local GBR establishment
+sub_258C	0000258C	00002638	00002634	?			none	0	no local GBR establishment
+Poweron_Reset	0000264C	000026D6	000026D2	ffff83cc	00002652	ldc r0, gbr	established_full	0	source=r0 via 00002650
+sub_275C	0000275C	0000281E		?			none	0	no local GBR establishment
+sub_281E	0000281E	00002832	0000282E	?			none	0	no local GBR establishment
+sub_2832	00002832	0000283E	0000283A	?			none	0	no local GBR establishment
+sub_283E	0000283E	0000288C	00002888	?			none	0	no local GBR establishment
+sub_2898	00002898	000028EE	000028EA	?			none	0	no local GBR establishment
+sub_28EE	000028EE	00002982	0000297E	?	000028F2	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_2982	00002982	000029B6	000029B2	?			none	0	no local GBR establishment
+sub_2A2C	00002A2C	00002AA4	00002AA0	?	00002A34	ldc r0, gbr	established_partial	12	reason=unprovable_source
+sub_2AA4	00002AA4	00002AEC		?			none	0	no local GBR establishment
+sub_2AEC	00002AEC	00002B2E	00002B2A	?			none	0	no local GBR establishment
+sub_2B2E	00002B2E	00002B6C	00002B68	?			none	0	no local GBR establishment
+sub_2B74	00002B74	00002C14	00002C10	?	00002B78	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2C28	00002C28	00002C48	00002C44	?			none	0	no local GBR establishment
+sub_2C48	00002C48	00002C70	00002C6C	?	00002C4E	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_2C70	00002C70	00002CC2	00002CBE	?	00002C74	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2CC2	00002CC2	00002D9C	00002D98	?	00002CCA	ldc r0, gbr	established_partial	20	reason=unprovable_source
+sub_2DAC	00002DAC	00002DE2	00002DDE	?	00002DB2	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_2DE2	00002DE2	0000316C	00003168	?	00002DEA	ldc r0, gbr	established_partial	34	reason=unprovable_source
+sub_316C	0000316C	0000333A	00003336	?	00003172	ldc r0, gbr	established_partial	53	reason=unprovable_source
+sub_333A	0000333A	000033FE	000033FA	?	00003340	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_33FE	000033FE	0000340A	00003406	?			none	0	no local GBR establishment
+sub_340A	0000340A	00003446	00003442	?			none	0	no local GBR establishment
+sub_3446	00003446	00003458	00003454	?			none	0	no local GBR establishment
+sub_3458	00003458	0000369E	0000369A	?	00003468	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_36A6	000036A6	0000389C	00003898	?	000036B4	ldc r0, gbr	established_partial	22	reason=unprovable_source
+sub_389C	0000389C	000038BA	000038B6	?			none	0	no local GBR establishment
+sub_38BA	000038BA	00003B50	00003B4C	?	000038C4	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_3B50	00003B50	00003B64	00003B60	?			none	0	no local GBR establishment
+sub_3B64	00003B64	00003B84	00003B80	?			none	0	no local GBR establishment
+sub_3B90	00003B90	00003D16	00003D12	?	00003B9A	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_3D1E	00003D1E	00003DA6	00003DA2	?	00003D26	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_3DA6	00003DA6	00003DDE	00003DDA	?	00003DAA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_3DDE	00003DDE	00003E54	00003E50	?	00003DE2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_3E54	00003E54	00003E84	00003E80	?			none	0	no local GBR establishment
+sub_3E90	00003E90	00004148	00004144	?	00003ECC	ldc r0, gbr	established_partial	11	reason=unprovable_source
+sub_4150	00004150	000041D6	000041D2	?	00004158	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_41D6	000041D6	000041E2	000041DE	?			none	0	no local GBR establishment
+sub_41E2	000041E2	000042C4	000042C0	?	000041E8	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_42DA	000042DA	000043AC	000043A8	?			none	0	no local GBR establishment
+sub_43C4	000043C4	00004462	0000445E	?			none	0	no local GBR establishment
+sub_4462	00004462	00004482	0000447E	?			none	0	no local GBR establishment
+sub_4482	00004482	0000448C	00004488	?			none	0	no local GBR establishment
+sub_448C	0000448C	000044B8	000044B4	?			none	0	no local GBR establishment
+sub_44B8	000044B8	000045D2	000045CE	?			none	0	no local GBR establishment
+sub_45DC	000045DC	00004698	00004694	ffff7218	000045E6	ldc r0, gbr	established_full	21	source=r0 via 000045E4
+sub_4698	00004698	000046D6	000046D2	ffff7224	0000469C	ldc r0, gbr	established_full	1	source=r0 via 0000469A
+sci_receive_message_assembler	000046D6	000047D4	000047D0	ffff7104	000046DC	ldc r0, gbr	established_full	5	source=r0 via 000046DA
+receive_header_length_update	000047D4	00004818	00004814	?			none	0	no local GBR establishment
+message_structure_checksum_valid	00004838	00004894	00004890	?			none	0	no local GBR establishment
+sub_4894	00004894	00004950	0000494C	ffff7220	00004898	ldc r0, gbr	established_full	4	source=r0 via 00004896
+sci_transmit_buffer	00004960	000049CA	000049C6	ffff720c	00004964	ldc r0, gbr	established_full	2	source=r0 via 00004962
+message_buffer_checksum1	000049CA	000049E6	000049E2	?			none	0	no local GBR establishment
+sci_send_message_type1	000049E6	00004A0A	00004A06	ffff710a	000049EC	ldc r0, gbr	established_full	2	source=r0 via 000049EA
+sci_send_message_type2	00004A0A	00004A32	00004A2E	ffff710a	00004A10	ldc r0, gbr	established_full	2	source=r0 via 00004A0E
+sci_send_message_type3	00004A32	00004D3E	00004D3A	ffff710a	00004A38	ldc r0, gbr	established_full	2	source=r0 via 00004A36
+sub_4FF4	00004FF4	000050F4	000050F0	?	00005004	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_50F4	000050F4	000051FE	000051FA	?	00005104	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_51FE	000051FE	00005236	00005232	?			none	0	no local GBR establishment
+sub_5240	00005240	000052E2	000052DE	?	0000524E	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_52E2	000052E2	000054E8	000054E4	?	000052F2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_54EA	000054EA	00005584	00005580	?	000054F0	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_5604	00005604	00005782	0000577E	?			none	0	no local GBR establishment
+sub_5782	00005782	000057B2	000057AE	?			none	0	no local GBR establishment
+sub_57BC	000057BC	00005858	00005854	?			none	0	no local GBR establishment
+sub_5858	00005858	00005876	00005872	?			none	0	no local GBR establishment
+sub_5880	00005880	000058BE	000058BA	?			none	0	no local GBR establishment
+sub_58C0	000058C0	00005A12	00005A0E	?			none	0	no local GBR establishment
+sub_5A14	00005A14	00005A92	00005A8E	?			none	0	no local GBR establishment
+sub_5A94	00005A94	00005ABE	00005ABA	?			none	0	no local GBR establishment
+sub_5AC0	00005AC0	00005AEE	00005AEA	?			none	0	no local GBR establishment
+sub_5AF0	00005AF0	00005B12	00005B0E	?			none	0	no local GBR establishment
+sub_5B14	00005B14	00005B80	00005B7C	?			none	0	no local GBR establishment
+sub_5B80	00005B80	00005BEA	00005BE6	?			none	0	no local GBR establishment
+sub_5BEC	00005BEC	00005C34	00005C30	?			none	0	no local GBR establishment
+sub_5C34	00005C34	000165E8	000165E4	?			inherited_only	1	no local GBR establishment
+INT_ATU31_IMI3A	0002040C	00020878	00020874	?	00020428	ldc r0, gbr	established_partial	37	reason=unprovable_source
+sub_2088C	0002088C	000209A6	000209A2	ffff20a8	00020898	ldc r0, gbr	established_full	0	source=r0 via 00020896
+sub_209A6	000209A6	00020DB0	00020DAC	?	000209BA	ldc r0, gbr	established_partial	18	reason=unprovable_source
+sub_20DCE	00020DCE	00020FEA		?	00020DE2	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_20FEA	00020FEA	00021406	00021402	ffff2150	00021378	ldc r0, gbr	established_full	1	source=r0 via 00021376
+sub_21406	00021406	0002147C	00021478	ffff2150	0002140C	ldc r0, gbr	established_full	1	source=r0 via 0002140A
+sub_2147C	0002147C	0002149E	0002149A	ffff2150	00021480	ldc r0, gbr	established_full	0	source=r0 via 0002147E
+sub_2149E	0002149E	000214D0	000214CC	ffff34c1	000214A2	ldc r0, gbr	established_full	0	source=r0 via 000214A0
+sub_214D0	000214D0	000214F4	000214F0	ffff34c1	000214D4	ldc r0, gbr	established_full	0	source=r0 via 000214D2
+sub_214F4	000214F4	00021510	0002150C	ffff34c1	000214F8	ldc r0, gbr	established_full	0	source=r0 via 000214F6
+sub_21510	00021510	00021526	00021522	?			none	0	no local GBR establishment
+sub_21526	00021526	00021542	0002153E	ffff34c1	0002152A	ldc r0, gbr	established_full	1	source=r0 via 00021528
+sub_21542	00021542	0002154E	0002154A	?			none	0	no local GBR establishment
+sub_21574	00021574	00021642	0002163E	00013b3c	0002157A	ldc r0, gbr	established_full	0	source=r0 via 00021578
+sub_21642	00021642	000216A0	0002169C	?			none	0	no local GBR establishment
+sub_216A0	000216A0	000216C2	000216BE	ffff2150	000216A4	ldc r0, gbr	established_full	0	source=r0 via 000216A2
+alt_Poweron_Reset	00021A9C	00021AC0		?			none	0	no local GBR establishment
+sub_21AC0	00021AC0	00021BDA	00021BD6	?			none	0	no local GBR establishment
+sub_21BE4	00021BE4	00021CCA	00021CC6	?			none	0	no local GBR establishment
+sub_21CD4	00021CD4	00021D10	00021D0C	?			none	0	no local GBR establishment
+sub_21D18	00021D18	00021E3C	00021E38	?			none	0	no local GBR establishment
+sub_21E44	00021E44	00021F32	00021F2E	?			none	0	no local GBR establishment
+copy_longwords_by_size	00021F3C	00021F96	00021F92	?			none	0	no local GBR establishment
+glb_21F98	00021F98	00021FFC	00021FF8	?			none	0	no local GBR establishment
+sub_21FFC	00021FFC	00022008		?			none	0	no local GBR establishment
+sub_22008	00022008	0002205C	00022058	?			none	0	no local GBR establishment
+sub_220C0	000220C0	0002215E	0002215A	?			none	0	no local GBR establishment
+sub_22180	00022180	0002221E	0002221A	?			none	0	no local GBR establishment
+sub_22260	00022260	000223FA	000223F6	?			none	0	no local GBR establishment
+sub_223FC	000223FC	000223FE		?			none	0	no local GBR establishment
+sub_223FE	000223FE	0002240C	00022408	?			none	0	no local GBR establishment
+sub_2240C	0002240C	0002241E	0002241A	?			none	0	no local GBR establishment
+sub_22420	00022420	00022434	00022430	?			none	0	no local GBR establishment
+sub_22434	00022434	00022448	00022444	?			none	0	no local GBR establishment
+sub_22448	00022448	0002245C	00022458	?			none	0	no local GBR establishment
+sub_2245C	0002245C	00022494	00022490	?			none	0	no local GBR establishment
+sub_22494	00022494	000224B2	000224AE	?			none	0	no local GBR establishment
+sub_224B2	000224B2	000224C6	000224C2	?			none	0	no local GBR establishment
+sub_224C6	000224C6	000224D8	000224D4	?			none	0	no local GBR establishment
+sub_224D8	000224D8	000224EC	000224E8	?			none	0	no local GBR establishment
+sub_224EC	000224EC	0002251A	00022516	?			none	0	no local GBR establishment
+sub_2251A	0002251A	00022588	00022584	?			none	0	no local GBR establishment
+sub_22588	00022588	00022696	00022692	?			none	0	no local GBR establishment
+sub_22696	00022696	0002270A	00022706	?			none	0	no local GBR establishment
+sub_2270A	0002270A	0002272E	0002272A	?			none	0	no local GBR establishment
+sub_2272E	0002272E	000227E4	000227E0	?			none	0	no local GBR establishment
+sub_227E4	000227E4	000228F0	000228EC	?			none	0	no local GBR establishment
+sub_228F0	000228F0	00022918	00022914	?			none	0	no local GBR establishment
+sub_22918	00022918	00022986	00022982	?			none	0	no local GBR establishment
+sub_22986	00022986	000229AA	000229A6	?			none	0	no local GBR establishment
+sub_229AA	000229AA	000229CE	000229CA	?			none	0	no local GBR establishment
+sub_229D0	000229D0	00022A8C	00022A88	?			none	0	no local GBR establishment
+sub_22A8C	00022A8C	00022AB6	00022AB2	?			none	0	no local GBR establishment
+sub_22AB8	00022AB8	00022AFC		?			none	0	no local GBR establishment
+sub_22AFC	00022AFC	00022B44		?			none	0	no local GBR establishment
+sub_22B44	00022B44	00022B7C		?			none	0	no local GBR establishment
+sub_22B7C	00022B7C	00022BB8	00022BB4	?			none	0	no local GBR establishment
+sub_22BC0	00022BC0	00022C00		?			none	0	no local GBR establishment
+sub_22C00	00022C00	00022C38		?			none	0	no local GBR establishment
+sub_22C38	00022C38	00022C78		?			none	0	no local GBR establishment
+sub_22C78	00022C78	00022CB8		?			none	0	no local GBR establishment
+sub_22CB8	00022CB8	00022CF8		?			none	0	no local GBR establishment
+sub_22CF8	00022CF8	00022D30		?			none	0	no local GBR establishment
+sub_22D30	00022D30	00022D68		?			none	0	no local GBR establishment
+sub_22D68	00022D68	00022DA8		?			none	0	no local GBR establishment
+sub_22DA8	00022DA8	00022DE0		?			none	0	no local GBR establishment
+sub_22DE0	00022DE0	00022DF2	00022DEE	?			none	0	no local GBR establishment
+sub_22DF8	00022DF8	00022E0A	00022E06	?			none	0	no local GBR establishment
+sub_22E10	00022E10	00022E22	00022E1E	?			none	0	no local GBR establishment
+sub_22E28	00022E28	00022E3C	00022E38	?			none	0	no local GBR establishment
+sub_22E44	00022E44	00022E56	00022E52	?			none	0	no local GBR establishment
+sub_22E60	00022E60	00022E72	00022E6E	?			none	0	no local GBR establishment
+sub_22E7C	00022E7C	00022E8E	00022E8A	?			none	0	no local GBR establishment
+sub_22E98	00022E98	00022EAC	00022EA8	?			none	0	no local GBR establishment
+sub_22EB4	00022EB4	00022EF2	00022EEE	?			none	0	no local GBR establishment
+sub_22EFC	00022EFC	00022F28		?			none	0	no local GBR establishment
+sub_22F28	00022F28	00022F54		?			none	0	no local GBR establishment
+sub_22F54	00022F54	00022F80		?			none	0	no local GBR establishment
+sub_22F80	00022F80	00022FAC		?			none	0	no local GBR establishment
+sub_22FAC	00022FAC	00022FD8		?			none	0	no local GBR establishment
+sub_22FD8	00022FD8	00023004		?			none	0	no local GBR establishment
+sub_23004	00023004	0002304C	00023048	?			none	0	no local GBR establishment
+sub_2304C	0002304C	0002306E	0002306A	?			none	0	no local GBR establishment
+sub_23078	00023078	000230B0		?			none	0	no local GBR establishment
+sub_230B0	000230B0	000230E8		?			none	0	no local GBR establishment
+sub_230E8	000230E8	00023128		?			none	0	no local GBR establishment
+sub_23128	00023128	0002313A	00023136	?			none	0	no local GBR establishment
+sub_23144	00023144	00023170		?			none	0	no local GBR establishment
+sub_23170	00023170	0002319C		?			none	0	no local GBR establishment
+sub_2319C	0002319C	000231C8		?			none	0	no local GBR establishment
+sub_231C8	000231C8	000233C2	000233BE	?			none	0	no local GBR establishment
+sub_233CC	000233CC	00023408	00023404	?			none	0	no local GBR establishment
+sub_2340C	0002340C	00023448	00023444	?			none	0	no local GBR establishment
+sub_2344C	0002344C	0002348E	0002348A	?			none	0	no local GBR establishment
+sub_23494	00023494	000234DE	000234DA	?			none	0	no local GBR establishment
+sub_2354C	0002354C	00023568		?			none	0	no local GBR establishment
+sub_23568	00023568	00023580	0002357C	?			none	0	no local GBR establishment
+sub_23580	00023580	00023608	00023604	?			none	0	no local GBR establishment
+sub_2360C	0002360C	00023648	00023644	?			none	0	no local GBR establishment
+sub_2364C	0002364C	00023696	00023692	?			none	0	no local GBR establishment
+sub_23700	00023700	00023796	00023792	?			none	0	no local GBR establishment
+sub_23798	00023798	0002384C	00023848	?	00023836	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2384C	0002384C	000238A4	000238A0	?			none	0	no local GBR establishment
+sub_238A4	000238A4	000238DA	000238D6	?			none	0	no local GBR establishment
+sub_238DA	000238DA	0002391A	00023916	?			none	0	no local GBR establishment
+sub_2391A	0002391A	00023AF0	00023AEC	?	0002392E	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_23AF0	00023AF0	00023B46	00023B42	?	00023AF8	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_23B50	00023B50	000240D4	000240D0	?	00023B64	ldc r0, gbr	established_partial	44	reason=unprovable_source
+sub_240D4	000240D4	00024166	00024162	ffff3628	000240DA	ldc r0, gbr	established_full	3	source=r0 via 000240D8
+sub_24166	00024166	00024182	0002417E	?			none	0	no local GBR establishment
+sub_24182	00024182	000241BA	000241B6	?			none	0	no local GBR establishment
+sub_241D2	000241D2	000241EE	000241EA	?			none	0	no local GBR establishment
+sub_241EE	000241EE	00024226	00024222	?			none	0	no local GBR establishment
+sub_24226	00024226	000242CC	000242C8	?	0002422A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_24310	00024310	000243A6	000243A2	?			none	0	no local GBR establishment
+sub_243AE	000243AE	000246AA	000246A6	?			none	0	no local GBR establishment
+sub_246AA	000246AA	000246B4	000246B0	?			none	0	no local GBR establishment
+sub_246B4	000246B4	000246D2	000246CE	?			none	0	no local GBR establishment
+sub_246D8	000246D8	000246EC	000246E8	?			none	0	no local GBR establishment
+sub_246EC	000246EC	00024740		?			none	0	no local GBR establishment
+update_state_2F14_and_status_bits	00024740	00024900	000248FC	ffff2f00	00024750	ldc r0, gbr	established_full	0	source=r0 via 0002474E
+evaluate_status_and_store_8630	00024910	00024954	00024950	?	00024914	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_24960	00024960	0002496E	0002496A	?			none	0	no local GBR establishment
+sub_2496E	0002496E	00024C30	00024C2C	?	000249AC	ldc r0, gbr	established_partial	4	reason=unprovable_source
+INT_WDT_ITI	00024C30	00024C56	00024C52	?			none	0	no local GBR establishment
+sub_24C56	00024C56	00024C66	00024C62	?			none	0	no local GBR establishment
+sub_24C70	00024C70	00024D98	00024D94	00013ae8	00024C7E	ldc r0, gbr	established_full	9	source=r0 via 00024C7C
+sub_24D98	00024D98	00024DA2		?			none	0	no local GBR establishment
+sub_24DA2	00024DA2	00024DB2		?			none	0	no local GBR establishment
+sub_24DB2	00024DB2	00024E42	00024E3E	?			none	0	no local GBR establishment
+sub_24E42	00024E42	00024EA8		?			none	0	no local GBR establishment
+sub_24EA8	00024EA8	00024F42	00024F3E	00013b00	00024EAE	ldc r0, gbr	established_full	0	source=r0 via 00024EAC
+sub_24F42	00024F42	00024F86	00024F82	?			none	0	no local GBR establishment
+alt_NMI	00024F9C	00024FF6	00024FF2	?			none	0	no local GBR establishment
+INT_TRAPA62	00025004	000253BC	000253B8	?			multiple_values	16	distinct=ffff1798,ffffb638
+sub_253C0	000253C0	000256B2	000256AE	?			none	0	no local GBR establishment
+sub_256B2	000256B2	00025732	0002572E	?			none	0	no local GBR establishment
+sub_25732	00025732	000257A4	000257A0	?			none	0	no local GBR establishment
+sub_257AC	000257AC	000257F2	000257EE	?	000257B0	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_25804	00025804	0002584A	00025846	?			none	0	no local GBR establishment
+sub_25860	00025860	00025894	00025890	?			none	0	no local GBR establishment
+sub_25898	00025898	000258A0	0002589C	?			none	0	no local GBR establishment
+sub_258A4	000258A4	0002598E	0002598A	?			none	0	no local GBR establishment
+sub_2598E	0002598E	000259A4	000259A0	?			none	0	no local GBR establishment
+sub_259C4	000259C4	000259FC	000259F8	?			none	0	no local GBR establishment
+sub_25A08	00025A08	00025A94	00025A90	?			none	0	no local GBR establishment
+sub_25A9C	00025A9C	00025B5C	00025B58	?			none	0	no local GBR establishment
+sub_25B5C	00025B5C	00025C74	00025C70	ffff1054	00025B60	ldc r0, gbr	established_full	0	source=r0 via 00025B5E
+sub_25C9C	00025C9C	00025D36	00025D32	?			none	0	no local GBR establishment
+sub_25D36	00025D36	00025D58	00025D54	?			none	0	no local GBR establishment
+INT_ATU02_ICI0A	00025D5A	00026F46	00026F42	ffff1054	00025D80	ldc r0, gbr	established_full	67	source=r0 via 00025D7E
+INT_ATU12_IMI1AE	00026F46	000276FC	000276F8	ffff1054	00026F6A	ldc r0, gbr	established_full	40	source=r0 via 00026F68
+sub_27720	00027720	0002794C	00027948	ffff1054	00027730	ldc r0, gbr	established_full	12	source=r0 via 0002772E
+INT_ATU11_IMI11A	00027978	00027AC6	00027AC2	?	00027994	ldc r0, gbr	established_partial	5	reason=unprovable_source
+service_ATU11_timer_compare_and_state	00027AC6	00027D5E	00027D5A	?	00027AD8	ldc r0, gbr	established_partial	7	reason=unprovable_source
+INT_ATU11_IMI11B	00027D6A	00028186	00028182	ffff1054	00027D86	ldc r0, gbr	established_full	8	source=r0 via 00027D84
+INT_ATU51_IMI5A	00028186	000282C4	000282C0	ffff1054	0002819A	ldc r0, gbr	established_full	0	source=r0 via 00028198
+INT_ATU51_IMI5B	000282C4	000283E8	000283E4	ffff1054	000282D6	ldc r0, gbr	established_full	0	source=r0 via 000282D4
+sub_28400	00028400	00028524	00028520	ffff1054	0002840C	ldc r0, gbr	established_full	3	source=r0 via 0002840A
+INT_ATU11_IMI1AB	00028524	0002853E	0002853A	?			none	0	no local GBR establishment
+INT_ATU11_IMI1AA	00028568	00028658	00028654	?			none	0	no local GBR establishment
+INT_ATU11_IMI1AC	00028658	00028794	00028790	?			none	0	no local GBR establishment
+sub_28794	00028794	000288AA	000288A6	ffff1ca8	000287A8	ldc r0, gbr	established_full	0	source=r0 via 000287A6
+sub_288B4	000288B4	00028AAC	00028AA8	?	000288C6	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_28B0C	00028B0C	00028BAC	00028BA8	?	00028B1C	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_28BAC	00028BAC	00028BD0	00028BCC	ffff1850	00028BB2	ldc r0, gbr	established_full	2	source=r0 via 00028BB0
+sub_28BD0	00028BD0	00028C36	00028C32	?			none	0	no local GBR establishment
+sub_28C36	00028C36	00029D82	00029D7E	?			multiple_values	43	distinct=ffff1e54,ffff3614
+sub_29D82	00029D82	00029DCE	00029DCA	ffff38dc	00029D88	ldc r0, gbr	established_full	0	source=r0 via 00029D86
+sub_29E54	00029E54	00029F36	00029F32	ffff38dc	00029E5C	ldc r0, gbr	established_full	0	source=r0 via 00029E5A
+sub_29F36	00029F36	00029FCA	00029FC6	ffff2118	00029F3C	ldc r0, gbr	established_full	0	source=r0 via 00029F3A
+sub_2A024	0002A024	0002A064		?			none	0	no local GBR establishment
+INT_ATU31_IMI3D	0002A064	0002A0FE	0002A0FA	?			none	0	no local GBR establishment
+sub_2A11C	0002A11C	0002A1CC	0002A1C8	?	0002A130	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_2A1CC	0002A1CC	0002A214	0002A210	?			none	0	no local GBR establishment
+sub_2A214	0002A214	0002A21C	0002A218	?			none	0	no local GBR establishment
+sub_2A21C	0002A21C	0002A2A0	0002A29C	?	0002A222	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2A2A0	0002A2A0	0002A382	0002A37E	?			none	0	no local GBR establishment
+sub_2A382	0002A382	0002A41A	0002A416	?	0002A38E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2A41A	0002A41A	0002A61A	0002A616	?	0002A424	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_2A61A	0002A61A	0002A734	0002A730	?			none	0	no local GBR establishment
+sub_2A776	0002A776	0002A812	0002A80E	?	0002A77C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2A812	0002A812	0002AA26	0002AA22	?	0002A81C	ldc r0, gbr	established_partial	43	reason=unprovable_source
+sub_2AA26	0002AA26	0002AA4C	0002AA48	?			none	0	no local GBR establishment
+sub_2AA64	0002AA64	0002ABC0	0002ABBC	0000e373	0002AB40	ldc r0, gbr	established_full	0	source=r0 via 0002AB3E
+sub_2ABE0	0002ABE0	0002ADCC	0002ADC8	ffff35b7	0002ABF0	ldc r0, gbr	established_full	0	source=r0 via 0002ABEE
+sub_2AE00	0002AE00	0002AEFA	0002AEF6	ffff1ca8	0002AE06	ldc r0, gbr	established_full	0	source=r0 via 0002AE04
+sub_2AEFA	0002AEFA	0002AF0C	0002AF08	?			none	0	no local GBR establishment
+sub_2AF0C	0002AF0C	0002AF16	0002AF12	?			none	0	no local GBR establishment
+sub_2AF30	0002AF30	0002B01A	0002B016	ffff34c1	0002AF38	ldc r0, gbr	established_full	0	source=r0 via 0002AF36
+sub_2B054	0002B054	0002B0B2	0002B0AE	?	0002B05A	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_2B0B2	0002B0B2	0002B184	0002B180	?	0002B0BC	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2B18E	0002B18E	0002B23E	0002B23A	?			none	0	no local GBR establishment
+sub_2B268	0002B268	0002B306	0002B302	ffff33d4	0002B272	ldc r0, gbr	established_full	3	source=r0 via 0002B270
+sub_2B306	0002B306	0002B414	0002B410	?			multiple_values	7	distinct=ffff33d4,ffff35ae
+sub_2B414	0002B414	0002B472	0002B46E	?	0002B418	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2B472	0002B472	0002B492	0002B48E	?			none	0	no local GBR establishment
+sub_2B4A4	0002B4A4	0002B734	0002B730	?	0002B4AA	ldc r0, gbr	established_partial	19	reason=unprovable_source
+sub_2B734	0002B734	0002B758	0002B754	?			none	0	no local GBR establishment
+sub_2B758	0002B758	0002B792	0002B78E	?	0002B75C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2B792	0002B792	0002B824	0002B820	?	0002B79C	ldc r0, gbr	established_partial	2	reason=unprovable_source
+INT_SCI1_RXI1	0002B82C	0002B88A	0002B886	?			none	0	no local GBR establishment
+sub_2B88A	0002B88A	0002B8EC	0002B8E8	?	0002B88E	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2B8EC	0002B8EC	0002B8FC	0002B8F8	?			none	0	no local GBR establishment
+sub_2B8FC	0002B8FC	0002B9A4	0002B9A0	?	0002B900	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2B9A4	0002B9A4	0002BB70	0002BB6C	?	0002B9AA	ldc r0, gbr	established_partial	12	reason=unprovable_source
+INT_SCI1_TXI1	0002BB78	0002BBCC	0002BBC8	?	0002BB86	ldc r0, gbr	established_partial	0	reason=unprovable_source
+INT_SCI1_TEI1	0002BBCC	0002BC6E	0002BC6A	?	0002BBE4	ldc r0, gbr	established_partial	6	reason=unprovable_source
+message_timer_tick	0002BC78	0002BCEE	0002BCEA	?	0002BC7E	ldc r0, gbr	established_partial	10	reason=unprovable_source
+message_buffer_checksum	0002BCF8	0002BD18	0002BD14	?			none	0	no local GBR establishment
+sub_2BD18	0002BD18	0002BD74	0002BD70	?			none	0	no local GBR establishment
+sub_2BD74	0002BD74	0002BDA6	0002BDA2	?			none	0	no local GBR establishment
+sub_2BDA6	0002BDA6	0002BDCA	0002BDC6	?			none	0	no local GBR establishment
+message_buffer_copy	0002BDCA	0002BDEA	0002BDE6	?			none	0	no local GBR establishment
+sub_2BDEA	0002BDEA	0002BE1C	0002BE18	?			none	0	no local GBR establishment
+message_finalize_fields	0002BE1C	0002BEA0	0002BE9C	?	0002BE20	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2BEAC	0002BEAC	0002BFFE	0002BFFA	?	0002BEB0	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_2C004	0002C004	0002C0EA	0002C0E6	?	0002C016	ldc r0, gbr	established_partial	15	reason=unprovable_source
+sub_2C0EA	0002C0EA	0002C10C	0002C108	?	0002C0EE	ldc r0, gbr	established_partial	1	reason=unprovable_source
+message_update_state	0002C10C	0002C164	0002C160	?	0002C114	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_2C164	0002C164	0002C18A		?			none	0	no local GBR establishment
+sub_2C18A	0002C18A	0002C1E8	0002C1E4	?			none	0	no local GBR establishment
+sub_2C1E8	0002C1E8	0002C204		?			none	0	no local GBR establishment
+sub_2C204	0002C204	0002C212	0002C20E	?			none	0	no local GBR establishment
+sub_2C220	0002C220	0002C2C0		?			none	0	no local GBR establishment
+sub_2C2C0	0002C2C0	0002C560	0002C55C	?	0002C2C6	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2C574	0002C574	0002C6DA	0002C6D6	00013afc	0002C63A	ldc r0, gbr	established_full	1	source=r0 via 0002C638
+sub_2C6DA	0002C6DA	0002C740	0002C73C	?	0002C6E6	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_2C74E	0002C74E	0002CABE	0002CABA	?	0002C762	ldc r0, gbr	established_partial	20	reason=unprovable_source
+message_build_and_finalize	0002CABE	0002CCF6	0002CCF2	?	0002CACA	ldc r0, gbr	established_partial	15	reason=unprovable_source
+sub_2CCF6	0002CCF6	0002CD94	0002CD90	?	0002CCFC	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_2CD94	0002CD94	0002CE60	0002CE5C	?	0002CD9E	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2CE70	0002CE70	0002CEA0	0002CE9C	?	0002CE78	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_2CEA0	0002CEA0	0002CEDA	0002CED6	?	0002CEAA	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_2CEDA	0002CEDA	0002CFB8	0002CFB4	?	0002CEE2	ldc r0, gbr	established_partial	9	reason=unprovable_source
+sub_2CFB8	0002CFB8	0002D09C	0002D098	?	0002CFBE	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_2D0B4	0002D0B4	0002D0F2	0002D0EE	?	0002D0BA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2D104	0002D104	0002D438	0002D434	ffff33d4	0002D112	ldc r0, gbr	established_full	3	source=r0 via 0002D110
+sub_2D450	0002D450	0002DDA8	0002DDA4	?			none	0	no local GBR establishment
+sub_2DDA8	0002DDA8	0002DDE0	0002DDDC	?	0002DDAE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2DE04	0002DE04	0002DE10		?			none	0	no local GBR establishment
+sub_2DE10	0002DE10	0002DE1C		?			none	0	no local GBR establishment
+sub_2DE1C	0002DE1C	0002E6F0	0002E6EC	?	0002DE28	ldc r0, gbr	established_partial	11	reason=unprovable_source
+sub_2E6F0	0002E6F0	0002E8A8	0002E8A4	?	0002E6FE	ldc r0, gbr	established_partial	20	reason=unprovable_source
+sub_2E8A8	0002E8A8	0002E96E	0002E96A	?	0002E8B4	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_2E97C	0002E97C	0002EF58	0002EF54	?	0002E986	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_2EF6C	0002EF6C	0002F308	0002F304	?	0002EF7C	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_2F324	0002F324	0002F45E	0002F45A	?	0002F338	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2F470	0002F470	0002F6CC	0002F6C8	?	0002F478	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_2F6E8	0002F6E8	0002F83E	0002F83A	?	0002F6FC	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2F864	0002F864	0002FB64	0002FB60	?	0002F874	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_2FB8C	0002FB8C	0002FC6C		?			none	0	no local GBR establishment
+sub_2FC6C	0002FC6C	0002FE54	0002FE50	?	0002FC8E	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_2FE6C	0002FE6C	0002FEF0	0002FEEC	?	0002FE74	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_2FEFC	0002FEFC	0003052C	00030528	?			none	0	no local GBR establishment
+sub_30540	00030540	00030664	00030660	?			none	0	no local GBR establishment
+sub_30688	00030688	000306C8	000306C4	?	0003068E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_306D0	000306D0	00030812	0003080E	?	000306DA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_30830	00030830	0003087C	00030878	?	00030838	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_30884	00030884	000308AA	000308A6	?	0003088A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_308B0	000308B0	00030AD4	00030AD0	?			none	0	no local GBR establishment
+sub_30AD4	00030AD4	00030B0C	00030B08	?	00030ADA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_30B2C	00030B2C	00030CE8	00030CE4	?	00030B60	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_30D04	00030D04	00030D9A	00030D96	?	00030D0A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_30DAC	00030DAC	00030E5A	00030E56	?	00030DB2	ldc r0, gbr	established_partial	8	reason=unprovable_source
+sub_30E6C	00030E6C	00030EE6	00030EE2	?	00030E72	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_30EF4	00030EF4	00031054	00031050	?	00030EFA	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_31070	00031070	000312A0	0003129C	?	00031082	ldc r0, gbr	established_partial	21	reason=unprovable_source
+sub_312BC	000312BC	0003134E	0003134A	?	000312C0	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_31354	00031354	00031366	00031362	?			none	0	no local GBR establishment
+sub_31366	00031366	00031382	0003137E	?			none	0	no local GBR establishment
+sub_31382	00031382	000313D4	000313D0	?	00031388	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_313D4	000313D4	0003146C	00031468	?	000313E6	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_3146C	0003146C	0003148E	0003148A	?			none	0	no local GBR establishment
+sub_3148E	0003148E	00031498	00031494	?			none	0	no local GBR establishment
+sub_31498	00031498	000317C4	000317C0	ffff3454	000314EA	ldc r0, gbr	established_full	0	source=r0 via 000314E8
+sub_317C4	000317C4	00031864	00031860	?			none	0	no local GBR establishment
+sub_3188C	0003188C	00031902	000318FE	?	00031892	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_31910	00031910	000319D8	000319D4	?	00031918	ldc r0, gbr	established_partial	11	reason=unprovable_source
+sub_319EC	000319EC	00031B64	00031B60	?	000319F2	ldc r0, gbr	established_partial	11	reason=unprovable_source
+sub_31B88	00031B88	00031C66	00031C62	?	00031B90	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_31C84	00031C84	00031D12	00031D0E	?	00031C8A	ldc r0, gbr	established_partial	9	reason=unprovable_source
+sub_31D30	00031D30	00031DAA	00031DA6	?			none	0	no local GBR establishment
+sub_31DAA	00031DAA	0003244E	0003244A	00012844	00031DBA	ldc r0, gbr	established_full	18	source=r0 via 00031DB8
+sub_3246C	0003246C	000324AC	000324A8	?			none	0	no local GBR establishment
+sub_324AC	000324AC	00032654	00032650	?	000324B4	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_32678	00032678	00032776	00032772	?	00032686	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_32790	00032790	000327FE	000327FA	?			none	0	no local GBR establishment
+sub_327FE	000327FE	000331DA	000331D6	?	00032806	ldc r0, gbr	established_partial	31	reason=unprovable_source
+sub_331E8	000331E8	000332CC	000332C8	?	000331FC	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_332E0	000332E0	000333BC	000333B8	?			none	0	no local GBR establishment
+sub_333D4	000333D4	00033A30	00033A2C	?	000333DA	ldc r0, gbr	established_partial	38	reason=unprovable_source
+sub_33A30	00033A30	00033A5E	00033A5A	?			none	0	no local GBR establishment
+sub_33A5E	00033A5E	00033BB8	00033BB4	?	00033A68	ldc r0, gbr	established_partial	20	reason=unprovable_source
+sub_33BBA	00033BBA	00033C6E	00033C6A	?	00033BC4	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_33C70	00033C70	00033CB4	00033CB0	?	00033C78	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_33CB8	00033CB8	00033CD2	00033CCE	?			none	0	no local GBR establishment
+sub_33CD4	00033CD4	00033D04	00033D00	?			none	0	no local GBR establishment
+sub_33D04	00033D04	00033D2E	00033D2A	?			none	0	no local GBR establishment
+sub_33D30	00033D30	00033E02	00033DFE	?	00033D38	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_33E18	00033E18	00033E36	00033E32	?			none	0	no local GBR establishment
+sub_33E3C	00033E3C	00033E88	00033E84	?	00033E42	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_33E90	00033E90	00033EDA	00033ED6	?	00033E96	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_33EDA	00033EDA	00033F14	00033F10	?	00033EDE	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_33F14	00033F14	00033F58	00033F54	?	00033F18	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_33F66	00033F66	00034200	000341FC	ffff1860	00033F6C	ldc r0, gbr	established_full	0	source=r0 via 00033F6A
+sub_34200	00034200	00034458	00034454	ffff2f00	0003434C	ldc r0, gbr	established_full	12	source=r0 via 0003434A
+sub_34476	00034476	000344A4	000344A0	?			none	0	no local GBR establishment
+sub_344A4	000344A4	000344B6	000344B2	?			none	0	no local GBR establishment
+sub_344B6	000344B6	00034576	00034572	?	000344BA	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_3459C	0003459C	0003466A	00034666	?			none	0	no local GBR establishment
+sub_3466A	0003466A	00034680	0003467C	?			none	0	no local GBR establishment
+sub_34680	00034680	000346E0	000346DC	?			none	0	no local GBR establishment
+sub_346E0	000346E0	000351BC	000351B8	?			multiple_values	25	distinct=ffff1990,ffff1e3c
+sub_351C4	000351C4	0003525C	00035258	ffff1860	000351CE	ldc r0, gbr	established_full	2	source=r0 via 000351CC
+sub_35262	00035262	0003548A	00035486	?	00035268	ldc r0, gbr	established_partial	12	reason=unprovable_source
+sub_3548A	0003548A	000354C0	000354BC	?	00035490	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_354C0	000354C0	000354E6	000354E2	?	000354C4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_354E6	000354E6	0003553C	00035538	ffff1860	000354EA	ldc r0, gbr	established_full	0	source=r0 via 000354E8
+sub_35550	00035550	00035570	0003556C	?			none	0	no local GBR establishment
+sub_35570	00035570	000355B6	000355B2	?	00035576	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_355B6	000355B6	00035614	00035610	?	000355EE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_35640	00035640	000356E6	000356E2	?	00035682	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_356E6	000356E6	00035764	00035760	ffff1860	000356EE	ldc r0, gbr	established_full	3	source=r0 via 000356EC
+sub_35764	00035764	0003578A	00035786	ffff1860	00035768	ldc r0, gbr	established_full	0	source=r0 via 00035766
+sub_3578A	0003578A	000357A4	000357A0	?			none	0	no local GBR establishment
+sub_357A4	000357A4	000357FA	000357F6	?	000357AA	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_357FA	000357FA	0003582E	0003582A	?			none	0	no local GBR establishment
+sub_3582E	0003582E	00035852	0003584E	?			none	0	no local GBR establishment
+sub_35852	00035852	00035932	0003592E	ffff1860	0003585A	ldc r0, gbr	established_full	2	source=r0 via 00035858
+sub_35932	00035932	0003597C	00035978	?	00035936	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_3597C	0003597C	000359BA	000359B6	?	00035980	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_35A02	00035A02	00035A32	00035A2E	ffff1860	00035A06	ldc r0, gbr	established_full	0	source=r0 via 00035A04
+sub_35A32	00035A32	00035B20	00035B1C	ffff2ee4	00035A3A	ldc r0, gbr	established_full	0	source=r0 via 00035A38
+sub_35B58	00035B58	00035B64	00035B60	?			none	0	no local GBR establishment
+sub_35B64	00035B64	00035CA8	00035CA4	ffff1e44	00035B68	ldc r0, gbr	established_full	2	source=r0 via 00035B66
+sub_35CA8	00035CA8	00035E24	00035E20	?	00035CC8	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_35E28	00035E28	00035E94	00035E90	ffff1860	00035E2E	ldc r0, gbr	established_full	2	source=r0 via 00035E2C
+sub_35E94	00035E94	00035ECC	00035EC8	ffff17d0	00035E98	ldc r0, gbr	established_full	0	source=r0 via 00035E96
+sub_35ECC	00035ECC	00035F08	00035F04	ffff17d0	00035ED0	ldc r0, gbr	established_full	0	source=r0 via 00035ECE
+sub_35F38	00035F38	0003600A	00036006	?	00035F44	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_36012	00036012	000360C8	000360C4	?	0003601E	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_360C8	000360C8	0003615A	00036156	?	000360CE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_3615A	0003615A	00036162	0003615E	?			none	0	no local GBR establishment
+sub_36166	00036166	00036198	00036194	?			none	0	no local GBR establishment
+sub_361D0	000361D0	000362C2	000362BE	?	000361DA	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_362C2	000362C2	0003648C	00036488	ffff35c8	000362CA	ldc r0, gbr	established_full	6	source=r0 via 000362C8
+sub_3648C	0003648C	0003661A	00036616	ffff1d80	0003651C	ldc r0, gbr	established_full	7	source=r0 via 0003651A
+sub_3661A	0003661A	00036666	00036662	?			none	0	no local GBR establishment
+sub_366A4	000366A4	000369A6	000369A2	ffff2f00	0003681A	ldc r0, gbr	established_full	3	source=r0 via 00036818
+sub_36A08	00036A08	00036A26	00036A22	?			none	0	no local GBR establishment
+sub_36A26	00036A26	00036A80	00036A7C	ffff180c	00036A2C	ldc r0, gbr	established_full	0	source=r0 via 00036A2A
+sub_36A80	00036A80	00036D7E	00036D7A	ffff2ec0	00036A8E	ldc r0, gbr	established_full	13	source=r0 via 00036A8C
+sub_36D80	00036D80	00036E02	00036DFE	ffff182c	00036D88	ldc r0, gbr	established_full	1	source=r0 via 00036D86
+sub_36E02	00036E02	00037074	00037070	ffff180c	00036E0A	ldc r0, gbr	established_full	3	source=r0 via 00036E08
+sub_37074	00037074	0003717E	0003717A	ffff180c	00037078	ldc r0, gbr	established_full	3	source=r0 via 00037076
+sub_3717E	0003717E	00037186	00037182	?			none	0	no local GBR establishment
+sub_371B2	000371B2	000371DC	000371D8	?			none	0	no local GBR establishment
+sub_371DC	000371DC	0003720E	0003720A	?			none	0	no local GBR establishment
+sub_3720E	0003720E	0003723C	00037238	?			none	0	no local GBR establishment
+sub_3723C	0003723C	000380AA	000380A6	?			multiple_values	50	distinct=00010eea,ffff180c,ffff1850
+sub_380C0	000380C0	000380CC	000380C8	?			none	0	no local GBR establishment
+sub_380CC	000380CC	00038470	0003846C	00008f77	000380DE	ldc r0, gbr	established_full	14	source=r0 via 000380DC
+sub_38494	00038494	0003850E	0003850A	?	0003849A	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_3850E	0003850E	00038592	0003858E	ffff1860	00038518	ldc r0, gbr	established_full	2	source=r0 via 00038516
+sub_38592	00038592	00038882	0003887E	?	000385A0	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_388B4	000388B4	00038BBA	00038BB6	?			multiple_values	3	distinct=ffff1054,ffff2d2c,ffff2f00
+sub_38BD4	00038BD4	00038C30	00038C2C	ffff35cb	00038BD8	ldc r0, gbr	established_full	0	source=r0 via 00038BD6
+sub_38C30	00038C30	00038C54	00038C50	?			none	0	no local GBR establishment
+sub_38C54	00038C54	00038CA4	00038CA0	?	00038C5A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_38CA4	00038CA4	00038CB8	00038CB4	?			none	0	no local GBR establishment
+sub_38CB8	00038CB8	00038CEC	00038CE8	?			none	0	no local GBR establishment
+sub_38CEC	00038CEC	00038D24	00038D20	ffff1860	00038CF2	ldc r0, gbr	established_full	0	source=r0 via 00038CF0
+sub_38D2E	00038D2E	00038D5E	00038D5A	?	00038D32	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_38D5E	00038D5E	00038D8C	00038D88	?			none	0	no local GBR establishment
+sub_38D8C	00038D8C	00038E28	00038E24	?			none	0	no local GBR establishment
+sub_38E28	00038E28	00038EAA	00038EA6	ffff35cb	00038E2C	ldc r0, gbr	established_full	0	source=r0 via 00038E2A
+sub_38EAA	00038EAA	00038F02	00038EFE	ffff35cb	00038EAE	ldc r0, gbr	established_full	2	source=r0 via 00038EAC
+sub_38F02	00038F02	00038F62	00038F5E	?			none	0	no local GBR establishment
+sub_38F62	00038F62	00039024	00039020	?	00038F66	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_39024	00039024	0003904A		?			none	0	no local GBR establishment
+sub_3904A	0003904A	0003923C	00039238	?	00039160	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_39254	00039254	0003967E	0003967A	?	00039292	ldc r0, gbr	established_partial	32	reason=unprovable_source
+sub_3968C	0003968C	000396CC	000396C8	?	00039692	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_396CC	000396CC	0003975E	0003975A	?			none	0	no local GBR establishment
+sub_3975E	0003975E	0003978C	00039788	?			none	0	no local GBR establishment
+sub_3978C	0003978C	000397EC	000397E8	?			none	0	no local GBR establishment
+sub_397EC	000397EC	0003985E	0003985A	?			none	0	no local GBR establishment
+sub_3985E	0003985E	000398AA	000398A6	ffff1e44	00039862	ldc r0, gbr	established_full	2	source=r0 via 00039860
+sub_398AA	000398AA	0003993C	00039938	?			none	0	no local GBR establishment
+sub_3993C	0003993C	00039962	0003995E	?			none	0	no local GBR establishment
+sub_39962	00039962	00039B10	00039B0C	ffff1850	0003996C	ldc r0, gbr	established_full	21	source=r0 via 0003996A
+sub_39B10	00039B10	00039C9A	00039C96	?	00039B32	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_39CB2	00039CB2	00039DBC	00039DB8	ffff2d2c	00039CC2	ldc r0, gbr	established_full	17	source=r0 via 00039CC0
+sub_39DBC	00039DBC	00039DFA	00039DF6	ffff2d2c	00039DC2	ldc r0, gbr	established_full	6	source=r0 via 00039DC0
+sub_39E02	00039E02	00039E40	00039E3C	ffff2d2c	00039E08	ldc r0, gbr	established_full	6	source=r0 via 00039E06
+sub_39E40	00039E40	00039E7A	00039E76	?			none	0	no local GBR establishment
+sub_39E7A	00039E7A	0003A178	0003A174	ffff1860	00039F06	ldc r0, gbr	established_full	21	source=r0 via 00039F04
+sub_3A178	0003A178	0003A4C4	0003A4C0	ffff34c1	0003A40E	ldc r0, gbr	established_full	17	source=r0 via 0003A40C
+sub_3A4E0	0003A4E0	0003AB8C	0003AB88	?	0003A4F6	ldc r0, gbr	established_partial	24	reason=unprovable_source
+sub_3AB8C	0003AB8C	0003B2B0	0003B2AC	?	0003AB9E	ldc r0, gbr	established_partial	0	reason=control_flow_boundary
+sub_3B2B0	0003B2B0	0003BA68	0003BA64	?			multiple_values	0	distinct=ffff1e3c,ffff2150
+sub_3BA88	0003BA88	0003BC5C	0003BC58	ffff1e54	0003BA9A	ldc r0, gbr	established_full	9	source=r0 via 0003BA98
+sub_3BC68	0003BC68	0003BFC8	0003BFC4	ffff1c6c	0003BC78	ldc r0, gbr	established_full	2	source=r0 via 0003BC76
+sub_3BFC8	0003BFC8	0003C2FA	0003C2F6	ffff1e54	0003BFDA	ldc r0, gbr	established_full	16	source=r0 via 0003BFD8
+sub_3C2FA	0003C2FA	0003C344	0003C340	?			none	0	no local GBR establishment
+sub_3C344	0003C344	0003C4D8	0003C4D4	ffff1c78	0003C382	ldc r0, gbr	established_full	1	source=r0 via 0003C380
+sub_3C514	0003C514	0003C554	0003C550	00008a1a	0003C518	ldc r0, gbr	established_full	1	source=r0 via 0003C516
+sub_3C554	0003C554	0003C590	0003C58C	?			none	0	no local GBR establishment
+sub_3C590	0003C590	0003D4DA	0003D4D6	?			none	0	no local GBR establishment
+sub_3D4DA	0003D4DA	0003D9FC	0003D9F8	ffff1e6e	0003D4E4	ldc r0, gbr	established_full	0	source=r0 via 0003D4E2
+sub_3D9FC	0003D9FC	0003DA4A	0003DA46	ffff1d83	0003DA02	ldc r0, gbr	established_full	2	source=r0 via 0003DA00
+sub_3DA74	0003DA74	0003DB16	0003DB12	?	0003DA7A	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_3DB16	0003DB16	0003E2D2	0003E2CE	?			multiple_values	13	distinct=ffff1054,ffff1d83
+sub_3E2D2	0003E2D2	0003E30C		?			none	0	no local GBR establishment
+sub_3E30C	0003E30C	0003E37C	0003E378	ffff1e6e	0003E316	ldc r0, gbr	established_full	1	source=r0 via 0003E314
+sub_3E390	0003E390	0003E3B8	0003E3B4	ffff1d7c	0003E394	ldc r0, gbr	established_full	2	source=r0 via 0003E392
+sub_3E3C0	0003E3C0	0003E448	0003E444	ffff1860	0003E3C4	ldc r0, gbr	established_full	1	source=r0 via 0003E3C2
+sub_3E448	0003E448	0003E5C4	0003E5C0	ffff1860	0003E456	ldc r0, gbr	established_full	0	source=r0 via 0003E454
+sub_3E5C4	0003E5C4	0003E65A	0003E656	ffff1860	0003E5C8	ldc r0, gbr	established_full	0	source=r0 via 0003E5C6
+sub_3E67C	0003E67C	0003F35C	0003F358	ffff1028	0003E692	ldc r0, gbr	established_full	31	source=r0 via 0003E690
+sub_3F390	0003F390	0003F3DA	0003F3D6	?			none	0	no local GBR establishment
+sub_3F3FC	0003F3FC	0003F458	0003F454	?			none	0	no local GBR establishment
+sub_3F478	0003F478	0003F500	0003F4FC	00008444	0003F482	ldc r0, gbr	established_full	0	source=r0 via 0003F480
+sub_3F500	0003F500	0003F52E		?			none	0	no local GBR establishment
+sub_3F52E	0003F52E	0003F700	0003F6FC	ffff1028	0003F538	ldc r0, gbr	established_full	1	source=r0 via 0003F536
+sub_3F700	0003F700	0003F998	0003F994	ffff1054	0003F70C	ldc r0, gbr	established_full	0	source=r0 via 0003F70A
+sub_3F998	0003F998	0003FAE8	0003FAE4	?			none	0	no local GBR establishment
+sub_3FAE8	0003FAE8	0003FE2A	0003FE26	?			none	0	no local GBR establishment
+sub_3FE2A	0003FE2A	0003FF2E	0003FF2A	000087c7	0003FE32	ldc r0, gbr	established_full	5	source=r0 via 0003FE30
+sub_3FF2E	0003FF2E	0003FF8E	0003FF8A	?			none	0	no local GBR establishment
+sub_3FF8E	0003FF8E	0003FFB2	0003FFAE	?			none	0	no local GBR establishment
+sub_3FFB2	0003FFB2	00040074	00040070	?			none	0	no local GBR establishment
+sub_40074	00040074	000400E0	000400DC	?			none	0	no local GBR establishment
+sub_400E0	000400E0	000401E2	000401DE	ffff1028	000400E8	ldc r0, gbr	established_full	0	source=r0 via 000400E6
+sub_401E2	000401E2	000401F4		?			none	0	no local GBR establishment
+sub_401F4	000401F4	00040326	00040322	ffff1054	000401FC	ldc r0, gbr	established_full	2	source=r0 via 000401FA
+sub_4035C	0004035C	000403BC	000403B8	?			none	0	no local GBR establishment
+sub_403D8	000403D8	00040762	0004075E	ffff1028	000403EA	ldc r0, gbr	established_full	1	source=r0 via 000403E8
+sub_40790	00040790	00040C2C	00040C28	ffff1028	000407A4	ldc r0, gbr	established_full	1	source=r0 via 000407A2
+sub_40C84	00040C84	00040EDC	00040ED8	ffff1d7c	00040C8E	ldc r0, gbr	established_full	10	source=r0 via 00040C8C
+sub_40F18	00040F18	0004110C	00041108	?			multiple_values	4	distinct=ffff1054,ffff34c1
+sub_4110C	0004110C	000411E4	000411E0	?			none	0	no local GBR establishment
+sub_411FC	000411FC	0004128A	00041286	ffff1054	00041232	ldc r0, gbr	established_full	4	source=r0 via 00041230
+sub_4128A	0004128A	000412B8	000412B4	?			none	0	no local GBR establishment
+sub_412B8	000412B8	000415C4	000415C0	ffff1d80	000412CC	ldc r0, gbr	established_full	24	source=r0 via 000412CA
+sub_415CC	000415CC	000416A2	0004169E	ffff1d99	000415D4	ldc r0, gbr	established_full	4	source=r0 via 000415D2
+sub_416E4	000416E4	00041A88	00041A84	ffff1d80	000416F0	ldc r0, gbr	established_full	28	source=r0 via 000416EE
+sub_41AC4	00041AC4	00041BA0	00041B9C	ffff1d80	00041AC8	ldc r0, gbr	established_full	4	source=r0 via 00041AC6
+sub_41BA0	00041BA0	00041D4C	00041D48	?			multiple_values	12	distinct=ffff1d80,ffff1d83
+sub_41D74	00041D74	00041F2C	00041F28	?	00041D7A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_41F2C	00041F2C	00041F60	00041F5C	ffff34c1	00041F32	ldc r0, gbr	established_full	2	source=r0 via 00041F30
+sub_41F60	00041F60	000421AC		ffff1d83	00041F6E	ldc r0, gbr	established_full	10	source=r0 via 00041F6C
+def_42112	000421AC	000422BA	000422B6	?			restored_only	6	caller GBR restored; no local ldc
+sub_422BA	000422BA	00042588	00042584	ffff1d12	000422C0	ldc r0, gbr	established_full	2	source=r0 via 000422BE
+sub_42588	00042588	0004259C	00042598	?			none	0	no local GBR establishment
+sub_4259C	0004259C	000425B0	000425AC	?			none	0	no local GBR establishment
+sub_425B0	000425B0	0004269C	00042698	?			none	0	no local GBR establishment
+sub_4269C	0004269C	00042798	00042794	00014a14	000426F2	ldc r0, gbr	established_full	0	source=r0 via 000426F0
+sub_42838	00042838	00043296	00043292	?			multiple_values	40	distinct=00014a14,ffff1990,ffff1d7c
+sub_4329A	0004329A	0004338C	00043388	?			none	0	no local GBR establishment
+sub_433B4	000433B4	00043462	0004345E	?	000433BE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_434C4	000434C4	000435EC	000435E8	ffff1990	0004352C	ldc r0, gbr	established_full	1	source=r0 via 0004352A
+sub_435EC	000435EC	0004364A	00043646	ffff1990	00043602	ldc r0, gbr	established_full	0	source=r0 via 00043600
+sub_436F6	000436F6	00043868	00043864	ffff1990	0004370C	ldc r0, gbr	established_full	0	source=r0 via 0004370A
+sub_43964	00043964	0004397C	00043978	?	0004396A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+INT_DMAC2_DEI2	000439F4	00043B30	00043B2C	ffff1990	00043A14	ldc r0, gbr	established_full	0	source=r0 via 00043A12
+sub_43B6C	00043B6C	00043C50	00043C4C	ffff1990	00043B78	ldc r0, gbr	established_full	1	source=r0 via 00043B76
+sub_43C50	00043C50	00043C66	00043C62	?			none	0	no local GBR establishment
+sub_43C66	00043C66	00043C9A	00043C96	ffff3370	00043C6A	ldc r0, gbr	established_full	0	source=r0 via 00043C68
+sub_43CA0	00043CA0	00043D3E	00043D3A	?			none	0	no local GBR establishment
+sub_43D3E	00043D3E	00043D5C	00043D58	?			none	0	no local GBR establishment
+sub_43D5C	00043D5C	00043D9C	00043D98	ffff1c78	00043D62	ldc r0, gbr	established_full	0	source=r0 via 00043D60
+sub_43DA6	00043DA6	00043E2E	00043E2A	ffff1054	00043DB4	ldc r0, gbr	established_full	1	source=r0 via 00043DB2
+sub_43E2E	00043E2E	00043E48	00043E44	?			none	0	no local GBR establishment
+sub_43E48	00043E48	0004403E	0004403A	ffff1054	00043E5C	ldc r0, gbr	established_full	2	source=r0 via 00043E5A
+sub_44054	00044054	0004410E	0004410A	ffff1054	0004405E	ldc r0, gbr	established_full	0	source=r0 via 0004405C
+sub_4410E	0004410E	0004415E	0004415A	ffff1054	00044112	ldc r0, gbr	established_full	0	source=r0 via 00044110
+sub_441B0	000441B0	00044562	0004455E	ffff1028	000441C0	ldc r0, gbr	established_full	6	source=r0 via 000441BE
+sub_44572	00044572	0004470E	0004470A	ffff1d99	00044580	ldc r0, gbr	established_full	15	source=r0 via 0004457E
+sub_4470E	0004470E	0004479E	0004479A	ffff1d99	00044712	ldc r0, gbr	established_full	2	source=r0 via 00044710
+sub_447A4	000447A4	000447D4	000447D0	?			none	0	no local GBR establishment
+sub_447D4	000447D4	000449BE	000449BA	ffff1d99	000447E2	ldc r0, gbr	established_full	8	source=r0 via 000447E0
+sub_449C2	000449C2	00044A54	00044A50	ffff1054	000449CE	ldc r0, gbr	established_full	6	source=r0 via 000449CC
+sub_44A54	00044A54	00044BB2	00044BAE	?			none	0	no local GBR establishment
+sub_44BB2	00044BB2	00044BEE	00044BEA	ffff1c78	00044BB6	ldc r0, gbr	established_full	0	source=r0 via 00044BB4
+sub_44BEE	00044BEE	00044C60	00044C5C	?			none	0	no local GBR establishment
+sub_44C60	00044C60	00044CA0	00044C9C	ffff1054	00044C66	ldc r0, gbr	established_full	4	source=r0 via 00044C64
+sub_44CAE	00044CAE	00044E74	00044E70	?			none	0	no local GBR establishment
+sub_44E74	00044E74	00044F04	00044F00	ffff1d12	00044E7A	ldc r0, gbr	established_full	0	source=r0 via 00044E78
+sub_44F04	00044F04	00044FDA	00044FD6	?	00044F08	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_44FDA	00044FDA	00045114	00045110	?	00044FE4	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_45114	00045114	00045160	0004515C	ffff1d12	00045118	ldc r0, gbr	established_full	0	source=r0 via 00045116
+sub_45160	00045160	00045354	00045350	?			none	0	no local GBR establishment
+sub_45354	00045354	00045440	0004543C	ffff1d99	0004535A	ldc r0, gbr	established_full	5	source=r0 via 00045358
+sub_45440	00045440	000454A2	0004549E	ffff1d99	00045444	ldc r0, gbr	established_full	4	source=r0 via 00045442
+sub_454AE	000454AE	0004564A	00045646	ffff1d12	000454B6	ldc r0, gbr	established_full	7	source=r0 via 000454B4
+sub_4564A	0004564A	00045692	0004568E	ffff1d7c	0004564E	ldc r0, gbr	established_full	0	source=r0 via 0004564C
+sub_45698	00045698	00045758	00045754	ffff1e6e	0004569E	ldc r0, gbr	established_full	0	source=r0 via 0004569C
+sub_457A0	000457A0	00045996	00045992	00008717	000457AA	ldc r0, gbr	established_full	0	source=r0 via 000457A8
+sub_45996	00045996	00045AB6	00045AB2	ffff1054	0004599A	ldc r0, gbr	established_full	0	source=r0 via 00045998
+sub_45AB6	00045AB6	0004619A	00046196	ffff1054	00045AC4	ldc r0, gbr	established_full	4	source=r0 via 00045AC2
+sub_4619C	0004619C	00046384	00046380	ffff1054	000461A6	ldc r0, gbr	established_full	8	source=r0 via 000461A4
+sub_463E4	000463E4	000464AE	000464AA	ffff34c1	000463F0	ldc r0, gbr	established_full	2	source=r0 via 000463EE
+sub_464B6	000464B6	00046744	00046740	?			none	0	no local GBR establishment
+sub_46744	00046744	00046BC2	00046BBE	?			multiple_values	6	distinct=ffff1d98,ffff1ebd
+calculate_bounded_correction_1088	00046BC8	00046E3E	00046E3A	ffff1990	00046BD4	ldc r0, gbr	established_full	1	source=r0 via 00046BD2
+calculate_state_dependent_correction_1992	00046E3E	000470CC	000470C8	0000821e	00046E50	ldc r0, gbr	established_full	8	source=r0 via 00046E4E
+sub_470CC	000470CC	0004718C	00047188	?	000470D2	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_471D4	000471D4	00047226	00047222	?			none	0	no local GBR establishment
+decay_1239_toward_zero_when_20BD_expires	00047226	00047642	0004763E	0000e4ac	000472F0	ldc r0, gbr	established_full	5	source=r0 via 000472EE
+sub_4765C	0004765C	000478C2	000478BE	ffff1054	00047666	ldc r0, gbr	established_full	0	source=r0 via 00047664
+sub_478D4	000478D4	00047988	00047984	ffff1c6c	000478DA	ldc r0, gbr	established_full	0	source=r0 via 000478D8
+sub_47988	00047988	00047C8C	00047C88	?			multiple_values	6	distinct=ffff1c6c,ffff34b0
+sub_47C92	00047C92	00047DBC	00047DB8	?			none	0	no local GBR establishment
+sub_47DBC	00047DBC	00047DF6	00047DF2	ffff1d80	00047DC0	ldc r0, gbr	established_full	0	source=r0 via 00047DBE
+sub_47DF6	00047DF6	00047E3C	00047E38	?			none	0	no local GBR establishment
+sub_47E3C	00047E3C	00047E7E	00047E7A	?			none	0	no local GBR establishment
+sub_47E7E	00047E7E	00047F0E	00047F0A	ffff2150	00047E84	ldc r0, gbr	established_full	2	source=r0 via 00047E82
+sub_47F5C	00047F5C	00047FA8	00047FA4	?			none	0	no local GBR establishment
+sub_47FA8	00047FA8	00048024	00048020	ffff1d99	00047FAC	ldc r0, gbr	established_full	1	source=r0 via 00047FAA
+sub_48024	00048024	0004809E	0004809A	ffff1d7c	00048028	ldc r0, gbr	established_full	1	source=r0 via 00048026
+sub_480A4	000480A4	00048228	00048224	ffff1d99	000480AA	ldc r0, gbr	established_full	4	source=r0 via 000480A8
+sub_48228	00048228	00048408	00048404	ffff34c1	0004823A	ldc r0, gbr	established_full	10	source=r0 via 00048238
+sub_48440	00048440	000484D0	000484CC	ffff1d99	0004844C	ldc r0, gbr	established_full	4	source=r0 via 0004844A
+sub_484D0	000484D0	000484F0	000484EC	?			none	0	no local GBR establishment
+sub_484F0	000484F0	00048576	00048572	ffff34c1	000484F6	ldc r0, gbr	established_full	1	source=r0 via 000484F4
+sub_48580	00048580	000486FE	000486FA	?			none	0	no local GBR establishment
+sub_486FE	000486FE	00048768	00048764	ffff1e6e	00048704	ldc r0, gbr	established_full	2	source=r0 via 00048702
+sub_48768	00048768	0004886A	00048866	?			none	0	no local GBR establishment
+sub_4886A	0004886A	00048876	00048872	?			none	0	no local GBR establishment
+sub_48876	00048876	00048882	0004887E	?			none	0	no local GBR establishment
+sub_48882	00048882	000488BA	000488B6	?			none	0	no local GBR establishment
+sub_488BA	000488BA	00048C1E	00048C1A	?	000488CE	ldc r0, gbr	established_partial	20	reason=unprovable_source
+sub_48C1E	00048C1E	00048D2E	00048D2A	00008d40	00048C24	ldc r0, gbr	established_full	17	source=r0 via 00048C22
+sub_48D2E	00048D2E	0004913C	00049138	?	00048D42	ldc r0, gbr	established_partial	13	reason=unprovable_source
+sub_4913C	0004913C	00049194	00049190	?			none	0	no local GBR establishment
+sub_491BC	000491BC	000494F6	000494F2	?			none	0	no local GBR establishment
+sub_494F6	000494F6	0004951C	00049518	?			none	0	no local GBR establishment
+sub_4951C	0004951C	0004954E	0004954A	?			none	0	no local GBR establishment
+sub_49558	00049558	000496B0	000496AC	ffff1d98	00049564	ldc r0, gbr	established_full	10	source=r0 via 00049562
+sub_496B0	000496B0	000496FA	000496F6	ffff34c1	000496B4	ldc r0, gbr	established_full	0	source=r0 via 000496B2
+sub_496FA	000496FA	00049722	0004971E	?			none	0	no local GBR establishment
+sub_49722	00049722	00049764	00049760	?			none	0	no local GBR establishment
+sub_49764	00049764	00049780	0004977C	?			none	0	no local GBR establishment
+sub_49780	00049780	000497B0	000497AC	ffff34c1	00049784	ldc r0, gbr	established_full	0	source=r0 via 00049782
+sub_497BC	000497BC	000497D8	000497D4	?			none	0	no local GBR establishment
+sub_497E2	000497E2	00049880	0004987C	ffff1d99	000497E6	ldc r0, gbr	established_full	2	source=r0 via 000497E4
+sub_498A8	000498A8	000499C2	000499BE	ffff1d99	000498B2	ldc r0, gbr	established_full	9	source=r0 via 000498B0
+sub_499E8	000499E8	00049A3A	00049A36	ffff1e6e	000499EC	ldc r0, gbr	established_full	2	source=r0 via 000499EA
+sub_49A3A	00049A3A	00049C0E	00049C0A	?			none	0	no local GBR establishment
+sub_49C50	00049C50	00049CD0	00049CCC	ffff1e6e	00049C54	ldc r0, gbr	established_full	1	source=r0 via 00049C52
+sub_49CD0	00049CD0	0004A3B4	0004A3B0	ffff1d99	0004A050	ldc r0, gbr	established_full	31	source=r0 via 0004A04E
+sub_4A3C4	0004A3C4	0004A4B4	0004A4B0	ffff1054	0004A3CC	ldc r0, gbr	established_full	0	source=r0 via 0004A3CA
+sub_4A4C8	0004A4C8	0004A574	0004A570	?			none	0	no local GBR establishment
+sub_4A580	0004A580	0004A73A	0004A736	?			none	0	no local GBR establishment
+sub_4A784	0004A784	0004A876	0004A872	ffff1054	0004A792	ldc r0, gbr	established_full	0	source=r0 via 0004A790
+sub_4A876	0004A876	0004A900	0004A8FC	?			none	0	no local GBR establishment
+sub_4A912	0004A912	0004A9C8	0004A9C4	ffff1000	0004A916	ldc r0, gbr	established_full	0	source=r0 via 0004A914
+sub_4A9C8	0004A9C8	0004AD54	0004AD50	ffff1d12	0004AA86	ldc r0, gbr	established_full	7	source=r0 via 0004AA84
+sub_4AD54	0004AD54	0004AE58	0004AE54	ffff1f9a	0004AD5E	ldc r0, gbr	established_full	4	source=r0 via 0004AD5C
+sub_4AE58	0004AE58	0004AEAA	0004AEA6	?			none	0	no local GBR establishment
+sub_4AEAA	0004AEAA	0004AF16	0004AF12	ffff1054	0004AEB0	ldc r0, gbr	established_full	0	source=r0 via 0004AEAE
+sub_4AF24	0004AF24	0004AFD2	0004AFCE	?	0004AF36	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_4AFD2	0004AFD2	0004B03E	0004B03A	ffff1054	0004AFD8	ldc r0, gbr	established_full	0	source=r0 via 0004AFD6
+sub_4B03E	0004B03E	0004B1A2	0004B19E	ffff1d7c	0004B04C	ldc r0, gbr	established_full	2	source=r0 via 0004B04A
+sub_4B1A2	0004B1A2	0004B20E	0004B20A	?			none	0	no local GBR establishment
+sub_4B234	0004B234	0004B3A6	0004B3A2	ffff1d99	0004B238	ldc r0, gbr	established_full	3	source=r0 via 0004B236
+sub_4B3AA	0004B3AA	0004B472	0004B46E	ffff1d80	0004B3B4	ldc r0, gbr	established_full	0	source=r0 via 0004B3B2
+sub_4B498	0004B498	0004B584	0004B580	ffff1054	0004B4A4	ldc r0, gbr	established_full	0	source=r0 via 0004B4A2
+sub_4B5B0	0004B5B0	0004B93E	0004B93A	ffff1054	0004B5C6	ldc r0, gbr	established_full	1	source=r0 via 0004B5C4
+sub_4B94E	0004B94E	0004C42C	0004C428	?			multiple_values	26	distinct=ffff1054,ffff1990,ffff34b0
+sub_4C43C	0004C43C	0004C526	0004C522	ffff1054	0004C442	ldc r0, gbr	established_full	4	source=r0 via 0004C440
+sub_4C526	0004C526	0004C5D4	0004C5D0	ffff34b0	0004C52A	ldc r0, gbr	established_full	8	source=r0 via 0004C528
+sub_4C608	0004C608	0004C694	0004C690	?	0004C610	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_4C6A8	0004C6A8	0004C734	0004C730	?			none	0	no local GBR establishment
+sub_4C752	0004C752	0004CA8E	0004CA8A	ffff34c1	0004C75E	ldc r0, gbr	established_full	19	source=r0 via 0004C75C
+sub_4CAB2	0004CAB2	0004CB18	0004CB14	?			none	0	no local GBR establishment
+sub_4CB18	0004CB18	0004CD78	0004CD74	?			none	0	no local GBR establishment
+sub_4CD7E	0004CD7E	0004CEB8	0004CEB4	?			none	0	no local GBR establishment
+sub_4CEB8	0004CEB8	0004CF88	0004CF84	?			none	0	no local GBR establishment
+sub_4CF88	0004CF88	0004D33C	0004D338	ffff1990	0004D040	ldc r0, gbr	established_full	6	source=r0 via 0004D03E
+sub_4D33C	0004D33C	0004DA5C	0004DA58	?			multiple_values	54	distinct=ffff1ca8,ffff1d7c
+sub_4DA88	0004DA88	0004DAB0	0004DAAC	?			none	0	no local GBR establishment
+sub_4DAB0	0004DAB0	0004DC32	0004DC2E	?	0004DAC0	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_4DC32	0004DC32	0004DDEC	0004DDE8	ffff1054	0004DC3E	ldc r0, gbr	established_full	1	source=r0 via 0004DC3C
+sub_4DDEC	0004DDEC	0004E034	0004E030	ffff1d99	0004DDFE	ldc r0, gbr	established_full	13	source=r0 via 0004DDFC
+sub_4E034	0004E034	0004E076	0004E072	ffff1c78	0004E038	ldc r0, gbr	established_full	0	source=r0 via 0004E036
+sub_4E076	0004E076	0004E0E4	0004E0E0	?			none	0	no local GBR establishment
+sub_4E0E4	0004E0E4	0004E202	0004E1FE	ffff1c6c	0004E14C	ldc r0, gbr	established_full	0	source=r0 via 0004E14A
+sub_4E24C	0004E24C	0004F6DE	0004F6DA	ffff1028	0004E262	ldc r0, gbr	established_full	221	source=r0 via 0004E260
+sub_4F6DE	0004F6DE	0004FBC2	0004FBBE	ffff1000	0004F6EA	ldc r0, gbr	established_full	3	source=r0 via 0004F6E8
+sub_4FBC2	0004FBC2	0004FF54	0004FF50	ffff1d80	0004FCEC	ldc r0, gbr	established_full	9	source=r0 via 0004FCEA
+sub_4FF54	0004FF54	0004FF82	0004FF7E	?			none	0	no local GBR establishment
+sub_4FF82	0004FF82	0005028A	00050286	?			multiple_values	6	distinct=ffff1990,ffff1d98
+sub_5028A	0005028A	00050340	0005033C	ffff1990	00050292	ldc r0, gbr	established_full	0	source=r0 via 00050290
+sub_503E8	000503E8	000504B0	000504AC	ffff1d99	000503F0	ldc r0, gbr	established_full	1	source=r0 via 000503EE
+sub_504B0	000504B0	000504DE	000504DA	ffff1e7c	000504B4	ldc r0, gbr	established_full	0	source=r0 via 000504B2
+sub_504DE	000504DE	00050506	00050502	ffff1e7c	000504E2	ldc r0, gbr	established_full	0	source=r0 via 000504E0
+sub_50510	00050510	0005056C	00050568	?			none	0	no local GBR establishment
+sub_5056C	0005056C	000505F6	000505F2	?			none	0	no local GBR establishment
+sub_5062C	0005062C	00050694	00050690	ffff34c1	00050630	ldc r0, gbr	established_full	0	source=r0 via 0005062E
+sub_506A0	000506A0	00050888	00050884	?	000506B4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_50888	00050888	00050906	00050902	?			none	0	no local GBR establishment
+sub_50940	00050940	00050990	0005098C	?			none	0	no local GBR establishment
+sub_50990	00050990	000509D6	000509D2	ffff1d99	00050996	ldc r0, gbr	established_full	4	source=r0 via 00050994
+sub_509D6	000509D6	00050A1E	00050A1A	?			none	0	no local GBR establishment
+sub_50A22	00050A22	00050BB0	00050BAC	?			none	0	no local GBR establishment
+sub_50BDC	00050BDC	00050C66	00050C62	ffff1d99	00050BE4	ldc r0, gbr	established_full	4	source=r0 via 00050BE2
+sub_50C66	00050C66	00050D92	00050D8E	?			none	0	no local GBR establishment
+sub_50D92	00050D92	00050DC2	00050DBE	?			none	0	no local GBR establishment
+sub_50DC2	00050DC2	00050E5E	00050E5A	00008a03	00050DC8	ldc r0, gbr	established_full	0	source=r0 via 00050DC6
+sub_50E5E	00050E5E	0005119E	0005119A	0000877f	00050E74	ldc r0, gbr	established_full	14	source=r0 via 00050E72
+sub_5119E	0005119E	00051274	00051270	ffff1d99	000511AC	ldc r0, gbr	established_full	0	source=r0 via 000511AA
+sub_51274	00051274	000513AC	000513A8	?			none	0	no local GBR establishment
+sub_513AC	000513AC	00051CAA	00051CA6	?	000513C2	ldc r0, gbr	established_partial	116	reason=unprovable_source
+sub_51CFC	00051CFC	00051DE8	00051DE4	ffff371e	00051D04	ldc r0, gbr	established_full	0	source=r0 via 00051D02
+sub_51E48	00051E48	00052094	00052090	ffff1e58	00051E54	ldc r0, gbr	established_full	1	source=r0 via 00051E52
+sub_52148	00052148	00052294	00052290	ffff34b3	000521DE	ldc r0, gbr	established_full	2	source=r0 via 000521DC
+nullsub_1	000522A4	000522A8	000522A4	?			none	0	no local GBR establishment
+sub_522A8	000522A8	000523B8	000523B4	ffff38df	000522B8	ldc r0, gbr	established_full	0	source=r0 via 000522B6
+sub_523B8	000523B8	0005251E	0005251A	ffff35cb	000523C0	ldc r0, gbr	established_full	7	source=r0 via 000523BE
+nullsub_2	0005251E	00052522	0005251E	?			none	0	no local GBR establishment
+sub_52568	00052568	00052668	00052664	ffff2f00	00052572	ldc r0, gbr	established_full	7	source=r0 via 00052570
+sub_52668	00052668	000526DE	000526DA	?			none	0	no local GBR establishment
+sub_526EA	000526EA	00052780	0005277C	ffff35c8	000526F2	ldc r0, gbr	established_full	0	source=r0 via 000526F0
+nullsub_3	00052780	00052784	00052780	?			none	0	no local GBR establishment
+sub_52784	00052784	0005279E	0005279A	?			none	0	no local GBR establishment
+sub_5279E	0005279E	000528CC	000528C8	ffff35cb	000527A6	ldc r0, gbr	established_full	3	source=r0 via 000527A4
+sub_528CC	000528CC	0005292E	0005292A	?			none	0	no local GBR establishment
+sub_5293C	0005293C	00052B6E	00052B6A	?	0005294C	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_52B6E	00052B6E	00053396	00053392	ffff2f00	00052B84	ldc r0, gbr	established_full	0	source=r0 via 00052B82
+process_runtime_table_value_5339E	0005339E	0005386A	00053866	?			multiple_values	0	distinct=ffff2ca4,ffff33b8
+sub_5386A	0005386A	00053CDE	00053CDA	ffff2150	0005387E	ldc r0, gbr	established_full	0	source=r0 via 0005387C
+sub_53CF8	00053CF8	00053E46	00053E42	ffff34b0	00053D02	ldc r0, gbr	established_full	0	source=r0 via 00053D00
+sub_53E4A	00053E4A	0005403E	0005403A	ffff34b0	00053E56	ldc r0, gbr	established_full	1	source=r0 via 00053E54
+sub_54040	00054040	0005417E	0005417A	ffff34b3	0005404A	ldc r0, gbr	established_full	0	source=r0 via 00054048
+sub_541A0	000541A0	0005425C	00054258	ffff1054	000541B6	ldc r0, gbr	established_full	0	source=r0 via 000541B4
+sub_5425C	0005425C	0005438C	00054388	ffff1054	00054268	ldc r0, gbr	established_full	0	source=r0 via 00054266
+sub_543CC	000543CC	00054D1A	00054D16	?			multiple_values	26	distinct=000093da,ffff34b3
+sub_54D1A	00054D1A	00055396	00055392	?			multiple_values	23	distinct=ffff33cc,ffff34b3,ffff34c1
+sub_553B8	000553B8	00055514	00055510	?	000553CA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_55518	00055518	00055F20	00055F1C	?	0005552E	ldc r0, gbr	established_partial	97	reason=unprovable_source
+sub_55F20	00055F20	00055F66	00055F62	?	00055F28	ldc r0, gbr	established_partial	1	reason=control_flow_boundary
+sub_55F66	00055F66	0005611C	00056118	?	00055F7C	ldc r0, gbr	established_partial	12	reason=unprovable_source
+sub_5611C	0005611C	00056294	00056290	?			none	0	no local GBR establishment
+sub_562D4	000562D4	000564BA	000564B6	?	000562E2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_564D4	000564D4	000565A8	000565A4	?	000564E4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_565AA	000565AA	0005667C	00056678	?	000565BA	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_5667C	0005667C	00056806	00056802	?	0005668E	ldc r0, gbr	established_partial	18	reason=unprovable_source
+sub_56806	00056806	00056AAA	00056AA6	?	0005681A	ldc r0, gbr	established_partial	13	reason=unprovable_source
+sub_56AAA	00056AAA	00057E62	00057E5E	?	00056AB0	ldc r0, gbr	established_partial	173	reason=control_flow_boundary
+sub_57E62	00057E62	0005808E	0005808A	?	00057E66	ldc r0, gbr	established_partial	18	reason=unprovable_source
+sub_5808E	0005808E	0005837C	00058378	?	000580A2	ldc r0, gbr	established_partial	24	reason=unprovable_source
+sub_5837C	0005837C	000588B8	000588B4	?	00058394	ldc r0, gbr	established_partial	60	reason=control_flow_boundary
+sub_588BA	000588BA	00058B06	00058B02	?	000588CE	ldc r0, gbr	established_partial	32	reason=unprovable_source
+sub_58B06	00058B06	00058F16	00058F12	?	00058B14	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_58F16	00058F16	00059198	00059194	?	00058F2A	ldc r0, gbr	established_partial	15	reason=unprovable_source
+sub_5919A	0005919A	000599AE	000599AA	?	000591B0	ldc r0, gbr	established_partial	141	reason=unprovable_source
+sub_599AE	000599AE	000599F0	000599EC	?			none	0	no local GBR establishment
+calculate_and_update_1C01	000599F0	00059B58	00059B54	ffff1990	00059A00	ldc r0, gbr	established_full	3	source=r0 via 000599FE
+prepare_85DF_and_19BF	00059B58	0005A020	0005A01C	?			multiple_values	2	distinct=ffff1c78,ffff1d12
+sub_5A020	0005A020	0005A066	0005A062	ffff1d99	0005A024	ldc r0, gbr	established_full	1	source=r0 via 0005A022
+sub_5A066	0005A066	0005A0BE	0005A0BA	ffff1d99	0005A06A	ldc r0, gbr	established_full	0	source=r0 via 0005A068
+sub_5A0BE	0005A0BE	0005A150	0005A14C	?	0005A0C4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_5A160	0005A160	0005A232	0005A22E	ffff1d7c	0005A164	ldc r0, gbr	established_full	6	source=r0 via 0005A162
+sub_5A270	0005A270	0005A29C	0005A298	ffff34c1	0005A274	ldc r0, gbr	established_full	2	source=r0 via 0005A272
+sub_5A29C	0005A29C	0005A2B4	0005A2B0	?			none	0	no local GBR establishment
+sub_5A2B4	0005A2B4	0005A348	0005A344	ffff1d7c	0005A2B8	ldc r0, gbr	established_full	0	source=r0 via 0005A2B6
+sub_5A348	0005A348	0005A37E	0005A37A	ffff1d7c	0005A34C	ldc r0, gbr	established_full	0	source=r0 via 0005A34A
+sub_5A382	0005A382	0005A3BA	0005A3B6	?			none	0	no local GBR establishment
+sub_5A3BA	0005A3BA	0005A444	0005A440	ffff1d7c	0005A3BE	ldc r0, gbr	established_full	0	source=r0 via 0005A3BC
+sub_5A48C	0005A48C	0005AACA	0005AAC6	ffff1d7c	0005A4A2	ldc r0, gbr	established_full	47	source=r0 via 0005A4A0
+sub_5AACA	0005AACA	0005ACE0	0005ACDC	ffff1d12	0005AADE	ldc r0, gbr	established_full	6	source=r0 via 0005AADC
+sub_5ACE0	0005ACE0	0005AD0E	0005AD0A	?			none	0	no local GBR establishment
+sub_5AD0E	0005AD0E	0005AD28	0005AD24	ffff1d12	0005AD12	ldc r0, gbr	established_full	0	source=r0 via 0005AD10
+sub_5AD68	0005AD68	0005ADE8	0005ADE4	ffff1d99	0005AD6C	ldc r0, gbr	established_full	0	source=r0 via 0005AD6A
+sub_5ADE8	0005ADE8	0005AFF2	0005AFEE	?	0005ADF0	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_5AFF2	0005AFF2	0005B124	0005B120	?	0005B002	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_5B124	0005B124	0005B1F4	0005B1F0	?			none	0	no local GBR establishment
+sub_5B1F4	0005B1F4	0005B298	0005B294	ffff1d12	0005B1FE	ldc r0, gbr	established_full	1	source=r0 via 0005B1FC
+sub_5B29C	0005B29C	0005B336	0005B332	ffff1d99	0005B2A6	ldc r0, gbr	established_full	1	source=r0 via 0005B2A4
+sub_5B336	0005B336	0005B5A0	0005B59C	?	0005B342	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_5B5AC	0005B5AC	0005B772	0005B76E	?			none	0	no local GBR establishment
+sub_5B772	0005B772	0005BA7C	0005BA78	ffff1054	0005B77C	ldc r0, gbr	established_full	0	source=r0 via 0005B77A
+sub_5BA8A	0005BA8A	0005BCCE	0005BCCA	ffff1d12	0005BA98	ldc r0, gbr	established_full	6	source=r0 via 0005BA96
+sub_5BCCE	0005BCCE	0005BD7C	0005BD78	?			none	0	no local GBR establishment
+sub_5BD7C	0005BD7C	0005BF6C	0005BF68	?			multiple_values	12	distinct=00008ccc,ffff34c1
+sub_5BFC8	0005BFC8	0005C0A0	0005C09C	ffff1054	0005BFDC	ldc r0, gbr	established_full	1	source=r0 via 0005BFDA
+sub_5C0A0	0005C0A0	0005C0F2	0005C0EE	?			none	0	no local GBR establishment
+sub_5C0F2	0005C0F2	0005C13A	0005C136	?			none	0	no local GBR establishment
+sub_5C148	0005C148	0005C1EE	0005C1EA	?			none	0	no local GBR establishment
+sub_5C220	0005C220	0005C2A4	0005C2A0	?			none	0	no local GBR establishment
+sub_5C2A4	0005C2A4	0005C398	0005C394	?			none	0	no local GBR establishment
+sub_5C398	0005C398	0005C470	0005C46C	ffff1054	0005C3AC	ldc r0, gbr	established_full	1	source=r0 via 0005C3AA
+sub_5C470	0005C470	0005C586	0005C582	?			none	0	no local GBR establishment
+sub_5C586	0005C586	0005C5E2	0005C5DE	?			none	0	no local GBR establishment
+sub_5C5E2	0005C5E2	0005C628	0005C624	ffff1c6c	0005C5E6	ldc r0, gbr	established_full	0	source=r0 via 0005C5E4
+sub_5C638	0005C638	0005C680	0005C67C	?			none	0	no local GBR establishment
+sub_5C680	0005C680	0005C6A8	0005C6A4	?			none	0	no local GBR establishment
+sub_5C704	0005C704	0005C764	0005C760	?			none	0	no local GBR establishment
+sub_5C764	0005C764	0005C7AA	0005C7A6	?			none	0	no local GBR establishment
+sub_5C7AA	0005C7AA	0005C802	0005C7FE	?			none	0	no local GBR establishment
+sub_5C802	0005C802	0005C84A	0005C846	?			none	0	no local GBR establishment
+sub_5C870	0005C870	0005C91A	0005C916	?			none	0	no local GBR establishment
+sub_5C91A	0005C91A	0005CBEC	0005CBE8	ffff34b3	0005C922	ldc r0, gbr	established_full	5	source=r0 via 0005C920
+sub_5CBEC	0005CBEC	0005CD84	0005CD80	?			none	0	no local GBR establishment
+sub_5CD8C	0005CD8C	0005CF44	0005CF40	?			none	0	no local GBR establishment
+sub_5CF44	0005CF44	0005D0D4	0005D0D0	?			none	0	no local GBR establishment
+sub_5D0D6	0005D0D6	0005D27E	0005D27A	?			none	0	no local GBR establishment
+sub_5D27E	0005D27E	0005D2A4	0005D2A0	?			none	0	no local GBR establishment
+sub_5D2AC	0005D2AC	0005D460	0005D45C	?			none	0	no local GBR establishment
+sub_5D460	0005D460	0005D5D6	0005D5D2	?			none	0	no local GBR establishment
+sub_5D5D8	0005D5D8	0005D776	0005D772	?			none	0	no local GBR establishment
+sub_5D776	0005D776	0005D79E	0005D79A	?			none	0	no local GBR establishment
+sub_5D79E	0005D79E	0005D828	0005D824	ffff2f00	0005D7A2	ldc r0, gbr	established_full	0	source=r0 via 0005D7A0
+sub_5D828	0005D828	0005D852	0005D84E	ffff2f00	0005D82C	ldc r0, gbr	established_full	0	source=r0 via 0005D82A
+sub_5D864	0005D864	0005D874	0005D870	?			none	0	no local GBR establishment
+sub_5D87C	0005D87C	0005D90E	0005D90A	?			none	0	no local GBR establishment
+sub_5D920	0005D920	0005D984	0005D980	ffff3628	0005D92E	ldc r0, gbr	established_full	2	source=r0 via 0005D92C
+sub_5D984	0005D984	0005E6D8	0005E6D4	ffff3628	0005D994	ldc r0, gbr	established_full	2	source=r0 via 0005D992
+sub_5E6DE	0005E6DE	0005E8FA	0005E8F6	ffff34b3	0005E6E6	ldc r0, gbr	established_full	6	source=r0 via 0005E6E4
+sub_5E90E	0005E90E	0005EA8A	0005EA86	ffff34c1	0005E922	ldc r0, gbr	established_full	2	source=r0 via 0005E920
+sub_5EAA0	0005EAA0	0005EAD2	0005EACE	ffff34b3	0005EAA4	ldc r0, gbr	established_full	0	source=r0 via 0005EAA2
+sub_5EAD2	0005EAD2	0005EB10	0005EB0C	?			none	0	no local GBR establishment
+sub_5EB10	0005EB10	0005EB26	0005EB22	?			none	0	no local GBR establishment
+sub_5EB26	0005EB26	0005EBA0	0005EB9C	ffff34b3	0005EB2A	ldc r0, gbr	established_full	5	source=r0 via 0005EB28
+sub_5EBAA	0005EBAA	0005EBF8	0005EBF4	ffff34ba	0005EBAE	ldc r0, gbr	established_full	4	source=r0 via 0005EBAC
+sub_5EBF8	0005EBF8	0005EC0E	0005EC0A	?			none	0	no local GBR establishment
+sub_5EC0E	0005EC0E	0005EEDA	0005EED6	?			multiple_values	1	distinct=ffff3454,ffff34b3
+sub_5EF24	0005EF24	0005F066	0005F062	?			none	0	no local GBR establishment
+sci_write_control_04_and_poll	0005F070	0005F116	0005F112	?			none	0	no local GBR establishment
+sci_write_control_06_and_poll	0005F116	0005F1BC	0005F1B8	?			none	0	no local GBR establishment
+sub_5F1C4	0005F1C4	0005F21E	0005F21A	ffff1990	0005F1C8	ldc r0, gbr	established_full	0	source=r0 via 0005F1C6
+sub_5F21E	0005F21E	0005F294	0005F290	?	0005F228	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_5F294	0005F294	0005F2D8	0005F2D4	ffff1990	0005F298	ldc r0, gbr	established_full	0	source=r0 via 0005F296
+sub_5F2DC	0005F2DC	0005F330	0005F32C	ffff3370	0005F2E2	ldc r0, gbr	established_full	4	source=r0 via 0005F2E0
+sub_5F330	0005F330	0005F39C	0005F398	ffff3370	0005F338	ldc r0, gbr	established_full	0	source=r0 via 0005F336
+sub_5F39C	0005F39C	0005F478	0005F474	ffff1990	0005F3A4	ldc r0, gbr	established_full	0	source=r0 via 0005F3A2
+sub_5F478	0005F478	0005F514	0005F510	ffff1990	0005F47E	ldc r0, gbr	established_full	2	source=r0 via 0005F47C
+sub_5F518	0005F518	0005F5A8	0005F5A4	ffff1990	0005F520	ldc r0, gbr	established_full	3	source=r0 via 0005F51E
+sub_5F5A8	0005F5A8	0005F766	0005F762	?			multiple_values	0	distinct=ffff1054,ffff1990
+INT_ATU31_IMI3B	0005F766	0005FA52	0005FA4E	ffff1054	0005F77C	ldc r0, gbr	established_full	0	source=r0 via 0005F77A
+sub_5FA70	0005FA70	000644B2	000644AE	?	0005FA86	ldc r0, gbr	established_partial	751	reason=unprovable_source
+sub_644B2	000644B2	000644FE	000644FA	?			none	0	no local GBR establishment
+sub_644FE	000644FE	00064522	0006451E	?			none	0	no local GBR establishment
+sub_64522	00064522	00064594	00064590	?			none	0	no local GBR establishment
+sub_64594	00064594	00064750	0006474C	?	00064598	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_64750	00064750	000647A4	000647A0	?			none	0	no local GBR establishment
+sub_647A4	000647A4	0006480E	0006480A	?			none	0	no local GBR establishment
+sub_6480E	0006480E	0006485C	00064858	?			none	0	no local GBR establishment
+sub_6485C	0006485C	00064894	00064890	?			none	0	no local GBR establishment
+sub_648A6	000648A6	0006493E	0006493A	ffff1054	000648AC	ldc r0, gbr	established_full	1	source=r0 via 000648AA
+sub_6493E	0006493E	0006496E	0006496A	?			none	0	no local GBR establishment
+sub_649C4	000649C4	000649EC	000649E8	ffff34c1	000649C8	ldc r0, gbr	established_full	2	source=r0 via 000649C6
+sub_649EC	000649EC	00064A1C	00064A18	ffff1d99	000649F0	ldc r0, gbr	established_full	2	source=r0 via 000649EE
+sub_64A1C	00064A1C	00064A72	00064A6E	ffff1d99	00064A24	ldc r0, gbr	established_full	3	source=r0 via 00064A22
+sub_64A72	00064A72	00064B5C	00064B58	ffff35cb	00064A78	ldc r0, gbr	established_full	2	source=r0 via 00064A76
+sub_64B5C	00064B5C	00064BC8	00064BC4	?	00064B62	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_64BE6	00064BE6	00064CAC	00064CA8	ffff1e44	00064C12	ldc r0, gbr	established_full	1	source=r0 via 00064C10
+sub_64CEE	00064CEE	00064D3A	00064D36	ffff38df	00064CF4	ldc r0, gbr	established_full	1	source=r0 via 00064CF2
+sub_64D3A	00064D3A	00064DB2	00064DAE	ffff2f00	00064D44	ldc r0, gbr	established_full	0	source=r0 via 00064D42
+sub_64DB2	00064DB2	00064E0E	00064E0A	ffff35c8	00064DB6	ldc r0, gbr	established_full	2	source=r0 via 00064DB4
+sub_64E18	00064E18	00064FB6	00064FB2	?	00064E22	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_64FB6	00064FB6	00065028	00065024	ffff2f00	00064FBC	ldc r0, gbr	established_full	3	source=r0 via 00064FBA
+sub_6502C	0006502C	00065136	00065132	?	00065034	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_65174	00065174	000652FE	000652FA	ffff35c8	00065186	ldc r0, gbr	established_full	6	source=r0 via 00065184
+sub_652FE	000652FE	00065376	00065372	ffff1860	00065302	ldc r0, gbr	established_full	0	source=r0 via 00065300
+sub_65376	00065376	000654AE	000654AA	ffff35c8	00065380	ldc r0, gbr	established_full	7	source=r0 via 0006537E
+sub_654DC	000654DC	0006550E	0006550A	?	000654E2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_6550E	0006550E	00065548	00065544	?	00065514	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_65548	00065548	000655DC	000655D8	?	0006554E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_65604	00065604	000656FE	000656FA	?	00065608	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_65730	00065730	0006591C	00065918	00009862	0006575E	ldc r0, gbr	established_full	4	source=r0 via 0006575C
+sub_6595C	0006595C	0006599A	00065996	?			none	0	no local GBR establishment
+sub_659B0	000659B0	000659EE	000659EA	?			none	0	no local GBR establishment
+sub_659FC	000659FC	00065A1E		?			none	0	no local GBR establishment
+sub_65A1E	00065A1E	00065A5A	00065A56	?			none	0	no local GBR establishment
+sub_65A5A	00065A5A	00065A9C	00065A98	?			none	0	no local GBR establishment
+sub_65A9C	00065A9C	00065ADC	00065AD8	?			none	0	no local GBR establishment
+sub_65ADC	00065ADC	00065B06	00065B02	?			none	0	no local GBR establishment
+sub_65B10	00065B10	00065B3A	00065B36	?			none	0	no local GBR establishment
+sub_65B3A	00065B3A	00065B68	00065B64	?			none	0	no local GBR establishment
+sub_65B68	00065B68	00065BAA	00065BA6	?			none	0	no local GBR establishment
+sub_65BAA	00065BAA	00065C08	00065C04	ffff34c1	00065BB0	ldc r0, gbr	established_full	2	source=r0 via 00065BAE
+sub_65C2C	00065C2C	00065C60	00065C5C	?			none	0	no local GBR establishment
+sub_65C60	00065C60	00065C76	00065C72	?			none	0	no local GBR establishment
+sub_65C76	00065C76	00065C9C	00065C98	?			none	0	no local GBR establishment
+sub_65C9C	00065C9C	00065CC0	00065CBC	?			none	0	no local GBR establishment
+sub_65CC0	00065CC0	00065CE2	00065CDE	?			none	0	no local GBR establishment
+sub_65CE2	00065CE2	00065D00	00065CFC	?			none	0	no local GBR establishment
+sub_65D1E	00065D1E	00065D54	00065D50	ffff34c1	00065D22	ldc r0, gbr	established_full	0	source=r0 via 00065D20
+sub_65D5C	00065D5C	00065D96	00065D92	?			none	0	no local GBR establishment
+sub_65D96	00065D96	00065DCC	00065DC8	ffff34c1	00065D9A	ldc r0, gbr	established_full	0	source=r0 via 00065D98
+sub_65DCC	00065DCC	00065E2E	00065E2A	?			none	0	no local GBR establishment
+sub_65E2E	00065E2E	00065EBA	00065EB6	?			none	0	no local GBR establishment
+sub_65EBA	00065EBA	000660CC	000660C8	?			multiple_values	12	distinct=ffff1d99,ffff38df
+sub_660F2	000660F2	000661B0	000661AC	ffff1054	000660FE	ldc r0, gbr	established_full	1	source=r0 via 000660FC
+sub_661B0	000661B0	000661D6	000661D2	?			none	0	no local GBR establishment
+sub_661D6	000661D6	00066376	00066372	?			none	0	no local GBR establishment
+sub_66376	00066376	000664AA	000664A6	ffff1d99	0006637C	ldc r0, gbr	established_full	3	source=r0 via 0006637A
+sub_664B2	000664B2	0006664A	00066646	ffff1054	000664B6	ldc r0, gbr	established_full	0	source=r0 via 000664B4
+sub_6664A	0006664A	00066B0E	00066B0A	?			none	0	no local GBR establishment
+sub_66B0E	00066B0E	00066B2C	00066B28	?			none	0	no local GBR establishment
+sub_66B58	00066B58	00066C4C	00066C48	ffff1000	00066BF8	ldc r0, gbr	established_full	0	source=r0 via 00066BF6
+sub_66C8E	00066C8E	00066CDC	00066CD8	?			none	0	no local GBR establishment
+sub_66CDC	00066CDC	0006708E	0006708A	?			multiple_values	15	distinct=ffff1028,ffff1054
+sub_670A4	000670A4	00067110	0006710C	ffff1e6e	000670AC	ldc r0, gbr	established_full	7	source=r0 via 000670AA
+sub_67110	00067110	000672A2	0006729E	ffff1e6e	00067118	ldc r0, gbr	established_full	17	source=r0 via 00067116
+sub_672C4	000672C4	0006746A	00067466	ffff1d7c	000672CE	ldc r0, gbr	established_full	4	source=r0 via 000672CC
+sub_674B4	000674B4	0006756A	00067566	?	000674B8	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_6758C	0006758C	000676CC	000676C8	ffff1d12	00067596	ldc r0, gbr	established_full	0	source=r0 via 00067594
+sub_676CC	000676CC	000677EA	000677E6	ffff1d98	000676D0	ldc r0, gbr	established_full	0	source=r0 via 000676CE
+sub_677EA	000677EA	000678C2	000678BE	ffff1d98	000677EE	ldc r0, gbr	established_full	0	source=r0 via 000677EC
+sub_678CA	000678CA	000679A0	0006799C	ffff1d98	000678CE	ldc r0, gbr	established_full	0	source=r0 via 000678CC
+sub_679D0	000679D0	00067AC8	00067AC4	ffff1d98	000679DA	ldc r0, gbr	established_full	3	source=r0 via 000679D8
+sub_67AC8	00067AC8	00067C96	00067C92	ffff34c1	00067AD0	ldc r0, gbr	established_full	0	source=r0 via 00067ACE
+sub_67C96	00067C96	00067CDC	00067CD8	00008ccc	00067C9C	ldc r0, gbr	established_full	5	source=r0 via 00067C9A
+sub_67D0C	00067D0C	000680DC	000680D8	?			multiple_values	3	distinct=ffff1028,ffff1054
+sub_680FC	000680FC	0006811A	00068116	?			none	0	no local GBR establishment
+sub_6811A	0006811A	000682D0	000682CC	?			none	0	no local GBR establishment
+sub_68336	00068336	0006846A	00068466	?	0006833E	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_6846A	0006846A	000684DE	000684DA	ffff2f00	00068470	ldc r0, gbr	established_full	3	source=r0 via 0006846E
+sub_684DE	000684DE	000685A6	000685A2	?	000684E6	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_685A6	000685A6	0006897C	00068978	?			multiple_values	6	distinct=ffff1054,ffff1e44
+sub_689BA	000689BA	00068A86	00068A82	?	000689C0	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_68A86	00068A86	00068ADC	00068AD8	?			none	0	no local GBR establishment
+sub_68ADC	00068ADC	00068AE8	00068AE4	?			none	0	no local GBR establishment
+sub_68AF4	00068AF4	00068B78	00068B74	?			none	0	no local GBR establishment
+sub_68B78	00068B78	00068BB2	00068BAE	?			none	0	no local GBR establishment
+sub_68BB2	00068BB2	00068C08	00068C04	?			none	0	no local GBR establishment
+sub_68C08	00068C08	00068C28	00068C24	?			none	0	no local GBR establishment
+sub_68C28	00068C28	000690C6	000690C2	ffff1054	00068CD6	ldc r0, gbr	established_full	2	source=r0 via 00068CD4
+sub_690C6	000690C6	00069272	0006926E	?			none	0	no local GBR establishment
+sub_692B8	000692B8	00069496	00069492	000128ae	000692CE	ldc r0, gbr	established_full	0	source=r0 via 000692CC
+sub_69496	00069496	0006987A	00069876	ffff1054	00069606	ldc r0, gbr	established_full	1	source=r0 via 00069604
+sub_6988C	0006988C	00069AC8	00069AC4	ffff2f00	00069892	ldc r0, gbr	established_full	3	source=r0 via 00069890
+sub_69B24	00069B24	00069C2A	00069C26	?	00069B30	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_69C5C	00069C5C	00069CE8	00069CE4	?	00069C70	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_69CE8	00069CE8	00069D1C	00069D18	?			none	0	no local GBR establishment
+sub_69D1C	00069D1C	0006A0B2	0006A0AE	?			none	0	no local GBR establishment
+sub_6A0D4	0006A0D4	0006A242	0006A23E	00008b51	0006A1B8	ldc r0, gbr	established_full	4	source=r0 via 0006A1B6
+sub_6A268	0006A268	0006A282	0006A27E	ffff1d12	0006A26C	ldc r0, gbr	established_full	0	source=r0 via 0006A26A
+sub_6A282	0006A282	0006A2A4	0006A2A0	?			none	0	no local GBR establishment
+sub_6A2A4	0006A2A4	0006A326	0006A322	?			none	0	no local GBR establishment
+sub_6A326	0006A326	0006A360	0006A35C	?			none	0	no local GBR establishment
+sub_6A376	0006A376	0006A42C	0006A428	?			none	0	no local GBR establishment
+sub_6A42C	0006A42C	0006A604	0006A600	?			none	0	no local GBR establishment
+sub_6A616	0006A616	0006A71C	0006A718	?			none	0	no local GBR establishment
+sub_6A75C	0006A75C	0006A7B8	0006A7B4	?			none	0	no local GBR establishment
+sub_6A7B8	0006A7B8	0006A828	0006A824	?			none	0	no local GBR establishment
+sub_6A85C	0006A85C	0006A8C0	0006A8BC	?			none	0	no local GBR establishment
+sub_6A8C0	0006A8C0	0006A96C	0006A968	ffff1d12	0006A8C6	ldc r0, gbr	established_full	1	source=r0 via 0006A8C4
+sub_6A96C	0006A96C	0006A9E8	0006A9E4	?			none	0	no local GBR establishment
+sub_6A9E8	0006A9E8	0006AA82	0006AA7E	ffff1054	0006A9EE	ldc r0, gbr	established_full	1	source=r0 via 0006A9EC
+sub_6AACC	0006AACC	0006AB16	0006AB12	?			none	0	no local GBR establishment
+sub_6AB16	0006AB16	0006AB6C	0006AB68	000095a6	0006AB1C	ldc r0, gbr	established_full	2	source=r0 via 0006AB1A
+sub_6AB6C	0006AB6C	0006ABAA	0006ABA6	?			none	0	no local GBR establishment
+sub_6ABAA	0006ABAA	0006AF62	0006AF5E	000095a6	0006AD52	ldc r0, gbr	established_full	6	source=r0 via 0006AD50
+sub_6AF84	0006AF84	0006B01C	0006B018	ffff1d98	0006AF88	ldc r0, gbr	established_full	1	source=r0 via 0006AF86
+sub_6B01C	0006B01C	0006B036	0006B032	ffff1d12	0006B020	ldc r0, gbr	established_full	0	source=r0 via 0006B01E
+sub_6B036	0006B036	0006B058	0006B054	?			none	0	no local GBR establishment
+sub_6B058	0006B058	0006B0EC	0006B0E8	?			none	0	no local GBR establishment
+sub_6B0EC	0006B0EC	0006B12A	0006B126	?			none	0	no local GBR establishment
+sub_6B160	0006B160	0006B236	0006B232	?			none	0	no local GBR establishment
+sub_6B236	0006B236	0006B284	0006B280	?			none	0	no local GBR establishment
+sub_6B284	0006B284	0006B484	0006B480	?			none	0	no local GBR establishment
+sub_6B484	0006B484	0006B918	0006B914	?			none	0	no local GBR establishment
+sub_6B9A4	0006B9A4	0006BAAA	0006BAA6	ffff1d98	0006B9AC	ldc r0, gbr	established_full	4	source=r0 via 0006B9AA
+sub_6BAD8	0006BAD8	0006BB64	0006BB60	?	0006BAEC	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_6BB64	0006BB64	0006BB9C	0006BB98	ffff1d12	0006BB68	ldc r0, gbr	established_full	0	source=r0 via 0006BB66
+sub_6BB9C	0006BB9C	0006BCCA	0006BCC6	?			none	0	no local GBR establishment
+sub_6BCE8	0006BCE8	0006BE14	0006BE10	000098c0	0006BCF0	ldc r0, gbr	established_full	2	source=r0 via 0006BCEE
+sub_6BE1E	0006BE1E	0006BE54	0006BE50	?			none	0	no local GBR establishment
+sub_6BE54	0006BE54	0006BED2	0006BECE	?			none	0	no local GBR establishment
+sub_6BED2	0006BED2	0006BF24		?			none	0	no local GBR establishment
+sub_6BF24	0006BF24	0006BFC2	0006BFBE	ffff34c1	0006BF28	ldc r0, gbr	established_full	0	source=r0 via 0006BF26
+sub_6BFC2	0006BFC2	0006BFE4		?			none	0	no local GBR establishment
+sub_6BFE4	0006BFE4	0006C3FC	0006C3F8	ffff1054	0006BFFA	ldc r0, gbr	established_full	12	source=r0 via 0006BFF8
+sub_6C3FC	0006C3FC	0006C4A0		?			none	0	no local GBR establishment
+sub_6C4A0	0006C4A0	0006C4DC	0006C4D8	?	0006C4A4	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_6C4DC	0006C4DC	0006CAE8	0006CAE4	?			multiple_values	11	distinct=0000fcbc,ffff1e6e
+sub_6CAF0	0006CAF0	0006CAFC	0006CAF8	?			none	0	no local GBR establishment
+sub_6CAFC	0006CAFC	0006CB06	0006CB02	?			none	0	no local GBR establishment
+sub_6CB06	0006CB06	0006CB56	0006CB52	?			none	0	no local GBR establishment
+sub_6CB56	0006CB56	0006CBC2	0006CBBE	?	0006CB5A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_6CBC2	0006CBC2	0006CC0C	0006CC08	?			none	0	no local GBR establishment
+sub_6CC22	0006CC22	0006CDAE	0006CDAA	?			none	0	no local GBR establishment
+sub_6CDC4	0006CDC4	0006CF6E	0006CF6A	?	0006CDD2	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_6CF6E	0006CF6E	0006CF94		?			none	0	no local GBR establishment
+sub_6CF94	0006CF94	0006D0BC	0006D0B8	ffff34c1	0006CF9E	ldc r0, gbr	established_full	0	source=r0 via 0006CF9C
+sub_6D0BC	0006D0BC	0006D24E	0006D24A	ffff3454	0006D0C4	ldc r0, gbr	established_full	0	source=r0 via 0006D0C2
+sub_6D274	0006D274	0006D4BC	0006D4B8	ffff3454	0006D278	ldc r0, gbr	established_full	2	source=r0 via 0006D276
+sub_6D4BC	0006D4BC	0006D976	0006D972	ffff2118	0006D4D2	ldc r0, gbr	established_full	2	source=r0 via 0006D4D0
+sub_6D976	0006D976	0006DAFC	0006DAF8	?			none	0	no local GBR establishment
+sub_6DAFC	0006DAFC	0006DC16	0006DC12	?	0006DB08	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_6DC24	0006DC24	0006DC2E		?			none	0	no local GBR establishment
+sub_6DC2E	0006DC2E	0006DF26	0006DF22	ffff2ee4	0006DC3A	ldc r0, gbr	established_full	0	source=r0 via 0006DC38
+sub_6DF26	0006DF26	0006E32A	0006E326	ffff34c1	0006DF2C	ldc r0, gbr	established_full	1	source=r0 via 0006DF2A
+sub_6E350	0006E350	0006E3C6	0006E3C2	?			none	0	no local GBR establishment
+sub_6E3CC	0006E3CC	0006E7F0	0006E7EC	?			multiple_values	3	distinct=ffff2118,ffff33e6
+sub_6E7F0	0006E7F0	0006E83C		?			none	0	no local GBR establishment
+sub_6E83C	0006E83C	0006E8F6	0006E8F2	?	0006E840	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_6E908	0006E908	0006E936	0006E932	ffff34c1	0006E90C	ldc r0, gbr	established_full	2	source=r0 via 0006E90A
+sub_6E936	0006E936	0006E9B8	0006E9B4	ffff34c1	0006E93A	ldc r0, gbr	established_full	1	source=r0 via 0006E938
+sub_6E9B8	0006E9B8	0006EAA4	0006EAA0	ffff34c1	0006E9BC	ldc r0, gbr	established_full	0	source=r0 via 0006E9BA
+sub_6EAAC	0006EAAC	0006EB44	0006EB40	ffff34c1	0006EAB4	ldc r0, gbr	established_full	6	source=r0 via 0006EAB2
+sub_6EB68	0006EB68	0006EBDA	0006EBD6	ffff34c1	0006EB6E	ldc r0, gbr	established_full	2	source=r0 via 0006EB6C
+sub_6EBF8	0006EBF8	0006F496	0006F492	ffff2150	0006F198	ldc r0, gbr	established_full	7	source=r0 via 0006F196
+sub_6F496	0006F496	0006F4C0		?			none	0	no local GBR establishment
+sub_6F4C0	0006F4C0	0006F4E4	0006F4E0	ffff1d99	0006F4C4	ldc r0, gbr	established_full	2	source=r0 via 0006F4C2
+sub_6F4E4	0006F4E4	0006F542	0006F53E	ffff2150	0006F4E8	ldc r0, gbr	established_full	0	source=r0 via 0006F4E6
+sub_6F542	0006F542	0006F5DC	0006F5D8	ffff34c1	0006F54C	ldc r0, gbr	established_full	2	source=r0 via 0006F54A
+sub_6F5E8	0006F5E8	0006F89A	0006F896	ffff2150	0006F6B0	ldc r0, gbr	established_full	3	source=r0 via 0006F6AE
+sub_6F89A	0006F89A	0006F8EC		?			none	0	no local GBR establishment
+sub_6F8EC	0006F8EC	0006FA82	0006FA7E	?			none	0	no local GBR establishment
+sub_6FADC	0006FADC	0006FCFE	0006FCFA	?			none	0	no local GBR establishment
+sub_6FCFE	0006FCFE	0006FD8C		?			none	0	no local GBR establishment
+sub_6FD8C	0006FD8C	0006FEF4	0006FEF0	ffff1c6c	0006FD96	ldc r0, gbr	established_full	4	source=r0 via 0006FD94
+sub_6FF48	0006FF48	00070040	0007003C	ffff2150	0006FF5A	ldc r0, gbr	established_full	1	source=r0 via 0006FF58
+sub_7004E	0007004E	00070126	00070122	?			none	0	no local GBR establishment
+sub_70168	00070168	00070372	0007036E	ffff2150	0007017E	ldc r0, gbr	established_full	0	source=r0 via 0007017C
+sub_703A8	000703A8	00070620	0007061C	ffff3454	000703B2	ldc r0, gbr	established_full	4	source=r0 via 000703B0
+sub_70620	00070620	00070B62	00070B5E	?			multiple_values	6	distinct=ffff1054,ffff1c6c,ffff34c1
+sub_70B62	00070B62	00070C76	00070C72	?	00070C52	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_70C80	00070C80	00070CC8	00070CC4	?			none	0	no local GBR establishment
+sub_70CD8	00070CD8	00070CF2		?			none	0	no local GBR establishment
+sub_70CF2	00070CF2	00070D1A	00070D16	?			none	0	no local GBR establishment
+sub_70D1A	00070D1A	000710D6	000710D2	?	00070D2E	ldc r0, gbr	established_partial	30	reason=unprovable_source
+sub_710E4	000710E4	00071184	00071180	?	000710EA	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_71184	00071184	00071226	00071222	?	0007118A	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_71254	00071254	000715AE	000715AA	?	0007125C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_715AE	000715AE	00071856	00071852	?	000715BE	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_71856	00071856	00071896	00071892	ffff34c1	0007185C	ldc r0, gbr	established_full	0	source=r0 via 0007185A
+sub_71896	00071896	00071932	0007192E	?			none	0	no local GBR establishment
+sub_71932	00071932	000719C4	000719C0	?			none	0	no local GBR establishment
+sub_719EA	000719EA	00071F06	00071F02	?	000719FE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_71F06	00071F06	00071F18	00071F14	?	00071F0A	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_71F18	00071F18	00071F64	00071F60	?			none	0	no local GBR establishment
+sub_71F74	00071F74	000722F4	000722F0	?	00071F7C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_722FE	000722FE	00072460	0007245C	?	0007230C	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_72480	00072480	0007266E	0007266A	?	0007248E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_72676	00072676	00072876	00072872	?	00072684	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_72884	00072884	00072A24	00072A20	?	00072890	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_72A2A	00072A2A	00072C78	00072C74	?	00072A36	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_72CA8	00072CA8	00072E3A	00072E36	?	00072CB8	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_72E44	00072E44	0007419C	00074198	?			none	0	no local GBR establishment
+sub_7419C	0007419C	000741FA	000741F6	?			none	0	no local GBR establishment
+sub_74212	00074212	0007430A	00074306	?			none	0	no local GBR establishment
+sub_7432C	0007432C	0007434C		?			none	0	no local GBR establishment
+sub_7434C	0007434C	0007485A	00074856	ffff363c	00074360	ldc r0, gbr	established_full	41	source=r0 via 0007435E
+sub_748B8	000748B8	00074A00	000749FC	ffff1e7c	000748C2	ldc r0, gbr	established_full	6	source=r0 via 000748C0
+sub_74A78	00074A78	00074EC6	00074EC2	ffff34b3	00074C2E	ldc r0, gbr	established_full	21	source=r0 via 00074C2C
+sub_74EC6	00074EC6	00074EDA	00074ED6	?			none	0	no local GBR establishment
+sub_74EDA	00074EDA	00074F18	00074F14	?			none	0	no local GBR establishment
+sub_74F18	00074F18	00074FAC	00074FA8	ffff34b3	00074F1E	ldc r0, gbr	established_full	1	source=r0 via 00074F1C
+sub_74FD4	00074FD4	0007507E	0007507A	?			none	0	no local GBR establishment
+sub_75082	00075082	00075346	00075342	00012844	0007508A	ldc r0, gbr	established_full	1	source=r0 via 00075088
+sub_7534E	0007534E	0007545A	00075456	ffff1860	00075356	ldc r0, gbr	established_full	6	source=r0 via 00075354
+sub_7545A	0007545A	000754FE	000754FA	ffff1860	00075462	ldc r0, gbr	established_full	7	source=r0 via 00075460
+sub_754FE	000754FE	00075512	0007550E	?			none	0	no local GBR establishment
+sub_75514	00075514	00075552	0007554E	?			none	0	no local GBR establishment
+sub_75552	00075552	00075566	00075562	?			none	0	no local GBR establishment
+sub_75566	00075566	000755CA	000755C6	ffff1860	0007556C	ldc r0, gbr	established_full	0	source=r0 via 0007556A
+sub_755E4	000755E4	0007567C	00075678	ffff35cb	000755EA	ldc r0, gbr	established_full	5	source=r0 via 000755E8
+sub_756A8	000756A8	000756B8		?			none	0	no local GBR establishment
+sub_756B8	000756B8	000756E0	000756DC	?			none	0	no local GBR establishment
+sub_756E0	000756E0	00075796	00075792	?	000756EA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_75796	00075796	00075BF8	00075BF4	ffff34c1	000757A6	ldc r0, gbr	established_full	3	source=r0 via 000757A4
+sub_75BF8	00075BF8	00075C8E	00075C8A	?			none	0	no local GBR establishment
+sub_75C8E	00075C8E	00075CB4	00075CB0	?			none	0	no local GBR establishment
+sub_75CB4	00075CB4	00075CD2		?			none	0	no local GBR establishment
+sub_75CD2	00075CD2	00075E04	00075E00	?			none	0	no local GBR establishment
+sub_75E04	00075E04	00075E72	00075E6E	ffff3628	00075E08	ldc r0, gbr	established_full	3	source=r0 via 00075E06
+sub_75E7C	00075E7C	000761AC	000761A8	?	00075E8A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_761C8	000761C8	000762C6	000762C2	?	000761D4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_762C6	000762C6	0007630E	0007630A	?			none	0	no local GBR establishment
+sub_7631A	0007631A	00076406	00076402	ffff38dc	00076322	ldc r0, gbr	established_full	2	source=r0 via 00076320
+sub_76448	00076448	00076522	0007651E	ffff38dc	0007644E	ldc r0, gbr	established_full	2	source=r0 via 0007644C
+sub_7652C	0007652C	00076602	000765FE	ffff38dc	00076532	ldc r0, gbr	established_full	2	source=r0 via 00076530
+sub_7660C	0007660C	00076736	00076732	ffff38df	00076612	ldc r0, gbr	established_full	4	source=r0 via 00076610
+sub_76736	00076736	000771A8	000771A4	ffff1054	0007674C	ldc r0, gbr	established_full	13	source=r0 via 0007674A
+sub_771DC	000771DC	00077250	0007724C	ffff38dc	000771E0	ldc r0, gbr	established_full	0	source=r0 via 000771DE
+sub_77274	00077274	000772D0	000772CC	ffff3628	0007727A	ldc r0, gbr	established_full	0	source=r0 via 00077278
+sub_772D6	000772D6	0007753A	00077536	?	000772E4	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_7754C	0007754C	0007759C	00077598	ffff2d2c	00077550	ldc r0, gbr	established_full	0	source=r0 via 0007754E
+sub_7759C	0007759C	000775E8	000775E4	ffff34c1	000775A0	ldc r0, gbr	established_full	5	source=r0 via 0007759E
+sub_775E8	000775E8	000775FC	000775F8	?			none	0	no local GBR establishment
+sub_77608	00077608	00079314	00079310	ffff34c1	0007761E	ldc r0, gbr	established_full	163	source=r0 via 0007761C
+sub_79320	00079320	000793D6	000793D2	ffff3454	0007932A	ldc r0, gbr	established_full	3	source=r0 via 00079328
+sub_793F0	000793F0	00079488	00079484	?	000793F4	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_79488	00079488	000795AE	000795AA	?	0007948C	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_795AE	000795AE	00079612	0007960E	ffff34c1	000795B2	ldc r0, gbr	established_full	7	source=r0 via 000795B0
+sub_79612	00079612	0007967A	00079676	?			none	0	no local GBR establishment
+sub_79688	00079688	000796F8	000796F4	?			none	0	no local GBR establishment
+sub_796F8	000796F8	00079776	00079772	ffff2d2c	00079702	ldc r0, gbr	established_full	0	source=r0 via 00079700
+sub_79776	00079776	00079A76	00079A72	?			none	0	no local GBR establishment
+sub_79A78	00079A78	00079D06	00079D02	ffff34b0	00079A86	ldc r0, gbr	established_full	9	source=r0 via 00079A84
+sub_79D38	00079D38	00079D9C	00079D98	?			none	0	no local GBR establishment
+sub_79D9C	00079D9C	0007A204	0007A200	?			none	0	no local GBR establishment
+sub_7A204	0007A204	0007A378		?			none	0	no local GBR establishment
+update_saturating_counters	0007A378	0007A480	0007A47C	?			none	0	no local GBR establishment
+sub_7A490	0007A490	0007A4CE	0007A4CA	?	0007A496	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_7A4D8	0007A4D8	0007B22E	0007B22A	ffff2d2c	0007A4EE	ldc r0, gbr	established_full	115	source=r0 via 0007A4EC
+sub_7B22E	0007B22E	0007B432	0007B42E	ffff2d2c	0007B236	ldc r0, gbr	established_full	2	source=r0 via 0007B234
+sub_7B432	0007B432	0007B590	0007B58C	?	0007B446	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_7B5B8	0007B5B8	0007B724	0007B720	ffff2d2c	0007B5C2	ldc r0, gbr	established_full	12	source=r0 via 0007B5C0
+sub_7B724	0007B724	0007B746	0007B742	?			none	0	no local GBR establishment
+sub_7B746	0007B746	0007B768	0007B764	?			none	0	no local GBR establishment
+sub_7B768	0007B768	0007B92A	0007B926	ffff2d2c	0007B76C	ldc r0, gbr	established_full	0	source=r0 via 0007B76A
+sub_7B92A	0007B92A	0007B974	0007B970	?			none	0	no local GBR establishment
+sub_7B97E	0007B97E	0007B9C0	0007B9BC	?			none	0	no local GBR establishment
+sub_7B9C0	0007B9C0	0007B9DA	0007B9D6	?			none	0	no local GBR establishment
+sub_7B9DA	0007B9DA	0007BA24	0007BA20	ffff2d2c	0007B9E2	ldc r0, gbr	established_full	2	source=r0 via 0007B9E0
+sub_7BA40	0007BA40	0007BB90	0007BB8C	?			none	0	no local GBR establishment
+sub_7BBBC	0007BBBC	0007BCFA	0007BCF6	ffff3628	0007BBC4	ldc r0, gbr	established_full	3	source=r0 via 0007BBC2
+sub_7BD06	0007BD06	0007BD32	0007BD2E	?			none	0	no local GBR establishment
+sub_7BD32	0007BD32	0007BE68	0007BE64	00008e46	0007BD38	ldc r0, gbr	established_full	0	source=r0 via 0007BD36
+sub_7BE68	0007BE68	0007BEC4	0007BEC0	ffff34c1	0007BE6C	ldc r0, gbr	established_full	1	source=r0 via 0007BE6A
+sub_7BEC4	0007BEC4	0007BF18	0007BF14	ffff34c1	0007BEC8	ldc r0, gbr	established_full	2	source=r0 via 0007BEC6
+sub_7BF18	0007BF18	0007BF4C	0007BF48	?			none	0	no local GBR establishment
+sub_7BF70	0007BF70	0007BF9E	0007BF9A	?			none	0	no local GBR establishment
+sub_7BF9E	0007BF9E	0007C0AA	0007C0A6	?			none	0	no local GBR establishment
+sub_7C0D4	0007C0D4	0007C136	0007C132	?			none	0	no local GBR establishment
+sub_7C136	0007C136	0007C3C0	0007C3BC	ffff35c8	0007C142	ldc r0, gbr	established_full	9	source=r0 via 0007C140
+sub_7C3C8	0007C3C8	0007C414	0007C410	00012844	0007C3D0	ldc r0, gbr	established_full	2	source=r0 via 0007C3CE
+sub_7C43C	0007C43C	0007C5C8	0007C5C4	ffff3454	0007C44E	ldc r0, gbr	established_full	9	source=r0 via 0007C44C
+sub_7C5C8	0007C5C8	0007C616	0007C612	?			none	0	no local GBR establishment
+sub_7C616	0007C616	0007C880	0007C87C	ffff363c	0007C61E	ldc r0, gbr	established_full	0	source=r0 via 0007C61C
+sub_7C880	0007C880	0007C9EC	0007C9E8	?	0007C886	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_7C9EC	0007C9EC	0007CA80	0007CA7C	ffff34c1	0007C9F6	ldc r0, gbr	established_full	2	source=r0 via 0007C9F4
+sub_7CA8E	0007CA8E	0007CB04	0007CB00	?	0007CA96	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_7CB04	0007CB04	0007CBB4	0007CBB0	ffff35cb	0007CB08	ldc r0, gbr	established_full	7	source=r0 via 0007CB06
+sub_7CBB4	0007CBB4	0007CD5C	0007CD58	?	0007CBBA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_7CD74	0007CD74	0007CF7E	0007CF7A	?			none	0	no local GBR establishment
+sub_7CFB4	0007CFB4	0007D006	0007D002	ffff34c1	0007CFBA	ldc r0, gbr	established_full	2	source=r0 via 0007CFB8
+sub_7D006	0007D006	0007D122	0007D11E	?	0007D012	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_7D124	0007D124	0007D2D6	0007D2D2	000083e2	0007D12E	ldc r0, gbr	established_full	0	source=r0 via 0007D12C
+sub_7D2D6	0007D2D6	0007D30E	0007D30A	?			none	0	no local GBR establishment
+sub_7D30E	0007D30E	0007D330	0007D32C	?			none	0	no local GBR establishment
+sub_7D354	0007D354	0007D446	0007D442	?			none	0	no local GBR establishment
+sub_7D45E	0007D45E	0007D4F2	0007D4EE	?	0007D468	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_7D4F2	0007D4F2	0007D758	0007D754	?	0007D504	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_7D758	0007D758	0007DC6A	0007DC66	ffff3454	0007D76C	ldc r0, gbr	established_full	20	source=r0 via 0007D76A
+sub_7DC6C	0007DC6C	0007DD12	0007DD0E	ffff34c1	0007DC78	ldc r0, gbr	established_full	0	source=r0 via 0007DC76
+sub_7DD12	0007DD12	0007E132	0007E12E	ffff3454	0007DD1E	ldc r0, gbr	established_full	17	source=r0 via 0007DD1C
+sub_7E132	0007E132	0007E6C2	0007E6BE	ffff3454	0007E144	ldc r0, gbr	established_full	17	source=r0 via 0007E142
+sub_7E6C2	0007E6C2	0007E8A4	0007E8A0	ffff363c	0007E6CC	ldc r0, gbr	established_full	0	source=r0 via 0007E6CA
+sub_7E8B2	0007E8B2	0007ED22	0007ED1E	ffff34b3	0007E8C6	ldc r0, gbr	established_full	4	source=r0 via 0007E8C4
+sub_7ED22	0007ED22	0007ED7C	0007ED78	ffff34c1	0007ED26	ldc r0, gbr	established_full	4	source=r0 via 0007ED24
+sub_7ED82	0007ED82	0007EE16	0007EE12	?			none	0	no local GBR establishment
+sub_7EE22	0007EE22	0007F15C	0007F158	ffff3454	0007EE36	ldc r0, gbr	established_full	3	source=r0 via 0007EE34
+sub_7F16C	0007F16C	0007F332	0007F32E	?			none	0	no local GBR establishment
+sub_7F332	0007F332	0007F622	0007F61E	00008bac	0007F33E	ldc r0, gbr	established_full	1	source=r0 via 0007F33C
+sub_7F62E	0007F62E	0007F670	0007F66C	?			none	0	no local GBR establishment
+sub_7F680	0007F680	0007F7BE	0007F7BA	?	0007F688	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_7F7C8	0007F7C8	0007F92A	0007F926	ffff34c1	0007F7CE	ldc r0, gbr	established_full	11	source=r0 via 0007F7CC
+sub_7F93C	0007F93C	0007FC2E	0007FC2A	ffff34c1	0007F94A	ldc r0, gbr	established_full	5	source=r0 via 0007F948
+sub_7FC2E	0007FC2E	0007FCA6	0007FCA2	ffff34c1	0007FC36	ldc r0, gbr	established_full	3	source=r0 via 0007FC34
+sub_7FCA6	0007FCA6	0007FD12	0007FD0E	?			none	0	no local GBR establishment
+sub_7FD40	0007FD40	0007FFB6	0007FFB2	ffff34c1	0007FD44	ldc r0, gbr	established_full	2	source=r0 via 0007FD42
+sub_7FFCC	0007FFCC	0008001E	0008001A	?			none	0	no local GBR establishment
+sub_8001E	0008001E	0008007C	00080078	?			none	0	no local GBR establishment
+sub_8007C	0008007C	000800CC	000800C8	?			none	0	no local GBR establishment
+sub_800E2	000800E2	00080120	0008011C	?			none	0	no local GBR establishment
+sub_80120	00080120	0008016A	00080166	?			none	0	no local GBR establishment
+sub_8016A	0008016A	000801BE	000801BA	?			none	0	no local GBR establishment
+sub_801CC	000801CC	00080216	00080212	?			none	0	no local GBR establishment
+sub_80216	00080216	0008023A	00080236	ffff34c1	0008021C	ldc r0, gbr	established_full	2	source=r0 via 0008021A
+sub_8023A	0008023A	0008027E	0008027A	ffff34c1	0008023E	ldc r0, gbr	established_full	2	source=r0 via 0008023C
+sub_8027E	0008027E	0008029A	00080296	ffff34c1	00080282	ldc r0, gbr	established_full	0	source=r0 via 00080280
+sub_8029A	0008029A	000802BE	000802BA	ffff3628	000802A0	ldc r0, gbr	established_full	2	source=r0 via 0008029E
+sub_802BE	000802BE	00080334	00080330	?			none	0	no local GBR establishment
+sub_80334	00080334	00080352	0008034E	?			none	0	no local GBR establishment
+sub_80352	00080352	00080384	00080380	?			none	0	no local GBR establishment
+sub_80384	00080384	000803D0	000803CC	?			none	0	no local GBR establishment
+sub_803D0	000803D0	000803EC	000803E8	?			none	0	no local GBR establishment
+sub_803EC	000803EC	00080424	00080420	?			none	0	no local GBR establishment
+nullsub_4	00080424	00080428	00080424	?			none	0	no local GBR establishment
+sub_80448	00080448	000804DA	000804D6	ffff34c1	00080450	ldc r0, gbr	established_full	4	source=r0 via 0008044E
+sub_804DA	000804DA	00080576	00080572	ffff34c1	000804E2	ldc r0, gbr	established_full	4	source=r0 via 000804E0
+sub_80576	00080576	0008081C	00080818	?			none	0	no local GBR establishment
+sub_8081C	0008081C	0008085E	0008085A	?			none	0	no local GBR establishment
+sub_8085E	0008085E	00080884	00080880	?			none	0	no local GBR establishment
+sub_80884	00080884	000808A0	0008089C	?			none	0	no local GBR establishment
+sub_808BC	000808BC	00080E78	00080E74	ffff34b3	0008094E	ldc r0, gbr	established_full	43	source=r0 via 0008094C
+sub_80E78	00080E78	00080E9A	00080E96	?			none	0	no local GBR establishment
+sub_80EB6	00080EB6	00080F32	00080F2E	?			none	0	no local GBR establishment
+sub_80F32	00080F32	00080FB6	00080FB2	ffff38df	00080F42	ldc r0, gbr	established_full	2	source=r0 via 00080F40
+sub_80FE4	00080FE4	0008106C	00081068	ffff1e6e	00080FEC	ldc r0, gbr	established_full	2	source=r0 via 00080FEA
+sub_8106C	0008106C	000810A0	0008109C	?			none	0	no local GBR establishment
+sub_810A0	000810A0	000810BC	000810B8	?			none	0	no local GBR establishment
+sub_810BC	000810BC	000810E8	000810E4	?			none	0	no local GBR establishment
+sub_810E8	000810E8	000810FA	000810F6	?			none	0	no local GBR establishment
+sub_81120	00081120	00081290	0008128C	?	00081128	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_81290	00081290	00081326	00081322	?	0008129A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_81350	00081350	0008141A	00081416	?			none	0	no local GBR establishment
+sub_81440	00081440	00081566	00081562	ffff34c1	00081446	ldc r0, gbr	established_full	6	source=r0 via 00081444
+sub_81566	00081566	0008157A	00081576	?			none	0	no local GBR establishment
+sub_8157A	0008157A	000816C6	000816C2	?			none	0	no local GBR establishment
+sub_816E8	000816E8	000816FE		?			none	0	no local GBR establishment
+sub_816FE	000816FE	00081840	0008183C	ffff38df	00081704	ldc r0, gbr	established_full	0	source=r0 via 00081702
+sub_8184A	0008184A	0008188E	0008188A	ffff3628	0008184E	ldc r0, gbr	established_full	2	source=r0 via 0008184C
+sub_8188E	0008188E	00081916	00081912	?			none	0	no local GBR establishment
+sub_81916	00081916	000819CA	000819C6	ffff3628	00081978	ldc r0, gbr	established_full	2	source=r0 via 00081976
+sub_819D8	000819D8	00081A92	00081A8E	ffff34c1	000819E8	ldc r0, gbr	established_full	4	source=r0 via 000819E6
+sub_81A92	00081A92	00081AA6	00081AA2	?			none	0	no local GBR establishment
+sub_81AA6	00081AA6	00081C16	00081C12	?	00081AAA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_81C3C	00081C3C	000820E0	000820DC	ffff34c1	00081C50	ldc r0, gbr	established_full	34	source=r0 via 00081C4E
+sub_820E0	000820E0	000821BA	000821B6	ffff34b3	000820E6	ldc r0, gbr	established_full	8	source=r0 via 000820E4
+sub_821CA	000821CA	000823E6	000823E2	ffff34c1	000821D6	ldc r0, gbr	established_full	6	source=r0 via 000821D4
+sub_823E8	000823E8	000824EA	000824E6	ffff34b0	000823EE	ldc r0, gbr	established_full	3	source=r0 via 000823EC
+sub_824EE	000824EE	00082584	00082580	ffff34b0	000824F6	ldc r0, gbr	established_full	0	source=r0 via 000824F4
+sub_825AC	000825AC	00082642	0008263E	?	000825B4	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_82660	00082660	000826FE	000826FA	ffff38df	00082666	ldc r0, gbr	established_full	0	source=r0 via 00082664
+sub_8272C	0008272C	000827B4	000827B0	ffff38df	0008276E	ldc r0, gbr	established_full	2	source=r0 via 0008276C
+sub_827F2	000827F2	00082820	0008281C	?			none	0	no local GBR establishment
+sub_82820	00082820	00082850	0008284C	?			none	0	no local GBR establishment
+sub_82850	00082850	000828A4	000828A0	?			none	0	no local GBR establishment
+sub_828D0	000828D0	00082DD0	00082DCC	?			none	0	no local GBR establishment
+sub_82DF8	00082DF8	000830FE	000830FA	ffff3628	00082E00	ldc r0, gbr	established_full	1	source=r0 via 00082DFE
+sub_830FE	000830FE	000831B0	000831AC	ffff3628	00083104	ldc r0, gbr	established_full	0	source=r0 via 00083102
+sub_831DC	000831DC	000836B6	000836B2	ffff35c8	000831F0	ldc r0, gbr	established_full	10	source=r0 via 000831EE
+initialize_state_2954_2955	000836DC	0008386C	00083868	?			none	0	no local GBR establishment
+sub_83888	00083888	00083892	0008388E	?			none	0	no local GBR establishment
+sub_83892	00083892	0008398C	00083988	?			none	0	no local GBR establishment
+sub_839BC	000839BC	00083A14	00083A10	?	000839C0	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_83A14	00083A14	00083AF8	00083AF4	ffff3628	00083A1E	ldc r0, gbr	established_full	3	source=r0 via 00083A1C
+sub_83B2C	00083B2C	00083F50	00083F4C	ffff38df	00083B3A	ldc r0, gbr	established_full	26	source=r0 via 00083B38
+sub_83F70	00083F70	00083FB8	00083FB4	ffff35cb	00083F76	ldc r0, gbr	established_full	1	source=r0 via 00083F74
+sub_83FB8	00083FB8	00083FF8	00083FF4	?			none	0	no local GBR establishment
+sub_83FF8	00083FF8	0008402A	00084026	ffff35c8	00083FFC	ldc r0, gbr	established_full	0	source=r0 via 00083FFA
+sub_8402A	0008402A	0008407E	0008407A	ffff1860	0008402E	ldc r0, gbr	established_full	0	source=r0 via 0008402C
+sub_84082	00084082	000840E0	000840DC	?			none	0	no local GBR establishment
+sub_840E0	000840E0	00084112	0008410E	?			none	0	no local GBR establishment
+sub_84112	00084112	00084154	00084150	ffff35cb	00084116	ldc r0, gbr	established_full	0	source=r0 via 00084114
+sub_84154	00084154	00084184	00084180	?			none	0	no local GBR establishment
+sub_84184	00084184	00084194	00084190	?			none	0	no local GBR establishment
+sub_841C8	000841C8	00084C1A	00084C16	ffff2f00	00084278	ldc r0, gbr	established_full	0	source=r0 via 00084276
+sub_84C1A	00084C1A	00084CEE	00084CEA	ffff35cb	00084C2E	ldc r0, gbr	established_full	3	source=r0 via 00084C2C
+sub_84CF4	00084CF4	00084DB2	00084DAE	ffff35cb	00084D08	ldc r0, gbr	established_full	3	source=r0 via 00084D06
+sub_84DC8	00084DC8	00084E7E	00084E7A	ffff35cb	00084DCE	ldc r0, gbr	established_full	0	source=r0 via 00084DCC
+sub_84E80	00084E80	00084F26	00084F22	?	00084E84	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_84F26	00084F26	00084F38	00084F34	?			none	0	no local GBR establishment
+sub_84F50	00084F50	00084FB2	00084FAE	ffff1d99	00084F54	ldc r0, gbr	established_full	0	source=r0 via 00084F52
+sub_84FB2	00084FB2	00085126	00085122	?			none	0	no local GBR establishment
+sub_85126	00085126	00085150	0008514C	?			none	0	no local GBR establishment
+sub_85190	00085190	000852F4	000852F0	?			none	0	no local GBR establishment
+sub_852F4	000852F4	0008531E	0008531A	?			none	0	no local GBR establishment
+sub_8531E	0008531E	000854A0	0008549C	?			none	0	no local GBR establishment
+sub_854A0	000854A0	000854BA	000854B6	?			none	0	no local GBR establishment
+sub_854BA	000854BA	00085634	00085630	ffff34c1	000854CC	ldc r0, gbr	established_full	20	source=r0 via 000854CA
+sub_8566C	0008566C	00085950	0008594C	ffff371e	00085678	ldc r0, gbr	established_full	4	source=r0 via 00085676
+sub_85950	00085950	0008599A	00085996	ffff371e	00085954	ldc r0, gbr	established_full	0	source=r0 via 00085952
+sub_859AA	000859AA	00085AF4	00085AF0	ffff3614	000859B2	ldc r0, gbr	established_full	2	source=r0 via 000859B0
+sub_85AF4	00085AF4	00085E34	00085E30	?	00085B02	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_85E34	00085E34	00086110	0008610C	?	00085E46	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_86118	00086118	000861AE	000861AA	?			none	0	no local GBR establishment
+sub_861AE	000861AE	000862D4	000862D0	ffff3628	000861B6	ldc r0, gbr	established_full	3	source=r0 via 000861B4
+sub_862D4	000862D4	00086684	00086680	?			none	0	no local GBR establishment
+sub_866BC	000866BC	00086818	00086814	ffff34c1	000866C2	ldc r0, gbr	established_full	11	source=r0 via 000866C0
+sub_86824	00086824	0008687A	00086876	ffff34c1	00086828	ldc r0, gbr	established_full	3	source=r0 via 00086826
+sub_8687A	0008687A	000868DC	000868D8	?	00086880	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_86900	00086900	00086B7A	00086B76	ffff34c1	00086914	ldc r0, gbr	established_full	3	source=r0 via 00086912
+sub_86B98	00086B98	00086D84	00086D80	?	00086BA2	ldc r0, gbr	established_partial	21	reason=unprovable_source
+sub_86D9C	00086D9C	00088514	00088510	ffff3454	00086DB2	ldc r0, gbr	established_full	47	source=r0 via 00086DB0
+sub_88534	00088534	00088904	00088900	ffff3454	00088544	ldc r0, gbr	established_full	6	source=r0 via 00088542
+sub_88904	00088904	00088942	0008893E	ffff34c1	00088908	ldc r0, gbr	established_full	4	source=r0 via 00088906
+sub_8895A	0008895A	00088AB2	00088AAE	?			none	0	no local GBR establishment
+sub_88AB4	00088AB4	00088CE0	00088CDC	ffff3454	00088AC6	ldc r0, gbr	established_full	19	source=r0 via 00088AC4
+sub_88CE0	00088CE0	0008947C	00089478	ffff2150	00088D84	ldc r0, gbr	established_full	0	source=r0 via 00088D82
+sub_8948A	0008948A	000895E8	000895E4	ffff3454	0008949A	ldc r0, gbr	established_full	3	source=r0 via 00089498
+sub_895EC	000895EC	000896E8	000896E4	?	000895F2	ldc r0, gbr	established_partial	11	reason=unprovable_source
+sub_896EE	000896EE	00089D9E	00089D9A	ffff3454	000896F8	ldc r0, gbr	established_full	25	source=r0 via 000896F6
+sub_89D9E	00089D9E	00089E5C	00089E58	ffff3454	00089DAA	ldc r0, gbr	established_full	3	source=r0 via 00089DA8
+sub_89E5C	00089E5C	00089E86	00089E82	ffff34c1	00089E60	ldc r0, gbr	established_full	2	source=r0 via 00089E5E
+sub_89EA8	00089EA8	0008A302	0008A2FE	ffff34b0	00089EE6	ldc r0, gbr	established_full	15	source=r0 via 00089EE4
+sub_8A302	0008A302	0008A37E	0008A37A	ffff2150	0008A308	ldc r0, gbr	established_full	0	source=r0 via 0008A306
+sub_8A3A0	0008A3A0	0008AB9A	0008AB96	?	0008A3B2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_8ABB4	0008ABB4	0008AD6A	0008AD66	?			none	0	no local GBR establishment
+sub_8AD7C	0008AD7C	0008B3F6	0008B3F2	ffff34c1	0008AD90	ldc r0, gbr	established_full	66	source=r0 via 0008AD8E
+sub_8B3FE	0008B3FE	0008B87E	0008B87A	?			none	0	no local GBR establishment
+sub_8B87E	0008B87E	0008B978	0008B974	ffff38df	0008B8AA	ldc r0, gbr	established_full	2	source=r0 via 0008B8A8
+sub_8B98C	0008B98C	0008C47C	0008C478	?	0008B9A2	ldc r0, gbr	established_partial	79	reason=unprovable_source
+sub_8C490	0008C490	0008CF66	0008CF62	?	0008C4A6	ldc r0, gbr	established_partial	151	reason=unprovable_source
+sub_8CF66	0008CF66	0008D4F4	0008D4F0	?	0008CF76	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_8D510	0008D510	00090090	0009008C	?	0008D526	ldc r0, gbr	established_partial	215	reason=unprovable_source
+sub_900DA	000900DA	00090380	0009037C	?	000900EC	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_90384	00090384	00090E60	00090E5C	?	00090388	ldc r0, gbr	established_partial	83	reason=unprovable_source
+sub_90E60	00090E60	00090E94	00090E90	?	00090E64	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_90EA4	00090EA4	00091510	0009150C	?	00090EBA	ldc r0, gbr	established_partial	118	reason=unprovable_source
+sub_91510	00091510	000915A4	000915A0	?	0009151E	ldc r0, gbr	established_partial	8	reason=control_flow_boundary
+sub_915A4	000915A4	00091800	000917FC	?	000915B8	ldc r0, gbr	established_partial	33	reason=unprovable_source
+sub_91802	00091802	00091A4A	00091A46	?	00091818	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_91A4A	00091A4A	00091AC8	00091AC4	?	00091A4E	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_91AD0	00091AD0	00091E20	00091E1C	?			none	0	no local GBR establishment
+sub_91E20	00091E20	00091E88	00091E84	?			none	0	no local GBR establishment
+sub_91E88	00091E88	00091EA4	00091EA0	?			none	0	no local GBR establishment
+sub_91EA4	00091EA4	00091F34	00091F30	?			none	0	no local GBR establishment
+sub_91F40	00091F40	00091FFA	00091FF6	ffff34c1	00091F46	ldc r0, gbr	established_full	0	source=r0 via 00091F44
+sub_91FFA	00091FFA	00092032	0009202E	?	00092002	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_92060	00092060	00092288	00092284	000083aa	00092070	ldc r0, gbr	established_full	0	source=r0 via 0009206E
+sub_92292	00092292	0009238C	00092388	?	00092296	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_9238E	0009238E	000926C0	000926BC	ffff34c1	00092398	ldc r0, gbr	established_full	15	source=r0 via 00092396
+sub_926C0	000926C0	0009284A	00092846	ffff34c1	000926C6	ldc r0, gbr	established_full	0	source=r0 via 000926C4
+sub_9284A	0009284A	000928FA	000928F6	?	00092852	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_928FA	000928FA	00092932	0009292E	?			none	0	no local GBR establishment
+sub_9293A	0009293A	00092B7E	00092B7A	ffff34c1	00092944	ldc r0, gbr	established_full	23	source=r0 via 00092942
+sub_92B7E	00092B7E	00092E1E	00092E1A	ffff34c1	00092B88	ldc r0, gbr	established_full	13	source=r0 via 00092B86
+sub_92E1E	00092E1E	00092E38		?			none	0	no local GBR establishment
+sub_92E38	00092E38	00093092	0009308E	?	00092E48	ldc r0, gbr	established_partial	8	reason=unprovable_source
+sub_9309E	0009309E	00093122	0009311E	ffff34c1	000930A2	ldc r0, gbr	established_full	0	source=r0 via 000930A0
+sub_93122	00093122	00093442	0009343E	ffff34b0	00093130	ldc r0, gbr	established_full	0	source=r0 via 0009312E
+sub_93442	00093442	00093870	0009386C	ffff34b3	00093450	ldc r0, gbr	established_full	0	source=r0 via 0009344E
+sub_93876	00093876	00093A02	000939FE	ffff34c1	0009387E	ldc r0, gbr	established_full	0	source=r0 via 0009387C
+sub_93A02	00093A02	00093AB0	00093AAC	ffff34b0	00093A0A	ldc r0, gbr	established_full	0	source=r0 via 00093A08
+sub_93AB8	00093AB8	00093B3C	00093B38	?			none	0	no local GBR establishment
+sub_93B3C	00093B3C	00093C12	00093C0E	?			none	0	no local GBR establishment
+sub_93C3C	00093C3C	00093D1C	00093D18	ffff34c1	00093C46	ldc r0, gbr	established_full	0	source=r0 via 00093C44
+sub_93D1C	00093D1C	00093D58	00093D54	?			none	0	no local GBR establishment
+sub_93D5E	00093D5E	00093DDA	00093DD6	ffff34c1	00093D64	ldc r0, gbr	established_full	0	source=r0 via 00093D62
+sub_93DDE	00093DDE	000941CA	000941C6	ffff34c1	00093DEA	ldc r0, gbr	established_full	31	source=r0 via 00093DE8
+sub_941D8	000941D8	000942F2	000942EE	ffff34c1	000941E0	ldc r0, gbr	established_full	0	source=r0 via 000941DE
+sub_942F2	000942F2	000946C0	000946BC	ffff34b3	000942FC	ldc r0, gbr	established_full	0	source=r0 via 000942FA
+sub_946C6	000946C6	000947F2	000947EE	?			none	0	no local GBR establishment
+sub_947F2	000947F2	0009495E	0009495A	?	000947FE	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_9495E	0009495E	000949EC	000949E8	ffff34c1	00094968	ldc r0, gbr	established_full	3	source=r0 via 00094966
+sub_94A24	00094A24	00094AF6	00094AF2	?			none	0	no local GBR establishment
+sub_94AF6	00094AF6	00094B02		?			none	0	no local GBR establishment
+sub_94B02	00094B02	00094B36	00094B32	?			none	0	no local GBR establishment
+sub_94B3E	00094B3E	00094C42	00094C3E	ffff34c1	00094B46	ldc r0, gbr	established_full	14	source=r0 via 00094B44
+sub_94C42	00094C42	00094C62	00094C5E	?			none	0	no local GBR establishment
+sub_94C9C	00094C9C	00094D88	00094D84	ffff34c1	00094CA8	ldc r0, gbr	established_full	10	source=r0 via 00094CA6
+sub_94D90	00094D90	00094E5A	00094E56	ffff34c1	00094D9A	ldc r0, gbr	established_full	11	source=r0 via 00094D98
+sub_94E64	00094E64	0009504C	00095048	ffff34c1	00094E74	ldc r0, gbr	established_full	8	source=r0 via 00094E72
+sub_9504C	0009504C	00095084	00095080	?			none	0	no local GBR establishment
+sub_95084	00095084	0009510E	0009510A	ffff34c1	00095088	ldc r0, gbr	established_full	3	source=r0 via 00095086
+sub_9511A	0009511A	000951EC	000951E8	?	00095120	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_951EC	000951EC	00095208	00095204	?			none	0	no local GBR establishment
+sub_95208	00095208	000952DA	000952D6	ffff3628	0009520E	ldc r0, gbr	established_full	2	source=r0 via 0009520C
+sub_952DA	000952DA	000952EC	000952E8	?			none	0	no local GBR establishment
+sub_952EC	000952EC	00095774	00095770	?	00095358	ldc r0, gbr	established_partial	7	reason=unprovable_source
+sub_9577A	0009577A	000957BA	000957B6	ffff34c1	0009577E	ldc r0, gbr	established_full	3	source=r0 via 0009577C
+sub_957BA	000957BA	000957E6	000957E2	?			none	0	no local GBR establishment
+sub_9580C	0009580C	00095958	00095954	?			multiple_values	9	distinct=ffff34b2,ffff371e
+nullsub_5	00095958	0009595C	00095958	?			none	0	no local GBR establishment
+sub_9595C	0009595C	000959A4		?			none	0	no local GBR establishment
+sub_959A4	000959A4	00095BA8	00095BA4	ffff34c1	000959A8	ldc r0, gbr	established_full	2	source=r0 via 000959A6
+sub_95BBA	00095BBA	00095BE2	00095BDE	?			none	0	no local GBR establishment
+sub_95C1C	00095C1C	00095C50	00095C4C	?			none	0	no local GBR establishment
+sub_95C58	00095C58	00095CDA	00095CD6	00008d36	00095C5E	ldc r0, gbr	established_full	3	source=r0 via 00095C5C
+sub_95CDA	00095CDA	00095D5C	00095D58	00008d37	00095CE0	ldc r0, gbr	established_full	3	source=r0 via 00095CDE
+sub_95D62	00095D62	00095F16	00095F12	?	00095D6E	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_95F16	00095F16	00095FB2	00095FAE	?	00095F1A	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_95FB2	00095FB2	00096046	00096042	?			none	0	no local GBR establishment
+sub_960A8	000960A8	0009619A	00096196	?	00096142	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_9619A	0009619A	000961D6	000961D2	ffff363c	0009619E	ldc r0, gbr	established_full	0	source=r0 via 0009619C
+sub_961E0	000961E0	00096228	00096224	?			none	0	no local GBR establishment
+sub_96258	00096258	000962B8	000962B4	?			none	0	no local GBR establishment
+sub_962B8	000962B8	00096366	00096362	?	000962BE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_9636E	0009636E	00096412	0009640E	?			none	0	no local GBR establishment
+sub_96412	00096412	00096496	00096492	?			none	0	no local GBR establishment
+sub_964F8	000964F8	0009652C	00096528	?			none	0	no local GBR establishment
+sub_9652C	0009652C	00096584	00096580	?	00096532	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_96584	00096584	00096696	00096692	000108d4	00096594	ldc r0, gbr	established_full	0	source=r0 via 00096592
+sub_96696	00096696	000966C2	000966BE	?			none	0	no local GBR establishment
+sub_966C2	000966C2	000966EE	000966EA	?			none	0	no local GBR establishment
+sub_966EE	000966EE	00096736	00096732	?			none	0	no local GBR establishment
+sub_96736	00096736	000967B0	000967AC	?			none	0	no local GBR establishment
+sub_967B0	000967B0	00096802	000967FE	?			none	0	no local GBR establishment
+sub_96802	00096802	0009689E	0009689A	ffff3454	00096808	ldc r0, gbr	established_full	0	source=r0 via 00096806
+sub_9689E	0009689E	000968B6	000968B2	?			none	0	no local GBR establishment
+sub_968B6	000968B6	00096918		?			none	0	no local GBR establishment
+sub_96918	00096918	000969C2	000969BE	ffff2150	0009691E	ldc r0, gbr	established_full	0	source=r0 via 0009691C
+sub_969C2	000969C2	00097348	00097344	?	000969D8	ldc r0, gbr	established_partial	76	reason=unprovable_source
+sub_97348	00097348	000973D4	000973D0	?	0009734C	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_973EC	000973EC	00097448	00097444	?			none	0	no local GBR establishment
+sub_97448	00097448	0009748A	00097486	ffff34c1	0009744E	ldc r0, gbr	established_full	3	source=r0 via 0009744C
+sub_9748A	0009748A	000974D0	000974CC	ffff2150	0009748E	ldc r0, gbr	established_full	0	source=r0 via 0009748C
+sub_974D0	000974D0	00097600	000975FC	?			multiple_values	5	distinct=ffff2150,ffff34c1
+sub_97600	00097600	00097634	00097630	ffff34c1	00097604	ldc r0, gbr	established_full	2	source=r0 via 00097602
+sub_97684	00097684	00097806	00097802	ffff34c1	00097696	ldc r0, gbr	established_full	3	source=r0 via 00097694
+sub_97806	00097806	000978FE	000978FA	?			none	0	no local GBR establishment
+sub_978FE	000978FE	000979C4	000979C0	?			none	0	no local GBR establishment
+sub_979C4	000979C4	00097A02	000979FE	?			none	0	no local GBR establishment
+sub_97A02	00097A02	00097A32	00097A2E	?			none	0	no local GBR establishment
+sub_97A44	00097A44	00097B3A	00097B36	?			none	0	no local GBR establishment
+nullsub_6	00097B3A	00097B3E	00097B3A	?			none	0	no local GBR establishment
+sub_97B3E	00097B3E	00097B6A	00097B66	?			none	0	no local GBR establishment
+sub_97B88	00097B88	00097BA2	00097B9E	?			none	0	no local GBR establishment
+sub_97BA2	00097BA2	00097BBC	00097BB8	?			none	0	no local GBR establishment
+sub_97BBC	00097BBC	00097FC4	00097FC0	?			none	0	no local GBR establishment
+sub_97FC4	00097FC4	00098012	0009800E	?			none	0	no local GBR establishment
+sub_98012	00098012	0009803E	0009803A	?			none	0	no local GBR establishment
+sub_9807C	0009807C	00098368	00098364	00015188	0009812E	ldc r0, gbr	established_full	0	source=r0 via 0009812C
+sub_98368	00098368	0009838C	00098388	?			none	0	no local GBR establishment
+sub_9838C	0009838C	0009843C	00098438	?	00098394	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_98442	00098442	00098632	0009862E	?	0009844C	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_98632	00098632	000986A0	0009869C	ffff1f9a	00098656	ldc r0, gbr	established_full	0	source=r0 via 00098654
+sub_986A0	000986A0	000986B4	000986B0	?			none	0	no local GBR establishment
+sub_986B4	000986B4	000986F0	000986EC	?			none	0	no local GBR establishment
+sub_986F0	000986F0	00098714	00098710	?			none	0	no local GBR establishment
+sub_98758	00098758	00098818	00098814	?	00098762	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_9881E	0009881E	00098A36	00098A32	?	00098828	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_98A36	00098A36	00098A60	00098A5C	?			none	0	no local GBR establishment
+nullsub_7	00098A60	00098A68	00098A64	?			none	0	no local GBR establishment
+nullsub_8	00098A68	00098A70	00098A6C	?			none	0	no local GBR establishment
+nullsub_9	00098A70	00098A74	00098A70	?			none	0	no local GBR establishment
+nullsub_10	00098A74	00098A7C	00098A78	?			none	0	no local GBR establishment
+sub_98A7C	00098A7C	00098ABE	00098ABA	?			none	0	no local GBR establishment
+sub_98ABE	00098ABE	00098C6A	00098C66	?	00098AD0	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_98C78	00098C78	00099088	00099084	?	00098C8C	ldc r0, gbr	established_partial	12	reason=unprovable_source
+sub_9908A	0009908A	00099612	0009960E	?	00099098	ldc r0, gbr	established_partial	26	reason=unprovable_source
+sub_99612	00099612	00099C4C	00099C48	?			none	0	no local GBR establishment
+sub_99C7C	00099C7C	00099DFE	00099DFA	ffff34c1	00099D04	ldc r0, gbr	established_full	4	source=r0 via 00099D02
+sub_99E24	00099E24	00099E58		?			none	0	no local GBR establishment
+sub_99E58	00099E58	00099F30	00099F2C	ffff34c1	00099E60	ldc r0, gbr	established_full	0	source=r0 via 00099E5E
+sub_99F30	00099F30	00099FC2	00099FBE	?	00099F34	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_99FC2	00099FC2	0009A15A	0009A156	?			none	0	no local GBR establishment
+sub_9A16C	0009A16C	0009A768	0009A764	?			multiple_values	0	distinct=ffff182c,ffff1860
+set_1DC0_bit2_clear_17DD_1843	0009A768	0009A786	0009A782	?			none	0	no local GBR establishment
+update_14A2_counter_and_track_max	0009A786	0009A82E	0009A82A	?			none	0	no local GBR establishment
+sub_9A82E	0009A82E	0009A878	0009A874	ffff1d99	0009A832	ldc r0, gbr	established_full	0	source=r0 via 0009A830
+sub_9A878	0009A878	0009A8AC		?			none	0	no local GBR establishment
+sub_9A8AC	0009A8AC	0009A9FA	0009A9F6	?	0009A8BA	ldc r0, gbr	established_partial	8	reason=unprovable_source
+sub_9AA0A	0009AA0A	0009AA40	0009AA3C	?			none	0	no local GBR establishment
+sub_9AA40	0009AA40	0009AA7E	0009AA7A	ffff34c1	0009AA46	ldc r0, gbr	established_full	2	source=r0 via 0009AA44
+sub_9AA7E	0009AA7E	0009AB04	0009AB00	ffff34c1	0009AAC2	ldc r0, gbr	established_full	3	source=r0 via 0009AAC0
+sub_9AB28	0009AB28	0009AB50	0009AB4C	ffff34c1	0009AB2C	ldc r0, gbr	established_full	2	source=r0 via 0009AB2A
+sub_9AB50	0009AB50	0009AB7C		?			none	0	no local GBR establishment
+sub_9AB7C	0009AB7C	0009AC9E	0009AC9A	ffff1e44	0009AB82	ldc r0, gbr	established_full	2	source=r0 via 0009AB80
+sub_9ACAA	0009ACAA	0009AFEA	0009AFE6	?	0009AF60	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_9AFEA	0009AFEA	0009B00C	0009B008	?			none	0	no local GBR establishment
+sub_9B024	0009B024	0009B052	0009B04E	?			none	0	no local GBR establishment
+sub_9B052	0009B052	0009B0F4	0009B0F0	?			none	0	no local GBR establishment
+sub_9B100	0009B100	0009B5AC	0009B5A8	?			none	0	no local GBR establishment
+sub_9B5AC	0009B5AC	0009B6C6	0009B6C2	?	0009B5B0	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_9B6E4	0009B6E4	0009B77C	0009B778	ffff34c1	0009B6E8	ldc r0, gbr	established_full	2	source=r0 via 0009B6E6
+sub_9B77C	0009B77C	0009BADE	0009BADA	ffff2150	0009B78C	ldc r0, gbr	established_full	3	source=r0 via 0009B78A
+sub_9BADE	0009BADE	0009BBB8	0009BBB4	?	0009BAE6	ldc r0, gbr	established_partial	9	reason=unprovable_source
+sub_9BBBC	0009BBBC	0009BF8C	0009BF88	ffff2150	0009BBC6	ldc r0, gbr	established_full	0	source=r0 via 0009BBC4
+sub_9BF8C	0009BF8C	0009BFB8	0009BFB4	?			none	0	no local GBR establishment
+sub_9BFB8	0009BFB8	0009C01A	0009C016	ffff34b3	0009BFBC	ldc r0, gbr	established_full	4	source=r0 via 0009BFBA
+sub_9C01A	0009C01A	0009C122	0009C11E	ffff34c1	0009C020	ldc r0, gbr	established_full	3	source=r0 via 0009C01E
+sub_9C122	0009C122	0009C15A	0009C156	ffff34b3	0009C126	ldc r0, gbr	established_full	4	source=r0 via 0009C124
+sub_9C194	0009C194	0009CD2E	0009CD2A	ffff1d12	0009C1AA	ldc r0, gbr	established_full	42	source=r0 via 0009C1A8
+sub_9CD70	0009CD70	0009CE70	0009CE6C	ffff3370	0009CD74	ldc r0, gbr	established_full	0	source=r0 via 0009CD72
+sub_9CE90	0009CE90	0009D1E8	0009D1E4	ffff34c1	0009CE98	ldc r0, gbr	established_full	8	source=r0 via 0009CE96
+sub_9D1E8	0009D1E8	0009D230	0009D22C	ffff34c1	0009D1EC	ldc r0, gbr	established_full	2	source=r0 via 0009D1EA
+sub_9D230	0009D230	0009D26C		?			none	0	no local GBR establishment
+sub_9D26C	0009D26C	0009D29E	0009D29A	?			none	0	no local GBR establishment
+sub_9D29E	0009D29E	0009D2E8	0009D2E4	?			none	0	no local GBR establishment
+sub_9D2E8	0009D2E8	0009D318	0009D314	ffff34c1	0009D2EC	ldc r0, gbr	established_full	3	source=r0 via 0009D2EA
+sub_9D318	0009D318	0009D342	0009D33E	?			none	0	no local GBR establishment
+sub_9D342	0009D342	0009D390	0009D38C	ffff34b3	0009D346	ldc r0, gbr	established_full	5	source=r0 via 0009D344
+sub_9D390	0009D390	0009D8A8	0009D8A4	ffff3454	0009D39C	ldc r0, gbr	established_full	18	source=r0 via 0009D39A
+sub_9D8C8	0009D8C8	0009D9BC	0009D9B8	ffff371e	0009D8CE	ldc r0, gbr	established_full	3	source=r0 via 0009D8CC
+sub_9D9C2	0009D9C2	0009DA0C	0009DA08	?			none	0	no local GBR establishment
+sub_9DA34	0009DA34	0009DDCA	0009DDC6	?	0009DA42	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_9DDCA	0009DDCA	0009E07C	0009E078	ffff34c1	0009DDD2	ldc r0, gbr	established_full	17	source=r0 via 0009DDD0
+sub_9E07C	0009E07C	0009E0C8	0009E0C4	ffff35cb	0009E082	ldc r0, gbr	established_full	2	source=r0 via 0009E080
+sub_9E0F8	0009E0F8	0009E164	0009E160	000085e1	0009E0FC	ldc r0, gbr	established_full	0	source=r0 via 0009E0FA
+sub_9E164	0009E164	0009E414	0009E410	?			none	0	no local GBR establishment
+sub_9E420	0009E420	0009E84C	0009E848	ffff3454	0009E434	ldc r0, gbr	established_full	23	source=r0 via 0009E432
+sub_9E880	0009E880	0009E8D6	0009E8D2	ffff1054	0009E884	ldc r0, gbr	established_full	0	source=r0 via 0009E882
+sub_9E8D6	0009E8D6	0009E92C	0009E928	ffff1054	0009E8DA	ldc r0, gbr	established_full	0	source=r0 via 0009E8D8
+sub_9E92C	0009E92C	0009E968	0009E964	ffff1054	0009E930	ldc r0, gbr	established_full	0	source=r0 via 0009E92E
+sub_9E976	0009E976	0009EE8A	0009EE86	ffff1054	0009E980	ldc r0, gbr	established_full	6	source=r0 via 0009E97E
+sub_9EE8A	0009EE8A	0009EEEE	0009EEEA	ffff1054	0009EE8E	ldc r0, gbr	established_full	0	source=r0 via 0009EE8C
+sub_9EEEE	0009EEEE	0009EF52	0009EF4E	ffff1054	0009EEF2	ldc r0, gbr	established_full	0	source=r0 via 0009EEF0
+sub_9EF84	0009EF84	0009EFA6	0009EFA2	ffff1d12	0009EF88	ldc r0, gbr	established_full	1	source=r0 via 0009EF86
+sub_9EFA6	0009EFA6	0009EFFC	0009EFF8	ffff3454	0009EFAA	ldc r0, gbr	established_full	2	source=r0 via 0009EFA8
+sub_9EFFC	0009EFFC	0009F09A	0009F096	ffff1054	0009F000	ldc r0, gbr	established_full	0	source=r0 via 0009EFFE
+sub_9F0AC	0009F0AC	0009FA18	0009FA14	ffff1054	0009F0BE	ldc r0, gbr	established_full	10	source=r0 via 0009F0BC
+sub_9FA50	0009FA50	0009FE34	0009FE30	?			none	0	no local GBR establishment
+sub_9FE60	0009FE60	000A04FE	000A04FA	ffff34b3	0009FE6E	ldc r0, gbr	established_full	34	source=r0 via 0009FE6C
+sub_A04FE	000A04FE	000A0570	000A056C	ffff34b3	000A0504	ldc r0, gbr	established_full	3	source=r0 via 000A0502
+sub_A05A4	000A05A4	000A0630	000A062C	ffff34c1	000A05A8	ldc r0, gbr	established_full	1	source=r0 via 000A05A6
+sub_A0630	000A0630	000A0672	000A066E	?			none	0	no local GBR establishment
+sub_A0690	000A0690	000A091A	000A0916	ffff34c1	000A06A2	ldc r0, gbr	established_full	39	source=r0 via 000A06A0
+sub_A091A	000A091A	000A0946	000A0942	ffff34b3	000A0922	ldc r0, gbr	established_full	5	source=r0 via 000A0920
+sub_A0946	000A0946	000A0CBA	000A0CB6	ffff34b3	000A0958	ldc r0, gbr	established_full	13	source=r0 via 000A0956
+sub_A0CBA	000A0CBA	000A1090	000A108C	ffff34b0	000A0CCC	ldc r0, gbr	established_full	22	source=r0 via 000A0CCA
+sub_A1090	000A1090	000A14A4	000A14A0	ffff34b0	000A10A2	ldc r0, gbr	established_full	20	source=r0 via 000A10A0
+sub_A14F0	000A14F0	000A1A36	000A1A32	ffff34b3	000A14FA	ldc r0, gbr	established_full	41	source=r0 via 000A14F8
+sub_A1A88	000A1A88	000A1D9E	000A1D9A	ffff34b3	000A1A90	ldc r0, gbr	established_full	21	source=r0 via 000A1A8E
+sub_A1D9E	000A1D9E	000A1DBE	000A1DBA	?			none	0	no local GBR establishment
+sub_A1DBE	000A1DBE	000A1F66	000A1F62	ffff34c1	000A1DC2	ldc r0, gbr	established_full	10	source=r0 via 000A1DC0
+sub_A1F70	000A1F70	000A24EA	000A24E6	ffff34b3	000A1F7A	ldc r0, gbr	established_full	39	source=r0 via 000A1F78
+sub_A24EA	000A24EA	000A24FC	000A24F8	ffff34b3	000A24EE	ldc r0, gbr	established_full	2	source=r0 via 000A24EC
+sub_A250A	000A250A	000A2568	000A2564	?			none	0	no local GBR establishment
+sub_A2594	000A2594	000A2BA8	000A2BA4	ffff2150	000A25A0	ldc r0, gbr	established_full	12	source=r0 via 000A259E
+sub_A2BB0	000A2BB0	000A2E84	000A2E80	?			none	0	no local GBR establishment
+sub_A2E84	000A2E84	000A314E	000A314A	ffff34b3	000A2E8C	ldc r0, gbr	established_full	17	source=r0 via 000A2E8A
+sub_A314E	000A314E	000A31B8	000A31B4	ffff34c1	000A3152	ldc r0, gbr	established_full	4	source=r0 via 000A3150
+sub_A31CC	000A31CC	000A3320	000A331C	ffff34b3	000A31D4	ldc r0, gbr	established_full	7	source=r0 via 000A31D2
+sub_A333A	000A333A	000A3802	000A37FE	ffff2150	000A334E	ldc r0, gbr	established_full	2	source=r0 via 000A334C
+sub_A3802	000A3802	000A3942	000A393E	ffff34b3	000A380A	ldc r0, gbr	established_full	5	source=r0 via 000A3808
+sub_A3942	000A3942	000A3A72	000A3A6E	ffff2150	000A3948	ldc r0, gbr	established_full	1	source=r0 via 000A3946
+sub_A3A88	000A3A88	000A3B42	000A3B3E	?			none	0	no local GBR establishment
+sub_A3B98	000A3B98	000A3CF0	000A3CEC	ffff34c1	000A3BA0	ldc r0, gbr	established_full	4	source=r0 via 000A3B9E
+sub_A3CFE	000A3CFE	000A3F4C	000A3F48	?			none	0	no local GBR establishment
+sub_A3F4C	000A3F4C	000A40C2	000A40BE	?			none	0	no local GBR establishment
+sub_A4108	000A4108	000A4220	000A421C	?	000A4114	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A422C	000A422C	000A4398	000A4394	?	000A4236	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_A43CA	000A43CA	000A449C	000A4498	?	000A43D4	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_A449C	000A449C	000A44D0	000A44CC	?			none	0	no local GBR establishment
+sub_A44D0	000A44D0	000A4618	000A4614	?			none	0	no local GBR establishment
+sub_A4664	000A4664	000A4FF0	000A4FEC	ffff34b3	000A4670	ldc r0, gbr	established_full	46	source=r0 via 000A466E
+sub_A5024	000A5024	000A5052	000A504E	ffff34c1	000A5028	ldc r0, gbr	established_full	2	source=r0 via 000A5026
+sub_A5090	000A5090	000A5818	000A5814	ffff34b3	000A50A2	ldc r0, gbr	established_full	67	source=r0 via 000A50A0
+sub_A5818	000A5818	000A5836	000A5832	?			none	0	no local GBR establishment
+sub_A5836	000A5836	000A5870	000A586C	ffff363c	000A583A	ldc r0, gbr	established_full	0	source=r0 via 000A5838
+sub_A5870	000A5870	000A588C	000A5888	?			none	0	no local GBR establishment
+sub_A58AE	000A58AE	000A659E	000A659A	ffff34b3	000A58C2	ldc r0, gbr	established_full	88	source=r0 via 000A58C0
+sub_A659E	000A659E	000A6642	000A663E	ffff34b3	000A65A4	ldc r0, gbr	established_full	4	source=r0 via 000A65A2
+sub_A6650	000A6650	000A6A08	000A6A04	ffff2150	000A665C	ldc r0, gbr	established_full	2	source=r0 via 000A665A
+sub_A6A44	000A6A44	000A6B24	000A6B20	ffff34c1	000A6A48	ldc r0, gbr	established_full	4	source=r0 via 000A6A46
+sub_A6B30	000A6B30	000A6DD2	000A6DCE	ffff34b0	000A6B3C	ldc r0, gbr	established_full	39	source=r0 via 000A6B3A
+sub_A6E1C	000A6E1C	000A70F0	000A70EC	?	000A6E22	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_A710C	000A710C	000A7120	000A711C	?	000A7110	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_A7124	000A7124	000A7150	000A714C	ffff3628	000A7128	ldc r0, gbr	established_full	2	source=r0 via 000A7126
+sub_A7150	000A7150	000A730E	000A730A	ffff34c1	000A715E	ldc r0, gbr	established_full	3	source=r0 via 000A715C
+sub_A7330	000A7330	000A734E	000A734A	?			none	0	no local GBR establishment
+sub_A734E	000A734E	000A73C0	000A73BC	?	000A7354	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_A73D0	000A73D0	000A74D2	000A74CE	?	000A73D6	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_A74D6	000A74D6	000A75F8	000A75F4	?			none	0	no local GBR establishment
+sub_A75F8	000A75F8	000A7654	000A7650	?			none	0	no local GBR establishment
+sub_A7654	000A7654	000A7678	000A7674	?			none	0	no local GBR establishment
+sub_A7678	000A7678	000A7688	000A7684	?			none	0	no local GBR establishment
+sub_A7688	000A7688	000A76FC	000A76F8	?			none	0	no local GBR establishment
+sub_A76FC	000A76FC	000A7730	000A772C	?			none	0	no local GBR establishment
+sub_A7730	000A7730	000A77CE	000A77CA	?			none	0	no local GBR establishment
+sub_A77CE	000A77CE	000A77DC	000A77D8	?			none	0	no local GBR establishment
+sub_A77FC	000A77FC	000A78C6	000A78C2	?			none	0	no local GBR establishment
+sub_A78C8	000A78C8	000A79B8	000A79B4	?	000A78CE	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_A79BA	000A79BA	000A7B16	000A7B12	?			none	0	no local GBR establishment
+sub_A7B16	000A7B16	000A7B32	000A7B2E	?			none	0	no local GBR establishment
+sub_A7B36	000A7B36	000A7BC4	000A7BC0	?			none	0	no local GBR establishment
+sub_A7BC4	000A7BC4	000A7BF6	000A7BF2	?			none	0	no local GBR establishment
+sub_A7BF6	000A7BF6	000A7C34	000A7C30	?			none	0	no local GBR establishment
+sub_A7C58	000A7C58	000A7C68	000A7C64	?			none	0	no local GBR establishment
+sub_A7C68	000A7C68	000A7C92	000A7C8E	?			none	0	no local GBR establishment
+sub_A7C92	000A7C92	000A7CA2	000A7C9E	?			none	0	no local GBR establishment
+sub_A7CA2	000A7CA2	000A7CC0	000A7CBC	?			none	0	no local GBR establishment
+sub_A7CC0	000A7CC0	000A7CEA	000A7CE6	ffff34c1	000A7CC4	ldc r0, gbr	established_full	0	source=r0 via 000A7CC2
+sub_A7CFC	000A7CFC	000A7D54	000A7D50	?	000A7D02	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_A7D60	000A7D60	000A7EFE	000A7EFA	ffff363c	000A7D68	ldc r0, gbr	established_full	0	source=r0 via 000A7D66
+sub_A7F90	000A7F90	000A8060	000A805C	?	000A7F9A	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_A80A8	000A80A8	000A80DC	000A80D8	ffff1054	000A80AC	ldc r0, gbr	established_full	0	source=r0 via 000A80AA
+sub_A80E8	000A80E8	000A8192	000A818E	ffff3628	000A80EC	ldc r0, gbr	established_full	2	source=r0 via 000A80EA
+sub_A81A0	000A81A0	000A8252	000A824E	ffff34c1	000A81A6	ldc r0, gbr	established_full	3	source=r0 via 000A81A4
+sub_A8252	000A8252	000A82FE	000A82FA	ffff34c1	000A8258	ldc r0, gbr	established_full	11	source=r0 via 000A8256
+sub_A82FE	000A82FE	000A843A	000A8436	?			none	0	no local GBR establishment
+sub_A843A	000A843A	000A84CC	000A84C8	ffff34c1	000A843E	ldc r0, gbr	established_full	4	source=r0 via 000A843C
+sub_A84CC	000A84CC	000A850A	000A8506	?			none	0	no local GBR establishment
+sub_A8520	000A8520	000A8598	000A8594	ffff34c1	000A8524	ldc r0, gbr	established_full	1	source=r0 via 000A8522
+sub_A8598	000A8598	000A8612	000A860E	?			none	0	no local GBR establishment
+sub_A8648	000A8648	000A868C	000A8688	?			none	0	no local GBR establishment
+sub_A868C	000A868C	000A8720	000A871C	ffff34c1	000A8690	ldc r0, gbr	established_full	0	source=r0 via 000A868E
+sub_A8736	000A8736	000A8DB6	000A8DB2	?			none	0	no local GBR establishment
+sub_A8DDC	000A8DDC	000A8EF0	000A8EEC	?	000A8DE0	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A8EF4	000A8EF4	000A8F4A	000A8F46	?	000A8EF8	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A8F4A	000A8F4A	000A90B4	000A90B0	?	000A8F52	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A90BA	000A90BA	000A938E	000A938A	ffff34c1	000A90CE	ldc r0, gbr	established_full	25	source=r0 via 000A90CC
+sub_A938E	000A938E	000A94B8	000A94B4	ffff34c1	000A93A2	ldc r0, gbr	established_full	2	source=r0 via 000A93A0
+sub_A94B8	000A94B8	000A953A	000A9536	?			none	0	no local GBR establishment
+sub_A953A	000A953A	000A9544	000A9540	?			none	0	no local GBR establishment
+sub_A9544	000A9544	000A9580	000A957C	?			none	0	no local GBR establishment
+sub_A9580	000A9580	000A95BA	000A95B6	?			none	0	no local GBR establishment
+sub_A95BA	000A95BA	000A95EC	000A95E8	?			none	0	no local GBR establishment
+sub_A95EC	000A95EC	000A9620	000A961C	?			none	0	no local GBR establishment
+sub_A9620	000A9620	000A9644	000A9640	?			none	0	no local GBR establishment
+sub_A9644	000A9644	000A96BA	000A96B6	?			none	0	no local GBR establishment
+sub_A96BA	000A96BA	000A96F2	000A96EE	?			none	0	no local GBR establishment
+sub_A96F2	000A96F2	000A970A	000A9706	?			none	0	no local GBR establishment
+sub_A970A	000A970A	000A974C	000A9748	?	000A970E	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A979C	000A979C	000A9842	000A983E	?			multiple_values	0	distinct=ffff35cb,ffff38df
+sub_A9842	000A9842	000A985C	000A9858	?			none	0	no local GBR establishment
+sub_A985C	000A985C	000A988C		?			none	0	no local GBR establishment
+sub_A988C	000A988C	000A9912	000A990E	?			none	0	no local GBR establishment
+sub_A9912	000A9912	000A9AA2	000A9A9E	?			none	0	no local GBR establishment
+sub_A9AA2	000A9AA2	000A9AB8	000A9AB4	?			none	0	no local GBR establishment
+sub_A9AB8	000A9AB8	000A9AFC		?			none	0	no local GBR establishment
+sub_A9AFC	000A9AFC	000A9B50	000A9B4C	?			none	0	no local GBR establishment
+sub_A9B50	000A9B50	000A9B9E	000A9B9A	ffff2f00	000A9B56	ldc r0, gbr	established_full	0	source=r0 via 000A9B54
+sub_A9B9E	000A9B9E	000A9C8E	000A9C8A	?	000A9BA6	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_A9C8E	000A9C8E	000A9CF8	000A9CF4	?			none	0	no local GBR establishment
+sub_A9D00	000A9D00	000A9D80	000A9D7C	ffff3abe	000A9D06	ldc r0, gbr	established_full	2	source=r0 via 000A9D04
+sub_A9D80	000A9D80	000A9E30	000A9E2C	ffff35cb	000A9D88	ldc r0, gbr	established_full	2	source=r0 via 000A9D86
+sub_A9E30	000A9E30	000A9F32	000A9F2E	?	000A9E38	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_A9F32	000A9F32	000A9F70	000A9F6C	ffff35cb	000A9F36	ldc r0, gbr	established_full	0	source=r0 via 000A9F34
+sub_A9F70	000A9F70	000A9FB6	000A9FB2	ffff35cb	000A9F76	ldc r0, gbr	established_full	2	source=r0 via 000A9F74
+sub_A9FEC	000A9FEC	000AA024	000AA020	ffff35cb	000A9FF0	ldc r0, gbr	established_full	0	source=r0 via 000A9FEE
+sub_AA024	000AA024	000AA040	000AA03C	ffff35cb	000AA028	ldc r0, gbr	established_full	0	source=r0 via 000AA026
+sub_AA040	000AA040	000AA074	000AA070	?			none	0	no local GBR establishment
+sub_AA074	000AA074	000AA156	000AA152	ffff35cb	000AA07A	ldc r0, gbr	established_full	5	source=r0 via 000AA078
+sub_AA156	000AA156	000AA2D8	000AA2D4	?			multiple_values	9	distinct=ffff35cb,ffff3abe
+sub_AA2D8	000AA2D8	000AA2FC	000AA2F8	ffff35cb	000AA2DC	ldc r0, gbr	established_full	2	source=r0 via 000AA2DA
+sub_AA2FC	000AA2FC	000AA36C		?			none	0	no local GBR establishment
+sub_AA36C	000AA36C	000AA3E8	000AA3E4	00012844	000AA374	ldc r0, gbr	established_full	2	source=r0 via 000AA372
+sub_AA3E8	000AA3E8	000AA460	000AA45C	00012844	000AA3EE	ldc r0, gbr	established_full	2	source=r0 via 000AA3EC
+sub_AA460	000AA460	000AA81A	000AA816	ffff35cb	000AA78E	ldc r0, gbr	established_full	0	source=r0 via 000AA78C
+sub_AA81A	000AA81A	000AA824	000AA820	?			none	0	no local GBR establishment
+sub_AA824	000AA824	000AA882	000AA87E	?			none	0	no local GBR establishment
+sub_AA882	000AA882	000AA894		?			none	0	no local GBR establishment
+sub_AA894	000AA894	000AA8DE	000AA8DA	ffff34c1	000AA898	ldc r0, gbr	established_full	0	source=r0 via 000AA896
+sub_AA8DE	000AA8DE	000AA9A4	000AA9A0	ffff3abe	000AA972	ldc r0, gbr	established_full	0	source=r0 via 000AA970
+sub_AA9A4	000AA9A4	000AA9B8	000AA9B4	?			none	0	no local GBR establishment
+sub_AA9B8	000AA9B8	000AA9F4		?			none	0	no local GBR establishment
+sub_AA9F4	000AA9F4	000AAAB4	000AAAB0	ffff1ebc	000AA9FA	ldc r0, gbr	established_full	2	source=r0 via 000AA9F8
+sub_AAAE0	000AAAE0	000AAB00	000AAAFC	?			none	0	no local GBR establishment
+sub_AAB14	000AAB14	000AAB92	000AAB8E	ffff34c1	000AAB18	ldc r0, gbr	established_full	0	source=r0 via 000AAB16
+sub_AAB92	000AAB92	000AAC42	000AAC3E	?			none	0	no local GBR establishment
+sub_AAC4E	000AAC4E	000AAD2A	000AAD26	ffff34c1	000AAC58	ldc r0, gbr	established_full	2	source=r0 via 000AAC56
+sub_AAD54	000AAD54	000AAE32	000AAE2E	ffff38df	000AAD5A	ldc r0, gbr	established_full	1	source=r0 via 000AAD58
+sub_AAE32	000AAE32	000AAF32	000AAF2E	ffff34c1	000AAE36	ldc r0, gbr	established_full	3	source=r0 via 000AAE34
+sub_AAF32	000AAF32	000AB024	000AB020	?			multiple_values	6	distinct=ffff34c1,ffff35cb
+sub_AB024	000AB024	000AB07C		?			none	0	no local GBR establishment
+sub_AB07C	000AB07C	000AB1FE	000AB1FA	?			none	0	no local GBR establishment
+sub_AB200	000AB200	000ABA78		?			multiple_values	5	distinct=55555555,aaaaaaaa
+INT_TRAPA32	000ABA78	000ABA82	000ABA7E	?			none	0	no local GBR establishment
+sub_ABA94	000ABA94	000ABA9A	000ABA96	?			none	0	no local GBR establishment
+sub_ABAB8	000ABAB8	000ABABE	000ABABA	?			none	0	no local GBR establishment
+sub_ABADA	000ABADA	000ABCE8	000ABCE4	?	000ABC60	ldc r0, gbr	established_partial	8	reason=unprovable_source
+sub_ABCEA	000ABCEA	000ABD4C	000ABD48	?			none	0	no local GBR establishment
+sub_ABD58	000ABD58	000AC41A	000AC416	?	000ABD60	ldc r0, gbr	established_partial	60	reason=unprovable_source
+sub_AC428	000AC428	000AC488	000AC484	?			none	0	no local GBR establishment
+sub_AC488	000AC488	000AC532	000AC52E	?			none	0	no local GBR establishment
+sub_AC53E	000AC53E	000AC5E2	000AC5DE	?			none	0	no local GBR establishment
+sub_AC5E2	000AC5E2	000AC666	000AC662	?			none	0	no local GBR establishment
+sub_AC6C4	000AC6C4	000AC6F8	000AC6F4	?			none	0	no local GBR establishment
+sub_AC6F8	000AC6F8	000AC750	000AC74C	?	000AC6FE	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_AC750	000AC750	000AC862	000AC85E	000108e4	000AC760	ldc r0, gbr	established_full	0	source=r0 via 000AC75E
+sub_AC862	000AC862	000AC88E	000AC88A	?			none	0	no local GBR establishment
+sub_AC88E	000AC88E	000AC8BA	000AC8B6	?			none	0	no local GBR establishment
+sub_AC8BA	000AC8BA	000AC902	000AC8FE	?			none	0	no local GBR establishment
+sub_AC902	000AC902	000AC97C	000AC978	?			none	0	no local GBR establishment
+sub_AC97C	000AC97C	000AC9CE	000AC9CA	?			none	0	no local GBR establishment
+sub_AC9CE	000AC9CE	000ACA76	000ACA72	?			none	0	no local GBR establishment
+sub_ACA76	000ACA76	000ACAD4		?			none	0	no local GBR establishment
+sub_ACAD4	000ACAD4	000ACBCE	000ACBCA	?			none	0	no local GBR establishment
+sub_ACBCE	000ACBCE	000ACBF4		?			none	0	no local GBR establishment
+sub_ACBF4	000ACBF4	000ACED0	000ACECC	ffff34c1	000ACBFE	ldc r0, gbr	established_full	12	source=r0 via 000ACBFC
+sub_ACED0	000ACED0	000AD030	000AD02C	ffff34c1	000ACED6	ldc r0, gbr	established_full	3	source=r0 via 000ACED4
+sub_AD030	000AD030	000AD05E	000AD05A	?			none	0	no local GBR establishment
+sub_AD070	000AD070	000AD082	000AD07E	?			none	0	no local GBR establishment
+INT_SCI0_RXI0	000AD094	000AD134	000AD130	ffff34c1	000AD0A4	ldc r0, gbr	established_full	2	source=r0 via 000AD0A2
+sub_AD134	000AD134	000AD49E	000AD49A	ffff35c8	000AD13E	ldc r0, gbr	established_full	13	source=r0 via 000AD13C
+sub_AD4B4	000AD4B4	000AD710	000AD70C	?			none	0	no local GBR establishment
+sub_AD710	000AD710	000AD9BC	000AD9B8	?			none	0	no local GBR establishment
+sub_AD9D0	000AD9D0	000ADE6C	000ADE68	?			none	0	no local GBR establishment
+sub_ADE6C	000ADE6C	000AE072	000AE06E	?	000ADE74	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_AE072	000AE072	000AE1F2	000AE1EE	?			none	0	no local GBR establishment
+sub_AE230	000AE230	000AE258	000AE254	?			none	0	no local GBR establishment
+sub_AE258	000AE258	000AE2AC	000AE2A8	?	000AE25C	ldc r0, gbr	established_partial	2	reason=unprovable_source
+INT_SCI2_TXI2	000AE2AC	000AE2FC	000AE2F8	?			none	0	no local GBR establishment
+INT_SCI2_TEI2	000AE2FC	000AE338	000AE334	?			none	0	no local GBR establishment
+INT_SCI2_RXI2	000AE338	000AE4CA	000AE4C6	?	000AE34E	ldc r0, gbr	established_partial	5	reason=unprovable_source
+sub_AE4CA	000AE4CA	000AE4D8		?			none	0	no local GBR establishment
+sub_AE4D8	000AE4D8	000AE552	000AE54E	ffff3628	000AE4DE	ldc r0, gbr	established_full	4	source=r0 via 000AE4DC
+sub_AE55C	000AE55C	000AE5AE	000AE5AA	?			none	0	no local GBR establishment
+sub_AE5B0	000AE5B0	000AE5BC	000AE5B8	?			none	0	no local GBR establishment
+sub_AE5C4	000AE5C4	000AE6D6	000AE6D2	ffff1028	000AE5C8	ldc r0, gbr	established_full	0	source=r0 via 000AE5C6
+sub_AE6D6	000AE6D6	000AE82E	000AE82A	ffff1d83	000AE6E2	ldc r0, gbr	established_full	12	source=r0 via 000AE6E0
+sub_AE82E	000AE82E	000AE8CE	000AE8CA	?			none	0	no local GBR establishment
+sub_AE8CE	000AE8CE	000AE942	000AE93E	0000f49e	000AE8DC	ldc r0, gbr	established_full	1	source=r0 via 000AE8DA
+sub_AE942	000AE942	000AEA9E	000AEA9A	?			none	0	no local GBR establishment
+sub_AEAE8	000AEAE8	000AEB6C	000AEB68	ffff1ca4	000AEAEC	ldc r0, gbr	established_full	0	source=r0 via 000AEAEA
+sub_AEB6C	000AEB6C	000AEC4A	000AEC46	?	000AEB74	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_AEC4A	000AEC4A	000AEC7C	000AEC78	?			none	0	no local GBR establishment
+sub_AEC7C	000AEC7C	000AEE0E	000AEE0A	ffff1d99	000AEC88	ldc r0, gbr	established_full	1	source=r0 via 000AEC86
+sub_AEE10	000AEE10	000AF014	000AF010	ffff1028	000AEE26	ldc r0, gbr	established_full	1	source=r0 via 000AEE24
+sub_AF014	000AF014	000AF17A	000AF176	ffff1ca5	000AF01E	ldc r0, gbr	established_full	0	source=r0 via 000AF01C
+sub_AF17A	000AF17A	000AF246	000AF242	ffff1d12	000AF184	ldc r0, gbr	established_full	0	source=r0 via 000AF182
+sub_AF290	000AF290	000AF368	000AF364	ffff34c1	000AF29A	ldc r0, gbr	established_full	8	source=r0 via 000AF298
+sub_AF374	000AF374	000AF410	000AF40C	ffff1ca5	000AF378	ldc r0, gbr	established_full	0	source=r0 via 000AF376
+sub_AF410	000AF410	000AF47A	000AF476	ffff1d98	000AF414	ldc r0, gbr	established_full	0	source=r0 via 000AF412
+sub_AF484	000AF484	000AF5B4	000AF5B0	ffff1e39	000AF48A	ldc r0, gbr	established_full	0	source=r0 via 000AF488
+sub_AF5B4	000AF5B4	000AF5BA	000AF5B6	?			none	0	no local GBR establishment
+sub_AF5BA	000AF5BA	000AF5C0	000AF5BC	?			none	0	no local GBR establishment
+sub_AF5C0	000AF5C0	000AF5E2	000AF5DE	?			none	0	no local GBR establishment
+sub_AF5E2	000AF5E2	000AF5F6	000AF5F2	?			none	0	no local GBR establishment
+sub_AF5F8	000AF5F8	000AF6A6	000AF6A2	?			none	0	no local GBR establishment
+sub_AF6A6	000AF6A6	000AFA9E	000AFA9A	ffff2f00	000AF6BA	ldc r0, gbr	established_full	0	source=r0 via 000AF6B8
+sub_AFA9E	000AFA9E	000AFB1A	000AFB16	ffff35cb	000AFAA4	ldc r0, gbr	established_full	2	source=r0 via 000AFAA2
+INT_HCAN1_OVR1	000AFB1A	000AFB84	000AFB80	?			none	0	no local GBR establishment
+sub_AFB84	000AFB84	000AFBBC	000AFBB8	?			none	0	no local GBR establishment
+sub_AFBBC	000AFBBC	000AFBF2	000AFBEE	?			none	0	no local GBR establishment
+sub_AFBF6	000AFBF6	000AFD76	000AFD72	ffff2f00	000AFC0A	ldc r0, gbr	established_full	0	source=r0 via 000AFC08
+sub_AFD76	000AFD76	000AFE56	000AFE52	ffff35cb	000AFD7C	ldc r0, gbr	established_full	3	source=r0 via 000AFD7A
+sub_AFE5A	000AFE5A	000B0060	000B005C	00009a66	000AFE6A	ldc r0, gbr	established_full	0	source=r0 via 000AFE68
+callback_update_9A66_entries	000B00E0	000B010C	000B0108	?			restored_only	0	caller GBR restored; no local ldc
+callback_clear_30_entry_flags	000B010C	000B01E2	000B01DE	ffff2f00	000B0114	ldc r0, gbr	established_full	0	source=r0 via 000B0112
+callback_process_records_dispatch_30	000B01F4	000B0220		ffff2f00	000B0204	ldc r0, gbr	established_full	0	source=r0 via 000B0202
+call_sub_B0850	000B0220	000B0590		?			none	0	no local GBR establishment
+cleanup_finalize_sub_B3FB8	000B0590	000B05A8	000B05A4	?			restored_only	0	caller GBR restored; no local ldc
+sub_B05B4	000B05B4	000B0850	000B084C	ffff2f00	000B05C4	ldc r0, gbr	established_full	3	source=r0 via 000B05C2
+sub_B0850	000B0850	000B09BA	000B09B6	ffff2f00	000B0854	ldc r0, gbr	established_full	0	source=r0 via 000B0852
+sub_B09BA	000B09BA	000B0A5C	000B0A58	ffff2f00	000B09BE	ldc r0, gbr	established_full	0	source=r0 via 000B09BC
+sub_B0A5C	000B0A5C	000B0C12	000B0C0E	ffff2f00	000B0A60	ldc r0, gbr	established_full	0	source=r0 via 000B0A5E
+sub_B0C1A	000B0C1A	000B0E4E	000B0E4A	?	000B0C28	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_B0E6C	000B0E6C	000B0F3E	000B0F3A	ffff2f00	000B0E72	ldc r0, gbr	established_full	0	source=r0 via 000B0E70
+sub_B0F3E	000B0F3E	000B0FCC	000B0FC8	?			none	0	no local GBR establishment
+sub_B0FD8	000B0FD8	000B119A	000B1196	ffff2ee4	000B0FDC	ldc r0, gbr	established_full	0	source=r0 via 000B0FDA
+sub_B119A	000B119A	000B12A4	000B12A0	?	000B11A0	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_B12A6	000B12A6	000B12FC	000B12F8	?			none	0	no local GBR establishment
+sub_B12FC	000B12FC	000B133A	000B1336	?			none	0	no local GBR establishment
+sub_B133A	000B133A	000B1394	000B1390	?			none	0	no local GBR establishment
+sub_B13BC	000B13BC	000B1450	000B144C	ffff2f00	000B13C2	ldc r0, gbr	established_full	0	source=r0 via 000B13C0
+sub_B1450	000B1450	000B1558	000B1554	ffff2ee4	000B145C	ldc r0, gbr	established_full	0	source=r0 via 000B145A
+sub_B1558	000B1558	000B1688	000B1684	ffff2ee4	000B1562	ldc r0, gbr	established_full	0	source=r0 via 000B1560
+sub_B16B0	000B16B0	000B1708	000B1704	ffff2f00	000B16B4	ldc r0, gbr	established_full	0	source=r0 via 000B16B2
+sub_B1708	000B1708	000B1726	000B1722	?			none	0	no local GBR establishment
+sub_B1726	000B1726	000B199A	000B1996	?	000B1734	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_B199A	000B199A	000B1A1E	000B1A1A	ffff2ee4	000B199E	ldc r0, gbr	established_full	0	source=r0 via 000B199C
+sub_B1A24	000B1A24	000B1C42	000B1C3E	?	000B1A36	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_B1C42	000B1C42	000B1CA4	000B1CA0	?			none	0	no local GBR establishment
+sub_B1CA4	000B1CA4	000B1CF6	000B1CF2	?			none	0	no local GBR establishment
+sub_B1CF6	000B1CF6	000B1D1A	000B1D16	?			none	0	no local GBR establishment
+sub_B1D1A	000B1D1A	000B1D56	000B1D52	ffff35cb	000B1D1E	ldc r0, gbr	established_full	1	source=r0 via 000B1D1C
+sub_B1D56	000B1D56	000B1D92	000B1D8E	ffff2f00	000B1D5C	ldc r0, gbr	established_full	1	source=r0 via 000B1D5A
+sub_B1DA6	000B1DA6	000B1E1A	000B1E16	?			none	0	no local GBR establishment
+sub_B1E1A	000B1E1A	000B203E	000B203A	ffff2f00	000B1E28	ldc r0, gbr	established_full	1	source=r0 via 000B1E26
+sub_B203E	000B203E	000B22E4	000B22E0	ffff2f00	000B2054	ldc r0, gbr	established_full	1	source=r0 via 000B2052
+sub_B2300	000B2300	000B2634	000B2630	ffff2f00	000B2308	ldc r0, gbr	established_full	1	source=r0 via 000B2306
+sub_B263C	000B263C	000B29A4	000B29A0	ffff2f00	000B2646	ldc r0, gbr	established_full	1	source=r0 via 000B2644
+sub_B29C8	000B29C8	000B2C8A	000B2C86	ffff2f00	000B29D0	ldc r0, gbr	established_full	1	source=r0 via 000B29CE
+sub_B2C8A	000B2C8A	000B2DCE	000B2DCA	ffff2f00	000B2C94	ldc r0, gbr	established_full	0	source=r0 via 000B2C92
+sub_B2DDC	000B2DDC	000B2F1E	000B2F1A	?			none	0	no local GBR establishment
+sub_B2F1E	000B2F1E	000B3064	000B3060	ffff2f00	000B2F2E	ldc r0, gbr	established_full	0	source=r0 via 000B2F2C
+sub_B3064	000B3064	000B31F8	000B31F4	?			none	0	no local GBR establishment
+sub_B31F8	000B31F8	000B3252	000B324E	?			none	0	no local GBR establishment
+sub_B3258	000B3258	000B3460	000B345C	ffff2f00	000B3264	ldc r0, gbr	established_full	0	source=r0 via 000B3262
+sub_B3460	000B3460	000B35FA	000B35F6	ffff2f00	000B3466	ldc r0, gbr	established_full	0	source=r0 via 000B3464
+sub_B360A	000B360A	000B37B0	000B37AC	ffff2f00	000B360E	ldc r0, gbr	established_full	0	source=r0 via 000B360C
+sub_B37B0	000B37B0	000B3852	000B384E	?			none	0	no local GBR establishment
+sub_B3864	000B3864	000B38B2	000B38AE	?	000B3868	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_B38B2	000B38B2	000B38F0	000B38EC	?			none	0	no local GBR establishment
+sub_B3924	000B3924	000B3A0E	000B3A0A	ffff2f00	000B3928	ldc r0, gbr	established_full	0	source=r0 via 000B3926
+sub_B3A0E	000B3A0E	000B3A74	000B3A70	ffff2f00	000B3A12	ldc r0, gbr	established_full	0	source=r0 via 000B3A10
+sub_B3A74	000B3A74	000B3A98	000B3A94	?			none	0	no local GBR establishment
+sub_B3AB2	000B3AB2	000B3B4A	000B3B46	?			none	0	no local GBR establishment
+sub_B3B74	000B3B74	000B3BB2	000B3BAE	?			none	0	no local GBR establishment
+sub_B3BB2	000B3BB2	000B3BD4	000B3BD0	?			none	0	no local GBR establishment
+sub_B3BD4	000B3BD4	000B3C00	000B3BFC	?			none	0	no local GBR establishment
+sub_B3C00	000B3C00	000B3C1C	000B3C18	?			none	0	no local GBR establishment
+sub_B3C1C	000B3C1C	000B3C66	000B3C62	?			none	0	no local GBR establishment
+sub_B3C66	000B3C66	000B3CDE	000B3CDA	000159b4	000B3C74	ldc r0, gbr	established_full	0	source=r0 via 000B3C72
+sub_B3CE4	000B3CE4	000B3DE4	000B3DE0	00009a66	000B3CEE	ldc r0, gbr	established_full	1	source=r0 via 000B3CEC
+sub_B3DF8	000B3DF8	000B3E4A	000B3E46	00009a66	000B3E00	ldc r0, gbr	established_full	0	source=r0 via 000B3DFE
+sub_B3E4A	000B3E4A	000B3FB0	000B3FAC	00015930	000B3EA6	ldc r0, gbr	established_full	0	source=r0 via 000B3EA4
+sub_B3FB8	000B3FB8	000B41BA	000B41B6	?			multiple_values	1	distinct=0000e3bf,ffff35c8
+sub_B41DC	000B41DC	000B41FE	000B41FA	?			none	0	no local GBR establishment
+sub_B41FE	000B41FE	000B4226	000B4222	ffff3b88	000B4204	ldc r0, gbr	established_full	4	source=r0 via 000B4202
+sub_B4226	000B4226	000B4278	000B4274	ffff3b88	000B422A	ldc r0, gbr	established_full	0	source=r0 via 000B4228
+sub_B4278	000B4278	000B434A	000B4346	ffff3b88	000B4280	ldc r0, gbr	established_full	20	source=r0 via 000B427E
+sub_B434A	000B434A	000B437E	000B437A	ffff3b88	000B4350	ldc r0, gbr	established_full	1	source=r0 via 000B434E
+sub_B437E	000B437E	000B46D2	000B46CE	ffff3b88	000B4386	ldc r0, gbr	established_full	34	source=r0 via 000B4384
+sub_B46D2	000B46D2	000B48AC	000B48A8	ffff3b88	000B46D8	ldc r0, gbr	established_full	53	source=r0 via 000B46D6
+sub_B48AC	000B48AC	000B4976	000B4972	ffff3b88	000B48B2	ldc r0, gbr	established_full	1	source=r0 via 000B48B0
+sub_B4976	000B4976	000B4982	000B497E	?			none	0	no local GBR establishment
+sub_B4982	000B4982	000B49BE	000B49BA	?			none	0	no local GBR establishment
+sub_B49BE	000B49BE	000B49D0	000B49CC	?			none	0	no local GBR establishment
+sub_B49D0	000B49D0	000B4B86	000B4B82	ffff3da4	000B49E0	ldc r0, gbr	established_full	3	source=r0 via 000B49DE
+sub_B4B86	000B4B86	000B4E30	000B4E2C	?			multiple_values	25	distinct=ffff3da4,ffff3da8
+sub_B4E30	000B4E30	000B4E4E	000B4E4A	?			none	0	no local GBR establishment
+sub_B4E4E	000B4E4E	000B50F0	000B50EC	?			multiple_values	2	distinct=ffff3da8,ffff3db8
+sub_B50F0	000B50F0	000B5104	000B5100	?			none	0	no local GBR establishment
+sub_B5104	000B5104	000B5124	000B5120	?			none	0	no local GBR establishment
+sub_B512A	000B512A	000B52CE	000B52CA	ffff3da8	000B5136	ldc r0, gbr	established_full	4	source=r0 via 000B5134
+sub_B52CE	000B52CE	000B5356	000B5352	ffff3da8	000B52D6	ldc r0, gbr	established_full	7	source=r0 via 000B52D4
+sub_B5356	000B5356	000B538E	000B538A	ffff3da8	000B535A	ldc r0, gbr	established_full	0	source=r0 via 000B5358
+sub_B5392	000B5392	000B5408	000B5404	ffff3da8	000B5396	ldc r0, gbr	established_full	0	source=r0 via 000B5394
+sub_B5408	000B5408	000B5486	000B5482	ffff3da4	000B542E	ldc r0, gbr	established_full	0	source=r0 via 000B542C
+sub_B5486	000B5486	000B556E	000B556A	?			multiple_values	2	distinct=ffff3ba0,ffff3da4
+sub_B5580	000B5580	000B5600	000B55FC	?			none	0	no local GBR establishment
+sub_B5600	000B5600	000B560E		?			none	0	no local GBR establishment
+sub_B560E	000B560E	000B5674	000B5670	?			none	0	no local GBR establishment
+INT_HCAN1_SLE1	000B5674	000B56E4	000B56E0	?			none	0	no local GBR establishment
+INT_HCAN1_RM1	000B56F0	000B57C4	000B57C0	ffff2cac	000B5706	ldc r0, gbr	established_full	2	source=r0 via 000B5704
+sub_B57C4	000B57C4	000B57D8	000B57D4	?			none	0	no local GBR establishment
+sub_B57D8	000B57D8	000B5D10	000B5D0C	?			none	0	no local GBR establishment
+sub_B5D10	000B5D10	000B617A	000B6176	?	000B5D1E	ldc r0, gbr	established_partial	2	reason=unprovable_source
+sub_B617A	000B617A	000B61E8	000B61E4	?			none	0	no local GBR establishment
+sub_B61E8	000B61E8	000B6284	000B6280	?			none	0	no local GBR establishment
+sub_B62B0	000B62B0	000B633A	000B6336	?			none	0	no local GBR establishment
+sub_B633A	000B633A	000B65C0	000B65BC	?			none	0	no local GBR establishment
+sub_B65C0	000B65C0	000B6DE2	000B6DDE	?			multiple_values	4	distinct=ffff2ee4,ffff3ba0
+sub_B6E08	000B6E08	000B6E4A	000B6E46	ffff2ee4	000B6E0C	ldc r0, gbr	established_full	0	source=r0 via 000B6E0A
+sub_B6E4A	000B6E4A	000B6EAA	000B6EA6	?			none	0	no local GBR establishment
+sub_B6EAA	000B6EAA	000B7876	000B7872	?			none	0	no local GBR establishment
+sub_B7890	000B7890	000B7A68	000B7A64	ffff3ba0	000B7896	ldc r0, gbr	established_full	4	source=r0 via 000B7894
+sub_B7A68	000B7A68	000B7DE0	000B7DDC	?			none	0	no local GBR establishment
+sub_B7DE0	000B7DE0	000B80CE	000B80CA	?			none	0	no local GBR establishment
+sub_B80CE	000B80CE	000B8174	000B8170	?			none	0	no local GBR establishment
+sub_B8188	000B8188	000B8202	000B81FE	?			none	0	no local GBR establishment
+sub_B8220	000B8220	000B828A	000B8286	?			none	0	no local GBR establishment
+sub_B8298	000B8298	000B833C	000B8338	?			none	0	no local GBR establishment
+sub_B833C	000B833C	000B8438	000B8434	?	000B834A	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_B8438	000B8438	000B84BA	000B84B6	ffff35cb	000B8446	ldc r0, gbr	established_full	4	source=r0 via 000B8444
+sub_B84BA	000B84BA	000B8514	000B8510	?			none	0	no local GBR establishment
+sub_B8514	000B8514	000B8616	000B8612	?			multiple_values	5	distinct=ffff3e10,ffff3f3c
+sub_B862C	000B862C	000B86B6	000B86B2	?			none	0	no local GBR establishment
+sub_B86C0	000B86C0	000B8772	000B876E	ffff3e02	000B86C6	ldc r0, gbr	established_full	0	source=r0 via 000B86C4
+sub_B878C	000B878C	000B87B8	000B87B4	?			none	0	no local GBR establishment
+sub_B87BC	000B87BC	000B89FE	000B89FA	00012844	000B87C0	ldc r0, gbr	established_full	0	source=r0 via 000B87BE
+sub_B89FE	000B89FE	000B9E4E	000B9E4A	ffff33dc	000B8AA2	ldc r0, gbr	established_full	15	source=r0 via 000B8AA0
+sub_B9E74	000B9E74	000B9EE2	000B9EDE	?			none	0	no local GBR establishment
+sub_B9EE2	000B9EE2	000B9F10	000B9F0C	?			none	0	no local GBR establishment
+sub_B9F10	000B9F10	000BAB88	000BAB84	?	000B9FAC	ldc r0, gbr	established_partial	15	reason=unprovable_source
+sub_BABF8	000BABF8	000BACDE	000BACDA	ffff3de8	000BABFC	ldc r0, gbr	established_full	14	source=r0 via 000BABFA
+sub_BACDE	000BACDE	000BACF2	000BACEE	?			none	0	no local GBR establishment
+sub_BACF2	000BACF2	000BADE4	000BADE0	?	000BACFC	ldc r0, gbr	established_partial	10	reason=unprovable_source
+sub_BADE4	000BADE4	000BAE82	000BAE7E	00016748	000BADEA	ldc r0, gbr	established_full	0	source=r0 via 000BADE8
+sub_BAE82	000BAE82	000BBF22	000BBF1E	?			multiple_values	29	distinct=00012e38,00016750,ffff3ba0
+sub_BBF22	000BBF22	000BBF52	000BBF4E	?			none	0	no local GBR establishment
+sub_BBF52	000BBF52	000BC110	000BC10C	?	000BBF62	ldc r0, gbr	established_partial	20	reason=control_flow_boundary
+sub_BC124	000BC124	000BC3DE	000BC3DA	ffff2150	000BC212	ldc r0, gbr	established_full	10	source=r0 via 000BC210
+sub_BC3DE	000BC3DE	000BC55E	000BC55A	?	000BC3F2	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_BC578	000BC578	000BCA14	000BCA10	?			multiple_values	2	distinct=ffff2cac,ffff33d4
+sub_BCA30	000BCA30	000BCABC	000BCAB8	?	000BCA3A	ldc r0, gbr	established_partial	4	reason=unprovable_source
+sub_BCABC	000BCABC	000BCB2C	000BCB28	ffff2d2c	000BCAC0	ldc r0, gbr	established_full	0	source=r0 via 000BCABE
+sub_BCB2C	000BCB2C	000BCB9C	000BCB98	ffff2cec	000BCB32	ldc r0, gbr	established_full	0	source=r0 via 000BCB30
+sub_BCB9C	000BCB9C	000BCBC2	000BCBBE	?			none	0	no local GBR establishment
+sub_BCBC2	000BCBC2	000BCC26	000BCC22	ffff2d2c	000BCBC6	ldc r0, gbr	established_full	0	source=r0 via 000BCBC4
+sub_BCC26	000BCC26	000BCCCE	000BCCCA	ffff2d2c	000BCC2A	ldc r0, gbr	established_full	0	source=r0 via 000BCC28
+sub_BCCCE	000BCCCE	000BCD2A	000BCD26	ffff2d2c	000BCCD4	ldc r0, gbr	established_full	0	source=r0 via 000BCCD2
+sub_BCD2A	000BCD2A	000BCDE4	000BCDE0	ffff2d2c	000BCD2E	ldc r0, gbr	established_full	0	source=r0 via 000BCD2C
+sub_BCDEE	000BCDEE	000BD7B6	000BD7B2	ffff2d0c	000BCE04	ldc r0, gbr	established_full	106	source=r0 via 000BCE02
+sub_BD7B6	000BD7B6	000BD90E	000BD90A	?			multiple_values	8	distinct=ffff2d2c,ffff35b7
+sub_BD918	000BD918	000BDBD0	000BDBCC	?			multiple_values	7	distinct=ffff35cb,ffff3628
+sub_BDBE8	000BDBE8	000BDC78	000BDC74	?	000BDBEE	ldc r0, gbr	established_partial	6	reason=unprovable_source
+sub_BDC78	000BDC78	000BDDE6	000BDDE2	?	000BDC82	ldc r0, gbr	established_partial	3	reason=unprovable_source
+sub_BDE0C	000BDE0C	000BDFAA	000BDFA6	ffff2d0c	000BDE18	ldc r0, gbr	established_full	24	source=r0 via 000BDE16
+sub_BDFAC	000BDFAC	000BE096	000BE092	ffff35b7	000BDFB4	ldc r0, gbr	established_full	6	source=r0 via 000BDFB2
+sub_BE096	000BE096	000BE0F6	000BE0F2	ffff35b7	000BE09A	ldc r0, gbr	established_full	1	source=r0 via 000BE098
+sub_BE0F6	000BE0F6	000BE12E	000BE12A	?	000BE0FA	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_BE12E	000BE12E	000BE166	000BE162	?	000BE132	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_BE166	000BE166	000BE1B8	000BE1B4	?	000BE1A0	ldc r0, gbr	established_partial	1	reason=unprovable_source
+sub_BE1B8	000BE1B8	000BE26E	000BE26A	ffff2d2c	000BE1C0	ldc r0, gbr	established_full	3	source=r0 via 000BE1BE
+sub_BE2B8	000BE2B8	000BE342	000BE33E	ffff34c1	000BE2BE	ldc r0, gbr	established_full	11	source=r0 via 000BE2BC
+sub_BE352	000BE352	000BF116	000BF112	?			multiple_values	1	distinct=ffff2150,ffff3628
+sub_BF13C	000BF13C	000BF312	000BF30E	?			none	0	no local GBR establishment
+sub_BF34C	000BF34C	000BF808	000BF804	ffff3628	000BF35E	ldc r0, gbr	established_full	17	source=r0 via 000BF35C
+sub_BF814	000BF814	000C0C76	000C0C72	ffff2150	000BF82A	ldc r0, gbr	established_full	52	source=r0 via 000BF828
+sub_C0C7A	000C0C7A	000C0E7E	000C0E7A	?			none	0	no local GBR establishment
+sub_C0E82	000C0E82	000C0F92	000C0F8E	ffff3454	000C0E88	ldc r0, gbr	established_full	0	source=r0 via 000C0E86
+sub_C0F9A	000C0F9A	000C1240	000C123C	ffff3454	000C0FA2	ldc r0, gbr	established_full	0	source=r0 via 000C0FA0
+sub_C1260	000C1260	000C1360	000C135C	ffff3454	000C1266	ldc r0, gbr	established_full	0	source=r0 via 000C1264
+sub_C1360	000C1360	000C13D4	000C13D0	?			none	0	no local GBR establishment
+sub_C1408	000C1408	000C1C24	000C1C20	?			multiple_values	22	distinct=ffff2f00,ffff3454
+sub_C1C24	000C1C24	000C1F72	000C1F6E	ffff35c8	000C1C32	ldc r0, gbr	established_full	3	source=r0 via 000C1C30
+sub_C1F78	000C1F78	000C2728	000C2724	?			multiple_values	20	distinct=ffff1860,ffff3370,ffff35af,ffff35c8
+sub_C2754	000C2754	000C27A6	000C27A2	ffff34c1	000C2758	ldc r0, gbr	established_full	0	source=r0 via 000C2756
+sub_C27A6	000C27A6	000C27DA	000C27D6	ffff3454	000C27AA	ldc r0, gbr	established_full	0	source=r0 via 000C27A8
+sub_C27DA	000C27DA	000C2814	000C2810	ffff34c1	000C27DE	ldc r0, gbr	established_full	0	source=r0 via 000C27DC
+sub_C2814	000C2814	000C2860	000C285C	ffff34c1	000C2818	ldc r0, gbr	established_full	0	source=r0 via 000C2816
+sub_C2862	000C2862	000C292C	000C2928	?	000C2866	ldc r0, gbr	established_partial	0	reason=unprovable_source
+sub_C2954	000C2954	000C2B04	000C2B00	ffff0638	000C295A	ldc r0, gbr	established_full	2	source=r0 via 000C2958
+sub_C2B30	000C2B30	000C2CC0	000C2CBC	?			none	0	no local GBR establishment

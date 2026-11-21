@@ -1,0 +1,630 @@
+# WO65116 verified function/GBR evidence map
+# generator_version: WO65116-GBRMAP-1.3.0
+# rom_path: EVIDENCE/VERSA f501.bin
+# rom_md5: 46991697c502052752a2cabcb84c9e27
+# rom_sha256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# listing_member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# listing_sha256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# listing_bytes: 27045080
+# run_date: 2026-11-21
+# target_file_sha256: N/A (structural map; no supplied target addresses)
+# pc_concordance_rows_checked: 306688
+# pc_concordance_rows_matched: 306688
+# method_limits: computed pointers, pointer tables, block-copy and movca.l transport are not modelled; GBR is inherited across calls and is not attributed to a callee without a local ldc
+# classification: gbr_value '?' / state partial|inherited|restored|multiple is a lead, not a confirmed base
+label	pc	reason	instruction	note
+sub_3A0	000003AE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+ripemd160_compress_block	0000064E	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_91C	00000924	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B60	00000B6E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BEC	00000BF2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+timer1a_interrupt_handler	00000E1E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_139C	000013A6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_14C0	000014C0	no_return_site		extent bounded by next code-start label
+sub_14DE	000014E6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_15CC	00001628	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_16FC	00001706	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_19C8	000019D2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1AF6	00001AFE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1BE8	00001BEC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1C4A	00001C4A	no_return_site		extent bounded by next code-start label
+sub_1C5C	00001C6E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1DA8	00001E02	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1DA8	00001EB4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_1DA8	00001F7E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2082	000020F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2082	000021B6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2458	0000245C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2562	00002562	no_return_site		extent bounded by next code-start label
+sub_275C	0000275C	no_return_site		extent bounded by next code-start label
+sub_28EE	000028F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A2C	00002A34	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2AA4	00002AA4	no_return_site		extent bounded by next code-start label
+sub_2B74	00002B78	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C48	00002C4E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C70	00002C74	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CC2	00002CCA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2DAC	00002DB2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2DE2	00002DEA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_316C	00003172	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_333A	00003340	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3458	00003468	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3458	00003616	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_36A6	000036B4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38BA	000038C4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38BA	000039B6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3B90	00003B9A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3D1E	00003D26	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3DA6	00003DAA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3DDE	00003DE2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3E90	00003ECC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3E90	00003F4A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3E90	00004104	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4150	00004158	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_41E2	000041E8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_41E2	00004266	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4FF4	00005004	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_50F4	00005104	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5240	0000524E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_52E2	000052F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_54EA	000054F0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5C34	000165E6	gbr_use_without_local_establishment	mov.l @(h'E0,gbr), r0	1 GBR operand use(s) in extent
+INT_ATU31_IMI3A	00020428	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_209A6	000209BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_20DCE	00020DCE	no_return_site		extent bounded by next code-start label
+sub_20DCE	00020DE2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+alt_Poweron_Reset	00021A9C	no_return_site		extent bounded by next code-start label
+sub_21FFC	00021FFC	no_return_site		extent bounded by next code-start label
+sub_223FC	000223FC	no_return_site		extent bounded by next code-start label
+sub_22AB8	00022AB8	no_return_site		extent bounded by next code-start label
+sub_22AFC	00022AFC	no_return_site		extent bounded by next code-start label
+sub_22B44	00022B44	no_return_site		extent bounded by next code-start label
+sub_22BC0	00022BC0	no_return_site		extent bounded by next code-start label
+sub_22C00	00022C00	no_return_site		extent bounded by next code-start label
+sub_22C38	00022C38	no_return_site		extent bounded by next code-start label
+sub_22C78	00022C78	no_return_site		extent bounded by next code-start label
+sub_22CB8	00022CB8	no_return_site		extent bounded by next code-start label
+sub_22CF8	00022CF8	no_return_site		extent bounded by next code-start label
+sub_22D30	00022D30	no_return_site		extent bounded by next code-start label
+sub_22D68	00022D68	no_return_site		extent bounded by next code-start label
+sub_22DA8	00022DA8	no_return_site		extent bounded by next code-start label
+sub_22EFC	00022EFC	no_return_site		extent bounded by next code-start label
+sub_22F28	00022F28	no_return_site		extent bounded by next code-start label
+sub_22F54	00022F54	no_return_site		extent bounded by next code-start label
+sub_22F80	00022F80	no_return_site		extent bounded by next code-start label
+sub_22FAC	00022FAC	no_return_site		extent bounded by next code-start label
+sub_22FD8	00022FD8	no_return_site		extent bounded by next code-start label
+sub_23078	00023078	no_return_site		extent bounded by next code-start label
+sub_230B0	000230B0	no_return_site		extent bounded by next code-start label
+sub_230E8	000230E8	no_return_site		extent bounded by next code-start label
+sub_23144	00023144	no_return_site		extent bounded by next code-start label
+sub_23170	00023170	no_return_site		extent bounded by next code-start label
+sub_2319C	0002319C	no_return_site		extent bounded by next code-start label
+sub_2354C	0002354C	no_return_site		extent bounded by next code-start label
+sub_23798	00023836	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2391A	0002392E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_23AF0	00023AF8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_23B50	00023B64	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_24226	0002422A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_246EC	000246EC	no_return_site		extent bounded by next code-start label
+evaluate_status_and_store_8630	00024914	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2496E	000249AC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_24D98	00024D98	no_return_site		extent bounded by next code-start label
+sub_24DA2	00024DA2	no_return_site		extent bounded by next code-start label
+sub_24E42	00024E42	no_return_site		extent bounded by next code-start label
+INT_TRAPA62	00025014	multiple_distinct_gbr_values	ldc r0, gbr	value=ffffb638
+INT_TRAPA62	000252EC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1798
+sub_257AC	000257B0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+INT_ATU11_IMI11A	00027994	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+service_ATU11_timer_compare_and_state	00027AD8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_288B4	000288C6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_28B0C	00028B1C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_28C36	00028C70	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e54
+sub_28C36	00029514	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3614
+sub_2A024	0002A024	no_return_site		extent bounded by next code-start label
+sub_2A11C	0002A130	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A21C	0002A222	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A382	0002A38E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A41A	0002A424	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A776	0002A77C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2A812	0002A81C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B054	0002B05A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B0B2	0002B0BC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B306	0002B324	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff33d4
+sub_2B306	0002B386	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35ae
+sub_2B414	0002B418	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B4A4	0002B4AA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B758	0002B75C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B792	0002B79C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B88A	0002B88E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B8FC	0002B900	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2B9A4	0002B9AA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+INT_SCI1_TXI1	0002BB86	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+INT_SCI1_TEI1	0002BBE4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_timer_tick	0002BC7E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_finalize_fields	0002BE20	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2BEAC	0002BEB0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C004	0002C016	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C0EA	0002C0EE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_update_state	0002C114	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C164	0002C164	no_return_site		extent bounded by next code-start label
+sub_2C1E8	0002C1E8	no_return_site		extent bounded by next code-start label
+sub_2C220	0002C220	no_return_site		extent bounded by next code-start label
+sub_2C2C0	0002C2C6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C6DA	0002C6E6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C74E	0002C762	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C74E	0002C98A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2C74E	0002CA6A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_build_and_finalize	0002CACA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_build_and_finalize	0002CBDE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+message_build_and_finalize	0002CC42	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CCF6	0002CCFC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CD94	0002CD9E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CE70	0002CE78	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CEA0	0002CEAA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CEDA	0002CEE2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CEDA	0002CF34	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CEDA	0002CF92	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2CFB8	0002CFBE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2D0B4	0002D0BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2DDA8	0002DDAE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2DE04	0002DE04	no_return_site		extent bounded by next code-start label
+sub_2DE10	0002DE10	no_return_site		extent bounded by next code-start label
+sub_2DE1C	0002DE28	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2E6F0	0002E6FE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2E6F0	0002E7CE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2E8A8	0002E8B4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2E97C	0002E986	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2EF6C	0002EF7C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2F324	0002F338	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2F470	0002F478	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2F6E8	0002F6FC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2F864	0002F874	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2FB8C	0002FB8C	no_return_site		extent bounded by next code-start label
+sub_2FC6C	0002FC8E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2FC6C	0002FD96	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_2FE6C	0002FE74	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30688	0003068E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_306D0	000306DA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30830	00030838	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30884	0003088A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30AD4	00030ADA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30B2C	00030B60	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30B2C	00030C0E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30D04	00030D0A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30DAC	00030DB2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30E6C	00030E72	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30EF4	00030EFA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_30EF4	00030F56	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_31070	00031082	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_312BC	000312C0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_31382	00031388	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_313D4	000313E6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3188C	00031892	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_31910	00031918	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_319EC	000319F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_31B88	00031B90	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_31C84	00031C8A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_324AC	000324B4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_32678	00032686	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_327FE	00032806	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_331E8	000331FC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_333D4	000333DA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33A5E	00033A68	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33A5E	00033B16	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33BBA	00033BC4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33C70	00033C78	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33D30	00033D38	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33E3C	00033E42	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33E90	00033E96	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33EDA	00033EDE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_33F14	00033F18	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_344B6	000344BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_344B6	00034502	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_346E0	00034718	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_346E0	000347CE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+sub_346E0	00034834	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_346E0	00034D4E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e3c
+sub_346E0	0003510A	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_35262	00035268	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35262	000353F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3548A	00035490	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_354C0	000354C4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35570	00035576	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_355B6	000355EE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35640	00035682	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_357A4	000357AA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35932	00035936	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3597C	00035980	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35CA8	00035CC8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_35F38	00035F44	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_36012	0003601E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_360C8	000360CE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_361D0	000361DA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_37074	000370AC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff180c
+sub_3723C	00037248	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_3723C	000372D8	multiple_distinct_gbr_values	ldc r0, gbr	value=00010eea
+sub_3723C	0003743A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff180c
+sub_3723C	000379C4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1850
+sub_3723C	00037E26	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_3723C	00037EF6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1850
+sub_38494	0003849A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38592	000385A0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38592	000387BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_388B4	000388BA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2d2c
+sub_388B4	000389B0	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2f00
+sub_388B4	00038A36	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_388B4	00038B2A	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_38C54	00038C5A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38D2E	00038D32	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38F62	00038F66	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_38F62	00038FAE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39024	00039024	no_return_site		extent bounded by next code-start label
+sub_3904A	00039160	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39254	00039292	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39254	00039650	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3968C	00039692	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39B10	00039B32	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39B10	00039BF0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39B10	00039C34	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_39B10	00039C6C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3A4E0	0003A4F6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3AB8C	0003AB9E	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_3B2B0	0003B2C2	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_3B2B0	0003B6B6	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_3B2B0	0003B746	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2150
+sub_3B2B0	0003B956	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e3c
+sub_3DA74	0003DA7A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_3DB16	0003DB24	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d83
+sub_3DB16	0003DD60	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_3E2D2	0003E2D2	no_return_site		extent bounded by next code-start label
+sub_3E3C0	0003E3F4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1860
+sub_3F500	0003F500	no_return_site		extent bounded by next code-start label
+sub_401E2	000401E2	no_return_site		extent bounded by next code-start label
+sub_40F18	00040F20	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_40F18	0004101E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_41BA0	00041BA4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d83
+sub_41BA0	00041C12	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d80
+sub_41D74	00041D7A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_41F60	00041F60	no_return_site		extent bounded by next code-start label
+def_42112	000421DE	gbr_use_without_local_establishment	and.b #h'EF, @(r0,gbr)	6 GBR operand use(s) in extent
+sub_422BA	0004250C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d12
+sub_42838	0004284E	multiple_distinct_gbr_values	ldc r0, gbr	value=00014a14
+sub_42838	000429AA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d7c
+sub_42838	00043136	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+sub_42838	00043258	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+sub_433B4	000433BE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_43964	0004396A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_44F04	00044F08	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_44FDA	00044FE4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_46744	00046748	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1ebd
+sub_46744	0004691C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d98
+sub_470CC	000470D2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_47988	00047992	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1c6c
+sub_47988	00047B60	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b0
+sub_488BA	000488CE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_48D2E	00048D42	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4AF24	0004AF36	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4B94E	0004B95E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_4B94E	0004BB3A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+sub_4B94E	0004BCF6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_4B94E	0004BF5C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b0
+sub_4C608	0004C610	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4D33C	0004D346	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1ca8
+sub_4D33C	0004D4A4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d7c
+sub_4DAB0	0004DAC0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_4FF82	0004FF8E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d98
+sub_4FF82	000500F6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+sub_506A0	000506B4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_513AC	000513C2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_513AC	00051BC0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5293C	0005294C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+process_runtime_table_value_5339E	000533B4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff33b8
+process_runtime_table_value_5339E	000534BE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2ca4
+sub_543CC	000543D4	multiple_distinct_gbr_values	ldc r0, gbr	value=000093da
+sub_543CC	0005447A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b3
+sub_543CC	00054772	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b3
+sub_54D1A	00054D1E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_54D1A	00054D82	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b3
+sub_54D1A	00055278	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff33cc
+sub_553B8	000553CA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_55518	0005552E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_55F20	00055F28	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_55F66	00055F7C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_562D4	000562E2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_564D4	000564E4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_565AA	000565BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5667C	0005668E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_56806	0005681A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_56AAA	00056AB0	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_56AAA	00056B52	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_57E62	00057E66	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_57E62	00057EB2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5808E	000580A2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5837C	00058394	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_588BA	000588CE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_58B06	00058B14	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_58B06	00058C0A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_58F16	00058F2A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5919A	000591B0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+prepare_85DF_and_19BF	00059B62	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1c78
+prepare_85DF_and_19BF	00059C4C	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+prepare_85DF_and_19BF	00059CCC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d12
+sub_5A0BE	0005A0C4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5ADE8	0005ADF0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5AFF2	0005B002	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5B336	0005B342	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5BD7C	0005BD84	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_5BD7C	0005BE5C	multiple_distinct_gbr_values	ldc r0, gbr	value=00008ccc
+sub_5EC0E	0005EC1E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3454
+sub_5EC0E	0005EE54	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b3
+sub_5F21E	0005F228	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_5F5A8	0005F5AC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_5F5A8	0005F716	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1990
+INT_ATU31_IMI3B	0005F872	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_5FA70	0005FA86	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_64594	00064598	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_64B5C	00064B62	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_64E18	00064E22	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6502C	00065034	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_654DC	000654E2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6550E	00065514	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_65548	0006554E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_65604	00065608	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_659FC	000659FC	no_return_site		extent bounded by next code-start label
+sub_65EBA	00065EC0	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff38df
+sub_65EBA	00065F6A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1d99
+sub_66CDC	00066CE6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_66CDC	00066E0A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1028
+sub_67110	000671AE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e6e
+sub_674B4	000674B8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_67D0C	00067DAA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1028
+sub_67D0C	0006807C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_68336	0006833E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_684DE	000684E6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_685A6	000685AC	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_685A6	000687E4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e44
+sub_685A6	000688CE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_689BA	000689C0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_68C28	00068DA4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_69496	000696FC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_6988C	00069A04	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2f00
+sub_69B24	00069B30	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_69C5C	00069C70	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6BAD8	0006BAEC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6BED2	0006BED2	no_return_site		extent bounded by next code-start label
+sub_6BFC2	0006BFC2	no_return_site		extent bounded by next code-start label
+sub_6BFE4	0006C20E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_6C3FC	0006C3FC	no_return_site		extent bounded by next code-start label
+sub_6C4A0	0006C4A4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6C4DC	0006C4E2	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1e6e
+sub_6C4DC	0006C566	multiple_distinct_gbr_values	ldc r0, gbr	value=0000fcbc
+sub_6CB56	0006CB5A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6CDC4	0006CDD2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6CF6E	0006CF6E	no_return_site		extent bounded by next code-start label
+sub_6DAFC	0006DB08	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6DC24	0006DC24	no_return_site		extent bounded by next code-start label
+sub_6DF26	0006DF80	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_6E3CC	0006E3DC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff33e6
+sub_6E3CC	0006E568	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2118
+sub_6E7F0	0006E7F0	no_return_site		extent bounded by next code-start label
+sub_6E83C	0006E840	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_6F496	0006F496	no_return_site		extent bounded by next code-start label
+sub_6F89A	0006F89A	no_return_site		extent bounded by next code-start label
+sub_6FCFE	0006FCFE	no_return_site		extent bounded by next code-start label
+sub_70620	0007062A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1054
+sub_70620	000706BE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1c6c
+sub_70620	00070792	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_70B62	00070C52	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_70CD8	00070CD8	no_return_site		extent bounded by next code-start label
+sub_70D1A	00070D2E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_710E4	000710EA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_71184	0007118A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_71254	0007125C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_71254	000713F6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_715AE	000715BE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_719EA	000719FE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_719EA	00071DD2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_71F06	00071F0A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_71F74	00071F7C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_722FE	0007230C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_72480	0007248E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_72676	00072684	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_72884	00072890	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_72A2A	00072A36	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_72CA8	00072CB8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7432C	0007432C	no_return_site		extent bounded by next code-start label
+sub_756A8	000756A8	no_return_site		extent bounded by next code-start label
+sub_756E0	000756EA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_75CB4	00075CB4	no_return_site		extent bounded by next code-start label
+sub_75E7C	00075E8A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_761C8	000761D4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_772D6	000772E4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_793F0	000793F4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_79488	0007948C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7A204	0007A204	no_return_site		extent bounded by next code-start label
+sub_7A490	0007A496	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7B432	0007B446	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7C880	0007C886	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7CA8E	0007CA96	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7CBB4	0007CBBA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7D006	0007D012	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7D45E	0007D468	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7D4F2	0007D504	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_7F680	0007F688	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_808BC	00080CA6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b3
+sub_81120	00081128	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_81290	0008129A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_816E8	000816E8	no_return_site		extent bounded by next code-start label
+sub_81AA6	00081AAA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_825AC	000825B4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_839BC	000839C0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_83A14	00083A80	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3628
+sub_84E80	00084E84	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_85AF4	00085B02	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_85E34	00085E46	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8687A	00086880	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_86B98	00086BA2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_895EC	000895F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8A3A0	0008A3B2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8B98C	0008B9A2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8C490	0008C4A6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8CF66	0008CF76	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_8D510	0008D526	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_900DA	000900EC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_90384	00090388	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_90384	000905A6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_90E60	00090E64	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_90EA4	00090EBA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_91510	0009151E	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_915A4	000915B8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_91802	00091818	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_91A4A	00091A4E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_91FFA	00092002	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_92292	00092296	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9284A	00092852	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_92E1E	00092E1E	no_return_site		extent bounded by next code-start label
+sub_92E38	00092E48	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_947F2	000947FE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_94AF6	00094AF6	no_return_site		extent bounded by next code-start label
+sub_9511A	00095120	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_952EC	00095358	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9580C	00095812	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff371e
+sub_9580C	0009592E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34b2
+sub_9595C	0009595C	no_return_site		extent bounded by next code-start label
+sub_95D62	00095D6E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_95F16	00095F1A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_960A8	00096142	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_962B8	000962BE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9652C	00096532	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_968B6	000968B6	no_return_site		extent bounded by next code-start label
+sub_969C2	000969D8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_97348	0009734C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_974D0	000974D6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2150
+sub_974D0	0009758E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_9838C	00098394	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_98442	0009844C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_98442	00098500	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_98758	00098762	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9881E	00098828	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9881E	000988EA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_98ABE	00098AD0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_98C78	00098C8C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9908A	00099098	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_99E24	00099E24	no_return_site		extent bounded by next code-start label
+sub_99F30	00099F34	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9A16C	0009A4F4	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff182c
+sub_9A16C	0009A51E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff182c
+sub_9A16C	0009A5B6	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff182c
+sub_9A16C	0009A6DC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1860
+sub_9A878	0009A878	no_return_site		extent bounded by next code-start label
+sub_9A8AC	0009A8BA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9AB50	0009AB50	no_return_site		extent bounded by next code-start label
+sub_9ACAA	0009AF60	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9B5AC	0009B5B0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9BADE	0009BAE6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_9D230	0009D230	no_return_site		extent bounded by next code-start label
+sub_9DA34	0009DA42	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A4108	000A4114	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A422C	000A4236	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A43CA	000A43D4	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A6E1C	000A6E22	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A710C	000A7110	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A734E	000A7354	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A73D0	000A73D6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A78C8	000A78CE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A7CFC	000A7D02	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A7F90	000A7F9A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A8DDC	000A8DE0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A8EF4	000A8EF8	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A8F4A	000A8F52	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A970A	000A970E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A979C	000A97A0	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35cb
+sub_A979C	000A97DE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff38df
+sub_A985C	000A985C	no_return_site		extent bounded by next code-start label
+sub_A9AB8	000A9AB8	no_return_site		extent bounded by next code-start label
+sub_A9B9E	000A9BA6	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_A9E30	000A9E38	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_AA156	000AA15C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3abe
+sub_AA156	000AA25C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35cb
+sub_AA2FC	000AA2FC	no_return_site		extent bounded by next code-start label
+sub_AA882	000AA882	no_return_site		extent bounded by next code-start label
+sub_AA9B8	000AA9B8	no_return_site		extent bounded by next code-start label
+sub_AAF32	000AAF36	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff34c1
+sub_AAF32	000AAFDA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35cb
+sub_AB024	000AB024	no_return_site		extent bounded by next code-start label
+sub_AB200	000AB200	no_return_site		extent bounded by next code-start label
+sub_AB200	000AB7A2	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_AB200	000AB7B8	multiple_distinct_gbr_values	ldc r8, gbr	value=?
+sub_AB200	000AB9DC	multiple_distinct_gbr_values	ldc r3, gbr	value=aaaaaaaa
+sub_AB200	000AB9E2	multiple_distinct_gbr_values	ldc r3, gbr	value=55555555
+sub_AB200	000AB9EA	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_ABADA	000ABC60	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_ABADA	000ABC88	ldc_value_not_provable	ldc r8, gbr	reason=unprovable_source
+sub_ABD58	000ABD60	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_AC6F8	000AC6FE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_ACA76	000ACA76	no_return_site		extent bounded by next code-start label
+sub_ACBCE	000ACBCE	no_return_site		extent bounded by next code-start label
+sub_ADE6C	000ADE74	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_AE258	000AE25C	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+INT_SCI2_RXI2	000AE34E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+INT_SCI2_RXI2	000AE42E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_AE4CA	000AE4CA	no_return_site		extent bounded by next code-start label
+sub_AEB6C	000AEB74	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+callback_process_records_dispatch_30	000B01F4	no_return_site		extent bounded by next code-start label
+call_sub_B0850	000B0220	no_return_site		extent bounded by next code-start label
+sub_B0C1A	000B0C28	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B119A	000B11A0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B1726	000B1734	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B1A24	000B1A36	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B3864	000B3868	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B3FB8	000B3FBC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35c8
+sub_B3FB8	000B4140	multiple_distinct_gbr_values	ldc r0, gbr	value=0000e3bf
+sub_B4B86	000B4B8E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3da4
+sub_B4B86	000B4C52	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3da8
+sub_B4E4E	000B4E58	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3db8
+sub_B4E4E	000B4F5C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3da8
+sub_B5486	000B54BE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3da4
+sub_B5486	000B552A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3ba0
+sub_B5600	000B5600	no_return_site		extent bounded by next code-start label
+sub_B5D10	000B5D1E	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B65C0	000B6ADA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3ba0
+sub_B65C0	000B6BDA	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2ee4
+sub_B833C	000B834A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B8514	000B851A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3e10
+sub_B8514	000B85C8	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3f3c
+sub_B9F10	000B9FAC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_B9F10	000BAAC2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BACF2	000BACFC	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BAE82	000BAEAC	multiple_distinct_gbr_values	ldc r0, gbr	value=00016750
+sub_BAE82	000BB37A	multiple_distinct_gbr_values	ldc r0, gbr	value=00012e38
+sub_BAE82	000BB4E0	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3ba0
+sub_BAE82	000BB6B0	multiple_distinct_gbr_values	ldc r0, gbr	value=?
+sub_BBF52	000BBF62	ldc_value_not_provable	ldc r0, gbr	reason=control_flow_boundary
+sub_BBF52	000BC040	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BC3DE	000BC3F2	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BC3DE	000BC490	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BC578	000BC5A0	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2cac
+sub_BC578	000BC646	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff33d4
+sub_BCA30	000BCA3A	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BD7B6	000BD7BE	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2d2c
+sub_BD7B6	000BD856	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35b7
+sub_BD918	000BD91E	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3628
+sub_BD918	000BDA1C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35cb
+sub_BDBE8	000BDBEE	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BDC78	000BDC82	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BE0F6	000BE0FA	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BE12E	000BE132	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BE166	000BE1A0	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+sub_BE352	000BE366	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2150
+sub_BE352	000BF09A	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3628
+sub_C1408	000C1412	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3454
+sub_C1408	000C1A38	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff2f00
+sub_C1F78	000C1F88	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35c8
+sub_C1F78	000C21AC	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff1860
+sub_C1F78	000C233C	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff35af
+sub_C1F78	000C2630	multiple_distinct_gbr_values	ldc r0, gbr	value=ffff3370
+sub_C2862	000C2866	ldc_value_not_provable	ldc r0, gbr	reason=unprovable_source
+unknown	0004398C	gbr_use_outside_function_extent	mov.b r0, @(5,gbr)	post-return or unlabelled code; no enclosing code-start label
+unknown	000439D4	gbr_use_outside_function_extent	mov.l r0, @(0,gbr)	post-return or unlabelled code; no enclosing code-start label
+unknown	000439EC	gbr_use_outside_function_extent	mov.b r0, @(4,gbr)	post-return or unlabelled code; no enclosing code-start label
