@@ -652,8 +652,9 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 # The callee may alter GBR; do not propagate a caller value blindly.
                 gbr = None
-            elif delay_slot_type == "bra":
-                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            # Local delayed branches are merged at their named target label.
+            # The merge retains only proven high-register definitions that
+            # predate the branch; values changed on either path are cleared.
             in_delay_slot = False
             delay_slot_type = None
         elif is_branch_delay:
@@ -662,10 +663,15 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 delay_slot_type = "ret"
             elif is_call:
                 delay_slot_type = "call"
+            elif hi == 0x8 and (op >> 8) & 0xF in (0xD, 0xF):
+                delay_slot_type = "conditional"
             else:
                 delay_slot_type = "bra"
         elif is_branch_no_delay:
-            invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            # Named local conditional targets are merged at the label below.
+            # Unknown/dynamic transfers still force complete invalidation.
+            if last_branch_target is None:
+                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
 
     # 6. PC Concordance verification for both output files
     valid_hits = []
