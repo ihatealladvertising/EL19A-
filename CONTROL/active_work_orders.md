@@ -18,13 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. The user authorized concurrent execution on 2026-11-20; WO65062, WO65064, and WO65065 are now closed bounded-complete (2026-11-21).
+- **Concurrent WOs:** none active. The user authorized concurrent execution on 2026-11-20; WO65062, WO65064, WO65065, and WO65083 are now closed bounded-complete (2026-11-21).
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| [WO65083](WO65083.md) | **ACTIVE — P1** | Owner: coordinator. Bounded 1D scalar/limiter discovery in ROM `0x7800–0x9500`, excluding completed WO65064 range `0x9500–0x9B00`. Establish literal-pool reader inventory and classify candidate UWORD/UBYTE slots by actual compare, arithmetic, helper-parameter, and RAM-shadow use; no semantics from value resemblance alone. |
+| — | **NONE** | No active work orders. WO65062, WO65064, WO65065, and WO65083 are closed bounded-complete. |
 
 
 
@@ -33,6 +33,8 @@
 
 
 ## Recent completed work
+
+- [WO65083](WO65083.md) — **BOUNDED COMPLETE — CLOSED:** completed the bounded literal-pool first-access census over ROM `0x7800–0x94FF` (3,663 first accesses from 3,962 literal-pool roots), classified repeated constants and traced direct UWORD comparison boundaries 78/956 and 60/964/1000. `0x9220`=10 is a count/record guard candidate; `0x90CC`=0x7FFF is generic saturation; `0x934C`=100 is an arithmetic bias. No units or calibration semantics assigned; no workbook/XML/catalogue integration.
 
 - [WO65062](WO65062.md) — **BOUNDED COMPLETE — CLOSED:** completed the targeted byte/bit access slice for FFFF85C4–FFFF85FF and FFFF860B–FFFF860F, corrected indexed/GBR/call-boundary cases, and classified all five FFFF85E4 writers. Static loc_1D64 copy capability and HCAN1 buffer producer are documented; actual runtime packet/destination and post-relocation VBR slots remain unproven. No exhaustive whole-ROM or semantic claim; no workbook/XML/catalogue integration.
 
