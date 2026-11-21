@@ -1,0 +1,29 @@
+# WO65119 false-alias and verified-facts register
+# generator_version: WO65119-FAREG-1.1.0
+# rom_path: EVIDENCE/VERSA f501.bin
+# rom_md5: 46991697c502052752a2cabcb84c9e27
+# rom_sha256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# listing_member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# listing_sha256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# listing_bytes: 27045080
+# run_date: 2026-11-21
+# pc_concordance_rows_checked: 306688
+# pc_concordance_rows_matched: 306688
+# target_file_sha256: N/A (curated register; no supplied targets)
+# method_limits: curated from closed work orders; DOCUMENTED rows are not re-derived here; mechanical checks cover only the stated tiers; no new alias search or semantic naming
+# classification: structural and negative-claim facts only; PASS on a mechanical check does not promote a DOCUMENTED conclusion
+alias_id	category	false_claim	correct_fact	addresses_pcs	verification_tier	verification_status	negative_search_method	evidence_level	source_wo	notes
+FA001	stale_gbr	PKIOR_W at FFFFF770 reached via a stale GBR in an INT_ATU routine	PKIOR_W is a RAM word at FFFFF770; no provable GBR access resolves to it	FFFFF770; 0x2869A/0x286A4/0x286E4/0x2870E/0x28738	LISTING_PC	PASS	bounded stale-GBR/resolver search; exact-literal and GBR forms; false origin unrecovered	confirmed	WO65061, WO65062, playbook	Mechanical check covers label mapping and the five annotation forms (address loads, not accesses); stale-GBR non-derivation remains documented-only.
+FA002	pool_label	byte_85DF in a .data.l pool refers to RAM FFFF85DF	the pool value is 0x000085DF, a ROM address; ROM[0x85DF]=01 6E FE 16	0x38084; ROM 0x85DF	ROM_BYTE	PASS	exact .data.l value search over the listing; ROM byte read at the label target	confirmed	playbook, WO65061	A 32-bit pool value below 0x100000 is a ROM pointer, not a RAM address.
+FA003	over_reach	a 0x55xxx displacement with GBR reaches RAM FFFF8AF0	no concordant @(disp,GBR) operand with the known GBR values yields FFFF8AF0	FFFF8AF0; GBR FFFF1028/FFFF1E54/0000821E	ARITHMETIC	PASS	scan every concordant @(disp,GBR) operand against each known GBR; width scaling b/w/l applied	confirmed	playbook, index item 5, WO65116/WO65117	FFFF8AF0 exists only as an undefined .res.b reservation in the listing.
+FA004	false_base	0x96A4A with offset 0x5F4 targets FFFF1648	base FFFF2150 + 0x5F4 = FFFF2744 (a different word)	0x96A4A; FFFF2150+0x5F4	ARITHMETIC	PASS	exact-base arithmetic and fixed-offset restriction; no FFFF1648 derivation	confirmed	WO65101	Listing line at 0x96A4A carries the h'5F4 annotation.
+FA005	pointer_table	FFFF8234 is an HCAN mailbox payload destination	FFFF8234 is a four-byte pointer table staged by sub_2BD74	FFFF8234; 0x4D74; 0x2CA1E	DOCUMENTED	NOT_RECHECKED	mailbox config/ID/DLC census; pointer-assembly and dereference chain; no MB payload role found	confirmed	WO65102, WO65108	Not re-derived here; use the source WO's reader/producer evidence.
+FA006	stale_annotation	@(h'14,r2) at 0x41196 and @(h'14,r5) at 0x41204 read FFFF1014	r2/r5 = FFFF1000, word displacement 0x14 scaled x2 -> FFFF1028	0x41196; 0x41204; FFFF1000+0x28	LISTING_PC	PASS	proven base plus SH-2 word-displacement scaling; listing B5/B6 correction comments	confirmed	WO65097, WO65012 errata	The V32 Batch-6 comments at both PCs repeat the withdrawn FFFF1014 claim.
+FA007	role_correction	FFFF33E6/FFFF33E8 and FFFF3368 are MMIO registers	they are RAM staging in the timer/APC output loop	FFFF33E6; FFFF33E8; FFFF3368	DOCUMENTED	NOT_RECHECKED	peripheral write census and port-mux search; no hardware register write proven	confirmed	WO65106 (corrects WO65074/WO65087)	Not re-derived here.
+FA008	data_class	FFFF8518-FFFF851B is an analog input stage	it is one four-byte RAM vector-table slot initialized at FFFF8500	FFFF8518-FFFF851B; FFFF8500	DOCUMENTED	NOT_RECHECKED	startup vector-table initialization trace; ADC2 callsite census (only 0x1B/0x1F)	confirmed	WO65105	Not re-derived here.
+FA009	role_correction	sub_25D36 is a flag helper	sub_25D36 is a divide-by-10 helper	sub_25D36	DOCUMENTED	NOT_RECHECKED	helper body decode; division sequence identified	confirmed	playbook	Not re-derived here.
+FA010	width_mismatch	a label named byte_* implies a byte-width access	the cited register was accessed as a word; width comes from the mnemonic, not the label	listing labels	DOCUMENTED	NOT_RECHECKED	mnemonic-width audit against label names	confirmed	playbook	Not re-derived here.
+FA011	role_correction	INT_TRAPA62 is a periodic scheduler tick	it is a bit0-gated software trap with event-gated dispatch	INT_TRAPA62	DOCUMENTED	NOT_RECHECKED	gate-bit trace and cadence search; no fixed period proven	confirmed	WO65104, WO65094	Not re-derived here.
+FA012	data_class	the 197-record DTC code table is read in the R14=1 DTC path	the 198-pointer dword_13780 scan does not read the 197-record DTC table	dword_13780; 197-record DTC table	DOCUMENTED	NOT_RECHECKED	pointer-array census and record-table reader search; no ordinal pairing assumed	bounded	WO65107	Not re-derived here.
+FA013	data_class	0xE904 is a catalogue gap absent from XML v3	0xE904 is already declared in XML v3 (Barometric Pressure Correction [S] mTHOSNTP)	0xE904	DOCUMENTED	NOT_RECHECKED	XML v3 declaration search and byte comparison	confirmed	WO65110	Not re-derived here; no XML edit made by this WO.
+FA014	role_correction	FFFF85E4 is ICR0A/TCNT0	FFFF85E4 consumes RAM FFFF14E0; no proven bridge to ICR0A capture	FFFF85E4; FFFF14E0; FFFF1A64	DOCUMENTED	NOT_RECHECKED	timer-register write/read census; observed ICR0A handler writes FFFF1A64	bounded	WO65104	Not re-derived here.
