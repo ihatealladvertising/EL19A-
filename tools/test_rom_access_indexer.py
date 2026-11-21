@@ -102,7 +102,7 @@ class ResolverMechanicsTests(unittest.TestCase):
 
     def test_invalid_target_width_is_rejected(self):
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as f:
-            f.write("000085DF\\n")
+            f.write("000085DF\n")
             target_path = f.name
         try:
             with self.assertRaises(ValueError):
@@ -117,7 +117,7 @@ class ResolverMechanicsTests(unittest.TestCase):
             self.skipTest("set WO65115_REGRESSION_TSV to a production regression-run TSV")
         with open(output_path, "r", encoding="utf-8", newline="") as f:
             content = [line for line in f if not line.startswith("#")]
-        rows = list(csv.DictReader(content, delimiter="\\t"))
+        rows = list(csv.DictReader(content, delimiter="\t"))
         by_target = {}
         for row in rows:
             by_target.setdefault(row["target"], []).append(row)
@@ -126,7 +126,7 @@ class ResolverMechanicsTests(unittest.TestCase):
             row["pc"].upper() for row in by_target.get("FFFF85DF", [])
             if row["access"] == "read"
         }
-        self.assertEqual(reads_85df, {"0x46BDE", "0x47014", "0x59CA2"})
+        self.assertEqual(reads_85df, {"0X46BDE", "0X47014", "0X59CA2"})
 
         reads_85e0 = [
             row for row in by_target.get("FFFF85E0", [])
@@ -157,7 +157,7 @@ class ResolverMechanicsTests(unittest.TestCase):
         import csv
         with open(output_path, "r", encoding="utf-8", newline="") as f:
             content = [line for line in f if not line.startswith("#")]
-        rows = list(csv.DictReader(content, delimiter="\\t"))
+        rows = list(csv.DictReader(content, delimiter="\t"))
         self.assertFalse(any(row["pc"].upper() == false_pc.upper() for row in rows))
 
 
