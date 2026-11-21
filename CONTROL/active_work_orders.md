@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. WO65085–WO65091 are closed bounded-complete (2026-11-21); the user authorizes concurrent execution.
+- **Concurrent WOs:** WO65092 active (2026-11-21). WO65085–WO65091 are closed bounded-complete; the user authorizes concurrent execution.
 
 ## Active work
 
@@ -26,6 +26,7 @@
 |---|---|---|
 | WO65090 | **CLOSED — BOUNDED COMPLETE** | ROM `0x829A–0x829F` signed scalar/clamp cluster traced; carried forward direct boundaries `0x913A/0x913C`, `0x91C2/0x91C4/0x91C6`, `0x97B2`. Extracted and raw-ROM-verified 197 DTC-like records (`0x12E44–0x1377F`, stride `0x0C`, U16BE code at `+6`) and 144 unique CID-like records (`0x14664–0x148A3`, stride 4, U16BE + `00 FF`). No physical semantics or workbook/XML integration. Evidence: [WO65090](WO65090.md), PR [#8](https://github.com/ihatealladvertising/EL19A-/pull/8). |
 | WO65091 | **CLOSED — BOUNDED COMPLETE** | Corrected `sub_969C2`: its SWORD-map column query is locally loaded from UWORD `FFFF85B2`, shared with `0x9C2E/0x9DAE`, `0x9B2E` and `0xAB22`. Bounded 42 register-base and 27 GBR+`0x16` UWORD stores; no static writer proven. Existing packet parser can dynamically write within a window including `FFFF85B2`, but actual packet/destination/length remain unknown. No physical semantics or workbook/XML integration. Evidence: [WO65091](WO65091.md), PR [#9](https://github.com/ihatealladvertising/EL19A-/pull/9). |
+| WO65092 | **ACTIVE — P1** | Trace the established snapshot chain `FFFF85E4 → FFFF8596 → FFFF85DA → FFFF85B2`; resolve exact helper scaling, callback/interrupt gates, byte-copy geometry and cross-context timing. Reuse WO65062/WO65091 evidence; no physical-unit promotion. See [WO65092](WO65092.md). |
 
 
 
