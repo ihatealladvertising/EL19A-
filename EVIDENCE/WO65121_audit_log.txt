@@ -1,0 +1,130 @@
+WO65121 independent reproduction audit
+audit_ref: origin/wo65118-ram-byte-bit-xref
+generator_version_expected: WO65118-RAMXREF-1.5.0
+
+=== 1. Canonical Git blobs ===
+BLOB generator  oid=8668f0b0ff5234fdaeac678c252d86f6b0c27ced bytes=19272 sha256=9ce02fbf2378a60207d8a6ca0bc237556f35e908d3f509efc96163407f9e916e
+PASS blob_oid_generator | 8668f0b0ff5234fdaeac678c252d86f6b0c27ced
+BLOB main       oid=2665ee62669ddcc141c1f659c0a1d4ac2cdaf423 bytes=2192172 sha256=b49375d3b7ab3ad5325107b5f7f024d59f938f86d7b75ea2be6e00f833fdf502
+PASS blob_oid_main | 2665ee62669ddcc141c1f659c0a1d4ac2cdaf423
+BLOB pages      oid=ae4fc310b2ad260c15d8b19ac70eba5fa2c30d1d bytes=5116 sha256=987ca48375e9371668fd391fc4b1362832d58ceab663644e8c37024fbbf705d2
+PASS blob_oid_pages | ae4fc310b2ad260c15d8b19ac70eba5fa2c30d1d
+BLOB unresolved oid=9561c1abb75e213815a2efaab115e1ecf945930b bytes=3220130 sha256=324122b34305847b0309c98e3b9a930c3c265a80e88a18f5a31553b5e3ea9265
+PASS blob_oid_unresolved | 9561c1abb75e213815a2efaab115e1ecf945930b
+
+=== 2. Pinned inputs ===
+PASS rom_bytes | 1048576
+PASS rom_md5 | 46991697c502052752a2cabcb84c9e27
+PASS rom_sha256 | bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+PASS listing_bytes | 27045080
+PASS listing_sha256 | 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+
+=== 3. Generator execution (unmodified blob) ===
+PASS generator_exit | rc=0
+--- generator stdout ---
+VERSION WO65118-RAMXREF-1.5.0
+PC_CONCORDANCE 306688 / 306688
+RAM_ROWS 22308 PAGES 100 UNRESOLVED 43530
+ACCESS [('read', 14231), ('write', 8077)]
+FORMS [('gbr_disp', 9539), ('base_disp', 5507), ('base_r0', 3661), ('base_indirect', 2883), ('gbr_r0', 718)]
+BIT_ACTIONS [('cleared', 388), ('set', 172)]
+UNRES_REASONS [('base_not_provable', 20840), ('index_not_provable', 16755), ('displacement_not_provable', 3689), ('gbr_not_provable', 2246)]
+R1_FFFF85DF_READERS [('00046BDE', 'base_r0'), ('00047014', 'base_r0')]
+R1_PASS True
+R2_FFFF85E0_ROWS 0 PASS True
+R3_FFFF1DB4 [('0004042c', 'read'), ('0004044a', 'write')]
+R3_PASS True
+R4_PKIORW_ROWS 0
+R4_PASS True
+R5_ROM_GBR_OVERREACH 0 PASS True
+CMP_FFFF860D_BIT3_5_ROWS 26 DISTINCT_PCS 26 ALL_ADDRESS_ROWS 71 ALL_BIT_NOTED 27
+CMP_FFFF84BA_READERS 125 WRITERS 0
+
+=== 4. Byte-for-byte artifact reproduction ===
+COMPARE main       regenerated_bytes=2192172 committed_bytes=2192172 sha256=b49375d3b7ab3ad5325107b5f7f024d59f938f86d7b75ea2be6e00f833fdf502
+PASS byte_identical_main
+COMPARE pages      regenerated_bytes=5116 committed_bytes=5116 sha256=987ca48375e9371668fd391fc4b1362832d58ceab663644e8c37024fbbf705d2
+PASS byte_identical_pages
+COMPARE unresolved regenerated_bytes=3220130 committed_bytes=3220130 sha256=324122b34305847b0309c98e3b9a930c3c265a80e88a18f5a31553b5e3ea9265
+PASS byte_identical_unresolved
+
+=== 5. Independent invariant audit (from regenerated rows) ===
+PASS header_comment_lines_main | 14
+PASS header_total_lines_main | 14 comment + 1 column header
+HEADER main       generator_version = WO65118-RAMXREF-1.5.0
+HEADER main       rom_md5 = 46991697c502052752a2cabcb84c9e27
+HEADER main       rom_sha256 = bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+HEADER main       listing_sha256 = 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+HEADER main       listing_bytes = 27045080
+HEADER main       run_date = 2026-11-21
+HEADER main       pc_concordance_rows_checked = 306688
+HEADER main       pc_concordance_rows_matched = 306688
+HEADER main       target_file_sha256 = N/A (global index; no supplied targets)
+PASS header_comment_lines_pages | 14
+PASS header_total_lines_pages | 14 comment + 1 column header
+HEADER pages      generator_version = WO65118-RAMXREF-1.5.0
+HEADER pages      rom_md5 = 46991697c502052752a2cabcb84c9e27
+HEADER pages      rom_sha256 = bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+HEADER pages      listing_sha256 = 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+HEADER pages      listing_bytes = 27045080
+HEADER pages      run_date = 2026-11-21
+HEADER pages      pc_concordance_rows_checked = 306688
+HEADER pages      pc_concordance_rows_matched = 306688
+HEADER pages      target_file_sha256 = N/A (global index; no supplied targets)
+PASS header_comment_lines_unresolved | 14
+PASS header_total_lines_unresolved | 14 comment + 1 column header
+HEADER unresolved generator_version = WO65118-RAMXREF-1.5.0
+HEADER unresolved rom_md5 = 46991697c502052752a2cabcb84c9e27
+HEADER unresolved rom_sha256 = bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+HEADER unresolved listing_sha256 = 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+HEADER unresolved listing_bytes = 27045080
+HEADER unresolved run_date = 2026-11-21
+HEADER unresolved pc_concordance_rows_checked = 306688
+HEADER unresolved pc_concordance_rows_matched = 306688
+HEADER unresolved target_file_sha256 = N/A (global index; no supplied targets)
+PASS header_generator_version
+PASS header_rom_md5
+PASS header_rom_sha256
+PASS header_listing_sha256
+PASS header_listing_bytes
+PASS header_pc_checked
+PASS header_pc_matched
+PASS main_row_count | 22308
+PASS page_row_count | 100
+PASS unresolved_row_count | 43530
+PASS address_range_and_format | violations=0
+PASS pc_format | violations=0
+ENUM access      ['read', 'write']
+PASS enum_access
+ENUM width       ['b', 'l', 'w']
+PASS enum_width
+ENUM bit_action  ['', 'cleared', 'set']
+PASS enum_bit_action
+ENUM form        ['base_disp', 'base_indirect', 'base_r0', 'gbr_disp', 'gbr_r0']
+PASS enum_form
+PASS no_duplicate_rows
+PASS main_sorted_by_page_address_pc
+PASS page_index_access_sum | sum=22308 main_rows=22308
+PASS page_index_page_set | pages_idx=100 pages_main=100
+PASS page_index_per_page_counts | mismatches=0
+UNRESOLVED_REASONS {'base_not_provable': 20840, 'displacement_not_provable': 3689, 'gbr_not_provable': 2246, 'index_not_provable': 16755}
+PASS unresolved_reason_distribution
+
+=== 6. Hard regression gates recomputed from rows ===
+PASS R1_FFFF85DF_readers | ['00046bde', '00047014']
+PASS R2_FFFF85E0_zero_rows | 0
+PASS R3_FFFF1DB4_reader_writer | [('0004042c', 'read'), ('0004044a', 'write')]
+PASS R4_PKIORW_zero_rows | 0
+PASS R5_no_rom_gbr_overreach | rows=0
+CMP FFFF860D bit3/5 rows=26 distinct_pcs=26 all_address_rows=71 bit_noted=27
+CMP FFFF84BA readers=125 writers=0
+
+=== 7. Independent PC/ROM concordance re-derivation ===
+INDEPENDENT_PC_CONCORDANCE checked=306688 matched=306688 mismatches=0
+PASS independent_pc_concordance_checked | 306688
+PASS independent_pc_concordance_matched | 306688
+PASS independent_pc_concordance_exact
+
+=== SUMMARY ===
+checks_total=49 checks_passed=49 checks_failed=0
+AUDIT_DISPOSITION REPRODUCED_AND_VERIFIED
