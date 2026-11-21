@@ -24,7 +24,7 @@
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| — | **NONE** | No active work orders. WO65062, WO65064, and WO65065 are closed bounded-complete. |
+| [WO65083](WO65083.md) | **ACTIVE — P1** | Owner: coordinator. Bounded 1D scalar/limiter discovery in ROM `0x7800–0x9500`, excluding completed WO65064 range `0x9500–0x9B00`. Establish literal-pool reader inventory and classify candidate UWORD/UBYTE slots by actual compare, arithmetic, helper-parameter, and RAM-shadow use; no semantics from value resemblance alone. |
 
 
 
