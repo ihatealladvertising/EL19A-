@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -569,6 +569,10 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             regs[0] = None
             reg_provenance[0] = None
             active_rom_pool_loads.pop(0, None)
+        elif hi == 0xF:
+            # Group-F operations are not modelled (e.g. MAC variants).
+            # Invalidate possible post-increment/source register effects.
+            invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
 
         # Control transfers and delay slots
         is_branch_delay = False
@@ -599,7 +603,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         if in_delay_slot:
             if delay_slot_type == "ret":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-                # These unmodelled GPR operations do not establish a new GBR value.
+                gbr = None
             elif delay_slot_type == "call":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 # The callee may alter GBR; do not propagate a caller value blindly.
