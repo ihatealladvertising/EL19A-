@@ -1,0 +1,32 @@
+# WO65120 call graph and ISR/dispatcher scheduler map
+# generator_version: WO65120-CALLGRAPH-1.1.0
+# rom_path: EVIDENCE/VERSA f501.bin
+# rom_md5: 46991697c502052752a2cabcb84c9e27
+# rom_sha256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# listing_member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# listing_sha256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# listing_bytes: 27045080
+# run_date: 2026-11-21
+# pc_concordance_rows_checked: 306688
+# pc_concordance_rows_matched: 306688
+# target_file_sha256: N/A (static graph; no supplied targets)
+# method_limits: static direct calls only; computed/indirect targets and runtime pointer tables not modelled; unresolved sites are listed, never treated as absence; function extents and GBR values are not republished (WO65116)
+# classification: structural call facts only; no semantic, physical or unit naming
+table	table_addr	index	target_pc	target_label	in_rom	code_start	source_pc	note
+dword_21A64	00021A64	0	00034464		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	1	0004D02C		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	2	0003C45E		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	3	00059CAE		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	4	00047276		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	5	0005F81E		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	6	000500EC		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	7	000951E0		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_21A64	00021A64	8	000C29A2		yes	yes	00020986	count_reg=r13=9; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	0	00025220	loc_25220	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	1	0002525C	loc_2525C	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	2	0002BC78	message_timer_tick	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	3	000AF47A	loc_AF47A	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	4	000534A8	loc_534A8	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	5	000BC59A	loc_BC59A	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	6	000B4C44	loc_B4C44	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
+dword_216EC	000216EC	7	000B85C2	loc_B85C2	yes	yes	00020A12	count_reg=r14=8; code_pc_concordant (label may be absent)
