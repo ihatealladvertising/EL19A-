@@ -1,0 +1,350 @@
+WO65122 independent reproduction audit (four packages)
+
+=== 1. Pinned inputs (shared) ===
+PASS rom_bytes | 1048576
+PASS rom_md5
+PASS rom_sha256
+PASS listing_bytes | 27045080
+PASS listing_sha256
+
+======================================================================
+=== PACKAGE WO65116  ref=origin/wo65116-function-gbr-map ===
+BLOB generator oid=ef6ea07f97fe6ed0115940d5b8dbcc8b16977016 sha256=ac83ed04f78297df71405f83e799a1fc44bf113149dd839309687e7b552adb4f
+PASS WO65116_generator_blob
+BLOB main       oid=907a27e201884b7df7477aeacc1beb604e8cdcf3 sha256=72ab3a451f09d0589c3f55517fba99f75b9ff571cbb21ce4f0a2e4fd9fe58e6f
+PASS WO65116_blob_main
+BLOB unresolved oid=ca553fe9fda70643f7e5eabfda88b61980981aa8 sha256=d84411b7b737f849adc980fd97f6f5bd3501d5a7eddf2dfacd6a1baba323eac8
+PASS WO65116_blob_unresolved
+--- generator execution ---
+PASS WO65116_generator_exit | rc=0
+  VERSION WO65116-GBRMAP-1.3.0
+  CODE_LINES_CONCORDANCE 306688 / 306688
+  CODE_START_LABELS 1877
+  UNRESOLVED_ROWS 615
+  GBR_STATES [('none', 815), ('established_full', 667), ('established_partial', 341), ('multiple_values', 50), ('restored_only', 3), ('inherited_only', 1)]
+  UNRES_REASONS [('ldc_value_not_provable', 382), ('multiple_distinct_gbr_values', 141), ('no_return_site', 87), ('gbr_use_outside_function_extent', 3), ('gbr_use_without_local_establishment', 2)]
+  ANCHOR [['sub_403D8', '000403D8', '00040762', '0004075E', 'ffff1028', '000403EA', 'ldc r0, gbr', 'established_full', '1', 'source=r0 via 000403E8']]
+  ANCHOR [['sub_3BA88', '0003BA88', '0003BC5C', '0003BC58', 'ffff1e54', '0003BA9A', 'ldc r0, gbr', 'established_full', '9', 'source=r0 via 0003BA98']]
+  ANCHOR [['calculate_state_dependent_correction_1992', '00046E3E', '000470CC', '000470C8', '0000821e', '00046E50', 'ldc r0, gbr', 'established_full', '8', 'source=r0 via 00046E4E']]
+  PKIOR_W_CODE_SITES ['0002869A', '000286A4', '000286E4', '0002870E', '00028738']
+  PKIOR_W_CONTROL 0002869A [('INT_ATU11_IMI1AC', '?', 'none', '')]
+  PKIOR_W_CONTROL 000286A4 [('INT_ATU11_IMI1AC', '?', 'none', '')]
+  PKIOR_W_CONTROL 000286E4 [('INT_ATU11_IMI1AC', '?', 'none', '')]
+  PKIOR_W_CONTROL 0002870E [('INT_ATU11_IMI1AC', '?', 'none', '')]
+  PKIOR_W_CONTROL 00028738 [('INT_ATU11_IMI1AC', '?', 'none', '')]
+  ESTABLISHED_WITHOUT_LOCAL_LDC []
+  ESTABLISHED_SOURCE_OUTSIDE_EXTENT []
+--- byte-for-byte comparison ---
+COMPARE WO65116 main       bytes=176385 sha256=72ab3a451f09d0589c3f55517fba99f75b9ff571cbb21ce4f0a2e4fd9fe58e6f
+PASS WO65116_byte_identical_main
+COMPARE WO65116 unresolved bytes=49038 sha256=d84411b7b737f849adc980fd97f6f5bd3501d5a7eddf2dfacd6a1baba323eac8
+PASS WO65116_byte_identical_unresolved
+--- row-level invariant audit ---
+PASS header_comment_lines_WO65116_main | 14
+PASS header_total_lines_WO65116_main
+PASS header_rom_md5_WO65116_main
+PASS header_rom_sha256_WO65116_main
+PASS header_listing_sha256_WO65116_main
+PASS header_listing_bytes_WO65116_main
+PASS header_pc_checked_WO65116_main
+PASS header_pc_matched_WO65116_main
+PASS header_target_na_WO65116_main
+PASS WO65116_header_version_main
+PASS WO65116_row_count_main | expected=1877 actual=1877
+ROWS WO65116 main       1877
+PASS header_comment_lines_WO65116_unresolved | 14
+PASS header_total_lines_WO65116_unresolved
+PASS header_rom_md5_WO65116_unresolved
+PASS header_rom_sha256_WO65116_unresolved
+PASS header_listing_sha256_WO65116_unresolved
+PASS header_listing_bytes_WO65116_unresolved
+PASS header_pc_checked_WO65116_unresolved
+PASS header_pc_matched_WO65116_unresolved
+PASS header_target_na_WO65116_unresolved
+PASS WO65116_header_version_unresolved
+PASS WO65116_row_count_unresolved | expected=615 actual=615
+ROWS WO65116 unresolved 615
+GBR_STATES {'established_full': 667, 'established_partial': 341, 'inherited_only': 1, 'multiple_values': 50, 'none': 815, 'restored_only': 3}
+PASS 65116_gbr_state_distribution
+PASS 65116_gbr_uses_sum | artifact_sum=8158
+ERRATUM_WO65116_SECTION_4_1: record states 8,155 GBR operand uses; sum of gbr_uses in the committed map is 8,158 (3 outside-extent uses are separate unresolved rows). Artifact reproduces byte-identically; prose correction belongs to the WO65116 owner/coordinator.
+PASS 65116_functions_with_uses
+PASS 65116_anchor_000403D8 | ('ffff1028', '000403EA')
+PASS 65116_anchor_0003BA88 | ('ffff1e54', '0003BA9A')
+PASS 65116_anchor_00046E3E | ('0000821e', '00046E50')
+UNRES_REASONS_65116 {'gbr_use_outside_function_extent': 3, 'gbr_use_without_local_establishment': 2, 'ldc_value_not_provable': 382, 'multiple_distinct_gbr_values': 141, 'no_return_site': 87}
+PASS 65116_unresolved_reasons
+PASS 65116_pkior_not_code_start
+PASS 65116_no_pkior_gbr_value
+
+======================================================================
+=== PACKAGE WO65117  ref=origin/wo65117-ea-dictionary ===
+BLOB generator oid=09ebede0b2f8871c467a41a2ed9747288af74dff sha256=bd099f9e8d58c7ba3f0d420b983f5af607c2d74d1082dd38239d3ee86d3ffff0
+PASS WO65117_generator_blob
+BLOB main       oid=8e6045463ab6cb976d184fee3efbbe62b2217093 sha256=33b49e67d77272545d66f23b46147ff933f5f8cb2f8d97a663920cd731b7d903
+PASS WO65117_blob_main
+BLOB unresolved oid=6e8a565468845c4f135b2a7e7a41fdb7f0acf051 sha256=231e98446e56ed25fe504b194cdad32fbd34634498e8f022c1823bfb171b05fa
+PASS WO65117_blob_unresolved
+--- generator execution ---
+PASS WO65117_generator_exit | rc=0
+  VERSION WO65117-EADICT-1.2.0
+  PC_CONCORDANCE 306688 / 306688
+  FUNCTIONS 1877 FULL_GBR_FUNCTIONS 667
+  RESOLVED_ROWS 7731 UNRESOLVED_ROWS 45105
+  FORMS [('gbr_disp', 5162), ('base_disp', 2567), ('gbr_r0', 2)]
+  TOP_BASES [('ffff34c1', 887), ('ffff3628', 492), ('ffff34b3', 379), ('ffff1054', 340), ('ffff3454', 308), ('ffff1028', 275), ('ffff2d2c', 242), ('ffff3b88', 217), ('ffff34b0', 205), ('ffff1860', 189), ('ffff1d99', 184), ('ffff2150', 163)]
+  UNRES_REASONS [('index_not_provable', 24727), ('base_not_provable', 9878), ('gbr_not_provable', 6811), ('displacement_not_provable', 3689)]
+  ANCHOR sub_403D8 ROWS 4 [['ffff1000', '00000030', 'ffff1030', 'w', 'write', 'base_disp', '0004057C', 'sub_403D8', "mov.w r0, @(h'18,r2)", 'disp*2'], ['ffff1028', '00000034', 'ffff105c', 'w', 'read', 'gbr_disp', '00040556', 'sub_403D8', "mov.w @(h'1A,gbr), r0", 'disp*2'], ['ffff1e6e', '00000005', 'ffff1e73', 'b', 'read', 'base_disp', '00040534', 'sub_403D8', 'mov.b @(5,r6), r0', 'disp*1'], ['ffff33e6', '0000000c', 'ffff33f2', 'w', 'read', 'base_disp', '000403FC', 'sub_403D8', 'mov.w @(6,r2), r0', 'disp*2']]
+  ANCHOR sub_3BA88 ROWS 19 [['ffff1c6c', '00000004', 'ffff1c70', 'b', 'read', 'base_disp', '0003BBB8', 'sub_3BA88', 'mov.b @(4,r7), r0', 'disp*1'], ['ffff1c6c', '00000005', 'ffff1c71', 'b', 'read', 'base_disp', '0003BB96', 'sub_3BA88', 'mov.b @(5,r7), r0', 'disp*1'], ['ffff1c6c', '00000005', 'ffff1c71', 'b', 'read', 'base_disp', '0003BC06', 'sub_3BA88', 'mov.b @(5,r7), r0', 'disp*1'], ['ffff1e54', '00000002', 'ffff1e56', 'b', 'read', 'gbr_disp', '0003BAA8', 'sub_3BA88', "mov.b @((byte_FFFF1E56 - h'FFFF1E54),gbr), r0", 'disp*1']]
+  ANCHOR calculate_state_dependent_correction_1992 ROWS 13 [['0000821e', '00000000', '0000821e', 'b', 'read', 'gbr_disp', '00046F3A', 'calculate_state_dependent_correction_1992', "mov.b @((dword_821C+2 - h'821E),gbr), r0", 'disp=0'], ['0000821e', '00000003', '00008221', 'b', 'read', 'gbr_disp', '00046F44', 'calculate_state_dependent_correction_1992', "mov.b @((dword_8220+1 - h'821E),gbr), r0", 'disp*1'], ['0000821e', '00000010', '0000822e', 'b', 'read', 'gbr_disp', '00046F90', 'calculate_state_dependent_correction_1992', "mov.b @((dword_822C+2 - h'821E),gbr), r0", 'disp*1'], ['0000821e', '00000012', '00008230', 'b', 'read', 'gbr_disp', '00047028', 'calculate_state_dependent_correction_1992', "mov.b @(h'12,gbr), r0", 'disp*1']]
+  ROM_GBR_FALSE_RAM_ATTRIBUTION [] COUNT 0
+  COMPLEX_821E_ROWS 10
+    COMPLEX 00046F3A EA 0000821e mov.b @((dword_821C+2 - h'821E),gbr), r0
+    COMPLEX 00046F44 EA 00008221 mov.b @((dword_8220+1 - h'821E),gbr), r0
+    COMPLEX 00046F90 EA 0000822e mov.b @((dword_822C+2 - h'821E),gbr), r0
+    COMPLEX 00046ED8 EA 000082d5 mov.b @((byte_82D5 - h'821E),gbr), r0
+    COMPLEX 00046EF6 EA 000082d6 mov.b @((byte_82D6 - h'821E),gbr), r0
+    COMPLEX 00046EFA EA 000082d7 mov.b @((byte_82D7 - h'821E),gbr), r0
+    COMPLEX 00046F08 EA 000082d8 mov.b @((byte_82D8 - h'821E),gbr), r0
+    COMPLEX 00046F0A EA 000082d9 mov.b @((byte_82D9 - h'821E),gbr), r0
+    COMPLEX 00046EC2 EA 000082da mov.b @((word_82DA - h'821E),gbr), r0
+    COMPLEX 00046EB6 EA 000082dc mov.b @((word_82DC - h'821E),gbr), r0
+  COMPLEX_821E_UNRESOLVED 0
+--- byte-for-byte comparison ---
+COMPARE WO65117 main       bytes=767526 sha256=33b49e67d77272545d66f23b46147ff933f5f8cb2f8d97a663920cd731b7d903
+PASS WO65117_byte_identical_main
+COMPARE WO65117 unresolved bytes=3842234 sha256=231e98446e56ed25fe504b194cdad32fbd34634498e8f022c1823bfb171b05fa
+PASS WO65117_byte_identical_unresolved
+--- row-level invariant audit ---
+PASS header_comment_lines_WO65117_main | 14
+PASS header_total_lines_WO65117_main
+PASS header_rom_md5_WO65117_main
+PASS header_rom_sha256_WO65117_main
+PASS header_listing_sha256_WO65117_main
+PASS header_listing_bytes_WO65117_main
+PASS header_pc_checked_WO65117_main
+PASS header_pc_matched_WO65117_main
+PASS header_target_na_WO65117_main
+PASS WO65117_header_version_main
+PASS WO65117_row_count_main | expected=7731 actual=7731
+ROWS WO65117 main       7731
+PASS header_comment_lines_WO65117_unresolved | 14
+PASS header_total_lines_WO65117_unresolved
+PASS header_rom_md5_WO65117_unresolved
+PASS header_rom_sha256_WO65117_unresolved
+PASS header_listing_sha256_WO65117_unresolved
+PASS header_listing_bytes_WO65117_unresolved
+PASS header_pc_checked_WO65117_unresolved
+PASS header_pc_matched_WO65117_unresolved
+PASS header_target_na_WO65117_unresolved
+PASS WO65117_header_version_unresolved
+PASS WO65117_row_count_unresolved | expected=45105 actual=45105
+ROWS WO65117 unresolved 45105
+FORMS_65117 {'base_disp': 2567, 'gbr_disp': 5162, 'gbr_r0': 2}
+WIDTHS_65117 {'b': 5804, 'l': 477, 'w': 1450}
+ACCESS_65117 {'read': 5189, 'write': 2542}
+PASS 65117_form_distribution
+PASS 65117_width_distribution
+PASS 65117_access_distribution
+PASS 65117_distinct_bases
+PASS 65117_distinct_effective_addresses
+PASS 65117_distinct_pcs
+PASS 65117_arithmetic_all_rows | violations=0
+PASS 65117_no_rom_gbr_overreach | rows=0
+PASS 65117_ffff85c4_coverage_gap_reproduced
+UNRES_REASONS_65117 {'base_not_provable': 9878, 'displacement_not_provable': 3689, 'gbr_not_provable': 6811, 'index_not_provable': 24727}
+PASS 65117_unresolved_reasons
+
+======================================================================
+=== PACKAGE WO65119  ref=origin/wo65119-false-alias-register ===
+BLOB generator oid=302a2ec083173574cb3934564e174d8aad710858 sha256=6375214993b3463040d3795b3c942171adab92709df09415d67b4c8b2fe7b223
+PASS WO65119_generator_blob
+BLOB register   oid=fe8c727affbd6400aa2349a45f04eea0e9b88336 sha256=335319f2500c49dba44531f2f5b948de612671fbed8b38ca1f34fece9ac157dc
+PASS WO65119_blob_register
+BLOB checks     oid=b9372c9505f71251fd22c70a9ece074e07d23e4b sha256=850b6a6e2a549ab9941b75259f35f8352f0f2dfe26b92ca450d61050bebaf842
+PASS WO65119_blob_checks
+--- generator execution ---
+PASS WO65119_generator_exit | rc=0
+  VERSION WO65119-FAREG-1.1.0
+  PC_CONCORDANCE 306688 / 306688
+  REGISTER_ROWS 14 CHECKS 13
+  STATUS {'PASS': 5, 'FAIL': 0, 'NOT_RECHECKED': 9}
+  FAILED_IDS []
+  HARD_ANCHORS {'FA001': 'PASS', 'FA002': 'PASS', 'FA003': 'PASS', 'FA004': 'PASS'}
+  HARD_ANCHORS_PASS True
+--- byte-for-byte comparison ---
+COMPARE WO65119 register   bytes=5657 sha256=335319f2500c49dba44531f2f5b948de612671fbed8b38ca1f34fece9ac157dc
+PASS WO65119_byte_identical_register
+COMPARE WO65119 checks     bytes=2031 sha256=850b6a6e2a549ab9941b75259f35f8352f0f2dfe26b92ca450d61050bebaf842
+PASS WO65119_byte_identical_checks
+--- row-level invariant audit ---
+PASS header_comment_lines_WO65119_register | 14
+PASS header_total_lines_WO65119_register
+PASS header_rom_md5_WO65119_register
+PASS header_rom_sha256_WO65119_register
+PASS header_listing_sha256_WO65119_register
+PASS header_listing_bytes_WO65119_register
+PASS header_pc_checked_WO65119_register
+PASS header_pc_matched_WO65119_register
+PASS header_target_na_WO65119_register
+PASS WO65119_header_version_register
+PASS WO65119_row_count_register | expected=14 actual=14
+ROWS WO65119 register   14
+PASS header_comment_lines_WO65119_checks | 14
+PASS header_total_lines_WO65119_checks
+PASS header_rom_md5_WO65119_checks
+PASS header_rom_sha256_WO65119_checks
+PASS header_listing_sha256_WO65119_checks
+PASS header_listing_bytes_WO65119_checks
+PASS header_pc_checked_WO65119_checks
+PASS header_pc_matched_WO65119_checks
+PASS header_target_na_WO65119_checks
+PASS WO65119_header_version_checks
+PASS WO65119_row_count_checks | expected=13 actual=13
+ROWS WO65119 checks     13
+PASS 65119_register_sorted
+PASS 65119_no_blank_status
+STATUS_65119 {'NOT_RECHECKED': 9, 'PASS': 5}
+TIERS_65119 {'ARITHMETIC': 2, 'DOCUMENTED': 9, 'LISTING_PC': 2, 'ROM_BYTE': 1}
+PASS 65119_status_distribution
+PASS 65119_tier_distribution
+PASS 65119_checks_all_pass
+PASS 65119_no_fail_status
+PASS 65119_fa001_contract
+
+======================================================================
+=== PACKAGE WO65120  ref=origin/wo65120-callgraph-scheduler ===
+BLOB generator oid=4ac92933268c843a0c4b84701463568d3542bc3f sha256=030434911444579e7c8381d4f3631031415cf54342cc9a96f405d83d032385d6
+PASS WO65120_generator_blob
+BLOB edges      oid=9753731619af9c5b7c14fdb23b1b898f4a89186e sha256=a7bea1a9c5ecff07eec7a312df707e01777d4725e7e1fb69759040017e90cfc5
+PASS WO65120_blob_edges
+BLOB summary    oid=1bd318b15fa540ed5b629723c7f4618517db302f sha256=a91d312787ae9a094d18bbd66673d1e6b6de42754dbc1020f67594e8a319a277
+PASS WO65120_blob_summary
+BLOB tables     oid=d04e206ba998d4671924c43b2f475607737fa92c sha256=9e86d33e6d53600f652bd383879dd5581b0360ac00245c9dd196ec8fcb6b7f53
+PASS WO65120_blob_tables
+BLOB isr        oid=c98819a2bdf434224706affa479493c723d83b0d sha256=9213f8853474d528de3eeeeac0387436d3d812d207ba16c1dd5a7c77ee63dcb4
+PASS WO65120_blob_isr
+BLOB unresolved oid=7e42529410fa8026b9e9440e7073369148af7060 sha256=0571e7bf3de09ec3d3c0997ac23f476ddc8aa30864069e1ecd4b582a8d1c0c43
+PASS WO65120_blob_unresolved
+--- generator execution ---
+PASS WO65120_generator_exit | rc=0
+  VERSION WO65120-CALLGRAPH-1.1.0
+  PC_CONCORDANCE 306688 / 306688
+  EDGES 6118 SUMMARY_ROWS 1862 TABLE_ROWS 17 ISR_ROWS 342 UNRESOLVED 233
+  FORMS [('jsr_reg_ann', 4133), ('bsr_direct', 1985)]
+  UNRES_REASONS [('jsr_target_not_provable', 229), ('bsr_target_not_code_label', 3), ('annotation_not_code_label', 1)]
+  R1_21A64_SLOTS 9 ALL_CONCORDANT_CODE_PCS True
+  R1_PASS True
+  R2_216EC_SLOTS 8 ALL_CONCORDANT_CODE_PCS True
+  R2_PASS True
+  R3_DISPATCHER_CALLERS ['INT_ATU02_ICI0A', 'INT_ATU12_IMI1AE']
+  R3_PASS True
+  R4_21A64_ORDER 00034464,0004D02C,0003C45E,00059CAE,00047276,0005F81E,000500EC,000951E0,000C29A2
+  R4_PASS True
+  R5_PKIORW_CALLEE_EDGES 0 RAM_DISPATCH_TARGETS 0
+  R5_PASS True
+  CMP_DISTINCT_CALLERS 1024 DISTINCT_CALLEES 1838
+--- byte-for-byte comparison ---
+COMPARE WO65120 edges      bytes=568903 sha256=a7bea1a9c5ecff07eec7a312df707e01777d4725e7e1fb69759040017e90cfc5
+PASS WO65120_byte_identical_edges
+COMPARE WO65120 summary    bytes=136376 sha256=a91d312787ae9a094d18bbd66673d1e6b6de42754dbc1020f67594e8a319a277
+PASS WO65120_byte_identical_summary
+COMPARE WO65120 tables     bytes=2932 sha256=9e86d33e6d53600f652bd383879dd5581b0360ac00245c9dd196ec8fcb6b7f53
+PASS WO65120_byte_identical_tables
+COMPARE WO65120 isr        bytes=37484 sha256=9213f8853474d528de3eeeeac0387436d3d812d207ba16c1dd5a7c77ee63dcb4
+PASS WO65120_byte_identical_isr
+COMPARE WO65120 unresolved bytes=12516 sha256=0571e7bf3de09ec3d3c0997ac23f476ddc8aa30864069e1ecd4b582a8d1c0c43
+PASS WO65120_byte_identical_unresolved
+--- row-level invariant audit ---
+PASS header_comment_lines_WO65120_edges | 14
+PASS header_total_lines_WO65120_edges
+PASS header_rom_md5_WO65120_edges
+PASS header_rom_sha256_WO65120_edges
+PASS header_listing_sha256_WO65120_edges
+PASS header_listing_bytes_WO65120_edges
+PASS header_pc_checked_WO65120_edges
+PASS header_pc_matched_WO65120_edges
+PASS header_target_na_WO65120_edges
+PASS WO65120_header_version_edges
+PASS WO65120_row_count_edges | expected=6118 actual=6118
+ROWS WO65120 edges      6118
+PASS header_comment_lines_WO65120_summary | 14
+PASS header_total_lines_WO65120_summary
+PASS header_rom_md5_WO65120_summary
+PASS header_rom_sha256_WO65120_summary
+PASS header_listing_sha256_WO65120_summary
+PASS header_listing_bytes_WO65120_summary
+PASS header_pc_checked_WO65120_summary
+PASS header_pc_matched_WO65120_summary
+PASS header_target_na_WO65120_summary
+PASS WO65120_header_version_summary
+PASS WO65120_row_count_summary | expected=1862 actual=1862
+ROWS WO65120 summary    1862
+PASS header_comment_lines_WO65120_tables | 14
+PASS header_total_lines_WO65120_tables
+PASS header_rom_md5_WO65120_tables
+PASS header_rom_sha256_WO65120_tables
+PASS header_listing_sha256_WO65120_tables
+PASS header_listing_bytes_WO65120_tables
+PASS header_pc_checked_WO65120_tables
+PASS header_pc_matched_WO65120_tables
+PASS header_target_na_WO65120_tables
+PASS WO65120_header_version_tables
+PASS WO65120_row_count_tables | expected=17 actual=17
+ROWS WO65120 tables     17
+PASS header_comment_lines_WO65120_isr | 14
+PASS header_total_lines_WO65120_isr
+PASS header_rom_md5_WO65120_isr
+PASS header_rom_sha256_WO65120_isr
+PASS header_listing_sha256_WO65120_isr
+PASS header_listing_bytes_WO65120_isr
+PASS header_pc_checked_WO65120_isr
+PASS header_pc_matched_WO65120_isr
+PASS header_target_na_WO65120_isr
+PASS WO65120_header_version_isr
+PASS WO65120_row_count_isr | expected=342 actual=342
+ROWS WO65120 isr        342
+PASS header_comment_lines_WO65120_unresolved | 14
+PASS header_total_lines_WO65120_unresolved
+PASS header_rom_md5_WO65120_unresolved
+PASS header_rom_sha256_WO65120_unresolved
+PASS header_listing_sha256_WO65120_unresolved
+PASS header_listing_bytes_WO65120_unresolved
+PASS header_pc_checked_WO65120_unresolved
+PASS header_pc_matched_WO65120_unresolved
+PASS header_target_na_WO65120_unresolved
+PASS WO65120_header_version_unresolved
+PASS WO65120_row_count_unresolved | expected=233 actual=233
+ROWS WO65120 unresolved 233
+FORMS_65120 {'bsr_direct': 1985, 'jsr_reg_ann': 4133}
+PASS 65120_form_distribution
+PASS 65120_no_duplicate_edges
+PASS 65120_distinct_callers
+PASS 65120_distinct_callees
+PASS 65120_summary_rows
+PASS 65120_R1_table_21A64_9_slots
+PASS 65120_R2_table_216EC_8_slots
+PASS 65120_tables_rom_and_code
+PASS 65120_R4_nine_entry_order
+PASS 65120_R5_no_ram_dispatch_target
+ISR_DISPATCH_CALLERS ['INT_ATU02_ICI0A', 'INT_ATU12_IMI1AE']
+PASS 65120_R3_known_isr_callers | ['INT_ATU02_ICI0A', 'INT_ATU12_IMI1AE']
+PASS 65120_isr_vector_rows
+PASS 65120_no_pkior_call_edge
+UNRES_REASONS_65120 {'annotation_not_code_label': 1, 'bsr_target_not_code_label': 3, 'jsr_target_not_provable': 229}
+PASS 65120_unresolved_reasons
+
+======================================================================
+=== 2. Independent PC/ROM concordance re-derivation (shared) ===
+INDEPENDENT_PC_CONCORDANCE checked=306688 matched=306688 mismatches=0
+PASS independent_pc_concordance_checked
+PASS independent_pc_concordance_matched
+PASS independent_pc_concordance_exact
+
+=== SUMMARY ===
+PACKAGE WO65116 REPRODUCED_AND_VERIFIED
+PACKAGE WO65117 REPRODUCED_AND_VERIFIED
+PACKAGE WO65119 REPRODUCED_AND_VERIFIED
+PACKAGE WO65120 REPRODUCED_AND_VERIFIED
+checks_total=199 checks_passed=199 checks_failed=0
+AUDIT_DISPOSITION ALL_REPRODUCED_AND_VERIFIED
