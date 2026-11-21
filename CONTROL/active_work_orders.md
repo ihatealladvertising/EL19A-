@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; owner: current session; branch `wo65109-ignition-fragment-reader-audit`. **Queued WOs:** WO65114 (P3) — three thin ROM/RAM reference closeout; not started. WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains queued-blocked; WO65115 queued — allocated, unclaimed.
+- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; branch `wo65109-ignition-fragment-reader-audit` (branch is behind main; no technical commits beyond claim). WO65115 (P1) — static access resolver index; owner current session; branch `wo65115-access-resolver-index`; preflight blocked on binary listing/ROM materialization in this execution environment. **Queued WOs:** WO65114 (P3) — three thin ROM/RAM reference closeout; not started. WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains queued-blocked.
 
 ## Queued work orders — allocated 2026-11-21
 
@@ -38,9 +38,13 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 | [WO65112](WO65112.md) | Claims ledger and annotation contradiction audit | 3 — bounded track | Documentation only | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65112.md` |
 | [WO65113](WO65113.md) | V57 definition provenance (external discriminator) | 4 — blocked | User-supplied external material | QUEUED — BLOCKED |
 | [WO65114](WO65114.md) | Three thin ROM/RAM reference closeout (`0x83B8`, `0x83A4`, `FFFF8578`) | 4 — low-cost cleanup | Independent; disjoint from active WO65109 | QUEUED — NOT STARTED |
-| [WO65115](WO65115.md) | Access resolver: static reader/writer index for supplied targets | 0 — force multiplier | Independent; the required `V3_NEXT6_16` listing is already present inside `EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip` | QUEUED — ALLOCATED, UNCLAIMED |
+| [WO65115](WO65115.md) | Access resolver: static reader/writer index for supplied targets | 0 — force multiplier | Independent; required `V3_NEXT6_16` listing ZIP is in repo but binary extraction is blocked in current execution environment | ACTIVE — P1; owner current session; branch `wo65115-access-resolver-index`; preflight input-access blocker |
 
 No queued WO authorizes XML, catalogue, ROM or listing edits. WO65114 expressly authorizes only the bounded Master Workbook register update described in its artifact boundary. Concurrent claims must use disjoint scopes: 65103/65104, 65105/65106, and 65107–65112 are mutually disjoint as recorded; WO65114 is disjoint from WO65109.
+
+## Branch reconciliation pending
+
+Two branch-only work packages were discovered after the last register checkpoint and are not yet reconciled into this authority file: `wo65116-function-gbr-map` (WO65116) and `wo65117-ea-dictionary` (WO65117). Each contains a work-order closeout, a stdlib generator and generated resolved/unresolved TSVs; both report ROM/listing hashes matching the register evidence and PC concordance 306,688/306,688. Their proposed status is CLOSED — BOUNDED COMPLETE, but the coordinator has not independently reproduced the generators or reviewed the outputs. Keep them unmerged and treat their rows as structural leads only until that audit is done. The two scopes are complementary to WO65115, not a replacement for its supplied-target regression contract.
 
 ## Active work
 
