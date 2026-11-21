@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65064, WO65065, and WO65082 remain active under the user's concurrent-execution authorization (2026-11-20, reaffirmed 2026-11-21). Their scopes remain separate.
+- **Concurrent WOs:** WO65062, WO65064, and WO65065 remain active under the user's concurrent-execution authorization (2026-11-20). Their scopes remain separate.
 
 ## Active work
 
@@ -28,15 +28,17 @@
 
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
 | [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
-| [WO65082](WO65082.md) | **ACTIVE — P1** | Reserved 2026-11-21: determine `0x12844` table geometry and reader mechanics from its 35 literal-pool loads; scope limited to dimensions, data width, axes/descriptor pairing, indexing/interpolation/clamping, and immediate result staging. No semantic name or workbook promotion without evidence. |
+
 
 
 
 ## Recent completed work
 
+- [WO65082](WO65082.md) — **BOUNDED COMPLETE — CLOSED:** corrected the premise that `0x12844` is a single calibration table. LST labels it `byte_12844`; sampled code treats it as a heterogeneous ROM data/configuration block with fixed-offset byte-field reads, a GBR base (`0x31DBA`), and a byte-indexed lookup (`0x33244`). The inherited 35-helper-argument claim was not independently reproduced; exact per-call helper use and embedded arrays at/after `0x1289C` remain unresolved. No workbook/XML/catalogue edit.
+
 - [WO65081](WO65081.md) — **BOUNDED COMPLETE — CLOSED:** corrected WO65080's effective-address attribution. All six exact code-use sites for offsets `0x732`/`0x6D0` resolve through base `FFFF1054`, yielding `FFFF1786`/`FFFF1724`; none of the cited accesses target `FFFF2150+0x732/+0x6D0`. WO65080's proposed consumer trace is superseded. No workbook/XML/catalogue edit.
 
-- [WO65080](WO65080.md) — **BOUNDED COMPLETE — CLOSED:** the `0x11700–0x13000` bank is consumed as a table set with its own axes, not a passive duplicate: 183 helper-argument loads (131 trust-range over 38 distinct addresses, 52 to the 18 normal mirrors), only 15/18 trust twins and 17/18 normal twins reached (`0x10CE2` never loaded). Where both banks appear in one routine (`sub_69496`, `sub_68C28`) the results land in different `FFFF2150` cells — parallel evaluation, not a selector or an in-place monitor comparison. ROM `0x8405` bit 2 gates compute-vs-reuse at `sub_703A8` (`0x104EC` path vs cached `FFFF1D12+0x60`) and `loc_704D0` (trust `0x11744`/`0x12B0E` vs cached `FFFF1054+0x73C`), not normal-vs-trust. No units, no workbook/XML/catalogue edit. Next: geometry of `0x12844` (35 loads). The proposed consumer trace of `FFFF2150+0x732/+0x6D0` is superseded by the effective-base correction in [WO65081](WO65081.md).
+- [WO65080](WO65080.md) — **BOUNDED COMPLETE — CLOSED:** the `0x11700–0x13000` bank is consumed as a table set with its own axes, not a passive duplicate: 183 helper-argument loads (131 trust-range over 38 distinct addresses, 52 to the 18 normal mirrors), only 15/18 trust twins and 17/18 normal twins reached (`0x10CE2` never loaded). Where both banks appear in one routine (`sub_69496`, `sub_68C28`) the results land in different `FFFF2150` cells — parallel evaluation, not a selector or an in-place monitor comparison. ROM `0x8405` bit 2 gates compute-vs-reuse at `sub_703A8` (`0x104EC` path vs cached `FFFF1D12+0x60`) and `loc_704D0` (trust `0x11744`/`0x12B0E` vs cached `FFFF1054+0x73C`), not normal-vs-trust. No units, no workbook/XML/catalogue edit. Next: classify the `0x12844` mixed ROM data/configuration block and separately verify any embedded calibration arrays or actual helper arguments. The proposed consumer trace of `FFFF2150+0x732/+0x6D0` is superseded by [WO65081](WO65081.md); the `0x12844` geometry premise is corrected by [WO65082](WO65082.md).
 - [WO65079](WO65079.md) — **BOUNDED COMPLETE:** no direct read of byte output `FFFF1130` was established by exact-address, GBR+`0xDC`, or fixed `Rn+0xDC` methods. Four `GBR+0xDC` reads resolve to `FFFFB584`, `FFFF2E08`, and `FFFF359D`; none target `FFFF1130`. Computed/inherited aliases remain untested.
 - [WO65078](WO65078.md) — **BOUNDED COMPLETE — CLOSED:** traced B956 (`0x0B956`) in `sub_969C2`: UWORD query `FFFF8494` is zero-extended into R7; map/axis pointers are `0x0B956/0x10994/0x0FDAC`; helper return is stored unchanged at `FFFF27DE`. WO65070's direct copy to `FFFF9C48` is reused. Second stack query, physical meaning/units and cadence remain unresolved.
 
