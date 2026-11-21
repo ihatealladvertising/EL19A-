@@ -7,6 +7,7 @@ pinned ROM plus extracted V3_NEXT6_16 listing.
 """
 
 import importlib.util
+import hashlib
 import os
 import tempfile
 import unittest
@@ -166,6 +167,78 @@ class ResolverMechanicsTests(unittest.TestCase):
         self.assertEqual(resolver.ldc_gbr_source_register(0x4B1E), 11)
         self.assertEqual(resolver.ldc_gbr_source_register(0x4917), 9)
         self.assertIsNone(resolver.ldc_gbr_source_register(0x401A))
+
+
+    def _run_synthetic_gbr_path(self, transfer_opcode):
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = bytearray(14)
+            instructions = [
+                (0x0000, 0x9004, "mov.w @(4,pc),r0"),
+                (0x0002, 0x401E, "ldc r0,gbr"),
+                (0x0004, transfer_opcode, "control transfer"),
+                (0x0006, 0x0009, "nop"),
+                (0x0008, 0xC41B, "mov.b @(0x1B,gbr),r0"),
+                (0x000A, 0x0009, "nop"),
+            ]
+            listing_lines = ["sub_0000:"]
+            for pc, opcode, assembly in instructions:
+                encoded = opcode.to_bytes(2, "big")
+                rom[pc:pc + 2] = encoded
+                listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}")
+            # PC-relative MOV.W at 0x0000: pool EA = 0 + 4 + 4*2 = 0x000C.
+            rom[0x000C:0x000E] = bytes.fromhex("85 C4")
+            listing_text = "\\n".join(listing_lines) + "\\n"
+
+            rom_path = os.path.join(tmp, "fixture.bin")
+            listing_path = os.path.join(tmp, "fixture.lst")
+            targets_path = os.path.join(tmp, "targets.txt")
+            hits_path = os.path.join(tmp, "hits.tsv")
+            unresolved_path = os.path.join(tmp, "unresolved.tsv")
+            with open(rom_path, "wb") as f:
+                f.write(rom)
+            with open(listing_path, "w", encoding="utf-8") as f:
+                f.write(listing_text)
+            with open(targets_path, "w", encoding="utf-8") as f:
+                f.write("FFFF85DF\\n")
+
+            old_md5 = resolver.EXPECTED_ROM_MD5
+            old_listing_sha = resolver.EXPECTED_LISTING_SHA256
+            resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
+            resolver.EXPECTED_LISTING_SHA256 = hashlib.sha256(
+                listing_text.encode("utf-8")
+            ).hexdigest()
+            try:
+                result = resolver.run_indexer(
+                    rom_path, listing_path, targets_path,
+                    hits_path, unresolved_path
+                )
+            finally:
+                resolver.EXPECTED_ROM_MD5 = old_md5
+                resolver.EXPECTED_LISTING_SHA256 = old_listing_sha
+            return result
+
+    def test_synthetic_ldc_gbr_read_is_resolved(self):
+        hits, unresolved, matched, checked = self._run_synthetic_gbr_path(0x0009)
+        self.assertEqual([row[2] for row in hits], ["0x8"])
+        self.assertEqual(hits[0][4], "read")
+        self.assertEqual(hits[0][7], "FFFF85C4")
+        self.assertEqual(unresolved, [])
+        self.assertEqual((matched, checked), (1, 1))
+
+    def test_synthetic_bra_preserves_gbr_to_branch_target(self):
+        hits, unresolved, matched, checked = self._run_synthetic_gbr_path(0xA000)
+        self.assertEqual([row[2] for row in hits], ["0x8"])
+        self.assertEqual(hits[0][4], "read")
+        self.assertEqual(unresolved, [])
+        self.assertEqual((matched, checked), (1, 1))
+
+    def test_synthetic_bsr_invalidates_gbr_at_callee_boundary(self):
+        hits, unresolved, matched, checked = self._run_synthetic_gbr_path(0xB000)
+        self.assertEqual(hits, [])
+        self.assertEqual(len(unresolved), 1)
+        self.assertEqual(unresolved[0][2], "0x8")
+        self.assertEqual(unresolved[0][11], "unresolved GBR register")
+        self.assertEqual((matched, checked), (1, 1))
 
 
 if __name__ == "__main__":
