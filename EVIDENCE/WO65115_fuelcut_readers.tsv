@@ -1,0 +1,135 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: da705be283c9749975c9ad2ff229895b2cc8925bcd6e52a90295c1aa6c4abda9
+# Run date: 2026-11-21
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=30018 rows_matched=30018
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+0xED64	rom	0x4893A	sub_488BA	read	b	pool	0xED64	full	-	sub_22E10 fixed-grid UBYTE table lookup via R4; query-dependent helper access (see WO65041-WO65044); pointer loaded at 0x48930
+0xEDA0	rom	0x48948	sub_488BA	read	b	pool	0xEDA0	full	-	sub_22E10 fixed-grid UBYTE table lookup via R4; query-dependent helper access (see WO65041-WO65044); pointer loaded at 0x48942
+0xEE68	rom	0x48E70	sub_48D2E	read	b	pool	0xEE68	full	-	sub_22E10 fixed-grid UBYTE table lookup via R4; query-dependent helper access (see WO65041-WO65044); pointer loaded at 0x48E68
+0xF01C	rom	0x48E60	sub_48D2E	read	b	pool	0xF01C	full	-	sub_22E10 fixed-grid UBYTE table lookup via R4; query-dependent helper access (see WO65041-WO65044); pointer loaded at 0x48E5A
+FFFF84BA	ram	0x2AF66	sub_2AF30	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x3C6C0	sub_3C590	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x3C6CC	sub_3C590	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x3C8F8	sub_3C590	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r14), r0
+FFFF84BA	ram	0x3CB4C	sub_3C590	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x3D238	sub_3C590	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x3E320	sub_3E30C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x3E348	sub_3E30C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x3EF66	sub_3E67C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x40426	sub_403D8	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x408B4	sub_40790	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x40DAC	sub_40C84	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x4166E	sub_415CC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x41A1C	sub_416E4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x41F38	sub_41F2C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x421BC	sub_41F60	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x441C8	sub_441B0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r12), r0
+FFFF84BA	ram	0x445D2	sub_44572	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r10), r0
+FFFF84BA	ram	0x447E8	sub_447D4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x45D4A	sub_45AB6	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x461C2	sub_4619C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x464C6	sub_464B6	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r11), r0
+FFFF84BA	ram	0x46924	sub_46744	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x47318	sub_471D4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r9), r0
+FFFF84BA	ram	0x48168	sub_480A4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x482EC	sub_48228	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x48826	sub_48768	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x48CA8	sub_48C1E	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x4A0E8	sub_49CD0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x4A290	sub_49CD0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x4C0A0	sub_4B94E	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x4C764	sub_4C752	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x4D4AA	sub_4D33C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r11), r0
+FFFF84BA	ram	0x4E342	sub_4E24C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x4FDF8	sub_4FBC2	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x50418	sub_503E8	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5054A	sub_50510	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r4), r0
+FFFF84BA	ram	0x513CA	sub_513AC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5450E	sub_543CC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5578E	sub_55518	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x557C8	sub_55518	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x59DFC	sub_599AE	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5A17E	sub_5A160	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5A724	sub_5A48C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5A8A0	sub_5A48C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x5BAEC	sub_5BA8A	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5BDE8	sub_5BD7C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5C8C2	sub_5C870	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x5EAAE	sub_5EAA0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r4), r0
+FFFF84BA	ram	0x5EABA	sub_5EAA0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r4), r0
+FFFF84BA	ram	0x64A36	sub_64A1C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r4), r0
+FFFF84BA	ram	0x672D2	sub_672C4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x6B5C6	sub_6B484	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x6CBA4	sub_6CB56	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x6D4DA	sub_6D4BC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x7582A	sub_75796	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x770B8	sub_76736	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x77152	sub_76736	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x78316	sub_77608	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x78326	sub_77608	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x789DE	sub_77608	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x79AB4	sub_79A78	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x79DE8	sub_79D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x79EE8	sub_79D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x79FF4	sub_79D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7A0FC	sub_79D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7A220	sub_7A204	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7A2AE	sub_7A204	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7A350	sub_7A204	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7A3F4	sub_7A204	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7BD92	sub_7BD32	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x7D16E	sub_7D124	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0x7D232	sub_7D124	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0x7D98C	sub_7D758	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x7D99A	sub_7D758	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x81D4A	sub_81C3C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r14), r0
+FFFF84BA	ram	0x81D9C	sub_81C3C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x82004	sub_81C3C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x85520	sub_854BA	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r9), r0
+FFFF84BA	ram	0x859E6	sub_859AA	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x85D74	sub_85AF4	read	b	gbr_disp	FFFF84B4	full	-	mov.b @(0x6,gbr), r0
+FFFF84BA	ram	0x86EFA	sub_86D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x87364	sub_86D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x87372	sub_86D9C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r3), r0
+FFFF84BA	ram	0x898CA	sub_896EE	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x898E0	sub_896EE	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x8BC22	sub_8B98C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0x8C004	sub_8B98C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r1), r0
+FFFF84BA	ram	0x923AC	sub_9238E	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x9538A	sub_952EC	read	b	gbr_disp	FFFF84B4	full	-	mov.b @(0x6,gbr), r0
+FFFF84BA	ram	0x95AAA	sub_959A4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x95B2A	sub_959A4	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x95C8E	sub_95C58	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x95D10	sub_95CDA	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0x95DCE	sub_95D62	read	b	gbr_disp	FFFF84B4	full	-	mov.b @(0x6,gbr), r0
+FFFF84BA	ram	0x95FE4	sub_95FB2	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x960DA	sub_960A8	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x9633C	sub_962B8	read	b	base_disp	FFFF8494	full	-	mov.b @(0x26,gbr), r0
+FFFF84BA	ram	0x968A2	sub_9689E	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x969E0	sub_969C2	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0x975E0	sub_974D0	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x9790C	sub_978FE	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x97CB6	sub_97BBC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x97EB2	sub_97BBC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x9C434	sub_9C194	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0x9CF60	sub_9CE90	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xA429C	sub_A422C	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0xA881C	sub_A8736	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r10), r0
+FFFF84BA	ram	0xA89EA	sub_A8736	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r10), r0
+FFFF84BA	ram	0xA8E2E	sub_A8DDC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0xA8E3E	sub_A8DDC	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0xA8F60	sub_A8F4A	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xA928C	sub_A90BA	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xAC50C	sub_AC488	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xAE70E	sub_AE6D6	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0xAE734	sub_AE6D6	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r5), r0
+FFFF84BA	ram	0xAE9FA	sub_AE942	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r6), r0
+FFFF84BA	ram	0xAEE34	sub_AEE10	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r7), r0
+FFFF84BA	ram	0xAF2A2	sub_AF290	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xAF3CE	sub_AF374	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
+FFFF84BA	ram	0xBFBA2	sub_BF814	read	b	base_disp	FFFF84B4	full	-	mov.b @(0x6,r2), r0
