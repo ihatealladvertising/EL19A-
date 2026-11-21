@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65064, WO65065, WO65077, and WO65078 are active under the user's concurrent-execution authorization of 2026-11-20/21. Their scopes remain separate.
+- **Concurrent WOs:** WO65062, WO65064, WO65065, and WO65078 are active under the user's concurrent-execution authorization of 2026-11-20/21. Their scopes remain separate.
 
 ## Active work
 
@@ -28,11 +28,12 @@
 
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
 | [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
-| [WO65077](WO65077.md) | **ACTIVE — P1** | Reserved: trace direct code readers of the known DTC record run at `0x12E44–0x1377F` through the shortest local lookup/result use. Reuse the already validated 197×12-byte structure; do not repeat enumeration, broad DTC/flags/CID census, global xref, or semantic promotion. |
 | [WO65078](WO65078.md) | **ACTIVE — P1** | New concurrent assignment: trace `sub_969C2` B956 (`0x0B956`) query arguments, lookup return, staging at `FFFF27DE`, and immediate local arithmetic/use. Reuse WO65060/65070; no map census, broad xref or physical naming. |
 
 ## Recent completed work
 
+
+- [WO65077](WO65077.md) — **BOUNDED COMPLETE:** no direct read of the validated DTC block `0x12E44–0x1377F` was established by exact-address/proven-literal methods. The sole in-range literal at `0x70650` loads numeric `0x1312D` into register arithmetic, then stores a capped UWORD to `FFFF1400` and a derived byte to `FFFF1130`; it does not dereference the DTC block. Computed/indirect paths remain untested.
 - [WO65076](WO65076.md) — **BOUNDED COMPLETE — CLOSED:** traced five direct readers of weighted C756/C956 result `FFFF156A`: secondary blend endpoint with `FFFF156C` into `FFFF1578`; difference input to `sub_22494`; selector-dependent staging into `FFFF157A`; and signed-saturating arithmetic feeding `FFFF156E`/`FFFF1576`. Physical meaning/units remain unresolved; no workbook/XML/catalog integration.
 
 
@@ -52,6 +53,7 @@
 - Do not repeat the completed `FFFF84BA` direct/wider/GBR/sibling-chain/ROM-pointer checks; the closed helper-family censuses; the `FFFF860D.bit3` writer search; or the `FFFF1018` reader/DMA/DTC checks. See the relevant WO records and archive for exact method boundaries.
 - **Unassigned candidates after the active WOs close:** a 1D scalar/limiter sweep (`0x7800–0x9B00`, plus DTC/CID extraction) or a bounded semantic caller trace for high-priority WO65060 map families. These are recommendations only, not active assignments.
 - Historical WO summaries and checkpoint details are preserved in the dated archive snapshot and individual WO records; neither expands an active WO's scope.
+
 
 
 
