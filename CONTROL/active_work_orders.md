@@ -18,13 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65093 active (P1); WO65085–WO65092 are closed bounded-complete (2026-11-21); the user authorizes concurrent execution.
-
-## Active work
-
-| WO | Status / priority | Latest checkpoint and continuation |
-|---|---|---|
-| WO65093 | **ACTIVE — P1** | Trace paired trust/normal 32-point lookup outputs from `sub_69C5C` (`0x11BC4`/`0x119C4`, stages `FFFF1714`/`FFFF1716`) through direct consumers and caller-side combination. Determine whether they are independently consumed, compared, selected, or blended; stop at first unresolved runtime/dispatcher boundary. No physical labels or units by analogy. Evidence in [WO65093](WO65093.md), branch `wo65093-paired-bank-output-consumers`. |
+- **Concurrent WOs:** none active. WO65085–WO65093 are closed bounded-complete (2026-11-21); the user authorizes concurrent execution.
 
 ## Active work
 
@@ -33,6 +27,7 @@
 | WO65090 | **CLOSED — BOUNDED COMPLETE** | ROM `0x829A–0x829F` signed scalar/clamp cluster traced; carried forward direct boundaries `0x913A/0x913C`, `0x91C2/0x91C4/0x91C6`, `0x97B2`. Extracted and raw-ROM-verified 197 DTC-like records (`0x12E44–0x1377F`, stride `0x0C`, U16BE code at `+6`) and 144 unique CID-like records (`0x14664–0x148A3`, stride 4, U16BE + `00 FF`). No physical semantics or workbook/XML integration. Evidence: [WO65090](WO65090.md), PR [#8](https://github.com/ihatealladvertising/EL19A-/pull/8). |
 | WO65091 | **CLOSED — BOUNDED COMPLETE** | Corrected `sub_969C2`: its SWORD-map column query is locally loaded from UWORD `FFFF85B2`, shared with `0x9C2E/0x9DAE`, `0x9B2E` and `0xAB22`. Bounded 42 register-base and 27 GBR+`0x16` UWORD stores; no static writer proven. Existing packet parser can dynamically write within a window including `FFFF85B2`, but actual packet/destination/length remain unknown. No physical semantics or workbook/XML integration. Evidence: [WO65091](WO65091.md), PR [#9](https://github.com/ihatealladvertising/EL19A-/pull/9). |
 | WO65092 | **CLOSED — BOUNDED COMPLETE** | Traced `FFFF85E4 → FFFF8596 → FFFF85DA → FFFF85B2`: timer/counter delta >>5, unsigned quotient `48,000,000 / FFFF85E4` capped UWORD (when `FFFF99E9.bit3` clear; set stores zero), then `>>3` under `FFFF8641` callback gates and a 40-byte `FFFF85C4→FFFF859C` snapshot copy. Corrected the earlier bit-polarity annotation. Cross-interrupt freshness and physical units remain unresolved. No workbook/XML/catalogue integration. Evidence: [WO65092](WO65092.md), PR [#10](https://github.com/ihatealladvertising/EL19A-/pull/10). |
+| WO65093 | **CLOSED — BOUNDED COMPLETE** | Traced paired lookups `0x11BC4`/`0x119C4` to UWORD endpoints `FFFF1768`/`FFFF176A`; runtime weight `FFFF1778` selects trust at zero, normal at `0xFFFF`, or interpolates into `FFFF1762`. `sub_6A0D4` applies a second gated blend with a local computed value; separate `0x6A4FC` consumer also reads trust endpoint/combined result. Corrected reservation address typo; physical domain/units unresolved. No workbook/XML/catalogue integration. Evidence: [WO65093](WO65093.md), PR [#11](https://github.com/ihatealladvertising/EL19A-/pull/11). |
 
 
 
@@ -42,6 +37,7 @@
 
 ## Recent completed work
 
+- [WO65093](WO65093.md) — **BOUNDED COMPLETE — CLOSED:** established runtime-weighted interpolation between trust/normal map outputs (`FFFF1768`/`FFFF176A`) using `FFFF1778`; result `FFFF1762` enters a second gated blend and a separate local consumer. No physical domain/units or workbook/XML/catalogue integration.
 - [WO65092](WO65092.md) — **BOUNDED COMPLETE — CLOSED:** established the timer-derived snapshot pipeline `FFFF85E4 → FFFF8596 → FFFF85DA → FFFF85B2`; the final word is copied as part of a 40-byte block transfer. Corrected `sub_34476` TST/BF polarity (`FFFF99E9.bit3` clear computes, set stores zero). The three stages run in distinct interrupt/service contexts, so global freshness ordering and physical units remain unknown. This copy writer was outside WO65091's direct fixed-offset/GBR store forms; no workbook/XML/catalogue integration.
 - [WO65091](WO65091.md) — **BOUNDED COMPLETE — CLOSED:** corrected the inline SWORD lookup's second coordinate to a local UWORD read from `FFFF85B2`; confirmed the same field feeds `0x9C2E/0x9DAE`, `0x9B2E`, `0xAB22` and `sub_969C2`. No fixed/static writer found in bounded literal/base/GBR reviews; the existing packet parser is a runtime-conditional potential writer because its accepted destination window includes this address. Actual packet and destination unresolved; no physical-domain or workbook/XML/catalogue promotion.
 - [WO65089](WO65089.md) — **BOUNDED COMPLETE — CLOSED:** traced three 3D groups and three 32-point UWORD curve groups through caller inputs, branch selection, helper return, RAM staging and first direct consumers. `0x0A342/0x0A382` are a bit7-selected UBYTE response pair; `0x0D8D6` is a centered UWORD correction surface; `0x0B422/0x0B4A2/0x0B522/0x0B5A2` are four same-index SWORD correction channels; `0x0F712/0x10F8A` form a bidirectional transfer pair; `0x10EEA/0x1100A` and `0x10F2A/0x1104A` form a range-selected two-piece UWORD transfer used multiplicatively. Software-role confidence high; physical domain/units unresolved. No workbook/XML/catalogue edit.
