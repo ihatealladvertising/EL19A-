@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; owner: current session; branch `wo65109-ignition-fragment-reader-audit`. WO65085–WO65108, WO65111 and WO65112 are closed; WO65110 remains queued; WO65113 queued-blocked.
+- **Active WOs:** WO65109 (P3) — ignition/knock fragment reader reconciliation; owner: current session; branch `wo65109-ignition-fragment-reader-audit`. WO65085–WO65108, WO65111 and WO65112 are closed; WO65110 is claimed (branch `wo65110-catalogue-triage`); WO65113 queued-blocked.
 
 ## Queued work orders — allocated 2026-11-21
 
@@ -33,7 +33,7 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 | [WO65107](WO65107.md) | DTC detection, storage and reporting path | 3 — bounded track | MIL output overlaps WO65106 | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65107.md` and PR [#24](https://github.com/ihatealladvertising/EL19A-/pull/24) |
 | [WO65108](WO65108.md) | HCAN1 mailbox message map (bounded subset) | 3 — bounded track | WO65103 transport knowledge; `FFFF8234` is a pointer table per WO65102, not a mailbox payload | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65108.md` and PR [#25](https://github.com/ihatealladvertising/EL19A-/pull/25) |
 | [WO65109](WO65109.md) | Ignition/knock fragment ↔ ROM reader reconciliation | 3 — bounded track | Independent | ACTIVE — P3; owner current session; branch `wo65109-ignition-fragment-reader-audit` |
-| [WO65110](WO65110.md) | Catalogue gap triage: 179 tables absent from XML v3 | 3 — bounded track | Independent | QUEUED |
+| [WO65110](WO65110.md) | Catalogue gap triage: 179 tables absent from XML v3 | 3 — bounded track | Independent | ACTIVE — claimed 2026-11-21; branch `wo65110-catalogue-triage` |
 | [WO65111](WO65111.md) | `0x12844` block schema and `0x8405` provenance | 3 — bounded track | Independent | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65111.md` |
 | [WO65112](WO65112.md) | Claims ledger and annotation contradiction audit | 3 — bounded track | Documentation only | CLOSED — BOUNDED COMPLETE; see `CONTROL/WO65112.md` |
 | [WO65113](WO65113.md) | V57 definition provenance (external discriminator) | 4 — blocked | User-supplied external material | QUEUED — BLOCKED |
