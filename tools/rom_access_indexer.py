@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.7.0"
+VERSION = "1.8.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -267,23 +267,20 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         # Label boundary within function (if not in delay slot)
         elif current_label != prev_label and not in_delay_slot:
             prev_label = current_label
-            if last_branch_target == current_label and last_branch_pc is not None:
-                # At a known in-function branch join, preserve only R8-R15
-                # whose definitions predate the branch. Values changed by
-                # the delay slot or linear fall-through path are not merged.
-                for reg in range(16):
-                    preserve = (reg >= 8 and reg_provenance[reg] is not None
-                                and reg_provenance[reg] < last_branch_pc)
-                    if not preserve:
-                        regs[reg] = None
-                        reg_provenance[reg] = None
-                        active_rom_pool_loads.pop(reg, None)
-                last_branch_target = None
-                last_branch_pc = None
-            else:
-                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-                last_branch_target = None
-                last_branch_pc = None
+            # Keep only high-register facts established before the most recent
+            # local branch. Any definition in the intervening linear region
+            # may belong only to the fall-through path and is discarded.
+            # This retains stable function bases such as R13 while preventing
+            # R0-R7 or branch-path redefinitions from leaking across joins.
+            for reg in range(16):
+                preserve = (8 <= reg <= 14 and reg_provenance[reg] is not None
+                            and (last_branch_pc is None or reg_provenance[reg] < last_branch_pc))
+                if not preserve:
+                    regs[reg] = None
+                    reg_provenance[reg] = None
+                    active_rom_pool_loads.pop(reg, None)
+            last_branch_target = None
+            last_branch_pc = None
 
         mem_access = None
         unresolved_access = None
@@ -652,7 +649,10 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 # The callee may alter GBR; do not propagate a caller value blindly.
                 gbr = None
-            # Local delayed branches are merged at their named target label.
+            elif delay_slot_type in ("bra", "conditional") and last_branch_target is None:
+                # Unknown/dynamic delayed transfer: no safe local join is known.
+                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            # Named local branches are merged at subsequent label boundaries.
             # The merge retains only proven high-register definitions that
             # predate the branch; values changed on either path are cleared.
             in_delay_slot = False
