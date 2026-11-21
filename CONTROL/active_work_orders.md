@@ -18,12 +18,17 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. WO65085–WO65094 are closed bounded-complete (2026-11-21); the user authorizes concurrent execution.
+- **Concurrent WOs:** WO65095–WO65099 active (P1); WO65085–WO65094 are closed bounded-complete (2026-11-21); the user authorizes concurrent execution.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
+| WO65095 | **ACTIVE — P1** | Identify whether the V57 16-point Rev-Hang Airflow / Alt target (0–6000 RPM, 400-RPM steps) maps to one or more catalogued `16x1` objects; trace RPM query, stored output and downstream idle/throttle/dashpot/airflow consumers. Fingerprint only; no guessed offsets. See [WO65095](WO65095.md), branch `wo65095-revhang-16pt-curve`. |
+| WO65096 | **ACTIVE — P1** | Resolve the V57 8-point TVO Upper Limit Table 1/2 target (0–3200 RPM) against catalogue `8x1` curves; prove axis, data encoding, mode/branch selection and downstream throttle-limit/target use. Identical screenshots do not prove one or two ROM tables. See [WO65096](WO65096.md), branch `wo65096-tvo-8pt-curves`. |
+| WO65097 | **ACTIVE — P1** | Trace consumers of 16x16 UWORD maps `0x0D456/0x0D656` and Trustful twins `0x121C4/0x123C4` from result staging into subsequent decisions/control outputs; reuse C756/C956 work without repeating it. See [WO65097](WO65097.md), branch `wo65097-d456-d656-map-consumers`. |
+| WO65098 | **ACTIVE — P1** | Continue downstream from established output stages for bidirectional 32-point UWORD pair `0x0F712/0x10F8A`; resolve immediate consumers and input/query scaling toward load/airmass/fuel calculations without assuming a MAF identity. See [WO65098](WO65098.md), branch `wo65098-maf-flow-32pt-consumers`. |
+| WO65099 | **ACTIVE — P1** | Continue axis/query and downstream consumer provenance for centered/ signed groups `0x0A0F2`, `0x0D8D6`, and `0x0B422–0x0B5A2`; reuse known helper geometry/staging, trace only unresolved producer/consumer links. See [WO65099](WO65099.md), branch `wo65099-centered-signed-map-consumers`. |
 | WO65094 | **CLOSED — BOUNDED COMPLETE** | `FFFF1778` increments by `0x0147` (327) when `FFFF8614.bit0` is set, saturating at `0xFFFF`; otherwise decrements, flooring at zero. Updated at callback entry 18/122 through `sub_69D1C` when `0x8B51.bit5=1` and `0x8CD3.bit7=0`, one event-gated opportunity per `INT_TRAPA62` dispatch pass (no fixed period proven). Corrects WO65093 direction, underflow result, and callback-gate polarity. Direction-bit producer, initial weight, and elapsed cadence unresolved. No workbook/XML/catalogue integration. Evidence: [WO65094](WO65094.md), PR [#12](https://github.com/ihatealladvertising/EL19A-/pull/12). |
 | WO65090 | **CLOSED — BOUNDED COMPLETE** | ROM `0x829A–0x829F` signed scalar/clamp cluster traced; carried forward direct boundaries `0x913A/0x913C`, `0x91C2/0x91C4/0x91C6`, `0x97B2`. Extracted and raw-ROM-verified 197 DTC-like records (`0x12E44–0x1377F`, stride `0x0C`, U16BE code at `+6`) and 144 unique CID-like records (`0x14664–0x148A3`, stride 4, U16BE + `00 FF`). No physical semantics or workbook/XML integration. Evidence: [WO65090](WO65090.md), PR [#8](https://github.com/ihatealladvertising/EL19A-/pull/8). |
 | WO65091 | **CLOSED — BOUNDED COMPLETE** | Corrected `sub_969C2`: its SWORD-map column query is locally loaded from UWORD `FFFF85B2`, shared with `0x9C2E/0x9DAE`, `0x9B2E` and `0xAB22`. Bounded 42 register-base and 27 GBR+`0x16` UWORD stores; no static writer proven. Existing packet parser can dynamically write within a window including `FFFF85B2`, but actual packet/destination/length remain unknown. No physical semantics or workbook/XML integration. Evidence: [WO65091](WO65091.md), PR [#9](https://github.com/ihatealladvertising/EL19A-/pull/9). |
@@ -84,7 +89,7 @@
 ## Guardrails and future priorities
 
 - Do not repeat the completed `FFFF84BA` direct/wider/GBR/sibling-chain/ROM-pointer checks; the closed helper-family censuses; the `FFFF860D.bit3` writer search; or the `FFFF1018` reader/DMA/DTC checks. See the relevant WO records and archive for exact method boundaries.
-- **Unassigned candidates after the active WOs close:** a 1D scalar/limiter sweep (`0x7800–0x9B00`, plus DTC/CID extraction) or a bounded semantic caller trace for high-priority WO65060 map families. These are recommendations only, not active assignments.
+- **1D scalar/limiter sweep status:** completed by WO65090 over `0x7800–0x9B00`, reusing WO65083/WO65064 and tracing the `0x829A–0x829F` signed-byte clamp cluster. Do not repeat the same interval census; physical units/roles and unresolved alias paths remain unassigned.
 - Historical WO summaries and checkpoint details are preserved in the dated archive snapshot and individual WO records; neither expands an active WO's scope.
 
 
