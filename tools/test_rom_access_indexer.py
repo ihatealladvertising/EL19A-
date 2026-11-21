@@ -128,12 +128,23 @@ class ResolverMechanicsTests(unittest.TestCase):
             if row["access"] == "read"
         }
         self.assertTrue({"0X46BDE", "0X47014", "0X59CA2"}.issubset(reads_85df))
+        writes_85df = {
+            row["pc"].upper() for row in by_target.get("FFFF85DF", [])
+            if row["access"] == "write"
+        }
+        self.assertTrue({"0X59BF2", "0X59C02", "0X59C04"}.issubset(writes_85df))
 
         reads_85e0 = [
             row for row in by_target.get("FFFF85E0", [])
             if row["access"] == "read"
         ]
         self.assertEqual(reads_85e0, [])
+        writes_85e0 = [
+            row for row in by_target.get("FFFF85E0", [])
+            if row["access"] == "write"
+        ]
+        self.assertEqual(len(writes_85e0), 1)
+        self.assertEqual(writes_85e0[0]["pc"].upper(), "0X59CA6")
 
         rows_1db4 = by_target.get("FFFF1DB4", [])
         self.assertTrue(any(row["pc"].upper() == "0X4042C" and row["access"] == "read" for row in rows_1db4))
@@ -478,6 +489,89 @@ class ResolverMechanicsTests(unittest.TestCase):
         self.assertEqual((hits[0][2], hits[0][4], hits[0][7]), ("0xA", "read", "FFFF1DB4"))
         self.assertEqual(unresolved, [])
         self.assertEqual((matched, checked), (1, 1))
+
+
+    def test_synthetic_nested_branch_retains_prior_conditional_target_state(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = bytearray(0x20)
+            instructions = [
+                (0x0000, 0xD605, "mov.l @(5,pc),r6"),
+                (0x0002, 0xE01B, "mov #0x1B,r0"),
+                (0x0004, 0x8F02, "bf/s loc_000C"),
+                (0x0006, 0x0009, "nop"),
+                (0x0008, 0xA001, "bra loc_000E"),
+                (0x000A, 0x0009, "nop"),
+                (0x000C, 0x0654, "mov.b r5,@(r0,r6)"),
+                (0x000E, 0x0009, "nop"),
+            ]
+            listing_lines = ["sub_0000:"]
+            for pc, opcode, assembly in instructions:
+                rom[pc:pc + 2] = opcode.to_bytes(2, "big")
+                if pc == 0x000C:
+                    listing_lines.append("loc_000C:")
+                if pc == 0x000E:
+                    listing_lines.append("loc_000E:")
+                listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}")
+            rom[0x0018:0x001C] = bytes.fromhex("FFFF85C4")
+            listing_text = "\n".join(listing_lines) + "\n"
+            rom_path = os.path.join(tmp, "fixture.bin")
+            listing_path = os.path.join(tmp, "fixture.lst")
+            targets_path = os.path.join(tmp, "targets.txt")
+            hits_path = os.path.join(tmp, "hits.tsv")
+            unresolved_path = os.path.join(tmp, "unresolved.tsv")
+            with open(rom_path, "wb") as f:
+                f.write(rom)
+            with open(listing_path, "w", encoding="utf-8") as f:
+                f.write(listing_text)
+            with open(targets_path, "w", encoding="utf-8") as f:
+                f.write("FFFF85DF\n")
+            old_md5 = resolver.EXPECTED_ROM_MD5
+            old_listing_sha = resolver.EXPECTED_LISTING_SHA256
+            resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
+            resolver.EXPECTED_LISTING_SHA256 = hashlib.sha256(listing_text.encode("utf-8")).hexdigest()
+            try:
+                hits, unresolved, matched, checked = resolver.run_indexer(
+                    rom_path, listing_path, targets_path, hits_path, unresolved_path
+                )
+            finally:
+                resolver.EXPECTED_ROM_MD5 = old_md5
+                resolver.EXPECTED_LISTING_SHA256 = old_listing_sha
+            self.assertEqual(len(hits), 1)
+            self.assertEqual((hits[0][2], hits[0][4], hits[0][7]), ("0xC", "write", "FFFF85C4"))
+            self.assertEqual(unresolved, [])
+            self.assertEqual((matched, checked), (1, 1))
+
+    def test_unresolved_site_is_emitted_once_for_multiple_targets(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            rom = bytearray.fromhex("6020 0009")
+            listing_text = "sub_0000:\n00000000 6020 CODE mov.b @r2,r0\n00000002 0009 CODE nop\n"
+            rom_path = os.path.join(tmp, "fixture.bin")
+            listing_path = os.path.join(tmp, "fixture.lst")
+            targets_path = os.path.join(tmp, "targets.txt")
+            hits_path = os.path.join(tmp, "hits.tsv")
+            unresolved_path = os.path.join(tmp, "unresolved.tsv")
+            with open(rom_path, "wb") as f:
+                f.write(rom)
+            with open(listing_path, "w", encoding="utf-8") as f:
+                f.write(listing_text)
+            with open(targets_path, "w", encoding="utf-8") as f:
+                f.write("FFFF85DF\nFFFF1DB4\n0x8550\n")
+            old_md5 = resolver.EXPECTED_ROM_MD5
+            old_listing_sha = resolver.EXPECTED_LISTING_SHA256
+            resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
+            resolver.EXPECTED_LISTING_SHA256 = hashlib.sha256(listing_text.encode("utf-8")).hexdigest()
+            try:
+                hits, unresolved, matched, checked = resolver.run_indexer(
+                    rom_path, listing_path, targets_path, hits_path, unresolved_path
+                )
+            finally:
+                resolver.EXPECTED_ROM_MD5 = old_md5
+                resolver.EXPECTED_LISTING_SHA256 = old_listing_sha
+            self.assertEqual(hits, [])
+            self.assertEqual(len(unresolved), 1)
+            self.assertEqual(unresolved[0][0:2], ("UNRESOLVED", "unknown"))
+            self.assertIn("FFFF85DF;FFFF1DB4;0x8550", unresolved[0][10])
+            self.assertEqual((matched, checked), (1, 1))
 
 
 if __name__ == "__main__":
