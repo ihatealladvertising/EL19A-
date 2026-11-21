@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65063, WO65064, WO65065, WO65074, and WO65075 are active under the user's concurrent-execution authorization of 2026-11-20. Their scopes remain separate.
+- **Concurrent WOs:** WO65062, WO65063, WO65064, WO65065, and WO65075 are active under the user's concurrent-execution authorization of 2026-11-20. Their scopes remain separate.
 
 ## Active work
 
@@ -28,7 +28,6 @@
 | [WO65063](WO65063.md) | **ACTIVE — P1** | Checkpoint 3 closes the WO65020 dependency: `FFFF85FC–FFFF85FF` is reused as mutable state, not established as a stable vector. Continue only the assigned `FFFF8684`/`FFFF889C` slot trace; current handler values remain unresolved. Next useful evidence is a proven runtime packet/destination or independent `FFFF85FC` handler/VBR-return path. |
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 3 is now in the base-branch record: the `0x9600–0x9700` and `0x9800–0x9B00` bounded censuses are documented, and the two open producer leads are closed. Continue only the listed operand-provenance candidates in `0x9600–0x9700`; retain the stated alias/index boundaries and do not repeat completed censuses. |
 | [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
-| [WO65074](WO65074.md) | **ACTIVE — P1** | Checkpoint 1: reserved a bounded test of the `0x987E=7500` / `0x97AE=6700` pairing in `sub_5919A`. Trace operand provenance and result paths; do not infer units. |
 | [WO65075](WO65075.md) | **ACTIVE — P1** | Reserved: trace the direct consumer of B956 UWORD staged at `FFFF9C48` (`0x972E0`); resolve the first reader and local use only, then stop at unresolved provenance or indirect boundary. |
 
 ## Recent completed work
@@ -37,6 +36,7 @@
 - [WO65070](WO65070.md) — **BOUNDED COMPLETE:** B956's UWORD staged at `FFFF27DE` is directly read and copied to `FFFF9C48`; no semantic name or downstream consumer was assigned.
 - [WO65072](WO65072.md) — **BOUNDED COMPLETE:** `FFFF2BC0` and `FFFF2BC2`, read against threshold 100, are written from `FFFF937C/+2` by saturating-increment or alternate `IVECT1` paths in `sub_8CF66`. The upstream state sources and units remain unresolved.
 - [WO65073](WO65073.md) — **BOUNDED COMPLETE — DOCUMENTATION ONLY:** preserves the user-provided stranded WO65064 update with explicit source attribution and verification limits; no ROM re-analysis or semantic promotion.
+- [WO65074](WO65074.md) — **BOUNDED COMPLETE:** traced the 7,500 and conditional 6,700 UWORD ceilings in `sub_5919A` across two parallel channels; selected pair is written to MMIO `FFFF33E6/FFFF33E8`. Physical units and peripheral function unresolved.
 - [WO65061](WO65061.md) — **CLOSED — BOUNDED COMPLETE:** resolved the stale-GBR false alias and verified the bounded `FFFF85DF` reader set; the historical false-positive origin remains unrecovered.
 - [WO65020](WO65020.md) — **BOUNDED COMPLETE — CLOSED:** supplemental alias audit for the `FFFF85FC` TRAPA slot; see WO65063 checkpoint 3 for the bounded dependency result.
 - WO65045 is **CLOSED — BOUNDED COMPLETE** by WO65056/65059; WO65054 is **CLOSED**, superseded by WO65056. Detailed recent results remain in their individual WO records.
