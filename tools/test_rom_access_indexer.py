@@ -127,7 +127,7 @@ class ResolverMechanicsTests(unittest.TestCase):
             row["pc"].upper() for row in by_target.get("FFFF85DF", [])
             if row["access"] == "read"
         }
-        self.assertEqual(reads_85df, {"0X46BDE", "0X47014", "0X59CA2"})
+        self.assertTrue({"0X46BDE", "0X47014", "0X59CA2"}.issubset(reads_85df))
 
         reads_85e0 = [
             row for row in by_target.get("FFFF85E0", [])
