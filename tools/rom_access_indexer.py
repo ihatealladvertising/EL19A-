@@ -51,15 +51,15 @@ def parse_targets(targets_file, space_override="auto"):
                 )
 
             token = line.strip()
-            # Normalize address
-            # Rule:
-            # - 8 hex digits beginning FFFF -> RAM
-            # - Anything else (1-6 hex digits) -> ROM
-            # - space_override overrides
+            # Accepted forms are explicit: 1-6 hex digits for ROM, or
+            # exactly FFFFxxxx for RAM. Reject ambiguous widths early.
+            if not re.fullmatch(r"(?:0[xX])?(?:[0-9a-fA-F]{1,6}|[fF]{4}[0-9a-fA-F]{4})", token):
+                raise ValueError(
+                    f"Line {line_num}: expected a 1-6 digit ROM address or FFFFxxxx RAM address: {token}"
+                )
             clean_hex = token.lower()
             if clean_hex.startswith("0x"):
                 clean_hex = clean_hex[2:]
-
             val = int(clean_hex, 16)
 
             if space_override == "auto":
@@ -107,6 +107,15 @@ def invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads):
         regs[reg] = None
         reg_provenance[reg] = None
     active_rom_pool_loads.clear()
+
+
+def pc_bytes_match(rom, pc, expected_bytes):
+    """Return True only when listing bytes exactly match ROM bytes at pc."""
+    return (
+        pc >= 0
+        and pc + len(expected_bytes) <= len(rom)
+        and rom[pc:pc + len(expected_bytes)] == expected_bytes
+    )
 
 
 def promote_pool_pointer_to_dereference(
@@ -573,7 +582,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         concordance_checked += 1
         if pc in code_dict:
             expected_bytes = code_dict[pc][1]
-            if pc + len(expected_bytes) <= len(rom) and rom[pc:pc+len(expected_bytes)] == expected_bytes:
+            if pc_bytes_match(rom, pc, expected_bytes):
                 concordance_matched += 1
                 valid_hits.append(h)
             else:
