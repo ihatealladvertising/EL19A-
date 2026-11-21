@@ -381,10 +381,15 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
 
         elif unresolved_access:
             acc_type, width, form, base_reg, base_val, ea, note, reason = unresolved_access
-            base_str = "?"
+            base_str = (
+                f"0x{base_val:X}" if base_val is not None and base_val < 0x100000
+                else (f"FFFF{base_val & 0xFFFF:04X}" if base_val is not None else "?")
+            )
+            base_resolved = "partial" if base_val is not None else "none"
             for t in targets_list:
-                # Log unresolved sites for relevant target space
-                unresolved.append((t["norm"], t["space"], f"0x{pc:X}", current_func, acc_type, width, form, base_str, "none", "-", note, reason))
+                # The exact target is unknown at this site; record the uncertainty
+                # against each supplied target without presenting it as a hit.
+                unresolved.append((t["norm"], t["space"], f"0x{pc:X}", current_func, acc_type, width, form, base_str, base_resolved, "-", note, reason))
 
         # A pointer passed to a helper is not labelled dereferenced here.
         # Without an interprocedural summary, that is only an unresolved consumer.
