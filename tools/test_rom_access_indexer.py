@@ -462,5 +462,23 @@ class ResolverMechanicsTests(unittest.TestCase):
         self.assertEqual((matched, checked), (1, 1))
 
 
+    def test_synthetic_mac_test_and_shift_preserve_unrelated_r13_base(self):
+        instructions = [
+            (0x0000, 0xDD02, "mov.l @(2,pc),r13"),
+            (0x0002, 0x0477, "mul.l r7,r4"),
+            (0x0004, 0x021A, "sts macl,r2"),
+            (0x0006, 0x2668, "tst r6,r6"),
+            (0x0008, 0x4221, "shar r2"),
+            (0x000A, 0x60D0, "mov.b @r13,r0"),
+        ]
+        hits, unresolved, matched, checked = self._run_synthetic_access_case(
+            instructions, [(0x000C, bytes.fromhex("FFFF1DB4"))], "FFFF1DB4"
+        )
+        self.assertEqual(len(hits), 1)
+        self.assertEqual((hits[0][2], hits[0][4], hits[0][7]), ("0xA", "read", "FFFF1DB4"))
+        self.assertEqual(unresolved, [])
+        self.assertEqual((matched, checked), (1, 1))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
