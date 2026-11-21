@@ -27,12 +27,14 @@
 | [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
 
 | [WO65064](WO65064.md) | **ACTIVE — P1** | Checkpoint 4 adds the `0x9500–0x9600` census (86 word loads, 63/128 slots, 25 compare-on-loaded candidates after an operand check that rejected 15) and resolves the 7500/6700 pairing: in `sub_5919A`, 7500 (`0x987E`) caps the record values at `GBR+0x74/+0x76` and 6700 (`0x97AE`) is a second, flag-gated cap on their copies at `+0x6C/+0x6E`, while 7200 (`0x9588`) is the zero-gate default for `+0x94/+0x96`; `0x95A0`=7500 is confirmed reached and never compared. No units assigned. Next: operand provenance for the 25 `0x9500–0x9600` candidates, then the `0x9600–0x9700` set. |
-| [WO65065](WO65065.md) | **ACTIVE — P1** | Checkpoint 1 identifies `sub_8CF66` as the writer of UWORDs `FFFF2BC0/FFFF2BC2`, incremented with `0xFFFF` saturation or zeroed by descriptor gates. Source-field/descriptor producers and cadence remain unresolved; continue only its assigned scope. |
+
 
 
 
 
 ## Recent completed work
+
+- [WO65065](WO65065.md) — **BOUNDED COMPLETE — CLOSED:** traced the immediate counter-writer caller chain; identified `FFFF93F2` descriptor and `FFFF937C/FFFF937E` source initialization in `sub_90384`; a separate read of `FFFF937E` occurs at `0x9D930`. Runtime source updates and scheduler cadence remain unresolved; no workbook/XML/catalogue integration.
 
 - [WO65082](WO65082.md) — **BOUNDED COMPLETE — CLOSED:** corrected the premise that `0x12844` is a single calibration table. LST labels it `byte_12844`; sampled code treats it as a heterogeneous ROM data/configuration block with fixed-offset byte-field reads, a GBR base (`0x31DBA`), and a byte-indexed lookup (`0x33244`). The inherited 35-helper-argument claim was not independently reproduced; exact per-call helper use and embedded arrays at/after `0x1289C` remain unresolved. No workbook/XML/catalogue edit.
 
