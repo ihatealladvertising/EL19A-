@@ -18,13 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** none active. WO65085, WO65086, WO65087 and WO65088 are closed bounded-complete (2026-11-21); the user authorized concurrent execution on 2026-11-20.
+- **Concurrent WOs:** WO65089 active (2026-11-21). WO65085–WO65088 are closed bounded-complete; the user authorized concurrent execution on 2026-11-20.
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| — | **NONE** | No active work orders. WO65085–WO65088 closed bounded-complete (2026-11-21). |
+| [WO65089](WO65089.md) | **ACTIVE / P1** | Semantic caller trace of the selected high-priority 3D map families (`0x0A342/0x0A382`, `0x0D8D6`, inline `0x0B422/0x0B4A2/0x0B522/0x0B5A2`) and 32-point curve pairs (`0x0F712/0x10F8A`, `0x10EEA/0x1100A`, `0x10F2A/0x1104A`) through caller-side queries, branch logic, result handling and first direct consumers. |
 
 
 
