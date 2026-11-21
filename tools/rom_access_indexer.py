@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.4.0"
+VERSION = "1.5.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -554,10 +554,11 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
         elif hi == 0x0 and disp4 in (0x4, 0x5, 0x6):
             # Indexed stores use the tracked base/index but do not write a GPR.
             pass
-        elif hi == 0x0 and (op & 0xFF) not in (0x23, 0x03):
-            # Other unmodelled group-0 operations may write a GPR (or change GBR).
+        elif hi == 0x0 and op == 0x0009:  # nop
+            pass
+        elif hi == 0x0 and op not in (0x000B, 0x002B) and (op & 0xFF) not in (0x23, 0x03):
+            # Other unmodelled group-0 operations may write GPRs, but not GBR.
             invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-            gbr = None
         elif hi == 0x2 and disp4 not in (0, 1, 2):
             # Non-basic group-2 addressing/transport is not resolved here.
             invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
