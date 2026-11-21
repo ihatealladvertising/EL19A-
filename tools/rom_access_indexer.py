@@ -539,7 +539,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 reg_provenance[ldc_reg] = None
                 active_rom_pool_loads.pop(ldc_reg, None)
             elif (op & 0xFF) not in (0x2B, 0x0B):  # jmp/jsr do not write a GPR
-                # Unmodelled group-4 instructions can read/write GPRs or GBR.
+                # Unmodelled group-4 instructions may write GPRs; GBR forms are handled above.
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                 # These unmodelled GPR operations do not establish a new GBR value.
 
