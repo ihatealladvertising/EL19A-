@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65064, WO65065, WO65076, and WO65077 are active under the user's concurrent-execution authorization of 2026-11-20/21. Their scopes remain separate.
+- **Concurrent WOs:** WO65062, WO65064, WO65065, and WO65077 are active under the user's concurrent-execution authorization of 2026-11-20/21. Their scopes remain separate.
 
 ## Active work
 
