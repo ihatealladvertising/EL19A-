@@ -18,13 +18,13 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V57_WO65003_WO65045_ProcessReconciliation_2026-11-18.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Concurrent WOs:** WO65062, WO65064, and WO65065 remain active under the user's concurrent-execution authorization (2026-11-20). Their scopes remain separate.
+- **Concurrent WOs:** none active. The user authorized concurrent execution on 2026-11-20; WO65062, WO65064, and WO65065 are now closed bounded-complete (2026-11-21).
 
 ## Active work
 
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
-| [WO65062](WO65062.md) | **ACTIVE — P1** | Checkpoint 19a: conditional HCAN1 receive/buffer path and range-validated copy capability are documented. No runtime packet, destination, or target write is established. Continue only within the WO's methods and stop conditions; no exhaustive-access claim or semantic promotion. |
+| — | **NONE** | No active work orders. WO65062, WO65064, and WO65065 are closed bounded-complete. |
 
 
 
@@ -33,6 +33,8 @@
 
 
 ## Recent completed work
+
+- [WO65062](WO65062.md) — **BOUNDED COMPLETE — CLOSED:** completed the targeted byte/bit access slice for FFFF85C4–FFFF85FF and FFFF860B–FFFF860F, corrected indexed/GBR/call-boundary cases, and classified all five FFFF85E4 writers. Static loc_1D64 copy capability and HCAN1 buffer producer are documented; actual runtime packet/destination and post-relocation VBR slots remain unproven. No exhaustive whole-ROM or semantic claim; no workbook/XML/catalogue integration.
 
 - [WO65064](WO65064.md) — **BOUNDED COMPLETE — CLOSED:** completed the 0x9700–0x9800 absolute-pointer UWORD census, the 0x9500–0x9600 25-candidate operand provenance, the 0x9600–0x9700 54-candidate operand provenance, and the 0x9800–0x9B00 multi-width census. Corrected candidate classification: 42 direct compare sites, 7 helper-input/coefficient uses, 5 constant/tautological comparisons; no units or semantic map identity assigned. The 7500/6700/7200 record chain remains as two clamp stages plus a distinct zero-gate default. No workbook/XML/catalogue integration.
 
