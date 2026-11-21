@@ -12,7 +12,7 @@ import re
 import sys
 from datetime import datetime
 
-VERSION = "1.11.0"
+VERSION = "1.12.0"
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_LISTING_MEMBER = "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst"
 EXPECTED_LISTING_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
@@ -246,6 +246,8 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
     last_branch_target = None
     last_branch_pc = None
     last_call_target = None
+    pending_branch_states = {}
+    last_instruction_falls_through = True
 
     for idx, (pc, hex_bytes, instr_text, comment, current_func, current_label) in enumerate(code_lines):
         op = int.from_bytes(hex_bytes[:2], "big")
@@ -264,22 +266,42 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             active_rom_pool_loads.clear()
             in_delay_slot = False
             prev_label = current_label
+            pending_branch_states.clear()
+            last_branch_target = None
+            last_branch_pc = None
+            last_instruction_falls_through = True
 
-        # Label boundary within function (if not in delay slot)
+        # Label boundary within function: merge explicit branch edges.
         elif current_label != prev_label and not in_delay_slot:
             prev_label = current_label
-            # Keep only high-register facts established before the most recent
-            # local branch. Any definition in the intervening linear region
-            # may belong only to the fall-through path and is discarded.
-            # This retains stable function bases such as R13 while preventing
-            # R0-R7 or branch-path redefinitions from leaking across joins.
-            for reg in range(16):
-                preserve = (8 <= reg <= 14 and reg_provenance[reg] is not None
-                            and (last_branch_pc is None or reg_provenance[reg] < last_branch_pc))
-                if not preserve:
-                    regs[reg] = None
-                    reg_provenance[reg] = None
-                    active_rom_pool_loads.pop(reg, None)
+            incoming = pending_branch_states.pop(current_label, [])
+            if incoming:
+                states = list(incoming)
+                if last_instruction_falls_through:
+                    states.append((list(regs), list(reg_provenance), dict(active_rom_pool_loads), gbr))
+                merged_regs = [None] * 16
+                merged_prov = [None] * 16
+                merged_pool = {}
+                for reg in range(16):
+                    values = [st[0][reg] for st in states]
+                    provenances = [st[1][reg] for st in states]
+                    if values and values[0] is not None and all(v == values[0] for v in values) and all(q == provenances[0] for q in provenances):
+                        merged_regs[reg] = values[0]
+                        merged_prov[reg] = provenances[0]
+                    pool_values = [st[2].get(reg) for st in states]
+                    if pool_values and pool_values[0] is not None and all(v == pool_values[0] for v in pool_values):
+                        merged_pool[reg] = pool_values[0]
+                gbr_values = [st[3] for st in states]
+                gbr = gbr_values[0] if gbr_values and gbr_values[0] is not None and all(v == gbr_values[0] for v in gbr_values) else None
+                regs, reg_provenance, active_rom_pool_loads = merged_regs, merged_prov, merged_pool
+            else:
+                for reg in range(16):
+                    preserve = (8 <= reg <= 14 and reg_provenance[reg] is not None
+                                and (last_branch_pc is None or reg_provenance[reg] < last_branch_pc))
+                    if not preserve:
+                        regs[reg] = None
+                        reg_provenance[reg] = None
+                        active_rom_pool_loads.pop(reg, None)
             last_branch_target = None
             last_branch_pc = None
 
@@ -426,10 +448,8 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 else (f"FFFF{base_val & 0xFFFF:04X}" if base_val is not None else "?")
             )
             base_resolved = "partial" if base_val is not None else "none"
-            for t in targets_list:
-                # The exact target is unknown at this site; record the uncertainty
-                # against each supplied target without presenting it as a hit.
-                unresolved.append((t["norm"], t["space"], f"0x{pc:X}", current_func, acc_type, width, form, base_str, base_resolved, "-", note, reason))
+            candidate_targets = ";".join(t["norm"] for t in targets_list)
+            unresolved.append(("UNRESOLVED", "unknown", f"0x{pc:X}", current_func, acc_type, width, form, base_str, base_resolved, "-", f"{note}; candidate targets (not resolved): {candidate_targets}", reason))
 
         # sub_22E10 is a verified fixed-grid UBYTE table reader. Its
         # caller contract passes the ROM table pointer in R4; the lookup is
@@ -672,6 +692,8 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                 call_text = (instr_text + " " + comment).lower()
                 last_call_target = "sub_22e10" if "sub_22e10" in call_text else None
 
+        was_in_delay_slot = in_delay_slot
+        completed_delay_type = delay_slot_type if in_delay_slot else None
         if in_delay_slot:
             if delay_slot_type == "ret":
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
@@ -689,12 +711,13 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
                     invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
                     gbr = None
                 last_call_target = None
-            elif delay_slot_type in ("bra", "conditional") and last_branch_target is None:
-                # Unknown/dynamic delayed transfer: no safe local join is known.
-                invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
-            # Named local branches are merged at subsequent label boundaries.
-            # The merge retains only proven high-register definitions that
-            # predate the branch; values changed on either path are cleared.
+            elif delay_slot_type in ("bra", "conditional"):
+                if last_branch_target is None:
+                    invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+                else:
+                    pending_branch_states.setdefault(last_branch_target, []).append(
+                        (list(regs), list(reg_provenance), dict(active_rom_pool_loads), gbr)
+                    )
             in_delay_slot = False
             delay_slot_type = None
         elif is_branch_delay:
@@ -708,10 +731,17 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
             else:
                 delay_slot_type = "bra"
         elif is_branch_no_delay:
-            # Named local conditional targets are merged at the label below.
-            # Unknown/dynamic transfers still force complete invalidation.
             if last_branch_target is None:
                 invalidate_general_registers(regs, reg_provenance, active_rom_pool_loads)
+            else:
+                pending_branch_states.setdefault(last_branch_target, []).append(
+                    (list(regs), list(reg_provenance), dict(active_rom_pool_loads), gbr)
+                )
+
+        if was_in_delay_slot:
+            last_instruction_falls_through = completed_delay_type in ("conditional", "call")
+        else:
+            last_instruction_falls_through = True
 
     # 6. PC Concordance verification for both output files
     valid_hits = []
@@ -784,6 +814,7 @@ def run_indexer(rom_path, listing_path, targets_path, out_path, unres_path, spac
     with open(unres_path, "w", encoding="utf-8") as f:
         for hline in header:
             f.write(hline + "\n")
+        f.write("# Unresolved semantics: one row per instruction site; target=UNRESOLVED means the effective address was not attributable to any single target. Candidate addresses are listed in note.\n")
         f.write("\t".join(columns_unres) + "\n")
         for row in unresolved:
             f.write("\t".join(str(c) for c in row) + "\n")
