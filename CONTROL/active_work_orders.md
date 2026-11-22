@@ -364,3 +364,11 @@ All five are read-only. Donor A2L/CF48D names, addresses, units and semantics ar
 - No exact donor payload/axis byte match was proven because the V6 ROM payload image was not available. No donor labels, units, addresses or physical identities promoted to EL19A calibration definitions.
 - Five ranked next target-side discriminators are recorded in WO65141: 0x0B756/0x0B7D6 query/consumer chain; F3D6/F3DE source and endpoint closure; 0x0F406 ADC-reference/channel identity; E678/E688/scalar timer/gate chain; 0x0A342/0x0A382 selector/query/consumer chain.
 - No Master Workbook, XML, A2L, catalogue, ROM/LST, indexes, scripts/tools or Library artifact was modified. Master Workbook remains V58; no integration claimed.
+
+## Post-crosswalk target-side discriminator reservations — 2026-11-22
+
+| WO | Scope | Priority | Dependencies / reuse | Status |
+|---|---|---|---|---|
+| [WO65180](WO65180.md) | `0x0B756/0x0B7D6` incoming query provenance and `FFFF86D4+0x0E` first-consumer semantics | P1 | WO65137/WO65141; WO65060/WO64940 and WO65116–WO65120 indexes; no payload/axis/helper census repeat | RESERVED — NOT STARTED; coordinator-assigned branch planned `wo65180-b756-b7d6-query-output-trace` |
+
+WO65180 is the highest-information target-side follow-up selected by WO65141. It tests whether the plausible RPM/ms axis-scale compatibility of the paired UWORD maps is supported by actual EL19A query producers and downstream use. It is strictly an EL19A read-only semantic trace; donor V6 units/names remain hypotheses only. Register reservation committed before branch creation or analysis.
