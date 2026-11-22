@@ -42,7 +42,7 @@ One session per lane plus explicit lane ownership prevents duplicate task execut
 Repeat this loop for the lifetime of the worker session:
 
 1. At startup only, read this protocol and the current operational frontier in active_work_orders.md. Find the next READY/ASSIGNED WO in your lane. Do not re-read the protocol or inventory the repository on every iteration.
-2. Read that WO and only the cited reports, evidence and source inputs needed for its stated question.
+2. If CONTROL/WO<ID>.md already exists, read it. If an assigned legacy WO has no report file yet, the queue row and its cited dependencies in active_work_orders.md are the authoritative specification: create CONTROL/WO<ID>.md with the objective, exact scope, owner, branch main, authorized paths, dependencies and stop boundary from that register entry. This is execution setup, not a separate claim commit; do not invent or widen scope.
 3. Perform the technical investigation to the specified stop boundary. Spend the effort on tracing, verification and interpretation, not administration.
 4. Before closeout, perform a bounded reconciliation against the exact prior findings cited by the WO and any directly affected claims discovered during the investigation. Distinguish confirmed corrections from hypotheses.
 5. Write the full result to your own CONTROL/WO<ID>.md report. Include verified facts, evidence anchors, calculations/branches, confidence, limits, no-repeat notes, changed paths and commit SHA.
