@@ -9,3 +9,4 @@ __pycache__/
 # Local IDE/database state unless explicitly selected for archival
 *.idb
 *.i64
+.env
