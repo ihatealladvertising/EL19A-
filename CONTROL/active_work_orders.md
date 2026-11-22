@@ -598,3 +598,18 @@ Three bounded validation WOs were reserved from the user's supplied byte extract
 | [WO65210](WO65210.md) | Reconcile the proposed eight-UWORD BE parse of `0xE678–0xE687` against established E678/E688 reader mechanics | P2 | RESERVED — NOT STARTED; unclaimed; `wo65210-e678-block-layout-validation` |
 
 These WOs do not reopen the EL19A `0x848A/0x848B` scalar, `0x8550` gate/threshold, or E678/E688 helper/callsite investigations. No new XML, workbook, catalogue, index, tool, ROM or listing edits are authorized. The candidate labels and scaling expressions remain unverified.
+
+
+## Metadata-to-ROM definition automation workflow — 2026-11-22
+
+Five bounded work orders were reserved to test the user's proposed A2L↔binary and CF48D BIN↔XML comparison workflow. These are reservations only; no technical execution is claimed. All workers remain unassigned until the coordinator records a claim transaction. The evidence inventory is the entry point; pairing must be proven by identifiers, address mapping and multiple payload anchors, never filename similarity alone.
+
+| WO | Focus | Priority | Dependency / status |
+|---|---|---:|---|
+| [WO65211](WO65211.md) | Inventory existing A2L, HEX/S19/BIN, XML and listing evidence; hashes, provenance and pairing candidates | P1 | Independent; start first; RESERVED — NOT STARTED; unclaimed; `wo65211-asap2-evidence-inventory` |
+| [WO65212](WO65212.md) | V6 `64811000p2_m.a2l` ↔ candidate HEX pairing and broad ASAP2 metadata extraction | P1 | WO65211 inventory; RESERVED — NOT STARTED; unclaimed; `wo65212-v6-a2l-hex-metadata` |
+| [WO65213](WO65213.md) | Juke `RFCC_2XHK19BDF1.a2l` ↔ reconstructed 06/07/08 BIN validation and metadata extraction | P1 | WO65211 inventory; reuse WO64833–WO64840; RESERVED — NOT STARTED; unclaimed; `wo65213-juke-a2l-bin-metadata` |
+| [WO65214](WO65214.md) | CF48D BIN/XML field-recoverability benchmark across XML layout classes | P1 | Reuse WO65150–WO65158; RESERVED — NOT STARTED; unclaimed; `wo65214-cf48d-bin-xml-metadata-benchmark` |
+| [WO65215](WO65215.md) | Cross-source metadata grammar, EL19A pilot and generator feasibility/specification | P1 | WO65211–WO65214 accepted; RESERVED — NOT STARTED; unclaimed; `wo65215-metadata-rule-synthesis` |
+
+**Workflow boundary:** WO65211 inventories and resolves asset provenance; WO65212/65213 extract A2L metadata only after pairing validation (A2L-only extraction remains allowed if a binary pair cannot be verified); WO65214 measures what BIN/XML structure makes recoverable; WO65215 synthesizes field-level confidence gates and a non-implemented generator specification. Existing Juke object-specific traces and CF48D payload/reader investigations are reused rather than repeated. No XML, A2L, ROM, LST, workbook, catalogue, index, script or tool edits are authorized. No generated definitions are authorized by this batch.
