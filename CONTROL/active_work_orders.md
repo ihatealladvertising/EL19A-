@@ -660,7 +660,7 @@ Five bounded work orders were reserved to test the user's proposed A2L↔binary 
 ## WO65183 claim — 2026-11-22
 
 - The current session claims WO65183 on `wo65183-qdspt-gate-ntc-threshold-provenance` (batch commit; single pull+push at batch end). Scope: `CONTROL/WO65183.md` only.
-- **Closeout 2026-11-22:** WO65183 CLOSED — BOUNDED COMPLETE. `FFFF1DB4.bit5` = raw hysteresis on `FFFF84BA` (set ≥0x0A, hold ≥0x07, ROM `0x8550`). E688/`0x848B` only when `FFFF85F8.bit4`=0 and `FFFF8600.bit6`=0, otherwise E678/`0x848A`. `FFFF860B.bit3`=1 bypasses both. The bits are `sub_20DCE` mirror copies of `85F9`/`8603`/`860D`; the producers are the stop boundary. WO64860 names the scalar byte `FFFF2446`, but the code gives `FFFF23E6`; needs reconciling. See `CONTROL/WO65183.md`.
+- **Closeout 2026-11-22:** WO65183 CLOSED — BOUNDED COMPLETE. `FFFF1DB4.bit5` = raw hysteresis on `FFFF84BA` (set ≥0x0A, hold ≥0x07, ROM `0x8550`). E688/`0x848B` only when `FFFF85F8.bit4`=0 and `FFFF8600.bit6`=0, otherwise E678/`0x848A`. `FFFF860B.bit3`=1 bypasses both. The bits are `sub_20DCE` mirror copies of `85F9`/`8603`/`860D`; the producers are the stop boundary. WO64860's stale `FFFF2446` destination was reconciled on 2026-11-22: the selected UBYTE is at `FFFF23E6`; see the dedicated reconciliation entry below. See `CONTROL/WO65183.md`.
 
 
 ## WO64860 effective-address reconciliation — 2026-11-22
