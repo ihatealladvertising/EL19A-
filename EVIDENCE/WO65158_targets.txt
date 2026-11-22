@@ -1,0 +1,49 @@
+# WO65158 target/ROM/RAM cell list
+# Donor ROM: EVIDENCE/CF48D.bin 1,048,576 bytes
+# SHA-256 fceae3e61f6517b1eb287c4938984498bfa5164688c3985d98baeeaaf52b04f1
+#
+# target	kind	start	end_exclusive	bytes	element	shape	rom_sha256	note
+98B1	map_payload	0x98B1	0x98C1	16	UBYTE	4x4	4e972baaee2ad54f78153134ef6484cd1a8e383d21582a21a481d4d214161916	all bytes 0x80 (offset-binary neutral)
+8CF8_reader_base	map_base	0x8CF8	-	-	-	-	-	reader base = 0x8D01 - 9; address = base + i*8 + j, i,j in 1..8
+8D01	map_consumed_window	0x8D01	0x8D40	63(+1)	UBYTE	8 rows x 8 cols, stride 8, col 0 unused	558316e9f1e0e5918009a43d4d069e7723a7dc6f8a04ddbedc50d824284212f2	first consumed cell; row stride 8; last reachable cell 0x8D40
+#   row i: offsets 0x0000..0x0000
+#   i=1 0x8D00: 00 64 00 00 00 00 00 00   (j=0..7, j=0 unused)
+#   i=2 0x8D08: 00 64 64 64 00 00 00 00   (j=0..7, j=0 unused)
+#   i=3 0x8D10: 00 64 64 64 64 64 00 00   (j=0..7, j=0 unused)
+#   i=4 0x8D18: 00 64 64 64 64 64 64 00   (j=0..7, j=0 unused)
+#   i=5 0x8D20: 00 64 64 64 64 64 64 00   (j=0..7, j=0 unused)
+#   i=6 0x8D28: 00 64 64 64 64 64 64 64   (j=0..7, j=0 unused)
+#   i=7 0x8D30: 00 64 64 64 64 64 64 64   (j=0..7, j=0 unused)
+#   i=8 0x8D38: 00 64 64 64 64 64 64 64   (j=0..7, j=0 unused)
+#
+# A-side ROM axes (gbr = 0xC2A0 from off_96E10, so @(disp,gbr) is ROM-relative)
+C360	axis_4	0xC360	0xC364	4	UBYTE	4 points	df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119	query = byte[FFFF85DC+5]
+#   points: 00 00 00 00
+C358	axis_4	0xC358	0xC35C	4	UBYTE	4 points	df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119	query = staged byte of r14
+#   points: 00 00 00 00
+#
+# B-side axes (first byte of each axis is skipped by the search loops)
+B262	axis_region	0xB262	0xB26A	8	UBYTE	7 compared at +1..+7 (bits/counts domain)	5d5641c9b2403ef1bad873a812800ddf4c49d2f45c05bfb98cbea6a95c7b32eb	query = byte[FFFF85DC+5]
+#   bytes: 22 24 26 28 2A 2C 38 40
+B26A	axis_region	0xB26A	0xB272	8	UBYTE	7 compared at +1..+7	fec95495719459637ce40f4bb27837a215c441c10ec6e1c3b93d0bfa78fa5344	query = byte[FFFF84A9]
+#   bytes: 78 7D 82 87 8C 91 96 AA
+
+# pointer-pool encodings (read from the binary)
+#	off_96E10 -> gbr	0x0000C2A0
+#	off_96E1C	0xFFFF10B4
+#	off_96E20	0x00009B11
+#	off_96E24	0x000098B1
+#	off_96E18	0x00009C11
+#	off_71868	0x0000B262
+#	off_7186C	0x0000B26A
+#	off_71870	0xFFFF10B4
+#	off_71874	0x00008D01
+#	off_71878	0xFFFF105A
+
+# RAM cells
+#	FFFF85DC+5	UBYTE shared query byte for both targets (read 0x96D18 and 0x716F0)
+#	FFFF84A9	UBYTE second query for the 0x8CF8-base map (read 0x71710)
+#	FFFF10B4+0xABB	UBYTE cam-timing result (store 0x96D44) -> FFFF1B6F
+#	FFFF10B4+0x1B8	UBYTE VVT delay result (store 0x71742 via 0x6E*4) -> FFFF126C
+#	FFFF23AC+2	UBYTE cam-timing section gate (bit0 tested 0x96CBC)
+#	FFFF85C1	UBYTE comparison byte after the VVT delay store (0x71756)

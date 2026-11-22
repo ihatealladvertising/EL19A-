@@ -1,0 +1,12 @@
+t	a	r	g	e	t			t	a	r	g	e	t	_	h	e	x			l	s	t	_	l	i	n	e			P	C			r	e	f	_	k	i	n	d			i	n	s	t	r	u	c	t	i	o	n			e	f	f	e	c	t	i	v	e	_	u	s	e
+98B1	0x98B1	359875	0x96D1C	data_ptr	mov.l off_96E24, r4 ; h'98B1	map base arg to sub_6E94 (only literal reader; pool entry is dword_98B0+1)
+9B11	0x9B11	359853	0x96CEA	data_ptr	mov.l off_96E20, r4 ; h'9B11	16x16 base intake-cam map read earlier in the same function
+C360	0xC360	359879	0x96D1A	gbr_offset	add r12, r5 (r12=0xC0, gbr=0xC2A0)	first axis arg to sub_6E94
+C358	0xC358	359881	0x96D22	gbr_offset	add r12, r6 (r12=0xB8)	second axis arg to sub_6E94
+8D01	0x8D01	265679	0x7172E	data_ptr	mov.l off_71874, r6 ; h'8D01	base 0x8D01 reloaded, then 0x71736 add #-9 -> 0x8CF8
+8CF8	0x8CF8	265686	0x71736	immediate	add #unk_FFFFFFF7, r6	effective reader base = 0x8D01 - 9
+B262	0xB262	265660	0x716F2	data_ptr	mov.l off_71868, r6 ; h'B262	row-axis region; loop compares byte[B262+r5], r5=1..7
+B26A	0xB26A	265664	0x7170E	data_ptr	mov.l off_7186C, r4 ; h'B26A	column-axis region; loop compares byte[B26A+r6], r6=1..7
+FFFF85DC+5	FFFF85DC	265661	0x716F0	ram_read	mov.b @(5,r3), r0	row-axis query (same byte as the cam-timing map)
+FFFF84A9	FFFF84A0	265662	0x71710	ram_read	mov.b @(9,r3), r0 (r3=FFFF84A0)	column-axis query
+FFFF10B4	FFFF10B4	265661	0x7172A	data_ptr	mov.l off_71870, r14 ; h'FFFF10B4	result store base (offset 0x1B8)
