@@ -597,7 +597,7 @@ Three bounded validation WOs were reserved from the user's supplied byte extract
 |---|---|---:|---|
 | [WO65208](WO65208.md) | Validate `0x83F0–0x83F3` four-byte dashpot-decay candidate: exact ROM identity, reader geometry, query, arithmetic and first consumer | P2 | CLOSED — BOUNDED COMPLETE; `wo65208-83f0-dashpot-curve-reader-validation`; region is two independent 16-bit ROM words (0x0080, 0x28C8), not a 4-byte value; RAM mirrors FFFF83F0/FFFF83F2 written once by sub_50F4, never read — dead stores; ROM bytes at 0x83F0/0x83F3 read once each as isolated gate checks. No first consumer; branch ready to merge. |
 | [WO65209](WO65209.md) | Validate `0x84C4` candidate threshold and disposition of proposed `0x84C4 → 0x8550` anchor, reusing WO65183 for the EL19A endpoint | P2 | RESERVED — NOT STARTED; unclaimed; `wo65209-84c4-cut-threshold-source-validation` |
-| [WO65210](WO65210.md) | Reconcile the proposed eight-UWORD BE parse of `0xE678–0xE687` against established E678/E688 reader mechanics | P2 | **ACTIVE — CLAIMED** (current session coordinator/worker; 2026-11-22); `wo65210-e678-block-layout-validation` |
+| [WO65210](WO65210.md) | Reconcile the proposed eight-UWORD BE parse of `0xE678–0xE687` against established E678/E688 reader mechanics | P2 | **CLOSED — BOUNDED COMPLETE** (ROM bytes+LST reader mechanics: proposed 8xUWORD BE inconsistent with sub_403D8->sub_22E10/loc_2350C 16-UBYTE path; E678/E688 identical 16B); merged to main in `7200c09`; see [WO65210](WO65210.md) |
 
 These WOs do not reopen the EL19A `0x848A/0x848B` scalar, `0x8550` gate/threshold, or E678/E688 helper/callsite investigations. No new XML, workbook, catalogue, index, tool, ROM or listing edits are authorized. The candidate labels and scaling expressions remain unverified.
 
