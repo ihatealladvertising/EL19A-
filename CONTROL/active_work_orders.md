@@ -232,3 +232,24 @@ Seven disjoint follow-ups were allocated from unresolved, explicitly identified 
 | [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | RESERVED — NOT STARTED; `wo65150-cf48d-knock-window-reader-overlay-trace` |
 
 All seven reuse the source WOs and existing indexes; none authorizes a repeated census. WO65150 is explicitly donor-only and must not transfer CF48D addresses or labels into EL19A. Work-order-specific acceptance criteria and evidence boundaries are recorded in each WO file. The coordinator alone updates lifecycle status; workers must claim a WO only after a separate register transaction records owner and branch.
+
+
+## CF48D remaining XML-map follow-on reservations — 2026-11-21
+
+Eleven bounded donor-side work orders were allocated from the user's 25-entry remaining `"Map"` inventory and its supplied 256-byte raw-window summaries. They cover all 25 listed entries exactly once. Allocation only: all are **RESERVED — NOT STARTED**, unclaimed, and no technical investigation is claimed. Each branch contains only its assigned `CONTROL/WO<ID>.md` record.
+
+| WO | Target family | Priority | Status |
+|---|---|---|---|
+| [WO65151](WO65151.md) | Knock-limit pair `0xB421/0xB42A` and knock-slice `0xB10C` | P1 | RESERVED — NOT STARTED; `wo65151-b421-b42a-b10c-knock-map-readers` |
+| [WO65152](WO65152.md) | QH0 normal/trustful pair `0xA78C/0xDBCA` | P1 | RESERVED — NOT STARTED; `wo65152-a78c-dbca-qh0-bank-selector` |
+| [WO65153](WO65153.md) | Engine torque `0xAF0C` and TTEPTD compensation `0xAE8C` | P2 | RESERVED — NOT STARTED; `wo65153-af0c-ae8c-torque-maps` |
+| [WO65154](WO65154.md) | AFR correction banks `0xA08C/0xA10C` and LTFT axes `0xBC9A/0xBBD8` | P1 | RESERVED — NOT STARTED; `wo65154-a08c-a10c-ltft-fuel-correction` |
+| [WO65155](WO65155.md) | P-gain bank pair `0x9271/0x92B1` | P2 | RESERVED — NOT STARTED; `wo65155-9271-92b1-pgain-bank-maps` |
+| [WO65156](WO65156.md) | MBT flame-speed `0x9191` and cylinder fresh-air `0x91A1` | P2 | RESERVED — NOT STARTED; `wo65156-9191-91a1-combustion-air-maps` |
+| [WO65157](WO65157.md) | Acceleration/deceleration fuel compensation `0x91B1/0x91F1` | P1 | RESERVED — NOT STARTED; `wo65157-91b1-91f1-accel-decel-fuel-maps` |
+| [WO65158](WO65158.md) | Intake-cam timing `0x98B1` and VVT diagnosis delay `0x8D01` | P2 | RESERVED — NOT STARTED; `wo65158-98b1-8d01-cam-vvt-maps` |
+| [WO65159](WO65159.md) | High-temperature fuel compensation `0x8DC1` | P2 | RESERVED — NOT STARTED; `wo65159-8dc1-high-temp-fuel-comp-map` |
+| [WO65160](WO65160.md) | Misfire diagnosis family `0x9EF1/0x9CF1/0x9DF1` | P1 | RESERVED — NOT STARTED; `wo65160-9ef1-9cf1-9df1-misfire-maps` |
+| [WO65161](WO65161.md) | Fuel-cut rest/suspension timing pair `0x9841/0x9851` | P2 | RESERVED — NOT STARTED; `wo65161-9841-9851-fuel-cut-maps` |
+
+All eleven explicitly treat the supplied fixed 256-byte/16×16 UBYTE profile as triage only. They require reader-derived object extents, dimensions, storage widths, axes, caller inputs, helper mechanics and first consumers. XML labels and apparent shape/adjacency/duplicate statistics remain hypotheses pending code evidence. All are **CF48D donor-only**: no address, semantic or unit may be transferred to EL19A. No ROM/LST/XML/workbook/catalogue/script/tool changes are authorized. The coordinator alone updates lifecycle status; workers must claim only after a separate register transaction records owner and branch.
