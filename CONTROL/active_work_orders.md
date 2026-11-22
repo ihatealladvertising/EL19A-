@@ -210,3 +210,8 @@ All five branch-only work packages have been independently reproduced, authorize
 
 
 
+
+
+## CF48D knock-window shape comparison — 2026-11-21
+
+- [WO65143](WO65143.md) — **BOUNDED COMPLETE — CLOSED:** records the user-supplied 16×16 UBYTE statistical/gradient comparison for CF48D blocks `0x8DD1`, `0x8ED1`, and `0x8FD1`. Supplied output reports `0x8DD1` and `0x8ED1` as exact 256-byte duplicates; `0x8FD1 - 0x8DD1` is cellwise non-positive (min -13, max 0, mean -4.15). Shape and gradient profiles are preserved in the WO. Labels are unverified; no reader/axis/selector trace, semantic promotion, or EL19A address transfer. User-supplied code/results were not independently rerun or checked against the binary. No ROM/LST/XML/workbook/catalogue/script changes. Branch: `wo65143-cf48d-knock-window-shape-audit`; report commit `2c0c24bec1348dd5a5c58f44628270672e215092`.
