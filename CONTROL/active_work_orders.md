@@ -11,16 +11,16 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 assigned — READY |
-| Worker 2 | WO65238 → WO65241 → WO65246 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE |
+| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 current — ASSIGNED |
+| Worker 2 | WO65238 | WO65226, WO65229, WO65232, WO65235, WO65225, WO65231, WO65234 and WO65237 CLOSED — BOUNDED COMPLETE; WO65238 current — ASSIGNED |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65251 | 1 |
-| Worker 2 | WO65241 → WO65246 → WO65249 | 3 |
+| Worker 1 | WO65251 → WO65254 → WO65257 | 3 |
+| Worker 2 | WO65241 → WO65246 → WO65249 → WO65252 | 4 |
 | Worker 3 | (empty) | 0 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65238; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251; Worker 2: WO65241, WO65246, WO65249; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235 and WO65237 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65238; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251 → WO65254 → WO65257; Worker 2: WO65241 → WO65246 → WO65249 → WO65252; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235 and WO65237 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; the remaining three form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
 
@@ -41,7 +41,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active/ready WOs:** current — WO65238 (Worker 2; P2), WO65248 (Worker 1; P1 semantic); FIFO backlog — WO65251 (Worker 1; P2 semantic), WO65241 (Worker 2; P2 semantic), WO65246 (Worker 2; P1 semantic), WO65249 (Worker 2; P2 semantic). Worker 3 is offline with no active assignment or backlog. **Withdrawn from active pool:** WO65240 and WO65243 (retained as non-operative artifacts only). **Blocked:** WO65206 (requires positive WO65204 alignment; WO65204 was negative). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65184, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217, WO65218, WO65219, WO65220, WO65221, WO65222, WO65223, WO65224, WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65242, WO65245.
+- **Active/ready WOs:** current — WO65238 (Worker 2; P2), WO65248 (Worker 1; P1 semantic); FIFO backlog — WO65251 (Worker 1; P2 semantic), WO65254 (Worker 1; P1 semantic), WO65257 (Worker 1; P1 semantic), WO65241 (Worker 2; P2 semantic), WO65246 (Worker 2; P1 semantic), WO65249 (Worker 2; P2 semantic), WO65252 (Worker 2; P1 semantic). Worker 3 is offline with no active assignment or backlog. **Withdrawn from active pool:** WO65240 and WO65243 (retained as non-operative artifacts only). **Blocked:** WO65206 (requires positive WO65204 alignment; WO65204 was negative). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65184, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217, WO65218, WO65219, WO65220, WO65221, WO65222, WO65223, WO65224, WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65242, WO65245.
 - **Checkpoint 2026-11-21 (claim):** WO65109 and WO65114 claimed by the current session. Branches `wo65109-ignition-fragment-reader-audit` and `wo65114-thin-reference-closeout`. Both scopes are disjoint; no technical finding is registered in this transaction. WO65122 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: all four remaining branch-only indexes (WO65116/65117/65119/65120) independently reproduced (199/199 checks; 14/14 TSVs byte-identical). WO65121 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: independent reproduction of WO65118's RAM byte/bit cross-reference passed 49/49 checks with all three TSVs byte-identical and 306,688/306,688 concordance re-derived. WO65115 is **CLOSED — BOUNDED COMPLETE** and merged to `main` in merge commit `87408dd02dd171c96f969a32d7aaf70b24d2b422` (final branch head `102a730fc15edf6ed7d77e09bef66050a1792093`): exact-HEAD bytes from original head `745a5def238e78d2260e0e04f234a43409c52ae8` were executed from canonical blobs; 24 tests (21 passed, 0 assertion failures, 2 accepted non-blocking fixture errors, 1 PKIOR skip), regression 29,905/29,905 and fuel-cut 30,018/30,018 concordance; all four TSVs are committed and remote-verified. PKIOR_W is accepted as EXHAUSTED-BOUNDED / NOT TESTABLE. **Completed/older WOs:** WO65114 is closed and merged (V58 successor). WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains closed — bounded complete.
 
 **Curve-family reconciliation closeout — 2026-11-22:** WO65216 is CLOSED — BOUNDED COMPLETE. The additive synthesis at `EVIDENCE/WO65216_curve_family_consumer_reconciliation.md` corrects the stale family-level no-consumer statements in WO65197/WO65198/WO65199: WO65202 (`0x0EB30`) and WO65203 (`0x0E700`) have positive downstream consumer paths; the other traced outputs remain bounded no-consumer findings. WO65173's completed report is also reconciled as CLOSED. No protected artifacts were changed.
@@ -805,6 +805,9 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65241](WO65241.md) | Worker 2 · 5th | Execute the bounded sub_22CB8 lookup call path in a minimal SH-2 interpreter; test axis/row-stride orientation and sentinel behavior. | Reuse WO65109, WO64968, WO64895 and WO65204; transient function-local pilot only, no full ECU/peripheral emulator or committed tools. | ASSIGNED — WORKER 2 — READY |
 | [WO65246](WO65246.md) | Worker 2 · 6th | Reconcile the whole-byte writer candidate at 0x63CEE with the FFFF1D81.bit5 E810 hysteresis latch and its map-query effect. | Reuse WO65189 and existing indexes; no map, query or timer-producer repeat. | ASSIGNED — WORKER 2 — READY |
 | [WO65249](WO65249.md) | Worker 2 · 7th | Trace the four known readers of the E914 result byte beyond its threshold/flag path and classify exact same-slot consumers. | Reuse WO65125/WO65231/WO65234; no E914 curve/query/flag mechanics or broad R13 census repeat. | ASSIGNED — WORKER 2 — READY |
+| [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace both 0x128FE 32-point curve result paths at FFFF1784/FFFF1786 through the first consequential consumer. | Reuse WO65089/WO65223; no curve/helper re-trace or global RAM xref. | ASSIGNED — WORKER 2 — READY |
+| [WO65254](WO65254.md) | Worker 1 · after WO65251 | Trace 0x0D456 16×16 UWORD map query producers and first result consumers. | Reuse WO64868/WO64918/WO65060/WO65110/WO65239; no helper census or diagnostic-join repeat. | ASSIGNED — WORKER 1 — READY |
+| [WO65257](WO65257.md) | Worker 1 · after WO65254 | Trace backward from Timer5 GR5A/GR5B compare sinks to command-state inputs and any ROM lookup contribution. | Reuse WO65106/WO65003/WO65103; no MMIO/ISR census or GR11A/GR11B producer repeat. | ASSIGNED — WORKER 1 — READY |
 
 
 **Cross-lane semantic workstream — 2026-11-22**
@@ -823,8 +826,17 @@ This is a coordinated subject-matter workstream across the existing three execut
 | [WO65246](WO65246.md) | Worker 2 · after WO65241 | FFFF1D81 whole-byte writer versus E810 hysteresis-bit state. | ASSIGNED — WORKER 2 — READY |
 | [WO65249](WO65249.md) | Worker 2 · after WO65246 | E914 result-byte downstream consumer trace. | ASSIGNED — WORKER 2 — READY |
 | [WO65243](WO65243.md) | Withdrawn — not active | Sink-first trace from at most two selected MMIO actuator endpoints. | WITHDRAWN — NOT ACTIVE |
+| [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace the 0x128FE 32-point curve output convergence at FFFF1784/FFFF1786 to its first consequential consumer. | ASSIGNED — WORKER 2 — READY |
+| [WO65254](WO65254.md) | Worker 1 · after WO65251 | Establish query inputs and first output consumers for the 0x0D456 16×16 UWORD map. | ASSIGNED — WORKER 1 — READY |
+| [WO65257](WO65257.md) | Worker 1 · after WO65254 | Trace backward from Timer5 compare registers to source state/lookup and the verified APC sink. | ASSIGNED — WORKER 1 — READY |
 
 The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream. WO65242 adds a static Mode $06 support/misfire-monitor provenance check. WO65243's earlier sink-first proposal is withdrawn from the active pool; no Worker 2 task is reserved under WO65240/WO65243.
+
+**Evidence-derived replenishment — 2026-11-22 (second pool):**
+- WO65252 continues the unresolved 0x128FE output convergence recorded in WO65223; it tests the combined FFFF1784/FFFF1786 state without repeating the 32-point reader.
+- WO65254 advances the unclosed 0x0D456 16×16 map from its known helper/axis geometry to exact caller inputs and first output consumers.
+- WO65257 replaces the withdrawn WO65243 sink-first proposal with one narrowly selected, already-proven Timer5 compare/APC path from WO65106; it traces the compare-value sources rather than repeating the MMIO census.
+- Donor corroboration is not re-queued: WO65175 already compared the V6 and Juke A2Ls, including the stable two-donor 0x0F406/mTTWN structural analogue. The broad 0x7800–0x9B00 sweep remains closed under WO65090; WO65240's literature glossary remains withdrawn until a concrete source-backed discriminator is identified.
 
 **Evidence-derived replenishment — 2026-11-22:** These five reservations are continuations of specific closed evidence, not new broad discovery passes:
 - WO65239's PID $0C / FFFF85DA join plus WO65092/WO65181's timer-reciprocal lineage creates the cross-source discriminator in WO65245; the same WO follows the two `0x10984` result cells to their first consequential consumers.
