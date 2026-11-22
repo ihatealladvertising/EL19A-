@@ -246,7 +246,7 @@ Eleven bounded donor-side work orders were allocated from the user's 25-entry re
 | [WO65154](WO65154.md) | AFR correction banks `0xA08C/0xA10C` and LTFT axes `0xBC9A/0xBBD8` | P1 | RESERVED — NOT STARTED; `wo65154-a08c-a10c-ltft-fuel-correction` |
 | [WO65155](WO65155.md) | P-gain bank pair `0x9271/0x92B1` | P2 | RESERVED — NOT STARTED; `wo65155-9271-92b1-pgain-bank-maps` |
 | [WO65156](WO65156.md) | MBT flame-speed `0x9191` and cylinder fresh-air `0x91A1` | P2 | RESERVED — NOT STARTED; `wo65156-9191-91a1-combustion-air-maps` |
-| [WO65157](WO65157.md) | Acceleration/deceleration fuel compensation `0x91B1/0x91F1` | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65157-91b1-91f1-accel-decel-fuel-maps`; coordinator review/merge pending |
+| [WO65157](WO65157.md) | Acceleration/deceleration fuel compensation `0x91B1/0x91F1` | P1 | NOT ACCEPTED — SCOPE MISMATCH; submitted EL19A RAM report is out of scope; CF48D donor-only work remains incomplete |
 | [WO65158](WO65158.md) | Intake-cam timing `0x98B1` and VVT diagnosis delay `0x8D01` | P2 | RESERVED — NOT STARTED; `wo65158-98b1-8d01-cam-vvt-maps` |
 | [WO65159](WO65159.md) | High-temperature fuel compensation `0x8DC1` | P2 | RESERVED — NOT STARTED; `wo65159-8dc1-high-temp-fuel-comp-map` |
 | [WO65160](WO65160.md) | Misfire diagnosis family `0x9EF1/0x9CF1/0x9DF1` | P1 | RESERVED — NOT STARTED; `wo65160-9ef1-9cf1-9df1-misfire-maps` |
