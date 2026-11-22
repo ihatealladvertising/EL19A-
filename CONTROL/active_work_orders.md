@@ -12,16 +12,16 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 | Slot | Current assigned work | Ownership |
 |---|---|---|
 | Worker 1 | WO65227 | WO65227 assigned — READY |
-| Worker 2 | WO65225 → WO65231 → WO65234 → WO65237 | WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE |
+| Worker 2 | WO65240 | WO65240 assigned — READY (semantic workstream) |
 | Worker 3 | WO65226 | WO65226 assigned — READY |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65230 → WO65233 → WO65236 | 3 |
+| Worker 1 | WO65230 → WO65233 → WO65236 → WO65239 | 4 |
 | Worker 2 | — | 0 |
-| Worker 3 | WO65229 → WO65232 → WO65235 → WO65238 | 4 |
+| Worker 3 | WO65229 → WO65232 → WO65235 → WO65238 → WO65241 | 5 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
@@ -32,14 +32,14 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65227; Worker 2 → (none — lane exhausted); Worker 3 → WO65226. FIFO READY backlog — Worker 1: WO65230, WO65233, WO65236; Worker 2: (empty — lane exhausted); Worker 3: WO65229, WO65232, WO65235, WO65238. Each lane executes its queue sequentially; no user prompt or cross-lane wait is required. Previous lane work WO65218–WO65224 and WO65184 is closed; no legacy task is reassigned between lanes. WO65183 is CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
+**Current queue state:** current tasks — Worker 1 → WO65227; Worker 2 → WO65240; Worker 3 → WO65226. FIFO READY backlog — Worker 1: WO65230, WO65233, WO65236, WO65239; Worker 2: (empty after current WO65240); Worker 3: WO65229, WO65232, WO65235, WO65238, WO65241. Each lane executes its queue sequentially; no user prompt or cross-lane wait is required. The semantic workstream is distributed across the existing three lanes; it is not a fourth execution slot. Previous lane work WO65218–WO65224 and WO65184 is closed; no legacy task is reassigned between lanes. WO65183 is CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
 
 ## Current operational frontier
 
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active/ready WOs:** current — WO65226 (Worker 3; P1), WO65227 (Worker 1; P1); FIFO backlog — WO65229 (Worker 3; P2), WO65230 (Worker 1; P1), WO65232 (Worker 3; P1), WO65233 (Worker 1; P2), WO65235 (Worker 3; P2), WO65236 (Worker 1; P2), WO65238 (Worker 3; P2). All report paths are under `CONTROL/`. **Blocked:** WO65206 (requires a positive WO65204 alignment, which was not found, so it remains ineligible). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65184, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217, WO65218, WO65219, WO65220, WO65221, WO65222, WO65223, WO65224, WO65225, WO65231, WO65234, WO65237.
+- **Active/ready WOs:** current — WO65226 (Worker 3; P1), WO65227 (Worker 1; P1), WO65240 (Worker 2; P2); FIFO backlog — WO65229 (Worker 3; P2), WO65230 (Worker 1; P1), WO65232 (Worker 3; P1), WO65233 (Worker 1; P2), WO65235 (Worker 3; P2), WO65236 (Worker 1; P2), WO65238 (Worker 3; P2), WO65239 (Worker 1; P1 semantic), WO65241 (Worker 3; P2 semantic). All report paths are under `CONTROL/`. **Blocked:** WO65206 (requires a positive WO65204 alignment, which was not found, so it remains ineligible). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65184, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217, WO65218, WO65219, WO65220, WO65221, WO65222, WO65223, WO65224, WO65225, WO65231, WO65234, WO65237.
 - **Checkpoint 2026-11-21 (claim):** WO65109 and WO65114 claimed by the current session. Branches `wo65109-ignition-fragment-reader-audit` and `wo65114-thin-reference-closeout`. Both scopes are disjoint; no technical finding is registered in this transaction. WO65122 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: all four remaining branch-only indexes (WO65116/65117/65119/65120) independently reproduced (199/199 checks; 14/14 TSVs byte-identical). WO65121 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: independent reproduction of WO65118's RAM byte/bit cross-reference passed 49/49 checks with all three TSVs byte-identical and 306,688/306,688 concordance re-derived. WO65115 is **CLOSED — BOUNDED COMPLETE** and merged to `main` in merge commit `87408dd02dd171c96f969a32d7aaf70b24d2b422` (final branch head `102a730fc15edf6ed7d77e09bef66050a1792093`): exact-HEAD bytes from original head `745a5def238e78d2260e0e04f234a43409c52ae8` were executed from canonical blobs; 24 tests (21 passed, 0 assertion failures, 2 accepted non-blocking fixture errors, 1 PKIOR skip), regression 29,905/29,905 and fuel-cut 30,018/30,018 concordance; all four TSVs are committed and remote-verified. PKIOR_W is accepted as EXHAUSTED-BOUNDED / NOT TESTABLE. **Completed/older WOs:** WO65114 is closed and merged (V58 successor). WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains closed — bounded complete.
 
 **Curve-family reconciliation closeout — 2026-11-22:** WO65216 is CLOSED — BOUNDED COMPLETE. The additive synthesis at `EVIDENCE/WO65216_curve_family_consumer_reconciliation.md` corrects the stale family-level no-consumer statements in WO65197/WO65198/WO65199: WO65202 (`0x0EB30`) and WO65203 (`0x0E700`) have positive downstream consumer paths; the other traced outputs remain bounded no-consumer findings. WO65173's completed report is also reconciled as CLOSED. No protected artifacts were changed.
@@ -787,6 +787,7 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65230](WO65230.md) | Worker 1 · next | Bind caller arguments r4–r7 to P0101/P0102/P0103 slots 132–134 and reconcile monitor predicates against WO65227. | Reuse WO65174 and WO65227; no ADC re-decode, monitor-body repeat or full DTC census. | ASSIGNED — WORKER 1 — READY |
 | [WO65233](WO65233.md) | Worker 1 · 2nd | Trace diagnostic response buffer FFFF2FBB beyond the append primitive to the first transport/queue endpoint. | Reuse WO65107 and WO65102/65103/65106/65108; no DTC descriptor, mailbox or copy-helper inventory repeat. | ASSIGNED — WORKER 1 — READY |
 | [WO65236](WO65236.md) | Worker 1 · 3rd | Resolve ROM byte 0x8445 threshold use at 0x38F98 to its exact RAM bit destination and first consumers. | Reuse WO65178 and existing indexes; no 0x84xx census or global RAM bit-xref. | ASSIGNED — WORKER 1 — READY |
+| [WO65239](WO65239.md) | Worker 1 · 4th | Join the 179 catalogue rows' actual reader query variables to named Consult Mode $22, OBD Mode $01 and relevant DTC source cells. | Reuse WO65173 and existing reader/query provenance; distinguish query identity from consumer/destination overlap. No repeated CID join, RAM xref, reader census or broad DTC scan. | ASSIGNED — WORKER 1 — READY |
 | [WO65231](WO65231.md) | Worker 2 · next | Determine post-write readers of E904/E914 status bits FFFF34C7.bit3 and FFFF34C6.bit4. | Reuse WO65127/65124/65125; no table/helper/query/threshold re-trace or whole-RAM bit census. | ASSIGNED — WORKER 2 — READY |
 | [WO65234](WO65234.md) | Worker 2 · 2nd | Resolve r13 and stack[0x50] provenance for dynamic E904/E914 result-byte store expressions. | Reuse WO65127 and WO65116–65122; no repeated lookup trace or global r13 census. | ASSIGNED — WORKER 2 — READY |
 | [WO65237](WO65237.md) | Worker 2 · 3rd | Prove/disprove whether the candidate 0x45E18/0x45E4E sequence addresses E934 output FFFF2718 and establish its first consumer. | Reuse WO65127/65126; no repeat of E934 reader mechanics/writer or FFFF86EF exclusion. | ASSIGNED — WORKER 2 — READY |
@@ -794,6 +795,20 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65232](WO65232.md) | Worker 3 · 2nd | Continue the 0x0A0F2 path through sub_25D36/sub_25C9C and trace external readers of FFFF1054+0x348. | Reuse WO65167/WO65099/WO65058; no map/query/axis or sub_27720 body repeat. | ASSIGNED — WORKER 3 — READY |
 | [WO65235](WO65235.md) | Worker 3 · 3rd | Find writers/copies/initializers for FFFF99AE, the ×4 query input for the scheduled 0x0F712/0x10F8A path. | Reuse WO65098/WO65089 and existing indexes; no helper/query/result-stage or full FFFF9916 census. | ASSIGNED — WORKER 3 — READY |
 | [WO65238](WO65238.md) | Worker 3 · 4th | Trace the eight reachable FFFF2F00 indexed record slots written from FFFF170A and compare alternate-path/shadow behavior. | Reuse WO65098/65097 and WO65226 where relevant; no curve-reader or full block/RAM census repeat. | ASSIGNED — WORKER 3 — READY |
+| [WO65241](WO65241.md) | Worker 3 · 5th | Execute the bounded sub_22CB8 lookup call path in a minimal SH-2 interpreter; test axis/row-stride orientation and sentinel behavior. | Reuse WO65109, WO64968, WO64895 and WO65204; transient function-local pilot only, no full ECU/peripheral emulator or committed tools. | ASSIGNED — WORKER 3 — READY |
+
+
+**Cross-lane semantic workstream — 2026-11-22**
+
+This is a coordinated subject-matter workstream across the existing three execution lanes, not a fourth worker slot. The tasks are reserved under the existing modulo-ID rule and remain FIFO within their assigned lane.
+
+| WO | Lane / queue position | Objective | Lifecycle |
+|---|---|---|---|
+| [WO65239](WO65239.md) | Worker 1 · after WO65230/65233/65236 | Query-variable → diagnostic symbol join, explicitly extending rather than repeating WO65173. | ASSIGNED — WORKER 1 — READY |
+| [WO65240](WO65240.md) | Worker 2 · current / first task | Page-cited glossary from the UpRev Nissan guide, Nistune MAF notes and knock-listener paper; derive falsifiable EL19A leads. | ASSIGNED — WORKER 2 — READY |
+| [WO65241](WO65241.md) | Worker 3 · after WO65229/65232/65235/65238 | Function-local SH-2 execution pilot on sub_22CB8; no whole-ECU emulation. | ASSIGNED — WORKER 3 — READY |
+
+The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream.
 
 **Queue policy:** target at least three READY follow-ons per lane, excluding its current in-progress WO. Refill after each bounded closeout where new defensible questions remain. FIFO order is the execution order. An explicit user request may authorize a deeper queue. All READY entries are owned by the named lane; READY does not mean simultaneous execution.
 
