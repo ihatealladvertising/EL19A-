@@ -1,0 +1,71 @@
+pid_hex	sae_name	unit	sae_formula	kline_mask_0xDFC0	can_mask_0xDFD0	kline_handler_pc	kline_ram_sources	can_handler_pc	can_ram_sources	rom_constants	math_helpers	notes
+0x00	Supported PIDs [01-20]	4B bitmask	bitmask	N	N	0x31DDE	0x0DFC0:4B	0xB8C54	0x0DFD0:4B	-	-	-
+0x01	Monitor status since DTCs cleared (MIL + readiness)	4B bitfield	bitfield	N	Y	0x31E88	FFFFA074+1/+2 (198-slot loop)	0xB8CDA	FFFFB36C+0xE6 (FFFFB452), FFFFA074+1/+2, FFFF35AE, FFFF35CB, FFFF3628	0x12846:b=0x2@320D8; 0x1284A:b=0xc0@31F08; 0x1284A:b=0xc0@31F3C; 0x1284D:b=0x20@31F7E; 0x1286F:b=0xf4@32018; 0x1286F:b=0xf4@320B0; 0x12870:b=0x0@32036; 0x12870:b=0x0@320B6; 0x12874:b=0x0@31FBA; 0x12875:b=0x3@31F46; 0x12876:b=0xaa@31FF2; 0x12877:b=0xac@3209A; 0x1287B:b=0xc8@31F12; 0x1287D:b=0xa0@31F62; 0x12881:b=0xc@32054; 0x12881:b=0xc@320BC; 0x12882:b=0xc0@3206A	-	-
+0x02	Unknown / OEM PID	-	-	N	N	-	-	0xB8DD4	FFFFB603:b@B8DE6; FFFF35AE:b@B8DF4; FFFF35E6:b@B8E00; FFFF362D:b@B8E08; FFFFB3CC:w@B8E14	-	-	-
+0x03	Fuel system status	2B enum	A=B1, B=B2	N	Y	0x3210E	FFFF3479:b@32114; FFFF347A:b@32130	0xB8E58	FFFF341D:b@B8E98; FFFF341E:b@B8EBE	0x08A7D:b=0x3@3211E; 0x08A7D:b=0x3@B8EA0	-	-
+0x04	Calculated engine load	%	A*100/255	N	Y	0x3213E	FFFF3478:b@32148	0xB8ECC	FFFF341C:b@B8EE4	-	-	-
+0x05	Engine coolant temperature (ECT)	degC	A-40	N	Y	0x32150	FFFF349E:b@3215A	0xB8EF0	FFFF3442:b@B8F08	-	-	-
+0x06	Short term fuel trim - Bank 1	%	(A-128)*100/128	N	Y	0x3216E	FFFF1C6C:w@32176	0xB8F14	FFFF1C6C:w@B8F28	-	sub_21AC0	-
+0x07	Long term fuel trim - Bank 1	%	(A-128)*100/128	N	Y	0x321A0	FFFF1C82:w@321A8	0xB8F4E	FFFF1C82:w@B8F60	-	sub_21AC0	-
+0x08	Short term fuel trim - Bank 2	%	(A-128)*100/128	N	N	0x321D2	FFFF1C6E:w@321DA	0xB8F88	FFFF1C6E:w@B8FA2	0x08A7D:b=0x3@B8F8C	sub_21AC0	-
+0x09	Long term fuel trim - Bank 2	%	(A-128)*100/128	N	N	0x32204	FFFF1C84:w@3220C	0xB8FCA	FFFF1C84:w@B8FE4	0x08A7D:b=0x3@B8FCE	sub_21AC0	-
+0x0B	Intake manifold absolute pressure (MAP)	kPa	A	N	N	0x32236	FFFF13AA:w@3223E	0xB900C	FFFF13AA:w@B9020	-	-	mul.l
+0x0C	Engine speed (RPM)	rpm	(256*A+B)/4	N	Y	0x3225A	FFFF85DA:w@32260	0xB9046	FFFF99E9:b@B9058; FFFF85DA:w@B9062	-	-	mul.l
+0x0D	Vehicle speed (VSS)	km/h	A	N	Y	0x3228E	FFFF8591:b@32296	0xB909C	FFFF8591:b@B90B2	0x0876D:b=0x0@B90B4	-	-
+0x0E	Timing advance	deg BTDC	A/2-64	N	Y	0x322B2	FFFF85CB:b@322BA	0xB90E4	FFFF85CB:b@B90FA	0x0841D:b=0x70@322B8; 0x0841D:b=0x70@B90F8	-	-
+0x0F	Intake air temperature (IAT)	degC	A-40	N	Y	0x322EE	FFFF99A4:b@322FA	0xB9158	FFFF99A4:b@B9176	-	-	-
+0x10	Mass air flow rate (MAF)	g/s	(256*A+B)/100	N	Y	0x32302	FFFF84A8:w@32308	0xB9180	FFFF84A8:w@B9194	0x08438:b=0x5c@3230A; 0x08438:b=0x5c@B9196	-	mul.l
+0x11	Throttle position (TPS)	%	A*100/255	N	Y	0x3232C	FFFF84BD:b@32332	0xB91C2	FFFF99B4:w@B91D8	-	sub_21AC0	mul.l
+0x13	Oxygen sensors present (2 banks)	1B bitmask	bitmask	N	Y	0x3233E	-	0xB9220	-	0x08A7D:b=0x3@32346; 0x08A7D:b=0x3@B9238	-	-
+0x14	Oxygen sensor 1 (S11) voltage & STFT	V / %	A/200, (B-128)*100/128	N	N	0x3234E	FFFF847C:w@32354; FFFF1C6C:w@32364	0xB9244	FFFF85E8:b@B924E; FFFF1C6C:w@B9258	-	sub_21AC0	-
+0x15	Oxygen sensor 2 (S12) voltage & STFT	V / %	A/200, (B-128)*100/128	N	Y	0x3236C	FFFF858E:b@32374	0xB9266	FFFF858E:b@B9270	-	-	-
+0x16	Oxygen sensor 3 (S13) voltage & STFT	V / %	A/200, (B-128)*100/128	N	N	-	-	0xB9286	FFFF8590:b@B9290	-	-	-
+0x18	Oxygen sensor 5 (S21) voltage & STFT	V / %	A/200, (B-128)*100/128	N	N	0x3238E	FFFF17A0:w@32392; FFFF1C6E:w@323A2	0xB92A6	FFFF85E9:b@B92B8; FFFF1C6E:w@B92BE	0x08A7D:b=0x3@B92AA	sub_21AC0	-
+0x19	Oxygen sensor 6 (S22) voltage & STFT	V / %	A/200, (B-128)*100/128	N	N	0x323D6	FFFF858F:b@323DE	0xB92D2	FFFF858F:b@B92E4	0x08A7D:b=0x3@B92D6	-	-
+0x1A	Oxygen sensor 7 (S23) voltage & STFT	V / %	A/200, (B-128)*100/128	N	N	-	-	0xB92FA	FFFF8591:b@B930C	0x08A7D:b=0x3@B92FE	-	-
+0x1C	OBD standards conformance	1B enum	enum	N	Y	0x323EC	-	0xB9322	-	0x08754:b=0x1@323F4; 0x08754:b=0x1@B933A	-	-
+0x1F	Run time since engine start	s	256*A+B	N	Y	-	-	0xB9346	FFFF3420:w@B9356	-	-	-
+0x20	Supported PIDs [21-40]	4B bitmask	bitmask	N	Y	-	0x0DFC4:4B	-	0x0DFD4:4B	-	-	-
+0x21	Distance traveled with MIL on	km	256*A+B	N	Y	0x323FC	FFFFA36C:l@32402	0xB9380	FFFF35AE:b@B9392; FFFF35E6:b@B93A0; FFFF362D:b@B93AA; FFFFA36C:l@B93B4	-	sub_21BE4; sub_33F14	-
+0x24	O2 Sensor 1 AFR equivalence ratio & voltage	lambda / V	2*(256*A+B)/65536, 8*(256*C+D)/65536	N	Y	-	-	0xB943C	FFFF33FA:w@B944C; FFFF847C:w@B9490	-	sub_21AC0; sub_21BE4	-
+0x28	Unknown / OEM PID	-	-	N	N	-	-	0xB94D2	FFFF33FC:w@B94E2; FFFF17A0:w@B9524	-	sub_21AC0; sub_21BE4	-
+0x2C	Commanded EGR	%	A*100/255	N	N	-	-	0xB9568	FFFF3404:w@B958C	0x09304:w=0xffff@B957A	sub_21AC0	-
+0x2D	EGR Error	%	(A-128)*100/128	N	N	-	-	0xB95BA	FFFF3404:w@B95CC; FFFFB36C:w@B95CE	-	sub_21AC0	-
+0x2E	Commanded evaporative purge	%	A*100/255	N	Y	-	-	0xB9612	FFFF1CC8:b@B9626	-	sub_21AC0	mul.l
+0x2F	Fuel tank level input	%	A*100/255	N	Y	-	-	0xB9654	FFFF999E:w@B9676; FFFF99A0:w@B96C6	0x08A8C:b=0x0@B9666; 0x0936E:w=0x6834@B9686; 0x09370:w=0x341a@B96D6; 0x09754:w=0x7a00@B9674; 0x09756:w=0x3d00@B96C4	sub_21BE4	-
+0x30	Warm-ups since codes cleared	count	A	N	Y	-	-	0xB970C	FFFF35AE:b@B971E; FFFF35E6:b@B972E; FFFF362D:b@B9738; FFFFB4A5:b@B9748	-	-	-
+0x31	Distance traveled since codes cleared	km	256*A+B	N	Y	-	-	0xB9764	FFFF35AE:b@B9776; FFFF35E6:b@B9784; FFFF362D:b@B978E; FFFFA34C:l@B9798	-	sub_21BE4	-
+0x32	Evap system vapor pressure	Pa	s16(A,B)/4	N	Y	-	-	0xB97FA	FFFFA360:w@B980C; FFFF8554:w@B9816	-	sub_21BE4	mul.l
+0x33	Absolute barometric pressure	kPa	A	N	Y	-	-	0xB985C	FFFFB47A:w@B9878	-	-	-
+0x3C	Catalyst temperature Bank 1 Sensor 1	degC	(256*A+B)/10-40	N	Y	-	-	0xB9888	FFFF3438:b@B98A0; FFFF2832:w@B98BE	0x08A8B:b=0x0@B989A	-	-
+0x3D	Catalyst temperature Bank 2 Sensor 1	degC	(256*A+B)/10-40	N	N	-	-	0xB990C	FFFF3438:b@B9924; FFFF2832:w@B9978	0x08A8B:b=0x0@B991E	-	-
+0x40	Supported PIDs [41-60]	4B bitmask	bitmask	N	Y	-	unsupported	-	0x0DFD8:4B	-	-	-
+0x41	Monitor status this drive cycle	4B bitfield	bitfield	N	Y	-	-	0xB99C6	FFFF340C:b@B99E6; FFFF35AE:b@B99F0; FFFF35E6:b@B99FE; FFFF362D:b@B9A06; FFFFB456:b@B9A12; FFFF340B:b@B9A34; FFFF35AE:b@B9A42; FFFF35E6:b@B9A4C; FFFF362D:b@B9A54; FFFFB454:b@B9A60	-	sub_B878C; sub_B87BC	-
+0x42	Control module voltage	V	(256*A+B)/1000	N	Y	-	-	0xB9A80	FFFF858A:b@B9A94	-	-	-
+0x43	Absolute load value	%	(256*A+B)*100/255	N	Y	-	-	0xB9AC8	FFFF860D:b@B9ADA; FFFF84A4:b@B9AEE	-	-	-
+0x44	Commanded air-fuel equivalence ratio	lambda	(256*A+B)/32768	N	Y	-	-	0xB9B18	FFFF33DE:w@B9B28; FFFF1C9A:w@B9B32	-	sub_21BE4	mul.l
+0x45	Relative throttle position	%	A*100/255	N	Y	-	-	0xB9B6E	FFFF84BD:b@B9B88	-	-	-
+0x47	Absolute throttle position B	%	A*100/255	N	Y	-	-	0xB9B94	FFFF99B8:w@B9BAA	-	sub_21AC0	mul.l
+0x49	Accelerator pedal position D	%	A*100/255	N	Y	-	-	0xB9BEC	FFFF9932:w@B9BFE	-	sub_21AC0	mul.l
+0x4A	Accelerator pedal position E	%	A*100/255	N	Y	-	-	0xB9C70	FFFF9936:w@B9C84	-	sub_21AC0	mul.l
+0x4B	Accelerator pedal position F	%	A*100/255	N	N	-	-	-	-	-	-	-
+0x4C	Commanded throttle actuator	%	A*100/255	N	Y	-	-	0xB9CC6	FFFF33E2:w@B9CD8	-	sub_21BE4	mul.l
+0x4D	Unknown / OEM PID	-	-	N	Y	-	-	0xB9D04	FFFF35AE:b@B9D16; FFFF35E6:b@B9D26; FFFF362D:b@B9D30; FFFFB476:w@B9D3C	-	-	-
+0x4E	Time since trouble codes cleared	min	256*A+B	N	Y	-	-	0xB9D84	FFFF35AE:b@B9D96; FFFF35E6:b@B9DA6; FFFF362D:b@B9DB0; FFFFB37A:w@B9DBA; FFFF3BA0:b@B9E1C	-	-	-
+0x61	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x62	Unknown / OEM PID	-	-	Y	Y	-	-	-	-	-	-	-
+0x63	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x64	Unknown / OEM PID	-	-	Y	Y	-	-	-	-	-	-	-
+0x65	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x66	Unknown / OEM PID	-	-	Y	Y	-	-	-	-	-	-	-
+0x67	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x68	Unknown / OEM PID	-	-	Y	N	-	-	-	-	-	-	-
+0x6C	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x6D	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x6E	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x6F	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x70	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x71	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x75	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x7F	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
+0x80	Unknown / OEM PID	-	-	N	Y	-	-	-	-	-	-	-
