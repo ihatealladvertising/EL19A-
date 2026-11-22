@@ -1,0 +1,27 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: ac3ffa0ea6ed9603e28f1f7993c12ad01c8675c9e8ea7030284b0a839099e133
+# Run date: 2026-11-22
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=29910 rows_matched=29910
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+FFFF1D40	ram	0x28D00	sub_28C36	write	b	base_r0	FFFF1D12	full	-	mov.b r6, @(r0,r1)
+FFFF1D40	ram	0x5A2B2	sub_5A29C	write	b	base_r0	FFFF1D12	full	-	mov.b r2, @(r0,r6)
+FFFF1D42	ram	0x56D0C	sub_56AAA	write	w	base_r0	FFFF1D12	full	-	mov.w r6, @(r0,r14)
+FFFF1D42	ram	0x56D28	sub_56AAA	write	w	base_r0	FFFF1D12	full	-	mov.w r6, @(r0,r14)
+FFFF1D42	ram	0x56D40	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x56FF8	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x57024	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x57046	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x57074	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x571A8	sub_56AAA	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r11)
+FFFF1D42	ram	0x96B00	sub_969C2	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r14)
+FFFF1D42	ram	0x96B28	sub_969C2	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x96BEE	sub_969C2	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x96EAC	sub_969C2	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r3)
+FFFF1D42	ram	0x97322	sub_969C2	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r5)
+FFFF1D44	ram	0x41084	sub_40F18	write	w	base_r0	FFFF1D12	full	-	mov.w r2, @(r0,r5)
+FFFF1D44	ram	0x4C848	sub_4C752	read	w	base_r0	FFFF1D12	full	-	mov.w @(r0,r2)
