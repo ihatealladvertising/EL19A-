@@ -72,6 +72,10 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 
 No queued WO authorizes XML, catalogue, ROM or listing edits. WO65114 expressly authorizes only the bounded Master Workbook register update described in its artifact boundary. Concurrent claims must use disjoint scopes: 65103/65104, 65105/65106, and 65107–65112 are mutually disjoint as recorded; WO65114 is disjoint from WO65109.
 
+## CF48D donor audit closeout — 2026-11-21
+
+- [WO65142](WO65142.md) — **BOUNDED COMPLETE — CLOSED:** consolidated the supplied CF48D ROM/XML/LST audit. Inventory: 197 XML table entries, 194 unique start addresses; all addresses in-bounds. Literal-search coverage: 176/197 entries; 21 without direct literal hits are explained by packed LST data (17 sequential DTC records plus four entries embedded in packed blocks / one separately labeled speed limiter). Three ignition timing / knock-window pairs share starts at `0x8DD1`, `0x8ED1`, `0x8FD1`; exact extents and overlay semantics remain unresolved. Documented standard and alternate 32-bit add/XOR checksum loops and their explicit field exclusions. User-supplied execution/output preserved; coordinator did not independently rerun scripts or recompute checksums. Donor-only; no EL19A semantic/address transfer and no ROM/LST/XML/workbook/catalogue edits. Branch: `wo65142-cf48d-xml-lst-rom-audit`; report commit `152d7acc924a3e9a047bf68e79ad861340cb1142`.
+
 ## Branch reconciliation (complete 2026-11-21)
 
 WO65109 and WO65114 closeouts were merged on 2026-11-21. WO65109: merge `8b9320af2373e662694ffd3c37fa1add554681cb`; all six fragment entries structurally bound to three 16×16 UBYTE objects. WO65114: merge `95bce80dc3f80d7e66953584b6d744cfc1059211`; V58 additive successor verified and made the current workbook. Their lifecycle statuses are CLOSED — BOUNDED COMPLETE.
