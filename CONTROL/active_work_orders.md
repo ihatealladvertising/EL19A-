@@ -19,9 +19,9 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65230 → WO65233 → WO65236 → WO65239 | 4 |
+| Worker 1 | WO65230 → WO65233 → WO65236 → WO65239 → WO65243 | 5 |
 | Worker 2 | — | 0 |
-| Worker 3 | WO65229 → WO65232 → WO65235 → WO65238 → WO65241 | 5 |
+| Worker 3 | WO65229 → WO65232 → WO65235 → WO65238 → WO65241 → WO65242 | 6 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65227; Worker 2 → WO65240; Worker 3 → WO65226. FIFO READY backlog — Worker 1: WO65230, WO65233, WO65236, WO65239; Worker 2: (empty after current WO65240); Worker 3: WO65229, WO65232, WO65235, WO65238, WO65241. Each lane executes its queue sequentially; no user prompt or cross-lane wait is required. The semantic workstream is distributed across the existing three lanes; it is not a fourth execution slot. Previous lane work WO65218–WO65224 and WO65184 is closed; no legacy task is reassigned between lanes. WO65183 is CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
+**Current queue state:** current tasks — Worker 1 → WO65227; Worker 2 → WO65240; Worker 3 → WO65226. FIFO READY backlog — Worker 1: WO65230, WO65233, WO65236, WO65239, WO65243; Worker 2: (empty after current WO65240); Worker 3: WO65229, WO65232, WO65235, WO65238, WO65241, WO65242. Each lane executes its queue sequentially; no user prompt or cross-lane wait is required. The semantic workstream is distributed across the existing three lanes; it is not a fourth execution slot. Previous lane work WO65218–WO65224 and WO65184 is closed; no legacy task is reassigned between lanes. WO65183 is CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
 
 ## Current operational frontier
 
@@ -788,6 +788,7 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65233](WO65233.md) | Worker 1 · 2nd | Trace diagnostic response buffer FFFF2FBB beyond the append primitive to the first transport/queue endpoint. | Reuse WO65107 and WO65102/65103/65106/65108; no DTC descriptor, mailbox or copy-helper inventory repeat. | ASSIGNED — WORKER 1 — READY |
 | [WO65236](WO65236.md) | Worker 1 · 3rd | Resolve ROM byte 0x8445 threshold use at 0x38F98 to its exact RAM bit destination and first consumers. | Reuse WO65178 and existing indexes; no 0x84xx census or global RAM bit-xref. | ASSIGNED — WORKER 1 — READY |
 | [WO65239](WO65239.md) | Worker 1 · 4th | Join the 179 catalogue rows' actual reader query variables to named Consult Mode $22, OBD Mode $01 and relevant DTC source cells. | Reuse WO65173 and existing reader/query provenance; distinguish query identity from consumer/destination overlap. No repeated CID join, RAM xref, reader census or broad DTC scan. | ASSIGNED — WORKER 1 — READY |
+| [WO65243](WO65243.md) | Worker 1 · 5th | Trace backward from at most two selected MMIO actuator endpoints to command variables, calculations, lookup results and candidate tables. | Reuse WO65106 and named consumer reports; no repeat MMIO census or broad RAM xref. | ASSIGNED — WORKER 1 — READY |
 | [WO65231](WO65231.md) | Worker 2 · next | Determine post-write readers of E904/E914 status bits FFFF34C7.bit3 and FFFF34C6.bit4. | Reuse WO65127/65124/65125; no table/helper/query/threshold re-trace or whole-RAM bit census. | ASSIGNED — WORKER 2 — READY |
 | [WO65234](WO65234.md) | Worker 2 · 2nd | Resolve r13 and stack[0x50] provenance for dynamic E904/E914 result-byte store expressions. | Reuse WO65127 and WO65116–65122; no repeated lookup trace or global r13 census. | ASSIGNED — WORKER 2 — READY |
 | [WO65237](WO65237.md) | Worker 2 · 3rd | Prove/disprove whether the candidate 0x45E18/0x45E4E sequence addresses E934 output FFFF2718 and establish its first consumer. | Reuse WO65127/65126; no repeat of E934 reader mechanics/writer or FFFF86EF exclusion. | ASSIGNED — WORKER 2 — READY |
@@ -796,6 +797,7 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65235](WO65235.md) | Worker 3 · 3rd | Find writers/copies/initializers for FFFF99AE, the ×4 query input for the scheduled 0x0F712/0x10F8A path. | Reuse WO65098/WO65089 and existing indexes; no helper/query/result-stage or full FFFF9916 census. | ASSIGNED — WORKER 3 — READY |
 | [WO65238](WO65238.md) | Worker 3 · 4th | Trace the eight reachable FFFF2F00 indexed record slots written from FFFF170A and compare alternate-path/shadow behavior. | Reuse WO65098/65097 and WO65226 where relevant; no curve-reader or full block/RAM census repeat. | ASSIGNED — WORKER 3 — READY |
 | [WO65241](WO65241.md) | Worker 3 · 5th | Execute the bounded sub_22CB8 lookup call path in a minimal SH-2 interpreter; test axis/row-stride orientation and sentinel behavior. | Reuse WO65109, WO64968, WO64895 and WO65204; transient function-local pilot only, no full ECU/peripheral emulator or committed tools. | ASSIGNED — WORKER 3 — READY |
+| [WO65242](WO65242.md) | Worker 3 · 6th | Determine static Mode $06 support; if present, trace bounded misfire monitor IDs, measured values, limits and ROM/RAM provenance. | Reuse WO65107/WO65173; no full DTC census, broad constants scan or live-vehicle access. | ASSIGNED — WORKER 3 — READY |
 
 
 **Cross-lane semantic workstream — 2026-11-22**
@@ -808,7 +810,7 @@ This is a coordinated subject-matter workstream across the existing three execut
 | [WO65240](WO65240.md) | Worker 2 · current / first task | Page-cited glossary from the UpRev Nissan guide, Nistune MAF notes and knock-listener paper; derive falsifiable EL19A leads. | ASSIGNED — WORKER 2 — READY |
 | [WO65241](WO65241.md) | Worker 3 · after WO65229/65232/65235/65238 | Function-local SH-2 execution pilot on sub_22CB8; no whole-ECU emulation. | ASSIGNED — WORKER 3 — READY |
 
-The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream.
+The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream. WO65242 adds a static Mode $06 support/misfire-monitor provenance check; WO65243 adds a two-endpoint sink-first actuator trace, reusing WO65106 rather than repeating its MMIO inventory.
 
 **Queue policy:** target at least three READY follow-ons per lane, excluding its current in-progress WO. Refill after each bounded closeout where new defensible questions remain. FIFO order is the execution order. An explicit user request may authorize a deeper queue. All READY entries are owned by the named lane; READY does not mean simultaneous execution.
 
