@@ -1,0 +1,13 @@
+t	a	r	g	e	t			t	a	r	g	e	t	_	h	e	x			l	s	t	_	l	i	n	e			P	C			r	e	f	_	k	i	n	d			i	n	s	t	r	u	c	t	i	o	n			e	f	f	e	c	t	i	v	e	_	u	s	e
+9191	0x9191	98180	0x2EF98	data_ptr	mov.l off_2F1FC, r4 ; h'9191	map base arg to sub_6E94 (only literal reader)
+91A1	0x91A1	67986	0x233C0	data_ptr	mov.l off_23444, r4 ; h'91A1	map base arg to sub_6F0C (2 callsites of sub_6F0C; second is 0x230D6 with base 0x9151)
+9151	0x9151	67525	0x230CA	data_ptr	mov.l off_231C8, r4 ; h'9151	sibling 16-byte map, same helper, different axes 0xB277/0xB27B
+B2D5	0xB2D5	158153	0x2EF90	data_ptr	mov.l off_2F1F8, r6 ; h'B2D5	second axis arg (target A)
+B2D9	0xB2D9	158155	0x2EF9A	immediate	add #4, r5 (r5 = 0xB2D5+4)	first axis arg (target A)
+B2D9	0xB2D9	67988	0x233C6	data_ptr	mov.l off_23448, r5 ; h'B2D9	first axis arg (target B)
+B2D5	0xB2D5	67989	0x233C8	data_ptr	mov.l off_2344C, r6 ; h'B2D5	second axis arg (target B)
+FFFF85DC+5	FFFF85DC	98183	0x2EF94	ram_read	mov.b @(5,r9), r0	query for the 0xB2D9 axis, target A (moved to r7 in the jsr delay slot)
+FFFF846E	FFFF846E	98177	0x2EF8E	ram_read	mov.b @r7, r0 ; staged at 0x2EF92 to sp+3	query for the 0xB2D5 axis, target A
+FFFF8628	FFFF8614	67987	0x233C4	ram_read	mov.w @(h'14,r10), r0 (r10=FFFF8614)	query for the 0xB2D9 axis, target B
+FFFF847E	FFFF847E	67986	0x233BE	ram_read	mov.b @r7, r0 ; staged at 0x233C2 to sp+3	query for the 0xB2D5 axis, target B (overwrites the staged 0x9471 result)
+9471	0x9471	67972	0x233A6	data_ptr	mov.l off_23438, r4 ; h'9471	16x16 UBYTE map read immediately before target B; result staged to sp+3 then to gbr+0xAC

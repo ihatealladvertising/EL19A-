@@ -1,0 +1,39 @@
+# WO65156 target/ROM/RAM cell list
+# Donor ROM: EVIDENCE/CF48D.bin 1,048,576 bytes
+# SHA-256 fceae3e61f6517b1eb287c4938984498bfa5164688c3985d98baeeaaf52b04f1
+#
+# target	kind	start	end_exclusive	bytes	element	dims	rom_sha256_of_object
+9191	map_payload	0x9191	0x91A1	16	UBYTE	4x4	7c264b89081801ef18e7e6bed03cba62e295b1f6b8f3e80b93da80623ca6f456
+#   row0: 11 1A 28 3A
+#   row1: 19 27 3C 55
+#   row2: 1B 2A 42 5E
+#   row3: 1D 2D 46 64
+91A1	map_payload	0x91A1	0x91B1	16	UBYTE	4x4	1b44afdd0dd3e0e17c7ce4f180c5ae9eaf32d99f7e8a88cb9d5aae02bd3d1671
+#   row0: 6C 6C 67 64
+#   row1: 64 64 6E 7F
+#   row2: 84 84 8D A0
+#   row3: 76 76 8E 9C
+#
+B2D5	axis_4	0xB2D5	0xB2D9	4	UBYTE	4 points	44d5cf976746641b341dad9940a6c3a7577c03f2f9a76e7356370c23e694e351
+#   points: 10 20 40 70
+B2D9	axis_4	0xB2D9	0xB2DD	4	UBYTE	4 points	88b3279a97935542c596cfe16b7888005222e07ceda04164342c9b290a7b9599
+#   points: 08 38 58 78
+B277	axis_4	0xB277	0xB27B	4	UBYTE	4 points	9510cec0248a5de36d53aa7e31f291bab771379133d7aa67d3b91d45f15a686f
+#   points: 10 18 38 58
+B27B	axis_4	0xB27B	0xB27F	4	UBYTE	4 points	7ffd1d9b936e51550a03ee2a2ff79a635f390d6ce541c0c60eb96f8c3c5000d5
+#   points: 40 80 C0 CA
+
+# pointer-pool encodings
+#	off_2F1FC	0x0000	.data.l dword_9190+1 -> 0x9191
+#	off_23444	0x0000	.data.l -> 0x91A1
+#	off_23448	0x0000	-> 0xB2D9 (first axis arg)
+#	off_2344C	0x0000	-> 0xB2D5 (second axis arg)
+
+# RAM cells
+#	FFFF10B4+0x2C7	UBYTE product term (store 0x2EF8C)
+#	FFFF10B4+0x2CA	UBYTE scaled product result (store 0x2EFD2)
+#	FFFF10B4+0x2CB	UBYTE 0x9191 map result (store 0x2EFA6)
+#	FFFF10B4+0x2CC	UBYTE multiplier term (read 0x2EFAC)
+#	FFFF8548+0x47	UBYTE 0x91A1 map result (store 0x233D4) -> FFFF858F
+#	FFFF8548+0xAC	UBYTE 0x9471 map result staged (store 0x233BC) -> FFFF85F4
+#	FFFF8614+0x14	UWORD query for the 0xB2D9 axis at the 0x233CC site (read 0x233C4) -> FFFF8628
