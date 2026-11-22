@@ -267,7 +267,7 @@ Ten disjoint, bounded follow-ons were allocated from explicit unresolved edges i
 | WO | Follow-up | Source evidence | Priority | Status |
 |---|---|---|---|---|
 | [WO65163](WO65163.md) | Producer and numeric-domain provenance for divisor `FFFF97F4` | WO65089 / WO65099 corrected coordinate formula | P1 | RESERVED — NOT STARTED; `wo65163-ffff97f4-divisor-provenance` |
-| [WO65164](WO65164.md) | Producer/domain lineage for query input `FFFF8494` across lookup contexts | WO65078 / WO65089 / WO65099 / WO65127 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65164-ffff8494-query-source-lineage`; coordinator review/merge pending |
+| [WO65164](WO65164.md) | Producer/domain lineage for query input `FFFF8494` across lookup contexts | WO65078 / WO65089 / WO65099 / WO65127 | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; boot/init source and physical query meaning unresolved |
 | [WO65165](WO65165.md) | Producer of row-query UWORD `FFFF1D42` | WO65099 / WO65100 SWORD-map record | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65165-ffff1d42-row-query-producer`; coordinator review/merge pending |
 | [WO65166](WO65166.md) | Incoming stack provenance of second `0x0B956` query | WO65078 unresolved second argument to `sub_22D30` | P1 | RESERVED — NOT STARTED; `wo65166-b956-second-stack-query` |
 | [WO65167](WO65167.md) | Callee effect after `FFFF85CB → sub_27720` | WO65057/WO65058 / WO65089 / WO65099 | P2 | RESERVED — NOT STARTED; `wo65167-0a0f2-sub27720-continuation` |
