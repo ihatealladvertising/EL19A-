@@ -35,21 +35,21 @@ One session per lane plus explicit lane ownership prevents duplicate task execut
 
 Repeat this loop for the lifetime of the worker session:
 
-1. At startup only, read this protocol and the current operational frontier in active_work_orders.md. Find the next READY/ASSIGNED WO in your lane. Do not re-read the protocol or inventory the repository on every iteration.
+1. At startup only, read this protocol and the current operational frontier in active_work_orders.md. Find the current WO and the ordered FIFO backlog for your lane. The next task is the earliest READY item. Do not re-read the protocol or inventory the repository on every iteration.
 2. If CONTROL/WO<ID>.md already exists, read it. If an assigned legacy WO has no report file yet, the queue row and its cited dependencies in active_work_orders.md are the authoritative specification: create CONTROL/WO<ID>.md with the objective, exact scope, owner, branch main, authorized paths, dependencies and stop boundary from that register entry. This is execution setup, not a separate claim commit; do not invent or widen scope.
 3. Perform the technical investigation to the specified stop boundary. Spend the effort on tracing, verification and interpretation, not administration.
 4. Before closeout, perform a bounded reconciliation against the exact prior findings cited by the WO and any directly affected claims discovered during the investigation. Distinguish confirmed corrections from hypotheses.
 5. Write the full result to your own CONTROL/WO<ID>.md report. Include verified facts, evidence anchors, calculations/branches, confidence, limits, no-repeat notes, changed paths and commit SHA.
 6. Close the WO in active_work_orders.md, update your lane's current/closed summary, and record any reconciliation disposition. Do not seek coordinator review or approval for a bounded closeout.
-7. Check your own lane. If a ready WO exists, take it immediately. If not, replenish the lane using the technical-priority and WO-creation rules below. Continue without waiting for another slot.
+7. Check your own lane. If a READY WO exists, take the earliest item in the lane's FIFO backlog immediately; execute only one WO at a time. If the backlog is below its target depth, replenish it under the technical-priority and WO-creation rules below. Continue without waiting for another slot or user prompt.
 
-An existing ASSIGNED — WORKER N entry reserves that task to its slot. No separate claim commit is required. A worker may start it immediately. Do not create routine claim, heartbeat, progress, handoff or status-polling commits. The current WO remains assigned to its slot until its closeout is recorded.
+An existing ASSIGNED — WORKER N — READY entry reserves that task to its slot. Multiple READY entries may exist in a lane's FIFO backlog; they are not permission to execute concurrently. No separate claim commit is required. A worker may start only the earliest READY item after closing its current WO. Do not create routine claim, heartbeat, progress, handoff or status-polling commits. The current WO remains assigned to its slot until its closeout is recorded.
 
 ## Technical direction and WO replenishment
 
 Workers are responsible for maintaining technical direction inside their own lanes. Do not wait for ChatGPT or a coordinator to invent the next WO.
 
-When your lane has no ready follow-on WO, choose the highest-payoff unresolved question using this order:
+When your lane's READY backlog is below target depth, choose the highest-payoff unresolved question using this order:
 
 1. Follow explicit current user priorities recorded in the operational frontier or a WO.
 2. Resolve an open P1 investigation, a concrete dependency, or a documented contradiction that blocks reliable downstream interpretation.
@@ -60,7 +60,7 @@ When your lane has no ready follow-on WO, choose the highest-payoff unresolved q
 
 Explicit no-repeat boundaries in Guardrails and future priorities and in completed WO reports override this ranking. In particular, the 1D scalar/limiter sweep over 0x7800–0x9B00 is already complete under WO65090; do not recreate that interval census. Reuse the completed reader indexes, helper crosswalks, maps, curves, and prior bounded negatives.
 
-Create one new bounded WO when your lane has no ready task and a defensible unresolved question exists. The new WO must state:
+When your lane has fewer than three READY follow-on WOs queued beyond its current in-progress task, create enough new bounded WOs to restore the target depth, provided defensible unresolved questions exist. The new WO must state:
 - a precise technical question and why it has value;
 - exact target addresses/functions/records and required inputs;
 - named completed evidence to reuse and explicit no-repeat exclusions;
@@ -70,7 +70,7 @@ Create one new bounded WO when your lane has no ready task and a defensible unre
 
 Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with your slot ownership, priority, dependencies, branch main and exact allowed paths. Use the modulo ID rule above. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
 
-Target one ready follow-on WO per lane where justified. Do not build a large speculative queue. Do not reserve tasks already covered by active work, completed work or a blocked dependency.
+Maintain a target backlog of **three READY follow-on WOs per lane**, in addition to the current in-progress WO. This is an operating buffer, not a limit: an explicit user request may authorize a larger queue. Queue tasks in a clear FIFO order; all queued WOs remain assigned to their modulo lane, but the worker starts only the earliest READY item and never runs two WOs concurrently in the same lane. Create replacements as work is completed so the buffer is replenished without a user prompt. Do not create filler: every queued WO must have a distinct, defensible technical question, exact scope, reuse/no-repeat boundary and stop condition. Do not queue work already covered, completed or blocked by an unavailable dependency.
 
 ## Reconciliation rules
 
