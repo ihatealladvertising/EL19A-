@@ -11,7 +11,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65245 | WO65242 CLOSED — BOUNDED COMPLETE; WO65245 assigned — READY |
+| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 assigned — READY |
 | Worker 2 | WO65235 → WO65238 → WO65241 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
@@ -19,7 +19,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65248 → WO65251 | 2 |
+| Worker 1 | WO65251 | 1 |
 | Worker 2 | WO65238 → WO65241 → WO65246 → WO65249 | 4 |
 | Worker 3 | (empty) | 0 |
 
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65245; Worker 2 → WO65235; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65248, WO65251; Worker 2: WO65238, WO65241, WO65246, WO65249; Worker 3: (empty). Worker 1's prior WO65242 is CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234 and WO65237 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65235; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251; Worker 2: WO65238, WO65241, WO65246, WO65249; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234 and WO65237 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 is CLOSED — BOUNDED COMPLETE; the remaining three form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
 
@@ -817,7 +817,7 @@ This is a coordinated subject-matter workstream across the existing three execut
 | [WO65240](WO65240.md) | Withdrawn — not active | Page-cited glossary from the UpRev Nissan guide, Nistune MAF notes and knock-listener paper; derive falsifiable EL19A leads. | WITHDRAWN — NOT ACTIVE |
 | [WO65241](WO65241.md) | Worker 2 · after WO65229/65232/65235/65238 | Function-local SH-2 execution pilot on sub_22CB8; no whole-ECU emulation. | ASSIGNED — WORKER 2 — READY |
 | [WO65242](WO65242.md) | Worker 1 | Static Mode $06 support check and bounded misfire-monitor provenance if supported. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65242](WO65242.md)) |
-| [WO65245](WO65245.md) | Worker 1 · after WO65242 | PID $0C / timer-derived FFFF85DA reconciliation and 0x10984 curve output consumers. | ASSIGNED — WORKER 1 — READY |
+| [WO65245](WO65245.md) | Worker 1 | PID $0C / timer-derived FFFF85DA reconciliation and 0x10984 curve output consumers. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65245](WO65245.md)) |
 | [WO65248](WO65248.md) | Worker 1 · after WO65245 | FFFF84A4 producer and PID $43 response lineage for the 0x0A0F2 query input. | ASSIGNED — WORKER 1 — READY |
 | [WO65251](WO65251.md) | Worker 1 · after WO65248 | FFFFB33C continuation beyond the 0x8445 option-bit gate. | ASSIGNED — WORKER 1 — READY |
 | [WO65246](WO65246.md) | Worker 2 · after WO65241 | FFFF1D81 whole-byte writer versus E810 hysteresis-bit state. | ASSIGNED — WORKER 2 — READY |
