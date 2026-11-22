@@ -289,3 +289,18 @@ Two disjoint, read-only work orders were allocated from the user's diagnostic re
 | [WO65174](WO65174.md) | Reverse-anchor nine MAF, temperature and TPS-oriented DTC slots from indexed writer callsites to monitor inputs/thresholds | P1 | Independent; reuses DTC crosswalk/writer index and WO65116–WO65120. Excludes WO65146's reserved indirect-record-consumer scope. | RESERVED — NOT STARTED; unclaimed; branch wo65174-sensor-dtc-monitor-input-reverse-trace |
 
 WO65173 must preserve all 259 CIDs, 19 current Mode $01 cross-matches, pointer-space distinctions, and exact/partial/no-match evidence. WO65174 is deliberately limited to slots 130, 132–134, 137–140 and 175 (including both distinct P0122 slots); it does not reopen the 198-slot DTC census or diagnostic reporting path. Both workers edit only their assigned WO record. No ROM/LST/XML/workbook/catalogue/index/script/tool/Library change is authorized. The coordinator alone records claims, progress, review and closure.
+
+
+## Additional cross-domain investigation reservations — 2026-11-22
+
+Five further disjoint work orders were allocated from the user's remaining avenues. Allocation only: all are **RESERVED — NOT STARTED**, unclaimed; no technical investigation is claimed. Each branch contains only its assigned work-order record.
+
+| WO | Scope | Priority | Dependencies | Status |
+|---|---|---|---|---|
+| [WO65175](WO65175.md) | X12C second Nissan A2L COMPU_METHOD/scaling and bank-symmetry crosswalk against V6 A2L and EL19A catalogue | P1 | Reuse WO65133–WO65141; donor metadata only | RESERVED — NOT STARTED; unclaimed; `wo65175-x12c-second-a2l-crosswalk` |
+| [WO65176](WO65176.md) | Remaining HCAN2 mailbox/register and RAM payload-buffer map | P1 | Reuse WO65103/65106/65108 and merged indexes; explicitly excludes completed HCAN1 subset | RESERVED — NOT STARTED; unclaimed; `wo65176-hcan2-mailbox-payload-map` |
+| [WO65177](WO65177.md) | Exact accounted-extent ledger and residual ROM islands for `0x8000–0x18000` | P1 | Reuse XML v3, ignition fragment, 179-row catalogue, DTC/Consult indexes and completed scalar sweep | RESERVED — NOT STARTED; unclaimed; `wo65177-rom-dark-matter-accounting` |
+| [WO65178](WO65178.md) | ROM-resident static configuration/option-byte guard matrix | P1 | Reuse WO65111 and merged function/GBR indexes; no repeat of detailed `0x8405` trace | RESERVED — NOT STARTED; unclaimed; `wo65178-rom-variant-guard-matrix` |
+| [WO65179](WO65179.md) | CF48D-to-EL19A structural table fingerprint comparison | P2 | Reuse WO65142/65143, WO65150–65161 and EL19A catalogue/reader evidence; donor readiness gates final matches | RESERVED — NOT STARTED; unclaimed; `wo65179-cf48d-el19a-structural-fingerprint-crosswalk` |
+
+All five are read-only. Donor A2L/CF48D names, addresses, units and semantics are not EL19A proof. WO65179 may define its comparison schema and readiness inventory before donor reader closeouts, but may not issue final high-confidence matches without exact reader/axis/consumer evidence on both ROMs. No ROM/LST/A2L/XML/workbook/catalogue/index/script/tool edits are authorized. The coordinator alone records claims, progress, review and closure; workers edit only their assigned WO record.
