@@ -13,7 +13,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 |---|---|---|
 | Worker 1 | WO65218 — `sub_762C6` caller-argument provenance; next WO65221 — `FFFF27EA` downstream readers | WO65218 assigned/ready; WO65221 assigned/ready as follow-on |
 | Worker 2 | WO65219 — `FFFF84EA` producer lineage | Assigned and ready; `CONTROL/WO65219.md` exists |
-| Worker 3 | WO65184 — `0x0A342/0x0A382` producer/query/output-consumer trace; next WO65220 — `FFFF3456/FFFF3458` consumers | WO65184 active; WO65220 assigned/ready as follow-on |
+| Worker 3 | WO65184 — `0x0A342/0x0A382` producer/query/output-consumer trace; next WO65220 — `FFFF8494` query-record initialization provenance | WO65184 active; WO65220 assigned/ready as follow-on |
 
 - **No waiting:** all three workers may start immediately and continue independently.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
@@ -726,12 +726,12 @@ Five bounded work orders were reserved to test the user's proposed A2L↔binary 
 
 ## Semantic-convergence follow-on batch — 2026-11-22
 
-Three bounded follow-ons were generated from the user's ranked investigative paths and the explicit unresolved boundaries in completed reports. These are reservations only; no new technical findings are claimed.
+Three bounded follow-ons were generated from the user's ranked investigative paths and the explicit unresolved boundaries in completed reports. After a final no-repeat check, Worker 3's task was prioritized from the shared `FFFF8494` lineage gap (WO65164/WO65180/WO65189) rather than the lower-priority `FFFF3456/FFFF3458` downstream endpoint follow-on; the latter remains a future candidate. These are reservations only; no new technical findings are claimed.
 
 | WO | Lane | Focus | Reused evidence / no-repeat boundary | Status |
 |---|---|---|---|---|
 | [WO65219](WO65219.md) | Worker 2 | Producer lineage for UWORD `FFFF84EA`, the varying query controlling the `0x0C3D6` Q15 crossfade weight | WO65193 identifies this as the only varying query and names its producer as the next discriminator; reuse WO65182/WO65183 and indexes. No repeat of C3D6 map/axis/crossfade or ADC/QDSPT audits. | ASSIGNED — WORKER 2 — READY |
-| [WO65220](WO65220.md) | Worker 3 | First readers and downstream consumers of `FFFF3456/FFFF3458` | WO65180 establishes parallel correction accumulators and leaves physical endpoints unresolved. No repeat of map lookup, query, payload, axis or accumulator arithmetic. | ASSIGNED — WORKER 3 — READY |
+| [WO65220](WO65220.md) | Worker 3 | `FFFF8494` query-record boot/initialization provenance and contexts of pointer seeds at `0x4ABAC` / `0x962BC` | WO65164 found no direct writer and exactly two pointer seeds; WO65180/WO65189 establish cross-family use. No repeat of resolver census, map/query traces or sibling-field producer arithmetic. | ASSIGNED — WORKER 3 — READY |
 | [WO65221](WO65221.md) | Worker 1 | Downstream readers of recursive-filter output `FFFF27EA` beyond its history copy | WO65191 explicitly identifies these readers as its next step. No repeat of B956 query, recursive MAC, coefficients, clamp or history shift; no reopening WO65090 scalar sweep. | ASSIGNED — WORKER 1 — READY |
 
 Lane mapping is collision-free: 65219 mod 3 = 2 (Worker 2), 65220 mod 3 = 0 (Worker 3), 65221 mod 3 = 1 (Worker 1). Worker 1's WO65221 follows WO65218; Worker 3's WO65220 follows active WO65184. Each worker owns only its own report and lifecycle/queue entries. Read-only technical work; no protected engineering artifact is authorized for modification. `using youtube videos.txt` remains user-owned, ignored, uncommitted and untouched.
