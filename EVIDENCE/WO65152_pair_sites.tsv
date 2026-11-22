@@ -1,0 +1,22 @@
+table	rom_pc	function	helper	axis_y	axis_x	instruction
+0xA78C-Normal	0x000565D6	loc_565CE	sub_70BC	0xB4CA	0xC842	mov.l off_5675C, r4
+0xA78C-Normal	0x00059414	loc_59406	sub_70BC	0xB4CA	0xC842	mov.l off_594D4, r4
+0xA78C-Normal	0x0005AA26	sub_5A98C	sub_72C4	0xB4CA	0xC842	mov.l off_5AB74, r5 (axis search; inline row read)
+0xA78C-Normal	0x0005AA3A	sub_5A98C	sub_72C4	0xB4CA	0xC842	mov.l off_5AB74, r5 (axis search; inline row read)
+0xA78C-Normal	0x0005AA66	sub_5A98C	inline	0xB4CA	0xC842	 mov.l off_5AB74, r11 (byte reads)
+0xA78C-Normal	0x0005AF2A	loc_5AEA8	sub_70BC	0xB4CA	0xC842	mov.l off_5AF8C, r4
+0xA78C-Normal	0x0005C6FE	sub_5C6B8	sub_70BC	0xB4CA	0xC842	mov.l off_5C908, r4
+0xA78C-Normal	0x0005C7A2	sub_5C78E	sub_70BC	0xB4CA	0xC842	mov.l off_5C908, r4
+0xA78C-Normal	0x0005CBF2	loc_5CBEA	sub_70BC	0xB4CA	0xC842	mov.l off_5CDD4, r4
+0xA78C-Normal	0x0005CEE2	loc_5CED6	sub_70BC	0xB4CA	0xC842	mov.l off_5D044, r4
+0xA78C-Normal	0x0005E82A	loc_5E818	sub_70BC	0xB4CA	0xC842	mov.l off_5E8E0, r4
+0xA78C-Normal	0x0005FD82	loc_5FD6A	sub_70BC	0xB4CA	0xC842	mov.l off_5FF18, r4
+0xA78C-Normal	0x0005FDFE	loc_5FDF2	sub_70BC	0xB4CA	0xC842	mov.l off_5FF18, r4
+0xDBCA-Trustful	0x0005AC02	sub_5AB78	inline	0xDE11	0xDEA2	mov.l off_5ADF8, r14 (inline indexed word read)
+0xDBCA-Trustful	0x0005AC20	sub_5AB78	inline	0xDE11	0xDEA2	mov.l off_5ADF8, r4 (inline indexed word read)
+0xDBCA-Trustful	0x0005AC4A	sub_5AB78	inline	0xDE11	0xDEA2	mov.l off_5ADF8, r9 (inline indexed word read)
+0xDBCA-Trustful	0x0005B026	loc_5AF9C	sub_73E4	0xDE11	0xDEA2	mov.l off_5B080, r4
+0xDBCA-Trustful	0x0005BA12	sub_5B9C8	sub_73E4	0xDE11	0xDEA2	mov.l off_5BB14, r4
+0xDBCA-Trustful	0x0005BCA0	loc_5BC98	sub_73E4	0xDE11	0xDEA2	mov.l off_5BD5C, r4
+0xDBCA-Trustful	0x0005BD8A	sub_5BD78	sub_73E4	0xDE11	0xDEA2	mov.l off_5BDF8, r4
+0xDBCA-Trustful	0x0006008A	loc_60076	sub_73E4	0xDE11	0xDEA2	mov.l off_600E8, r4

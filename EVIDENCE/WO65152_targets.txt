@@ -1,0 +1,15 @@
+# WO65152 targets — CF48D QH0 normal/trustful pair
+# ROM: EVIDENCE/CF48D.bin 512-byte payloads verified byte-identical
+0xA78C    QH0/Torque Conversion Map (normal), 16x16 UWORD BE, 0x200 bytes
+0xDBCA    QH0/Torque Conversion Map Trustful, 16x16 UWORD BE, 0x200 bytes
+0xB4CA    normal Y axis, 16 x UBYTE
+0xC842    normal X axis, 16 x UWORD BE
+0xDE11    trustful Y axis, 16 x UBYTE
+0xDEA2    trustful X axis, 16 x UWORD BE
+# RAM cells of interest (base GBR / FFFF10B4 unless stated)
++0x8A6    normal QH0 query input, UWORD
++0x8E0    normal QH0 result, UWORD
++0xB54    trustful QH0 query input, UWORD
++0xB9A    trustful QH0 query input copy, UWORD (compared by loc_7264C)
++0xBA6    trustful QH0 result, UWORD
+FFFF2630+0x2C6   |normal query - trustful query| store, UWORD
