@@ -1,0 +1,15 @@
+t	a	r	g	e	t			t	a	r	g	e	t	_	h	e	x			l	s	t	_	l	i	n	e			P	C			r	e	f	_	k	i	n	d			i	n	s	t	r	u	c	t	i	o	n			e	f	f	e	c	t	i	v	e	_	u	s	e
+A08C	0xA08C	158158	0x46E8C	data_ptr	mov.l off_470C0, r4	map base arg to sub_7054 (bank-1 read)
+A10C	0xA10C	158216	0x46EEE	data_ptr	mov.l off_470D0, r4	map base arg to sub_7054 (bank-2 read)
+A08C+0x80	0xA10C	158520	0x470D0	pointer_pool	off_470D0: .data.l dword_A08C+h'80	A10C is A08C+128
+C7E2	0xC7E2	158153	0x46E82	data_ptr	mov.l off_470BC, r10	column-axis arg to sub_7054
+C7C2	0xC7C2	158162	0x46E94	data_ptr	mov.l off_470C4, r5	row-axis arg to sub_7054 (bank 1)
+C7C2	0xC7C2	158219	0x46EF4	data_ptr	mov.l off_470C4, r5	row-axis arg to sub_7054 (bank 2)
+A08C+0x2A	0xA0B6	199770	0x574CC	pointer_pool	off_574CC: .data.l dword_A08C+h'2A	NOT a read: 0x5737E mov.l off_574CC,r13 then 0x57384 mul.l r2,r13 -> immediate multiplier
+BBD8	0xBBD8	126416	0x3A21A	data_ptr	mov.l off_3A46C, r14	axis base; reader searches +1+i, i=0..6
+BC9A	0xBC9A	126484	0x3A28E	data_ptr	mov.l off_3A478, r11	axis base; reader searches +1+i, i=0..6
+FFFF8468	FFFF8468	126422	0x3A21E	ram_read	mov.w @r2, r7	BBD8 search query (UWORD)
+FFFF85DC+5	FFFF85DC	126486	0x3A290	ram_read	mov.b @(5,r6), r0	BC9A search query (UBYTE)
+FFFF8025	0x8025	126438	0x3A25A	rom_read	mov.l off_3A474, r4 ; h'8025	single ROM byte, lower-interval bias for BBD8 index adjust
+FFFF8024	0x8024	126456	0x3A2D2	rom_read	mov.l off_3A47C, r5 ; h'8024	single ROM byte, >>2 bias for BC9A index adjust
+FFFF3927+0xC	FFFF3927	126488	0x3A348	ram_gate	tst #h'20, r0	gate: bit5 of FFFF3933 selects the sub_3A932 branch pair

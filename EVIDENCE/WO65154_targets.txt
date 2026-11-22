@@ -1,0 +1,55 @@
+# WO65154 target/ROM/RAM cell list
+# Donor ROM: EVIDENCE/CF48D.bin 1,048,576 bytes
+# SHA-256 fceae3e61f6517b1eb287c4938984498bfa5164688c3985d98baeeaaf52b04f1
+#
+# target	kind	start	end_exclusive	bytes	element	dims	rom_sha256_of_object
+A08C	map_payload	0xA08C	0xA10C	128	UWORD	8x8	5da7d06167813eb1c13a89a8e298f6e19fddad49d380a16f23a343b78fc2ad53
+#   row-major, 8 UWORD per row, row stride 16 bytes (mov #8,r5 + shll r5 at loc_7588)
+#   row0: 8023 8022 801C 8022 8022 8022 8022 8022
+#   row1: 8024 8027 802B 802F 8032 8031 8038 8038
+#   row2: 8032 802D 8030 802F 8032 8031 8038 8038
+#   row3: 803A 8038 8037 803B 803B 803B 803F 803F
+#   row4: 8039 8040 8044 8043 8044 8044 8051 8051
+#   row5: 8043 803B 8042 804C 8050 804E 8051 8051
+#   row6: 803D 8042 8049 804E 8052 8053 8056 8056
+#   row7: 804C 8055 8055 8056 8056 8056 8056 8056
+A10C	map_payload	0xA10C	0xA18C	128	UWORD	8x8	dfbd2f88e9429ad9dc1562a4dfc4eabe1a30701e9bc38833771d018054224db5
+#   row-major, 8 UWORD per row, row stride 16 bytes (mov #8,r5 + shll r5 at loc_7588)
+#   row0: 802D 8027 8022 8027 8027 8027 8027 8027
+#   row1: 802F 8033 8035 8038 8039 8038 8040 8044
+#   row2: 804A 803B 803D 8038 8039 8038 8040 8044
+#   row3: 8048 8045 8046 8038 803E 8044 8044 8044
+#   row4: 8046 804E 804E 804E 804D 804E 8058 8058
+#   row5: 804C 804E 804D 8051 8057 8057 8058 8058
+#   row6: 804D 8054 8056 8055 8055 8055 8058 8058
+#   row7: 8051 8054 8055 8054 8054 8055 8058 8058
+BBD8	axis_region	0xBBD8	0xBBE8	16	UBYTE	7 points searched	a5f7001c1cfdcde043b5f9a974cdb1da305ea7c663255701cfcd02af9248a2ae
+#   bytes 0xBBD8..0xBBE7: 00 15 28 40 58 70 80 90 31 35 3A 40 45 5C 5C 5C
+#   reader-searched points 0xBBD9..0xBBDF: 15 28 40 58 70 80 90
+BC9A	axis_region	0xBC9A	0xBCAA	16	UBYTE	7 points searched	eca9ae66a4accdf9e1e574eb707debef22dd970734cd62af49408b7e568832c6
+#   bytes 0xBC9A..0xBCA9: 00 14 24 34 44 58 6C 80 78 78 78 78 78 70 6C 68
+#   reader-searched points 0xBC9B..0xBCA1: 14 24 34 44 58 6C 80
+C7E2	axis_16	0xC7E2	0xC7F2	16	UWORD	8 points	db5bbc3330e72ddfd875e5dc2c9bd2d8ab2b3cf7f6e3641f6a300f1a1483e221
+#   points: 1800 2000 2800 3000 3800 4000 5C00 7800
+C7C2	axis_16	0xC7C2	0xC7D2	16	UWORD	8 points	04a3394e30b1c511dec3787f62da9dcf9bfb78f0eb68c069c745aeef0e0dfb15
+#   points: 0030 0060 0080 00A0 00C0 00E0 0100 0120
+
+# RAM cells written by sub_46DC6 (gbr=FFFF902C set 0x46DDA; r9=FFFF2630 from off_470AC)
+#	FFFF26F0	A08C interpolation result (store 0x46EDC, r9 offset 0xC0)
+#	FFFF26F2	A10C interpolation result (store 0x46F3E, r9 offset 0xC2)
+#	FFFF904C	gbr+0x20 routed bank-1 output (0x46F74)
+#	FFFF904E	gbr+0x22 routed bank-2 output (0x46F98)
+#	FFFF902C	gbr+0 base output (0x46FA6)
+#	FFFF9030	gbr+4 base output (0x46FB6)
+#	FFFF9034	gbr+8 base output (0x46FDE)
+#	FFFF2840	word 0x210 cell (0x46E4E)
+#	FFFF2842	word 0x212 cell (0x46E78)
+#
+# RAM cells written by sub_3A204 (r9 = bank selector 0/1 from caller r4)
+#	FFFF229E+2*bank	UWORD LTFT result (0x3A3A0)
+#	FFFF1004+bank	UBYTE packed 3-bit search indexes (0x3A3A4)
+#	FFFF9CFA+2*bank	UWORD index word (0x3A364)
+#	FFFFA25C	UWORD 8x8 RAM table, bank==1 path (0x3A318)
+#	FFFFA2DC	UWORD 8x8 RAM table, bank!=1 path (0x3A326)
+#	FFFFA0F1	byte arg sub_3A932, bank!=1 (0x3A37A)
+#	FFFFA131	byte arg sub_3A932, bank==1 (0x3A38C)
