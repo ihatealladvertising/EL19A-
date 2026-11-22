@@ -240,7 +240,7 @@ Eleven bounded donor-side work orders were allocated from the user's 25-entry re
 
 | WO | Target family | Priority | Status |
 |---|---|---|---|
-| [WO65151](WO65151.md) | Knock-limit pair `0xB421/0xB42A` and knock-slice `0xB10C` | P1 | **ACTIVE — CLAIMED** (current session coordinator/worker; 2026-11-22); `wo65151-b421-b42a-b10c-knock-map-readers` |
+| [WO65151](WO65151.md) | Knock-limit pair `0xB421/0xB42A` and knock-slice `0xB10C` | P1 | **CLOSED — BOUNDED COMPLETE** (PARTIAL; donor-only); merged to main in `5bf2945`; see [WO65151](WO65151.md) |
 | [WO65152](WO65152.md) | QH0 normal/trustful pair `0xA78C/0xDBCA` | P1 | RESERVED — NOT STARTED; `wo65152-a78c-dbca-qh0-bank-selector` |
 | [WO65153](WO65153.md) | Engine torque `0xAF0C` and TTEPTD compensation `0xAE8C` | P2 | RESERVED — NOT STARTED; `wo65153-af0c-ae8c-torque-maps` |
 | [WO65154](WO65154.md) | AFR correction banks `0xA08C/0xA10C` and LTFT axes `0xBC9A/0xBBD8` | P1 | RESERVED — NOT STARTED; `wo65154-a08c-a10c-ltft-fuel-correction` |
@@ -459,7 +459,7 @@ The 23 currently reserved WO branches were also checked individually. Each has e
 
 ## Concurrent claim correction — 2026-11-22
 
-After the historical branch audit snapshot above, WO65151 was claimed by a concurrent coordinator/worker and is now recorded as **ACTIVE — CLAIMED** on `wo65151-b421-b42a-b10c-knock-map-readers`. The earlier branch-audit count of zero active WOs is retained as an as-of-audit snapshot; this correction supersedes it for current lifecycle state. No edits to WO65151 are made by this session.
+After the historical branch audit snapshot above, WO65151 was claimed, completed, and closed on main (`5bf2945`, report in `CONTROL/WO65151.md`). The earlier branch-audit count of zero active WOs is retained as an as-of-audit snapshot; this note records the subsequent claim/closeout lifecycle. No workbook/XML/A2L/ROM/LST/catalogue/index/tool edits were made.
 
 ## Next-three target investigation reservations — 2026-11-22
 
