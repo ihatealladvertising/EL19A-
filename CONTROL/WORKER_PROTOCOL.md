@@ -27,7 +27,9 @@ Each slot owns its lane. It selects only its own READY/ASSIGNED work in the live
 - ID mod 3 = 2: Worker 2
 - ID mod 3 = 0: Worker 3
 
-Start at the next unused WO ID after 65217. Advance by 3 until the ID is absent from both the register and CONTROL/WO<ID>.md. Legacy assignments listed in the register remain assigned as written; do not renumber or reassign them. A worker creates new WOs only in its own modulo lane. This makes concurrent WO creation use distinct IDs and report paths.
+Start at the next unused WO ID after 65217. Advance by 3 until the ID is absent from both the register and CONTROL/WO<ID>.md. Legacy assignments listed in the register remain assigned as written; do not renumber or reassign them. A worker creates new WOs only in its own modulo lane.
+
+**Explicit user-directed transfer exception:** A direct user instruction may transfer an existing, unstarted READY WO to another slot when a lane is offline or exhausted. This is an exception to the default no-reassignment rule. Preserve WO IDs, technical scope, dependencies, evidence anchors, no-repeat boundaries and FIFO order. In one atomic `main` commit, update the WO report's assigned status, owner and sequencing language together with the live register's current/backlog entries. Retain the original modulo allocation as historical metadata; the updated live register determines the new lane. Do not transfer in-progress work unless the user explicitly names it and the handoff boundary is recorded. This makes concurrent WO creation use distinct IDs and report paths.
 
 One session per lane plus explicit lane ownership prevents duplicate task execution. The register's SHA protects concurrent writes to the shared queue; it is not a reason to introduce cross-worker waiting.
 
