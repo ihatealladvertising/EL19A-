@@ -585,3 +585,16 @@ These are reservations only; no technical execution is claimed. Each branch cont
 - Evidence gaps dominate the remaining risk, not contradictions: 41 of 76 definition rows are uncited in any WO report (including 7 `3D` grid claims such as `0xA452` and the `0xAC62/0xACA2/0xACE2/0xAD22` Transient-Throttle block), and 154 of 179 catalogue rows carry no consumer evidence — the `Reader-Verified` tier means geometry only. The `0x0E904` XML Y axis (static 0..240) is contradicted by the catalogue's proven `0x0FA62` UWORD axis; WO65124 already establishes it, so only a definition edit is outstanding.
 - WP5 delivered 25 ranked, non-duplicative follow-up items, each checked against the live register: definition repairs first (I-01/I-02/I-03/I-04), then the six multi-row 16×16 UWORD consumer gaps where one trace closes two rows (`0x119C4/0x11BC4`, `0x121C4/0x123C4`, `0x0C756/0x0C956`, `0x0D456/0x0D656`, `0x0D8D6`, `0x0A342`), then grouped curve families and documentation hygiene. No reserved or active WO scope is duplicated.
 - Report `CONTROL/WO65162.md` carries the full 261-row evidence matrix as its appendix. Read-only: no XML, catalogue, workbook, tool, index, ROM or listing was modified, and no broad scan or helper census was performed.
+
+
+## User-supplied Versa f501 candidate validation — 2026-11-22
+
+Three bounded validation WOs were reserved from the user's supplied byte extraction and JSON candidate definitions. These are hypotheses only: the supplied script read both the purported donor and target offsets from the same `VERSA f501.bin` byte array, so its anchor pairs do not independently establish cross-ROM correspondence. Adjacent UWORD reads overlap and are raw context only unless reader mechanics confirm word storage. Each branch contains only its assigned WO report; no technical work is claimed.
+
+| WO | Focus | Priority | Status / branch |
+|---|---|---:|---|
+| [WO65208](WO65208.md) | Validate `0x83F0–0x83F3` four-byte dashpot-decay candidate: exact ROM identity, reader geometry, query, arithmetic and first consumer | P2 | RESERVED — NOT STARTED; unclaimed; `wo65208-83f0-dashpot-curve-reader-validation` |
+| [WO65209](WO65209.md) | Validate `0x84C4` candidate threshold and disposition of proposed `0x84C4 → 0x8550` anchor, reusing WO65183 for the EL19A endpoint | P2 | RESERVED — NOT STARTED; unclaimed; `wo65209-84c4-cut-threshold-source-validation` |
+| [WO65210](WO65210.md) | Reconcile the proposed eight-UWORD BE parse of `0xE678–0xE687` against established E678/E688 reader mechanics | P2 | RESERVED — NOT STARTED; unclaimed; `wo65210-e678-block-layout-validation` |
+
+These WOs do not reopen the EL19A `0x848A/0x848B` scalar, `0x8550` gate/threshold, or E678/E688 helper/callsite investigations. No new XML, workbook, catalogue, index, tool, ROM or listing edits are authorized. The candidate labels and scaling expressions remain unverified.
