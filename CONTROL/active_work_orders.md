@@ -250,7 +250,7 @@ Eleven bounded donor-side work orders were allocated from the user's 25-entry re
 |---|---|---|---|
 | [WO65151](WO65151.md) | Knock-limit pair `0xB421/0xB42A` and knock-slice `0xB10C` | P1 | **CLOSED — BOUNDED COMPLETE** (PARTIAL; donor-only); merged to main in `5bf2945`; see [WO65151](WO65151.md) |
 | [WO65152](WO65152.md) | QH0 normal/trustful pair `0xA78C/0xDBCA` | P1 | **CLOSED — BOUNDED NEGATIVE** (donor-only); no bank selector: pair is byte-identical and read unconditionally in the same task pass; only shared consumer is a query-plausibility monitor; `wo65152-a78c-dbca-qh0-bank-selector` |
-| [WO65153](WO65153.md) | Engine torque `0xAF0C` and TTEPTD compensation `0xAE8C` | P2 | **ACTIVE — CLAIMED** (current session coordinator/worker; 2026-11-22); `wo65153-af0c-ae8c-torque-maps` |
+| [WO65153](WO65153.md) | Engine torque `0xAF0C` and TTEPTD compensation `0xAE8C` | P2 | **CLOSED — BOUNDED COMPLETE** (PARTIAL; donor-only); merged to main in `fde7030`; see [WO65153](WO65153.md) |
 | [WO65154](WO65154.md) | AFR correction banks `0xA08C/0xA10C` and LTFT axes `0xBC9A/0xBBD8` | P1 | RESERVED — NOT STARTED; `wo65154-a08c-a10c-ltft-fuel-correction` |
 | [WO65155](WO65155.md) | P-gain bank pair `0x9271/0x92B1` | P2 | RESERVED — NOT STARTED; `wo65155-9271-92b1-pgain-bank-maps` |
 | [WO65156](WO65156.md) | MBT flame-speed `0x9191` and cylinder fresh-air `0x91A1` | P2 | RESERVED — NOT STARTED; `wo65156-9191-91a1-combustion-air-maps` |
