@@ -10,3 +10,6 @@ __pycache__/
 *.idb
 *.i64
 .env
+
+# User-owned local note; do not commit/discard without explicit direction (backup: C:\Users\Vivian\AppData\Local\Temp\opencode\using youtube videos.txt.backup-20261122-143618 SHA256 51225EFE38AE8AACA1A946961BAA118703A2AB55D3A891FBE4B92A393B2C3A5B)
+using youtube videos.txt
