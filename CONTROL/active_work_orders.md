@@ -717,8 +717,8 @@ Five bounded work orders were reserved to test the user's proposed A2L↔binary 
 
 ## WO65218 lane replenishment — 2026-11-22
 
-- Worker 1's WO65174 closeout identified a specific, bounded unresolved edge: upstream caller-argument provenance for \`sub_762C6\`, affecting DTC slots 132–134. The existing call summary identifies \`sub_761C8\` as the direct caller and \`sub_70620\` as its caller; the DTC indexes enumerate the corresponding slot-dispatch sites. A search of the current register found no existing WO for this edge.
-- Created \`CONTROL/WO65218.md\` and assigned it to Worker 1. ID 65218 satisfies the lane rule (65218 mod 3 = 1). No approval gate applies when the lane replenishment criteria are met; the earlier handoff's proposed continuation is now an explicit ready assignment.
-- Scope is limited to r4–r7 provenance through \`sub_761C8\` and, only if needed, one caller boundary into \`sub_70620\`. Existing slot monitor traces and the DTC census are reused; no physical sensor identity is assumed.
+- Worker 1's WO65174 closeout identified a specific, bounded unresolved edge: upstream caller-argument provenance for `sub_762C6`, affecting DTC slots 132–134. The existing call summary identifies `sub_761C8` as the direct caller and `sub_70620` as its caller; the DTC indexes enumerate the corresponding slot-dispatch sites. A search of the current register found no existing WO for this edge.
+- Created `CONTROL/WO65218.md` and assigned it to Worker 1. ID 65218 satisfies the lane rule (65218 mod 3 = 1). No approval gate applies when the lane replenishment criteria are met; the earlier handoff's proposed continuation is now an explicit ready assignment.
+- Scope is limited to r4–r7 provenance through `sub_761C8` and, only if needed, one caller boundary into `sub_70620`. Existing slot monitor traces and the DTC census are reused; no physical sensor identity is assumed.
 - Worker 1 owns the report and its own closeout. No other lane's task or status was changed.
-- No ROM, LST, XML/A2L, workbook, catalogue, index, script, tool, Library or user-owned local file was modified. \`using youtube videos.txt\` remains untouched and uncommitted.
+- No ROM, LST, XML/A2L, workbook, catalogue, index, script, tool, Library or user-owned local file was modified. `using youtube videos.txt` remains untouched and uncommitted.
