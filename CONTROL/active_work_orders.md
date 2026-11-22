@@ -7,12 +7,20 @@
 
 ## Concurrency protocol
 
-- Before starting concurrent work, the coordinator checks the latest register and available branches, allocates a unique WO ID, records its assignment, and commits that reservation.
-- Investigations may proceed in parallel. Each worker edits only its assigned `CONTROL/WO<ID>.md`; workers do not edit the shared register. Send the coordinator a concise checkpoint/status proposal for registration.
-- The coordinator alone updates `active_work_orders.md`, against the latest authoritative version, one status/checkpoint transaction per commit. Do not combine concurrent proposals into a stale full-file replacement.
-- After each commit, read back the register and verify the new status/checkpoint and all concurrent assignments remain present. Never resolve a conflict by discarding another worker's entry.
-- Keep lifecycle, owner, priority, latest checkpoint, and next action here. Put detailed findings and superseded checkpoints in the WO record or dated archive.
+The detailed worker contract is [`CONTROL/WORKER_PROTOCOL.md`](WORKER_PROTOCOL.md). The rules below are operational and binding:
 
+- **Single-writer coordinator:** Only the coordinator allocates WO IDs, approves/reserves WOs, assigns owners/branches, updates lifecycle status in this register, and integrates PRs to `main`.
+- **No worker self-selection:** A reserved/unclaimed WO is not an assignment. Workers do not choose the next WO, partition IDs by parity, or infer ownership from branch existence. They request assignment and wait.
+- **Assignment transaction:** Before work starts, coordinator rereads this live register, verifies scope/dependencies and branch availability, then records WO ID, owner/session, dedicated branch, `ACTIVE — CLAIMED` status and checkpoint in one minimal commit. It reads back the committed register before telling the worker to proceed.
+- **Worker isolation:** Each worker edits only its assigned WO report and explicitly authorized evidence outputs on its dedicated branch. Workers never edit this register, another worker's branch, or push/merge to `main`.
+- **Serialized integration:** Coordinator alone reviews and merges PRs, resolves conflicts against current `main`, updates this register, and verifies each update by readback. Never overwrite a newer register with a stale full-file copy or discard concurrent entries.
+- **No false lock guarantees:** Branch creation is not treated as an atomic claim because the available create/update branch operation may update an existing ref. Exclusive ownership comes from the coordinator's serialized assignment transaction, not branch naming.
+- **Parallel work:** Disjoint WOs may run concurrently. Overlapping scopes or output paths must be partitioned or serialized before assignment.
+- **Recovery:** Only coordinator may release/reassign stale claims after checking worker and branch activity.
+- **Batching:** Workers send concise checkpoints; coordinator batches administrative updates and reports technical outcomes/exceptions only.
+- **Authority boundary:** WO approval does not authorize protected artifact changes beyond the exact scope and artifact permissions stated in that WO.
+
+Until an automated dispatcher with durable serialized claims and stale-claim recovery is implemented and tested, workers must request assignments from the coordinator; they must not self-assign.
 ## Current operational frontier
 
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
