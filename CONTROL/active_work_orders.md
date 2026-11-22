@@ -431,3 +431,27 @@ WO65180 is the highest-information target-side follow-up selected by WO65141. It
 - Corrected the crosswalk arithmetic: nominal 5.0 V gives approximately 19.53125 mV per `>>2` staged count and 156.25 mV per 8-count table step. Exact 160 mV steps require AVref=5.12 V, permitted but not established.
 - `0x0F406 ↔ mTTWN` remains a strong structural/function-family donor candidate, not a verified physical calibration identity. The donor payload remains unavailable.
 - Only WO65182 report was integrated. Workbook V58, XML/A2L, ROM/LST, catalogue, evidence indexes, tooling and Library were not modified; no hardware probing or vehicle test. **Active WOs: none** at this checkpoint.
+
+
+## Stranded branch reconciliation audit — 2026-11-22
+
+The current branch inventory was compared with `main`; no open PRs or unresolved review threads were found. The following older, divergent branches are **historical/redundant**, not outstanding worker results. Their diffs contain only old WO report additions and, for some branches, a stale copy of `CONTROL/active_work_orders.md`. The corresponding reports are already present on current `main` and their lifecycle dispositions are recorded below. Do not merge their stale register edits, rebase them, or treat their continued existence as an active task.
+
+| Historical branch | WO report represented in its diff | Current-main disposition |
+|---|---|---|
+| `ihatealladvertising-b956-map-context` | WO65078 | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-b956-map-semantics` | WO65069 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-b956-output-consumers` | WO65075, WO65077, WO65079 | Recovered/closed to main |
+| `ihatealladvertising-c0d6-map-semantics` | WO65068 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-cid-supmask-extraction` | WO65065 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-dtc-block-validation` | WO65063 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-ffff156a-consumer` | WO65076 | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-inline-map-semantics` | WO65064 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-map-caller-semantics` | WO65067 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-scalar-limiter-sweep` | WO65066 plus stale register edit | Recovered to main / CLOSED |
+| `reconcile-stranded-wo-records-20261121` | duplicate/restoration set for WO65066/67/68/69/75/77 plus stale register edit | Superseded by the already-recovered individual main reports |
+| `reconcile-wo65079-20261121` | WO65079 plus stale register edit | Superseded by WO65079 already recovered to main |
+
+The 23 currently reserved WO branches were also checked individually. Each has exactly one assigned `CONTROL/WO<ID>.md` addition relative to its old merge base; each assigned report still states RESERVED — NOT STARTED (or RESERVED — NOT STARTED; unclaimed). No technical closeout, tool/data artifact or worker result is present on those branches. They remain genuine unclaimed reservations, not completed reports. The only review/integration obligations are therefore future worker closeouts; none is currently pending review.
+
+**Inventory disposition:** 12 old unregistered/reconciliation branches retained as historical; 23 active reservations retained unchanged; 0 active WOs; 0 open PRs at the time of this audit. No branches were deleted, rebased, force-pushed or merged.
