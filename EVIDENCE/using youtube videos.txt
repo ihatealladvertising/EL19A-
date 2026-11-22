@@ -1,0 +1,132 @@
+ locate a table via visual data shapes or pattern matching, inspect the immediate preceding or succeeding hex data for monotonic ascending sequences typical of breakpoint headers         -------   use the described methods: " 
+-  Once you identify the starting memory address of a map table, check XREFs (Cross References) to see where that address is called in the code. 
+-  Nissan lookup routines adhere to a strict register convention before calling table interpolation helper routines 
+-  r4: Pointer to the calibration table data. 
+-  r5: Pointer to the Y-axis (vertical) breakpoint array. 
+-  r6: Pointer to the X-axis (horizontal) breakpoint array. 
+ By inspecting the instructions immediately preceding the function call, you can definitively confirm the memory addresses for the table data and its corresponding axes.                 ------------               Key Technical Concepts Covered 
+-  Table and Axis Registration: Typical 16x16 8-bit maps are accessed by loading the table base address into register R4, with the two corresponding axis lookup addresses loaded into R5 and R6. 
+-  CPU Register Conventions: Follows SuperH (SH) CPU compiler conventions where arguments 1 through 4 are passed in registers R4 through R7, while extra parameters are pushed onto the stack. 
+-  Interpolation Loops: Helper functions iterate through axis tables (matching the table dimension minus one), extract grid values, and compute fractional interpolation fractions. 
+-  Axis Modifications & Shifts: Explains why axis lookup methods can differ—such as shifting values left by two positions (multiplying by 4)—which prevents scaling errors during logging analysis"
+
+
+
+
+
+
+
+
+
+
+
+I want to add more candidate tables first
+
+Agreed. We should prioritize expanding calibration candidate coverage before investing further in comprehensive reader contracts and RAM crosswalks. I was getting ahead of the project's current objective.
+
+The lookup-helper work is still valuable, but it should support candidate discovery rather than become a prerequisite that delays it.
+Revised project order
+1 — Current priority
+
+Expand candidate table inventory
+
+Discover additional plausible calibration tables using:
+
+    Screenshot and parameter-hierarchy matching.
+
+    ROM payload morphology and dimensions.
+
+    Pointer references and known helper callsites.
+
+    Axis/value-pattern fingerprints.
+
+    Cross-ROM comparisons and donor references.
+
+    Adjacent or structured calibration blocks.
+    2 — Following stage
+
+    Structural screening
+
+    Establish candidate address, extent, storage width, plausible dimensions, axis leads and reader references where available. Reject false boundaries and duplicate placements.
+    3 — Later
+
+    Functional verification
+
+    Apply the lookup contracts, trace input RAM, interpolation and output consumers. Prioritize candidates with the greatest calibration value.
+    4 — Later
+
+    XML integration
+
+    Promote only candidates whose required identification and functional evidence is sufficient.
+
+How I would handle new candidates
+
+I recommend a deliberately permissive discovery stage. A candidate should not need a complete reader-to-actuator evidence chain just to enter the inventory.
+
+Each new candidate should retain, where available:
+
+Field
+	
+
+Purpose
+
+ROM address / extent
+	
+
+Location and proposed boundaries
+
+Raw storage
+	
+
+UBYTE, UWORD, etc.
+
+Possible dimensions
+	
+
+1D, 2D, scalar or unresolved
+
+Axis leads
+	
+
+Addresses or possible implicit grids
+
+Reader/caller
+	
+
+Known or suspected code reference
+
+Discovery source
+	
+
+Screenshot, morphology, cross-ROM, pointer
+
+Confidence
+	
+
+Provisional through confirmed
+
+Unresolved issues
+	
+
+What would distinguish it from false matches
+
+Keep constant-like, zero-filled, 0xFF and sentinel-heavy objects in the inventory as separate structural categories rather than automatically treating them as useful variable calibrations.
+
+This also preserves our established distinction between candidate discovery and technical confirmation. 
+One strategic adjustment
+
+I would use the existing lookup knowledge to accelerate harvesting:
+
+    Search known helper callers for previously unregistered table pointers.
+
+    Identify axis pairs that suggest additional maps.
+
+    Examine structured blocks for adjacent calibration objects.
+
+    Compare newly found candidates against existing placements to avoid duplicates.
+
+But don't spend time completing every helper contract first.
+
+My revised recommendation: make the next research cycle a candidate-discovery and inventory-expansion cycle. Once we have a substantially broader candidate population, the lookup-contract and RAM-dataflow work will have a much larger dataset to operate on.
+
+That is the better sequence for the objective you've chosen.
