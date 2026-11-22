@@ -1,0 +1,35 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: a0bde518a89184ef94b42c628390db1458e56f084bc21c881e24e82fa6019d64
+# Run date: 2026-11-22
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=29918 rows_matched=29918
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+FFFF1008	ram	0x42E30	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0x8,r3)
+FFFF1008	ram	0x430CA	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0x8,r3)
+FFFF1008	ram	0x430D4	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0x8,r3)
+FFFF1008	ram	0x430E4	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0x8,r3)
+FFFF1008	ram	0x430EE	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0x8,r3)
+FFFF100A	ram	0x42C04	sub_42838	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xA,r14)
+FFFF100C	ram	0x3E8A0	sub_3E67C	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xC,r5)
+FFFF100C	ram	0x3E944	sub_3E67C	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xC,r5)
+FFFF100C	ram	0x3E954	sub_3E67C	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xC,r5)
+FFFF100C	ram	0x3E96C	sub_3E67C	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xC,r5)
+FFFF100C	ram	0x3E97C	sub_3E67C	write	w	base_disp	FFFF1000	full	-	mov.w r0, @(0xC,r5)
+FFFF100E	ram	0x4767A	sub_4765C	read	b	base_disp	FFFF1000	full	-	mov.b @(0xE,r2), r0
+FFFF100E	ram	0x4A79A	sub_4A784	read	b	base_disp	FFFF1000	full	-	mov.b @(0xE,r5), r0
+FFFF100E	ram	0x4A87E	sub_4A876	read	b	base_disp	FFFF1000	full	-	mov.b @(0xE,r14), r0
+FFFF100E	ram	0x4A956	sub_4A912	read	b	gbr_disp	FFFF1000	full	-	mov.b @(0xE,gbr), r0
+FFFF100E	ram	0x4A95C	sub_4A912	write	b	gbr_disp	FFFF1000	full	-	mov.b r0, @(0xE,gbr)
+FFFF100E	ram	0x4A9BA	sub_4A912	read	b	gbr_disp	FFFF1000	full	-	mov.b @(0xE,gbr), r0
+FFFF100E	ram	0x4A9C0	sub_4A912	write	b	gbr_disp	FFFF1000	full	-	mov.b r0, @(0xE,gbr)
+FFFF100E	ram	0x4B4AC	sub_4B498	read	b	base_disp	FFFF1000	full	-	mov.b @(0xE,r4), r0
+FFFF100E	ram	0x541CC	sub_541A0	read	b	base_disp	FFFF1000	full	-	mov.b @(0xE,r2), r0
+FFFF1C78	ram	0x401B6	sub_400E0	read	b	base_disp	FFFF1C78	full	-	mov.b @r6, r2
+FFFF1C78	ram	0x44A3A	sub_449C2	write	b	base_disp	FFFF1C78	full	-	mov.b r6, @r2
+FFFF1C78	ram	0x44BBE	sub_44BB2	read	b	gbr_disp	FFFF1C78	full	-	mov.b @(0x0,gbr), r0
+FFFF1C79	ram	0x46358	sub_4619C	read	b	base_disp	FFFF1C78	full	-	mov.b @(0x1,r4), r0
+FFFF1C79	ram	0x46BF6	sub_46744	read	b	base_disp	FFFF1C78	full	-	mov.b @(0x1,r6), r0

@@ -1,0 +1,52 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: e43a1de1f4a4ad2887fde60beba8184c858b1df95e6dc754a29373363b785d04
+# Run date: 2026-11-22
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=29935 rows_matched=29935
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+FFFF859C	ram	0x4A9CC	sub_4A9C8	read	b	base_disp	FFFF859C	full	-	mov.b @r5, r2
+FFFF85B0	ram	0x76C8C	sub_76736	read	w	base_disp	FFFF859C	full	-	mov.w @(0x14,r14), r0
+FFFF85B2	ram	0x39FD6	sub_39E7A	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x3A39A	sub_3A178	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x3B7E2	sub_3B2B0	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r3), r0
+FFFF85B2	ram	0x42BA6	sub_42838	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r3), r0
+FFFF85B2	ram	0x42BC6	sub_42838	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r1), r0
+FFFF85B2	ram	0x440A4	sub_44054	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r4), r0
+FFFF85B2	ram	0x44AF6	sub_44A54	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x45C96	sub_45AB6	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r7), r0
+FFFF85B2	ram	0x47344	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x4737E	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x473BA	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x47426	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x47564	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x475C2	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x47618	sub_471D4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x477BE	sub_4765C	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r5), r0
+FFFF85B2	ram	0x4804E	sub_48024	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r4), r0
+FFFF85B2	ram	0x480FE	sub_480A4	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r4), r0
+FFFF85B2	ram	0x4AA9E	sub_4A9C8	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x4E2AE	sub_4E24C	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r11), r0
+FFFF85B2	ram	0x55538	sub_55518	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r14), r0
+FFFF85B2	ram	0x55776	sub_55518	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r1), r0
+FFFF85B2	ram	0x557B6	sub_55518	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r3), r0
+FFFF85B2	ram	0x557EA	sub_55518	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r1), r0
+FFFF85B2	ram	0x56CE2	sub_56AAA	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x72532	sub_72480	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r6), r0
+FFFF85B2	ram	0x72728	sub_72676	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r6), r0
+FFFF85B2	ram	0x72F2A	sub_72E44	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x7369A	sub_72E44	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r14), r0
+FFFF85B2	ram	0x78404	sub_77608	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r3), r0
+FFFF85B2	ram	0x7934C	sub_79320	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x797B2	sub_79776	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r4), r0
+FFFF85B2	ram	0x797FA	sub_79776	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r4), r0
+FFFF85B2	ram	0x8BC28	sub_8B98C	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0x8BFF6	sub_8B98C	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r3), r0
+FFFF85B2	ram	0xA810C	sub_A80E8	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r5), r0
+FFFF85B2	ram	0xA8156	sub_A80E8	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r5), r0
+FFFF85B2	ram	0xBC4A2	sub_BC3DE	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0xBC4F6	sub_BC3DE	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0
+FFFF85B2	ram	0xBE87E	sub_BE352	read	w	base_disp	FFFF859C	full	-	mov.w @(0x16,r2), r0

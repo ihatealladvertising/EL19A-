@@ -1,7 +1,7 @@
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** This file is the sole current source of truth for work-order lifecycle, assignments, priorities, continuation, and handoff. Technical evidence belongs in individual `WO<ID>.md` records.
-**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-21
+**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-22
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
@@ -18,7 +18,7 @@
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** WO65127 (current session; P1 E904/E914/E934 cluster reconciliation). **Reserved/unclaimed:** WO65133–WO65138. **Reserved/blocked:** WO65139 (waits for WO65127 closure), WO65140 (waits for WO65132 closure), and WO65141 (crosswalk synthesis; waits for WO65133–WO65140 and prerequisite closures). WO65124–WO65126 are CLOSED — BOUNDED COMPLETE and merged to `main` via PRs #29–#31; their unresolved reconciliation points are carried into WO65127. WO65128 is CLOSED — BOUNDED COMPLETE and merged to `main` in `699d62865b5b1be760441348a6eacb67d1dfb3a5`; its shared output-field and `FFFF84AC` distinction are recorded in its WO record. WO65129 is CLOSED — BOUNDED COMPLETE and merged to `main` in `c9f9a2558850674172fa594b772b23d942c3c73d`; its gated `FFFF1D64` handoff and near-2:1 payload correction are recorded in its WO record. WO65130 is CLOSED — BOUNDED COMPLETE and merged to `main` in `574ef7fc3c48b669880d75a2435a147077d66f62`; its separate-consumer verdict, `FFFF1287` address correction and mirrored `FFFF1E8A` gate are recorded in its WO record. WO65131 is CLOSED — BOUNDED COMPLETE and merged to `main` in `84ddc769cef9dda0d5ca1082efc785ea9a7fb00c`; its `FFFF1054` base correction, intermediate cross-bank difference path, and no-final-cross-read verdict are recorded in its WO record. WO65132 is CLOSED — BOUNDED COMPLETE and merged to `main` in `4b40324457641f9ee0d9f0ec0f5bf3df6031ccf0`; its `FFFF84A6` result cell, `sub_36A08` clamp to `FFFF1840`, and bounded downstream/additional-reader map are recorded in its WO record. WO65109 and WO65114 are closed and merged; V58 is the current workbook.
+- **Active WOs:** none. **Reserved/unclaimed:** WO65152-WO65156, WO65158-WO65159, WO65161-WO65163, WO65167, WO65170-WO65179, WO65183-WO65188. **Closed/reconciled:** WO65133-WO65141, WO65144-WO65151, WO65157, WO65160, WO65164-WO65169, WO65180-WO65182. WO65157's earlier EL19A RAM submission was rejected as out of scope and retained historically; corrected CF48D donor-only rework is closed/merged via PR #37. WO65139 raw-vs-converted axis comparison withdrawn; no V6 counterpart established. WO65145 direct reads at 0x829C/0x829D corrected. WO65150 XML labels remain unverified hypotheses. WO65168 bounded negative: 1 direct write/0 direct reads of FFFF29C4; no indirect consumer proven. WO65169 static source trace closed; computed/transport/runtime source and cadence remain unresolved. WO65137 paired-map callsites/staging corrected by WO65180 erratum. WO65151 B421/B42A/B10C reader/selector trace closed bounded-partial (donor-only); physical meaning unresolved. **Master Workbook:** V58 remains current; no workbook update/integration claimed.
 - **Checkpoint 2026-11-21 (claim):** WO65109 and WO65114 claimed by the current session. Branches `wo65109-ignition-fragment-reader-audit` and `wo65114-thin-reference-closeout`. Both scopes are disjoint; no technical finding is registered in this transaction. WO65122 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: all four remaining branch-only indexes (WO65116/65117/65119/65120) independently reproduced (199/199 checks; 14/14 TSVs byte-identical). WO65121 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: independent reproduction of WO65118's RAM byte/bit cross-reference passed 49/49 checks with all three TSVs byte-identical and 306,688/306,688 concordance re-derived. WO65115 is **CLOSED — BOUNDED COMPLETE** and merged to `main` in merge commit `87408dd02dd171c96f969a32d7aaf70b24d2b422` (final branch head `102a730fc15edf6ed7d77e09bef66050a1792093`): exact-HEAD bytes from original head `745a5def238e78d2260e0e04f234a43409c52ae8` were executed from canonical blobs; 24 tests (21 passed, 0 assertion failures, 2 accepted non-blocking fixture errors, 1 PKIOR skip), regression 29,905/29,905 and fuel-cut 30,018/30,018 concordance; all four TSVs are committed and remote-verified. PKIOR_W is accepted as EXHAUSTED-BOUNDED / NOT TESTABLE. **Completed/older WOs:** WO65114 is closed and merged (V58 successor). WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains closed — bounded complete.
 
 ## Queued work orders — allocated 2026-11-21
@@ -44,21 +44,21 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 | [WO65124](WO65124.md) | E904 axis and XML v3 verification | 1 — P1 | Kilo; bounded report accepted; unresolved GBR/r13 base questions transferred to WO65127 | CLOSED — BOUNDED COMPLETE; merged to `main` via PR #29 in `45da46789ee9e52a64139418c575c3a185d14ef5` |
 | [WO65125](WO65125.md) | E914 curve and GBR+0x72.bit4 consumer | 1 — P1 | Kilo; bounded report accepted; flag chronology and GBR base questions transferred to WO65127 | CLOSED — BOUNDED COMPLETE; merged to `main` via PR #30 in `cb277fa0e7ad3ac4f910b58907d3471d244d4e84` |
 | [WO65126](WO65126.md) | E934 query producer and downstream consumers | 1 — P1 | Bounded report accepted; query-source, GBR and output-consumer discrepancies transferred to WO65127 | CLOSED — BOUNDED COMPLETE; merged to `main` via PR #31 in `ae221efe87fd16c0e74df7354010724dc6620bc2` |
-| [WO65127](WO65127.md) | E904/E914/E934 cluster reconciliation and closeout | 1 — P1 | WO65124–WO65126 CLOSED; reuse their merged reports and WO65110/WO65057/WO65058; reconcile contradictory bases, flag chronology and E934 query/consumer claims | CLAIMED — IN PROGRESS; owner current session; branch `wo65127-barometric-cluster-synthesis`; work order refined at commit `089f8cab` |
+| [WO65127](WO65127.md) | E904/E914/E934 cluster reconciliation and closeout | 1 — P1 | WO65124–WO65126 CLOSED; reuse their merged reports and WO65110/WO65057/WO65058; reconcile contradictory bases, flag chronology and E934 query/consumer claims | CLOSED — BOUNDED COMPLETE; merged to `main` in `71f37e6b0601f87a84af878cca8a2cee1e8e83ce`; see [WO65127](WO65127.md) |
 | [WO65128](WO65128.md) | `0x10FEA` dual-caller NTC correction consumer trace | 1 — P1 | Independent; reuse WO65056/WO65057/WO65058 and shared indexes; trace both `sub_22E60` callers, `FFFF1848`, GBR-relative C2 outputs and reconcile `FFFF8494+0x18` claim | CLOSED — BOUNDED COMPLETE; merged to `main` in `699d62865b5b1be760441348a6eacb67d1dfb3a5` |
 | [WO65129](WO65129.md) | `0x10D12/0x10D1A` paired branch-gain consumer trace | 2 — P1 | Independent; reuse WO65057/WO65058 and shared indexes; verify selector and trace `FFFF1054+0x430` through `sub_6A8C0`/`sub_6A96C` | CLOSED — BOUNDED COMPLETE; merged to `main` in `c9f9a2558850674172fa594b772b23d942c3c73d` |
 | [WO65130](WO65130.md) | `0x0E9AC` dual-monitor outcome trace | 3 — P2 | Independent; reuse WO65057/WO65058 and shared indexes; trace both `sub_22F28` callers and their distinct result/flag consumers | CLOSED — BOUNDED COMPLETE; merged to `main` in `574ef7fc3c48b669880d75a2435a147077d66f62` |
 | [WO65131](WO65131.md) | `0x0CD56` / `0x11FC4` paired normal/trust consumer trace | 1 — P1 | Reuse WO64915/WO65060/WO65080/WO65081; trace the paired `sub_69496` result cells `FFFF2150+0x5BC` and `+0x726` through first readers; do not repeat payload/helper/bank census | CLOSED — BOUNDED COMPLETE; merged to `main` in `84ddc769cef9dda0d5ca1082efc785ea9a7fb00c` |
 | [WO65132](WO65132.md) | `0x0FEE0` 32-point UWORD curve consumer trace | 2 — P2 | Reuse WO65060/WO65110 and shared indexes; single callsite `sub_22E98 @ 0x369EA`; resolve query, output and first reader only; no helper-family census | CLOSED — BOUNDED COMPLETE; merged to `main` in `4b40324457641f9ee0d9f0ec0f5bf3df6031ccf0`; see [WO65132](WO65132.md) |
-| [WO65133](WO65133.md) | V6 master A2L crosswalk against 179 EL19A catalogue rows | 0 — force multiplier | Independent; A2L metadata screen only; reuse current catalogue and reader/helper evidence | RESERVED — NOT STARTED; unclaimed; branch `wo65133-v6-a2l-candidate-crosswalk` |
-| [WO65134](WO65134.md) | `0x0F406` NTC curve ↔ V6 `mTTWN` | 1 — P1 | Independent; reuse WO65056/WO65057; test 20 mV/count vs 160 mV axis and output/function context | RESERVED — NOT STARTED; unclaimed; branch `wo65134-0f406-mttwn-ntc-xref` |
-| [WO65135](WO65135.md) | `0x0A342/0x0A382` transient maps ↔ V6 `mMITANDA/mMITANDD` | 1 — P1 | Independent; reuse WO65089 target trace; compare both axes, pair payloads and branch selection | RESERVED — NOT STARTED; unclaimed; branch `wo65135-0a342-mmitanda-transient-xref` |
-| [WO65136](WO65136.md) | QDSPT dashpot D/N curve and scalar bundle ↔ V6 `R301.26` | 1 — P1 | Independent; reuse WO65095 and ETC fragment; test curve axes/output scale, scalar formulas and `mDSHCUT` address conflict | RESERVED — NOT STARTED; unclaimed; branch `wo65136-dashpot-v6-family-xref` |
-| [WO65137](WO65137.md) | `0x0B756/0x0B7D6` UWORD pair ↔ V6 `mMABFSFT/mMABFSFT2` | 2 — P2 | Independent; reuse WO65060/WO64940; compare both donor axes, payloads and result staging | RESERVED — NOT STARTED; unclaimed; branch `wo65137-b756-nxtp-map-xref` |
-| [WO65138](WO65138.md) | `0xF3D6/0xF3DE` TVO limiters ↔ V6 `mTTVOULM/mTTVOULMS` | 2 — P2 | Independent; reuse ETC limiter fragment; test `0.3575°` output conversion, 25-rpm axes and main/sub callers | RESERVED — NOT STARTED; unclaimed; branch `wo65138-f3d6-mttvoulm-limiter-xref` |
-| [WO65139](WO65139.md) | E904/E914/E934 ↔ V6 A/F diagnostic and pressure families | 1 — P1 | Blocked until WO65127 CLOSED; donor-side comparison only; reuse merged WO65124–WO65126 and accepted WO65127 findings | RESERVED — BLOCKED; unclaimed; branch `wo65139-e9xx-v6-diagnostic-pressure-xref` |
-| [WO65140](WO65140.md) | `0x0FEE0` ↔ V6 `mTATVO` 32-point throttle-area curve | 2 — P2 | Blocked until WO65132 CLOSED; donor-side comparison only; reuse its query/output/first-consumer report | RESERVED — BLOCKED; unclaimed; branch `wo65140-0fee0-mtatvo-donor-xref` |
-| [WO65141](WO65141.md) | V6 A2L crosswalk synthesis and evidence-grade disposition | 1 — P1 | Blocked until WO65133–WO65140 and prerequisites are CLOSED; no new target trace | RESERVED — BLOCKED; unclaimed; branch `wo65141-v6-a2l-crosswalk-synthesis` |
+| [WO65133](WO65133.md) | V6 master A2L crosswalk against 179 EL19A catalogue rows | 0 — force multiplier | Independent; A2L metadata screen only; reuse current catalogue and reader/helper evidence | CLOSED — BOUNDED COMPLETE; merged to `main` in `904ca525ecd3fa2286139f73c8991856c6de9cff`; see [WO65133](WO65133.md) |
+| [WO65134](WO65134.md) | `0x0F406` NTC curve ↔ V6 `mTTWN` | 1 — P1 | Independent; reuse WO65056/WO65057; test 20 mV/count vs 160 mV axis and output/function context | CLOSED — BOUNDED COMPLETE; merged to `main` in `64e09f3792904d091cc4bbc29b0cf2888fe68821`; see [WO65134](WO65134.md) |
+| [WO65135](WO65135.md) | `0x0A342/0x0A382` transient maps ↔ V6 `mMITANDA/mMITANDD` | 1 — P1 | Independent; reuse WO65089 target trace; compare both axes, pair payloads and branch selection | CLOSED — BOUNDED COMPLETE; merged to `main` in `2546388a88335ac82187e436cc32b91db5124953`; see [WO65135](WO65135.md) |
+| [WO65136](WO65136.md) | QDSPT dashpot D/N curve and scalar bundle ↔ V6 `R301.26` | 1 — P1 | Independent; reuse WO65095 and ETC fragment; test curve axes/output scale, scalar formulas and `mDSHCUT` address conflict | CLOSED — BOUNDED COMPLETE; merged to `main` in `ca4885b450894fec276bebd6ee1c339a094c930e`; see [WO65136](WO65136.md) |
+| [WO65137](WO65137.md) | `0x0B756/0x0B7D6` UWORD pair ↔ V6 `mMABFSFT/mMABFSFT2` | 2 — P2 | Independent; reuse WO65060/WO64940; compare both donor axes, payloads and result staging | CLOSED — BOUNDED COMPLETE; merged to `main` in `b0cecc8cbd0a31b5440a7773234643c341f561cf`; see [WO65137](WO65137.md) |
+| [WO65138](WO65138.md) | `0xF3D6/0xF3DE` TVO limiters ↔ V6 `mTTVOULM/mTTVOULMS` | 2 — P2 | Independent; reuse ETC limiter fragment; test `0.3575°` output conversion, 25-rpm axes and main/sub callers | CLOSED — BOUNDED COMPLETE; merged to `main` in `5b682860f2b1e649c318c37c06a9780ae91e39e7`; see [WO65138](WO65138.md) |
+| [WO65139](WO65139.md) | E904/E914/E934 ↔ V6 A/F diagnostic and pressure families | 1 — P1 | WO65127 CLOSED; donor-side comparison only; reuse merged WO65124–WO65126 and accepted WO65127 findings | CLOSED — BOUNDED COMPLETE; merged PR #32; coordinator erratum withdraws raw-vs-converted axis comparison; no counterpart established |
+| [WO65140](WO65140.md) | `0x0FEE0` ↔ V6 `mTATVO` 32-point throttle-area curve | 2 — P2 | WO65132 CLOSED; donor-side comparison only; reuse its query/output/first-consumer report | CLOSED — BOUNDED COMPLETE; merged PR #33; structural analogue only, no semantic counterpart established |
+| [WO65141](WO65141.md) | V6 A2L crosswalk synthesis and evidence-grade disposition | 1 — P1 | WO65133–WO65140 and prerequisites CLOSED; synthesis only, no new target trace | CLOSED — BOUNDED COMPLETE; synthesis merged via PR #39 to main (`ddf56e6`); no physical calibration identity promoted |
 
 **Bounded closeout checkpoint — 2026-11-21:** WO65124, WO65125 and WO65126 were accepted as bounded technical reports and merged to `main` (PR #29 / `45da4678`, PR #30 / `cb277fa0`, PR #31 / `ae221efe`). Their raw table/axis/helper evidence is preserved in the three reports. Physical meanings remain unassigned. Specific unresolved items were not promoted to facts: E904's `r13` destination base and GBR base; E914's earlier flag read at `0x880F4` versus later set at `0x882B2` and its absolute GBR; E934's true `r6` query lineage, `sub_39FC8` GBR, and relation between `FFFF2718` and `FFFF86EF`. These discrepancies are transferred to the now-active WO65127, which was refined to perform only this bounded reconciliation and to recommend (not implement) the E904 XML v4 axis correction. WO65127 reuses the merged reports plus existing WO65116/65117/65118/65119/65120 indexes; no repeated payload/helper census or integration edits. The coordinator alone updates this register. 
 
@@ -68,7 +68,7 @@ Allocated from the ranked candidate list supplied by the user. Allocation only: 
 
 **Additional bounded reservations — 2026-11-21:** WO65131 is a P1 follow-on for the paired `0x0CD56` / `0x11FC4` 16×16 normal/trust maps. It reuses WO64915/WO65060/WO65080/WO65081 and specifically advances WO65080's known separate result cells (`FFFF2150+0x5BC`, `+0x726`) to their first consumers; no payload, helper or global bank census repeat. WO65132 is a P2 trace of the single `0x0FEE0` 32-point UWORD BE curve at `sub_22E98 @ 0x369EA`, reusing WO65060's completed helper census and stopping at the first consumer. Both are **RESERVED — NOT STARTED**, unclaimed, and independent of WO65127–WO65130. Existing resolver/index reuse and manual effective-address verification are required. Branches: `wo65131-cd56-trustbank-consumer`, `wo65132-0fee0-32pt-consumer`.
 
-**V6 master A2L cross-reference reservations — 2026-11-21:** WO65133 screens all 179 reader/helper-verified EL19A catalogue entries against the pinned V6 A2L's characteristic, axis, conversion, function and measurement declarations; WO65134–WO65138 are disjoint target-family checks for NTC/mTTWN, transient fresh-air maps, QDSPT dashpot bundle, N×TP paired maps, and TVO upper-limit curves. WO65139 is donor-side only and BLOCKED until WO65127 closes; it compares the E904/E914/E934 results against distinct V6 A/F-response and atmospheric-pressure families. WO65140 is donor-side only and BLOCKED until WO65132 closes; it tests the 0x0FEE0/mTATVO axis and output fingerprint. WO65141 is the final synthesis and remains BLOCKED until WO65133–WO65140 and both prerequisites close. All nine are unclaimed reservations; each branch contains only its assigned WO record. A2L source identity is pinned in the individual WOs (file `64811000p2_m.a2l`, SHA-256 `6c1248fb0acf5e80a77ff470cf8e14cda97260b291a556f330967748a7b30a88`). No worker is authorized to edit the A2L, target ROM/listing, workbook, XML or catalogue.
+**V6 master A2L cross-reference reservations — 2026-11-21:** WO65133 screens all 179 reader/helper-verified EL19A catalogue entries against the pinned V6 A2L's characteristic, axis, conversion, function and measurement declarations; WO65134–WO65138 are disjoint target-family checks for NTC/mTTWN, transient fresh-air maps, QDSPT dashpot bundle, N×TP paired maps, and TVO upper-limit curves. WO65139 is donor-side only and BLOCKED until WO65127 closes; it compares the E904/E914/E934 results against distinct V6 A/F-response and atmospheric-pressure families. WO65140 is donor-side only and BLOCKED until WO65132 closes; it tests the 0x0FEE0/mTATVO axis and output fingerprint. WO65141 is the final synthesis; its WO65133–WO65140 dependencies and prerequisites were all closed by 2026-11-22, so it is now unblocked but remains unclaimed. All nine are unclaimed reservations; each branch contains only its assigned WO record. A2L source identity is pinned in the individual WOs (file `64811000p2_m.a2l`, SHA-256 `6c1248fb0acf5e80a77ff470cf8e14cda97260b291a556f330967748a7b30a88`). No worker is authorized to edit the A2L, target ROM/listing, workbook, XML or catalogue.
 
 No queued WO authorizes XML, catalogue, ROM or listing edits. WO65114 expressly authorizes only the bounded Master Workbook register update described in its artifact boundary. Concurrent claims must use disjoint scopes: 65103/65104, 65105/65106, and 65107–65112 are mutually disjoint as recorded; WO65114 is disjoint from WO65109.
 
@@ -95,8 +95,8 @@ All five branch-only work packages have been independently reproduced, authorize
 | WO | Status / priority | Latest checkpoint and continuation |
 |---|---|---|
 | WO65127 | **CLAIMED — IN PROGRESS; P1** | Current session owns bounded reconciliation of merged WO65124–65126 reports. Audit E904 r13/GBR bases; E914 flag chronology and absolute GBR; E934 r6 query lineage, GBR and `FFFF2718`/`FFFF86EF` field relationship. No physical semantics or XML edits. Branch `wo65127-barometric-cluster-synthesis`. |
-| WO65122 | **CLOSED — BOUNDED COMPLETE** | Independently re-ran all four exact generator blobs (WO65116/65117/65119/65120) against pinned inputs: 14/14 TSVs byte-identical, 199/199 checks passed, PC/ROM concordance re-derived 306,688/306,688, per-package counts/distributions/anchors/gates all confirmed. One WO65116 prose erratum recorded (8,155 stated vs 8,158 summed). All four audited branches remain unmerged pending coordinator authorization. See [WO65122](WO65122.md), checkpoints 1–2. |
-| WO65121 | **CLOSED — BOUNDED COMPLETE** | Independently re-ran the exact WO65118 generator blob against the pinned ROM/listing: all three TSVs byte-identical to committed blobs, 49/49 audit checks passed, PC/ROM concordance independently re-derived 306,688/306,688 with zero mismatches, R1–R5 PASS. WO65118 is now verified rather than a structural lead; its branch remains unmerged pending coordinator merge authorization. See [WO65121](WO65121.md), checkpoints 1–2. |
+| WO65122 | **CLOSED — BOUNDED COMPLETE** | Independently re-ran all four exact generator blobs (WO65116/65117/65119/65120) against pinned inputs: 14/14 TSVs byte-identical, 199/199 checks passed, PC/ROM concordance re-derived 306,688/306,688, per-package counts/distributions/anchors/gates all confirmed. One WO65116 prose erratum recorded (8,155 stated vs 8,158 summed). The four audited packages were subsequently merged to `main` after this reproduction audit. See the branch-reconciliation checkpoint and [WO65122](WO65122.md), checkpoints 1–2. |
+| WO65121 | **CLOSED — BOUNDED COMPLETE** | Independently re-ran the exact WO65118 generator blob against the pinned ROM/listing: all three TSVs byte-identical to committed blobs, 49/49 audit checks passed, PC/ROM concordance independently re-derived 306,688/306,688 with zero mismatches, R1–R5 PASS. WO65118 was independently reproduced (49/49 checks) and subsequently merged to `main` in `86914f2e04f9f3580b097dfc3553d89e21320c5e`. See [WO65121](WO65121.md), checkpoints 1–2. |
 
 | WO65109 | **CLOSED — BOUNDED COMPLETE** | Six ignition/knock fragment entries bound to three 16×16 UBYTE objects (`0x9B2E`, `0x9C2E`, `0x9DAE`) read by `sub_22CB8`. `0x9C2E` and `0x9DAE` payloads are byte-identical; XML axis orientation is inconsistent with reader order; bit 7 is discarded on the paired `0x9C2E/0x9DAE` path. All six structurally bound; physical semantics remain provisional. Merged from branch `wo65109-ignition-fragment-reader-audit` in `8b9320af2373e662694ffd3c37fa1add554681cb`. See [WO65109](WO65109.md). |
 | WO65114 | **CLOSED — BOUNDED COMPLETE** | ROM `0x83B8` confirmed as UBYTE compare threshold; `0x83A4` as UBYTE multiplier/threshold; `FFFF8578` receives word constant `0xDA80` under `FFFFB600.bit7`, not mailbox payload. V58 additive workbook successor (149 sheets) committed and pointer updated. Merged from branch `wo65114-thin-reference-closeout` in `95bce80dc3f80d7e66953584b6d744cfc1059211`. See [WO65114](WO65114.md). |
@@ -136,8 +136,8 @@ All five branch-only work packages have been independently reproduced, authorize
 ## Recent completed work
 
 - **Branch reconciliation (2026-11-21):** all five audited structural indexes merged to `main` after independent reproduction by WO65121/WO65122 — WO65116 `a5cefff7…`, WO65117 `505908fa…`, WO65118 `86914f2e…`, WO65119 `2768875c…`, WO65120 `fd1b349c…`. Artifact blobs re-verified on `main` against the audited blob IDs. The WO65116 §4.1 `gbr_uses` prose was corrected from 8,155 to the verified 8,158 on its branch before merge; no artifact bytes changed.
-- [WO65122](WO65122.md) — **BOUNDED COMPLETE — CLOSED / MERGED:** independent reproduction audit of the four remaining branch-only indexes (WO65116 function/GBR map, WO65117 effective-address dictionary, WO65119 false-alias register, WO65120 call graph/scheduler). All 14 TSVs byte-identical to committed blobs; 199/199 checks passed; PC/ROM concordance independently re-derived 306,688/306,688; all published counts, distributions, anchors and gates confirmed. One documentation erratum recorded (WO65116 §4.1: 8,155 stated vs 8,158 summed). All four audited branches remain unmerged pending coordinator authorization. No generator, TSV, ROM, listing, XML, workbook, catalogue, resolver or test source was modified. See [WO65122](WO65122.md), checkpoints 1–2.
-- [WO65121](WO65121.md) — **BOUNDED COMPLETE — CLOSED / MERGED:** independent reproduction audit of the WO65118 global RAM byte/bit cross-reference. Exact generator blob re-run against pinned ROM/listing; all three TSVs byte-identical to committed blobs; 49/49 checks passed; PC/ROM concordance independently re-derived 306,688/306,688 with zero mismatches; R1–R5 PASS; page-index sum 22,308; unresolved distribution 43,530. WO65118 is now verified but its branch remains unmerged pending coordinator authorization. No source or artifact was modified. See [WO65121](WO65121.md), checkpoints 1–2.
+- [WO65122](WO65122.md) — **BOUNDED COMPLETE — CLOSED / MERGED:** independent reproduction audit of the four remaining branch-only indexes (WO65116 function/GBR map, WO65117 effective-address dictionary, WO65119 false-alias register, WO65120 call graph/scheduler). All 14 TSVs byte-identical to committed blobs; 199/199 checks passed; PC/ROM concordance independently re-derived 306,688/306,688; all published counts, distributions, anchors and gates confirmed. One documentation erratum recorded (WO65116 §4.1: 8,155 stated vs 8,158 summed). All four audited branches were subsequently merged to `main` in the branch-reconciliation transaction. No generator, TSV, ROM, listing, XML, workbook, catalogue, resolver or test source was modified. See [WO65122](WO65122.md), checkpoints 1–2.
+- [WO65121](WO65121.md) — **BOUNDED COMPLETE — CLOSED / MERGED:** independent reproduction audit of the WO65118 global RAM byte/bit cross-reference. Exact generator blob re-run against pinned ROM/listing; all three TSVs byte-identical to committed blobs; 49/49 checks passed; PC/ROM concordance independently re-derived 306,688/306,688 with zero mismatches; R1–R5 PASS; page-index sum 22,308; unresolved distribution 43,530. WO65118 was independently reproduced and subsequently merged to `main` in `86914f2e04f9f3580b097dfc3553d89e21320c5e`. No source or artifact was modified. See [WO65121](WO65121.md), checkpoints 1–2.
 - [WO65115](WO65115.md) — **BOUNDED COMPLETE — CLOSED / MERGED:** exact-current-HEAD static access resolver execution against pinned ROM/listing. 24 tests (21 passed, 2 accepted non-blocking literal-`\n` fixture errors, 1 PKIOR skip); regression 12 resolved / 29,893 unresolved / 29,905:29,905 concordance; fuel-cut 125 resolved / 29,893 unresolved / 30,018:30,018 concordance. All four EVIDENCE TSVs are committed and remote-blob verified. The two harness errors were accepted as non-blocking test-fixture defects; PKIOR_W was accepted under WO65061's EXHAUSTED-BOUNDED disposition and remains NOT TESTABLE / SKIPPED. Branch merged to `main` in `87408dd02dd171c96f969a32d7aaf70b24d2b422`. No ROM, listing, XML, workbook, catalogue, resolver, or test source was modified.
 - [WO65110](WO65110.md) — **BOUNDED COMPLETE — CLOSED:** catalogue gap triage. Ranked queue of all 179 rows (band A 9, band B 11, band C 75, band D 84) with the scoring formula, a band-A promotion shortlist stating the evidence still missing per row, and an explicit unscoreable class of 154 rows. Three corrections to the gap-list premise: `0xE904` is already an XML v3 `[S]` table; 18 rows are byte-identical twins of other rows (six ROM-verified); and multi-reader tables number three, not the many a row-count queue would assume. Duplicate detection against XML is reliable only for 2D/3D entries because XML `1D` tables declare no extent.
 - [WO65112](WO65112.md) — **BOUNDED COMPLETE — CLOSED:** documentation-only errata audit. Twenty superseded-claim rows (claim → replacement → source record) covering the six named correction chains plus WO65103/WO65111, a do-not-cite set, and a contested list (WO65061/65062 read counts, WO65014's two mDDPAPO models, the duplicated WO65062 Correction 6b, and WO65102's unverified PCs). Coverage is bounded to those chains; the remaining WO archive was not re-indexed. No disassembly, ROM analysis or annotation edit.
@@ -223,12 +223,262 @@ Seven disjoint follow-ups were allocated from unresolved, explicitly identified 
 
 | WO | Follow-up | Source closeout | Priority | Status |
 |---|---|---|---|---|
-| [WO65144](WO65144.md) | Ignition-fragment downstream computation/action trace (`FFFF100A`, `FFFF1C79`, bit-7 path) | WO65109 | P1 | RESERVED — NOT STARTED; `wo65144-ignition-fragment-downstream-trace` |
-| [WO65145](WO65145.md) | Producer lineage and arithmetic domain for scalar cluster `0x829A–0x829F` | WO65090 / WO65065 | P1 | RESERVED — NOT STARTED; `wo65145-829a-scalar-cluster-producer-units` |
-| [WO65146](WO65146.md) | Computed/indirect consumer paths for DTC/CID records; no repeat of direct-literal census | WO65090 / WO65077 | P2 | RESERVED — NOT STARTED; `wo65146-dtc-cid-indirect-consumer-paths` |
-| [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | RESERVED — NOT STARTED; `wo65147-10fea-c2-producer-outcome` |
-| [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | RESERVED — NOT STARTED; `wo65148-10d12-gated-handoff-source-trace` |
-| [WO65149](WO65149.md) | Producers/lifecycle of `FFFF2BB8`, `FFFF8A54`, and `FFFF1E8A` across distinct `0x0E9AC` consumers | WO65130 | P2 | RESERVED — NOT STARTED; `wo65149-0e9ac-upstream-gates-mirror-trace` |
-| [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | RESERVED — NOT STARTED; `wo65150-cf48d-knock-window-reader-overlay-trace` |
+| [WO65144](WO65144.md) | Ignition-fragment downstream computation/action trace (`FFFF100A`, `FFFF1C79`, bit-7 path) | WO65109 | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; coordinator reviewed; semantic meaning unresolved |
+| [WO65145](WO65145.md) | Producer lineage and arithmetic domain for scalar cluster `0x829A–0x829F` | WO65090 / WO65065 | P1 | CLOSED — BOUNDED COMPLETE; coordinator erratum confirms direct reads at 0x829C/0x829D; physical identity unresolved |
+| [WO65146](WO65146.md) | Computed/indirect consumer paths for DTC/CID records; no repeat of direct-literal census | WO65090 / WO65077 | P2 | CLOSED — BOUNDED NEGATIVE; no computed/indirect consumer path for DTC or CID records; report/evidence committed directly to main |
+| [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; manual GBR resolution; physical semantics unresolved |
+| [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | CLOSED — BOUNDED COMPLETE; merged PR #34; upstream FFFF156A/FFFF84FE producers unresolved |
+| [WO65149](WO65149.md) | Producers/lifecycle of `FFFF2BB8`, `FFFF8A54`, and `FFFF1E8A` across distinct `0x0E9AC` consumers | WO65130 | P2 | CLOSED — BOUNDED COMPLETE; corrected report merged via PR #38 (`c2a292d`); FFFF2BB8 writer resolved; FFFF8A54 consumer remains unresolved |
+| [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | CLOSED — BOUNDED COMPLETE; merged PR #35; XML map labels remain unverified hypotheses |
 
 All seven reuse the source WOs and existing indexes; none authorizes a repeated census. WO65150 is explicitly donor-only and must not transfer CF48D addresses or labels into EL19A. Work-order-specific acceptance criteria and evidence boundaries are recorded in each WO file. The coordinator alone updates lifecycle status; workers must claim a WO only after a separate register transaction records owner and branch.
+
+
+## CF48D remaining XML-map follow-on reservations — 2026-11-21
+
+Eleven bounded donor-side work orders were allocated from the user's 25-entry remaining `"Map"` inventory and its supplied 256-byte raw-window summaries. They cover all 25 listed entries exactly once. Allocation only: all are **RESERVED — NOT STARTED**, unclaimed, and no technical investigation is claimed. Each branch contains only its assigned `CONTROL/WO<ID>.md` record.
+
+| WO | Target family | Priority | Status |
+|---|---|---|---|
+| [WO65151](WO65151.md) | Knock-limit pair `0xB421/0xB42A` and knock-slice `0xB10C` | P1 | **CLOSED — BOUNDED COMPLETE** (PARTIAL; donor-only); merged to main in `5bf2945`; see [WO65151](WO65151.md) |
+| [WO65152](WO65152.md) | QH0 normal/trustful pair `0xA78C/0xDBCA` | P1 | RESERVED — NOT STARTED; `wo65152-a78c-dbca-qh0-bank-selector` |
+| [WO65153](WO65153.md) | Engine torque `0xAF0C` and TTEPTD compensation `0xAE8C` | P2 | RESERVED — NOT STARTED; `wo65153-af0c-ae8c-torque-maps` |
+| [WO65154](WO65154.md) | AFR correction banks `0xA08C/0xA10C` and LTFT axes `0xBC9A/0xBBD8` | P1 | RESERVED — NOT STARTED; `wo65154-a08c-a10c-ltft-fuel-correction` |
+| [WO65155](WO65155.md) | P-gain bank pair `0x9271/0x92B1` | P2 | RESERVED — NOT STARTED; `wo65155-9271-92b1-pgain-bank-maps` |
+| [WO65156](WO65156.md) | MBT flame-speed `0x9191` and cylinder fresh-air `0x91A1` | P2 | RESERVED — NOT STARTED; `wo65156-9191-91a1-combustion-air-maps` |
+| [WO65157](WO65157.md) | Acceleration/deceleration fuel compensation `0x91B1/0x91F1` | P1 | CLOSED — BOUNDED COMPLETE; merged via PR #37 to main (93c8f4c); no physical direction/units/output conversion/cadence promoted |
+| [WO65158](WO65158.md) | Intake-cam timing `0x98B1` and VVT diagnosis delay `0x8D01` | P2 | RESERVED — NOT STARTED; `wo65158-98b1-8d01-cam-vvt-maps` |
+| [WO65159](WO65159.md) | High-temperature fuel compensation `0x8DC1` | P2 | RESERVED — NOT STARTED; `wo65159-8dc1-high-temp-fuel-comp-map` |
+| [WO65160](WO65160.md) | Misfire diagnosis family `0x9EF1/0x9CF1/0x9DF1` | P1 | CLOSED — BOUNDED (not statically resolvable); 0 resolver hits (base-register-indirect); report/evidence committed directly to main |
+| [WO65161](WO65161.md) | Fuel-cut rest/suspension timing pair `0x9841/0x9851` | P2 | RESERVED — NOT STARTED; `wo65161-9841-9851-fuel-cut-maps` |
+
+All eleven explicitly treat the supplied fixed 256-byte/16×16 UBYTE profile as triage only. They require reader-derived object extents, dimensions, storage widths, axes, caller inputs, helper mechanics and first consumers. XML labels and apparent shape/adjacency/duplicate statistics remain hypotheses pending code evidence. All are **CF48D donor-only**: no address, semantic or unit may be transferred to EL19A. No ROM/LST/XML/workbook/catalogue/script/tool changes are authorized. The coordinator alone updates lifecycle status; workers must claim only after a separate register transaction records owner and branch.
+
+
+## External-worker intensive audit reservation — 2026-11-21
+
+- [WO65162](WO65162.md) — **RESERVED — NOT STARTED; unclaimed; external worker intended.** Independent, row-level evidence audit of the current EL19A definition (76 entries), separate ignition/knock fragment (6 entries), and 179-row discovered-table catalogue. Deliverables: reconciled inventory, compact evidence-grade matrix for every row, contradiction/overlap register, and ranked top-25 non-duplicative follow-up backlog. Reuses existing WO reports and indexes; no broad ROM scan, no new helper census, no A2L/CF48D semantic borrowing, and no XML/catalogue/workbook/tool edits. This audit is a read-only quality-control workstream, independent of the dedicated A2L crosswalk WOs 65133–65141 and the CF48D donor workstream. Branch: `wo65162-independent-definition-evidence-audit`. External worker must not begin until the coordinator records the worker identity and branch in this register; worker edits only the assigned WO file. See `CONTROL/WO65162.md` for full scope and acceptance criteria.
+
+
+## EL19A producer/query/consumer follow-on reservations — 2026-11-21
+
+Ten disjoint, bounded follow-ons were allocated from explicit unresolved edges in closed EL19A investigations. Allocation only: every WO is **RESERVED — NOT STARTED**, unclaimed, and no technical work is claimed. The five merged static indexes WO65116–WO65120 and their independent audits WO65121/WO65122 must be reused before any new broad search.
+
+| WO | Follow-up | Source evidence | Priority | Status |
+|---|---|---|---|---|
+| [WO65163](WO65163.md) | Producer and numeric-domain provenance for divisor `FFFF97F4` | WO65089 / WO65099 corrected coordinate formula | P1 | RESERVED — NOT STARTED; `wo65163-ffff97f4-divisor-provenance` |
+| [WO65164](WO65164.md) | Producer/domain lineage for query input `FFFF8494` across lookup contexts | WO65078 / WO65089 / WO65099 / WO65127 | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; boot/init source and physical query meaning unresolved |
+| [WO65165](WO65165.md) | Producer of row-query UWORD `FFFF1D42` | WO65099 / WO65100 SWORD-map record | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; corrected access count is 2 writes and 11 reads |
+| [WO65166](WO65166.md) | Incoming stack provenance of second `0x0B956` query | WO65078 unresolved second argument to `sub_22D30` | P1 | CLOSED — BOUNDED; second query = UWORD[FFFF85B2] (FFFF859C+0x16); producer unresolved |
+| [WO65167](WO65167.md) | Callee effect after `FFFF85CB → sub_27720` | WO65057/WO65058 / WO65089 / WO65099 | P2 | RESERVED — NOT STARTED; `wo65167-0a0f2-sub27720-continuation` |
+| [WO65168](WO65168.md) | Indexed/indirect consumer of `FFFF29C4` | WO65100 `FFFF9C5C → FFFF29C4`; WO65118 xref | P1 | CLOSED — BOUNDED NEGATIVE; 1 direct write/0 direct reads; no indirect consumer proven; original 0x972C2 claim withdrawn |
+| [WO65169](WO65169.md) | Live producer/update source for `FFFF937C/FFFF937E` and descriptor gates | WO65065 / WO65103 / WO65104 | P1 | CLOSED — BOUNDED COMPLETE; static source/reader/caller trace reviewed; post-init computed/transport source remains unresolved |
+| [WO65170](WO65170.md) | Actual consumer/layout of descriptor-like ROM records at `0x13B50` | WO65055 bounded negative and record fingerprint | P2 | RESERVED — NOT STARTED; `wo65170-13b50-descriptor-consumer` |
+| [WO65171](WO65171.md) | Indirect consumer of copied pointer field `FFFFB6F0` | WO65055 copy provenance / WO65056 acquisition context | P2 | RESERVED — NOT STARTED; `wo65171-fffb6f0-copied-pointer-consumer` |
+| [WO65172](WO65172.md) | Subsequent reader of dynamic record slot populated from `FFFF170A` | WO65097 / WO65098 dynamic indexed store | P2 | RESERVED — NOT STARTED; `wo65172-ffff170a-dynamic-record-reader` |
+
+All ten are EL19A-only and reuse the merged structural indexes as navigation aids, not semantic proof. They must not repeat completed query/helper traces, target-literal negatives, map censuses or copy-family scans. Each WO identifies its exact unresolved edge and stop boundary. No XML, workbook, catalogue, ROM/LST, tooling or Library edits are authorized. Workers edit only their assigned WO record; the coordinator alone updates lifecycle status. Branches are separate and the scopes are allocated for concurrent work.
+
+## Diagnostic RAM-anchor reservations — 2026-11-22
+
+Two disjoint, read-only work orders were allocated from the user's diagnostic reverse-anchor proposal. Allocation only: both are **RESERVED — NOT STARTED**, unclaimed; no technical investigation has been performed.
+
+| WO | Scope | Priority | Dependencies | Status |
+|---|---|---|---|---|
+| [WO65173](WO65173.md) | Join all 259 Consult-II Mode $22 CIDs to existing RAM byte/bit xref, catalogue consumer summary and OBD Mode $01 map | P1 | Independent; reuses WO65118/WO65121 and existing diagnostic indexes. Data-join only; no ROM trace. | RESERVED — NOT STARTED; unclaimed; branch wo65173-consult22-ram-cell-join |
+| [WO65174](WO65174.md) | Reverse-anchor nine MAF, temperature and TPS-oriented DTC slots from indexed writer callsites to monitor inputs/thresholds | P1 | Independent; reuses DTC crosswalk/writer index and WO65116–WO65120. Excludes WO65146's reserved indirect-record-consumer scope. | RESERVED — NOT STARTED; unclaimed; branch wo65174-sensor-dtc-monitor-input-reverse-trace |
+
+WO65173 must preserve all 259 CIDs, 19 current Mode $01 cross-matches, pointer-space distinctions, and exact/partial/no-match evidence. WO65174 is deliberately limited to slots 130, 132–134, 137–140 and 175 (including both distinct P0122 slots); it does not reopen the 198-slot DTC census or diagnostic reporting path. Both workers edit only their assigned WO record. No ROM/LST/XML/workbook/catalogue/index/script/tool/Library change is authorized. The coordinator alone records claims, progress, review and closure.
+
+
+## Additional cross-domain investigation reservations — 2026-11-22
+
+Five further disjoint work orders were allocated from the user's remaining avenues. Allocation only: all are **RESERVED — NOT STARTED**, unclaimed; no technical investigation is claimed. Each branch contains only its assigned work-order record.
+
+| WO | Scope | Priority | Dependencies | Status |
+|---|---|---|---|---|
+| [WO65175](WO65175.md) | X12C second Nissan A2L COMPU_METHOD/scaling and bank-symmetry crosswalk against V6 A2L and EL19A catalogue | P1 | Reuse WO65133–WO65141; donor metadata only | RESERVED — NOT STARTED; unclaimed; `wo65175-x12c-second-a2l-crosswalk` |
+| [WO65176](WO65176.md) | Remaining HCAN2 mailbox/register and RAM payload-buffer map | P1 | Reuse WO65103/65106/65108 and merged indexes; explicitly excludes completed HCAN1 subset | RESERVED — NOT STARTED; unclaimed; `wo65176-hcan2-mailbox-payload-map` |
+| [WO65177](WO65177.md) | Exact accounted-extent ledger and residual ROM islands for `0x8000–0x18000` | P1 | Reuse XML v3, ignition fragment, 179-row catalogue, DTC/Consult indexes and completed scalar sweep | RESERVED — NOT STARTED; unclaimed; `wo65177-rom-dark-matter-accounting` |
+| [WO65178](WO65178.md) | ROM-resident static configuration/option-byte guard matrix | P1 | Reuse WO65111 and merged function/GBR indexes; no repeat of detailed `0x8405` trace | RESERVED — NOT STARTED; unclaimed; `wo65178-rom-variant-guard-matrix` |
+| [WO65179](WO65179.md) | CF48D-to-EL19A structural table fingerprint comparison | P2 | Reuse WO65142/65143, WO65150–65161 and EL19A catalogue/reader evidence; donor readiness gates final matches | RESERVED — NOT STARTED; unclaimed; `wo65179-cf48d-el19a-structural-fingerprint-crosswalk` |
+
+All five are read-only. Donor A2L/CF48D names, addresses, units and semantics are not EL19A proof. WO65179 may define its comparison schema and readiness inventory before donor reader closeouts, but may not issue final high-confidence matches without exact reader/axis/consumer evidence on both ROMs. No ROM/LST/A2L/XML/workbook/catalogue/index/script/tool edits are authorized. The coordinator alone records claims, progress, review and closure; workers edit only their assigned WO record.
+
+
+## Coordinator reconciliation checkpoint — 2026-11-22
+
+- Reviewed and reconciled report/evidence records for WO65139, WO65144, WO65145, WO65147, WO65148, WO65150, WO65164, WO65165 and WO65168. WO65148 and WO65150 were merged via PRs #34/#35; the other reports were already committed to main and were reviewed in place. Corrections are recorded in the individual WO files.
+- WO65157 is not accepted: its submission analyzed EL19A RAM, while its assignment is CF48D donor-only. Its original donor task remains unfinished. WO65169 is partial, not closed; WO65065's known readers at 0x8D202, 0x8D244 and 0x9D930 were not reconciled, and post-initialization producer/descriptor/caller lineage remains open.
+- Process deviation: multiple worker reports and, in some commits, the shared register were written directly to main instead of the assigned WO branch/PR path. The coordinator preserved and reviewed the main-branch evidence, did not merge stale template branches, and corrected lifecycle entries here. Future work must use register-first reservation and coordinator-only register updates.
+- No workbook update was made or claimed. The authoritative workbook pointer remains V58; the V58 binary is present on main, while the Library copy available to the coordinator is V57.
+
+## WO65169 static-trace closeout — 2026-11-22
+
+- The canonical listing confirms the sole identified direct initialization stores to FFFF937C/FFFF937E at 0x9041A/0x9041C under GBR=FFFF9324, plus descriptor gate initialization. WO65065 reader paths were restored and expanded: UWORD[FFFF937C] at 0x8D202; UWORD[FFFF937E] at 0x8D244; independent UWORD[FFFF937E] read at 0x9D930, compared with UWORD[FFFF98CA].
+- sub_8CF66 loads R1=FFFF93F2 and uses descriptor bytes +4/+6 and +5/+7 to gate the A70/A72 counter paths, with additional reads at +8..+0xB. Caller chain and conditional sub_9D8C8 read path are in CONTROL/WO65169.md. No timer period, source units or physical identity are assigned.
+- Bounded direct-literal and known-GBR review found no post-initialization writer; computed-pointer/alias, copy, DMA/DTC, interrupt/peripheral-fed updates remain unresolved. WO65169 is CLOSED — BOUNDED COMPLETE at this explicit stop boundary, not a claim that the live source producer was identified.
+- No Master Workbook update or other engineering artifact integration was performed; V58 remains the authoritative workbook pointer.
+
+## WO65157 coordinator claim — 2026-11-22
+
+- Coordinator claims the existing WO65157 reservation on `wo65157-91b1-91f1-accel-decel-fuel-maps` to perform the registered CF48D donor-only task. The earlier EL19A RAM submission is retained as out-of-scope material and is not used in this investigation.
+- Scope remains limited to CF48D ROM/LST pointers at 0x23202/0x2320A, with exact payload extent, axes, helper/query mechanics, selector chronology and first consumers. XML labels remain hypotheses.
+- Claim recorded before branch/artifact activity. No new WO allocated. No changes to ROM/LST/XML/workbook are authorized.
+
+## WO65157 integration branch handoff — 2026-11-22
+
+- Original assigned branch `wo65157-91b1-91f1-accel-decel-fuel-maps` retained unchanged after PR #36 reported a dirty merge because its base predates the coordinator scope-mismatch correction. No force-push or history rewrite performed.
+- Current claim is reassigned to the clean integration branch `wo65157-cf48d-map-consumer-closeout`, to be created from current `main`. The original branch and PR #36 remain historical until the replacement PR is accepted.
+
+## WO65157 closeout — 2026-11-22
+
+- Correct donor-only report is merged to main via PR #37, merge commit 93c8f4c30820bdde12a600d501dc57f81bd41c62. The report establishes distinct 8×8 UBYTE maps at 0x91B1/0x91F1, two 8-point axes, sub_6F78 lookup mechanics, FFFF2401.bit7 threshold/feedback selection, and first downstream staging at FFFF1D98-relative destinations.
+- XML acceleration/deceleration labels remain unverified hypotheses. Query units, output conversion, source pointer r8+0x24, full UWORD field construction at FFFF1D9A, physical meaning and runtime cadence remain unresolved.
+- PR #36 closed as superseded; original stale branch retained unchanged. PR #37 was based on the current register/main state and merged cleanly; no force-push/rewrite. Only CONTROL/WO65157.md changed.
+- No raw CF48D.bin binary verification was available in the coordinator runtime; the exact CF48D.bin.lst was byte-identical to its repository/Library Git blob. This input boundary is noted in the report.
+- Master Workbook remains V58; no engineering workbook integration claimed.
+
+## WO65149 review / integration claim — 2026-11-22
+
+- Coordinator claims the completed WO65149 report for review and integration on `wo65149-corrected-closeout`. The original worker branch `wo65149-0e9ac-upstream-gates-mirror-trace` is retained unchanged; it is 123 commits behind and diverged from current main. Its report received a coordinator erratum correcting the missed FFFF2BB8 stores at 0x55FCE/0x55FD8/0x55FE0 and the 32-bit width of the FFFF8A54 boolean store.
+- No force-push or history rewrite. A clean integration branch will be created from this current main after this reservation/claim commit is verified.
+
+## WO65149 closeout — 2026-11-22
+
+- Corrected report integrated via PR #38, merge commit c2a292dbe18fab8325d03eeb00bfffc8026caf48. The direct FFFF2BB8 producer was found in sub_55F66: zero when FFFF8A46 is zero; otherwise increment UWORD[FFFF8A78] with saturation at 0xFFFF. The same function later reads it at 0x56086 and compares it with 100× curve output.
+- FFFF8A54 is a 32-bit boolean store at 0x5608E; 32-bit zero setup at 0x56B12. Its downstream consumer remains unresolved. FFFF1E8A remains a Caller 2 self-gate / read-modify-write; no cross-feed between the two callers was found.
+- Original worker branch remains retained unchanged; its base was 123 commits behind. Clean integration branch created from current main after register-first claim; no history rewrite.
+- No workbook update or semantic/physical-unit promotion. Master Workbook remains V58.
+
+## WO65141 coordinator claim — 2026-11-22
+
+- Coordinator claims the existing P1 synthesis reservation on clean integration branch `wo65141-current-main-synthesis`, created from the current `main` after this register transaction is committed and verified.
+- Dependencies verified CLOSED: WO65133–WO65140, plus target-side prerequisites WO65127 and WO65132. Source reports have been reviewed; no new target trace, census, XML edit, workbook edit or catalogue edit is in scope.
+- The synthesis must retain separate structural/software-role/physical-domain confidence. WO65139's raw-vs-converted axis-range comparison was withdrawn by erratum; WO65140's target-vs-donor scale link is not established; no donor A2L label is promoted to EL19A physical identity.
+
+## WO65141 closeout — 2026-11-22
+
+- Evidence-grade synthesis of WO65133–WO65140, reconciled with target-side prerequisites WO65127/WO65132, merged to main via PR #39, merge commit ddf56e60b549451cdba39a8e1928dcc858fc0969. Only CONTROL/WO65141.md changed.
+- Strongest donor candidate: EL19A 0x0F406 ↔ V6 mTTWN (conditional scale inference; physical identity not verified). Strong structural/scale-compatible analogue: F3D6/F3DE ↔ mTTVOULM/S, but target runtime does not execute donor conversions. Other paired map/dashpot candidates remain possible family analogues only; 0x0FEE0/mTATVO is structural only; E904/E914/E934 has no counterpart established among tested donors, with raw-vs-converted range contradictions withdrawn.
+- No exact donor payload/axis byte match was proven because the V6 ROM payload image was not available. No donor labels, units, addresses or physical identities promoted to EL19A calibration definitions.
+- Five ranked next target-side discriminators are recorded in WO65141: 0x0B756/0x0B7D6 query/consumer chain; F3D6/F3DE source and endpoint closure; 0x0F406 ADC-reference/channel identity; E678/E688/scalar timer/gate chain; 0x0A342/0x0A382 selector/query/consumer chain.
+- No Master Workbook, XML, A2L, catalogue, ROM/LST, indexes, scripts/tools or Library artifact was modified. Master Workbook remains V58; no integration claimed.
+
+## Post-crosswalk target-side discriminator reservations — 2026-11-22
+
+| WO | Scope | Priority | Dependencies / reuse | Status |
+|---|---|---|---|---|
+| [WO65180](WO65180.md) | `0x0B756/0x0B7D6` incoming query provenance and `FFFF86D4+0x0E` first-consumer semantics | P1 | WO65137/WO65141; WO65060/WO64940 and WO65116–WO65120 indexes; no payload/axis/helper census repeat | CLOSED — BOUNDED COMPLETE; merged via PR #40 to main (`062a6fd`); both raw queries and parallel accumulator consumers resolved; physical units remain unresolved |
+
+WO65180 is the highest-information target-side follow-up selected by WO65141. It tests whether the plausible RPM/ms axis-scale compatibility of the paired UWORD maps is supported by actual EL19A query producers and downstream use. It is strictly an EL19A read-only semantic trace; donor V6 units/names remain hypotheses only. Register reservation committed before branch creation or analysis.
+
+## WO65180 coordinator claim — 2026-11-22
+
+- Branch `wo65180-b756-b7d6-query-output-trace` was created from main after the reservation commit and contains only the assigned scoped WO record. Coordinator claim is now registered before technical work.
+- Investigation is limited to both `sub_22CF8` callers at 0x39FD2/0x39FE2, their query producers, and the first meaningful consumer of FFFF86D4+0x0E. Reuse WO65137/WO65060/WO64940 and WO65116–WO65122. No repeated payload/axis/helper census or broad scans.
+- No physical RPM/ms meaning is assumed from V6 compu metadata; no XML/workbook/catalogue/tool edits authorized.
+
+
+## WO65180 closeout — 2026-11-22
+
+- WO65180 merged to main via PR #40, merge commit 062a6fd9f8b2cc075513b1692e1d339b729b2d2b. The verified helper calls are 0x39FE2 (map 0x0B756) and 0x39FF4 (map 0x0B7D6); 0x39FD2/0x39FEE load map bases, not calls.
+- Both lookups use the same raw UWORD queries UWORD[FFFF85B2] and UWORD[FFFF8494] with axes 0x0FCFC/0x0FD3C. No target scaling is applied at the callsites. Query producers/physical units remain unresolved.
+- Both results are staged separately at FFFF86E2 (0x0B756) and FFFF86E0 (0x0B7D6), then consumed by parallel bias/clamp accumulators ending at FFFF3456/FFFF3458. The 0x0B7D6 all-0x8000 surface is actively used as a neutral bias contribution; not a disabled table or a proven alternate mode bank.
+- WO65137 received a coordinator erratum correcting its earlier second-call PC and result offset. Only CONTROL/WO65180.md and CONTROL/WO65137.md changed; no ROM/LST/XML/A2L/catalogue/index/tool/Library/workbook files changed.
+- Master Workbook remains V58; no workbook integration claimed. Physical query domains and terminal output semantics remain open.
+
+## Target-side TVO limiter source and endpoint reservation — 2026-11-22
+
+- [WO65181](WO65181.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Resolve the upstream producer and numeric domain of `FFFF85CE`, then trace the two F3D6/F3DE limiter results (`FFFF33EA` and `FFFF2C92`) to their first meaningful downstream consumers and any demonstrable actuator/output boundary. This is the second-ranked unresolved target-side discriminator in WO65141, following the now-closed WO65180. Reuse WO65138's exact curve, axis, query, clamp and staging evidence plus WO65116–WO65122 indexes. Do not repeat payload/axis/helper census or assume 25 rpm/count / 0.3575°/count donor conversions are executed by EL19A. Branch: `wo65181-f3d6-f3de-query-endpoint-trace`.
+- Scope is read-only and limited to this assigned WO report. No ROM/LST/A2L/XML/catalogue/workbook/index/tool/script changes are authorized. Stop at unresolved computed-pointer, transport, scheduling or hardware-interface boundaries; a bounded unresolved result is acceptable and must not be promoted to physical throttle units or actuator identity.
+
+
+## WO65181 coordinator claim — 2026-11-22
+
+- The current session claims WO65181 on `wo65181-f3d6-f3de-query-endpoint-trace`. The branch was created from current `main` after the reservation transaction, and its only change is the assigned `CONTROL/WO65181.md` specification.
+- Scope is limited to the `FFFF85CE` query producer/numeric domain and the F3D6/F3DE staged-result first consumers / endpoint boundary. Reuse WO65138/WO65141 and WO65116–WO65122; do not repeat table payload, axis or helper census.
+- No workbook, XML, A2L, catalogue, ROM/LST, index or tooling edits are authorized. Technical work begins only after this claim is registered and read back.
+
+
+## WO65181 closeout — 2026-11-22
+
+- **CLOSED — BOUNDED COMPLETE**, merged via PR #41 at `2a3b98ca21ee1ee2c0fc159dd6c3f010ae34a141`; final report `CONTROL/WO65181.md` is present on `main` (report blob SHA `9214703a4b7676b7f5f608ec833c6093d91a68c4`).
+- Resolved the direct producer of `FFFF85CE` and its timer-capture-derived reciprocal lineage; final shared F3D6/F3DE query is `min(UWORD[FFFF8596] >> 7, 255)`, including sentinel/invalid-input differences.
+- Identified both result paths' first downstream 32-point UWORD table consumers (`0x0F712` and `0x128FE`) and internal RAM-calculation destinations. Physical timer clock/domain, RPM interpretation, dynamic F3D6 bound producers, and actuator endpoint remain unresolved.
+- Only the assigned WO report was integrated. Workbook V58, XML/A2L, ROM/LST, catalogue, indexes, tools and Library were not modified. No physical test performed.
+- No outstanding WO65181 review threads or submitted reviews existed; PR was self-reviewed against its one-file diff and merged cleanly. **Active WOs: none** at this checkpoint.
+
+
+## 0x0F406 ADC reference and NTC channel-identity reservation — 2026-11-22
+
+- [WO65182](WO65182.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Continue WO65141's third-ranked discriminator. Reuse WO65056/WO65105 for the proven ADC2 AN27/AN31 acquisition, shared `0x0F406` curve and filtering/failsafe chain, plus WO65134 for the conditional 20 mV/count ↔ 160 mV/point comparison. Resolve only: (a) whether target-side ADC configuration or available board evidence proves the reference/full-scale voltage; (b) whether downstream consumers distinguish AN27 from AN31 sufficiently to assign coolant versus intake-air roles. Branch: `wo65182-0f406-adc-reference-channel-identity`.
+- No ADC helper census, repeated `0x0F406` payload/axis decode, broad RAM scan, or donor-name promotion. If VREF or physical sensor assignment reaches a board/harness/peripheral boundary without evidence, record that boundary as unresolved. Read-only; only the assigned WO report may be modified. Workbook V58, XML/A2L, ROM/LST, catalogue, indexes and tools are out of scope.
+
+
+## WO65182 coordinator claim — 2026-11-22
+
+- Current session claims WO65182 on `wo65182-0f406-adc-reference-channel-identity`. Branch was created from main after the reservation commit; only the assigned WO report was added.
+- The claimed scope is limited to the independent ADC reference/full-scale evidence and target-side downstream role distinction for existing AN27/AN31 NTC paths. Reuse WO65056/WO65105/WO65134 and WO65116–WO65122; no repeated ADC helper, curve, axis or filter census.
+- Claim is registered before further technical work. No workbook, XML/A2L, ROM/LST, catalogue, index, tool or Library edits are authorized.
+
+
+## WO65182 closeout — 2026-11-22
+
+- **CLOSED — BOUNDED COMPLETE**, merged via PR #42 at `cd77cb70b3e658eccda3be80a8af9b58e288a20d`; final `CONTROL/WO65182.md` is integrated on `main` (report blob SHA `46872fbc0517358c3f440304907de01becbff451`).
+- Confirmed firmware channel indices `0x1B` / `0x1F` map to SH7058 ADC2 channels 3 / 7, corresponding to MCU inputs AN27 / AN31. Physical coolant-versus-intake-air wiring remains unproven.
+- SH7058 device specification requires external AVref 4.5 V to AVcc (AVcc=5.0 V ±0.5 V for ADC use). Actual ECU-board AVref remains unknown.
+- Corrected the crosswalk arithmetic: nominal 5.0 V gives approximately 19.53125 mV per `>>2` staged count and 156.25 mV per 8-count table step. Exact 160 mV steps require AVref=5.12 V, permitted but not established.
+- `0x0F406 ↔ mTTWN` remains a strong structural/function-family donor candidate, not a verified physical calibration identity. The donor payload remains unavailable.
+- Only WO65182 report was integrated. Workbook V58, XML/A2L, ROM/LST, catalogue, evidence indexes, tooling and Library were not modified; no hardware probing or vehicle test. **Active WOs: none** at this checkpoint.
+
+
+## Stranded branch reconciliation audit — 2026-11-22
+
+The current branch inventory was compared with `main`; no open PRs or unresolved review threads were found. The following older, divergent branches are **historical/redundant**, not outstanding worker results. Their diffs contain only old WO report additions and, for some branches, a stale copy of `CONTROL/active_work_orders.md`. The corresponding reports are already present on current `main` and their lifecycle dispositions are recorded below. Do not merge their stale register edits, rebase them, or treat their continued existence as an active task.
+
+| Historical branch | WO report represented in its diff | Current-main disposition |
+|---|---|---|
+| `ihatealladvertising-b956-map-context` | WO65078 | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-b956-map-semantics` | WO65069 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-b956-output-consumers` | WO65075, WO65077, WO65079 | Recovered/closed to main |
+| `ihatealladvertising-c0d6-map-semantics` | WO65068 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-cid-supmask-extraction` | WO65065 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-dtc-block-validation` | WO65063 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-ffff156a-consumer` | WO65076 | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-inline-map-semantics` | WO65064 plus stale register edit | CLOSED — BOUNDED COMPLETE |
+| `ihatealladvertising-map-caller-semantics` | WO65067 plus stale register edit | Recovered to main / CLOSED |
+| `ihatealladvertising-scalar-limiter-sweep` | WO65066 plus stale register edit | Recovered to main / CLOSED |
+| `reconcile-stranded-wo-records-20261121` | duplicate/restoration set for WO65066/67/68/69/75/77 plus stale register edit | Superseded by the already-recovered individual main reports |
+| `reconcile-wo65079-20261121` | WO65079 plus stale register edit | Superseded by WO65079 already recovered to main |
+
+The 23 currently reserved WO branches were also checked individually. Each has exactly one assigned `CONTROL/WO<ID>.md` addition relative to its old merge base; each assigned report still states RESERVED — NOT STARTED (or RESERVED — NOT STARTED; unclaimed). No technical closeout, tool/data artifact or worker result is present on those branches. They remain genuine unclaimed reservations, not completed reports. The only review/integration obligations are therefore future worker closeouts; none is currently pending review.
+
+**Inventory disposition:** 12 old unregistered/reconciliation branches retained as historical; 23 active reservations retained unchanged; 0 active WOs; 0 open PRs at the time of this audit. No branches were deleted, rebased, force-pushed or merged.
+
+
+## Concurrent claim correction — 2026-11-22
+
+After the historical branch audit snapshot above, WO65151 was claimed, completed, and closed on main (`5bf2945`, report in `CONTROL/WO65151.md`). The earlier branch-audit count of zero active WOs is retained as an as-of-audit snapshot; this note records the subsequent claim/closeout lifecycle. No workbook/XML/A2L/ROM/LST/catalogue/index/tool edits were made.
+
+## Next-three target investigation reservations — 2026-11-22
+
+The next three tasks are reserved from the post-WO65182 ranking in `CONTROL/WO65141.md`. Reservation only: no technical execution or finding is claimed.
+
+- [WO65183](WO65183.md) — **RESERVED — NOT STARTED; unclaimed; P1.** QDSPT threshold and mode-gate provenance around `sub_403D8`: resolve `FFFF1DB4.bit5`, `FFFF85F8.bit4`, `FFFF8600.bit6`, `FFFF860B.bit3`, the `0x8550` comparison against the AN27-derived `FFFF84BA` path, and branch/state consequences. Reuse WO65056/WO65095, WO64831/WO64834/WO64860/WO64874/WO64880/WO64892, WO65136/WO65182. No repeat of E678/E688 table mechanics or timer-capture derivation. Branch: `wo65183-qdspt-gate-ntc-threshold-provenance`.
+- [WO65184](WO65184.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Trace producers/meaning for `FFFF860D`, `FFFF857A`, `FFFF85FB.bit7` and first meaningful consumers of `FFFF189C/FFFF18C4` for the `0x0A342/0x0A382` pair. Reuse WO65089/WO65135 and WO65116–WO65122; no payload/axis/helper re-decode. Branch: `wo65184-0a342-0a382-query-output-consumer`.
+- [WO65185](WO65185.md) — **RESERVED — NOT STARTED; unclaimed; P2.** Feasibility-frontier audit for the separate screenshot scalar `Throttle Reduction Rate = 52.34%`: determine whether any new, independently evidenced EL19A throttle-target/actuator-command path can anchor it, reusing `EVIDENCE/Rev Hang.PNG`, WO64831/64850/64854/64855/64860/64862/64874, WO65014 and WO65106 plus relevant V6 A2L function associations. Explicitly exclude A0E2, paired `0x848A/0x848B`, and unrelated `FFFF12EA` as established matches. No blind ROM-wide 0x43/value search or assumed percentage conversion. A bounded no-new-entry/blocked result is acceptable. Branch: `wo65185-throttle-reduction-scalar-feasibility`.
+
+All three are read-only, disjoint and unclaimed. A worker may begin only after a separate coordinator claim transaction; workers edit only their assigned WO report. No workbook V58, XML/A2L, ROM/LST, catalogue, indexes, scripts, tools or Library modifications are authorized.
+
+
+## Additional F3D6/F3DE residual reservations — 2026-11-22
+
+Three additional disjoint, read-only tasks are reserved from the updated residual ranking in `CONTROL/WO65141.md`. Reservation only; no technical result is claimed.
+
+- [WO65186](WO65186.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Resolve the producer/representation of UWORD clamp bounds `FFFF9866` and `FFFF9868` used by the F3D6 path under GBR=`FFFF9862` (+4/+6). Reconcile WO64832's earlier bounded negative using WO65116–WO65122's newer function/GBR, effective-address, byte/bit and callgraph evidence. Check only direct/GBR/copy/computed-pointer routes relevant to these two words; no generic limiter census. Branch: `wo65186-f3d6-dynamic-clamp-bound-provenance`.
+- [WO65187](WO65187.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Trace the writers and chronology of shared table-path gate `FFFF99E7.bit3` for the F3D6/F3DE routines. Establish exact set/clear polarity and writer inputs; stop at unresolved scheduling/transport. No curve/helper/query re-decode; exclude WO65183's separate QDSPT branch flags. Branch: `wo65187-f3d6-f3de-table-gate-provenance`.
+- [WO65188](WO65188.md) — **RESERVED — NOT STARTED; unclaimed; P2.** Continue only the selected difference-triggered event path: `abs(FFFF33EA-FFFF2C92)`, low-byte nonzero, difference > `0x5C`, `FFFF39A7` clear, dispatch argument `0x4E` to `sub_71F74`. WO64832 already established the generic dispatcher and internal helpers `sub_72480/sub_72676`; resume inside that selected path, not with a dispatcher census. Establish first meaningful record/state/output effect and stop at the first external/hardware boundary. Branch: `wo65188-f3d6-f3de-event-4e-handler-continuation`.
+
+The tasks are disjoint from active WO65151 and reserved WO65183–WO65185. Workers may begin only after separate claim transactions and may edit only the assigned report. No workbook V58, ROM/LST, XML/A2L, catalogue, evidence index, script, tool or Library change is authorized.
+

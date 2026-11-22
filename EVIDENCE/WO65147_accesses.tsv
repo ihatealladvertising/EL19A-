@@ -1,0 +1,15 @@
+# ROM MD5: 46991697c502052752a2cabcb84c9e27
+# ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+# Listing member: EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst
+# Listing SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+# Resolver version: 1.12.0
+# Target file hash: eaccd369165b748f2956db074b7835b5b245a3c3eff1448046d2fdc519104437
+# Run date: 2026-11-22
+# Method limits: computed pointers, pointer tables beyond the named sub_22E10/R4 contract, other interprocedural helper-argument dereferences, block-copy and movca.l transport are not modelled
+# Concordance: rows_checked=29898 rows_matched=29898
+target	space	pc	function	access	width	form	base	base_resolved	mask	note
+FFFF180C	ram	0x292E6	sub_28C36	write	w	base_disp	FFFF180C	full	-	mov.w r6, @r13
+FFFF180E	ram	0x292CE	sub_28C36	write	w	base_disp	FFFF180C	full	-	mov.w r0, @(0x2,r13)
+FFFF181C	ram	0x292F0	sub_28C36	write	w	base_disp	FFFF181C	full	-	mov.w r6, @r14
+FFFF181E	ram	0x292DC	sub_28C36	write	w	base_disp	FFFF181C	full	-	mov.w r0, @(0x2,r14)
+FFFF18DC	ram	0x29260	sub_28C36	write	b	base_r0	FFFF1860	full	-	mov.b r2, @(r0,r1)
