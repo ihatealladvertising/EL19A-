@@ -1,0 +1,9 @@
+# WO65147 GBR-relative unresolved extract
+# source: rom_access_indexer 1.12.0 full unresolved log (29893 rows); selected rows = GBR-displacement sites of the routine entered at loc_37424 (GBR = FFFF180C via 0x37438/0x3743A)
+UNRESOLVED	unknown	0x375A0	sub_3723C	write	w	gbr_disp	?	none	-	mov.w r0, @(0x3C,gbr); candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved GBR register
+UNRESOLVED	unknown	0x375A8	sub_3723C	write	l	gbr_disp	?	none	-	mov.l r0, @(0x38,gbr); candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved GBR register
+UNRESOLVED	unknown	0x375AA	sub_3723C	read	b	gbr_disp	?	none	-	mov.b @(0xD0,gbr), r0; candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved GBR register
+UNRESOLVED	unknown	0x37692	sub_3723C	write	w	gbr_disp	?	none	-	mov.w r0, @(0x2,gbr); candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved GBR register
+UNRESOLVED	unknown	0x37924	sub_3723C	write	w	base_disp	?	none	-	mov.w r0, @(0x2,r10); candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved base register
+UNRESOLVED	unknown	0x3792A	sub_3723C	write	b	base_disp	?	none	-	mov.b r0, @(0x1,r10); candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved base register
+UNRESOLVED	unknown	0x3792C	sub_3723C	read	w	gbr_disp	?	none	-	mov.w @(0x2,gbr), r0; candidate targets (not resolved): FFFF18DC;FFFF180E;FFFF180C;FFFF181C;FFFF181E	unresolved GBR register
