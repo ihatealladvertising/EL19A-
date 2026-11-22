@@ -265,7 +265,7 @@ Eleven bounded donor-side work orders were allocated from the user's 25-entry re
 | [WO65160](WO65160.md) | Misfire diagnosis family `0x9EF1/0x9CF1/0x9DF1` | P1 | CLOSED — BOUNDED (not statically resolvable); 0 resolver hits (base-register-indirect); report/evidence committed directly to main |
 | [WO65161](WO65161.md) | Fuel-cut rest/suspension timing pair `0x9841/0x9851` | P2 | **CLOSED — BOUNDED COMPLETE** (PARTIAL; donor-only); merged to main in `1a54dd2`; see [WO65161](WO65161.md) |
 
-All eleven explicitly treat the supplied fixed 256-byte/16×16 UBYTE profile as triage only. They require reader-derived object extents, dimensions, storage widths, axes, caller inputs, helper mechanics and first consumers. XML labels and apparent shape/adjacency/duplicate statistics remain hypotheses pending code evidence. All are **CF48D donor-only**: no address, semantic or unit may be transferred to EL19A. No ROM/LST/XML/workbook/catalogue/script/tool changes are authorized. The coordinator alone updates lifecycle status; workers must claim only after a separate register transaction records owner and branch.
+All eleven explicitly treat the supplied fixed 256-byte/16×16 UBYTE profile as triage only. They require reader-derived object extents, dimensions, storage widths, axes, caller inputs, helper mechanics and first consumers. XML labels and apparent shape/adjacency/duplicate statistics remain hypotheses pending code evidence. All are **CF48D donor-only**: no address, semantic or unit may be transferred to EL19A. No ROM/LST/XML/workbook/catalogue/script/tool changes are authorized. Workers self-claim and update only their own lifecycle rows under the autonomous Worker 1/2/3 slot protocol.
 
 
 ## External-worker intensive audit reservation — 2026-11-21
