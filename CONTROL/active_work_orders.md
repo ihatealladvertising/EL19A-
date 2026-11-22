@@ -542,7 +542,7 @@ Four bounded work orders were added after a no-duplicate review. The existing Mo
 | WO | Class | Scope | Priority | Dependency / status |
 |---|---|---|---|---|
 | [WO65204](WO65204.md) | INFRA / PILOT | Bounded normalized SH-2 instruction alignment pilot: CF48D ignition reader at 0x8ED1 against EL19A candidate readers for 0x9B2E/0x9C2E/0x9DAE | P1 | Independent; RESERVED — NOT STARTED; unclaimed; `wo65204-instruction-alignment-pilot` |
-| [WO65205](WO65205.md) | ANCHOR | Trace backward from WO65106's identified ATU ignition-output candidate(s) to the EL19A advance/trim software value and output staging | P1 | Independent; RESERVED — NOT STARTED; unclaimed; `wo65205-ignition-output-backtrace` |
+| [WO65205](WO65205.md) | ANCHOR | Test whether WO65106's ATU/timer output inventory contains an ignition-specific endpoint; trace backward only if target-side evidence establishes that link | P1 | Independent; RESERVED — NOT STARTED; unclaimed; `wo65205-ignition-output-backtrace` |
 | [WO65206](WO65206.md) | ANCHOR / DEPENDENT | Evidence-gated propagation of donor A2L/logger RAM symbols to a maximum of 15 EL19A candidates | P2 | BLOCKED until WO65204 has a positive alignment result and WO65207 supplies the shortlist; RESERVED — NOT STARTED; unclaimed; `wo65206-donor-ram-symbol-propagation` |
 | [WO65207](WO65207.md) | ADJUDICATE | Rank top 30 unnamed/weakly named EL19A RAM candidates using existing unique-reader indexes and independent diagnostic/hardware anchors | P1 | Independent; RESERVED — NOT STARTED; unclaimed; `wo65207-reader-count-ram-priority` |
 
