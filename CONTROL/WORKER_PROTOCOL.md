@@ -18,15 +18,9 @@ Never run two sessions under the same slot. All three slots may start immediatel
 
 All work is committed directly to shared main. No feature branches, PRs, merges, cherry-picks, resets, force-pushes or history rewrites.
 
-**Current legacy assignments (explicit assignments override the new-ID rule):**
+**Live assignments are defined only by `CONTROL/active_work_orders.md`.** Do not use historical queue tables or older assignment notes embedded elsewhere in the register to infer current ownership. A closed WO is not an active assignment even if an old paragraph still names its former owner. Explicit current lane assignments in the live register override the modulo rule for already-existing WOs.
 
-| Slot | Assigned work |
-|---|---|
-| Worker 1 | WO65174 — DTC/sensor-monitor input reverse trace |
-| Worker 2 | WO65178 — ROM configuration/option-byte guard matrix |
-| Worker 3 | WO65184 — 0x0A342/0x0A382 producer and consumer trace (already ACTIVE) |
-
-Each slot owns its lane. It selects only its own READY/ASSIGNED work, performs one WO at a time, and updates only its own lane's lifecycle records. Do not borrow another slot's WO, change another slot's owner/status, or wait for another slot.
+Each slot owns its lane. It selects only its own READY/ASSIGNED work in the live register, performs one WO at a time, and updates only its own lane's lifecycle records. Do not borrow another slot's WO, change another slot's owner/status, or wait for another slot.
 
 **New WO ID allocation is collision-free by lane:** for WOs created under this protocol, assign by ID remainder:
 - ID mod 3 = 1: Worker 1

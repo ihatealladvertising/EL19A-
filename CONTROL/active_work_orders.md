@@ -11,11 +11,11 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65218 — `sub_762C6` caller-argument provenance for slots 132–134 | Assigned and ready; `CONTROL/WO65218.md` exists |
-| Worker 2 | No current assignment (WO65178 closed) | Lane ready for its own replenishment; no other slot assignment |
-| Worker 3 | WO65184 — 0x0A342/0x0A382 producer/query/output-consumer trace | Active; report exists |
+| Worker 1 | WO65218 → WO65221 → WO65224 | WO65218 current; WO65221 ready follow-on; WO65224 reserved/dependent until WO65221 closes |
+| Worker 2 | WO65219 → WO65222 | WO65219 current/ready; WO65222 reserved/dependent until WO65219 closes |
+| Worker 3 | PAUSED — offline temporarily. WO65184 retained; then WO65220 → WO65223 | WO65184 PAUSED — WORKER OFFLINE; WO65220 and WO65223 remain reserved to Worker 3 and are not available for reassignment |
 
-- **No waiting:** all three workers may start immediately and continue independently.
+- **Availability:** Workers 1 and 2 may start immediately and continue independently. Worker 3 is temporarily offline; its lane is paused without releasing or reallocating its work.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
 - **Future IDs:** new WOs after 65217 use ID modulo 3: remainder 1 → Worker 1; remainder 2 → Worker 2; remainder 0 → Worker 3. A worker creates and owns only its own lane's new WOs.
 - **Queue replenishment:** when its lane has no ready follow-on, the worker chooses and writes the next bounded, high-value technical WO using the ranking and no-repeat rules in WORKER_PROTOCOL.md. Maintain one justified ready follow-on per lane; do not create speculative filler.
@@ -24,14 +24,14 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** Worker 1 → WO65218 (ASSIGNED — READY); Worker 2 → no current task (WO65178 CLOSED; lane may self-replenish); Worker 3 → WO65184 (ACTIVE). WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
+**Current queue state:** Worker 1 → WO65218 (current), then WO65221 (READY), then WO65224 (RESERVED — DEPENDENT); Worker 2 → WO65219 (current/READY), then WO65222 (RESERVED — DEPENDENT); Worker 3 → PAUSED — WORKER OFFLINE: WO65184 retained as paused, followed by WO65220 (reserved) and WO65223 (reserved). Worker 3's tasks are not eligible for other workers. WO65183 is CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by its unmet positive-alignment dependency. Historical assignment/claim notes below are not live assignments; the current lane table and lifecycle status above take precedence.
 
 ## Current operational frontier
 
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
 - **Current XML baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` (`EL19A_Merged_Spec_v3`: 76 tables, 7 verified and 69 `[S]`) plus `EL19A_ignition_decoded_fragment_33ea8e67.xml` (6 ignition/knock tables).
 - **Discovery staging:** `CALIBRATIONS/discovered_tables_catalog.csv` (179 helper/reader-verified varying tables absent from XML v3).
-- **Active WOs:** WO65184 (Worker 3; P1; branch `main`; `CONTROL/WO65184.md`). **Assigned/ready:** WO65218 (Worker 1; P1; branch `main`; `CONTROL/WO65218.md`). **Blocked:** WO65206 (requires a positive WO65204 alignment, which was not found, so it remains ineligible). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217.
+- **Active WOs:** none currently executing. **Paused:** WO65184 (Worker 3; P1; `CONTROL/WO65184.md`; paused because Worker 3 is temporarily offline). **Assigned/ready:** WO65218 (Worker 1; P1; `CONTROL/WO65218.md`), WO65221 (Worker 1; P1; `CONTROL/WO65221.md`), WO65222 (Worker 2; P1; `CONTROL/WO65222.md`). **Paused/reserved:** WO65220 (Worker 3; unavailable while Worker 3 is offline). **Reserved/dependent:** WO65223 (Worker 3; waits for WO65220 and Worker 3's return), WO65224 (Worker 1; waits for WO65221). **Blocked:** WO65206 (requires a positive WO65204 alignment, which was not found, so it remains ineligible). **Closed/reconciled:** WO65127, WO65133-WO65141, WO65144-WO65157, WO65158, WO65159-WO65161, WO65162, WO65163-WO65169, WO65167, WO65170, WO65171, WO65172, WO65173, WO65174, WO65176, WO65177, WO65178, WO65179, WO65180-WO65183, WO65185-WO65187, WO65188, WO65189, WO65190, WO65192, WO65194, WO65195, WO65197, WO65196-WO65205, WO65207, WO65208, WO65209, WO65210-WO65214, WO65215, WO65216, WO65217, WO65219.
 - **Checkpoint 2026-11-21 (claim):** WO65109 and WO65114 claimed by the current session. Branches `wo65109-ignition-fragment-reader-audit` and `wo65114-thin-reference-closeout`. Both scopes are disjoint; no technical finding is registered in this transaction. WO65122 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: all four remaining branch-only indexes (WO65116/65117/65119/65120) independently reproduced (199/199 checks; 14/14 TSVs byte-identical). WO65121 is **CLOSED — BOUNDED COMPLETE** and merged to `main`: independent reproduction of WO65118's RAM byte/bit cross-reference passed 49/49 checks with all three TSVs byte-identical and 306,688/306,688 concordance re-derived. WO65115 is **CLOSED — BOUNDED COMPLETE** and merged to `main` in merge commit `87408dd02dd171c96f969a32d7aaf70b24d2b422` (final branch head `102a730fc15edf6ed7d77e09bef66050a1792093`): exact-HEAD bytes from original head `745a5def238e78d2260e0e04f234a43409c52ae8` were executed from canonical blobs; 24 tests (21 passed, 0 assertion failures, 2 accepted non-blocking fixture errors, 1 PKIOR skip), regression 29,905/29,905 and fuel-cut 30,018/30,018 concordance; all four TSVs are committed and remote-verified. PKIOR_W is accepted as EXHAUSTED-BOUNDED / NOT TESTABLE. **Completed/older WOs:** WO65114 is closed and merged (V58 successor). WO65085–WO65108 and WO65110–WO65112 are closed; WO65113 remains closed — bounded complete.
 
 **Curve-family reconciliation closeout — 2026-11-22:** WO65216 is CLOSED — BOUNDED COMPLETE. The additive synthesis at `EVIDENCE/WO65216_curve_family_consumer_reconciliation.md` corrects the stale family-level no-consumer statements in WO65197/WO65198/WO65199: WO65202 (`0x0EB30`) and WO65203 (`0x0E700`) have positive downstream consumer paths; the other traced outputs remain bounded no-consumer findings. WO65173's completed report is also reconciled as CLOSED. No protected artifacts were changed.
@@ -722,3 +722,31 @@ Five bounded work orders were reserved to test the user's proposed A2L↔binary 
 - Scope is limited to r4–r7 provenance through `sub_761C8` and, only if needed, one caller boundary into `sub_70620`. Existing slot monitor traces and the DTC census are reused; no physical sensor identity is assumed.
 - Worker 1 owns the report and its own closeout. No other lane's task or status was changed.
 - No ROM, LST, XML/A2L, workbook, catalogue, index, script, tool, Library or user-owned local file was modified. `using youtube videos.txt` remains untouched and uncommitted.
+
+
+## Semantic-convergence follow-on batch — 2026-11-22
+
+Three bounded follow-ons were generated from the user's ranked investigative paths and the explicit unresolved boundaries in completed reports. After a final no-repeat check, Worker 3's task was prioritized from the shared `FFFF8494` lineage gap (WO65164/WO65180/WO65189) rather than the lower-priority `FFFF3456/FFFF3458` downstream endpoint follow-on; the latter remains a future candidate. These are reservations only; no new technical findings are claimed.
+
+| WO | Lane | Focus | Reused evidence / no-repeat boundary | Status |
+|---|---|---|---|---|
+| [WO65219](WO65219.md) | Worker 2 | Producer lineage for UWORD `FFFF84EA`, the varying query controlling the `0x0C3D6` Q15 crossfade weight | WO65193 identifies this as the only varying query and names its producer as the next discriminator; reuse WO65182/WO65183 and indexes. No repeat of C3D6 map/axis/crossfade or ADC/QDSPT audits. | ASSIGNED — WORKER 2 — READY |
+| [WO65220](WO65220.md) | Worker 3 | `FFFF8494` query-record boot/initialization provenance and contexts of pointer seeds at `0x4ABAC` / `0x962BC` | WO65164 found no direct writer and exactly two pointer seeds; WO65180/WO65189 establish cross-family use. No repeat of resolver census, map/query traces or sibling-field producer arithmetic. | ASSIGNED — WORKER 3 — READY |
+| [WO65221](WO65221.md) | Worker 1 | Downstream readers of recursive-filter output `FFFF27EA` beyond its history copy | WO65191 explicitly identifies these readers as its next step. No repeat of B956 query, recursive MAC, coefficients, clamp or history shift; no reopening WO65090 scalar sweep. | ASSIGNED — WORKER 1 — READY |
+
+Lane mapping is collision-free: 65219 mod 3 = 2 (Worker 2), 65220 mod 3 = 0 (Worker 3), 65221 mod 3 = 1 (Worker 1). Worker 1's WO65221 follows WO65218; Worker 3's WO65220 follows active WO65184. Each worker owns only its own report and lifecycle/queue entries. Read-only technical work; no protected engineering artifact is authorized for modification. `using youtube videos.txt` remains user-owned, ignored, uncommitted and untouched.
+
+
+## Semantic-convergence follow-on queue — 2026-11-22
+
+Three additional bounded WOs were generated from the requested end-to-end semantic chains. They are deliberately **RESERVED — DEPENDENT; NOT READY** so each lane retains only one ready follow-on and workers do not accumulate speculative backlog. Each becomes READY only after its named predecessor is closed by the same worker.
+
+| WO | Lane | Objective | Reuse / strict no-repeat boundary | Lifecycle |
+|---|---|---|---|---|
+| [WO65222](WO65222.md) | Worker 2 | Identify the timer-capture source, peripheral channel, clock/prescaler and event identity feeding `FFFF14E0 → FFFF85E4`; determine whether the reciprocal chain supports RPM/speed or only a period-derived coordinate. | Reuse WO65092, WO65104, WO65106 and WO65181. No repeat of delta arithmetic, reciprocal helper, FFFF8596/85CE derivation or Timer11/Timer5/APC census. | RESERVED — DEPENDENT on WO65219 |
+| [WO65223](WO65223.md) | Worker 3 | Follow `0x0F712` and `0x128FE` 32-point lookup outputs to downstream control/diagnostic/peripheral sinks and identify any convergence. | Reuse WO65181, WO65138 and WO65141. No repeat of F3D6/F3DE payload, axis, query or lookup argument derivation. | RESERVED — DEPENDENT on WO65220 |
+| [WO65224](WO65224.md) | Worker 1 | Trace downstream sinks of normal/trust blend `FFFF1762` and signed aggregation `FFFF9C28–FFFF9C5C`; classify their verified software roles and any shared endpoint. | Reuse WO65093, WO65094, WO65099, WO65165, WO65092 and WO65181. No repeat of blend formula, ±327 callback or SWORD-map aggregation arithmetic. | RESERVED — DEPENDENT on WO65221 |
+
+**Semantic proof gate for this batch:** a physical identity is not accepted merely because a variable is read or a donor name/axis looks plausible. Require a direct ADC/CAN/DTC/actuator/MMIO edge, consistent target-side units/clamps across at least two independent paths, or explicit elimination (for example, proven dead/shadow-only state). Otherwise retain the precise software-role description and unresolved boundary.
+
+**NTC disposition:** WO65182 already closed the software-side AN27/AN31 consumer discriminator as unresolved: both use the same `0xF406` NTC curve and separate normalization paths; actual AVref and sensor-to-pin wiring require board/harness evidence not present in the ROM repository. Do not generate another ADC/NTC scan without new external hardware evidence.
