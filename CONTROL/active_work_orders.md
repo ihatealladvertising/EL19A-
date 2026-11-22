@@ -223,7 +223,7 @@ Seven disjoint follow-ups were allocated from unresolved, explicitly identified 
 
 | WO | Follow-up | Source closeout | Priority | Status |
 |---|---|---|---|---|
-| [WO65144](WO65144.md) | Ignition-fragment downstream computation/action trace (`FFFF100A`, `FFFF1C79`, bit-7 path) | WO65109 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65144-ignition-fragment-downstream-trace`; coordinator review/merge pending |
+| [WO65144](WO65144.md) | Ignition-fragment downstream computation/action trace (`FFFF100A`, `FFFF1C79`, bit-7 path) | WO65109 | P1 | CLOSED — BOUNDED COMPLETE; report/evidence committed directly to main; coordinator reviewed; semantic meaning unresolved |
 | [WO65145](WO65145.md) | Producer lineage and arithmetic domain for scalar cluster `0x829A–0x829F` | WO65090 / WO65065 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65145-829a-scalar-cluster-producer-units`; coordinator review/merge pending |
 | [WO65146](WO65146.md) | Computed/indirect consumer paths for DTC/CID records; no repeat of direct-literal census | WO65090 / WO65077 | P2 | RESERVED — NOT STARTED; `wo65146-dtc-cid-indirect-consumer-paths` |
 | [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65147-10fea-c2-producer-outcome`; coordinator review/merge pending |
