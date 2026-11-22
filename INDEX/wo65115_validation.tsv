@@ -1,0 +1,11 @@
+target	expected_rule	actual_hits	status	concordance	sample_hits
+0x388AC	exact == 1	1	PASS	141/141	0x38806(sub_38592:constant)
+0x8550	exact == 1	1	PASS	141/141	0x40436(sub_403D8:dereferenced)
+0xED64	exact == 1	1	PASS	141/141	0x48930(sub_488BA:dereferenced)
+0xEDA0	exact == 1	1	PASS	141/141	0x48942(sub_488BA:dereferenced)
+0xEE68	exact == 1	1	PASS	141/141	0x48E68(sub_48D2E:dereferenced)
+0xF01C	exact == 1	1	PASS	141/141	0x48E5A(sub_48D2E:dereferenced)
+FFFF1DB4	exact == 3 (r@4042C, w@4044A, r@4054A in sub_403D8)	3	PASS	141/141	0x4042C(sub_403D8:read); 0x4044A(sub_403D8:write); 0x4054A(sub_403D8:read)
+FFFF84BA	exact == 129	129	PASS	141/141	0x2AF66(sub_2AF30:read); 0x3C6C0(sub_3C590:read); 0x3C6CC(sub_3C590:read); 0x3C8F8(sub_3C590:read); 0x3CB4C(sub_3C590:read); 0x3D238(sub_3C590:read)
+FFFF85DF	exact == 3	3	PASS	141/141	0x46BDE(sub_46744:read); 0x47014(sub_46744:read); 0x59BF2(sub_599AE:write)
+FFFF85E0	exact == 0	0	PASS	141/141	-
