@@ -215,3 +215,20 @@ All five branch-only work packages have been independently reproduced, authorize
 ## CF48D knock-window shape comparison — 2026-11-21
 
 - [WO65143](WO65143.md) — **BOUNDED COMPLETE — CLOSED:** records the user-supplied 16×16 UBYTE statistical/gradient comparison for CF48D blocks `0x8DD1`, `0x8ED1`, and `0x8FD1`. Supplied output reports `0x8DD1` and `0x8ED1` as exact 256-byte duplicates; `0x8FD1 - 0x8DD1` is cellwise non-positive (min -13, max 0, mean -4.15). Shape and gradient profiles are preserved in the WO. Labels are unverified; no reader/axis/selector trace, semantic promotion, or EL19A address transfer. User-supplied code/results were not independently rerun or checked against the binary. No ROM/LST/XML/workbook/catalogue/script changes. Branch: `wo65143-cf48d-knock-window-shape-audit`; report commit `2c0c24bec1348dd5a5c58f44628270672e215092`.
+
+
+## Closed-WO follow-on reservations — 2026-11-21
+
+Seven disjoint follow-ups were allocated from unresolved, explicitly identified leads in closed informative work orders. Allocation only: all are **RESERVED — NOT STARTED**, unclaimed, and no technical investigation is claimed. Each branch contains only its assigned `CONTROL/WO<ID>.md` record. Existing active/reserved work remains unchanged.
+
+| WO | Follow-up | Source closeout | Priority | Status |
+|---|---|---|---|---|
+| [WO65144](WO65144.md) | Ignition-fragment downstream computation/action trace (`FFFF100A`, `FFFF1C79`, bit-7 path) | WO65109 | P1 | RESERVED — NOT STARTED; `wo65144-ignition-fragment-downstream-trace` |
+| [WO65145](WO65145.md) | Producer lineage and arithmetic domain for scalar cluster `0x829A–0x829F` | WO65090 / WO65065 | P1 | RESERVED — NOT STARTED; `wo65145-829a-scalar-cluster-producer-units` |
+| [WO65146](WO65146.md) | Computed/indirect consumer paths for DTC/CID records; no repeat of direct-literal census | WO65090 / WO65077 | P2 | RESERVED — NOT STARTED; `wo65146-dtc-cid-indirect-consumer-paths` |
+| [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | RESERVED — NOT STARTED; `wo65147-10fea-c2-producer-outcome` |
+| [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | RESERVED — NOT STARTED; `wo65148-10d12-gated-handoff-source-trace` |
+| [WO65149](WO65149.md) | Producers/lifecycle of `FFFF2BB8`, `FFFF8A54`, and `FFFF1E8A` across distinct `0x0E9AC` consumers | WO65130 | P2 | RESERVED — NOT STARTED; `wo65149-0e9ac-upstream-gates-mirror-trace` |
+| [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | RESERVED — NOT STARTED; `wo65150-cf48d-knock-window-reader-overlay-trace` |
+
+All seven reuse the source WOs and existing indexes; none authorizes a repeated census. WO65150 is explicitly donor-only and must not transfer CF48D addresses or labels into EL19A. Work-order-specific acceptance criteria and evidence boundaries are recorded in each WO file. The coordinator alone updates lifecycle status; workers must claim a WO only after a separate register transaction records owner and branch.
