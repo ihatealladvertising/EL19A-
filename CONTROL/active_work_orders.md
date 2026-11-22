@@ -227,7 +227,7 @@ Seven disjoint follow-ups were allocated from unresolved, explicitly identified 
 | [WO65145](WO65145.md) | Producer lineage and arithmetic domain for scalar cluster `0x829A–0x829F` | WO65090 / WO65065 | P1 | RESERVED — NOT STARTED; `wo65145-829a-scalar-cluster-producer-units` |
 | [WO65146](WO65146.md) | Computed/indirect consumer paths for DTC/CID records; no repeat of direct-literal census | WO65090 / WO65077 | P2 | RESERVED — NOT STARTED; `wo65146-dtc-cid-indirect-consumer-paths` |
 | [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | RESERVED — NOT STARTED; `wo65147-10fea-c2-producer-outcome` |
-| [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | RESERVED — NOT STARTED; `wo65148-10d12-gated-handoff-source-trace` |
+| [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65148-10d12-gated-handoff-source-trace`; coordinator review/merge pending |
 | [WO65149](WO65149.md) | Producers/lifecycle of `FFFF2BB8`, `FFFF8A54`, and `FFFF1E8A` across distinct `0x0E9AC` consumers | WO65130 | P2 | RESERVED — NOT STARTED; `wo65149-0e9ac-upstream-gates-mirror-trace` |
 | [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | RESERVED — NOT STARTED; `wo65150-cf48d-knock-window-reader-overlay-trace` |
 
