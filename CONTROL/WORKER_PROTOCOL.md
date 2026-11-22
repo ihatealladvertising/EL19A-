@@ -83,6 +83,33 @@ Reconciliation is a normal part of every lane, not a coordinator-only duty.
 - Do not mark another worker's WO closed or blocked. Each slot owns its own task lifecycle. Cross-lane observations may be recorded as findings or dependencies, but not as reassignment instructions.
 - Keep status (active/closed/blocked), technical result (positive/negative/partial), and unresolved semantic boundary separate.
 
+## Semantic evidence workstream
+
+Semantic investigations run alongside the three existing structural worker lanes; there is no fourth lane. The purpose is to move from verified locations and reader mechanics toward defensible input, function and output identities.
+
+For every new WO labeled `SEMANTIC`, and every existing semantic WO before execution/continuation, include a falsifiable hypothesis record with:
+- **Hypothesis:** proposed input, function, output or physical role/name.
+- **Evidence:** exact EL19A addresses, instruction PCs, report/index anchors and any diagnostic/donor/literature references, clearly separated by source class.
+- **Prediction:** the specific observation required if the hypothesis is correct.
+- **Cheap discriminator:** the smallest bounded test that could falsify or distinguish it.
+- **Result:** supported, weakened, rejected or unresolved; do not claim an unrun test.
+- **Information gain:** which competing interpretations the test separates and why this test is the least-cost useful discriminator.
+
+Each semantic WO and closeout must state which identity layer it advances: **input identity**, **function identity**, and/or **output identity**. A diagnostic-symbol join can name an input but cannot by itself name the table's function. Literature and donor labels generate or challenge hypotheses but are not target-side proof. Execution validation establishes software behavior only. Physical calibration identity requires target-side consumer/endpoint evidence and compatible units/branches.
+
+Preserve the existing evidence grades (Reader-Verified, Query-Traced, Semantic-Strong). Do not redefine or promote them based on auxiliary flags. Where useful, record descriptive flags such as `QUERY_SYMBOL_JOINED`, `LITERATURE_CORRELATED`, `DONOR_CORROBORATED`, `EXECUTION_VALIDATED`, `SINK_ANCHORED`, and `PHYSICAL_IDENTITY_UNRESOLVED`; these flags are annotations, not evidence grades.
+
+Semantic workstream phases:
+1. identify the actual query input and join it to Consult Mode $22, OBD Mode $01 or named DTC source cells;
+2. establish vocabulary from the repository's relevant tuning literature with page-level citations;
+3. validate a bounded pure-software reader path by controlled execution and an independent reference model;
+4. identify outputs by tracing backward from selected MMIO/actuator sinks through command variables and calculations to lookup results;
+5. corroborate only the strongest candidates against independent donor definitions and diagnostic/literature references.
+
+Two bounded companion tracks are authorized when queued as explicit WOs: (a) static Mode $06 service-support/dispatch and, only if present, monitor ID/result/limit/scaling provenance; vehicle access remains deferred; (b) sink-first actuator tracing from selected existing MMIO census endpoints. Neither permits a broad firmware/peripheral emulator, live-vehicle testing, or an indiscriminate MMIO sweep.
+
+Rank semantic tests by expected information gain across competing hypotheses, not by the number of addresses inspected. Reuse completed WO65106 MMIO and WO65173 diagnostic joins; do not repeat their inventories. Donor comparisons must be selective and must test a concrete discriminator; address matching or donor-name agreement alone is insufficient.
+
 ## Evidence and technical standards
 
 - Record exact instruction PCs/listing anchors, effective addresses, widths, signedness, query and axis construction, search/interpolation/clamp behavior, branch conditions, arithmetic and first meaningful consumers as applicable.
