@@ -11,11 +11,12 @@ This section supersedes the older V55 operational-status statements below. The h
 
 - **Sole operational authority:** `CONTROL/active_work_orders.md` on `main`.
 - **Current Master Workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx`; 1,355,957 bytes; 149 sheets; Git blob SHA `58f0599c45fc7ee032d55110d186d7a846a02234`.
-- **Current lifecycle at synchronization:** no active work orders; 23 reserved/unclaimed work orders; no open pull requests. Consult the live register for subsequent allocations and changes.
+- **Current lifecycle at synchronization:** WO65151 is ACTIVE — CLAIMED; 27 work orders are reserved/unclaimed; no open pull requests at the time of this readback. Consult the live register for subsequent allocations and changes.
 - **Latest technical integration:** WO65180, WO65181 and WO65182 are CLOSED — BOUNDED COMPLETE, merged through PRs #40, #41 and #42 respectively.
   - WO65180: both `0x0B756/0x0B7D6` query producers and first accumulator consumers are resolved; physical units remain unresolved.
   - WO65181: F3D6/F3DE shared query lineage resolves to `min(UWORD[FFFF8596] >> 7, 255)`; first downstream 32-point UWORD calculation paths are identified; timer timebase/physical units and actuator endpoint remain unresolved.
   - WO65182: ADC2 channel arguments `0x1B/0x1F` resolve to MCU inputs AN27/AN31; actual board AVref and physical coolant/IAT channel assignments remain unresolved. The nominal-5-V scale comparison is corrected: 19.53125 mV per staged `>>2` count and 156.25 mV per 8-count step; exact 160 mV requires AVref 5.12 V, not established on the ECU.
+- **New reservations:** WO65183–WO65185 cover the QDSPT threshold/mode gate, the 0x0A342/0x0A382 query-selector/output path, and the separate 52.34% screenshot scalar feasibility frontier. WO65186–WO65188 cover the F3D6 dynamic clamp bounds, the shared F3D6/F3DE table-path gate FFFF99E7.bit3, and the selected difference-event 0x4E handler continuation. All six remain RESERVED — NOT STARTED; unclaimed. The other current reservations are listed in CONTROL/active_work_orders.md. No technical results are claimed for these specifications.
 - **Artifact boundary:** these integrations changed only the assigned CONTROL reports and coordinator evidence notes. No new workbook, XML/A2L, ROM/LST, calibration catalogue, indexes, scripts or tools were edited.
 - The old OneDrive Control Notebook remains historical only. Do not use this document's legacy snapshots to infer live WO lifecycle; reread the live register.
 
