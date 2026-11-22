@@ -12,7 +12,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 | Slot | Current assigned work | Ownership |
 |---|---|---|
 | Worker 1 | WO65242 | WO65242 next — READY (WO65239 closed) |
-| Worker 2 | WO65229 → WO65232 → WO65235 → WO65238 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 assigned — READY; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE |
+| Worker 2 | WO65229 | WO65229 assigned — READY (WO65226 closed) |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
@@ -798,7 +798,7 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65234](WO65234.md) | Worker 2 · 2nd | Resolve r13 and stack[0x50] provenance for dynamic E904/E914 result-byte store expressions. | Reuse WO65127 and WO65116–65122; no repeated lookup trace or global r13 census. | CLOSED — BOUNDED COMPLETE |
 | [WO65237](WO65237.md) | Worker 2 · 3rd | Prove/disprove whether the candidate 0x45E18/0x45E4E sequence addresses E934 output FFFF2718 and establish its first consumer. | Reuse WO65127/65126; no repeat of E934 reader mechanics/writer or FFFF86EF exclusion. | CLOSED — BOUNDED COMPLETE |
 | [WO65243](WO65243.md) | Withdrawn — not active | Trace backward from at most two selected MMIO actuator endpoints to command variables, calculations, lookup results and candidate tables. | Reuse WO65106 and named consumer reports; no repeat MMIO census or broad RAM xref. | WITHDRAWN — NOT ACTIVE |
-| [WO65229](WO65229.md) | Worker 2 · first after WO65226 | Continue the 0x0FEE0 32-point curve: trace FFFF184C query producer and both parallel FFFF84A6 readers in sub_388B4. | Reuse WO65132/WO65140 and WO65116–65122; no payload/helper/callsite/initial-consumer or donor-comparison repeat. | ASSIGNED — WORKER 2 — READY |
+| [WO65229](WO65229.md) | Worker 2 · current | Continue the 0x0FEE0 32-point curve: trace FFFF184C query producer and both parallel FFFF84A6 readers in sub_388B4. | Reuse WO65132/WO65140 and WO65116–65122; no payload/helper/callsite/initial-consumer or donor-comparison repeat. | ASSIGNED — WORKER 2 — READY |
 | [WO65232](WO65232.md) | Worker 2 · 2nd | Continue the 0x0A0F2 path through sub_25D36/sub_25C9C and trace external readers of FFFF1054+0x348. | Reuse WO65167/WO65099/WO65058; no map/query/axis or sub_27720 body repeat. | ASSIGNED — WORKER 2 — READY |
 | [WO65235](WO65235.md) | Worker 2 · 3rd | Find writers/copies/initializers for FFFF99AE, the ×4 query input for the scheduled 0x0F712/0x10F8A path. | Reuse WO65098/WO65089 and existing indexes; no helper/query/result-stage or full FFFF9916 census. | ASSIGNED — WORKER 2 — READY |
 | [WO65238](WO65238.md) | Worker 2 · 4th | Trace the eight reachable FFFF2F00 indexed record slots written from FFFF170A and compare alternate-path/shadow behavior. | Reuse WO65098/65097 and WO65226 where relevant; no curve-reader or full block/RAM census repeat. | ASSIGNED — WORKER 2 — READY |
