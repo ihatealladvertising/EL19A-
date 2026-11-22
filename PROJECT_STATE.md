@@ -17,6 +17,7 @@ This section supersedes the older V55 operational-status statements below. The h
   - WO65181: F3D6/F3DE shared query lineage resolves to `min(UWORD[FFFF8596] >> 7, 255)`; first downstream 32-point UWORD calculation paths are identified; timer timebase/physical units and actuator endpoint remain unresolved.
   - WO65182: ADC2 channel arguments `0x1B/0x1F` resolve to MCU inputs AN27/AN31; actual board AVref and physical coolant/IAT channel assignments remain unresolved. The nominal-5-V scale comparison is corrected: 19.53125 mV per staged `>>2` count and 156.25 mV per 8-count step; exact 160 mV requires AVref 5.12 V, not established on the ECU.
 - **New reservations:** WO65183–WO65185 cover the QDSPT threshold/mode gate, the 0x0A342/0x0A382 query-selector/output path, and the separate 52.34% screenshot scalar feasibility frontier. WO65186–WO65188 cover the F3D6 dynamic clamp bounds, the shared F3D6/F3DE table-path gate FFFF99E7.bit3, and the selected difference-event 0x4E handler continuation. All six remain RESERVED — NOT STARTED; unclaimed. The other current reservations are listed in CONTROL/active_work_orders.md. No technical results are claimed for these specifications.
+
 - **Artifact boundary:** these integrations changed only the assigned CONTROL reports and coordinator evidence notes. No new workbook, XML/A2L, ROM/LST, calibration catalogue, indexes, scripts or tools were edited.
 - The old OneDrive Control Notebook remains historical only. Do not use this document's legacy snapshots to infer live WO lifecycle; reread the live register.
 

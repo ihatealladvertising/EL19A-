@@ -481,3 +481,4 @@ Three additional disjoint, read-only tasks are reserved from the updated residua
 - [WO65188](WO65188.md) — **RESERVED — NOT STARTED; unclaimed; P2.** Continue only the selected difference-triggered event path: `abs(FFFF33EA-FFFF2C92)`, low-byte nonzero, difference > `0x5C`, `FFFF39A7` clear, dispatch argument `0x4E` to `sub_71F74`. WO64832 already established the generic dispatcher and internal helpers `sub_72480/sub_72676`; resume inside that selected path, not with a dispatcher census. Establish first meaningful record/state/output effect and stop at the first external/hardware boundary. Branch: `wo65188-f3d6-f3de-event-4e-handler-continuation`.
 
 The tasks are disjoint from active WO65151 and reserved WO65183–WO65185. Workers may begin only after separate claim transactions and may edit only the assigned report. No workbook V58, ROM/LST, XML/A2L, catalogue, evidence index, script, tool or Library change is authorized.
+
