@@ -229,7 +229,7 @@ Seven disjoint follow-ups were allocated from unresolved, explicitly identified 
 | [WO65147](WO65147.md) | Producers of `FFFF18DC` and `FFFF180E`; C2 flag/outcome chain | WO65128 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65147-10fea-c2-producer-outcome`; coordinator review/merge pending |
 | [WO65148](WO65148.md) | Producers of `FFFF156A`/`FFFF156C` and `FFFF84FE`; gated `FFFF1D64` handoff effect | WO65129 / WO65076 | P1 | COMPLETE — BOUNDED COMPLETE; worker report on `wo65148-10d12-gated-handoff-source-trace`; coordinator review/merge pending |
 | [WO65149](WO65149.md) | Producers/lifecycle of `FFFF2BB8`, `FFFF8A54`, and `FFFF1E8A` across distinct `0x0E9AC` consumers | WO65130 | P2 | RESERVED — NOT STARTED; `wo65149-0e9ac-upstream-gates-mirror-trace` |
-| [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | RESERVED — NOT STARTED; `wo65150-cf48d-knock-window-reader-overlay-trace` |
+| [WO65150](WO65150.md) | CF48D donor-only reader/extent/overlay trace for `0x8DD1`, `0x8ED1`, `0x8FD1` | WO65142 / WO65143 | P1 | COMPLETE — BOUNDED REPORT RECEIVED; branch report requires correction/review; self-claim was not registered; `wo65150-cf48d-knock-window-reader-overlay-trace` |
 
 All seven reuse the source WOs and existing indexes; none authorizes a repeated census. WO65150 is explicitly donor-only and must not transfer CF48D addresses or labels into EL19A. Work-order-specific acceptance criteria and evidence boundaries are recorded in each WO file. The coordinator alone updates lifecycle status; workers must claim a WO only after a separate register transaction records owner and branch.
 
