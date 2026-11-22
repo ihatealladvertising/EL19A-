@@ -661,3 +661,11 @@ Five bounded work orders were reserved to test the user's proposed A2L↔binary 
 
 - The current session claims WO65183 on `wo65183-qdspt-gate-ntc-threshold-provenance` (batch commit; single pull+push at batch end). Scope: `CONTROL/WO65183.md` only.
 - **Closeout 2026-11-22:** WO65183 CLOSED — BOUNDED COMPLETE. `FFFF1DB4.bit5` = raw hysteresis on `FFFF84BA` (set ≥0x0A, hold ≥0x07, ROM `0x8550`). E688/`0x848B` only when `FFFF85F8.bit4`=0 and `FFFF8600.bit6`=0, otherwise E678/`0x848A`. `FFFF860B.bit3`=1 bypasses both. The bits are `sub_20DCE` mirror copies of `85F9`/`8603`/`860D`; the producers are the stop boundary. WO64860 names the scalar byte `FFFF2446`, but the code gives `FFFF23E6`; needs reconciling. See `CONTROL/WO65183.md`.
+
+
+## WO64860 effective-address reconciliation — 2026-11-22
+
+- Coordinator review prompted by WO65183 resolved the stale destination claim in WO64860. The effective-address expression is `FFFF2150 + 0x296 = FFFF23E6`, not `FFFF2446`.
+- Corrected the primary report and dependent references in WO64861, WO64862, WO64863, WO64872, WO64874, WO64885 and WO65015; WO65183 now records the discrepancy as reconciled. The separate `sub_5C220` writer to `FFFF12EA` remains distinct.
+- The bounded path is now recorded as `0x848A/0x848B → UBYTE FFFF23E6 → compare/subtract against UWORD FFFF1042 (or 0xFFFF sentinel) → UWORD FFFF1018`. No physical output, throttle command, percentage or units are established.
+- Report-only correction. No ROM, LST, XML, A2L, workbook, catalogue, index or tool edits.
