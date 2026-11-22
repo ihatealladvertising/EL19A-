@@ -5,21 +5,23 @@
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
-## Concurrency protocol
+## Autonomous worker-slot protocol (effective 2026-11-22)
 
-The detailed worker contract is [`CONTROL/WORKER_PROTOCOL.md`](WORKER_PROTOCOL.md). The rules below are operational and binding:
+The controlling execution rules are in [`CONTROL/WORKER_PROTOCOL.md`](WORKER_PROTOCOL.md). **They supersede every older coordinator-only, no-self-selection, separate-branch, and PR instruction in this file.** Workers operate autonomously after receiving a Worker 1, Worker 2 or Worker 3 startup prompt; no ChatGPT/coordinator assignment or closeout is required.
 
-- **Coordinator is the lifecycle single-writer:** Only the coordinator allocates WO IDs, approves/reserves work, assigns owners, records claims, changes lifecycle status in this register, reviews/accepts closeouts, and records closure. Workers never edit this register.
-- **No worker self-selection:** A reserved/unclaimed WO is not an assignment. Workers never choose the next WO, partition IDs by parity/highest ID, or infer ownership from a report or branch. They request assignment and wait.
-- **Assignment transaction:** Before work starts, coordinator rereads this live register, verifies dependencies and output-path availability, then records WO ID, exact owner/session, branch `main`, status `ACTIVE — CLAIMED`, authorized file paths, and checkpoint in one minimal commit. Coordinator reads back the committed register before instructing the worker to proceed.
-- **Main-only worker commits:** All workers use shared `main`; do not create/use feature branches or open PRs. An assigned worker may commit directly to `main`, but only the assigned WO report and evidence/output paths explicitly authorized by that WO and recorded in the assignment.
-- **File-level isolation:** Workers never edit this register, another WO report, another worker's files, or paths outside their allowlist. Only one worker may own/write a given file at a time. Concurrent WOs are allowed only when their authorized output paths are disjoint.
-- **Safe main updates:** Workers fetch latest `main` and the current blob SHA immediately before each file update. On a rejected update or SHA conflict, fetch latest content, preserve intervening changes, and reapply only the worker's intended edit; retry once, then stop and report the exact error. No stale full-file overwrite, force push, reset, history rewrite, or repeated stale-SHA retries.
-- **Coordinator register serialization:** The coordinator fetches the latest register and blob SHA immediately before each lifecycle update, makes a minimal change, and verifies it by readback. Worker commits may move `main`; workers must not repair register conflicts.
-- **Review and recovery:** Workers submit concise checkpoints and completion handoffs but never mark a WO closed. Only the coordinator reviews reports, accepts/returns closeouts, releases/reassigns stale claims, and records lifecycle changes.
-- **Authority boundary:** WO approval authorizes only the scope and output paths expressly listed in the WO and assignment. Protected artifacts remain out of scope unless specifically authorized.
+- **Shared branch:** every worker uses `main`; no feature branches or PRs.
+- **Worker 3 first pick:** claims the highest-numbered eligible reserved WO whenever it has no active task.
+- **Worker 1:** while Worker 3 has an active claim, claims the lowest eligible odd-numbered WO; if none exists, the lowest eligible WO overall.
+- **Worker 2:** while Worker 3 has an active claim, calculates Worker 1's next candidate, excludes it, then claims the lowest eligible even-numbered WO; if none exists, the lowest remaining WO.
+- **Eligibility:** dependencies satisfied, required inputs available, status reserved/unclaimed, no active claim, and no overlap in authorized output paths. Blocked and closed tasks are excluded.
+- **Claim transaction:** the worker updates its own queue entry and the Active WOs summary in one minimal commit, recording slot owner, `ACTIVE — CLAIMED`, branch `main`, and authorized paths. It verifies the readback before starting.
+- **Lifecycle ownership:** each worker may update only its own claim and closeout. Workers must never edit another worker's assignment, status or report. The worker that completes a WO records the report and marks its own queue entry closed; then it selects the next WO under the same slot rule.
+- **Collision recovery:** on a register SHA conflict, refresh the register once, recompute the correct slot candidate, and retry only the minimal claim/closeout edit. Never overwrite another worker's changes.
+- **Technical focus:** no repeated protocol reading, branch/PR inspection, status polling during technical work, interim commits or unrelated repository cleanup. Read the WO and cited evidence, perform the trace, make one final report/evidence commit and one closeout register commit.
+- **Protected artifacts:** no ROM/LST/XML/A2L/workbook/catalogue/index/script/tool/Library edits unless the individual WO explicitly authorizes them.
 
-All new and current worker assignments use branch `main`. Old branch names recorded in completed reports are historical provenance only, not current worker instructions.
+**Historical text below:** prior notes describing coordinator assignment, workers never editing the register, feature branches, or the retired parity scheme are retained only as historical records. They do not override the active protocol above.
+
 ## Current operational frontier
 
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
@@ -32,7 +34,7 @@ All new and current worker assignments use branch `main`. Old branch names recor
 
 ## Queued work orders — allocated 2026-11-21
 
-Allocated from the ranked candidate list supplied by the user. Allocation only: no investigation has been performed and no technical finding is claimed. WO65102 closed after allocation, so every queued WO is unblocked except WO65113, which waits on external material. Claiming requires a coordinator commit recording owner and branch.
+Allocated from the ranked candidate list supplied by the user. Allocation only: no investigation has been performed and no technical finding is claimed. WO65102 closed after allocation, so every queued WO is unblocked except WO65113, which waits on external material. Workers self-claim by Worker slot under the autonomous protocol above.
 
 | WO | Theme | Sequence | Depends on | Status |
 |---|---|---|---|---|
@@ -288,7 +290,7 @@ Ten disjoint, bounded follow-ons were allocated from explicit unresolved edges i
 | [WO65171](WO65171.md) | Indirect consumer of copied pointer field `FFFFB6F0` | WO65055 copy provenance / WO65056 acquisition context | P2 | **CLOSED — BOUNDED COMPLETE**: first consumer `sub_74212` reads it as rec0/slot4 of the `FFFFB6E0` 10-pointer record array, copies byte(`FFFF84BB`) to `FFFFAF66`/`FFFF2B14`; downstream reader unresolved; see [WO65171](WO65171.md) |
 | [WO65172](WO65172.md) | Subsequent reader of dynamic record slot populated from `FFFF170A` | WO65097 / WO65098 dynamic indexed store | P2 | RESERVED — NOT STARTED; `wo65172-ffff170a-dynamic-record-reader` |
 
-All ten are EL19A-only and reuse the merged structural indexes as navigation aids, not semantic proof. They must not repeat completed query/helper traces, target-literal negatives, map censuses or copy-family scans. Each WO identifies its exact unresolved edge and stop boundary. No XML, workbook, catalogue, ROM/LST, tooling or Library edits are authorized. Workers edit only their assigned WO record; the coordinator alone updates lifecycle status. Branches are separate and the scopes are allocated for concurrent work.
+All ten are EL19A-only and reuse the merged structural indexes as navigation aids, not semantic proof. They must not repeat completed query/helper traces, target-literal negatives, map censuses or copy-family scans. Each WO identifies its exact unresolved edge and stop boundary. No XML, workbook, catalogue, ROM/LST, tooling or Library edits are authorized. Workers self-claim and update only their own lifecycle rows under the autonomous Worker 1/2/3 slot protocol. All current work uses shared main; concurrent scopes and output paths must remain disjoint.
 
 ## Diagnostic RAM-anchor reservations — 2026-11-22
 
@@ -299,7 +301,7 @@ Two disjoint, read-only work orders were allocated from the user's diagnostic re
 | [WO65173](WO65173.md) | Join all 259 Consult-II Mode $22 CIDs to existing RAM byte/bit xref, catalogue consumer summary and OBD Mode $01 map | P1 | Independent; reuses WO65118/WO65121 and existing diagnostic indexes. Data-join only; no ROM trace. | **CLOSED — BOUNDED COMPLETE** (data-join; 259/19/189/39 reconciled; 75 direct, 166 partial, 2 ambiguous/not-RAM-comparable, 16 unresolved-no-xref; no index/script edits); merged to main in `48bd569`; see [WO65173](WO65173.md) |
 | [WO65174](WO65174.md) | Reverse-anchor nine MAF, temperature and TPS-oriented DTC slots from indexed writer callsites to monitor inputs/thresholds | P1 | Independent; reuses DTC crosswalk/writer index and WO65116–WO65120. Excludes WO65146's reserved indirect-record-consumer scope. | RESERVED — NOT STARTED; unclaimed; branch wo65174-sensor-dtc-monitor-input-reverse-trace |
 
-WO65173 must preserve all 259 CIDs, 19 current Mode $01 cross-matches, pointer-space distinctions, and exact/partial/no-match evidence. WO65174 is deliberately limited to slots 130, 132–134, 137–140 and 175 (including both distinct P0122 slots); it does not reopen the 198-slot DTC census or diagnostic reporting path. Both workers edit only their assigned WO record. No ROM/LST/XML/workbook/catalogue/index/script/tool/Library change is authorized. The coordinator alone records claims, progress, review and closure.
+WO65173 must preserve all 259 CIDs, 19 current Mode $01 cross-matches, pointer-space distinctions, and exact/partial/no-match evidence. WO65174 is deliberately limited to slots 130, 132–134, 137–140 and 175 (including both distinct P0122 slots); it does not reopen the 198-slot DTC census or diagnostic reporting path. Each worker edits only its own WO report and authorized paths. No ROM/LST/XML/workbook/catalogue/index/script/tool/Library change is authorized. Workers self-record only their own claim and closure under the autonomous slot protocol.
 
 
 ## Additional cross-domain investigation reservations — 2026-11-22
@@ -314,7 +316,7 @@ Five further disjoint work orders were allocated from the user's remaining avenu
 | [WO65178](WO65178.md) | ROM-resident static configuration/option-byte guard matrix | P1 | Reuse WO65111 and merged function/GBR indexes; no repeat of detailed `0x8405` trace | RESERVED — NOT STARTED; unclaimed; `wo65178-rom-variant-guard-matrix` |
 | [WO65179](WO65179.md) | CF48D-to-EL19A structural table fingerprint comparison | P2 | Reuse WO65142/65143, WO65150–65161 and EL19A catalogue/reader evidence; donor readiness gates final matches | **CLOSED — BOUNDED COMPLETE**: helper bodies identical (`sub_22C38`≡CF48D `sub_6F78`, `sub_22CF8`≡`sub_7054`); top hypotheses EL19A 0x0A342/0x0A382 ↔ CF48D 0x91B1/0x91F1 (bit7-selected pair, ×4 axis) and 0x0B756/0x0B7D6 ↔ 0xA08C/0xA10C (sequential dual read); PARTIAL only, no meaning transferred; see [WO65179](WO65179.md) |
 
-All five are read-only. Donor A2L/CF48D names, addresses, units and semantics are not EL19A proof. WO65179 may define its comparison schema and readiness inventory before donor reader closeouts, but may not issue final high-confidence matches without exact reader/axis/consumer evidence on both ROMs. No ROM/LST/A2L/XML/workbook/catalogue/index/script/tool edits are authorized. The coordinator alone records claims, progress, review and closure; workers edit only their assigned WO record.
+All five are read-only. Donor A2L/CF48D names, addresses, units and semantics are not EL19A proof. WO65179 may define its comparison schema and readiness inventory before donor reader closeouts, but may not issue final high-confidence matches without exact reader/axis/consumer evidence on both ROMs. No ROM/LST/A2L/XML/workbook/catalogue/index/script/tool edits are authorized. Workers self-claim and update only their own reports and lifecycle rows under the autonomous slot protocol.
 
 
 ## Coordinator reconciliation checkpoint — 2026-11-22
@@ -480,7 +482,7 @@ The next three tasks are reserved from the post-WO65182 ranking in `CONTROL/WO65
 - [WO65184](WO65184.md) — **RESERVED — NOT STARTED; unclaimed; P1.** Trace producers/meaning for `FFFF860D`, `FFFF857A`, `FFFF85FB.bit7` and first meaningful consumers of `FFFF189C/FFFF18C4` for the `0x0A342/0x0A382` pair. Reuse WO65089/WO65135 and WO65116–WO65122; no payload/axis/helper re-decode. Branch: `wo65184-0a342-0a382-query-output-consumer`.
 - [WO65185](WO65185.md) — **RESERVED — NOT STARTED; unclaimed; P2.** Feasibility-frontier audit for the separate screenshot scalar `Throttle Reduction Rate = 52.34%`: determine whether any new, independently evidenced EL19A throttle-target/actuator-command path can anchor it, reusing `EVIDENCE/Rev Hang.PNG`, WO64831/64850/64854/64855/64860/64862/64874, WO65014 and WO65106 plus relevant V6 A2L function associations. Explicitly exclude A0E2, paired `0x848A/0x848B`, and unrelated `FFFF12EA` as established matches. No blind ROM-wide 0x43/value search or assumed percentage conversion. A bounded no-new-entry/blocked result is acceptable. Branch: `wo65185-throttle-reduction-scalar-feasibility`.
 
-All three are read-only, disjoint and unclaimed. A worker may begin only after a separate coordinator claim transaction; workers edit only their assigned WO report. No workbook V58, XML/A2L, ROM/LST, catalogue, indexes, scripts, tools or Library modifications are authorized.
+All three are read-only, disjoint and unclaimed. A worker claims its WO directly under the autonomous Worker 1/2/3 slot protocol and edits only its own assigned report. No workbook V58, XML/A2L, ROM/LST, catalogue, indexes, scripts, tools or Library modifications are authorized.
 
 
 ## Additional F3D6/F3DE residual reservations — 2026-11-22
@@ -491,7 +493,7 @@ Three additional disjoint, read-only tasks are reserved from the updated residua
 - [WO65187](WO65187.md) — **CLOSED — BOUNDED COMPLETE; P1.** Coordinator integration on `main` accepted the bounded static scan: both table-path gate reads and their polarity are recorded; no bit3 writer was found in the scanned load-site set; dynamic writer remains unresolved. Report: `CONTROL/WO65187.md`.
 - [WO65188](WO65188.md) — **ACTIVE — CLAIMED; P2.** Owner/session: current session (the owner recorded in the submitted report); branch: `main`; authorized edit: `CONTROL/WO65188.md` only. Correction pass: reconcile the UBYTE/1-byte label against the `mov.w` store and re-derive the event-status effective address from the incoming index/register path. Do not edit this register or any other path; submit the corrected report for coordinator review.
 
-The tasks are disjoint from active WO65151 and reserved WO65183–WO65185. Workers may begin only after separate claim transactions and may edit only the assigned report. No workbook V58, ROM/LST, XML/A2L, catalogue, evidence index, script, tool or Library change is authorized.
+The tasks are disjoint from active WO65151 and reserved WO65183–WO65185. Workers self-claim under the autonomous Worker 1/2/3 slot protocol and may edit only their own assigned report. No workbook V58, ROM/LST, XML/A2L, catalogue, evidence index, script, tool or Library change is authorized.
 
 
 ## WO65152 closeout — 2026-11-22
@@ -548,7 +550,7 @@ Four bounded work orders were added after a no-duplicate review. The existing Mo
 | [WO65206](WO65206.md) | ANCHOR / DEPENDENT | Evidence-gated propagation of donor A2L/logger RAM symbols to a maximum of 15 EL19A candidates | P2 | BLOCKED until WO65204 has a positive alignment result and WO65207 supplies the shortlist; RESERVED — NOT STARTED; unclaimed; `wo65206-donor-ram-symbol-propagation` |
 | [WO65207](WO65207.md) | ADJUDICATE | Rank top 30 unnamed/weakly named EL19A RAM candidates using existing unique-reader indexes and independent diagnostic/hardware anchors | P1 | Independent; CLOSED — BOUNDED COMPLETE; `wo65207-reader-count-ram-priority`. Top candidate FFFF362D (151 UBYTE reads); top UWORD candidate FFFF84F4 (62 reads, 0 writers); top computed-state FFFF122C (42 UWORD reads, 21 writes).
 
-These are reservations only; no technical execution is claimed. Each branch contains only its assigned WO report. Workers may begin only after coordinator claim transactions record owner and branch. No Mode $01 extraction duplication, broad RAM scan, new tool, or protected engineering-artifact edit is authorized. WO65206 is dependency-gated and must not start unless both prerequisites pass.
+These are reservations only; no technical execution is claimed. Each current worker uses shared `main` and edits only its own assigned WO report. Workers self-claim under the autonomous slot protocol. No Mode $01 extraction duplication, broad RAM scan, new tool, or protected engineering-artifact edit is authorized. WO65206 is dependency-gated and must not start unless both prerequisites pass.
 
 **Queue priority adjustment:** Work WO65204 and WO65207 ahead of donor-name propagation; WO65205 is an independent high-value hardware-first anchor. Continue the existing WO65189–WO65203 semantic-consumer batch as capacity permits, but do not add another broad map/curve batch until this queue is materially advanced. The completed scalar sweep WO65090 is not reopened; only specific unresolved addresses may receive bounded follow-ups.
 
@@ -603,7 +605,7 @@ These WOs do not reopen the EL19A `0x848A/0x848B` scalar, `0x8550` gate/threshol
 
 ## Metadata-to-ROM definition automation workflow — 2026-11-22
 
-Five bounded work orders were reserved to test the user's proposed A2L↔binary and CF48D BIN↔XML comparison workflow. These are reservations only; no technical execution is claimed. All workers remain unassigned until the coordinator records a claim transaction. The evidence inventory is the entry point; pairing must be proven by identifiers, address mapping and multiple payload anchors, never filename similarity alone.
+Five bounded work orders were reserved to test the user's proposed A2L↔binary and CF48D BIN↔XML comparison workflow. These are reservations only; no technical execution is claimed. Workers self-assign under the autonomous Worker 1/2/3 slot protocol. The evidence inventory is the entry point; pairing must be proven by identifiers, address mapping and multiple payload anchors, never filename similarity alone.
 
 | WO | Focus | Priority | Dependency / status |
 |---|---|---:|---|
