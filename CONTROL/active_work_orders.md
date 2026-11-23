@@ -13,7 +13,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 |---|---|---|
 | Worker 1 | WO65287 | WO65260 CLOSED - BOUNDED COMPLETE; WO65287 promoted to current P1 execution; backlog WO65296->WO65305->WO65266->WO65275->WO65278->WO65281->WO65284->WO65290->WO65299->WO65302->WO65308->WO65263 |
 | Worker 2 | WO65258 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65241 CLOSED — BOUNDED COMPLETE; WO65246 CLOSED — BOUNDED COMPLETE; WO65249 CLOSED — BOUNDED COMPLETE; WO65252 CLOSED — BOUNDED COMPLETE; queued WO65279, WO65282, WO65285, WO65288, WO65291, WO65294, WO65297, WO65300, WO65303, WO65306 and WO65309 — READY |
-| Worker 3 | WO65293 | User-directed transfer from Worker 1; WO65293 assigned - READY; no further backlog |
+| Worker 3 | WO65293 | User-directed transfer from Worker 1; WO65293 assigned - READY; FIFO backlog WO65310→WO65313→WO65316 |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
@@ -21,7 +21,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 |---|---|---:|
 | Worker 1 | WO65296 → WO65305 → WO65266 → WO65275 → WO65278 → WO65281 → WO65284 → WO65290 → WO65299 → WO65302 → WO65308 → WO65263 | 12 |
 | Worker 2 | WO65261 → WO65279 → WO65282 → WO65285 → WO65288 → WO65291 → WO65294 → WO65297 → WO65300 → WO65303 → WO65306 → WO65309 | 12 |
-| Worker 3 | (empty after current WO65293) | 0 |
+| Worker 3 | WO65310 → WO65313 → WO65316 | 3 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state (2026-11-23):** Worker 1 current → WO65287; READY backlog → WO65296 → WO65305 → WO65266 → WO65275 → WO65278 → WO65281 → WO65284 → WO65290 → WO65299 → WO65302 → WO65308 → WO65263. Worker 2 remains reserved at WO65258; READY backlog unchanged → WO65261 → WO65279 → WO65282 → WO65285 → WO65288 → WO65291 → WO65294 → WO65297 → WO65300 → WO65303 → WO65306 → WO65309. Worker 3 current → WO65293 (user-directed transfer from Worker 1); no backlog. Worker 1 and Worker 3 are authorized to start their current READY tasks; Worker 2 remains STOPPED. The direct transfer preserves WO65293's ID, scope, dependencies and stop conditions; original modulo-3 allocation remains historical metadata. Worker 1's prior WOs WO65242, WO65245, WO65248, WO65251, WO65254, WO65257, WO65260 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246, WO65249 and WO65252 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state (2026-11-23):** Worker 1 current → WO65287; READY backlog → WO65296 → WO65305 → WO65266 → WO65275 → WO65278 → WO65281 → WO65284 → WO65290 → WO65299 → WO65302 → WO65308 → WO65263. Worker 2 remains reserved at WO65258; READY backlog unchanged → WO65261 → WO65279 → WO65282 → WO65285 → WO65288 → WO65291 → WO65294 → WO65297 → WO65300 → WO65303 → WO65306 → WO65309. Worker 3 current → WO65293 (user-directed transfer from Worker 1); READY backlog → WO65310 → WO65313 → WO65316. Worker 1 and Worker 3 are authorized to start their current READY tasks; Worker 2 remains STOPPED. The direct transfer preserves WO65293's ID, scope, dependencies and stop conditions; original modulo-3 allocation remains historical metadata. Worker 1's prior WOs WO65242, WO65245, WO65248, WO65251, WO65254, WO65257, WO65260 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246, WO65249 and WO65252 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-23:** WO65293 was an unstarted READY Worker 1 task. At the user's direction, it is transferred to Worker 3 to run the bounded 3D ignition/fuel semantic triage in parallel with Worker 1's end-to-end ignition/map/fuel investigations. WO ID, technical scope, dependencies and stop conditions are unchanged; the WO report records Worker 3 as current owner and retains its original modulo-3 allocation as historical metadata. Worker 1's high-payoff queue was reordered to WO65287 → WO65296 → WO65305; WO65263 is deferred to the end of its remaining backlog.
 
@@ -902,3 +902,16 @@ Six additional bounded WOs are READY and appended after existing FIFO work. Work
 | [WO65309](WO65309.md) | Worker 2 · after WO65306 | Extract RPM/speed-control VALUE metadata and distinguish actual limiters from speed-reference acceleration/deceleration coefficients. | Exact donor A2L only; explicitly classify mCRURFVAG/mCRURFVDG/mCRUSPAG/mCRUSPDG as ramp candidates unless source proves otherwise. | ASSIGNED — WORKER 2 — READY |
 
 **Evidence rule:** A2L declaration order is not a physical ROM ordering key. Use exact donor addresses, storage width, record layout, symbol/description family and conversion definitions only to generate/rank hypotheses. Every EL19A definition field still requires target-side address, reader, axis/query and consumer evidence. The reported XML counts (549 total; 301 untagged, 69 [S], 179 [P]) are inventory counts, not proof that those entries are correctly named or tune-safe.
+
+
+## Worker 3 32-point curve follow-on queue — 2026-11-23
+
+Three additional bounded Worker 3 tasks are READY after current WO65293. They continue distinct unresolved boundaries from existing 32-point curve evidence; no new ROM scan or protected artifact modification is authorized. FIFO execution is one WO at a time:
+
+| WO | Lane / FIFO position | Objective | Reuse / no-repeat boundary | Lifecycle |
+|---|---|---|---|---|
+| [WO65310](WO65310.md) | Worker 3 · after WO65293 | Resolve the producer and numeric domain of `FFFF184C`, the query source for the `0x0FEE0` 32-point UWORD curve. | Reuse WO65132 and WO65116–WO65122; no table/helper/reader re-trace or global sensor census. | ASSIGNED — WORKER 3 — READY |
+| [WO65313](WO65313.md) | Worker 3 · after WO65310 | Trace the five known `FFFF84A6/FFFF1840` consumer sites for `0x0FEE0` to their first consequential destinations. | Reuse WO65132; no query-producer/helper repeat or global RAM census. | ASSIGNED — WORKER 3 — READY |
+| [WO65316](WO65316.md) | Worker 3 · after WO65313 | Test only alias-based downstream consumers of the F3D6 `0x0F712` 32-point lookup results at `FFFF1630/FFFF1632`. | Reuse WO65223/WO65097 and existing EA/GBR/RAM indexes; no exact-address search repeat, global RAM scan or peripheral census. | ASSIGNED — WORKER 3 — READY |
+
+**Queue rule:** WO65293 remains Worker 3's current task. WO65310, WO65313 and WO65316 are sequential READY follow-ons, not concurrent assignments. Each task may close as a bounded negative if its specified alias/source boundary is not resolvable from existing evidence.
