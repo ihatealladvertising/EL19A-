@@ -11,16 +11,16 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 assigned — READY |
-| Worker 2 | WO65241 → WO65246 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE |
+| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 assigned — READY; WO65263 appended — READY |
+| Worker 2 | WO65241 → WO65246 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65261 appended — READY |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65251 → WO65254 → WO65257 → WO65260 | 4 |
-| Worker 2 | WO65246 → WO65249 → WO65252 → WO65258 | 4 |
+| Worker 1 | WO65251 → WO65254 → WO65257 → WO65260 → WO65263 | 5 |
+| Worker 2 | WO65246 → WO65249 → WO65252 → WO65258 → WO65261 | 5 |
 | Worker 3 | (empty) | 0 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
@@ -32,9 +32,15 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65241; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251 → WO65254 → WO65257 → WO65260; Worker 2: WO65246, WO65249, WO65252, WO65258; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237 and WO65238 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65241; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251 → WO65254 → WO65257 → WO65260 → WO65263; Worker 2: WO65246 → WO65249 → WO65252 → WO65258 → WO65261; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237 and WO65238 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; the remaining three form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
+
+## Screenshot/RPM-load axis workstream allocations — 2026-11-22
+
+- **WO65261 — Worker 2, P1, READY:** extract non-Rev-Hang screenshot table/scalar evidence and cross-reference exact candidates to the existing calibration catalogue. Report: [WO65261](WO65261.md). Excludes `Rev Hang.PNG` and the second Rev Hang capture by content; no new Rev Hang-derived tables, values or axes.
+- **WO65263 — Worker 1, P1, READY:** validate screenshot-linked ignition/fueling axis identities against target reader/query paths, testing RPM-on-Y/load-on-X per table rather than assuming a global convention. Depends on WO65261 and reuses WO65109. Report: [WO65263](WO65263.md).
+- Both are queued at the tail of their respective lane FIFOs. No technical findings are claimed at allocation time; no screenshots, ROM/LSTs, workbook, catalogue or XML files were modified.
 
 ## Current operational frontier
 
