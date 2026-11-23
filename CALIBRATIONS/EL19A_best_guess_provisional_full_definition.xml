@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roms>
+	<rom>
+		<romid>
+			<xmlid>EL19A_Merged_Spec_v3</xmlid>
+			<internalidaddress>0x13A98</internalidaddress>
+			<internalidstring>8CMCKRN5</internalidstring>
+			<ecuid>1EL19A</ecuid>
+			<year>2008</year>
+			<market>USDM</market>
+			<make>Nissan</make>
+			<model>Versa</model>
+			<submodel>MT</submodel>
+			<memmodel>SH7058</memmodel>
+			<endian>Big</endian>
+			<flashmethod>Nisprog</flashmethod>
+			<filesize>1024kb</filesize>
+		</romid>
+		<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+		<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		<scaling name="Temp_Coolant_Min" units="Celsius" expression="x-50" to_byte="x+50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+		<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint16" endian="big" />
+		<scaling name="Axis_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Axis_RPM_x50" units="RPM" expression="x*50" to_byte="x/50" format="0" fineincrement="50" coarseincrement="200" storagetype="uint8" endian="big" />
+		<scaling name="Axis_Pct_x0p390625" units="%" expression="x*0.390625" to_byte="x/0.390625" format="0.0" fineincrement="0.39" coarseincrement="3.9" storagetype="uint8" endian="big" />
+		<scaling name="Axis_Pct_x0p78125" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.0" fineincrement="0.78" coarseincrement="7.8" storagetype="uint8" endian="big" />
+		<scaling name="Data_Pct_x0p78125" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.0" fineincrement="0.78" coarseincrement="7.8" storagetype="uint8" endian="big" />
+		<scaling name="Rpm_x25" units="RPM" expression="x*25" to_byte="x/25" format="0" fineincrement="25" coarseincrement="100" storagetype="uint8" endian="big" />
+		<scaling name="Axis_TempC" units="Celsius" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="10" storagetype="float" endian="big" />
+		<scaling name="Query_Raw" units="raw query" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="16" storagetype="uint16" endian="big" />
+		<scaling name="Percent_UWORD_100_256" units="%" expression="x*0.390625" to_byte="x/0.390625" format="0.00" fineincrement="0.390625" coarseincrement="3.90625" storagetype="uint16" endian="big" />
+		<!-- VERIFIED entries. Categories nested per the stated hierarchy: Electronic Throttle Control > Dashpot / Throttle Control Decel / Limiters > Degree Based. -->
+		<table name="Rev Hang Airflow | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE678" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<table name="Rev Hang Airflow Alt | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE688" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<table name="Throttle Reduction Rate | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x848A" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big">
+			<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		</table>
+		<table name="Throttle Reduction Rate (Neutral) | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x848B" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big">
+			<scaling name="Percent_ThrottleReduction" units="%" expression="x*0.78125" to_byte="x/0.78125" format="0.00" fineincrement="0.78125" coarseincrement="7.8125" storagetype="uint8" endian="big" />
+		</table>
+		<table name="Coolant Temp Min for Rev Hang | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x8550" type="1D" scaling="Temp_Coolant_Min" storagetype="uint8" endian="big">
+			<scaling name="Temp_Coolant_Min" units="Celsius" expression="x-50" to_byte="x+50" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="TVO Upper Limit Table | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0xF3D6" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+			<table name="Engine Speed (RPM) - mTTVONBP" type="Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="8">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>25</data>
+				<data>50</data>
+				<data>700</data>
+				<data>2200</data>
+				<data>2600</data>
+				<data>2800</data>
+				<data>3200</data>
+			</table>
+		</table>
+		<table name="TVO Upper Limit Table 2 | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0xF3DE" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="TVO_Degrees_Ref" units="Degrees" expression="x*0.3575" to_byte="x/0.3575" format="0.0000" fineincrement="0.3575" coarseincrement="3.575" storagetype="uint8" endian="big" />
+			<table name="Engine Speed (RPM) - mTTVONBPS" type="Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="8">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>25</data>
+				<data>50</data>
+				<data>700</data>
+				<data>2200</data>
+				<data>2600</data>
+				<data>2800</data>
+				<data>3200</data>
+			</table>
+		</table>
+		<!-- SPECULATIVE ENTRIES. [S] = speculative title. Y = RPM-like axis (x50), X = load-like axis (percent) following the common 350Z convention; basis in each comment. Orientation is a hypothesis. -->
+		<!-- B012: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 1 [S] (B012)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- B112: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 2 [S] (B112)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- B212: Readers sub_22DA8 pass E0BE (rpm-like, x50) and E0E2; results reach threshold compares and counter updates (WO64830), values 13-128. With the ignition maps now identified at 9B2E/9C2E/9DAE, the 350Z tree slot Ignition Timing > Knock Control > Thresholds > Knock Slice Map fits better than an ignition role. -->
+		<table name="Knock Slice Map 3 [S] (B212)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE0E2)" type="X Axis" storageaddress="0xE0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE0BE)" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9B2E: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="Cold Ignition Timing Map (16x16) [S] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9C2E: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="High Octane Ignition Timing Map (16x16) [S] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- 9DAE: Decodes as ignition: degrees = (x%128)-64, knock window = x>>7 (see fragment). 9C2E row 400rpm decodes 0 0 0 -1 -1 -4 -14 ... like the 350Z High Octane map (3 3 7 2 0 -3 -7 -11 -12 -13). Axes: E4AC x50 = 400..6400 step 400, E4BC x0.78125 = 6.25..100 percent. Names follow CF48D address order (Cold, High Octane, High Detonation); 9B2E differs from 9C2E in 47 cells (up to +4 degrees, rows 1600-2800 and 6000-6400, load above 31 percent) and 9C2E equals 9DAE, so which is which is unproven. Shown raw here. -->
+		<table name="High Detonation Ignition Timing Map (16x16) [S] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x9DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE4BC)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE4AC)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- A452: E047 idle-spark lead; F576 x50 = 1000..5600 rpm, F57E x0.39 = 25..60 percent. Values 80-100. -->
+		<table name="Idle Ignition Advance Map [S] (A452)" category="SPEC//Ignition Timing//Main" storageaddress="0xA452" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF57E)" type="X Axis" storageaddress="0xF57E" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF576)" type="Y Axis" storageaddress="0xF576" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- A552: RR-008 matched all axes and cells. E339 x0.390625 gives 6.25 percent steps like the 350Z load axis; E291 x50 = 400..6400 rpm. Data x0.78125: 112-138 reads 87-108 percent. -->
+		<table name="Fuel Compensation Map (16x16) [S] (A552)" category="SPEC//Fuel Delivery//Main" storageaddress="0xA552" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis (0xE339)" type="X Axis" storageaddress="0xE339" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis (0xE291)" type="Y Axis" storageaddress="0xE291" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- AC62: Exact Juke fingerprint mMTEX1 copy 1; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 1A [S] (AC62)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xAC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- ACA2: Exact Juke fingerprint mMTEX1 copy 2; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 1B [S] (ACA2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- ACE2: Exact Juke fingerprint mMTEX2 copy 1; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 2A [S] (ACE2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xACE2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AD22: Exact Juke fingerprint mMTEX2 copy 2; donor orientation X F22E (x50 = 1200..6000 rpm), Y F226 (x0.39 = 5.5..33 percent) kept; reader sub_22C00. -->
+		<table name="Fuel Compensation Map (Transient Throttle) 2B [S] (AD22)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0xAD22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xF22E)" type="X Axis" storageaddress="0xF22E" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xF226)" type="Y Axis" storageaddress="0xF226" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AB22: E24D x50 = 2000..6000 rpm; E022 x0.39 = 25..53 percent. Function unknown. -->
+		<table name="Operating Correction Map [S] (AB22)" category="SPEC//Unassigned" storageaddress="0xAB22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis (0xE022)" type="X Axis" storageaddress="0xE022" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis (0xE24D)" type="Y Axis" storageaddress="0xE24D" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- AB72: RR-032: exact fuel-cut-timing axis match; payload equals AB62; axes ambiguous so raw. -->
+		<table name="Fuel Cut Timing Map 1 [S] (AB72)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xAB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xF552)" type="X Axis" storageaddress="0xF552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xF54E)" type="Y Axis" storageaddress="0xF54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- AB62: Payload equals AB72. -->
+		<table name="Fuel Cut Timing Map 2 [S] (AB62)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xAB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xF552)" type="X Axis" storageaddress="0xF552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xF54E)" type="Y Axis" storageaddress="0xF54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A0E2: Cells vary strongly along rows (24->83) and weakly down columns, so columns = pedal (E002: 16/48/80/112 x0.78 = 12.5/37.5/62.5/87.5 percent), rows = rpm (E006 x50 = 800..6000). Register listed the opposite; result reaches FFFF120A. Data 24-125 read 19-98 percent at x0.78125. -->
+		<table name="Accelerator Pedal to Throttle Target Map [S] (A0E2)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0xA0E2" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE002)" type="X Axis" storageaddress="0xE002" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE006)" type="Y Axis" storageaddress="0xE006" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A272: Sibling of A0E2, same axes and orientation; values 93-128. -->
+		<table name="Accelerator Pedal to Throttle Target Map B [S] (A272)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0xA272" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE002)" type="X Axis" storageaddress="0xE002" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE006)" type="Y Axis" storageaddress="0xE006" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- AC12: E2A1 x50 = 800..3200 rpm; E0A2 x0.39 = 25..80 percent; payload equals A652. -->
+		<table name="Idle Speed Correction Map 1 [S] (AC12)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xAC12" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE0A2)" type="X Axis" storageaddress="0xE0A2" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE2A1)" type="Y Axis" storageaddress="0xE2A1" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- A652: Payload equals AC12. -->
+		<table name="Idle Speed Correction Map 2 [S] (A652)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xA652" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis (0xE0A2)" type="X Axis" storageaddress="0xE0A2" scaling="Axis_Pct_x0p390625" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis (0xE2A1)" type="Y Axis" storageaddress="0xE2A1" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- ED64: 16 pts: 120x5 then falling to 72 (x25 = 3000 plateau to 1800 rpm). Matches the Maxima/350Z Bosch fuel cut shape. Coolant axis is the donor display axis, lookup axis unproven. -->
+		<table name="Fuel Cut Bosch [S] (ED64)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xED64" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EDA0: x25 = 3000 plateau, 2800, 2200 falling to 1400 rpm. Matches the JECS fuel cut shape. -->
+		<table name="Fuel Cut JECS [S] (EDA0)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xEDA0" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EE68: x25 = 2000 plateau falling to 1200 rpm. Matches the JECS fuel restore shape. -->
+		<table name="Fuel Restore JECS [S] (EE68)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xEE68" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- F01C: x25 = 2700 plateau falling to 1500 rpm. Matches the Bosch fuel restore shape. -->
+		<table name="Fuel Restore Bosch [S] (F01C)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xF01C" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+			<table name="Coolant Temperature (Celsius)" type="Static Y Axis" scaling="Axis_TempC" storagetype="float" endian="big" sizey="16">
+				<data>-40</data>
+				<data>-30</data>
+				<data>-20</data>
+				<data>-10</data>
+				<data>0</data>
+				<data>10</data>
+				<data>20</data>
+				<data>30</data>
+				<data>40</data>
+				<data>50</data>
+				<data>60</data>
+				<data>70</data>
+				<data>80</data>
+				<data>90</data>
+				<data>100</data>
+				<data>110</data>
+			</table>
+		</table>
+		<!-- EFA4: Read with E678/E688 by sub_403D8 via sub_22E10; rises 0-166. -->
+		<table name="QDSPT Basic Value Table (Third Mode) [S] (EFA4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0xEFA4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E904: Juke fingerprint mTHOSNTP; falls 255 to 128. -->
+		<table name="Barometric Pressure Correction [S] mTHOSNTP (E904)" category="SPEC//Airflow//Main" storageaddress="0xE904" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F062: Juke fingerprint mTRPAMB; ROM axis E0CE. -->
+		<table name="Ambient Pressure Reference Curve [S] mTRPAMB (F062)" category="SPEC//Airflow//Main" storageaddress="0xF062" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Axis (0xE0CE)" type="Y Axis" storageaddress="0xE0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- E424: Exact Juke fingerprint mTA5N; shape 0,0,0,82,192x3,225,0... -->
+		<table name="Post-Start Correction [S] mTA5N (E424)" category="SPEC//Engine Start Performance//After Start" storageaddress="0xE424" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F10E: Juke fingerprint mTSTNGTM; 250,250,150,75,60,45... decays like a start-up curve; compare 350Z Crank Fueling table. -->
+		<table name="Cranking Fuel Value vs Coolant [S] mTSTNGTM (F10E)" category="SPEC//Engine Start Performance//Cranking Control//Main" storageaddress="0xF10E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F2B2: Juke fingerprint mTTNKAS; flat 64 then decays to 0; query FFFF859C+0x0C. -->
+		<table name="After-Start Correction vs Rotations [S] mTTNKAS (F2B2)" category="SPEC//Engine Start Performance//After Start" storageaddress="0xF2B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F426: Juke fingerprint mTTXNEL; falls 102 to 76. Shape matches 350Z Bosch/JECS fuel cut and restore tables (x25 gives 1900-2550 rpm). Scaling unproven. -->
+		<table name="Engine Speed Threshold Curve [S] mTTXNEL (F426)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0xF426" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E974: Only zero or non-zero tested by sub_3BA88/3BFC8/412B8; chain ends at FFFF1992 and ATU channel 11 compare. -->
+		<table name="Correction Chain Enable Gate (low-input detect) [S] (E974)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xE974" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EE08: Read by sub_3BC68, task neighbour of the E974 paths. -->
+		<table name="Throttle Correction Rate Curve A [S] (EE08)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xEE08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EE28: Read by sub_3BC68; near copy of EE08. -->
+		<table name="Throttle Correction Rate Curve B [S] (EE28)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0xEE28" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F33E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 1 [S] (F33E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF33E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F34E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 2 [S] (F34E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF34E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F35E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 3 [S] (F35E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF35E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- F36E: sub_4F6DE/sub_4FBC2 family; decaying shape. -->
+		<table name="Idle Decay Rate Curve 4 [S] (F36E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0xF36E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E510: Read by sub_4F6DE; rises 87-128. -->
+		<table name="Operating Correction Rising Curve [S] (E510)" category="SPEC//Unassigned" storageaddress="0xE510" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EB40: Read by sub_4F6DE; falls 255 to 0. -->
+		<table name="Operating Correction Falling Curve [S] (EB40)" category="SPEC//Unassigned" storageaddress="0xEB40" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- E800: Read by sub_46744; 255 then 64 falling to 10. -->
+		<table name="Warm-Up Decay Curve [S] (E800)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xE800" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EA2C: Read by sub_4DC32 pair; falls 56 to 4. -->
+		<table name="Decay Curve A [S] (EA2C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xEA2C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EA3C: Read by sub_4DC32 pair; falls 73 to 9. -->
+		<table name="Decay Curve B [S] (EA3C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xEA3C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECCE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Rise [S] (ECCE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECCE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECDE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Slow Rise [S] (ECDE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECEE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall A [S] (ECEE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECEE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ECFE: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall B [S] (ECFE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xECFE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ED0E: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall C [S] (ED0E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xED0E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- ED1E: Read at init by sub_77608; idle/coolant bank hypothesis. -->
+		<table name="Idle Coolant Compensation Curve Fall D [S] (ED1E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0xED1E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EDC8: 64 then 48; identical to EDD8; read at 0x3C55E. -->
+		<table name="Operating Limit Clamp Curve 1 [S] (EDC8)" category="SPEC//Unassigned" storageaddress="0xEDC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- EDD8: Identical to EDC8. -->
+		<table name="Operating Limit Clamp Curve 2 [S] (EDD8)" category="SPEC//Unassigned" storageaddress="0xEDD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Query (raw 0-240)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- 8808: sub_3BA88 gate threshold (E974 path A) -->
+		<table name="Gate Threshold A [S] (8808)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8808" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8809: sub_3BA88 set threshold (E974 path A) -->
+		<table name="Set Threshold A [S] (8809)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8809" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 82E0: sub_3BFC8 gate threshold (E974 path B) -->
+		<table name="Gate Threshold B [S] (82E0)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x82E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 82E1: sub_3BFC8 set threshold (E974 path B) -->
+		<table name="Set Threshold B [S] (82E1)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x82E1" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8231: sub_3BA88 signed limit -->
+		<table name="Integrator Lower Limit A [S] (8231)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8231" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 892D: routine 0x387B4 qualifier vs FFFF852A -->
+		<table name="Input Qualifier Minimum [S] (892D)" category="SPEC//Unassigned//Scalars" storageaddress="0x892D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8B22: routine 0x387B4 lower bound x128 -->
+		<table name="Input Valid Lower Bound x128 [S] (8B22)" category="SPEC//Unassigned//Scalars" storageaddress="0x8B22" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8367: routine 0x387B4 and sub_38592 filter coefficient /128 -->
+		<table name="Input Filter Coefficient k/128 [S] (8367)" category="SPEC//Unassigned//Scalars" storageaddress="0x8367" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 841D: sub_470CC base constant -->
+		<table name="Actuator Command Base [S] (841D)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x841D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8E5B: sub_470CC offset -->
+		<table name="Actuator Command Offset Plus [S] (8E5B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8E5B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8435: sub_470CC offset -->
+		<table name="Actuator Command Offset Minus [S] (8435)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8435" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8A9B: sub_27720 threshold -->
+		<table name="Actuator Command Active Limit [S] (8A9B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x8A9B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 924E: sub_403D8 gain: factor=min(255,(peak-ROM[92C4])*ROM[924E]); donor mDDPAPO UWORD x0.390625; provisional. -->
+		<table name="QDSPT APO Compensation Change Rate [S] mDDPAPO (924E)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x924E" type="1D" scaling="Percent_UWORD_100_256" storagetype="uint16" endian="big" />
+		<!-- 92C4: sub_403D8 offset word -->
+		<table name="QDSPT APO Compensation Threshold [S] (92C4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x92C4" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" />
+		<!-- 83A4: read at 0x7BADA -->
+		<table name="Unknown Count or Flag [S] (83A4)" category="SPEC//Unassigned//Scalars" storageaddress="0x83A4" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 83B8: compared at 0x9BF4C -->
+		<table name="Unknown Threshold 83B8 [S] (83B8)" category="SPEC//Unassigned//Scalars" storageaddress="0x83B8" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8620: compared at 0x95EE0 -->
+		<table name="Unknown Threshold 8620 [S] (8620)" category="SPEC//Unassigned//Scalars" storageaddress="0x8620" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 85E0: compared with FFFF84B5 at 0x9FBF6 -->
+		<table name="Input Threshold vs FFFF84B5 [S] (85E0)" category="SPEC//Unassigned//Scalars" storageaddress="0x85E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- 8485: shadow-copied to FFFF36C1; tested zero or non-zero -->
+		<table name="Init-Copied Scalar to FFFF36C1 [S] (8485)" category="SPEC//Unassigned//Scalars" storageaddress="0x8485" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" />
+		<!-- REMOVED (failed ROM checks): 9B11, B421, B42A, C9C0, B547, 14B00, 14D00, 15300, 15450, 15580, 15A80, F100, 83A0, 83BC, B450, 9A00. -->
+		<!-- Ignition/knock decoded alternate views retained from the six-entry decoded fragment. -->
+		<scaling name="Ign_Degrees" units="Degrees" expression="(x%128)-64" to_byte="x+64" format="0.0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Knock_Window_Flag" units="0: Off | 1: On" expression="floor(x/128)" to_byte="x*128" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<table name="Cold Ignition Timing Map (16x16) [S decoded] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9B2E" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="Cold Ignition Timing Map Knock Window [S decoded] (9B2E)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9B2E" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Octane Ignition Timing Map (16x16) [S decoded] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x9C2E" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Octane Ignition Timing Map Knock Window [S decoded] (9C2E)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9C2E" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Detonation Ignition Timing Map (16x16) [S decoded] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x9DAE" type="3D" scaling="Ign_Degrees" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<table name="High Detonation Ignition Timing Map Knock Window [S decoded] (9DAE)" category="SPEC//Ignition Timing//Knock Control//Main" storageaddress="0x9DAE" type="3D" scaling="Knock_Window_Flag" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="Cylinder Filling Up Efficiency (%)" type="X Axis" storageaddress="0xE4BC" scaling="Axis_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Engine Speed (RPM)" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_RPM_x50" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- PROVISIONAL CATALOGUE EXPANSION: 179 addresses absent from XML v3. [P] labels are best-guess labels, not semantic verification. Raw scaling is intentionally used unless the existing evidence supports a specific scale. -->
+		<scaling name="Raw_SBYTE" units="raw signed" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="int8" endian="big" />
+		<scaling name="Raw_SWORD" units="raw signed" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="int16" endian="big" />
+		<table name="[P] Engine Operating Correction Map (0A0F2)" category="SPEC//Engine Control//Corrections" storageaddress="0x0A0F2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8"><table name="X axis (fixed raw query; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table><table name="Y axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Intake-Air Temperature Compensation Map (0A8A2)" category="SPEC//Airflow//Corrections" storageaddress="0x0A8A2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8"><table name="X axis (fixed raw query; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table><table name="Y axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Barometric Pressure Correction Curve (0E904)" category="SPEC//Airflow//Pressure Compensation" storageaddress="0x0E904" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (0x0FA62)" type="Y Axis" storageaddress="0x0FA62" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Pressure-Dependent Operating Correction Curve (0E914)" category="SPEC//Airflow//Pressure Compensation" storageaddress="0x0E914" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (0x0FA82)" type="Y Axis" storageaddress="0x0FA82" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Operating-Mode Correction Curve (0E934)" category="SPEC//Engine Control//Corrections" storageaddress="0x0E934" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (0x0E082)" type="Y Axis" storageaddress="0x0E082" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16" /></table>
+		<table name="[P] Operating Monitor Threshold Curve (0E9AC)" category="SPEC//Diagnostics//Monitor Thresholds" storageaddress="0x0E9AC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (0x0F51E)" type="Y Axis" storageaddress="0x0F51E" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16" /></table>
+		<table name="[P] NTC Sensor Voltage-to-Temperature Linearization (0F406)" category="SPEC//Sensors//Temperature" storageaddress="0x0F406" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="32"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="32"><data>0</data><data>8</data><data>16</data><data>24</data><data>32</data><data>40</data><data>48</data><data>56</data><data>64</data><data>72</data><data>80</data><data>88</data><data>96</data><data>104</data><data>112</data><data>120</data><data>128</data><data>136</data><data>144</data><data>152</data><data>160</data><data>168</data><data>176</data><data>184</data><data>192</data><data>200</data><data>208</data><data>216</data><data>224</data><data>232</data><data>240</data><data>248</data></table></table>
+		<table name="[P] Coolant-Temperature Compensation Curve (0DE5E)" category="SPEC//Engine Temperature//Warm-Up" storageaddress="0x0DE5E" type="2D" scaling="Raw_SBYTE" storagetype="int8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Idle Operating Correction Gain Curve (0E4D4)" category="SPEC//Idle Speed Control//Corrections" storageaddress="0x0E4D4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="4"><data>0</data><data>64</data><data>128</data><data>192</data></table></table>
+		<table name="[P] Throttle Active-Window Correction Curve (0F4BE)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0F4BE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="4"><data>0</data><data>64</data><data>128</data><data>192</data></table></table>
+		<table name="[P] Engine Operating Region Selector (0ED9C)" category="SPEC//Engine Control//Selectors" storageaddress="0x0ED9C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4"><table name="Query axis (0x0E21A; untyped axis)" type="Y Axis" storageaddress="0x0E21A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Window Selector (0F2AE)" category="SPEC//Engine Control//Selectors" storageaddress="0x0F2AE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4"><table name="Query axis (0x0E21A; untyped axis)" type="Y Axis" storageaddress="0x0E21A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Region Gain (107CC)" category="SPEC//Engine Control//Corrections" storageaddress="0x107CC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4"><table name="Query axis (0x0E21A; untyped axis)" type="Y Axis" storageaddress="0x0E21A" scaling="Query_Raw" /></table>
+		<table name="[P] High-Branch Operating Gain (10D12)" category="SPEC//Engine Control//Corrections" storageaddress="0x10D12" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="4"><data>0</data><data>16384</data><data>32768</data><data>49152</data></table></table>
+		<table name="[P] Low-Branch Operating Gain (10D1A)" category="SPEC//Engine Control//Corrections" storageaddress="0x10D1A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="4"><data>0</data><data>16384</data><data>32768</data><data>49152</data></table></table>
+		<table name="[P] Airflow / Load Compensation Curve (10974)" category="SPEC//Airflow//Corrections" storageaddress="0x10974" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>8192</data><data>16384</data><data>24576</data><data>32768</data><data>40960</data><data>49152</data><data>57344</data></table></table>
+		<table name="[P] Speed-Dependent Operating Correction Curve (10E6A)" category="SPEC//Engine Control//Corrections" storageaddress="0x10E6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>8192</data><data>16384</data><data>24576</data><data>32768</data><data>40960</data><data>49152</data><data>57344</data></table></table>
+		<table name="[P] Coolant-Temperature Compensation Curve (10FEA)" category="SPEC//Engine Temperature//Warm-Up" storageaddress="0x10FEA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>8192</data><data>16384</data><data>24576</data><data>32768</data><data>40960</data><data>49152</data><data>57344</data></table></table>
+		<table name="[P] Engine Operating Compensation Curve (1501C)" category="SPEC//Engine Control//Corrections" storageaddress="0x1501C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>8192</data><data>16384</data><data>24576</data><data>32768</data><data>40960</data><data>49152</data><data>57344</data></table></table>
+		<table name="[P] Throttle / Pedal Control Correction Table (0CD56)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0E2C9; untyped axis)" type="X Axis" storageaddress="0x0E2C9" scaling="Query_Raw" /><table name="Y axis (0x0FEC0; untyped axis)" type="Y Axis" storageaddress="0x0FEC0" scaling="Query_Raw" /></table>
+		<table name="[P] Throttle / Pedal Control Correction Table (0D456)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0D456" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0F6F2)" type="X Axis" storageaddress="0x0F6F2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x1133A)" type="Y Axis" storageaddress="0x1133A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Throttle / Pedal Control Correction Table (0C756)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0C756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0FCBC)" type="X Axis" storageaddress="0x0FCBC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x0FCDC)" type="Y Axis" storageaddress="0x0FCDC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Curve (10206)" category="SPEC//Engine Control//Curves" storageaddress="0x10206" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x109B4)" type="Y Axis" storageaddress="0x109B4" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Curve (10954)" category="SPEC//Engine Control//Curves" storageaddress="0x10954" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0F912)" type="Y Axis" storageaddress="0x0F912" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Curve (1100A)" category="SPEC//Engine Control//Curves" storageaddress="0x1100A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x10EEA)" type="Y Axis" storageaddress="0x10EEA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" /></table>
+		<table name="[P] Engine Operating Correction Curve (08EA0)" category="SPEC//Engine Control//Curves" storageaddress="0x08EA0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Temperature Compensation Table (0A342)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0A342" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8"><table name="X axis (0x0DFF2)" type="X Axis" storageaddress="0x0DFF2" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" /><table name="Y axis (0x0DFFA)" type="Y Axis" storageaddress="0x0DFFA" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8" /></table>
+		<table name="[P] Engine Operating Correction Map (0AF72)" category="SPEC//Engine Control//Maps" storageaddress="0x0AF72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Engine Operating Correction Map (0B622)" category="SPEC//Engine Control//Maps" storageaddress="0x0B622" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8"><table name="X axis (0x0F7D2; untyped axis)" type="X Axis" storageaddress="0x0F7D2" scaling="Query_Raw" /><table name="Y axis (0x0F7E2; untyped axis)" type="Y Axis" storageaddress="0x0F7E2" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Map (0B756)" category="SPEC//Engine Control//Maps" storageaddress="0x0B756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8"><table name="X axis (0x0FCFC)" type="X Axis" storageaddress="0x0FCFC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" /><table name="Y axis (0x0FD3C)" type="Y Axis" storageaddress="0x0FD3C" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" /></table>
+		<table name="[P] Engine Operating Correction Map (0B956)" category="SPEC//Engine Control//Maps" storageaddress="0x0B956" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x10994; untyped axis)" type="X Axis" storageaddress="0x10994" scaling="Query_Raw" /><table name="Y axis (0x0FDAC; untyped axis)" type="Y Axis" storageaddress="0x0FDAC" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Map (0C0D6)" category="SPEC//Engine Control//Maps" storageaddress="0x0C0D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0FB02; untyped axis)" type="X Axis" storageaddress="0x0FB02" scaling="Query_Raw" /><table name="Y axis (0x0FBF0; untyped axis)" type="Y Axis" storageaddress="0x0FBF0" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Map (0C3D6)" category="SPEC//Engine Control//Maps" storageaddress="0x0C3D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (0x0FE10; untyped axis)" type="Y Axis" storageaddress="0x0FE10" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Map (0C956)" category="SPEC//Engine Control//Maps" storageaddress="0x0C956" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0FCBC)" type="X Axis" storageaddress="0x0FCBC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x0FCDC)" type="Y Axis" storageaddress="0x0FCDC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (0D656)" category="SPEC//Engine Control//Maps" storageaddress="0x0D656" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x0F6F2)" type="X Axis" storageaddress="0x0F6F2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x1133A)" type="Y Axis" storageaddress="0x1133A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (0D8D6)" category="SPEC//Engine Control//Maps" storageaddress="0x0D8D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0DAD6)" category="SPEC//Engine Control//Curves" storageaddress="0x0DAD6" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E4CC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E4CC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E4E4)" category="SPEC//Engine Control//Curves" storageaddress="0x0E4E4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E4EC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E4EC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E520)" category="SPEC//Engine Control//Curves" storageaddress="0x0E520" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E032; untyped axis)" type="Y Axis" storageaddress="0x0E032" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0E634)" category="SPEC//Engine Control//Curves" storageaddress="0x0E634" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E63C)" category="SPEC//Engine Control//Curves" storageaddress="0x0E63C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E6F8)" category="SPEC//Engine Control//Curves" storageaddress="0x0E6F8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E700)" category="SPEC//Engine Control//Curves" storageaddress="0x0E700" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E708)" category="SPEC//Engine Control//Curves" storageaddress="0x0E708" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E748)" category="SPEC//Engine Control//Curves" storageaddress="0x0E748" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E788)" category="SPEC//Engine Control//Curves" storageaddress="0x0E788" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E7D0)" category="SPEC//Engine Control//Curves" storageaddress="0x0E7D0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E7D8)" category="SPEC//Engine Control//Curves" storageaddress="0x0E7D8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E7E0)" category="SPEC//Engine Control//Curves" storageaddress="0x0E7E0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E828)" category="SPEC//Engine Control//Curves" storageaddress="0x0E828" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E840)" category="SPEC//Engine Control//Curves" storageaddress="0x0E840" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E878)" category="SPEC//Engine Control//Curves" storageaddress="0x0E878" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E880)" category="SPEC//Engine Control//Curves" storageaddress="0x0E880" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E888)" category="SPEC//Engine Control//Curves" storageaddress="0x0E888" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E898)" category="SPEC//Engine Control//Curves" storageaddress="0x0E898" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E924)" category="SPEC//Engine Control//Curves" storageaddress="0x0E924" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E954)" category="SPEC//Engine Control//Curves" storageaddress="0x0E954" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E984)" category="SPEC//Engine Control//Curves" storageaddress="0x0E984" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E9BC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E9BC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E9C4)" category="SPEC//Engine Control//Curves" storageaddress="0x0E9C4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E8DC; untyped axis)" type="Y Axis" storageaddress="0x0E8DC" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0E9DC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E9DC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E9EC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E9EC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0E9FC)" category="SPEC//Engine Control//Curves" storageaddress="0x0E9FC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EA14)" category="SPEC//Engine Control//Curves" storageaddress="0x0EA14" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EA4C)" category="SPEC//Engine Control//Curves" storageaddress="0x0EA4C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EA54)" category="SPEC//Engine Control//Curves" storageaddress="0x0EA54" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EA90)" category="SPEC//Engine Control//Curves" storageaddress="0x0EA90" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EB30)" category="SPEC//Engine Control//Curves" storageaddress="0x0EB30" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EBC0)" category="SPEC//Engine Control//Curves" storageaddress="0x0EBC0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E11C; untyped axis)" type="Y Axis" storageaddress="0x0E11C" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0EBC8)" category="SPEC//Engine Control//Curves" storageaddress="0x0EBC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EBD8)" category="SPEC//Engine Control//Curves" storageaddress="0x0EBD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E092; untyped axis)" type="Y Axis" storageaddress="0x0E092" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0EBE8)" category="SPEC//Engine Control//Curves" storageaddress="0x0EBE8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E09A; untyped axis)" type="Y Axis" storageaddress="0x0E09A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0EC08)" category="SPEC//Engine Control//Curves" storageaddress="0x0EC08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0F0CE; untyped axis)" type="Y Axis" storageaddress="0x0F0CE" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0EC30)" category="SPEC//Engine Control//Curves" storageaddress="0x0EC30" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0F0CE; untyped axis)" type="Y Axis" storageaddress="0x0F0CE" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0ED44)" category="SPEC//Engine Control//Curves" storageaddress="0x0ED44" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0ED4C)" category="SPEC//Engine Control//Curves" storageaddress="0x0ED4C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EDE8)" category="SPEC//Engine Control//Curves" storageaddress="0x0EDE8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EDF0)" category="SPEC//Engine Control//Curves" storageaddress="0x0EDF0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EE96)" category="SPEC//Engine Control//Curves" storageaddress="0x0EE96" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EEDE)" category="SPEC//Engine Control//Curves" storageaddress="0x0EEDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E04A; untyped axis)" type="Y Axis" storageaddress="0x0E04A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0EF94)" category="SPEC//Engine Control//Curves" storageaddress="0x0EF94" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EF9C)" category="SPEC//Engine Control//Curves" storageaddress="0x0EF9C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EFDC)" category="SPEC//Engine Control//Curves" storageaddress="0x0EFDC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0EFFC)" category="SPEC//Engine Control//Curves" storageaddress="0x0EFFC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x08CD3; untyped axis)" type="Y Axis" storageaddress="0x08CD3" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0F072)" category="SPEC//Engine Control//Curves" storageaddress="0x0F072" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F082)" category="SPEC//Engine Control//Curves" storageaddress="0x0F082" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F092)" category="SPEC//Engine Control//Curves" storageaddress="0x0F092" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F0B2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F0B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F0DE)" category="SPEC//Engine Control//Curves" storageaddress="0x0F0DE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F0E6)" category="SPEC//Engine Control//Curves" storageaddress="0x0F0E6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F0FE)" category="SPEC//Engine Control//Curves" storageaddress="0x0F0FE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F12E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F12E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F21E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F21E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0EBB8; untyped axis)" type="Y Axis" storageaddress="0x0EBB8" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0F256)" category="SPEC//Engine Control//Curves" storageaddress="0x0F256" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F2A6)" category="SPEC//Engine Control//Curves" storageaddress="0x0F2A6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E108; untyped axis)" type="Y Axis" storageaddress="0x0E108" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0F2DA)" category="SPEC//Engine Control//Curves" storageaddress="0x0F2DA" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F2F2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F2F2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F38E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F38E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>16</data><data>32</data><data>48</data><data>64</data><data>80</data><data>96</data><data>112</data><data>128</data><data>144</data><data>160</data><data>176</data><data>192</data><data>208</data><data>224</data><data>240</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F39E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F39E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0E124; untyped axis)" type="Y Axis" storageaddress="0x0E124" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0F3E6)" category="SPEC//Engine Control//Curves" storageaddress="0x0F3E6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F3FE)" category="SPEC//Engine Control//Curves" storageaddress="0x0F3FE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F48E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F48E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F4C2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F4C2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x0F49E; untyped axis)" type="Y Axis" storageaddress="0x0F49E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0F52E)" category="SPEC//Engine Control//Curves" storageaddress="0x0F52E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F6B2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F6B2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F6D2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F6D2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Temperature Compensation Table (0F712)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0F712" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="32"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data><data>16</data><data>17</data><data>18</data><data>19</data><data>20</data><data>21</data><data>22</data><data>23</data><data>24</data><data>25</data><data>26</data><data>27</data><data>28</data><data>29</data><data>30</data><data>31</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F7F2)" category="SPEC//Engine Control//Curves" storageaddress="0x0F7F2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (0F8BE)" category="SPEC//Engine Control//Curves" storageaddress="0x0F8BE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0F9C2; untyped axis)" type="Y Axis" storageaddress="0x0F9C2" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0FC90)" category="SPEC//Engine Control//Curves" storageaddress="0x0FC90" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x111EA; untyped axis)" type="Y Axis" storageaddress="0x111EA" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0FEC0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEC0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0CD56; untyped axis)" type="Y Axis" storageaddress="0x0CD56" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (0FEE0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEE0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="32"><data>0</data><data>2048</data><data>4096</data><data>6144</data><data>8192</data><data>10240</data><data>12288</data><data>14336</data><data>16384</data><data>18432</data><data>20480</data><data>22528</data><data>24576</data><data>26624</data><data>28672</data><data>30720</data><data>32768</data><data>34816</data><data>36864</data><data>38912</data><data>40960</data><data>43008</data><data>45056</data><data>47104</data><data>49152</data><data>51200</data><data>53248</data><data>55296</data><data>57344</data><data>59392</data><data>61440</data><data>63488</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (1003E)" category="SPEC//Engine Control//Curves" storageaddress="0x1003E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0FBA8; untyped axis)" type="Y Axis" storageaddress="0x0FBA8" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1007E)" category="SPEC//Engine Control//Curves" storageaddress="0x1007E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x112AA; untyped axis)" type="Y Axis" storageaddress="0x112AA" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1008E)" category="SPEC//Engine Control//Curves" storageaddress="0x1008E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x112BA; untyped axis)" type="Y Axis" storageaddress="0x112BA" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (100BE)" category="SPEC//Engine Control//Curves" storageaddress="0x100BE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (100DE)" category="SPEC//Engine Control//Curves" storageaddress="0x100DE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10226)" category="SPEC//Engine Control//Curves" storageaddress="0x10226" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10286)" category="SPEC//Engine Control//Curves" storageaddress="0x10286" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x1072C; untyped axis)" type="Y Axis" storageaddress="0x1072C" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1031C)" category="SPEC//Engine Control//Curves" storageaddress="0x1031C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x09270; untyped axis)" type="Y Axis" storageaddress="0x09270" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1033C)" category="SPEC//Engine Control//Curves" storageaddress="0x1033C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (1040C)" category="SPEC//Engine Control//Curves" storageaddress="0x1040C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x1046C; untyped axis)" type="Y Axis" storageaddress="0x1046C" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (104EC)" category="SPEC//Engine Control//Curves" storageaddress="0x104EC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0F932; untyped axis)" type="Y Axis" storageaddress="0x0F932" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (105FC)" category="SPEC//Engine Control//Curves" storageaddress="0x105FC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0FA42; untyped axis)" type="Y Axis" storageaddress="0x0FA42" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1061C)" category="SPEC//Engine Control//Curves" storageaddress="0x1061C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0F982; untyped axis)" type="Y Axis" storageaddress="0x0F982" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (108B4)" category="SPEC//Engine Control//Curves" storageaddress="0x108B4" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10984)" category="SPEC//Engine Control//Curves" storageaddress="0x10984" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0FBC8; untyped axis)" type="Y Axis" storageaddress="0x0FBC8" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10A54)" category="SPEC//Engine Control//Curves" storageaddress="0x10A54" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10A64)" category="SPEC//Engine Control//Curves" storageaddress="0x10A64" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10A84)" category="SPEC//Engine Control//Curves" storageaddress="0x10A84" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10AF4)" category="SPEC//Engine Control//Curves" storageaddress="0x10AF4" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0FC10; untyped axis)" type="Y Axis" storageaddress="0x0FC10" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10B14)" category="SPEC//Engine Control//Curves" storageaddress="0x10B14" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0FC10; untyped axis)" type="Y Axis" storageaddress="0x0FC10" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10B34)" category="SPEC//Engine Control//Curves" storageaddress="0x10B34" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0FC30; untyped axis)" type="Y Axis" storageaddress="0x0FC30" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10B44)" category="SPEC//Engine Control//Curves" storageaddress="0x10B44" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0FC30; untyped axis)" type="Y Axis" storageaddress="0x0FC30" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10BC8)" category="SPEC//Engine Control//Curves" storageaddress="0x10BC8" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10BE8)" category="SPEC//Engine Control//Curves" storageaddress="0x10BE8" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x0FB68; untyped axis)" type="Y Axis" storageaddress="0x0FB68" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10CE2)" category="SPEC//Engine Control//Curves" storageaddress="0x10CE2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10D42)" category="SPEC//Engine Control//Curves" storageaddress="0x10D42" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10D6A)" category="SPEC//Engine Control//Curves" storageaddress="0x10D6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x10BB8; untyped axis)" type="Y Axis" storageaddress="0x10BB8" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10EAA)" category="SPEC//Engine Control//Curves" storageaddress="0x10EAA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10ECA)" category="SPEC//Engine Control//Curves" storageaddress="0x10ECA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10EEA)" category="SPEC//Engine Control//Curves" storageaddress="0x10EEA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="32"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data><data>16</data><data>17</data><data>18</data><data>19</data><data>20</data><data>21</data><data>22</data><data>23</data><data>24</data><data>25</data><data>26</data><data>27</data><data>28</data><data>29</data><data>30</data><data>31</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10F2A)" category="SPEC//Engine Control//Curves" storageaddress="0x10F2A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x1104A; untyped axis)" type="Y Axis" storageaddress="0x1104A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (10F6A)" category="SPEC//Engine Control//Curves" storageaddress="0x10F6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (10F7A)" category="SPEC//Engine Control//Curves" storageaddress="0x10F7A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Airflow / Engine-Load Correction Table (10F8A)" category="SPEC//Airflow//Corrections" storageaddress="0x10F8A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x0F712; untyped axis)" type="Y Axis" storageaddress="0x0F712" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1104A)" category="SPEC//Engine Control//Curves" storageaddress="0x1104A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x10F2A; untyped axis)" type="Y Axis" storageaddress="0x10F2A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (1109A)" category="SPEC//Engine Control//Curves" storageaddress="0x1109A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x093F4; untyped axis)" type="Y Axis" storageaddress="0x093F4" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (110DA)" category="SPEC//Engine Control//Curves" storageaddress="0x110DA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x0FC40; untyped axis)" type="Y Axis" storageaddress="0x0FC40" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Map (119C4)" category="SPEC//Engine Control//Maps" storageaddress="0x119C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x1298E)" type="X Axis" storageaddress="0x1298E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x129AE)" type="Y Axis" storageaddress="0x129AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (11BC4)" category="SPEC//Engine Control//Maps" storageaddress="0x11BC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x1298E)" type="X Axis" storageaddress="0x1298E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x129AE)" type="Y Axis" storageaddress="0x129AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (11FC4)" category="SPEC//Engine Control//Maps" storageaddress="0x11FC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x128AE)" type="X Axis" storageaddress="0x128AE" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" /><table name="Y axis (0x129EE)" type="Y Axis" storageaddress="0x129EE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (121C4)" category="SPEC//Engine Control//Maps" storageaddress="0x121C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x128DE)" type="X Axis" storageaddress="0x128DE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x12E18)" type="Y Axis" storageaddress="0x12E18" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Map (123C4)" category="SPEC//Engine Control//Maps" storageaddress="0x123C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16"><table name="X axis (0x128DE)" type="X Axis" storageaddress="0x128DE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" /><table name="Y axis (0x12E18)" type="Y Axis" storageaddress="0x12E18" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" /></table>
+		<table name="[P] Engine Operating Correction Curve (128FE)" category="SPEC//Engine Control//Curves" storageaddress="0x128FE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x12D58; untyped axis)" type="Y Axis" storageaddress="0x12D58" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12A0E)" category="SPEC//Engine Control//Curves" storageaddress="0x12A0E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (12A2E)" category="SPEC//Engine Control//Curves" storageaddress="0x12A2E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>4096</data><data>8192</data><data>12288</data><data>16384</data><data>20480</data><data>24576</data><data>28672</data><data>32768</data><data>36864</data><data>40960</data><data>45056</data><data>49152</data><data>53248</data><data>57344</data><data>61440</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (12A6E)" category="SPEC//Engine Control//Curves" storageaddress="0x12A6E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (12B0E)" category="SPEC//Engine Control//Curves" storageaddress="0x12B0E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x1297E; untyped axis)" type="Y Axis" storageaddress="0x1297E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12B3E)" category="SPEC//Engine Control//Curves" storageaddress="0x12B3E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x12B7E; untyped axis)" type="Y Axis" storageaddress="0x12B7E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12B5E)" category="SPEC//Engine Control//Curves" storageaddress="0x12B5E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x12B7E; untyped axis)" type="Y Axis" storageaddress="0x12B7E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12B9E)" category="SPEC//Engine Control//Curves" storageaddress="0x12B9E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x12C7E; untyped axis)" type="Y Axis" storageaddress="0x12C7E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12BDE)" category="SPEC//Engine Control//Curves" storageaddress="0x12BDE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x12CBE; untyped axis)" type="Y Axis" storageaddress="0x12CBE" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12C7E)" category="SPEC//Engine Control//Curves" storageaddress="0x12C7E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x12B9E; untyped axis)" type="Y Axis" storageaddress="0x12B9E" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12CBE)" category="SPEC//Engine Control//Curves" storageaddress="0x12CBE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x12BDE; untyped axis)" type="Y Axis" storageaddress="0x12BDE" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12D38)" category="SPEC//Engine Control//Curves" storageaddress="0x12D38" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="16"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data><data>8</data><data>9</data><data>10</data><data>11</data><data>12</data><data>13</data><data>14</data><data>15</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (12D58)" category="SPEC//Engine Control//Curves" storageaddress="0x12D58" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32"><table name="Query axis (0x128FE; untyped axis)" type="Y Axis" storageaddress="0x128FE" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (12D98)" category="SPEC//Engine Control//Curves" storageaddress="0x12D98" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16"><table name="Query axis (0x1170A; untyped axis)" type="Y Axis" storageaddress="0x1170A" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (14EE2)" category="SPEC//Engine Control//Curves" storageaddress="0x14EE2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (0x14EDA; untyped axis)" type="Y Axis" storageaddress="0x14EDA" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (14FDC)" category="SPEC//Engine Control//Curves" storageaddress="0x14FDC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x14FCC; untyped axis)" type="Y Axis" storageaddress="0x14FCC" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (14FFC)" category="SPEC//Engine Control//Curves" storageaddress="0x14FFC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8"><table name="Query axis (0x14FEC; untyped axis)" type="Y Axis" storageaddress="0x14FEC" scaling="Query_Raw" /></table>
+		<table name="[P] Engine Operating Correction Curve (154D0)" category="SPEC//Engine Control//Curves" storageaddress="0x154D0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Engine Operating Correction Curve (154D8)" category="SPEC//Engine Control//Curves" storageaddress="0x154D8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8"><table name="Query axis (fixed raw query; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>32</data><data>64</data><data>96</data><data>128</data><data>160</data><data>192</data><data>224</data></table></table>
+		<table name="[P] Temperature Compensation Table (0B422)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0B422" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Temperature Compensation Table (0B4A2)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0B4A2" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Temperature Compensation Table (0B522)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0B522" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+		<table name="[P] Temperature Compensation Table (0B5A2)" category="SPEC//Engine Temperature//Corrections" storageaddress="0x0B5A2" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8"><table name="X axis (index placeholder; provisional)" type="Static X Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizex="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table><table name="Y axis (index placeholder; provisional)" type="Static Y Axis" scaling="Query_Raw" storagetype="uint16" endian="big" sizey="8"><data>0</data><data>1</data><data>2</data><data>3</data><data>4</data><data>5</data><data>6</data><data>7</data></table></table>
+	
+	</rom>
+</roms>
