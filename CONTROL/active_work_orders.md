@@ -11,16 +11,16 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65263 | WO65260 CLOSED - BOUNDED COMPLETE (2026-11-22; MB28 FFFF3DD0-FFFF3DD7 provenance negative for diagnostic-symbol crosswalk); WO65263 assigned - READY; backlog WO65266->WO65275->WO65278->WO65281 |
-| Worker 2 | WO65258 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65241 CLOSED — BOUNDED COMPLETE; WO65246 CLOSED — BOUNDED COMPLETE; WO65249 CLOSED — BOUNDED COMPLETE; WO65252 CLOSED — BOUNDED COMPLETE; queued WO65279 and WO65282 — READY |
+| Worker 1 | WO65263 | WO65260 CLOSED - BOUNDED COMPLETE (2026-11-22; MB28 FFFF3DD0-FFFF3DD7 provenance negative for diagnostic-symbol crosswalk); WO65263 assigned - READY; backlog WO65266->WO65275->WO65278->WO65281->WO65285->WO65288->WO65291->WO65294->WO65297->WO65300 |
+| Worker 2 | WO65258 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65241 CLOSED — BOUNDED COMPLETE; WO65246 CLOSED — BOUNDED COMPLETE; WO65249 CLOSED — BOUNDED COMPLETE; WO65252 CLOSED — BOUNDED COMPLETE; queued WO65279, WO65282, WO65283, WO65286, WO65289, WO65292, WO65295 and WO65298 — READY |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65266 → WO65275 → WO65278 → WO65281 | 4 |
-| Worker 2 | WO65261 → WO65279 → WO65282 | 3 |
+| Worker 1 | WO65266 → WO65275 → WO65278 → WO65281 → WO65285 → WO65288 → WO65291 → WO65294 → WO65297 → WO65300 | 10 |
+| Worker 2 | WO65261 → WO65279 → WO65282 → WO65283 → WO65286 → WO65289 → WO65292 → WO65295 → WO65298 | 9 |
 | Worker 3 | (empty) | 0 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state (2026-11-23):** reserved next tasks — Worker 1 → WO65263; Worker 2 → WO65258; Worker 3 → none (offline). Both Worker 1 and Worker 2 are STOPPED; their reservations and FIFO READY queues are preserved but neither lane is executing. FIFO READY backlog — Worker 1: WO65266 → WO65275 → WO65278 → WO65281; Worker 2: WO65261 → WO65279 → WO65282. Worker 3 has no active or backlog work orders; do not pre-assign Worker 3 WOs unless explicitly requested. Worker 1's prior WOs WO65242, WO65245, WO65248, WO65251, WO65254, WO65257, WO65260 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246, WO65249 and WO65252 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state (2026-11-23):** reserved next tasks — Worker 1 → WO65263; Worker 2 → WO65258; Worker 3 → none (offline). Both Worker 1 and Worker 2 are STOPPED; their reservations and FIFO READY queues are preserved but neither lane is executing. FIFO READY backlog — Worker 1: WO65266 → WO65275 → WO65278 → WO65281 → WO65285 → WO65288 → WO65291 → WO65294 → WO65297 → WO65300; Worker 2: WO65261 → WO65279 → WO65282 → WO65283 → WO65286 → WO65289 → WO65292 → WO65295 → WO65298. Worker 3 has no active or backlog work orders; do not pre-assign Worker 3 WOs unless explicitly requested. Worker 1's prior WOs WO65242, WO65245, WO65248, WO65251, WO65254, WO65257, WO65260 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246, WO65249 and WO65252 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; WO65241 and WO65246 are CLOSED — BOUNDED COMPLETE; the remaining two form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
 
@@ -865,3 +865,25 @@ The literature and diagnostic-name joins generate hypotheses, not semantic proof
 **Queue policy:** target at least three READY follow-ons per lane, excluding its current in-progress WO. Refill after each bounded closeout where new defensible questions remain. FIFO order is the execution order. An explicit user request may authorize a deeper queue. All READY entries are owned by the named lane; READY does not mean simultaneous execution.
 
 **Semantic proof gate:** physical identity still requires target-side endpoint/units/branch evidence. Preserve software roles and unknowns where that bar is not met. No protected engineering artifacts are authorized for modification.
+
+
+## Ignition/fueling RR completion pool — 2026-11-23
+
+User-authorized expanded pool generated from the ignition/fueling/RR-definition leads. All tasks are READY, assigned by the existing modulo rule, and appended after each lane's already-registered FIFO work. Worker 3 remains offline and was not pre-assigned. No lane executes more than one WO at a time.
+
+| WO | Lane / FIFO position | Objective | Reuse / no-repeat boundary | Lifecycle |
+|---|---|---|---|---|
+| [WO65283](WO65283.md) | Worker 2 · after WO65282 | Falsify A2L 1D CURVE/VALUE declaration-order hypothesis across existing V6/CF48D/Juke sources; deliver normalized ordered symbol stream. | Reuse WO65133/WO65175 and existing donor A2Ls; preserve source order; no donor-to-target address/scale transfer or new extraction files. | ASSIGNED — WORKER 2 — READY |
+| [WO65285](WO65285.md) | Worker 1 · after WO65281 | Align A2L 1D CURVE sequence to EL19A curve inventory using only verified anchors and the WO65283 ordering result. | Reuse WO65283, WO65060/WO65110/65132/65140/65162; no broad curve scan, inferred extents or XML edits. | ASSIGNED — WORKER 1 — READY |
+| [WO65286](WO65286.md) | Worker 2 · after WO65283 | Resolve readers, axes, query domains and output roles for 0x101E6/0x110EA, 0x102A6/0x12AAE and 0x102FC/0x112CA. | Reuse WO64903/WO65060/WO65110/WO65162; no broad fuel scan or donor scaling transfer. | ASSIGNED — WORKER 2 — READY |
+| [WO65288](WO65288.md) | Worker 1 · after WO65285 | Trace 0x9B2E/0x9C2E/0x9DAE lookup results toward spark timing; validate raw-to-degree arithmetic and bit-7 treatment. | Reuse WO65109/WO64849/WO64904; no reader/payload repeat, no ignition MMIO census or XML edit. | ASSIGNED — WORKER 1 — READY |
+| [WO65289](WO65289.md) | Worker 2 · after WO65286 | Resolve AB62/AB72 and F426 target consumers; bounded reader/query screen of ED64/EDA0/EE68/F01C fuel-cut/restore candidates. | Reuse WO64908 and existing helper/query mechanics; no full fuel-cut state machine or broad ROM scan. | ASSIGNED — WORKER 2 — READY |
+| [WO65291](WO65291.md) | Worker 1 · after WO65288 | Resolve E700/E708 dwell-curve readers/axes and test A452 for a direct idle-spark/dwell discriminator. | Reuse WO64904/WO65110/WO65162; no coil MMIO sweep or broad 1D search. | ASSIGNED — WORKER 1 — READY |
+| [WO65292](WO65292.md) | Worker 2 · after WO65289 | Align A2L VALUE/scalar sequence to EL19A scalar candidates for fuel multipliers, injector latency, MAF, dwell and limits. | Reuse WO65283, WO64903/WO64904/WO65090/WO65162; no repeat of 0x7800–0x9B00 sweep. | ASSIGNED — WORKER 2 — READY |
+| [WO65294](WO65294.md) | Worker 1 · after WO65291 | Semantic triage of still-unassigned ignition/fuel 3D catalogue maps; return up to 12 evidence-ranked leads. | Reuse WO65110/WO65133/WO65162/WO64903/WO64904; no generic 179-row re-audit or new ROM scan. | ASSIGNED — WORKER 1 — READY |
+| [WO65295](WO65295.md) | Worker 2 · after WO65292 | Reconcile missing K-value, injector latency, MAF, AFR/conversion, STFT/LTFT and cylinder-trim families against existing evidence. | Reuse WO64903/WO64908/WO65090/WO65133/WO65162/WO65283; no repeated scalar sweep or full crosswalk. | ASSIGNED — WORKER 2 — READY |
+| [WO65297](WO65297.md) | Worker 1 · after WO65294 | Determine whether 0x0D456/0x0D656 UWORD map output is ignition, fuel, torque/airflow or generic control. | Reuse WO65254 and WO65266/WO65275 query provenance when closed; no reader/axis/query-producer repeat. | ASSIGNED — WORKER 1 — READY |
+| [WO65298](WO65298.md) | Worker 2 · after WO65295 | Cross-check only top fuel scalar/curve candidates against existing OBD/Consult/DTC symbol joins to establish input identity. | Reuse WO65173/WO65239 and WO65292/WO65295; no global diagnostic join or physical sensor claims. | ASSIGNED — WORKER 2 — READY |
+| [WO65300](WO65300.md) | Worker 1 · after WO65297 | Synthesize closed ignition/fueling work into RR definition-readiness/inclusion matrix and copy-paste-ready row recommendations. | Consume only closed reports; reconcile WO65162 structural defects; report only, no XML/workbook/catalogue edits. | ASSIGNED — WORKER 1 — READY |
+
+**Queue boundaries:** WO65283 is the falsifiable ordering pilot. WO65285/WO65292 must treat its result as a gate and close as not applicable if the relevant CURVE/VALUE ordering is not useful. The start/base-fuel, ignition, fuel-cut, dwell, 3D-map, diagnostic-crosscheck and final-readiness tasks are deliberately separate so a negative result in one family does not block independent progress. No work order authorizes edits to the RR XML or engineering archive.
