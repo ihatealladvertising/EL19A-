@@ -1,0 +1,8 @@
+CF48D_Function	CF48D_Address	EL19A_Function	EL19A_Address	Alignment_Status	Notes
+sub_315D4	0x315D4	sub_22CB8	0x22CB8	NEGATIVE_at_instruction_level	ABI-level correspondence POSITIVE (map r4, axis bases r5/r6, query r7/stack, stride mask 0xF); CF48D self-relocates (ldc r0,gbr=0xB624 internally); EL19A expects caller-supplied GBR-relative bases; helper bodies unrelated; no literal-pool or table-pointer correspondence
+sub_701C	0x701C	loc_23254	off_22CEC	NEGATIVE	Interpolation tails unrelated; CF48D tail loc_7510, EL19A tail loc_23254 (0x80 sentinel handling)
+sub_7700	0x7700	sub_2344C	0x2344C	POSITIVE	Verified helper-body identity (WO65179): 25-instruction sequence, axis byte ×4 via shll2, same search/compare/fraction structure
+sub_7680	0x7680	sub_233CC	0x233CC	POSITIVE	Verified helper-body identity (WO65179): plain UBYTE descending search, same body
+sub_6F78	0x6F78	sub_22C38	0x22C38	POSITIVE	Verified helper-body identity (WO65179): same 25-instruction reader wrapper, extu.w r7, search with r4=7, tail jmp to 2D-UBYTE interp
+sub_7054	0x7054	sub_22CF8	0x22CF8	POSITIVE	Verified helper-body identity (WO65179): same sequence, two UWORD axis searches with mov #h'E,r4, tail to 2D-UWORD interp
+sub_76C0	0x76C0	sub_2340C	0x2340C	POSITIVE	Verified helper-body identity (WO65179): UWORD descending search (mov.w @(r0,r4), extu.w)
