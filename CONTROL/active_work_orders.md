@@ -11,16 +11,16 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65248 | WO65245 CLOSED — BOUNDED COMPLETE; WO65248 assigned — READY; WO65263 appended — READY |
-| Worker 2 | WO65241 → WO65246 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65261 appended — READY |
+| Worker 1 | WO65254 | WO65251 CLOSED — BOUNDED COMPLETE; WO65254 assigned — READY |
+| Worker 2 | WO65241 → WO65246 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65251 → WO65254 → WO65257 → WO65260 → WO65263 | 5 |
-| Worker 2 | WO65246 → WO65249 → WO65252 → WO65258 → WO65261 | 5 |
+| Worker 1 | WO65257 → WO65260 → WO65263 | 3 |
+| Worker 2 | WO65246 → WO65249 → WO65252 → WO65258 | 4 |
 | Worker 3 | (empty) | 0 |
 
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
@@ -32,15 +32,9 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65248; Worker 2 → WO65241; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65251 → WO65254 → WO65257 → WO65260 → WO65263; Worker 2: WO65246 → WO65249 → WO65252 → WO65258 → WO65261; Worker 3: (empty). Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237 and WO65238 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state:** current tasks — Worker 1 → WO65254; Worker 2 → WO65241; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65257 → WO65260 → WO65263; Worker 2: WO65246, WO65249, WO65252, WO65258. Worker 3 has no active or backlog work orders; do not pre-assign Worker 3 WOs unless explicitly requested. Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237 and WO65238 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; the remaining three form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
-
-## Screenshot/RPM-load axis workstream allocations — 2026-11-22
-
-- **WO65261 — Worker 2, P1, READY:** extract non-Rev-Hang screenshot table/scalar evidence and cross-reference exact candidates to the existing calibration catalogue. Report: [WO65261](WO65261.md). Excludes `Rev Hang.PNG` and the second Rev Hang capture by content; no new Rev Hang-derived tables, values or axes.
-- **WO65263 — Worker 1, P1, READY:** validate screenshot-linked ignition/fueling axis identities against target reader/query paths, testing RPM-on-Y/load-on-X per table rather than assuming a global convention. Depends on WO65261 and reuses WO65109. Report: [WO65263](WO65263.md).
-- Both are queued at the tail of their respective lane FIFOs. No technical findings are claimed at allocation time; no screenshots, ROM/LSTs, workbook, catalogue or XML files were modified.
 
 ## Current operational frontier
 
@@ -798,8 +792,8 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65239](WO65239.md) | Worker 1 | Join the 179 catalogue rows' actual reader query variables to named Consult Mode $22, OBD Mode $01 and relevant DTC source cells. | Reuse WO65173 and existing reader/query provenance; distinguish query identity from consumer/destination overlap. No repeated CID join, RAM xref, reader census or broad DTC scan. | **CLOSED — BOUNDED COMPLETE** (Worker 1; 2026-11-22; 179-row query-to-diagnostic join: direct same-cell FFFF85DA=OBD0x0C/CID1201, FFFF855E=CID121A; derived FFFF84A4/PID0x43; 19 NTC-rescale candidates rejected as direct PID same-cell; 72 no-match known-RAM, 85 no-RAM-cell; WO65173 not mutated); merged `725b099`; see [WO65239](WO65239.md) |
 | [WO65242](WO65242.md) | Worker 1 | Determine static Mode $06 support; if present, trace bounded misfire monitor IDs, measured values, limits and ROM/RAM provenance. | Reuse WO65107/WO65173; no full DTC census, broad constants scan or live-vehicle access. | **CLOSED — BOUNDED COMPLETE** (Worker 1; 2026-11-22; `sub_2C2C0` service `FFFF8003==0x06` -> `sub_2DE10` -> `sub_30830(6,0x11)` explicit NRC 0x11 unsupported; no OBD Mode $06 result path in bounded dispatch; `sub_327FE` noted as internal non-OBD family) |
 | [WO65245](WO65245.md) | Worker 1 · completed | Reconcile PID $0C / CID 0x1201 same-cell identity of FFFF85DA against its timer-derived producer; trace both 0x10984 curve outputs through first meaningful consumers. | Reuse WO65239/WO65092/WO65181 and catalogue/index anchors; no timer or curve payload/helper re-trace. | CLOSED — BOUNDED COMPLETE |
-| [WO65248](WO65248.md) | Worker 1 · current | Trace the producer and OBD PID $43 response lineage of FFFF84A4, the doubled/clamped query byte for 0x0A0F2. | Reuse WO65239/WO65058/WO65099/WO65220; no map/helper/consumer re-trace or full PID scan. | CURRENT — ASSIGNED — WORKER 1 |
-| [WO65251](WO65251.md) | Worker 1 · 3rd | Continue the WO65236 option-bit path from FFFFB33C and trace the nearest source of FFFF99A6. | Reuse WO65236/WO65178; no repeat of 0x8445 threshold or FFFF9A0B.bit5 first-consumer trace. | ASSIGNED — WORKER 1 — READY |
+| [WO65248](WO65248.md) | Worker 1 · completed | Trace the producer and OBD PID $43 response lineage of FFFF84A4, the doubled/clamped query byte for 0x0A0F2. | Reuse WO65239/WO65058/WO65099/WO65220; no map/helper/consumer census. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65248](WO65248.md)) |r full PID scan. | CURRENT — ASSIGNED — WORKER 1 |
+| [WO65251](WO65251.md) | Worker 1 · completed | Continue the WO65236 option-bit path from FFFFB33C and trace the nearest source of FFFF99A6. | Reuse WO65236/WO65178; no repeat of 0x8445 threshold or FFFF9A0B.bit5 first-consumer trace. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65251](WO65251.md)) |
 | [WO65231](WO65231.md) | Worker 2 · next | Determine post-write readers of E904/E914 status bits FFFF34C7.bit3 and FFFF34C6.bit4. | Reuse WO65127/65124/65125; no table/helper/query/threshold re-trace or whole-RAM bit census. | CLOSED — BOUNDED COMPLETE |
 | [WO65234](WO65234.md) | Worker 2 · 2nd | Resolve r13 and stack[0x50] provenance for dynamic E904/E914 result-byte store expressions. | Reuse WO65127 and WO65116–65122; no repeated lookup trace or global r13 census. | CLOSED — BOUNDED COMPLETE |
 | [WO65237](WO65237.md) | Worker 2 · 3rd | Prove/disprove whether the candidate 0x45E18/0x45E4E sequence addresses E934 output FFFF2718 and establish its first consumer. | Reuse WO65127/65126; no repeat of E934 reader mechanics/writer or FFFF86EF exclusion. | CLOSED — BOUNDED COMPLETE |
@@ -813,9 +807,9 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65249](WO65249.md) | Worker 2 · 7th | Trace the four known readers of the E914 result byte beyond its threshold/flag path and classify exact same-slot consumers. | Reuse WO65125/WO65231/WO65234; no E914 curve/query/flag mechanics or broad R13 census repeat. | ASSIGNED — WORKER 2 — READY |
 | [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace both 0x128FE 32-point curve result paths at FFFF1784/FFFF1786 through the first consequential consumer. | Reuse WO65089/WO65223; no curve/helper re-trace or global RAM xref. | ASSIGNED — WORKER 2 — READY |
 | [WO65258](WO65258.md) | Worker 2 · after WO65252 | Reconcile all MB28 payload writers and TXPR1 requests; classify each trigger as response/event/periodic or unresolved. | Reuse WO65108/WO65176/WO65120 and MMIO census; no mailbox-init or all-mailbox census repeat; static only. | ASSIGNED — WORKER 2 — READY |
-| [WO65254](WO65254.md) | Worker 1 · after WO65251 | Trace 0x0D456 16×16 UWORD map query producers and first result consumers. | Reuse WO64868/WO64918/WO65060/WO65110/WO65239; no helper census or diagnostic-join repeat. | ASSIGNED — WORKER 1 — READY |
-| [WO65257](WO65257.md) | Worker 1 · after WO65254 | Trace backward from Timer5 GR5A/GR5B compare sinks to command-state inputs and any ROM lookup contribution. | Reuse WO65106/WO65003/WO65103; no MMIO/ISR census or GR11A/GR11B producer repeat. | ASSIGNED — WORKER 1 — READY |
-| [WO65260](WO65260.md) | Worker 1 · after WO65257 | Trace MB28 payload source bytes FFFF3DD0–FFFF3DD7 to their producers and crosswalk against known OBD/Consult diagnostic cells. | Reuse WO65108/WO65173/WO65239/WO65176; no mailbox or diagnostic-join repeat; static only. | ASSIGNED — WORKER 1 — READY |
+| [WO65254](WO65254.md) | Worker 1 · current | Trace 0x0D456 16×16 UWORD map query producers and first result consumers. | Reuse WO64868/WO64918/WO65060/WO65110/WO65239; no helper census or diagnostic-join repeat. | READY |
+| [WO65257](WO65257.md) | Worker 1 · 2nd | Trace backward from Timer5 GR5A/GR5B compare sinks to command-state inputs and any ROM lookup contribution. | Reuse WO65106/WO65003/WO65103; no MMIO/ISR census or GR11/PCM73 repeat. | READY |
+| [WO65260](WO65260.md) | Worker 1 · 3rd | Trace MB28 payload source bytes FFFF3DD0–FFFF3DD7 to their producers and crosswalk against known OBD/Consult diagnostic cells. | Reuse WO65108/WO65173/WO65239/WO65176; no mailbox/queue/protocol-body repeat. | READY |
 
 
 **Cross-lane semantic workstream — 2026-11-22**
@@ -829,15 +823,16 @@ This is a coordinated subject-matter workstream across the existing three execut
 | [WO65241](WO65241.md) | Worker 2 · after WO65229/65232/65235/65238 | Function-local SH-2 execution pilot on sub_22CB8; no whole-ECU emulation. | ASSIGNED — WORKER 2 — READY |
 | [WO65242](WO65242.md) | Worker 1 | Static Mode $06 support check and bounded misfire-monitor provenance if supported. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65242](WO65242.md)) |
 | [WO65245](WO65245.md) | Worker 1 | PID $0C / timer-derived FFFF85DA reconciliation and 0x10984 curve output consumers. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65245](WO65245.md)) |
-| [WO65248](WO65248.md) | Worker 1 · after WO65245 | FFFF84A4 producer and PID $43 response lineage for the 0x0A0F2 query input. | ASSIGNED — WORKER 1 — READY |
-| [WO65251](WO65251.md) | Worker 1 · after WO65248 | FFFFB33C continuation beyond the 0x8445 option-bit gate. | ASSIGNED — WORKER 1 — READY |
+| [WO65248](WO65248.md) | Worker 1 | FFFF84A4 producer and PID $43 response lineage for the 0x0A0F2 query input. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65248](WO65248.md)) |
+| [WO65251](WO65251.md) | Worker 1 | FFFFB33C continuation beyond the 0x8445 option-bit gate. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65251](WO65251.md)) |
 | [WO65246](WO65246.md) | Worker 2 · after WO65241 | FFFF1D81 whole-byte writer versus E810 hysteresis-bit state. | ASSIGNED — WORKER 2 — READY |
 | [WO65249](WO65249.md) | Worker 2 · after WO65246 | E914 result-byte downstream consumer trace. | ASSIGNED — WORKER 2 — READY |
 | [WO65243](WO65243.md) | Withdrawn — not active | Sink-first trace from at most two selected MMIO actuator endpoints. | WITHDRAWN — NOT ACTIVE |
 | [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace the 0x128FE 32-point curve output convergence at FFFF1784/FFFF1786 to its first consequential consumer. | ASSIGNED — WORKER 2 — READY |
-| [WO65254](WO65254.md) | Worker 1 · after WO65251 | Establish query inputs and first output consumers for the 0x0D456 16×16 UWORD map. | ASSIGNED — WORKER 1 — READY |
+| [WO65254](WO65254.md) | Worker 1 · current | Establish query inputs and first output consumers for the 0x0D456 16×16 UWORD map. | ASSIGNED — WORKER 1 — READY |
 | [WO65257](WO65257.md) | Worker 1 · after WO65254 | Trace backward from Timer5 compare registers to source state/lookup and the verified APC sink. | ASSIGNED — WORKER 1 — READY |
 | [WO65260](WO65260.md) | Worker 1 · after WO65257 | Crosswalk MB28's eight known source bytes to exact RAM producers and named OBD/Consult symbols. | ASSIGNED — WORKER 1 — READY |
+| [WO65263](WO65263.md) | Worker 1 · after WO65260 | Trace downstream consumer(s) of FFFF99A8 and nearest producer of FFFFA370 (A34C+0x24) in the WO65251 390xx min-cap chain. | ASSIGNED — WORKER 1 — READY |
 | [WO65258](WO65258.md) | Worker 2 · after WO65252 | Determine whether MB28 is periodic engine-state broadcast or only request/event-response traffic; reconcile every payload writer and TX trigger. | ASSIGNED — WORKER 2 — READY |
 
 The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream. WO65242 adds a static Mode $06 support/misfire-monitor provenance check. WO65243's earlier sink-first proposal is withdrawn from the active pool; no Worker 2 task is reserved under WO65240/WO65243.
