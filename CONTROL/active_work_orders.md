@@ -11,7 +11,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
-| Worker 1 | WO65254 | WO65251 CLOSED — BOUNDED COMPLETE; WO65254 assigned — READY |
+| Worker 1 | WO65257 | WO65251 CLOSED — BOUNDED COMPLETE; WO65254 CLOSED — BOUNDED COMPLETE; WO65257 assigned — READY |
 | Worker 2 | WO65252 | WO65226 CLOSED — BOUNDED COMPLETE; WO65229 CLOSED — BOUNDED COMPLETE; WO65232 CLOSED — BOUNDED COMPLETE; WO65235 CLOSED — BOUNDED COMPLETE; WO65225 CLOSED — BOUNDED COMPLETE; WO65231 CLOSED — BOUNDED COMPLETE; WO65234 CLOSED — BOUNDED COMPLETE; WO65237 CLOSED — BOUNDED COMPLETE; WO65238 CLOSED — BOUNDED COMPLETE; WO65241 CLOSED — BOUNDED COMPLETE; WO65246 CLOSED — BOUNDED COMPLETE; WO65249 CLOSED — BOUNDED COMPLETE |
 | Worker 3 | — | Offline — no current task or READY backlog |
 
@@ -19,7 +19,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65257 → WO65260 → WO65263 | 3 |
+| Worker 1 | WO65260 → WO65263 → WO65266 | 3 |
 | Worker 2 | WO65252 → WO65258 → WO65261 | 3 |
 | Worker 3 | (empty) | 0 |
 
@@ -32,7 +32,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 - **Shared main:** no feature branches or PRs. Re-read the latest register SHA before each write; on a conflict refresh once, preserve other lanes' changes and retry once.
 - **Protected material:** no protected artifact edits without WO-specific authorization. Ignored and user-owned local files remain untouched regardless of .gitignore rules; using youtube videos.txt remains user-owned, uncommitted and untouched.
 
-**Current queue state:** current tasks — Worker 1 → WO65254; Worker 2 → WO65252; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65257 → WO65260 → WO65263; Worker 2: WO65252, WO65258, WO65261. Worker 3 has no active or backlog work orders; do not pre-assign Worker 3 WOs unless explicitly requested. Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246 and WO65249 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
+**Current queue state:** current tasks — Worker 1 → WO65257; Worker 2 → WO65252; Worker 3 → none (offline). FIFO READY backlog — Worker 1: WO65260 → WO65263 → WO65266; Worker 2: WO65252, WO65258, WO65261. Worker 3 has no active or backlog work orders; do not pre-assign Worker 3 WOs unless explicitly requested. Worker 1's prior WOs WO65242, WO65245 are CLOSED — BOUNDED COMPLETE. Worker 2's prior WOs WO65225, WO65226, WO65229, WO65231, WO65232, WO65234, WO65235, WO65237, WO65238, WO65241, WO65246 and WO65249 are CLOSED — BOUNDED COMPLETE. WO65206 remains blocked by the negative WO65204 alignment and is not assigned to either lane. The semantic workstream remains within the three execution lanes; no task is live unless listed in the current lane table.
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; WO65241 and WO65246 are CLOSED — BOUNDED COMPLETE; the remaining two form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
 
@@ -807,9 +807,9 @@ The user's operating preference is a sizeable prebuilt queue so the worker lanes
 | [WO65249](WO65249.md) | Worker 2 · 7th | Trace the four known readers of the E914 result byte beyond its threshold/flag path and classify exact same-slot consumers. | Reuse WO65125/WO65231/WO65234; no E914 curve/query/flag mechanics or broad R13 census repeat. | ASSIGNED — WORKER 2 — READY |
 | [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace both 0x128FE 32-point curve result paths at FFFF1784/FFFF1786 through the first consequential consumer. | Reuse WO65089/WO65223; no curve/helper re-trace or global RAM xref. | ASSIGNED — WORKER 2 — READY |
 | [WO65258](WO65258.md) | Worker 2 · after WO65252 | Reconcile all MB28 payload writers and TXPR1 requests; classify each trigger as response/event/periodic or unresolved. | Reuse WO65108/WO65176/WO65120 and MMIO census; no mailbox-init or all-mailbox census repeat; static only. | ASSIGNED — WORKER 2 — READY |
-| [WO65254](WO65254.md) | Worker 1 · current | Trace 0x0D456 16×16 UWORD map query producers and first result consumers. | Reuse WO64868/WO64918/WO65060/WO65110/WO65239; no helper census or diagnostic-join repeat. | READY |
-| [WO65257](WO65257.md) | Worker 1 · 2nd | Trace backward from Timer5 GR5A/GR5B compare sinks to command-state inputs and any ROM lookup contribution. | Reuse WO65106/WO65003/WO65103; no MMIO/ISR census or GR11/PCM73 repeat. | READY |
-| [WO65260](WO65260.md) | Worker 1 · 3rd | Trace MB28 payload source bytes FFFF3DD0–FFFF3DD7 to their producers and crosswalk against known OBD/Consult diagnostic cells. | Reuse WO65108/WO65173/WO65239/WO65176; no mailbox/queue/protocol-body repeat. | READY |
+| [WO65254](WO65254.md) | Worker 1 · completed | Trace 0x0D456 16x16 UWORD map query producers and first result consumers. | Reuse WO64868/WO64918/WO65060/WO65110/WO65239; no helper census or diagnostic-join repeat. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65254](WO65254.md)) |
+| [WO65257](WO65257.md) | Worker 1 · current | Trace backward from Timer5 GR5A/GR5B compare sinks to command-state inputs and any ROM lookup contribution. | Reuse WO65106/WO65003/WO65103; no MMIO/ISR census or GR11/PCM73 repeat. | READY |
+| [WO65260](WO65260.md) | Worker 1 · 2nd | Trace MB28 payload source bytes FFFF3DD0–FFFF3DD7 to their producers and crosswalk against known OBD/Consult diagnostic cells. | Reuse WO65108/WO65173/WO65239/WO65176; no mailbox/queue/protocol-body repeat. | READY |
 
 
 **Cross-lane semantic workstream — 2026-11-22**
@@ -829,10 +829,11 @@ This is a coordinated subject-matter workstream across the existing three execut
 | [WO65249](WO65249.md) | Worker 2 · after WO65246 | E914 result-byte downstream consumer trace. | ASSIGNED — WORKER 2 — READY |
 | [WO65243](WO65243.md) | Withdrawn — not active | Sink-first trace from at most two selected MMIO actuator endpoints. | WITHDRAWN — NOT ACTIVE |
 | [WO65252](WO65252.md) | Worker 2 · after WO65249 | Trace the 0x128FE 32-point curve output convergence at FFFF1784/FFFF1786 to its first consequential consumer. | ASSIGNED — WORKER 2 — READY |
-| [WO65254](WO65254.md) | Worker 1 · current | Establish query inputs and first output consumers for the 0x0D456 16×16 UWORD map. | ASSIGNED — WORKER 1 — READY |
-| [WO65257](WO65257.md) | Worker 1 · after WO65254 | Trace backward from Timer5 compare registers to source state/lookup and the verified APC sink. | ASSIGNED — WORKER 1 — READY |
+| [WO65254](WO65254.md) | Worker 1 | Establish query inputs and first output consumers for the 0x0D456 16×16 UWORD map. | **CLOSED — BOUNDED COMPLETE** (2026-11-22; see [WO65254](WO65254.md)) |
+| [WO65257](WO65257.md) | Worker 1 · current | Trace backward from Timer5 compare registers to source state/lookup and the verified APC sink. | ASSIGNED — WORKER 1 — READY |
 | [WO65260](WO65260.md) | Worker 1 · after WO65257 | Crosswalk MB28's eight known source bytes to exact RAM producers and named OBD/Consult symbols. | ASSIGNED — WORKER 1 — READY |
 | [WO65263](WO65263.md) | Worker 1 · after WO65260 | Trace downstream consumer(s) of FFFF99A8 and nearest producer of FFFFA370 (A34C+0x24) in the WO65251 390xx min-cap chain. | ASSIGNED — WORKER 1 — READY |
+| [WO65266](WO65266.md) | Worker 1 · after WO65263 | Trace producer(s) of FFFF84FE (FFFF84D4+0x2A), the Y-axis query word used by 0x0D456/0x0D656 in sub_66DF6. | ASSIGNED — WORKER 1 — READY |
 | [WO65258](WO65258.md) | Worker 2 · after WO65252 | Determine whether MB28 is periodic engine-state broadcast or only request/event-response traffic; reconcile every payload writer and TX trigger. | ASSIGNED — WORKER 2 — READY |
 
 The literature and diagnostic-name joins generate hypotheses, not semantic proof. The execution pilot validates only the reader's software behavior; no physical calibration identity is promoted by this workstream. WO65242 adds a static Mode $06 support/misfire-monitor provenance check. WO65243's earlier sink-first proposal is withdrawn from the active pool; no Worker 2 task is reserved under WO65240/WO65243.
