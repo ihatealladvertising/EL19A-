@@ -1,0 +1,369 @@
+a33b 	
+ Post subject: Ignition Timing - how it really works
+PostPosted: Thu Sep 06, 2018 9:51 am 
+Offline
+Experienced
+
+Joined: Sat Jun 24, 2017 3:23 pm
+Posts: 315 	
+Alas! The answers to the age-old question can be found within! For years people have wondered what’s up with the “burn time” table? Or is it a “Time for cylinder max pressure” table? Why can’t we understand what Nissan is doing with ignition timing?! What sort of witchcraft is this?!
+
+Well, a quick look at the A2L dispels all the myths; the “timing maps” are actually “advance trimming maps” and the conversion for them is X-64 in (hold your breath…) degrees.
+
+I know right? Now, there’s plenty more to the timing calcs than just the trimming maps, but as far as tuning is concerned, the trimming tables have a direct correlation on the amount of advance.
+
+So, how does it all work?
+
+First, the ECU calculates MBT angle. I haven’t dissected this function entirely, the ECU estimates the mass of the contents in the cylinder, determines a flame speed, accounts for RPM, calculates a time and converts it to a mean best torque advance angle, vMBTCAL "MBT operation value"
+
+The "Trimming-map compensation value", vLADVTRM has the knock flag (128) removed and is stored as vADVTRMAP, "Trimming-map reference value". wvHTARTDR "High intake air temperature retard value (after the change width limiter)" is subtracted from the reference value and the result is saved as vADVTRM "Trimming-map compensation value". This result is added to vMBTCAL.
+
+Then a few more parameters are accounted for; vCATDAN "Catalyst heating compensation value" and vADVJAR "Jar sound compensation value" are subtracted, vVTCADV "VTC ignition timing compensation value" is added. Finally -64 is applied to result in vTADVMnm "At the time of usual, a basic ignition timing"
+
+This isn’t the end though! More to come…
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+a33b 	
+ Post subject: Re: Ignition Timing - how it really works
+PostPosted: Thu Sep 06, 2018 9:51 am 
+Offline
+Experienced
+
+Joined: Sat Jun 24, 2017 3:23 pm
+Posts: 315 	
+Now things start to get a bit more complicated. Most folks (myself included) aren’t going to be modifying this part of the ROM, but I was on a quest to find out how knock was compensated for in the calcs, so I carried on. I’ve skipped over details like idle, start, and how some of the functions feeding into the timing routines work, the focus here is just to gather a broad understanding.
+
+In the above post, all that the ECU figured out was a value for best torque. Great! But what about knock compensation? Cruise conditions? Acceleration? Deceleration? It’s all in here, the "Calculation of torque correction volume at ignition timing" routine, KF7-320A.1[6].
+
+Now the ECU checks a couple of flags to determine if the engine is operating in the knock control region. If it is, it grabs bvBETA "Knock control value" and keeps it handy. It then recalls vTQRET "The amount of retard control" which is calculated by a separate torque request routine. The ECU checks which one is greater and stores it as vADVHOS "The amount of ADV compensation".
+
+Then it recalls vDLTADV "At the time of the acceleration, the amount of ADV phase control" and adds it to vADVHOS. It also recalls avSCKRET "The amount of re-acceleration shock retard" and compares the sum of vDLTADV and vADVHOS with avSCKRET and chooses the larger of the values. The larger of the values is added to vTADVM "A basic ignition timing" (same as vTADVMnm for our intents and purposes) and the result is stored as vADVBL "In front of the limiter, ignition timing"
+
+As you would expect, the ECU runs some checks on these calcs and ensures that the results are within an acceptable range and aren’t changing too much too fast. This is also where vADVADJ "ADV adjustment value" which is programmable by CONSULT tool is incorporated. This is the popular “2 degree advance” mod that was done back when there were no tuning options. The advance side limiter in my ROM is 50 deg and -7 retard. Once it goes through these details the result is stored as vADV "Ignition timing".
+
+Just about finished, the ECU then runs a few more checks and calculates the value you see with your OBD reader vFADV "A final ignition timing"! This is where the flywheel tooth position mCRSET "A Ref signal rising is located" (often 110 degrees) is taken into account.
+
+That’s all for now. I’m inclined to investigate vDLTADV "At the time of the acceleration, the amount of ADV phase control" and vTQRET "The amount of retard control" a bit more to see how their routines work and if there are benefits to manipulating ignition timing this way.
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+fenugrec 	
+ Post subject: Re: Ignition Timing - how it really works
+PostPosted: Thu Sep 06, 2018 9:20 pm 
+Offline
+Experienced
+User avatar
+
+Joined: Thu Jan 09, 2014 12:07 am
+Posts: 652 	
+Awesome post - one of the best I've seen in a while, with the A2L release itself.
+When you're done with the write-up, I might steal it for the wiki (or you can add it yourself if you were so inclined).
+
+Thanks for documenting this !
+
+_________________
+If you like nisprog + npkern, you can support me via https://liberapay.com/fenugrec/
+For sending me encrypted/secure messages, use PGP key 0xBAC61AEB3A3E6531 available from pool.sks-keyservers.net
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+mutex 	
+ Post subject: Re: Ignition Timing - how it really works
+PostPosted: Sat Sep 08, 2018 3:51 am 
+Offline
+Newbie
+
+Joined: Wed Feb 15, 2017 6:06 am
+Posts: 19 	
+This is an awesome discovery.
+
+Things make a lot more sense. I was wondering why it never looked like a traditional rpm-load timing map.
+Everything is around 64 in the 350z/g35 vq35de timing maps.
+I note: Nissan adds a little extra "timing" when the intake cam timing is at it's most advanced.
+
++ Thanks.
+There are 2 ways to tune ignition;
+1) dyno time
+2) data logging
+Nissan's ignition strategy is comprehensive and complex, but ultimately depends on the ignition trimming table for final control. If your engine is operating normally, meaning it is at temp, no high IAT, good knock sensor, you can data log your actual ignition timing vs. load and RPM. Where you want more advance, add it into the trimming map.
+
+What you've done with your map is add advance, but you don't know if it is safe. You've also removed the high sensitivity knock window, so the engine won't pull timing as quickly if it detects knock. I'd definitely add the knock window back in as a safety, and don't go adding timing until you know what the baseline of the engine operation is.
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+a33b 	
+ Post subject: Re: Ignition tuning
+PostPosted: Thu Jun 06, 2019 1:28 am 
+Offline
+Experienced
+
+Joined: Sat Jun 24, 2017 3:23 pm
+Posts: 315 	
+The 3x3 maps limit the ignition retard the ECU will apply. They are arranged so that in stock factor the highest amount of knock retard is in the high sensitivity window. On older ECUs, the limit of retard is lower at higher RPM. I suspect this is either because too much false knock is detected, or the volumetric efficiency of the engine has fallen off at that point.
+
+The SLI tables are thresholds for the amount of background noise expected. Increasing them essentially mutes the knock input. Unfortunately the descriptions of the knock routine are not well understood. A good tune shouldn't knock, so try to stay away. Log bvBETA to see how much knock retard the ECU is applying to final ignition timing.
+
+
+
+
+
+
+Just an extremely basic "guide" to tuning the timing maps for anyone who might have a hard time understanding.
+
+The photo below shows the SAME VALUES, except the one on the left has the knock window removed to help visualize the timing adjustment aspect of it. First, we need to understand the timing formula. Given that this is an extremely complex thing, let's just put it simply as Ignition Timing = MBT + Timing Adjustment + X. Where MBT is the calculated MBT value that ALL COMPENSATIONS are based on, Timing Adjustment being the Ignition Timing Map Value, and X being the knock window compensation. The knock window compensation is based off knock sensor feedback and so forth, but this compensation is ONLY active when you're within the knock window. So when you're outside of the knock window, the formula is Ignition Timing = MBT + Timing Adjustment.
+
+So we know how it's calculated, but how do we know how to tune it? So since we're relying on the ECU to calculate MBT accurately (Nissan's engineers claim the calculated MBT value has a +/- 3 degree deviance from actual MBT), we are now tuning based off the belief that the calculated MBT Value = Actual MBT. So instead of needing to focus on finding MBT, now we shift to preventing knock. Since anywhere outside the knock window is Ignition Timing = MBT + Timing Adjustment, this means that the MAXIMUM VALUE we want is 0. Because then we are running MBT. Anything higher will unnecessarily over-advance us. So if you know you're not knocking, you can raise the values closer and closer to 0 until you either hit 0, or knock starts to occur. Do be aware of what octane you're going to be running, because you don't want to run super close to MBT if you're going to be running on 87 octane. If you notice that from 6.2%-31.2% ITAC (X-Axis) we are actually using positive values in a few spots. This is because most of the time that we're in those cells, we will be transitioning from deceleration. So the positive values are there to offset some of the initial acceleration retarding that occurs when going from deceleration to acceleration. Same for within the knock window. Since within the knock window the formula is Ignition Timing = MBT + Timing Adjustment + X, we now are fighting the X compensation. This is why you see +3 in some cells. This is because due to the aggressive knock logic, it can potentially pull a decent bit of timing unnecessarily. So by having +3, we're offsetting a lot of the timing retard that is occurring due to knock sensor feedback.
+
+So outside of any areas where compensations are occurring, 0 is the maximum value you want to run for these maps. Within areas where compensations are occurring, you'll need to experiment through trial and error. Especially on any VVEL equipped vehicles. The reason the knock window is so frustrating to deal with is because Nissan's knock logic will retard ignition timing during a knock event, then leave it retarded for a predetermined amount of time to ensure that the engine stops knocking. I don't know the actual time frame, but just know that it will retard timing beyond the knock event to verify that knock stops occurring. When you're outside of the knock window, it doesn't give a crap about knock unless it trips the knock flag, where it'll then run off the high detonation ignition timing map.
+
+Attachment:
+Zoom in (real dimensions: 598 x 163)TimingMAPP.PNG
+TimingMAPP.PNG [ 68.88 KiB | Viewed 352 times ]
+
+_________________
+NissanDefinitions Repository
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+bradsm87 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Apr 29, 2021 10:03 pm 
+Offline
+Experienced
+
+Joined: Thu Apr 14, 2011 9:16 am
+Posts: 425 	
+I think the ECU's MBT calculation is probably close on many ROMs but many aren't. Also after intake, exhaust and other modifications, the MBT calculation can be further off. I have seen improvements on the dyno going from say +4 to +6 timing trim for example, so MBT calculation is at least 6 degrees off in this case.
+
+I do agree that values that are very negative are areas where there is the most room for improvement if the fuel supports the change without knock. I also agree that people should not introduce positive trim values without verifying that there is an improvement on a dyno.
+
+Fingers crossed that conditional conversion based on individual rows, columns and cells comes to RomRaider one day so that we can display the timing trim map with the knock window extra 128 automatically removed from view. For now, I tune timing with another tool where I can better visualise it.
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+Pytrex 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Apr 29, 2021 10:24 pm 
+Offline
+RomRaider Donator
+User avatar
+
+Joined: Fri Jul 26, 2019 4:35 am
+Posts: 798
+Location: United States of America 	
+bradsm87 wrote:
+I think the ECU's MBT calculation is probably close on many ROMs but many aren't. Also after intake, exhaust and other modifications, the MBT calculation can be further off. I have seen improvements on the dyno going from say +4 to +6 timing trim for example, so MBT calculation is at least 6 degrees off in this case.
+
+
+So according to the patent, the +/- 3 degree deviance is for all iterations of the system. But there are going to be times where it's off by more than that. But the majority of the time, it'll be +/- 3 degrees. As for improvements, there's no way to tell for certain without datalogging the proper parameters. You need to datalog MBT alongside Ignition Timing, then comparing it to where you find MBT on a dyno. Because there are a billion other compensations that could be retarding the timing besides the trimming value. So you can't immediately assume that the trimming map is at fault. (Hence why you see positive values) Another issue is the MBT compensation doesn't compensate for IAT. Instead, leaving that for trimming to handle. The main MBT Compensations are Coolant Temperature and Target AFR. Everything else will be handled similarly to the trimming value.
+
+But trust me, you won't affect the MBT calculation by just simply doing FBO modifications haha I can guarantee that the stock timing system is accurate within +/- 3 degrees at LEAST until you're boosted (if NA stock). It calculates flame speed based off a base flame speed, unburned gas density, fresh air rate, etc. However, it's undetermined whether the values are based off the physical dimensions or CFM data that Nissan gathered in a controlled environment. But Juan from UpRev (their tuner) is currently running the stock timing system and handling 1000whp :) So I'd say it's probably primarily based on dimensions.
+
+Quote:
+Fingers crossed that conditional conversion based on individual rows, columns and cells comes to RomRaider one day so that we can display the timing trim map with the knock window extra 128 automatically removed from view. For now, I tune timing with another tool where I can better visualise it.
+
+What I do is I just subtract 128 from the entire knock window, set it as the revert point, then click the color palette to have it show the proper shading. Then when I'm done, I just add the 128 back in. That way, everything is done inside of RomRaider :) I personally don't think it would be smart to pull an UpRev and have it default to showing everything without the knock window. It leads to confusion for those who are unaware and it's as easy as can be to just remove the knock window to visualize the trimming effects.
+
+_________________
+NissanDefinitions Repository
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+bradsm87 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Apr 29, 2021 11:59 pm 
+Offline
+Experienced
+
+Joined: Thu Apr 14, 2011 9:16 am
+Posts: 425 	
+I've learnt over the years that vehicle manufacturers, like us, often take shortcuts (as long as the end result is the same) with ECU calibration. One example is where on many ROMs, they have not used the target AFR MBT compensation table. AFR has a HUGE impact on flame speed and MBT timing. Although Hitachi (or JECS or whoever developed the firmware) incorporated features such as target AFR MBT compensation, Nissan probably just thought it easier on many vehicles just to utilise the timing trim table to get the result they need.
+
+One example is the TB48DE. Stock target AFR at full load high RPM is 11.27:1. Stock timing trim value in that area is +6. If I lean it out, final timing is pretty much unaffected, even though 12.9:1 flame speed is way faster than 11.27:1 and MBT timing is very different.
+
+Another one is IAT as you mentioned.
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+Pytrex 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Fri Apr 30, 2021 12:17 am 
+Offline
+RomRaider Donator
+User avatar
+
+Joined: Fri Jul 26, 2019 4:35 am
+Posts: 798
+Location: United States of America 	
+bradsm87 wrote:
+I've learnt over the years that vehicle manufacturers, like us, often take shortcuts (as long as the end result is the same) with ECU calibration. One example is where on many ROMs, they have not used the target AFR MBT compensation table. AFR has a HUGE impact on flame speed and MBT timing. Although Hitachi (or JECS or whoever developed the firmware) incorporated features such as target AFR MBT compensation, Nissan probably just thought it easier on many vehicles just to utilise the timing trim table to get the result they need.
+
+You're absolutely right! It doesn't seem that any Z utilizes the Target AFR MBT compensation, which doesn't make any sense to me. What makes even LESS sense is the fact that it's a fixed axis where the Target AFR it provides 3/8 usable axis points. 11.03, 12.94, and 14.7 tAFR. The rest are Target AFR's you'll never use. So I have no clue why Nissan did such a thing. It would be extremely useful to have it setup to go from your richest Target AFR-14.7 AFR within the 8 axis points, but apparently that would be too much work. I've been wanting to adjust the Target AFR MBT comp tables, but leaving it at 100% until I figure out how to properly get new values is the safest route.
+
+I want to eventually add all compensations to the MBT functions, rather than just trimming said MBT value. But that's just a plan for now. I'm not boosted yet, so I'm safe with Nissan's system for now. VVT is an interesting one to consider. Because it does increase VE, which should be translated into ITAC anyway. So I wonder if that's enough or if it'll need a separate compensation for VVT angles. But I do agree that we could make the timing system even more accurate :)
+
+_________________
+NissanDefinitions Repository
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+bradsm87 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Tue Jun 01, 2021 12:22 am 
+Offline
+Experienced
+
+Joined: Thu Apr 14, 2011 9:16 am
+Posts: 425 	
+Where does the MBT calculation get its load from? Not the X axis load point in maps but the lookup early in the calculation for a starting point for load/cylinder fill? Is it ITAC or something else?
+
+I'm guessing it must be ITAC because it can't be MAF without another scalar to get the units back to something standard. mQUNIT is not used to calibrate to a particular standard flow rate. It's used to get to a BFS suitable for whatever injectors you have so that data would vary depending on what the injector size is.
+
+Fresh Air Rate (mMITAN) doesn't appear to have enough variance in its values to be a primary load source. It looks like more of a modifier for a rough idea of how diluted the cylinders are with exhaust gas hence the use of the word "fresh". Higher load = less exhaust dilution in the cylinders.
+
+Edit: Maybe cylinder fill isn't actually needed to be known if flame speed is known. My head hurts haha!
+
+Edit 2: mTDENS is probably the main one to determine load and scaled from 0 all the way up to 175% ITAC. This is probably the best one to increase values in if increasing compression ratio. It likely refers to compressed density before ignition.
+
+
+Last edited by bradsm87 on Wed Jun 02, 2021 8:19 pm, edited 1 time in total.
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+Initial Z 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Wed Jun 02, 2021 6:04 pm 
+Offline
+Newbie
+
+Joined: Thu May 20, 2021 4:15 pm
+Posts: 42 	
+When running E85 on NA engine, would it be reasonable to advance the trim to 0 in all cells from 800 or 1200 rpm to redline and just call it a day, until one can tune it on a dyno? Is there a chance the fueling change throws MBT calculation off enough that 0 trim has a change to advance the timing too much for little gain except excess cylinder pressures?
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+Pytrex 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Jun 03, 2021 1:02 am 
+Offline
+RomRaider Donator
+User avatar
+
+Joined: Fri Jul 26, 2019 4:35 am
+Posts: 798
+Location: United States of America 	
+bradsm87 wrote:
+Where does the MBT calculation get its load from? Not the X axis load point in maps but the lookup early in the calculation for a starting point for load/cylinder fill? Is it ITAC or something else?
+
+I'm confused by what you're asking. ITAC IS load. It's the primary load parameter used within the ECU, as it's an estimated Volumetric Efficiency.
+
+_________________
+NissanDefinitions Repository
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+Pytrex 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Jun 03, 2021 1:03 am 
+Offline
+RomRaider Donator
+User avatar
+
+Joined: Fri Jul 26, 2019 4:35 am
+Posts: 798
+Location: United States of America 	
+Initial Z wrote:
+When running E85 on NA engine, would it be reasonable to advance the trim to 0 in all cells from 800 or 1200 rpm to redline and just call it a day, until one can tune it on a dyno? Is there a chance the fueling change throws MBT calculation off enough that 0 trim has a change to advance the timing too much for little gain except excess cylinder pressures?
+
+
+That has yet to be determined. I'm not quite sure on how Nissan came up with the map values yet. So I'm not sure what modifications will require altering said maps and tables. But by setting a cell to 0, you're going to then be running AT the calculated MBT value. So with e85, this theoretically wouldn't be an issue IF the MBT calculations are still accurate.
+
+_________________
+NissanDefinitions Repository
+
+Report this post
+Top 	
+ Profile Send private message  
+Reply with quote  
+bradsm87 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Jun 03, 2021 1:09 am 
+Offline
+Experienced
+
+Joined: Thu Apr 14, 2011 9:16 am
+Posts: 425 	
+Pytrex wrote:
+bradsm87 wrote:
+Where does the MBT calculation get its load from? Not the X axis load point in maps but the lookup early in the calculation for a starting point for load/cylinder fill? Is it ITAC or something else?
+
+I'm confused by what you're asking. ITAC IS load. It's the primary load parameter used within the ECU, as it's an estimated Volumetric Efficiency.
+
+
+I know ITAC is load but that doesn't mean all functions use it as their load source.
+
+I was asking what the primary source for "load" (not necessarily ITAC) for the MBT calculation is. I now see that it's mostly going to be the flame speed and mTDENS, which both use ITAC as their load source so ITAC is the primary load source for MBT calculations.
+
+
+Report this post
+Top 	
+ Profile Send private message E-mail  
+Reply with quote  
+Initial Z 	
+ Post subject: Re: Basic Guide to Ignition Timing Maps
+PostPosted: Thu Jun 03, 2021 5:07 am 
+Offline
+Newbie
+
+Joined: Thu May 20, 2021 4:15 pm
+Posts: 42 	
+Pytrex wrote:
+Initial Z wrote:
+When running E85 on NA engine, would it be reasonable to advance the trim to 0 in all cells from 800 or 1200 rpm to redline and just call it a day, until one can tune it on a dyno? Is there a chance the fueling change throws MBT calculation off enough that 0 trim has a change to advance the timing too much for little gain except excess cylinder pressures?
+
+
+That has yet to be determined. I'm not quite sure on how Nissan came up with the map values yet. So I'm not sure what modifications will require altering said maps and tables. But by setting a cell to 0, you're going to then be running AT the calculated MBT value. So with e85, this theoretically wouldn't be an issue IF the MBT calculations are still accurate.
+
+
+Yeah, that was my understanding as well. With stock compression and not being boosted yet, I imagine it would be very hard to induce knock with E85, which is why I was thinking of upping the trim to 0 on all cells (excluding idle and cells that have more advance by default), but then started wondering whether the MBT calculation is still accurate with the changed fuel.
+
+I advanced the timing in the worst slumps conservatively and the car does seem to run better, but proper changes would require dyno and datalogging.
+
+
+
+
+
+
+
+

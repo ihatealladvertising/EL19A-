@@ -11,6 +11,8 @@
 5. Read the relevant calibration inventory and XML baseline/build manifest before definition work. Do not infer current state from `PROJECT_STATE.md` unless its synchronization block is current; it may be historical.
 6. For technical questions, follow finding IDs to their source WOs/evidence. Chat summaries and memory are navigation aids, never technical authority.
 
+Read `CONTROL/PROJECT_KNOWLEDGE_PROCESS_REVIEW.md` as part of recovery; its latest entry records known documentation gaps, contradictions, method changes and fresh-session test results. The review log is a diagnostic aid, not a substitute for the live register or findings index.
+
 ## Source-of-truth hierarchy
 
 - Work-order lifecycle/assignment: `CONTROL/active_work_orders.md`.

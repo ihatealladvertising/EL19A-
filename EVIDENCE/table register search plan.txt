@@ -1,0 +1,161 @@
+**Yes. This can produce both a quick list of new table candidates and fill missing axis addresses for existing candidates.** However, I would combine the methods into a two-part discovery and reconciliation process.
+
+The key is to use visual patterns to find candidates, then use code references to identify their actual axes. Do not make proximity the deciding factor.
+
+## **1. New candidate discovery**
+
+Good for rapid discovery
+
+Start with the EL19A ROM and search for recognizable data patterns:
+
+1. Identify likely 4×4, 8×8 and 16×16 UBYTE grids.
+2. Identify likely 8-, 16- and 32-point curves, including UWORD candidates.
+3. Record starting addresses, estimated extents and storage types.
+4. Inspect preceding and succeeding ROM data for monotonic breakpoint sequences.
+5. Record possible X/Y axes and shared-axis relationships.
+
+This should produce a useful initial list without requiring full function analysis.
+
+One important limitation: **axis arrays are not necessarily adjacent to their tables.** For example, the `0xA552` map uses axes at `0xE339` and `0xE291`. Therefore, an adjacent-data search alone will miss legitimate axis relationships.
+
+## **2. Axis completion and verification**
+
+Useful for existing candidates too
+
+For every existing candidate, including those with blank or uncertain axis addresses:
+
+1. Find code references to the map address, where available.
+2. Locate the caller and identify the interpolation helper being called.
+3. Inspect the instructions preceding that call.
+4. Record the actual pointer arguments.
+5. Follow those pointers to inspect the referenced breakpoint arrays.
+6. Confirm their lengths, storage types, ordering and any transformations.
+7. Update the candidate's axis information, marking whether it is a lead or confirmed relationship.
+
+Your stated convention is particularly useful:
+
+| Register | Typical 2D lookup argument |
+| -------- | -------------------------- |
+| R4       | Table data                 |
+| R5       | Y-axis pointer             |
+| R6       | X-axis pointer             |
+
+But this must be checked against the specific helper. It is not a universal rule for every EL19A lookup routine.
+
+For example, `sub_22C78` supports the R4/R5/R6 arrangement, and the `0xA552` caller confirms it. Its Y-axis values are multiplied by four, while its X-axis values remain raw.
+
+## **3. Important exceptions to preserve**
+
+The procedure must recognize three different situations:
+
+| Lookup situation            | What to register                                                        |
+| --------------------------- | ----------------------------------------------------------------------- |
+| 2D map with explicit axes   | Table address, X axis, Y axis                                           |
+| 1D curve with explicit axis | Curve address and its axis                                              |
+| Fixed-grid lookup           | Table address and implicit query grid; do not invent ROM axis addresses |
+
+For instance, `0xE678` and `0xE688` use a fixed query grid of 0, 16, 32 … 240 through `sub_22E10`. Those are not separate ROM axis arrays.
+
+Also, an address XREF is not necessarily a direct callsite. The pointer may be loaded through a literal pool, descriptor or indirect structure. Follow the actual pointer into the caller rather than treating an absent direct XREF as proof that no reader exists.
+
+## **4. Recommended Manager instruction**
+
+I would add this as a standalone preliminary workstream before the CF48D family investigations:
+
+# MANAGER WORKSTREAM — RAPID TABLE DISCOVERY AND AXIS COMPLETION
+
+**Priority: HIGH — execute before deeper semantic investigations**
+
+## Objective
+
+Produce two deliverables:
+
+1. A rapid inventory of additional EL19A calibration-table candidates.
+2. An axis reconciliation for existing EL19A candidates, identifying missing, incomplete or incorrectly registered axes.
+
+Use visual data morphology, pattern matching, local breakpoint inspection and existing IDA references together.
+
+## Part A — New candidate harvesting
+
+Search the EL19A ROM for plausible:
+
+- 4×4, 8×8 and 16×16 UBYTE maps.
+- 8-, 16- and 32-point UBYTE curves.
+- UWORD curves and maps.
+- Adjacent calibration groups and repeated structures.
+
+For each candidate record:
+
+`address | estimated extent | storage type | likely dimensions | adjacent axis leads | discovery rationale | confidence`
+
+Inspect preceding and succeeding bytes for plausible monotonic breakpoint arrays. Treat proximity and morphology as discovery clues, not proof.
+
+Include candidates even if their semantic identity is unknown.
+
+## Part B — Existing candidate axis completion
+
+Reconcile every existing candidate in the current inventory and XML definition.
+
+For each candidate:
+
+1. Identify available code references to its table address.
+2. Identify the reader/helper used by each relevant caller.
+3. Inspect caller argument setup immediately before the helper call.
+4. Identify the actual table and axis pointers.
+5. Inspect the referenced axis data and its plausible length.
+6. Establish axis ordering, storage type and scaling transformations.
+7. Record shared axes and repeated use by other candidates.
+8. Identify candidates with blank, missing, incorrect or uncertain axis entries.
+
+Apply the observed R4/R5/R6 convention only after identifying the specific helper's argument contract.
+
+Inspect additional stack arguments where applicable.
+
+## Part C — Classify lookup behavior
+
+Distinguish:
+
+- Explicit two-axis maps.
+- Explicit one-axis curves.
+- Fixed-grid lookup tables.
+- Tables with indirect or descriptor-based pointers.
+- Structural objects that resemble tables but are not yet established as calibrations.
+
+Record ×4, ×16 or other axis transformations separately from raw ROM breakpoint values.
+
+Do not create fake ROM axes for fixed-grid lookups.
+
+## Part D — Reconciliation output
+
+Provide two separate lists:
+
+**List 1 — New candidates**
+
+- All newly discovered addresses.
+- Dimensions, type and extent estimates.
+- Axis leads.
+- Discovery rationale and confidence.
+
+**List 2 — Existing candidates needing axis attention**
+
+- Candidate address.
+- Currently registered axes.
+- Newly discovered axis addresses.
+- Confirmed versus provisional status.
+- Scaling differences or unresolved pointer relationships.
+
+Also provide a short list of candidates for which no explicit ROM axis is expected because the reader uses a fixed grid.
+
+## Constraints
+
+- Use the current candidate register and existing XML as the baseline.
+- Avoid duplicate candidate creation.
+- Use existing scripts, tools and annotated listings.
+- Prefer narrow searches and caller-specific evidence.
+- Do not require complete semantic or actuator verification.
+- Do not change XML, workbook, GitHub or Library files.
+- Prepare no more than three work orders per batch.
+- Follow `CONTROL/active_work_orders.md` for work-order authorization.
+- Keep communication to the minimum practical amount.
+
+**My recommendation:** run this before the individual CF48D family stages. It can expand the candidate inventory while improving the axis coverage of tables already found, without making full functional verification a prerequisite.&#x20;
