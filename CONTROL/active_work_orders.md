@@ -19,7 +19,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65797 → WO65800 → WO65812 → WO65815 | 4 |
+| Worker 1 | WO65800 → WO65812 → WO65815 | 3 |
 | Worker 2 | WO65315 → WO65813 → WO65816 | 3 |
 | Worker 3 | WO65739 → WO65742 → WO65808 → WO65814 → WO65817 | 5 |
 
