@@ -1,7 +1,7 @@
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** This file is the sole current source of truth for work-order lifecycle, assignments, priorities, continuation, and handoff. Technical evidence belongs in individual `WO<ID>.md` records.
-**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-23
+**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-24
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
@@ -21,9 +21,9 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 |---|---|---:|
 | Worker 1 | WO65719 → WO65722 → WO65725 → WO65728 | 4 |
 | Worker 2 | WO65303 → WO65306 → WO65309 | 3 |
-| Worker 3 | WO65499 → WO65502 → WO65505 → WO65724 | 4 |
+| Worker 3 | WO65499 → WO65502 → WO65505 → WO65724 → WO65730 | 5 |
 
-- **Worker 3 lifecycle reconciliation (2026-11-24):** WO65490 and WO65493 are CLOSED; WO65496 is this lane's current WO. Other lanes' merges twice rolled the Worker 3 row and queue back to their 2026-11-23 `WO65322`/`WO65325` state and spliced a stale backlog note into the row, so both are maintained here from the WO records. WO65502 and WO65505 are new IDs in this lane (mod 3 = 0). WO65724 was queued into this lane by its author and is retained at the tail (P1; the user may promote it). No other lane's row was edited. FIFO: WO65496 → WO65499 → WO65502 → WO65505 → WO65724.
+- **Worker 3 lifecycle reconciliation (2026-11-24):** WO65490 and WO65493 are CLOSED; WO65496 is this lane's current WO. Other lanes' merges twice rolled the Worker 3 row and queue back to their 2026-11-23 `WO65322`/`WO65325` state and spliced a stale backlog note into the row, so both are maintained here from the WO records. WO65502 and WO65505 are new IDs in this lane (mod 3 = 0). WO65724 was queued into this lane by its author (P1); WO65730 was appended behind it (P2). No other lane's row was edited. FIFO: WO65496 → WO65499 → WO65502 → WO65505 → WO65724 → WO65730.
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
 - **Future IDs:** new WOs after 65217 use ID modulo 3: remainder 1 → Worker 1; remainder 2 → Worker 2; remainder 0 → Worker 3. A worker creates and owns only its own lane's new WOs.
