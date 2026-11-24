@@ -23,11 +23,6 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 | Worker 2 | WO65309 → WO65312 → WO65315 → WO65813 → WO65816 | 5 |
 | Worker 3 | WO65739 → WO65742 → WO65808 → WO65814 → WO65817 | 5 |
 
-| Lane | Queue order after current WO | Depth |
-|---|---|---:|
-| Worker 1 | WO65797 → WO65800 → WO65812 | 3 |
-| Worker 2 | WO65309 → WO65312 → WO65315 → WO65813 | 4 |
-| Worker 3 | WO65739 → WO65742 → WO65808 → WO65814 | 4 |
 
 - **User-directed donor alignment/scalar crosswalk WOs (2026-11-24):** created WO65815 (Worker 1; validate Claude's alignment algorithm and donor-2 mapping), WO65816 (Worker 2; reconcile two-donor A2L agreement/disagreement classifications, dependent on WO65815), and WO65817 (Worker 3; target-side validation of mDSHCUT, mDDSHPTD/N and disputed mDDPAPO candidates, dependent on WO65815/65816). The 1,863 common-symbol and 842 agreement figures remain reported inputs, not independently verified results. Each WO prohibits semantic promotion from donor matching alone and protects XML, workbook, inventory, A2L, ROM/LST and Findings index.
 - **User-directed calibration-family gap WOs (2026-11-24):** created WO65812 (Worker 1; ignition-family gap reconciliation), WO65813 (Worker 2; fuel/injection family gap reconciliation), and WO65814 (Worker 3; torque/throttle/limiter/support-family gap reconciliation). Each reuses existing reports and candidate evidence, requires FOUND / GENERIC CANDIDATE / NOT LOCATED / NOT APPLICABLE classification, and prohibits broad scans, XML edits and vehicle testing. Reports: [WO65812](WO65812.md), [WO65813](WO65813.md), [WO65814](WO65814.md).
