@@ -2,7 +2,7 @@
 
 **Status:** SEEDED — TWO A2L SYNTHESIS BATCHES MIGRATED; ONGOING  
 **Authority:** This index is the entry point for calibration interpretation. See [README](README.md) for the full schemas and the mandatory XML build gate.  
-**Index revision:** WO65563 second A2L synthesis batch, 2026-11-24.
+**Index revision:** WO65563 second A2L synthesis batch, 2026-11-24; `FND-000010`/`REC-000010` firmware-RAM band reconciliation added 2026-11-24 (WO65811).
 
 ## Record schema
 
@@ -23,6 +23,7 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `0x0B756`, `0x0B7D6`; axes `0x0FCFC`/`0x0FD3C` | `FND-000007` | `REC-000007` | Distinct parallel 8×8 UWORD correction surfaces with raw shared queries; `B7D6` constant-neutral; donor RPM/ms/N×TP semantics unpromoted. |
 | `0x0E904`, `0x0E914`, `0x0E934` | `FND-000008` | `REC-000008` | No V6 counterpart established among bounded candidates; withdrawn raw-vs-converted range contradictions retained only as history. |
 | `0x0A272`; axes `0x0E006`/`0x0E002` | `FND-000009` | `REC-000009` | Target caller gives Y=`E006`/X=`E002` and matches XML; workbook “Not established” superseded; A0E2 remains a separate object. |
+| `FFFF2B6C`–`FFFF2BA4` band of `unk_FFFF2150`; clamp edges `FFFF2B6E`/`FFFF2B72` used by `FFFF1640` | `FND-000010` | `REC-000010` | Band is firmware-initialised RAM with a `0x7FFF` no-limit default from ROM word `0x90CC`, overridden by the bound publisher at `0x6D4A0`; not calibration-derived, stays opaque, no definition or name. |
 
 ## Current priority migrations
 
@@ -33,13 +34,14 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - [x] Correction to provisional scalar labels at `0x848A/0x848B`.
 - [x] Next high-value A2L synthesis batch: `0x0F406` NTC candidate and `0x0B756/0x0B7D6` scale-compatible analogue dispositions.
 - [x] E904/E914/E934 “no V6 counterpart established” dispositions and A272 axis correction.
-- [ ] Broader geometry corrections only when they change an axis, unit, dimension, scaling, label or XML disposition. Routine RAM-cell endpoint traces remain outside this index.
+- [x] Firmware-initialised RAM correction for the `FFFF2150` limit band and the `FFFF1640` clamp edges (`FND-000010`/`REC-000010`), superseding WO65499's fixed-displacement-only “zero writers” reading.
+- [ ] Broader geometry corrections only when they change an axis, unit, dimension, scaling, label or XML disposition. Routine RAM-cell endpoint traces remain outside this index — with the recorded exception of `FND-000010`, retained because it forecloses a calibration definition rather than merely tracing a cell.
 - [ ] Further A2L synthesis migrations only from a closed report with new material calibration-interpretation evidence; do not re-screen the 179-row catalogue or repeat completed donor comparisons.
 
 ## Record locations
 
-- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000009.md`
-- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000009.md`
+- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000010.md`
+- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000010.md`
 - Evidence references: `FINDINGS/evidence/EVD-xxxxxx.md` (schema reserved; no EVD records created in this revision)
 
 ## Migration coverage and cross-links
@@ -55,6 +57,7 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `FND-000007` | WO65137 §§2–5 and callsite erratum, WO65180, WO65141 §§1/3/4/5/refresh, WO65060/64940 reused | `discovered_tables_catalog.csv` `0x0B756`; paired `0x0B7D6`; no XML edit |
 | `FND-000008` | WO65127 §§1–6, WO65139 §§3–4 and coordinator erratum, WO65141 §§1/3/4, WO65124 §6 | `discovered_tables_catalog.csv` `0x0E904`; provisional XML lines 319/918 as history/build context; no XML edit |
 | `FND-000009` | WO64913 §Closeout/register corrections, WO64966, WO65162 X026/X027, WO65548 remaining list | provisional XML X026/X027 (`0xA0E2`/`0xA272`); workbook crosswalk as superseded source; no edit |
+| `FND-000010` | WO65499 §§3–4 (superseded census), WO65733 §§2–5 (three writer clusters, block-copy exclusions), WO65496 §3 (`copy_longwords_by_size` call site) | none — the band is excluded from the calibration inventory and no XML object covers it; no edit |
 
 **Inventory pointer status:** current calibration CSVs have no stable finding-ID column. No CSV, XML, workbook, catalogue, ROM, LST, A2L, protected evidence or script was edited in this revision; this index provides the address-to-inventory/XML crosswalk. Additive CSV pointers may be introduced only under a later explicitly authorized format change.
 
@@ -69,6 +72,7 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - `0x0B756/0x0B7D6` compact callsite/“query unavailable” summary versus corrected calls, staged results and parallel first consumers, with physical units still open (`REC-000007`).
 - E904/E914/E934 raw-versus-converted range contradictions versus NOT ESTABLISHED disposition (`REC-000008`).
 - A272 workbook “Not established” axes versus caller/XML `E006`/`E002`, with A0E2 kept separate (`REC-000009`).
+- WO65499's “zero fixed-displacement writers ⇒ no initializer” reading of the `FFFF2150` limit band versus three indexed-store initializer clusters and the `0x7FFF` default, with the old census retained as history and its conclusion upgraded from inferred to positively proven (`REC-000010`).
 
 ## Promotion rule
 
