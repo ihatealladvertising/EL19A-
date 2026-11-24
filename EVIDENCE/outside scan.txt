@@ -1,0 +1,214 @@
+Running the uint8 ignition-trim candidate scan across f501.bin (1,048,576 bytes / 0x100000) returned 1,061 overlapping sliding-window hits, heavily concentrated around the 0x009B00–0x009E80 region where masked values sit tightly near 64 (0x40) and 0x80 bit flags appear across roughly two-thirds of the cells.
+1. Top Non-Overlapping Candidates by Table Shape
+
+Because a 2-byte sliding step produces many overlapping windows that share almost identical statistics, deduplicating non-overlapping windows per shape highlights the strongest distinct regions:
+Offset (Hex)	Shape (Size)	Score	0x80 Flags	Near-64 (52..76 Masked)	Unflagged X - 64 Range
+0x009B5E	12x12 (144 B)	168.8	68.8%	100.0%	[-8°, +6°]
+0x009C5E	12x12 (144 B)	168.8	68.8%	100.0%	[-8°, +6°]
+0x009DDE	12x12 (144 B)	168.8	68.8%	100.0%	[-8°, +6°]
+0x009B5E	8x8 (64 B)	168.8	68.8%	100.0%	[-7°, +6°]
+0x009B9E	8x8 (64 B)	168.8	68.8%	100.0%	[-8°, +3°]
+0x009CDE	8x8 (64 B)	168.8	68.8%	100.0%	[-2°, +0°]
+0x009E5E	8x8 (64 B)	168.8	68.8%	100.0%	[-2°, +0°]
+0x009C4E	16x16 (256 B)	157.8	63.3%	94.5%	[-8°, +6°]
+2. Key Observations & Next Checks
+
+    Tight Cluster Around 0x009B00–0x009E70: All highest-scoring hits sit in a narrow band of f501.bin (0x009B5E through 0x009E70), with 68.8%–71.9% of bytes carrying the 0x80 bit and 94.5%–100.0% of val & 0x7F values falling in 52..76 (-12° to +12° around 64).
+
+    Unflagged X - 64 Spread: Across the 16x16 and 12x12 candidates around 0x009B5E–0x009DDE, unflagged cells map to [-8°, +6°] after X - 64, while 0x009CDE–0x009E70 shows a very tight [-3°, +0°] / [-2°, +0°] spread.
+
+    Filtering False Positives: Because a raw byte scan without axis alignment or spatial gradient checks can also catch packed bitfields or adjacent uint8 arrays in the same calibration block, inspecting the actual 2D rows/columns and adjacent axis tables around 0x009B5E and 0x009C4E is the next step to separate genuine ignition trim tables from neighboring data.
+
+Want me to dump and inspect the 16x16 block at 0x009C4E?
+Yes
+Inspecting the 16x16 (256-byte) window starting at 0x009C4E (0x009C4E–0x009D4D) in f501.bin shows that it actually cuts across two distinct zones rather than aligning cleanly with a single 16x16 table: a smooth gradient region in rows R00–R13 (0x009C4E–0x009D2D) followed by a sharp transition in R14–R15 (0x009D2E–0x009D4D) into a flat block of 0x40 (64).1. Structural & Value Layout Across the 16x16 Window (0x009C4E – 0x009D4D)Columns C00–C04 (Unflagged Low Bytes, 0x00–0x46): Values sit mostly in 56–70 (0x38–0x46) across R00–R13, giving X - 64 deltas from -8° to +6° (with R00–R01 at -1° to +4°, R02–R06 dipping to -8° on the left and rising to +6° around C03–C04, and R08–R13 staying tight between -3° and +0°).Columns C05–C15 in R00–R13 (Bit-7 Flagged Bytes >= 128, 0xB1–0xC6): Every cell in C05–C15 across rows R00–R13 has 0x80 set (177–198 raw). Masking with & 0x7F yields smooth values between 49 and 70 (-15° to +6° if scaled with X - 64), showing gentle row-to-row and column-to-column progression rather than random noise.Row R14 (0x009D2E–0x009D3D) Boundary: C00–C07 step smoothly from 128 (0x80) to 132 (0x84)—which masks to 0..4 (-64 if scaled as X - 64, or 0..4 if treated as small flags/indices)—while C08–C15 immediately drop to 64 (0x40).Row R15 (0x009D3E–0x009D4D) Flat Fill: All 16 bytes are 64 (0x40), and looking further past 0x009D4D shows 0x40 continuing through 0x009D6D before shifting into other patterned blocks around 0x009D6E–0x009DBB.2. Masked (raw & 0x7F) Grid (R00–R15, C00–C15)Row (Hex Start)C00C01C02C03C04C05C06C07C08C09C10C11C12C13C14C15R00 (0x009C4E)63626565656259555251495051515154R01 (0x009C5E)63636668686763605656555455565555R02 (0x009C6E)60606369707066636058565656575757R03 (0x009C7E)60596269686865646260585656565656R04 (0x009C8E)57576068666667656259595654545456R05 (0x009C9E)57576066676867666461595756565659R06 (0x009CAE)56565965656665646362595858595962R07 (0x009CBE)57575963636363625958565554535254R08 (0x009CCE)62616463636262615959585857595960R09 (0x009CDE)62626463636361605958575657575758R10 (0x009CEE)62626463636261605856555454555454R11 (0x009CFE)62626463636261595757565656575657R12 (0x009D0E)62626463626260595857565657595960R13 (0x009D1E)61616262616159595757575959606061R14 (0x009D2E)012344446464646464646464R15 (0x009D3E)64646464646464646464646464646464(Italicized cells had 0x80 set in the raw byte; all other cells had 0x80 clear.)3. Diagnostic Interpretation & Next StepBoundary Shift Suggests a Smaller or Differently Aligned Table: Because R00–R13 (14 rows) maintains a coherent 2D surface across C00–C15 while R14–R15 jumps into 0x40 fill, 0x009C4E is likely either a 14x16 (or 12x12 / 8x8 slice within 0x009C4E–0x009D2D) or slightly offset from the true table start (0x009C40–0x009C50).How to Verify: Check nearby offsets just before 0x009C4E (such as 0x009C40 or 0x009C44) and inspect adjacent uint16 / uint8 arrays before/after 0x009C00–0x009D70 to see if monotonic RPM/load axis breakpoints sit adjacent to this surface.
+
+Inspecting 0x009B20–0x009E80 in f501.bin and scanning 0x009500–0x00A400 for monotonic axis arrays shows repeating 16-byte/256-byte row motifs inside 0x009B00–0x009E80 and no classic RPM (400–6400+) or load axis breakpoint arrays sitting immediately adjacent to that block.
+1. What the Surrounding Bytes (0x009B20 – 0x009E80) Show
+
+    Repeating Sub-Blocks Inside 0x009B30–0x009E7F: The same 16-byte row sequences recur across multiple offsets rather than forming a single isolated 16x16 table:
+
+        50 50 51 52 52 52 53 53 53 53 63 63 65 ... appears at 0x009B34, 0x009C34, and 0x009DB4 (a 0x100 / 256-byte stride!).
+
+        41 41 41 BE BB B7 B4 B3 B1 B2 B3 B3 B3 B6 3F 3F appears at 0x009B50, 0x009C50, and 0x009DD0 (also a 0x100-byte stride).
+
+        The 0x40 (64) flat zone (0x009D2E–0x009D6D) and 0x10 (16) / 0x00 band around 0x009F17–0x009F6E likewise repeat or align on regular uint8 / uint16 strides.
+
+    Why 0x100-Byte Strides Appear: When a uint8 array or table repeats every 256 bytes (0x100), either a multi-map / bank / page structure is laid out at fixed 0x100 offsets or a slice of data is being read at an offset that crosses multiple sub-records.
+
+2. Monotonic Axis Scan Results (0x009500 – 0x00A400)
+
+    No Typical RPM / Load Breakpoint Arrays Directly Adjacent: Scanning 0x009500–0x00A400 for strictly/monotonically increasing uint16 (big-endian and little-endian) or uint8 sequences returned zero ascending RPM arrays (such as 400, 800, 1200, ... or 600, 1200, 1600, ...) or ascending load arrays right next to 0x009B00–0x009E80.
+
+    What the Monotonic Scan Did Catch:
+
+        Constant uint16 plateau runs (16448 = 0x4040 across 0x009D36–0x009D6E and 0x009EB6–0x009EEE; 4112 = 0x1010 across 0x009F2E–0x009F6E), which are just 0x40 or 0x10 byte runs read as uint16 pairs.
+
+        Short non-decreasing uint8 runs inside the gradients themselves (such as 46, 47, 48, 49, 49, 50, 50, 50, 63 at 0x009B46 / 0x009C46 / 0x009DC6 and 185..189 at 0x009D26 / 0x009EA6), which are table/row cells rather than standalone axis tables.
+
+3. Practical Next Steps in f501.bin
+
+    Locate Where RPM & Load Axis Arrays Actually Live: Scan the broader f501.bin ROM (or cross-reference against a known SH7058 / Nissan map layout or .lst / A2L reference) for ascending uint16 or uint8 axis tables (such as RPM 400–6400+ and load/TPS/MAF arrays) so you can pair candidate value blocks with their real axes.
+
+    Check 0x100-Byte Repeating Blocks: Compare 0x009B50, 0x009C50, and 0x009DD0 across their full 0x100-byte intervals to see if they are identical copies, bank variants, or adjacent channels/tables.
+
+Scanning the entire 1,048,576-byte (0x100000) f501.bin image for strictly increasing sequences of length >= 6 yields 1,022 big-endian uint16 arrays (91 with max values in 1,000..12,000), 196 little-endian uint16 arrays (38 in 1,000..12,000), and 361 uint8 arrays.1. Notable Big-Endian uint16 Axis-Like Arrays (RPM / Load / Lookup Breakpoints)In big-endian uint16 (>H, matching SH705x byte order), clean step-wise ascending sequences appear across 0x00C156–0x0108E4, including several arrays that resemble engine speed or throttle/load/timer breakpoints:Offset Range (Hex)LengthValuesCharacter0x00FC10–0x00FC3016[400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1850]Clean 100-step RPM-like progression (400..1850)0x00FC30–0x00FC408[400, 610, 820, 1030, 1240, 1450, 1660, 1850]Even 210-step 8-point sequence (400..1850)0x00F932–0x00F9428[0, 250, 500, 750, 1000, 1250, 1500, 1750]Exact 250-step ramp (0..1750)0x00F942–0x00F9528[0, 200, 400, 600, 800, 1000, 1200, 2550]200-step ramp jumping to 2550 at the end0x00F7E2–0x00F7F28[0, 200, 300, 400, 500, 1000, 1050, 1500]Multi-range breakpoint-like progression0x00FCDC–0x00FCFC16[0, 30, 60, 100, 140, 180, 220, 260, 300, 350, 400, 500, 600, 800, 1000, 2000]Fine low-end steps (30..40) scaling up to 20000x0105DC–0x0105FE17[0, 30, 60, 100, 150, 200, 240, 280, 350, 450, 500, 550, 800, 1000, 1400, 2000, 2888]Similar low-to-mid breakpoint curve up to 28880x01072C–0x01074C16[0, 30, 60, 90, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 550, 2550]Smooth 30/50-step table up to 550 + 25500x010804–0x01082416[920, 955, 989, 1024, 1058, 1092, 1127, 1161, 1196, 1230, 1265, 1299, 1333, 1368, 1402, 1437]Near-linear ~34.5-step progression (920..1437)0x00F912–0x00F93216[0, 96, 128, 192, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1664, 1920]Multiples of 64/128 (0..1920)0x00FB68–0x00FB8615[0, 64, 128, 192, 256, 320, 384, 512, 768, 1280, 2048, 3072, 4608, 7168, 10752]Power/binary-like scaling (0..10752)0x0102FC–0x01031412[5000, 6480, 6782, 7222, 7304, 7387, 7474, 7568, 8105, 8638, 9122, 10000]High-value ascending array (5000..10000)2. What Else Showed Up in the ScanRepeated uint16 BE Rows & Patterns: Several sequences repeat across fixed offsets—for instance, [3855, 5140, 5142, 5911, 5912, 6168] at 0x00B030, 0x00B130, and 0x00B230 (0x100 spacing), and [3599, 3855, 4114, 5142, 6427, 7456, 8740] at both 0x00ECE0 and 0x00F2F4.Little-Endian uint16 Hits: Most LE sequences with clean round steps (0x014FCC [256..2048], 0x00FBA8 [0..10240], 0x025B9A [9218..10754]) are artifacts of reading big-endian byte pairs or 16-bit/8-bit structures in little-endian order.Strictly Increasing uint8 Runs: Many of the first 40 uint8 hits are rows inside larger uint8 blocks (0x009F8E–0x009FCE, 0x00A344–0x00A492) rather than standalone axis headers, alongside a few small ascending lists like 0x0083B6 ([6, 10, 20, 24, 40, 75, 80, 110]).3. Next Steps to Pin Down True Map Axes in f501.binCheck Nearby Value Tables Around 0x00F700–0x010900: The cleanest uint16 BE step arrays (0x00F932, 0x00FC10, 0x01072C, 0x010804) sit in a compact band around 0x00F7E0–0x010900; inspecting the bytes immediately before and after those offsets can reveal whether an axis header sits right next to its 2D/3D data table.Search for Higher-RPM (1500–6500+) or Pointer/Descriptor Tables: If engine RPM axes in f501.bin use a scaling factor (e.g., RPM * scale) or live in another region/pointer table, adjusting the scan filter or inspecting pointer/offset tables around 0x000000–0x015000 will surface them.
+oth 0x00F932 and 0x00FC10 sit inside tightly packed blocks of uint16 big-endian lookup/breakpoint arrays separated by 00 00 words and followed by distinct boundary transitions (00 20 / 0xCCCD fractional ramps after 0x00F932, and [50..90] plus 0x00 fill after 0x00FC10).
+1. Context Around 0x00F932 (0x00F8E0 – 0x00F9A0)
+
+    Before 0x00F932 (0x00F8E0–0x00F931):
+
+        0x00F8E0–0x00F8F1 holds repeated 00 15 (21) uint16 BE entries.
+
+        0x00F8F2–0x00F911 begins with 00 00 followed by [25, 50, 100, 150, 200, 300, 400, 500, 600, 675, 700, 725, 750, 775, 800].
+
+        0x00F912–0x00F931 begins with 00 00 followed by [96, 128, 192, 256, 384, 512, 640, 768, 896, 1024, 1152, 1280, 1408, 1664, 1920].
+
+    At 0x00F932 (0x00F932–0x00F951):
+
+        After 00 00 at 0x00F932–0x00F933, [250, 500, 750, 1000, 1250, 1500, 1750] runs through 0x00F941.
+
+        Immediately after 00 00 at 0x00F942–0x00F943, [200, 400, 600, 800, 1000, 1200, 2550] runs through 0x00F951.
+
+    After 0x00F951 (0x00F952–0x00F9A0):
+
+        0x00F952–0x00F963 switches to repeated 00 20 (32) uint16 BE entries ending with 00 00.
+
+        From 0x00F964 onward, the bytes shift into [328, 655, 1966, 3277, 4588, 6554, ...] and 0xCCCD / 0x199A / 0x3333 / 0x6666 / 0x8000 fixed-point/fractional progressions.
+
+2. Context Around 0x00FC10 (0x00FBC0 – 0x00FC90)
+
+    Before 0x00FC10 (0x00FBC0–0x00FC0F):
+
+        0x00FBC0–0x00FBC7 holds [240, 320, 400, 480], followed by 00 00 and [48, 64, 80, 96, 112, 128, 480] (0x00FBCA–0x00FBD7), then zeros through 0x00FBD9.
+
+        0x00FBE0–0x00FBEF has [33068, 33268, 33468, 33668, 33868, 34068, 34268, 34468] (+200 step each).
+
+        0x00FBF0–0x00FC0F has uint16 BE values with low byte 0x00 and high byte stepping [16, 20, 24, 28, 32, 36, 40, 48, 52, 56, 64, 72, 80, 96, 112, 144].
+
+    At 0x00FC10 (0x00FC10–0x00FC3F):
+
+        0x00FC10–0x00FC2F holds the 16-element 100-step ramp [400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1850].
+
+        0x00FC30–0x00FC3F immediately follows with the 8-element ramp [400, 610, 820, 1030, 1240, 1450, 1660, 1850].
+
+    After 0x00FC3F (0x00FC40–0x00FC90):
+
+        0x00FC40–0x00FC4F holds [50, 55, 60, 65, 70, 75, 80, 90].
+
+        0x00FC50 through 0x00FC8F (and beyond) drops into a solid 0x00 zero block.
+
+3. What This Layout Suggests
+
+    Compact Axis/Breakpoint Tables: Both regions look like dense collections of short uint16 big-endian breakpoint or scaling tables separated by 0x0000 markers rather than a 2D map sitting directly at 0x00F932 or 0x00FC10.
+
+    Pointer/Table Indirection Likely: Because these breakpoint arrays are packed back-to-back with short lengths (7, 8, 12, 16 entries) and followed by zero/constant fill, their corresponding 2D/3D data tables are likely either referenced by an offset/pointer table elsewhere in the ROM or located in a separate data region rather than immediately appended at 0x00FC50.
+Scanning f501.bin (0x000000–0x100000) for 32-bit and 16-bit values falling inside 0x00F900–0x00FC50 surfaces 37 big-endian uint32 matches (all with upper bytes 0x0000xxxx) and 213 big-endian uint16 matches, including direct hits on several of the exact axis/breakpoint offsets we saw earlier (0x00F912, 0x00F932, 0x00F942, 0x00FB68, 0x00FC10, 0x00FC30, 0x00FC40).1. Notable 32-Bit Big-Endian Matches (0x0000F9xx – 0x0000FCxx)ROM Offset (Hex)32-Bit BE ValueTarget Offset (0x00F900–0x00FC50)Notes / Context0x06FD6C0x0000F9120x00F912[0, 96, 128, 192, ...] (16-pt array)0x0704A80x0000F9120x00F912Second 32-bit reference to 0x00F9120x0704BC0x0000F9320x00F932[0, 250, 500, 750, 1000, 1250, 1500, 1750]0x06BF000x0000F9420x00F942[0, 200, 400, 600, 800, 1000, 1200, 2550]0x04E2240x0000FAA20x00FAA2Near 0x00FAA2 ([128, 896, ...] LE / surrounding block)0x0A40D80x0000FB680x00FB68[0, 64, 128, 192, 256, 320, 384, ...] (15-pt array)0x0A4BB00x0000FB680x00FB68Second 32-bit reference to 0x00FB680x0911A0, 0x0916C40x0000FBC80x00FBC8Inside the 0x00FBC0–0x00FBD7 (240..480 / 48..480) region0x0A97700x0000FBF00x00FBF0Start of 0x00FBF0–0x00FC0F ([4096..36864])0x08E3100x0000FC100x00FC10[400, 500, 600, ..., 1800, 1850] (16-pt array)0x08CDE40x0000FC300x00FC30[400, 610, 820, 1030, 1240, 1450, 1660, 1850]0x0916B00x0000FC400x00FC40[50, 55, 60, 65, 70, 75, 80, 90]2. What the 16-Bit & 32-Bit Scans Show32-Bit BE Pointers (0x0000F9xx–0x0000FCxx): Every 32-bit match in 0x00F900–0x00FC50 across 0x00000000, 0x00100000, and 0x00800000 bases had 0x0000 in its high 16 bits, placing them in the upper code/table region (0x04E224–0x0A9770 and 0x014C28–0x014D84). Repeated occurrences of the same value—such as 0x0000FB15 at 0x014C28, 0x014C4C, 0x014CA8, and 0x014D84, or 0x0000F912 at 0x06FD6C and 0x0704A8—are strong candidates for pointer/descriptor entries referencing those calibration tables.16-Bit BE Clusters (0xF900–0xFC50): A dense run of 16-bit big-endian values in 0xFA21–0xFBBE appears around 0x00B4A2–0x00B4E4 (repeating pairs like FAA9 FAA9 and FB90 FA63 FA21 FA88 FAA1), which looks like an index/pointer or lookup table rather than arbitrary code.16-Bit LE Hits (2,129 matches): Most little-endian uint16 hits in 0xF900–0xFC50 are false positives from reading big-endian code/constants byte-swapped.3. Next Steps to Confirm True Table ReferencesInspect Code/Descriptor Context Around 0x0704A8–0x0704BC and 0x08E310: Checking the surrounding words/instructions around 0x0704A8 and 0x08E310 can show whether those 0x0000F912 / 0x0000F932 / 0x0000FC10 entries sit inside a table-descriptor struct or subroutine literal pool.Check Companion Data Pointers Near Those References: Often a table descriptor or routine that loads an RPM/load axis array (0x00FC10 or 0x00F932) also stores the pointer to the corresponding 2D/3D table or axis length right next to it.
+Both 0x0704A8 and 0x08E310 sit inside SH705x code regions—specifically right next to 0x0002 / 0x2Fxx instruction patterns (0x0002 0x2D30, 0x0002 0x2F54, 0x0002 0x2F80) and literal-pool / constant words rather than a clean pointer-table array.
+1. Around 0x0704A8 (0x070480 – 0x0704DF)
+
+    Immediate Context (0x0704A4–0x0704BF):
+
+        0x0704A4–0x0704A7: 00 00 F8 F2 (0x0000F8F2)
+
+        0x0704A8–0x0704AB: 00 00 F9 12 (0x0000F912)
+
+        0x0704AC–0x0704AF: 00 02 2D 30
+
+        0x0704B0–0x0704B3: FF FF 21 50
+
+        0x0704B4–0x0704B7: 00 01 04 EC
+
+        0x0704B8–0x0704BB: 00 02 2F 54
+
+        0x0704BC–0x0704BF: 00 00 F9 32 (0x0000F932)
+
+    Structural Takeaway: The 0x0000F8F2, 0x0000F912, and 0x0000F932 longwords are interspersed with 0x0002 / 0x2D30 / 0x2F54 / 0xFFFF words inside an instruction/literal block (0x070480–0x0704DF), consistent with PC-relative constant pools (mov.l @(disp,PC),Rn) or mixed code/data literals in SuperH code rather than a standalone table-descriptor struct.
+
+2. Around 0x08E310 (0x08E2E0 – 0x08E33F)
+
+    Immediate Context (0x08E30C–0x08E323):
+
+        0x08E30C–0x08E30F: 00 01 0A F4
+
+        0x08E310–0x08E313: 00 00 FC 10 (0x0000FC10)
+
+        0x08E314–0x08E317: 00 02 2F 80
+
+        0x08E318–0x08E31B: 00 7F FF 80
+
+        0x08E31C–0x08E31F: 00 01 0B 14
+
+    Structural Takeaway: Like 0x0704A8, 0x0000FC10 sits sandwiched between 0x0001 0x0AF4 before it and 0x0002 0x2F80 / 0x007F 0xFF80 right after it, surrounded by SuperH-like opcode bytes (0x600C, 0xE0A4, 0xA017, 0xA013, 0xC6DD).
+
+3. Why This Matters for Tracing Tables in f501.bin
+
+    Code Literal Pools vs. Calibration Descriptors: Seeing 0x0000F912, 0x0000F932, and 0x0000FC10 embedded inside code/literal areas means those 0x0000F9xx/0x0000FCxx values are likely constants/addresses loaded by routines (e.g., lookup/interpolation helper calls) rather than rows of an open table pointer directory.
+
+    How to Pin Down the Caller: Disassembling the routines around 0x070480–0x0704DF and 0x08E2E0–0x08E33F in IDA Pro (or matching against a .lst / reference ROM) will show which registers receive 0x0000F912, 0x0000F932, or 0x0000FC10 and what table/axis parameters are passed alongside them.
+
+Expanding the scan to 0x070300–0x070700 (1,024 bytes) around 0x0704A8 and 0x08E100–0x08E500 (1,024 bytes) around 0x08E310 for 2-byte-aligned 32-bit big-endian longwords in 0x0000F000–0x00012000 finds 7 matches in the first window and 3 in the second, all clustered tightly around 0x0704A4–0x0704BC and 0x08E30C–0x08E31C.1. Matches in Window Around 0x0704A8 (0x070300 – 0x070700)ROM Offset (Hex)32-Bit BE ValueRange Check (0x0000F000–0x00012000)Notes0x07037E0x0000FFFFInside rangeUpper-word mask/sentinel (0x0000FFFF), not a calibration pointer0x0704960x0000FFFFInside rangeSecond 0x0000FFFF word earlier in the same block0x0704A40x0000F8F2Inside rangePoints near the 0x0000F8F2 (25..150 / 00 00 boundary) sequence0x0704A80x0000F912Inside rangePoints to 0x00F912 ([0, 96, 128, 192, ...])0x0704B40x000104ECInside rangePoints higher into 0x0104EC (just past 0x0104AC–0x0104CC)0x0704BC0x0000F932Inside rangePoints to 0x00F932 ([0, 250, 500, 750, ...])0x0705E40x00011744Inside rangeFurther along in 0x0705xx (0x00011744)2. Matches in Window Around 0x08E310 (0x08E100 – 0x08E500)ROM Offset (Hex)32-Bit BE ValueRange Check (0x0000F000–0x00012000)Notes0x08E30C0x00010AF4Inside rangeImmediately precedes 0x0000FC10 (0x08E30C–0x08E30F)0x08E3100x0000FC10Inside rangePoints to 0x00FC10 ([400, 500, 600, ..., 1850])0x08E31C0x00010B14Inside rangeTwo words after 0x0000FC10 (0x08E31C–0x08E31F)3. Key TakeawaysDense Reference Clusters at Fixed Strides: In 0x0704A4–0x0704BC, 0x0000F8F2, 0x0000F912, 0x000104EC, and 0x0000F932 appear every 8–12 bytes (0x0704A4, 0x0704A8, 0x0704B4, 0x0704BC), while in 0x08E30C–0x08E31C, 0x00010AF4, 0x0000FC10, and 0x00010B14 sit just 4–12 bytes apart.Sparse Outside Those Tight Bands: Across the rest of both 1 KB windows (0x070300–0x070495, 0x0704C0–0x070700, and 0x08E100–0x08E30B, 0x08E320–0x08E500), only two sentinel/later words (0x07037E and 0x0705E4) appear, reinforcing that those compact clusters hold the literal/pointer constants for that routine or table group.
+Inspecting 0x010AD0–0x010B3F in f501.bin reveals a repeating 32-byte (0x20-byte) uint16 big-endian curve starting right at 0x010AF4 and repeating identically at 0x010B14, preceded by 0xFD50 and 0xFFFF fill and followed at 0x010B34 by a regular +5,040 (0x13B0) ascending uint16 sequence.
+1. Structure of 0x010AD0 – 0x010B3F
+
+    Lead-In Fill (0x010AD0–0x010AF3): Repeated FD 50 (64,848) words through 0x010AE3, followed by FF FF (65,535) erased-flash fill through 0x010AF3.
+
+    Repeating 16-Element (32-Byte) uint16 BE Sequence (0x010AF4–0x010B33):
+
+        First copy (0x010AF4–0x010B13): [768, 349, 240, 213, 213, 202, 202, 202, 192, 192, 192, 192, 192, 192, 192, 192] (03 00, 01 5D, 00 F0, 00 D5, 00 D5, 00 CA, 00 CA, 00 CA, then eight 00 C0 entries).
+
+        Exact duplicate (0x010B14–0x010B33): Starts right at 0x010B14 with the identical 16 uint16 BE values ([768, 349, 240, 213, 213, 202, 202, 202, 192, 192, 192, 192, 192, 192, 192, 192]).
+
+    Post-Block Ascending Sequence (0x010B34–0x010B3F): Shifts into [9600, 14640, 19680, 24720, 29760, 34800] (0x2580, 0x3930, 0x4CE0, 0x6090, 0x7440, 0x87F0), climbing in exact +5,040 (0x13B0) increments.
+
+2. What This Tells Us About the 0x08E30C–0x08E31C Literal Cluster
+
+    Why Both 0x010AF4 and 0x010B14 Were Referenced: Around 0x08E310, 0x00010AF4 and 0x00010B14 sit only two words apart (0x08E30C and 0x08E31C)—matching the exact 0x20-byte (32-byte) stride between the two copies of that 16-word uint16 BE curve (768 -> 349 -> 240 -> 213 -> 202 -> 192).
+
+    Curve Shape: Rather than an ascending axis array, 768 -> 349 -> 240 -> 213 -> 202 -> 192 is a decaying/clamping or inverse/reciprocal-like curve that levels off at 192 (0x00C0) across the upper half of its 16 entries.
+The +5,040 (0x13B0) progression starting at 0x010B34 actually runs as an 8-element (16-byte) repeating ramp—twice in a row (0x010B34–0x010B43 and 0x010B44–0x010B53)—before dropping into zero fill (0x010B54–0x010BA3).
+1. Sequence Breakdown (0x010B34 – 0x010B53)
+
+    First 8-Word Pass (0x010B34–0x010B43):
+
+        9600 (0x2580) -> 14640 (0x3930) -> 19680 (0x4CE0) -> 24720 (0x6090) -> 29760 (0x7440) -> 34800 (0x87F0) -> 39840 (0x9BA0) — six consecutive steps of +5,040 (0x13B0).
+
+        Eighth entry at 0x010B42 is 44400 (0xAD70), a +4,560 (0x11D0) step rather than +5,040.
+
+    Second Identical 8-Word Pass (0x010B44–0x010B53):
+
+        Repeats the exact same eight uint16 BE values ([9600, 14640, 19680, 24720, 29760, 34800, 39840, 44400]) over 16 bytes (0x10).
+
+2. What Follows After 0x010B53 (0x010B54 – 0x010BE0)
+
+    Zero Block (0x010B54–0x010BA3): 80 bytes (40 uint16 words) of 0x0000 fill.
+
+    Subsequent Data Blocks (0x010BA4–0x010BDF):
+
+        0x010BA4–0x010BAF: [2930, 1599, 1024, 715, 0, 37182]
+
+        0x010BB0–0x010BB7: [23676, 15393, 10485, 8766]
+
+        0x010BB8–0x010BC7: 00 00 followed by [146, 292, 328, 365, 401, 438] (~36.5–37 step per entry), then FF FF at 0x010BC6–0x010BC7.
+
+        0x010BC8–0x010BD7: [33107, 33128, 33222, 33326, 33462, 33632, 33835, 34070] (smoothly accelerating uint16 BE values).
+
+        0x010BD8–0x010BDF: [100, 300, 600, 800].
+
+3. Pattern Note
+
+Rather than a long continuous ramp, 0x010B34–0x010B53 is a paired 8-point uint16 BE table/row (9600 up to 44400) sitting right after the two copies of the 768 -> ... -> 192 curve (0x010AF4 and 0x010B14). That pairing (16-word curve duplicated twice, followed by an 8-word ramp duplicated twice) is typical of back-to-back calibration rows or dual-bank/dual-channel lookup arrays.
+
+Scanning 0x010800–0x011000 (2,048 bytes / 1,024 uint16 big-endian words) in f501.bin finds 3 back-to-back identical pairs and several recurring uint16 BE sequences (with multiples of 56 = 0x38 showing up in multiple places).1. Adjacent Identical uint16 BE Pairs (0x010800 – 0x011000)Length (Bytes)First CopySecond CopyStrideSequence Values (uint16 BE)16 (32 B)0x010AF4–0x010B130x010B14–0x010B3332 B (0x20)[768, 349, 240, 213, 213, 202, 202, 202, 192, 192, 192, 192, 192, 192, 192, 192]8 (16 B)0x010A54–0x010A630x010A64–0x010A7316 B (0x10)[10, 10, 17, 25, 27, 25, 24, 22]8 (16 B)0x010B34–0x010B430x010B44–0x010B5316 B (0x10)[9600, 14640, 19680, 24720, 29760, 34800, 39840, 44400]2. Other Non-Adjacent Repeating uint16 BE SequencesMultiples-of-56 (0x38) Progression ([224, 280, 336, 392, 448, 504, 560, 616, 672]):Appears as a 9-word (18-byte) sequence at 0x0109BC and 0x010CEA (and its 8-word suffix [280..672] at 0x0109BE, 0x010CCC, and 0x010CEC).At 0x010CCC and 0x010CEC, the 8-word ramp extends into a 12-word (24-byte) match [280, 336, 392, 448, 504, 560, 616, 672, 840, 840, 840, 0].Near-Identical / Trailing-Edge Pairs: Filtering for sequences with small element-wise differences (max_diff <= 25) mostly highlights zero-padded tails ending in [0, 0, 5, 10] at 0x01091A versus all-zero runs starting around 0x0109F4 and 0x010B54.3. Structural Pattern Across 0x010800 – 0x011000Consistent Back-to-Back Duplication: All three adjacent pairs (0x010A54, 0x010AF4, and 0x010B34) repeat immediately at a stride equal to their exact byte length (16 B, 32 B, and 16 B), reinforcing that this 0x010800–0x011000 block contains paired/dual calibration arrays rather than single-pass code.Recurrence of 56-Step (0x38) Ramps: Seeing [280, 336, ..., 672, 840, 840, 840, 0] repeated at 0x010CCC and 0x010CEC (32 bytes apart) points to another paired or duplicated table/axis block in the upper half of 0x010Cxx.
+Inspecting 0x010A20–0x010A9F and 0x010C90–0x010D1F in f501.bin shows that both repeating blocks sit between distinct 0x8000 / 0x80xx plateaus and 0x0000 zero padding, with 0x010CCC–0x010D01 forming a paired 16-word (32-byte) table whose tail converges onto the same 280..672 (+56 step) and 840 plateau.1. Context Around 0x010A54 (0x010A20 – 0x010A9F)Before 0x010A54 (0x010A20–0x010A53):0x010A20–0x010A33 runs [922, 1024, 1126, 1229, 1331, 1382, 1382, 1382, 1382, 1382].0x010A34–0x010A53 is a flat run of 0x8000 (32,768 / high-bit-set 0x80 0x00 byte pairs).At 0x010A54 (0x010A54–0x010A73):Two back-to-back 8-word (16-byte) copies of [10, 10, 17, 25, 27, 25, 24, 22] (0x000A, 0x000A, 0x0011, 0x0019, 0x001B, 0x0019, 0x0018, 0x0016).After 0x010A73 (0x010A74–0x010A9F):Followed by 0x0000 zero fill from 0x010A74 through 0x010A83, then an ascending uint16 BE sequence ([52479, 53247, 54271, ..., 57344, 57344]).2. Context Around 0x010CCC (0x010C90 – 0x010D1F)Before 0x010CCC (0x010C90–0x010CC1):0x010C90–0x010CA1 has [11469, 11469] followed by eight 15052 (0x3ACC) words.0x010CA2–0x010CC1 steps in +100 (0x0064) increments from 0x8000 (32,768) up to 0x85DC (34,268), followed by 00 00.At 0x010CCC (0x010CC2–0x010D01):First 16-word (32-byte) entry (0x010CC2–0x010CE1): [42, 90, 148, 212, 280, 336, 392, 448, 504, 560, 616, 672, 840, 840, 840, 0], preceded by 00 00 at 0x010CC0–0x010CC1.Second 16-word (32-byte) entry (0x010CE2–0x010D01): [28, 70, 137, 224, 280, 336, 392, 448, 504, 560, 616, 672, 840, 840, 840, 0], preceded by 00 00 at 0x010CE0–0x010CE1.Notice how the first four entries differ ([42, 90, 148, 212] vs. [28, 70, 137, 224]), and from the 5th entry onward (280 through 840, 840, 840, 0) both 16-word rows match identically.After 0x010D01 (0x010D02–0x010D1F):0x010D02–0x010D13 is 0x0000 zero fill, followed at 0x010D14 by [3277, 2294, 1311, 328, 1638, 1147, 655].3. Pattern Across This Calibration BandDelimited Paired Rows: In 0x010CC0–0x010D03, each 16-word (32-byte) sequence is framed by 00 00 words and shares a common upper curve (280..672 stepping by +56, clamped at 840, terminated by 0) while diverging at its low-end entries ([42, 90, 148, 212] vs. [28, 70, 137, 224]).Typical Delimiter / Plateau Layout: Across 0x010A00–0x010D20, 0x0000 and 0x8000 / 0x80xx runs repeatedly separate short 8- or 16-word uint16 BE lookup/trimming rows, making it straightforward to segment individual records by scanning for 0x0000 delimiters and plateau transitions.
+
+
+
+
+
+
+
+
+
+
+
