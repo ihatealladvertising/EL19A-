@@ -122,3 +122,5 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 ## Queued work orders — allocated 2026-11-21
 
 Allocated from the ranked candidate list supplied by the user. Allocation only: no investigation has been performed and no technical finding is claimed. WO65102 closed after allocation, so every queued WO is unblocked except WO65113, which waits on external material. This is a legacy allocation record. Current ownership is explicitly assigned in the autonomous worker-lane protocol and current operational frontier above.
+
+**Current queue state (2026-11-23; semantic-gap WOs added):** Worker 1 current → WO65539; READY backlog → WO65542 → WO65545 → WO65548 → WO65554 (literature glossary). Worker 2 current → WO65285; READY backlog → WO65288 → WO65291 → WO65294 → WO65297 → WO65300 → WO65303 → WO65306 → WO65309 → WO65555 (SH-2 execution feasibility only; no interpreter implementation/execution). Worker 3 current → WO65487; READY backlog → WO65490 → WO65493 → WO65496 → WO65556 (sink-first actuator trace). New WOs are appended FIFO; current work and existing order are unchanged.
