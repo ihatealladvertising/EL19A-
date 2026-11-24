@@ -1,0 +1,995 @@
+There are a multitude of fuel compensation maps. The basic 16x16 one, 
+fresh air rate 4x4, 8x8 transient throttle acceleration, 
+and a 8x8 transient throttle deceleration
+
+
+ignition timing trim map is  a 16x16 size map 
+The nissan ECUs structure is fairly similar between roms of similar engines and years but the map values won't necessarily be the same
+ so you have to often look for values in the vicinity of a map you're trying to find.
+After finding the memory address of a possible map, you'll need to look for the X- and Y-axis memory addresses 
+inside the rom
+
+
+jump into the memory address of the first value of the map, if it is referenced somewhere in the code, click on the cross reference to jump there and look for memory addresses loaded into r5 and r6 registers. The convention in the roms tends to be to load map into r4, y into r5 and x into r6 before 
+jumping into the map interpolation function.
+
+So when you locate the map/table within a function, it'll have the address be copied to r4. The X-Axis will be copied to r6, while the Y-Axis will be copied to r5. 
+0:01
+What about figuring out the units for an axis and the factor and offset
+best way is to cross-reference from either the most well-known ROMs that have an A2L (v4y713) or one where someone spent ridiculous amounts of time on (CF48D).
+If you take say CF48D and it looks very different, there will still be more similarities than differences. Sometimes you can even search for certain values (say the first row of a map) and find the exact same map (or 90% identical) in your ROM. Once you have a few footholds it gets easier.
+ost single value items are not too bad to find due to things generally being in the same order as the Renault A2L
+
+
+
+okay this is going to be a
+0:03
+very uh high level overview of uh the
+0:06
+workflow that i use
+0:08
+to analyze a new rom 
+
+the other stuff i'm looking for are
+0:53
+these checksum locations
+0:54
+you'll need these if you're doing an
+0:57
+rom raider
+0:58
+
+
+6:08
+and the interesting one is atu31imi3a
+6:14
+they always use that one 
+6:18
+and this is a timer interrupt that runs
+6:21
+periodically and i know that at the end
+6:23
+of this function
+6:25
+really close to the end the last bsr
+6:29
+ there's a
+6:40
+bunch of loops here and what they do
+6:41
+is they cycle through a bunch of call
+6:43
+tables and
+6:44
+what a call table looks like there's one
+6:46
+at 24 dc
+6:48
+let me just define that as an offset
+6:52
+all right so it's only bytes for now but
+6:54
+i know they're offsets
+6:55
+let me just define a few 
+6:58
+i can go in
+6:59
+ define it as a subroutine
+7:02
+so there you go that's a clean function
+7:03
+so the same thing for everything
+7:07
+and this is really the meat of the code
+7:09
+by going to the call tables
+7:18
+i actually do this manual manually for
+7:21
+all the call tables so go to
+7:26
+the function
+7:27
+define it define it go back loop to the
+7:30
+next one
+7:31
+and so on and so on
+7:35
+s
+7:52
+in this view so what it does is load r13
+7:55
+with
+7:56
+a counter which is 14 and it grabs
+8:00
+a function pointer from that table
+8:03
+jumps to it with jsr increments the
+8:05
+address and decrements the counter so
+8:08
+this is a loop here it goes over grabs a
+8:10
+pointer jump to the function
+8:11
+increment and decrease the counter so i
+8:13
+know there's 14
+8:14
+functions for this table
+8:20
+
+9:06
+here so you see this one has eight
+9:07
+entries let me go to this one
+9:11
+actually i know they're all in that area
+9:15
+around
+9:16
+
+9:40
+then what i like to do is just organize
+9:42
+z's a bit cleaner so on each of them
+9:44
+i'll define them as an
+9:45
+array i have four elements for this one
+9:50
+i like to have eight per line
+9:55
+automatic widths no dupes
+10:01
+with indices indexes
+10:05
+
+array there we go
+10:25
+
+14 8 per line yes
+10:34
+yes and so on
+10:38
+
+10:58
+let's see what table this is oh 3d this
+11:01
+is a big table
+11:02
+this is almost 64 entries
+11:05
+so this is one of the big ones all right
+11:11
+okay all done accept this one here i
+11:13
+forgot
+11:15
+that's eight i think
+11:21
+okay so these are all the call tables
+11:24
+they're almost all the same from one
+11:28
+rom to the next give or take a few
+11:30
+functions so there's a couple small call
+11:31
+tables here with
+11:33
+about eight entries then there's a
+11:35
+fairly big one here that was
+11:37
+around 60 entries or so and two smaller
+11:40
+ones
+11:41
+then one massive one here with this was
+11:44
+uh there you go 104 entries
+11:48
+and another one another smaller one and
+11:50
+
+
+so what i'm going to try is to cross
+0:06
+reference a certain parameter
+0:08
+from the a2l to that
+0:11
+other rom that i just opened
+0:15
+so i just picked a parameter let's take
+0:17
+this one here
+0:18
+it's called mrftw1 radiator fan
+0:21
+switching coolant temperature
+0:23
+it's stored at address 8a75 and it is a
+0:28
+single byte and this a2l
+0
+0:45
+so the first thing i'll do is look at
+0:47
+that parameter and figure out
+0:49
+where it's used and how so i'll go for a
+0:52
+binary search of the address 
+0:57
+i'm lucky because there's a couple
+0:58
+references sometimes you might need to
+1:00
+use
+1:01
+uh find refs to do this
+1:04
+so let's take the first one so there's
+1:08
+ because it's
+3:38
+accessing 875 by loading 8871
+3:42
+then accessing an offset here's what
+3:44
+that looks like
+3:46
+loads 8a71 and you'll notice here it's
+3:48
+using mob
+3:49
+l and indeed
+3:57
+it's moving the it's loading the number
+4:00
+without doing the sign extension
+4:02
+so 8a75 is going in r5 then accessing
+4:05
+plus 4. so there we go that's the access
+4:07
+we're looking for
+4:10
+the next thing i want to do is find out
+4:14
+if i can identify this function and what
+4:17
+i mean by that is am i going to find
+4:19
+the equivalent function in the other rom
+4:21
+so what i do for that is
+4:24
+just look at what the function looks
+4:26
+like in general just based on the graph
+4:27
+overview
+4:28
+and go to the top then
+4:31
+work my way up the call tree so
+4:35
+that function was called from here this
+4:37
+function was called
+4:39
+from the call table this is what i'm
+4:40
+looking for i want to land back to the
+4:42
+call tables because these are very
+4:43
+similar as i mentioned the other time
+4:46
+so this function is 4a2d8
+4:50
+and for some reason my version of ida
+4:54
+doesn't highlight anymore it used to be
+4:56
+click once here and go here and it would
+4:58
+highlight it i don't know why this isn't
+5:00
+doing it anymore
+5:03
+here it is here so it's the last line
+5:07
+near the number okay so i'll put that on
+5:10
+hold
+5:11
+then you open a second window doesn't
+5:14
+matter now it's open
+5:15
+so this is where i left off there's not
+5:17
+a whole lot of stuff defined but
+5:18
+i do have one thing which is the call
+5:22
+table worker and
+5:26
+let me just jump back to the call tables
+5:29
+there we go okay
+5:30
+so this is the call tables in the rom
+5:33
+i'm analyzing
+5:35
+so i'm looking for the function which
+5:36
+was in the line with
+5:38
+number 32 and sometimes they line up
+5:40
+perfectly you'll go okay line 32 last
+5:42
+function the line go there
+5:44
+and boom
+5:48
+and it doesn't seem like uh
+5:54
+no not really so this one here what i'm
+5:57
+looking at is
+5:57
+function entry then bsrs uh control flow
+6:01
+jumps
+6:01
+so i can see there's a condition checked
+6:04
+and it's bypassing a bunch of stuff
+6:06
+and this is really relatively short
+6:08
+function so i'm looking for something
+6:09
+similar
+6:11
+nearby in the call table
+6:15
+this one isn't it this one isn't
+6:18
+so i'll just pause this and come back
+6:21
+when i find something interesting
+6:25
+by the way i'm almost improvising i
+6:26
+don't know if i'll be able to find this
+6:30
+this parameter i i hope so
+6:33
+i'll throw the book at it so i found
+6:35
+this one here so it's a line above and a
+6:37
+function before
+6:38
+let's see what it looks like i see a bsr
+6:41
+a bunch of bsrs then it exits
+6:44
+problem with that is i don't have these
+6:46
+conditionals on the exit
+6:49
+so what i'll try and do next is go one
+6:52
+level deeper so
+6:53
+this is in the zb060 so the reference
+6:56
+rom
+6:57
+ so this is a
+7:01
+function we're looking
+7:02
+for this is the one
+7:07
+we want
+7:09
+it's a fairly big function with a sort
+7:12
+of a switch case
+7:13
+structure here
+7:19
+
+okay i just continued moving up and
+7:36
+looking at all the
+7:37
+functions branching out of the call
+7:38
+table and i think
+7:40
+
+so we have a couple bsrs and then we
+7:48
+try to get this separate there we go
+7:52
+it looks a lot like the other one a
+7:53
+couple bsrs a few conditionals
+7:56
+let's go back to  this function
+8:01
+so that's the new rom reference rom it's
+8:04
+pretty convincing so let's go back into
+8:06
+that
+8:08
+function we're looking for with the the
+8:10
+switch case
+8:12
+and let's try the same thing in other rom
+8:15
+and it looks an awful lot like the one
+8:17
+we're looking for
+8:18
+see if i switch between both um
+8:22
+this is pretty convincing so just go
+8:25
+down here
+8:34
+and i'm looking for 
+let's go here first 
+and it's pretty similar so it's loading
+8:52
+two addresses
+8:54
+and it's gonna read into that
+8:58
+general area of the rom so the pattern is similar but not
+9:04
+identical i see it's using that address
+9:06
+plus three as an access and it's reading
+9:09
+a byte in both cases
+9:11
+so that's encouraging and the last thing
+9:12
+i'll go and check is
+9:15
+address1 plus 3 that's
+9:19
+address2 and the value is 91.
+9:22
+very often simple parameters like this
+9:25
+will have the same value
+9:28
+so in this case is that true 
+9:33
+nope so in the reference rom they're
+9:36
+using 95.
+9:38
+so it's close but not the same so it
+9:41
+wouldn't be possible
+9:42
+to just do a search for that value
+9:45
+especially for a single byte there's no
+9:46
+way
+9:47
+you're going to land right on the
+9:49
+parameter you're looking for
+9:52
+one other thing i like to check just to
+9:55
+get a better confidence that what i
+9:56
+found is indeed the same parameters
+9:58
+usually they're stored in the same order
+10:00
+next to similar parameters so let's see
+10:03
+if that's true in this case
+
+10:28
+but the function structure
+10:32
+this one um from what i've seen this is
+10:35
+pretty unique i'm
+10:37
+pretty sure this is what we're looking
+10:38
+for and to be extra certain you could go
+10:41
+back and go further down and
+10:42
+keep track of that value and see what
+10:45
+happens to it
+10:47
+other times you see a parameter accessed
+10:49
+near a table read or some
+10:52
+other very noticeable parameter
+10:55
+in this case well there's address3
+10:59
+and it's accessing 8 a 8 0 here from
+11:02
+this line
+11:03
+so let's see what's there that's value
+11:06
+98
+11:07
+so that's in my source rom let's go back
+11:09
+to the target rom
+11:11
+back to the function and it's taking address3 plus 2 which is
+11:19
+6856 value is 96. what did i say the
+11:22
+value was
+
+98 it's pretty close
+11:28
+and in the case of the reference rom i
+11:31
+can go back to the a
+
+the a2l and figure out what that means
+11:35
+so it's accessing eight
+11:36
+a7 f plus one
+11:40
+let's go back in there
+11:43
+search eight a eight zero
+11:47
+and there it is here radio radiator fan
+11:49
+switching coolant temperature too so it
+11:51
+makes sense that it will be
+11:52
+working on both those parameters in the
+11:55
+same area
+11:57
+so that's it i'm pretty confident this
+12:01
+parameter is the one i look up i'm
+12:02
+looking for
+12:03
+
+there we go to the size one single byte
+12:47
+perfect
+12:49
+
+
+0:01
+in this demo I'll be looking at a
+0:02
+typical 2D interpolated table and how
+0:06
+the axis values work how to find them
+0:10
+and how to identify the the ram
+0:13
+locations g so here's a probably typical map
+0:21
+I have no idea what it is I'm just
+0:23
+pretty sure it's a 16x 16 eight 8bit
+0:27
+table  I messed
+0:42
+around a bit till I found the the start
+0:43
+of the table and just to confirm find
+0:46
+find the cross
+0:48
+reference and go back to code here so we
+0:51
+have this access code let me just mark
+0:54
+
+1:22
+usual code pattern it it'll load the
+1:26
+table address into
+1:28
+R4 then two other addresses into R5 R
+1:32
+six and then it'll jump to a
+1:35
+function so
+1:37
+usually R5 and R six are the axis look
+1:42
+of value so let's see what that looks
+1:44
+like
+1 sometimes um Ida will think
+1:58
+they're bytes but they're 16 bits but
+2:00
+16bit values so for now I'll just mark
+2:02
+this as a bite and it's also pretty
+2:05
+obvious that there's 16 entries so that
+2:08
+also confirms that my table dimensions
+2:10
+were
+2:11
+correct I'll just make this show show a
+2:14
+bit better all right so these are the
+2:16
+lookup
+2:19
+values and same thing for the other one
+2:24
+
+2:28
+one 16
+2:32
+yes okay so we have a table two XIs look
+2:35
+up tables and a
+2:38
+function um now what I've noticed is
+2:41
+most of the
+2:42
+time uh if R5 is X and R six is
+2:47
+y then the table is shown properly that
+2:52
+is as you increase as it looks up in the
+2:56
+R5 value it selects a column and R six
+2:59
+will select the row but I remember
+3:01
+clearly that there's at least one or two
+3:02
+maps that have that order transposed
+3:06
+what I mean is R six will be columns and
+3:09
+R5 will be rows and it's really a pain
+3:13
+to figure out for sure which one it is
+3:14
+in the code so you'll have to rely on
+3:17
+other Maps um or really dig deep into
+3:21
+the lookup lookup function which I've
+3:23
+done uh it's a bit tedious so now we found the
+3:41
+axis uh lookup tables now let's go look
+3:45
+at that
+3:46
+function also just a quick tangent here
+3:49
+R 456 those are the standard registers
+3:54
+for passing in parameters to a function
+3:56
+there's actually a fourth one which is
+3:57
+R7 which is right here if you're
+4:00
+familiar with Super H you know that jsr
+4:03
+actually executes one off code right
+4:05
+after uh before jump into this function
+4:08
+and that's how it loads argument number
+4:10
+four and the next question is well what
+4:13
+happens to extra arguments because to
+4:15
+look up data in a table you need five
+4:18
+things you need where the table is you
+4:20
+need the access data so that's X and Y
+4:24
+then you need a value for both input
+4:27
+values let's call them like that
+4:30
+so one of them is passed in our
+4:33
+seven and the other one is passed on the
+4:37
+stack so the reference for that is 
+4:42
+documented in this brick of a document
+4:45
+which is just a c compiler which I think
+4:50
+Nissan has been using they don't have a
+4:53
+whole lot of choice would be logical
+4:54
+that they'd be using this compiler and
+4:57
+by convention it uses R4 through r seven
+5:00
+for the four first arguments and then it
+5:02
+pushes the other arguments on the
+5:05
+stack it's upside down to what I'm used
+5:08
+to so as the code runs it pushes
+5:11
+arguments here argument area then when
+5:14
+it calls the function uh the CPU takes
+5:16
+care of putting the return address on
+5:18
+the stack and then any local variables
+5:21
+will be added onto
+5:23
+that okay back to code
+5:26
+here I'll just call this a table
+5:30
+look up sometimes when you're lucky
+5:32
+they're reused a whole bunch of times
+5:34
+here it's just used
+5:41
+twice so what I want to do is figure
+5:45
+out which value is used to index into
+5:49
+address4 so the one in
+5:53
+R5 Let's see what this looks
+5:56
+like  keep track of the registers R4
+6:20
+is the table address R5 oops actually
+6:31
+address address
+6:34
+okay so let's see what happens with R5
+6:38
+with X is zero I just called it that
+6:41
+way uh R5 first thing it does copies to
+6:44
+r0o and it clobbers R5 okay fair enough
+6:48
+then jumps into this and it passes in uh
+6:52
+15 into R4
+6:55
+R4 and this is going to be the first
+6:58
+axis interpolation so I know by now that
+7:01
+15 is the number of elements minus one
+7:04
+so it's a 16 element axis lookup
+7:08
+table and indeed I can see there's a
+7:11
+loop here so it Loops
+7:14
+it uh pulls out a value from the table
+7:18
+and then it decrements and Loops
+7:21
+over and then once it found two
+7:26
+items here it pulls the values from the
+7:28
+table does some math this is just a
+7:31
+horrible division function so it's uh
+7:33
+basically figure out a
+7:36
+fraction just for the rest of the
+7:38
+interpolation but that doesn't really
+7:39
+matter for now all I wanted to know is
+7:42
+uh
+7:43
+which which value it lose uses for the
+7:46
+lookup so I know
+7:49
+r0 came from here came from R5 which was
+7:52
+the address okay so it pulls a value
+7:56
+does a bit of math and Compares it to R5
+8:00
+ here it is using r0o uh
+8:08
+it
+8:10
+happens so
+8:12
+R5 is compared to R1 R5 which one was
+8:17
+that when we call this function that was
+8:21
+R7 okay
+8:23
+good so let's move back a
+8:27
+bit when the table lookup function was
+8:29
+called it passed in a value into r
+8:33
+s this value was copied to
+8:36
+R5 and this value is used to find where
+8:40
+we are in the axis
+8:43
+table 
+8:57
+okay now for the other one the other
+8:59
+axis is r6 and here 
+it looks an awful lot like the
+9:17
+other
+9:19
+one this time it's also copying from r0o
+9:23
+and where did r0o come
+9:26
+from it came from r6
+9:30
+yeah we know
+9:32
+that what is it compared to R5 okay
+9:36
+where does R5 come
+9:38
+from ah okay so it came from that
+9:42
+argument that was pushed on the stack
+9:46
+perfect that's axis
+9:49
+zero axis one 
+value
+9:54
+good and we also know that um
+10:00
+the value is a byte because it's
+10:02
+extended unsigned and in the function
+10:05
+two I was doing a comparison of just
+10:08
+bytes sometimes you'll have one axis
+10:10
+that's 8 bit values and the other one's
+10:12
+16 bits so there'll be different Lookout
+10:15
+functions here I don't know why they why
+10:17
+they're using two different functions
+10:18
+ I figured out in
+10:27
+the meantime why it is that we're using
+10:30
+two different interpolators for both
+10:33
+axes and the reason is simple this one
+10:35
+was the simpler version where it's
+10:38
+pulling a value from the uh access table
+10:40
+and comparing it to our our input
+10:44
+value whereas the other
+10:47
+one it's shifting left by two positions
+10:50
+so it's multiplying by four so that's
+10:53
+that happens sometimes and it's
+10:54
+something to keep in mind when uh
+10:56
+figuring out scalings sometimes it pulls
+11:01
+tricks like this um shifting left by one
+11:04
+or two positions it depends so it's
+11:07
+something to look out
+11:09
+for so r s is the lookup
+11:18
+value for x is
+11:20
+zero where does R7 come from it was
+11:23
+copied
+11:25
+from r0o which came from here
+11:29
+which is a ram
+11:31
+axis 
+
+this scenario you have a a base plus
+12:56
+offset address and then R12 one of the
+12:58
+registers is set here it's not so bad
+13:01
+sometimes you have to go all the way up
+13:03
+in the function to figure out what's the
+13:05
+value in there and then you got to find
+13:06
+the offset it's a real pain so with a
+13:09
+script  in this case I was just
+13:45
+after the address for this value which
+13:48
+is used to look up into the second
+13:52
+axis 
