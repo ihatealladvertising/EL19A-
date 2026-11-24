@@ -1,8 +1,8 @@
 # Calibration Findings / Reconciliation Index
 
-**Status:** SEEDED — INITIAL HIGH-VALUE BATCH MIGRATED; ONGOING  
+**Status:** SEEDED — TWO A2L SYNTHESIS BATCHES MIGRATED; ONGOING  
 **Authority:** This index is the entry point for calibration interpretation. See [README](README.md) for the full schemas and the mandatory XML build gate.  
-**Index revision:** WO65548 initial seed, 2026-11-24.
+**Index revision:** WO65563 second A2L synthesis batch, 2026-11-24.
 
 ## Record schema
 
@@ -19,6 +19,10 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `0x9B2E`, `0x9C2E`, `0x9DAE`; axes `0xE4AC`/`0xE4BC` | `FND-000003` | `REC-000003` | Three distinct placements on fixed ROM axes; `9C2E`/`9DAE` payload aliases cancel in the paired differential; ignition/knock labels provisional. |
 | `0x848A`, `0x848B`; donor `0x90EA` | `FND-000004` | `REC-000004` | `848A/B` paired user-verified donor mapping; separate donor `mDDPAPO` and screenshot scalar roles; numeric coincidence does not merge them. |
 | `0x0E904`; axis `0x0FA62` | `FND-000005` | `REC-000005` | XML v3 static `0–240` axis is wrong; future build uses explicit UWORD axis at `0x0FA62`; no XML edit in this revision. |
+| `0x0F406` | `FND-000006` | `REC-000006` | Strong `mTTWN` donor candidate by geometry/output/context; `20 mV/count` is conditional on unknown board AVref; physical identity MED-LOW and unpromoted. |
+| `0x0B756`, `0x0B7D6`; axes `0x0FCFC`/`0x0FD3C` | `FND-000007` | `REC-000007` | Distinct parallel 8×8 UWORD correction surfaces with raw shared queries; `B7D6` constant-neutral; donor RPM/ms/N×TP semantics unpromoted. |
+| `0x0E904`, `0x0E914`, `0x0E934` | `FND-000008` | `REC-000008` | No V6 counterpart established among bounded candidates; withdrawn raw-vs-converted range contradictions retained only as history. |
+| `0x0A272`; axes `0x0E006`/`0x0E002` | `FND-000009` | `REC-000009` | Target caller gives Y=`E006`/X=`E002` and matches XML; workbook “Not established” superseded; A0E2 remains a separate object. |
 
 ## Current priority migrations
 
@@ -27,14 +31,15 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - [x] 9B2E/9C2E/9DAE raw UBYTE and runtime alias disposition.
 - [x] High-value axis correction at `0x0E904`/`0x0FA62`.
 - [x] Correction to provisional scalar labels at `0x848A/0x848B`.
-- [ ] Next high-value A2L synthesis batch: `0x0F406` NTC candidate and `0x0B756/0x0B7D6` scale-compatible analogues.
-- [ ] E904/E914/E934 “no V6 counterpart established” dispositions and A272 axis correction.
+- [x] Next high-value A2L synthesis batch: `0x0F406` NTC candidate and `0x0B756/0x0B7D6` scale-compatible analogue dispositions.
+- [x] E904/E914/E934 “no V6 counterpart established” dispositions and A272 axis correction.
 - [ ] Broader geometry corrections only when they change an axis, unit, dimension, scaling, label or XML disposition. Routine RAM-cell endpoint traces remain outside this index.
+- [ ] Further A2L synthesis migrations only from a closed report with new material calibration-interpretation evidence; do not re-screen the 179-row catalogue or repeat completed donor comparisons.
 
 ## Record locations
 
-- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000005.md`
-- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000005.md`
+- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000009.md`
+- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000009.md`
 - Evidence references: `FINDINGS/evidence/EVD-xxxxxx.md` (schema reserved; no EVD records created in this revision)
 
 ## Migration coverage and cross-links
@@ -46,8 +51,12 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `FND-000003` | WO64970, WO64968, WO64848 closeout, WO65109, WO64913 | `candidate_register.csv` 9C2E/9DAE; provisional XML lines 134/139/144 and 889–909 |
 | `FND-000004` | WO64831 §§3–4/§9, WO65014 user correction, WO65112 errata, WO65141 | provisional XML lines 80/83 |
 | `FND-000005` | WO65124 §6, WO65058, WO65162 I-04, catalogue row `0x0E904` | `discovered_tables_catalog.csv` `0x0E904`; provisional XML lines 319/918 |
+| `FND-000006` | WO65134 §§1–5 and scale erratum, WO65141 §1/§4/erratum, WO65182, WO65056/65057 reused | `discovered_tables_catalog.csv` `0x0F406`; no XML edit |
+| `FND-000007` | WO65137 §§2–5 and callsite erratum, WO65180, WO65141 §§1/3/4/5/refresh, WO65060/64940 reused | `discovered_tables_catalog.csv` `0x0B756`; paired `0x0B7D6`; no XML edit |
+| `FND-000008` | WO65127 §§1–6, WO65139 §§3–4 and coordinator erratum, WO65141 §§1/3/4, WO65124 §6 | `discovered_tables_catalog.csv` `0x0E904`; provisional XML lines 319/918 as history/build context; no XML edit |
+| `FND-000009` | WO64913 §Closeout/register corrections, WO64966, WO65162 X026/X027, WO65548 remaining list | provisional XML X026/X027 (`0xA0E2`/`0xA272`); workbook crosswalk as superseded source; no edit |
 
-**Inventory pointer status:** current calibration CSVs have no stable finding-ID column. No CSV, XML, workbook, catalogue, ROM, LST, A2L or script was edited in this revision; this index provides the address-to-inventory/XML crosswalk. Additive CSV pointers may be introduced only under a later explicitly authorized format change.
+**Inventory pointer status:** current calibration CSVs have no stable finding-ID column. No CSV, XML, workbook, catalogue, ROM, LST, A2L, protected evidence or script was edited in this revision; this index provides the address-to-inventory/XML crosswalk. Additive CSV pointers may be introduced only under a later explicitly authorized format change.
 
 ## Conflicts resolved without erasing history
 
@@ -56,6 +65,10 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - 9B2E dynamic-axis label and XML ignition/knock overlays versus fixed GBR-rooted axes, identical `9C2E`/`9DAE` payloads and bit-7 disposition (`REC-000003`).
 - 0x848A/B, mDDPAPO and the single 52.34% screenshot scalar: kept as three distinct roles (`REC-000004`).
 - E904 static inline axis versus verified explicit `0x0FA62` axis and interpolation (`REC-000005`).
+- `0x0F406` exact nominal-5-V `20/160 mV` claim versus external AVref and conditional compatibility (`REC-000006`).
+- `0x0B756/0x0B7D6` compact callsite/“query unavailable” summary versus corrected calls, staged results and parallel first consumers, with physical units still open (`REC-000007`).
+- E904/E914/E934 raw-versus-converted range contradictions versus NOT ESTABLISHED disposition (`REC-000008`).
+- A272 workbook “Not established” axes versus caller/XML `E006`/`E002`, with A0E2 kept separate (`REC-000009`).
 
 ## Promotion rule
 
