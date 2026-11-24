@@ -85,6 +85,22 @@ Reconciliation is a normal part of every lane, not a coordinator-only duty.
 - Do not mark another worker's WO closed or blocked. Each slot owns its own task lifecycle. Cross-lane observations may be recorded as findings or dependencies, but not as reassignment instructions.
 - Keep status (active/closed/blocked), technical result (positive/negative/partial), and unresolved semantic boundary separate.
 
+## Durable calibration knowledge preservation (effective 2026-11-23)
+
+The authoritative calibration knowledge layer is `FINDINGS/INDEX.md`, governed by `FINDINGS/README.md`. The operational register remains the sole lifecycle authority; it is not the technical findings database.
+
+- Any result that materially changes a calibration object's proposed identity, geometry, axes/query domain, storage, scaling, units, confidence, XML disposition or evidence status MUST be promoted into a stable finding record. A sentence in a WO report or chat is not sufficient.
+- Every finding must link to exact source evidence, source WO/report anchors, affected addresses and inventory/XML objects; distinguish observation, inference, confidence and unresolved boundary.
+- When a finding changes an earlier interpretation, create an additive reconciliation record preserving old interpretation → corrected interpretation, reason and both source links. Never erase or silently rewrite historical claims.
+- Update the address lookup in `FINDINGS/INDEX.md`; update calibration-inventory finding pointers only where the format supports safe additive changes. Keep the operational register to status and concise links.
+- Do not flood the index with routine RAM-cell endpoint traces that do not affect calibration interpretation or reusable evidence methods.
+- **Definition-build gate:** before generating or revising any XML definition, reconcile every included/affected object against the current findings and reconciliation index, then record the index revision and unresolved conflicts in a build manifest/report. Reading only recent WO summaries does not satisfy this gate.
+- Existing evidence classes remain separate. The E678/E688 Rev Hang screenshot-finalized presentation is a narrow user-authorized exception; preserve their RPM presentation while recording timer-derived ROM query mechanics separately. Apply ROM reader/query/consumer evidence normally to all other tables and reconcile source conflicts.
+
+## ChatGPT context recovery
+
+A fresh ChatGPT session must follow `CONTROL/CHATGPT_CONTEXT_RECOVERY.md`. Start with the live operational register, then this protocol and the findings index; read current WO reports and source evidence as required. Do not treat saved memory, chat summaries or stale `PROJECT_STATE.md` snapshots as authoritative. Never claim repository state without current readback.
+
 ## Semantic evidence workstream
 
 Semantic investigations run alongside the three existing structural worker lanes; there is no fourth lane. The purpose is to move from verified locations and reader mechanics toward defensible input, function and output identities.

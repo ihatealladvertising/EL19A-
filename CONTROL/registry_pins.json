@@ -1,0 +1,51 @@
+{
+  "schema_version": 4,
+  "repository": "ihatealladvertising/EL19A-",
+  "authority_branch": "main",
+  "current_workbook": "WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx",
+  "current_workbook_sheets": 149,
+  "current_xml_baseline": "public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml",
+  "current_xml_fragment": "EL19A_ignition_decoded_fragment_33ea8e67.xml",
+  "discovery_staging": "CALIBRATIONS/discovered_tables_catalog.csv",
+  "legacy_cutoff_id": 65163,
+  "default_lease_hours": 24,
+  "protected_generated_files": [
+    "CONTROL/active_work_orders.md",
+    "CONTROL/WO_LIVE_INDEX.md"
+  ],
+  "lanes": {
+    "git-1": {
+      "min_id": 65200,
+      "max_id": 69999,
+      "description": "Primary Git IDE / coordinator worker lane"
+    },
+    "aistudio": {
+      "min_id": 70000,
+      "max_id": 79999,
+      "description": "Stateless AI Studio container lane (no local .git; disjoint files only)"
+    },
+    "git-2": {
+      "min_id": 80000,
+      "max_id": 89999,
+      "description": "Secondary Git IDE / parallel external worker lane"
+    },
+    "reserve": {
+      "min_id": 90000,
+      "max_id": 99999,
+      "description": "Reserved synthesis / coordinator batch lane"
+    }
+  },
+  "banned_owner_tokens": [
+    "current session",
+    "this session",
+    "owner",
+    "tbd",
+    "todo",
+    "unknown",
+    "n/a",
+    "none",
+    "worker",
+    "assistant",
+    "ai"
+  ]
+}

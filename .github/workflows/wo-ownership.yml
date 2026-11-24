@@ -1,0 +1,96 @@
+name: Work-Order Ownership & Auto-Register
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "CONTROL/**"
+      - "tools/wo_registry.py"
+      - "tools/test_wo_registry.py"
+      - ".github/workflows/wo-ownership.yml"
+  push:
+    branches: [main]
+    paths:
+      - "CONTROL/WO*.md"
+      - "CONTROL/registry_pins.json"
+      - "tools/wo_registry.py"
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  validate-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch with base history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Collect changed files vs base branch
+        id: diff
+        run: |
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          FILES=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" | tr '\n' ' ')
+          echo "changed=$FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Validate WO ownership, lanes, scope locks, and protected registers
+        run: |
+          ALLOW_PINS=""
+          if echo "${{ toJson(github.event.pull_request.labels.*.name) }}" | grep -q '"coordinator-pins"'; then
+            ALLOW_PINS="--allow-pins-edit"
+          fi
+          python3 tools/wo_registry.py validate \
+            --forbid-register-edit \
+            $ALLOW_PINS \
+            --changed-files ${{ steps.diff.outputs.changed }}
+
+      - name: Run WO registry unit & real-repo tests
+        run: python3 -m unittest -v tools/test_wo_registry.py
+
+  rebuild-register:
+    if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: wo-register-main
+      cancel-in-progress: false
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate main WO records
+        run: python3 tools/wo_registry.py validate
+
+      - name: Deterministically rebuild live index and main register dashboard
+        run: |
+          NOW_UTC=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          python3 tools/wo_registry.py rebuild \
+            --out CONTROL/WO_LIVE_INDEX.md \
+            --inject-register CONTROL/active_work_orders.md \
+            --now "$NOW_UTC"
+
+      - name: Commit updated register if changed
+        run: |
+          if git diff --quiet -- CONTROL/WO_LIVE_INDEX.md CONTROL/active_work_orders.md; then
+            echo "No register changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CONTROL/WO_LIVE_INDEX.md CONTROL/active_work_orders.md
+          git commit -m "chore(wo): auto-rebuild work-order register [skip ci]"
+          git push origin main
