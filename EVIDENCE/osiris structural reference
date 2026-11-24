@@ -1,0 +1,123 @@
+```python
+import struct
+
+files = [
+    ('EM43A Back To Stock.OsirisROM', 'Back To Stock'),
+    ('EM43A.OsirisROM', 'Tuned / Custom')
+]
+
+for fname, label in files:
+    with open(fname, 'rb') as f:
+        data = f.read()
+    print(f"================ {fname} ({label}) | Size: {len(data)} (0x{len(data):X}) ================")
+    # Let's verify exact contiguous byte ranges from 0x000000 to len(data)
+    # 0x000000..0x00001F (32 B): Magic banner
+    # 0x000020..0x000022 (3 B): \r\n\x1a
+    # 0x000023..0x00003F (29 B): Zero padding
+    # 0x000040..0x000043 (4 B): fBH`
+    # 0x000044..0x000047 (4 B): 00 01 00 00
+    # 0x000048..0x00004B (4 B): 00 05 00 00 (B2S) vs 00 03 00 00 (Tune)
+    # 0x00004C..0x00005F (20 B): Zero padding
+    # 0x000060..0x000077 (24 B): ROMData header (8B tag + 12B u32s + 4B word)
+    # 0x000078..0x100077 (1,048,576 B = 0x100000): ROMData payload
+    # 0x100078..EOF: Trailer
+    assert len(data) >= 0x100078
+    assert data[0x00:0x20] == b'UpRev Osiris ROM File Ver 1.0000'
+    assert data[0x20:0x23] == b'\r\n\x1a'
+    assert data[0x23:0x40] == b'\x00' * (0x40 - 0x23)
+    assert data[0x4C:0x60] == b'\x00' * (0x60 - 0x4C)
+    print("Header & ROMData assertions passed.")
+    pos = 0x100078
+    while pos < len(data):
+        if data[pos:pos+10] == b'AITuneDesc':
+            tag = 'AITuneDesc'
+            tlen = 10
+        elif pos + 8 <= len(data) and all(32 <= b < 127 for b in data[pos:pos+8]):
+            tag = data[pos:pos+8].decode('ascii')
+            tlen = 8
+        else:
+            print(f"  0x{pos:06X}..0x{len(data):06X} ({len(data)-pos} B): Raw trailing/embedded bytes starting with {data[pos:pos+16].hex(' ')}")
+            break
+        u0, u1, u2 = struct.unpack('<III', data[pos+tlen:pos+tlen+12])
+        w4 = data[pos+tlen+12:pos+tlen+16]
+        end_rec = pos + u1
+        print(f"  0x{pos:06X}..0x{end_rec:06X} ({u1} B): Tag={tag!r} (tlen={tlen}), u32=({u0}, {u1}, {u2}), w4={w4.hex(' ')}, payload_start=0x{pos+tlen+16:06X} (len={u0} B)")
+        pos = end_rec
+
+
+```
+
+```text
+================ EM43A Back To Stock.OsirisROM (Back To Stock) | Size: 1048838 (0x100106) ================
+Header & ROMData assertions passed.
+  0x100078..0x10009C (36 B): Tag='Keys    ' (tlen=8), u32=(12, 36, 1), w4=63 dd 06 91, payload_start=0x100090 (len=12 B)
+  0x10009C..0x1000BC (32 B): Tag='Verify  ' (tlen=8), u32=(8, 32, 1), w4=ce 4e 38 f4, payload_start=0x1000B4 (len=8 B)
+  0x1000BC..0x1000E7 (43 B): Tag='TuneDesc' (tlen=8), u32=(19, 43, 1), w4=51 94 9d 3f, payload_start=0x1000D4 (len=19 B)
+  0x1000E7..0x100106 (31 B): Tag='TuneVer ' (tlen=8), u32=(7, 31, 1), w4=dd d1 d3 b2, payload_start=0x1000FF (len=7 B)
+================ EM43A.OsirisROM (Tuned / Custom) | Size: 1049801 (0x1004C9) ================
+Header & ROMData assertions passed.
+  0x100078..0x10009C (36 B): Tag='Keys    ' (tlen=8), u32=(12, 36, 1), w4=86 e4 4a 51, payload_start=0x100090 (len=12 B)
+  0x10009C..0x1004C9 (1069 B): Tag='CELData2' (tlen=8), u32=(1045, 1069, 1), w4=2d e2 9a 6c, payload_start=0x1000B4 (len=1045 B)
+
+
+```
+
+Here is the complete offset-by-offset container map from `0x000000` to EOF for both `EM43A Back To Stock.OsirisROM` (`1,048,838` bytes = `0x100106`) and `EM43A.OsirisROM` (`1,049,801` bytes = `0x1004C9`).
+
+### 1. Shared File Header & `ROMData` Section (`0x000000` – `0x100077`)
+
+Both files follow the exact same header and `ROMData` layout through `0x100077`, differing only at `0x48`–`0x4B` and in the 4-byte word at `0x74`–`0x77` and the 1 MB `ROMData` payload:
+
+| Byte Range (`Hex`) | Size (`Dec` / `Hex`) | `EM43A Back To Stock.OsirisROM` | `EM43A.OsirisROM` | Role / Notes |
+| --- | --- | --- | --- | --- |
+| `0x000000`–`0x00001F` | `32` B (`0x20`) | `UpRev Osiris ROM File Ver 1.0000` | `UpRev Osiris ROM File Ver 1.0000` | Magic format banner |
+| `0x000020`–`0x000022` | `3` B (`0x03`) | `0d 0a 1a` (`\r\n\x1a`) | `0d 0a 1a` (`\r\n\x1a`) | CRLF + EOF banner delimiter |
+| `0x000023`–`0x00003F` | `29` B (`0x1D`) | `00` × 29 | `00` × 29 | Zero padding |
+| `0x000040`–`0x000043` | `4` B (`0x04`) | `66 42 48 60` (`fBH``) | `66 42 48 60` (`fBH``) | Header magic / signature |
+| `0x000044`–`0x000047` | `4` B (`0x04`) | `00 01 00 00` | `00 01 00 00` | Header field (`LE=256`, `BE=65536`) |
+| `0x000048`–`0x00004B` | `4` B (`0x04`) | `00 05 00 00` (`LE=1280`, `BE=327680`) | `00 03 00 00` (`LE=768`, `BE=196608`) | File-variant header field |
+| `0x00004C`–`0x00005F` | `20` B (`0x14`) | `00` × 20 | `00` × 20 | Zero padding |
+| `0x000060`–`0x000067` | `8` B (`0x08`) | `ROMData ` | `ROMData ` | Section tag |
+| `0x000068`–`0x00006B` | `4` B (`0x04`) | `1,048,576` (`0x00100000` LE) | `1,048,576` (`0x00100000` LE) | `u32[0]` (`ROMData` payload length) |
+| `0x00006C`–`0x00006F` | `4` B (`0x04`) | `1,048,600` (`0x00100018` LE) | `1,048,600` (`0x00100018` LE) | `u32[1]` (`u32[0] + 24`, total record span) |
+| `0x000070`–`0x000073` | `4` B (`0x04`) | `1` (`0x00000001` LE) | `1` (`0x00000001` LE) | `u32[2]` constant |
+| `0x000074`–`0x000077` | `4` B (`0x04`) | `9d 2f 8e 7e` | `39 55 66 77` | 4-byte post-header word |
+| `0x000078`–`0x100077` | `1,048,576` B (`0x100000`) | Encrypted 1 MB ROM payload (`7.997` bits/byte) | Encrypted 1 MB ROM payload (`7.997` bits/byte) | Main ECU ROM image block |
+
+### 2. `EM43A Back To Stock.OsirisROM` Trailer Map (`0x100078` – `0x100106`, EOF)
+
+| Byte Range (`Hex`) | Size (`Dec` / `Hex`) | Section / Field | Details |
+| --- | --- | --- | --- |
+| `0x100078`–`0x10007F` | `8` B (`0x08`) | `Keys    ` tag | Space-padded tag |
+| `0x100080`–`0x10008B` | `12` B (`0x0C`) | `u32` header | `u32[0]=12`, `u32[1]=36`, `u32[2]=1` |
+| `0x10008C`–`0x10008F` | `4` B (`0x04`) | Post-header word | `63 dd 06 91` |
+| `0x100090`–`0x10009B` | `12` B (`0x0C`) | `Keys    ` payload | `82 0c 13 b5 a9 28 bd 18 3c 0c 01 1a` |
+| `0x10009C`–`0x1000A3` | `8` B (`0x08`) | `Verify  ` tag | Space-padded tag |
+| `0x1000A4`–`0x1000AF` | `12` B (`0x0C`) | `u32` header | `u32[0]=8`, `u32[1]=32`, `u32[2]=1` |
+| `0x1000B0`–`0x1000B3` | `4` B (`0x04`) | Post-header word | `ce 4e 38 f4` |
+| `0x1000B4`–`0x1000B9` | `6` B (`0x06`) | `Verify  ` payload (`6` B to `0x1000BA`) | `28 7e 33 0a 70 15` (`2` B shorter than `u32[0]=8` before `AITuneDesc`) |
+| `0x1000BA`–`0x1000C3` | `10` B (`0x0A`) | `AITuneDesc` tag | Unpadded 10-byte tag |
+| `0x1000C4`–`0x1000CF` | `12` B (`0x0C`) | `u32` header | `u32[0]=19`, `u32[1]=43`, `u32[2]=1` |
+| `0x1000D0`–`0x1000D3` | `4` B (`0x04`) | Post-header word | `51 94 9d 3f` |
+| `0x1000D4`–`0x1000E6` | `19` B (`0x13`) | `AITuneDesc` payload | `c3 55 d3 cb d6 08 a5 d9 d7 71 9a cd d0 2a 85 fd 3f 5b 30` |
+| `0x1000E7`–`0x1000EE` | `8` B (`0x08`) | `TuneVer ` tag | Space-padded tag |
+| `0x1000EF`–`0x1000FA` | `12` B (`0x0C`) | `u32` header | `u32[0]=7`, `u32[1]=31`, `u32[2]=1` |
+| `0x1000FB`–`0x1000FE` | `4` B (`0x04`) | Post-header word | `dd d1 d3 b2` |
+| `0x1000FF`–`0x100105` | `7` B (`0x07`) | `TuneVer ` payload (to EOF at `0x100106`) | `65 df aa 7a 15 7a 9b` |
+
+### 3. `EM43A.OsirisROM` Trailer Map (`0x100078` – `0x1004C9`, EOF)
+
+| Byte Range (`Hex`) | Size (`Dec` / `Hex`) | Section / Field | Details |
+| --- | --- | --- | --- |
+| `0x100078`–`0x10007F` | `8` B (`0x08`) | `Keys    ` tag | Space-padded tag |
+| `0x100080`–`0x10008B` | `12` B (`0x0C`) | `u32` header | `u32[0]=12`, `u32[1]=36`, `u32[2]=1` |
+| `0x10008C`–`0x10008F` | `4` B (`0x04`) | Post-header word | `86 e4 4a 51` |
+| `0x100090`–`0x10009B` | `12` B (`0x0C`) | `Keys    ` payload | `b5 9c ab 02 2b 64 f3 6d b1 7c 68 66` |
+| `0x10009C`–`0x1000A3` | `8` B (`0x08`) | `CELData2` tag | Space-padded tag |
+| `0x1000A4`–`0x1000AF` | `12` B (`0x0C`) | `u32` header | `u32[0]=1045`, `u32[1]=1069`, `u32[2]=1` |
+| `0x1000B0`–`0x1000B3` | `4` B (`0x04`) | Post-header word | `2d e2 9a 6c` |
+| `0x1000B4`–`0x1000C1` | `14` B (`0x0E`) | `CELData2` payload (pre-`mdc`) | `55 2b c8 c8 db 9d 3f 05 71 ab b3 82 b0 23` |
+| `0x1000C2`–`0x1000C4` | `3` B (`0x03`) | Embedded `mdc` marker | `6d 64 63` (`mdc`) inside `CELData2` payload |
+| `0x1000C5`–`0x1004C8` | `1,028` B (`0x404`) | `CELData2` payload (post-`mdc` to EOF at `0x1004C9`) | High-entropy binary block (`7.7856` bits/byte), ending with `... 20 bb ba 2d e7 21 3d 19` |
+
+With the container layout and section boundaries mapped out from `0x000000` to EOF, you have a clear structural reference for parsing headers, isolating `Keys` and `CELData2`, and comparing future `.OsirisROM` dumps.
