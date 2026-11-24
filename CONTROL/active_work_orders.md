@@ -19,10 +19,12 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
-| Worker 1 | WO65797 → WO65800 → WO65812 | 3 |
-| Worker 2 | WO65312 → WO65315 → WO65813 | 3 |
-| Worker 3 | WO65739 → WO65742 → WO65808 → WO65814 | 4 |
+| Worker 1 | WO65797 → WO65800 → WO65812 → WO65815 | 4 |
+| Worker 2 | WO65312 → WO65315 → WO65813 → WO65816 | 4 |
+| Worker 3 | WO65739 → WO65742 → WO65808 → WO65814 → WO65817 | 5 |
 
+
+- **User-directed donor alignment/scalar crosswalk WOs (2026-11-24):** created WO65815 (Worker 1; validate Claude's alignment algorithm and donor-2 mapping), WO65816 (Worker 2; reconcile two-donor A2L agreement/disagreement classifications, dependent on WO65815), and WO65817 (Worker 3; target-side validation of mDSHCUT, mDDSHPTD/N and disputed mDDPAPO candidates, dependent on WO65815/65816). The 1,863 common-symbol and 842 agreement figures remain reported inputs, not independently verified results. Each WO prohibits semantic promotion from donor matching alone and protects XML, workbook, inventory, A2L, ROM/LST and Findings index.
 - **User-directed calibration-family gap WOs (2026-11-24):** created WO65812 (Worker 1; ignition-family gap reconciliation), WO65813 (Worker 2; fuel/injection family gap reconciliation), and WO65814 (Worker 3; torque/throttle/limiter/support-family gap reconciliation). Each reuses existing reports and candidate evidence, requires FOUND / GENERIC CANDIDATE / NOT LOCATED / NOT APPLICABLE classification, and prohibits broad scans, XML edits and vehicle testing. Reports: [WO65812](WO65812.md), [WO65813](WO65813.md), [WO65814](WO65814.md).
 - **Worker 3 delivery recovery (2026-11-24):** WO65805 restored `EVIDENCE/WO65803_ram_byte_bit_xref_corrected.tsv` (5,262,288 B, MD5 `e9a38c6c`, SHA-256 `09f87050`, commit `3689c2b`) from the committed WO65803 generator and the pinned inputs; all input blobs and the output match WO65803's recorded hashes and two runs are byte-identical. Consumers must read the committed blob, not a CRLF-smudged worktree copy.
 - **Worker 3 lifecycle and FIFO reconciliation (2026-11-24):** WO65490, WO65493, WO65496, WO65499 and WO65502 are CLOSED; WO65733 is this lane's current WO (WO65505 CLOSED). The live queue table previously omitted current WO65505 and incorrectly promoted WO65724 to current; this is corrected from the Worker 3 lane row and WO65505 report. WO65724 remains first READY follow-on (P1); WO65733 is moved ahead of WO65730; WO65730 remains queued last. FIFO: WO65496 → WO65499 → WO65502 → WO65505 → WO65724 → WO65733 → WO65730.
