@@ -19,11 +19,11 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 | Lane | Current WO + READY follow-ons (FIFO) | Total depth |
 |---|---|---:|
-| Worker 1 | WO65764 → WO65767 → WO65770 → WO65773 | 4 |
+| Worker 1 | WO65764 → WO65770 → WO65767 → WO65773 | 4 |
 | Worker 2 | WO65303 → WO65306 → WO65309 | 3 |
-| Worker 3 | WO65724 → WO65730 → WO65733 | 3 |
+| Worker 3 | WO65505 → WO65724 → WO65733 → WO65730 | 4 |
 
-- **Worker 3 lifecycle reconciliation (2026-11-24):** WO65490, WO65493, WO65496, WO65499 and WO65502 are CLOSED; WO65505 is this lane's current WO. Other lanes' merges twice rolled the Worker 3 row and queue back to their 2026-11-23 `WO65322`/`WO65325` state and spliced a stale backlog note into the row, so both are maintained here from the WO records. WO65502 and WO65505 are new IDs in this lane (mod 3 = 0). WO65724 was queued into this lane by its author (P1); WO65730 was appended behind it (P2). No other lane's row was edited. FIFO: WO65496 → WO65499 → WO65502 → WO65505 → WO65724 → WO65730.
+- **Worker 3 lifecycle and FIFO reconciliation (2026-11-24):** WO65490, WO65493, WO65496, WO65499 and WO65502 are CLOSED; WO65505 remains this lane's current WO. The live queue table previously omitted current WO65505 and incorrectly promoted WO65724 to current; this is corrected from the Worker 3 lane row and WO65505 report. WO65724 remains first READY follow-on (P1); WO65733 is moved ahead of WO65730; WO65730 remains queued last. FIFO: WO65496 → WO65499 → WO65502 → WO65505 → WO65724 → WO65733 → WO65730.
 - **Availability:** Workers 1–3 may start their own READY work immediately and continue independently. No cross-lane wait or coordinator approval is required.
 - **Lane ownership:** each worker works only WOs explicitly assigned to its slot. Existing WOs keep the explicit lane recorded here or in their queue row.
 - **Future IDs:** new WOs after 65217 use ID modulo 3: remainder 1 → Worker 1; remainder 2 → Worker 2; remainder 0 → Worker 3. A worker creates and owns only its own lane's new WOs.
