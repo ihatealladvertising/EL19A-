@@ -17,7 +17,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 **Ordered READY backlog (FIFO; one WO at a time per lane):**
 
-| Lane | Queue order after current WO | Depth |
+| Lane | Current WO + READY follow-ons (FIFO) | Total depth |
 |---|---|---:|
 | Worker 1 | WO65719 → WO65722 → WO65725 → WO65728 | 4 |
 | Worker 2 | WO65303 → WO65306 → WO65309 | 3 |
