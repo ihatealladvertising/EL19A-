@@ -97,6 +97,14 @@ The authoritative calibration knowledge layer is `FINDINGS/INDEX.md`, governed b
 - **Definition-build gate:** before generating or revising any XML definition, reconcile every included/affected object against the current findings and reconciliation index, then record the index revision and unresolved conflicts in a build manifest/report. Reading only recent WO summaries does not satisfy this gate.
 - Existing evidence classes remain separate. The E678/E688 Rev Hang screenshot-finalized presentation is a narrow user-authorized exception; preserve their RPM presentation while recording timer-derived ROM query mechanics separately. Apply ROM reader/query/consumer evidence normally to all other tables and reconcile source conflicts.
 
+## Recurring Project Knowledge and Process Review
+
+Run the review defined in `CONTROL/PROJECT_KNOWLEDGE_PROCESS_REVIEW.md` every 10 additional WO closeouts across all lanes or every 7 calendar days, whichever comes first. The first worker/session to observe the due trigger performs it; check the review log first to avoid duplicate work. This is a short repository-only maintenance review, not a new technical WO and not authority to alter another lane's lifecycle.
+
+Use the five required lenses: knowledge coverage, contradictions, investigation efficiency, method improvement and fresh-session context integrity. Record a compact dated entry in the review log, including concrete actions or explicit no-change dispositions. Promote material calibration interpretations through the Findings system; preserve prior claims with additive reconciliation. Promote reusable methods to durable repository documentation. Do not treat chat history or saved memory as a substitute for missing repository evidence.
+
+The acceptance test is whether a competent investigator without conversation access can resume from repository files without repeating major investigations or inheriting incorrect assumptions. Mark PASS only after checking the live register, protocol, findings/reconciliation index, recovery guide, current calibration baseline/build state and relevant linked reports. Otherwise mark PARTIAL or FAIL and name the blockers.
+
 ## ChatGPT context recovery
 
 A fresh ChatGPT session must follow `CONTROL/CHATGPT_CONTEXT_RECOVERY.md`. Start with the live operational register, then this protocol and the findings index; read current WO reports and source evidence as required. Do not treat saved memory, chat summaries or stale `PROJECT_STATE.md` snapshots as authoritative. Never claim repository state without current readback.
