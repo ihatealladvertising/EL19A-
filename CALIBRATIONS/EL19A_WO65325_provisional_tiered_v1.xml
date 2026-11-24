@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  EL19A provisional tiered RomRaider definition — WO65325 v1
+  Target: EVIDENCE/VERSA f501.bin (1024 kB, SH7058, big-endian, MR18DE)
+  Basis: WO65323 whole-inventory consistency matrix, WO65305 fuel/AF closure,
+         WO65293 3D triage, WO65310/WO65313/WO65316/WO65322 chain results.
+  Tiers appear in every table name:
+    [EST]  Established  - target-side reader/query plus coherent geometry/axis
+    [HCP]  High-confidence provisional - geometry/reader or exact mirror proven,
+           physical function unassigned
+    [EXP]  Exploratory  - structural only, donor- or morphology-derived, or parked
+  NO physical function name is asserted here. Payload scalings are raw unless a
+  conversion is independently established on the target; axis scalings use the
+  conventions that are consistent with the measured raw axis values (WO65323 §3.3)
+  and are marked as unproven in the axis table names.
+  Scalars are intentionally ABSENT: the scalar/curve manifest (WO65324, Worker 2)
+  is not complete, so this file does not fabricate a scalar section.
+-->
+<roms>
+	<rom>
+		<romid>
+			<xmlid>EL19A_Provisional_Tiered_WO65325_v1</xmlid>
+			<internalidaddress>0x13A98</internalidaddress>
+			<internalidstring>8CMCKRN5</internalidstring>
+			<ecuid>1EL19A</ecuid>
+			<year>2008</year>
+			<market>USDM</market>
+			<make>Nissan</make>
+			<model>Versa</model>
+			<submodel>MT</submodel>
+			<memmodel>SH7058</memmodel>
+			<endian>Big</endian>
+			<flashmethod>Nisprog</flashmethod>
+			<filesize>1024kb</filesize>
+		</romid>
+
+		<!-- ==================== IGNITION-SIDE UBYTE 16x16 ==================== -->
+		<!-- Axes: 0xE4AC / 0xE4BC, both ascending, raw 8..128 (WO65323 §3.3).
+		     Conversion shown (x50 rpm, x0.78125 %) is the donor-consistent convention
+		     from WO65319 §4.1 S1 and is NOT target-proven; raw is authoritative. -->
+		<table name="[HCP] Ignition-family UBYTE map A (9B2E) raw" category="SPEC//Ignition Timing//Main" storageaddress="0x9B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE4BC) raw, x0.78125 % unproven" type="X Axis" storageaddress="0xE4BC" scaling="Axis_U8_LoadPct" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_LoadPct" units="raw (x0.78125 = %)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE4AC) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Ignition-family UBYTE map B (9C2E) raw" category="SPEC//Ignition Timing//Main" storageaddress="0x9C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE4BC) raw, x0.78125 % unproven" type="X Axis" storageaddress="0xE4BC" scaling="Axis_U8_LoadPct" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_LoadPct" units="raw (x0.78125 = %)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE4AC) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Ignition-family UBYTE map C (9DAE) raw, byte-identical twin of 9C2E" category="SPEC//Ignition Timing//Main" storageaddress="0x9DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE4BC) raw, x0.78125 % unproven" type="X Axis" storageaddress="0xE4BC" scaling="Axis_U8_LoadPct" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_LoadPct" units="raw (x0.78125 = %)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE4AC) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE4AC" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== KNOCK-SIDE UBYTE 16x16 ==================== -->
+		<!-- Reader sub_22DA8; axes 0xE0E2 (raw U8) and 0xE0BE (rpm-like U8); results reach
+		     threshold compares and counters (WO64830). Physical role still unassigned. -->
+		<table name="[HCP] Knock-band UBYTE map 1 (B012) raw" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE0E2) raw" type="X Axis" storageaddress="0xE0E2" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE0BE) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Knock-band UBYTE map 2 (B112) raw" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE0E2) raw" type="X Axis" storageaddress="0xE0E2" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE0BE) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Knock-band UBYTE map 3 (B212) raw" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0xB212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xE0E2) raw" type="X Axis" storageaddress="0xE0E2" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xE0BE) raw, x50 = rpm unproven" type="Y Axis" storageaddress="0xE0BE" scaling="Axis_U8_Rpm" storagetype="uint8" endian="big" sizey="16">
+				<scaling name="Axis_U8_Rpm" units="raw (x50 = rpm)" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== UWORD 16x16 CORRECTION CLUSTER ==================== -->
+		<!-- Two exact mirror families with shared byte-identical axes (WO65323 §3.2).
+		     Axis scalings are raw; the x0.125 % / x3.125 rpm conventions are hypotheses
+		     under test in WO65484 and must not be displayed as physical units yet. -->
+		<table name="[HCP] UWORD correction map 1 (C756) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0C756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0FCBC) raw" type="X Axis" storageaddress="0x0FCBC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FCDC) raw" type="Y Axis" storageaddress="0x0FCDC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 2 (C956) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0C956" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0FCBC) raw" type="X Axis" storageaddress="0x0FCBC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FCDC) raw" type="Y Axis" storageaddress="0x0FCDC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 3 (119C4) raw, byte-identical twin of C756" category="SPEC//Engine Control//Corrections" storageaddress="0x119C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0FCBC) raw" type="X Axis" storageaddress="0x0FCBC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FCDC) raw" type="Y Axis" storageaddress="0x0FCDC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 4 (11BC4) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x11BC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0FCBC) raw" type="X Axis" storageaddress="0x0FCBC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FCDC) raw" type="Y Axis" storageaddress="0x0FCDC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 5 (D456) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0D456" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0F6F2) raw" type="X Axis" storageaddress="0x0F6F2" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x1133A) raw" type="Y Axis" storageaddress="0x1133A" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 6 (121C4) raw, byte-identical twin of D456" category="SPEC//Engine Control//Corrections" storageaddress="0x121C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0F6F2) raw" type="X Axis" storageaddress="0x0F6F2" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x1133A) raw" type="Y Axis" storageaddress="0x1133A" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 7 (D656) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0D656" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0F6F2) raw" type="X Axis" storageaddress="0x0F6F2" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x1133A) raw" type="Y Axis" storageaddress="0x1133A" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] UWORD correction map 8 (123C4) raw, byte-identical twin of D656" category="SPEC//Engine Control//Corrections" storageaddress="0x123C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0F6F2) raw" type="X Axis" storageaddress="0x0F6F2" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x1133A) raw" type="Y Axis" storageaddress="0x1133A" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== OFFSET-BINARY 16x16 (WO65322) ==================== -->
+		<!-- Payload and staging are offset-binary around 0x8000 (WO65322 §3).
+		     X axis 0x0E2C9 = 0,16,24,...,128 (U8); Y axis 0x0FEC0 is a sentinel-terminated
+		     U16 ladder whose last entry is 0xFFFF, so no physical unit is claimed. -->
+		<table name="[HCP] Offset-binary UWORD map (0CD56) raw 0x8000-centred" category="SPEC//Engine Control//Corrections" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0E2C9) raw U8" type="X Axis" storageaddress="0x0E2C9" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FEC0) raw U16, 0xFFFF sentinel" type="Y Axis" storageaddress="0x0FEC0" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Offset-binary UWORD map twin (11FC4) raw, byte-identical to 0CD56" category="SPEC//Engine Control//Corrections" storageaddress="0x11FC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0E2C9) raw U8" type="X Axis" storageaddress="0x0E2C9" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="16">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FEC0) raw U16, 0xFFFF sentinel" type="Y Axis" storageaddress="0x0FEC0" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== 8x8 UBYTE FAMILIES ==================== -->
+		<table name="[EST] Load-domain signed correction map (A0F2) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0A0F2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="[EST] Coolant-indexed 8x8 multiplier (A8A2) raw" category="SPEC//Airflow//Corrections" storageaddress="0x0A8A2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="[HCP] Paired 8x8 UBYTE map 1 (A342) raw" category="SPEC//Airflow//Corrections" storageaddress="0x0A342" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0x0DFF2) raw" type="X Axis" storageaddress="0x0DFF2" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0x0DFFA) raw" type="Y Axis" storageaddress="0x0DFFA" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[HCP] Paired 8x8 UBYTE map 2 (A382) raw, selector FFFF85FB.bit7" category="SPEC//Airflow//Corrections" storageaddress="0x0A382" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0x0DFF2) raw" type="X Axis" storageaddress="0x0DFF2" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0x0DFFA) raw" type="Y Axis" storageaddress="0x0DFFA" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] 8x8 UBYTE map (AC62) raw" category="SPEC//Unassigned" storageaddress="0x0AC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xF22E) raw" type="X Axis" storageaddress="0xF22E" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xF226) raw" type="Y Axis" storageaddress="0xF226" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] 8x8 UBYTE map (ACA2) raw, byte-identical to AC62" category="SPEC//Unassigned" storageaddress="0x0ACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xF22E) raw" type="X Axis" storageaddress="0xF22E" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xF226) raw" type="Y Axis" storageaddress="0xF226" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] Generic 4x4 UBYTE placement (AB62) raw" category="SPEC//Unassigned" storageaddress="0x0AB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xF552) raw" type="X Axis" storageaddress="0xF552" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="4">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xF54E) raw" type="Y Axis" storageaddress="0xF54E" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="4">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] Generic 4x4 UBYTE placement (AB72) raw, byte-identical to AB62" category="SPEC//Unassigned" storageaddress="0x0AB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="X Axis (0xF552) raw" type="X Axis" storageaddress="0xF552" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizex="4">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+			<table name="Y Axis (0xF54E) raw" type="Y Axis" storageaddress="0xF54E" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="4">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== UWORD 8x8 ==================== -->
+		<table name="[HCP] UWORD 8x8 map (B756) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x0B756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			<table name="X Axis (0x0FCFC) raw" type="X Axis" storageaddress="0x0FCFC" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizex="8">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+			<table name="Y Axis (0x0FD3C) raw" type="Y Axis" storageaddress="0x0FD3C" scaling="Axis_U16_Raw" storagetype="uint16" endian="big" sizey="8">
+				<scaling name="Axis_U16_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+			</table>
+		</table>
+
+		<!-- ==================== 1-D CURVES ==================== -->
+		<table name="[EST] NTC voltage-to-temperature linearization (F406) raw" category="SPEC//Sensors//Temperature" storageaddress="0xF406" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="32">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="Implicit grid 0..248 step 8" type="Static Y Axis" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="32">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+				<data>0</data><data>8</data><data>16</data><data>24</data><data>32</data><data>40</data><data>48</data><data>56</data><data>64</data><data>72</data><data>80</data><data>88</data><data>96</data><data>104</data><data>112</data><data>120</data><data>128</data><data>136</data><data>144</data><data>152</data><data>160</data><data>168</data><data>176</data><data>184</data><data>192</data><data>200</data><data>208</data><data>216</data><data>224</data><data>232</data><data>240</data><data>248</data>
+			</table>
+		</table>
+		<table name="[EXP] Generic limiter-pair curve 1 (F3D6) raw" category="SPEC//Unassigned" storageaddress="0xF3D6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="ROM axis (0xF3CE) raw" type="Y Axis" storageaddress="0xF3CE" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] Generic limiter-pair curve 2 (F3DE) raw" category="SPEC//Unassigned" storageaddress="0xF3DE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+			<table name="ROM axis (0xF3C6) raw" type="Y Axis" storageaddress="0xF3C6" scaling="Axis_U8_Raw" storagetype="uint8" endian="big" sizey="8">
+				<scaling name="Axis_U8_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="8" storagetype="uint8" endian="big" />
+			</table>
+		</table>
+		<table name="[EXP] Timer-query basic-value curve 1 (E678) raw" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0xE678" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="[EXP] Timer-query basic-value curve 2 (E688) raw" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0xE688" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		</table>
+		<table name="[HCP] Runtime-selected UWORD curve 1 (10206) raw" category="SPEC//Engine Control//Curves" storageaddress="0x10206" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		</table>
+		<table name="[HCP] Runtime-selected UWORD curve 2 (10226) raw" category="SPEC//Engine Control//Curves" storageaddress="0x10226" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		</table>
+		<table name="[HCP] Runtime-selected UWORD alternate 1 (10CC2) raw, bit FFFF1E13.bit3" category="SPEC//Engine Control//Curves" storageaddress="0x10CC2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		</table>
+		<table name="[HCP] Runtime-selected UWORD alternate 2 (10CE2) raw, bit FFFF1E13.bit3" category="SPEC//Engine Control//Curves" storageaddress="0x10CE2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		</table>
+		<table name="[HCP] Fixed-grid filter-coefficient vector (108B4) raw" category="SPEC//Engine Control//Corrections" storageaddress="0x108B4" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		</table>
+	</rom>
+</roms>
