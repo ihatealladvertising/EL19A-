@@ -2,7 +2,7 @@
 
 **Status:** SEEDED — TWO A2L SYNTHESIS BATCHES MIGRATED; ONGOING  
 **Authority:** This index is the entry point for calibration interpretation. See [README](README.md) for the full schemas and the mandatory XML build gate.  
-**Index revision:** `FND-000012`/`REC-000013` GBR-relative address rule and four attribution corrections (WO65895, 2026-11-25); `FND-000011` donor-only ignition trimming/display and compensation context; `FND-000010`/`REC-000010` firmware-RAM band reconciliation (WO65811); `REC-000011` WO65808 initializer/publisher correction; and `REC-000012` WO65739 copy-helper extent erratum — the latter recorded 2026-11-24.
+**Index revision:** `FND-000013` MAF scaling axis 0x0F712 and curve 0x10F8A (WO65297/WO65300); `REC-000014` 0x848A/0x848B object-type correction RAM cell vs ROM constant (WO65847); `REC-000015` 0x8550/mDSHCUT FFFF1DB4.bit5 attribution contradicted (WO65865 vs WO65817); `FND-000012`/`REC-000013` GBR-relative address rule and four attribution corrections (WO65895); `FND-000011` donor-only ignition trimming/display and compensation context; `FND-000010`/`REC-000010` firmware-RAM band reconciliation (WO65811); `REC-000011` WO65808 initializer/publisher correction; and `REC-000012` WO65739 copy-helper extent erratum — the latter recorded 2026-11-24.
 
 ## Record schema
 
@@ -17,7 +17,9 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `0xE678–0xE687`, `0xE688–0xE697` | `FND-000001` | `REC-000001` | User-finalized RPM display presentation retained for these two tables only; timer-derived implicit-grid query remains a separate runtime fact. |
 | `0xF3D6`/`0xF3C6`, `0xF3DE`/`0xF3CE` | `FND-000002` | `REC-000002` | Two distinct generic 8-point UBYTE limit schedules with target-proven ×13/clamp mechanics; donor TVO units and main/sub labels not promoted. |
 | `0x9B2E`, `0x9C2E`, `0x9DAE`; axes `0xE4AC`/`0xE4BC` | `FND-000003` | `REC-000003` | Three distinct placements on fixed ROM axes; `9C2E`/`9DAE` payload aliases cancel in the paired differential; ignition/knock labels provisional. |
-| `0x848A`, `0x848B`; donor `0x90EA` | `FND-000004` | `REC-000004` | `848A/B` paired user-verified donor mapping; separate donor `mDDPAPO` and screenshot scalar roles; numeric coincidence does not merge them. |
+| `0x848A`, `0x848B`; donor `0x90EA` | `FND-000004` | `REC-000004`, `REC-000014` | `848A/B` paired user-verified donor mapping; `REC-000014` corrects object types: `0x848A` = RAM cell `FFFF848A` (QDSPT reads), `0x848B` = ROM constant `0x0000848B` (single read at `0x0404DE`), D/N unsupported. |
+| `0x0F712` axis; `0x10F8A` curve | `FND-000013` | — | MAF airflow measurement calibration: axis 32×1 UWORD BE reader `sub_22FAC @ 0x37398`, curve 32×1 UWORD BE reader `sub_22FAC @ 0x648D8`; no diagnostic query identity; physical identity as MAF flow scaling structural only. |
+| `0x8550` ROM byte `0x0A` | — | `REC-000015` | `sub_403D8 @ 0x4043A` reads ROM byte `0x8550`, hysteresis threshold compare vs `UBYTE[FFFF84BA]`; `FFFF1DB4.bit5` dashpot-gate attribution from WO65817 contradicted by WO65865 (no reader/writer); donor mDSHCUT not promoted. |
 | `0x0E904`; axis `0x0FA62` | `FND-000005` | `REC-000005` | XML v3 static `0–240` axis is wrong; future build uses explicit UWORD axis at `0x0FA62`; no XML edit in this revision. |
 | `0x0F406` | `FND-000006` | `REC-000006` | Strong `mTTWN` donor candidate by geometry/output/context; `20 mV/count` is conditional on unknown board AVref; physical identity MED-LOW and unpromoted. |
 | `0x0B756`, `0x0B7D6`; axes `0x0FCFC`/`0x0FD3C` | `FND-000007` | `REC-000007` | Distinct parallel 8×8 UWORD correction surfaces with raw shared queries; `B7D6` constant-neutral; donor RPM/ms/N×TP semantics unpromoted. |
@@ -33,7 +35,9 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - [x] F3D6/F3DE query, axes and clamp findings.
 - [x] 9B2E/9C2E/9DAE raw UBYTE and runtime alias disposition.
 - [x] High-value axis correction at `0x0E904`/`0x0FA62`.
-- [x] Correction to provisional scalar labels at `0x848A/0x848B`.
+- [x] Correction to provisional scalar labels at `0x848A/0x848B` (object-type correction: RAM cell vs ROM constant, `REC-000014`).
+- [x] MAF scaling axis `0x0F712` and curve `0x10F8A` promoted as `FND-000013`; no diagnostic query identity, physical identity structural only.
+- [x] `0x8550`/`mDSHCUT` contradiction recorded as `REC-000015`: `FFFF1DB4.bit5` dashpot-gate attribution from WO65817 contradicted by WO65865 (no reader/writer); `0x8550` ROM read and threshold compare survive as structural facts only.
 - [x] Next high-value A2L synthesis batch: `0x0F406` NTC candidate and `0x0B756/0x0B7D6` scale-compatible analogue dispositions.
 - [x] E904/E914/E934 “no V6 counterpart established” dispositions and A272 axis correction.
 - [x] Firmware-initialised RAM correction for the `FFFF2150` limit band and `FFFF1640` clamp edges (`FND-000010`/`REC-000010`); WO65808's A52/A58 initializer and signed-minimum corrections are in `REC-000011`, and WO65739's separate copier-extent erratum is in `REC-000012`.
@@ -44,8 +48,8 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 
 ## Record locations
 
-- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000012.md`
-- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000013.md`
+- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000013.md`
+- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000015.md`
 - Evidence references: `FINDINGS/evidence/EVD-xxxxxx.md` (schema reserved; no EVD records created in this revision)
 
 ## Migration coverage and cross-links
@@ -64,6 +68,9 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `FND-000010` | WO65499 §§3–4 (superseded census), WO65733 §§2–5 (three indexed-store initializer clusters), WO65808 (A52/A58 values and signed-minimum publisher), WO65739 (copy-helper extent), WO65496 §3 (copy call site) | none — the band is excluded from the calibration inventory and no XML object covers it; no edit |
 | `FND-000011` | `EVIDENCE/rr forum ignition tables v2.txt`; `CONTROL/WO65730.md` §§1–4; user-supplied screenshot descriptions (2026-11-24) | none — cross-ROM context only; no EL19A inventory or XML object changed; screenshot filenames await exact repository-path/byte reconciliation |
 | `FND-000012` | WO65865, WO65883, WO65886, WO65889, WO65892 (per-site base tables) | none — evidence method and RAM-cell address corrections only; no inventory row or XML object changes |
+| `FND-000013` | `CONTROL/WO65297.md` §3 lines 41–45; `CONTROL/WO65300.md` §1–2, §35–38; `CONTROL/WO65813.md` §49 row "MAF scaling" | none — no MAF table object currently in XML v3; no CSV, XML or inventory edit made |
+| `REC-000014` | `CONTROL/WO65847.md` §Trace result and §Verdict; `CONTROL/WO65817.md` §Candidate classification 2 (superseded in part) | `CALIBRATIONS/EL19A_best_guess_provisional_full_definition.xml` lines 80/83 referenced as history only; no XML edit |
+| `REC-000015` | `CONTROL/WO65817.md` §Candidate classification 1 (superseded on `FFFF1DB4` attribution); `CONTROL/WO65865.md` §Verdict and §Reconciliation of WO65841 | none — no XML object at `0x8550` defined; no XML edit |
 
 **Inventory pointer status:** current calibration CSVs have no stable finding-ID column. No CSV, XML, workbook, catalogue, ROM, LST, A2L, protected evidence or script was edited in this revision; this index provides the address-to-inventory/XML crosswalk. Additive CSV pointers may be introduced only under a later explicitly authorized format change.
 
@@ -82,6 +89,9 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - WO65733's broad “all sixteen fields are `0x7FFF`” and signed-maximum publisher descriptions versus WO65808's fourteen `0x7FFF` fields, A52/A58 `0x8000` values, and signed-minimum publisher (`REC-000011`).
 - WO65733's `copy_longwords_by_size` maximum `+0x3C` statement versus WO65739's length-`0x60` generic path reaching `+0x5C` at the different `FFFF84D4` destination; no effect on the `FFFF2150` no-copy conclusion (`REC-000012`).
 - WO65865's `0x0A19B8`→`FFFF34E4` under base `FFFF34B0`, WO65838/WO65859's non-existent `FFFF109E`, and WO65886's "eight further `FFFF355D` readers" versus own-base resolution to `FFFF34E7`, `FFFF8E9E`, `FFFF10FE`, `FFFF36BE` and `FFFFB552`; superseded addresses retained only as history (`REC-000013`, method rule in `FND-000012`).
+- `FND-000004`'s paired-UBYTE donor mapping for `0x848A/0x848B` versus WO65847's object-type resolution: `0x848A` = RAM cell `FFFF848A` (repeated QDSPT reads), `0x848B` = ROM constant `0x0000848B` (single read at `0x0404DE`), `FFFF848B` never referenced; D/N donor distinction unsupported (`REC-000014`).
+- WO65817's `FFFF1DB4.bit5` dashpot state flag and write at `0x4044A` versus WO65865's whole-image no-reader/no-writer result for `FFFF1DB4`; the `FFFF1DB4` attribution is withdrawn, `0x8550` ROM read and threshold compare survive as structural facts only, donor mDSHCUT not promoted (`REC-000015`).
+- MAF axis `0x0F712` and curve `0x10F8A` promoted as `FND-000013`: target-supported airflow measurement calibration, no diagnostic query identity, physical identity structural only.
 
 ## Promotion rule
 
