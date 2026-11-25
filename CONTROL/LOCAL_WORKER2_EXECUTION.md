@@ -82,6 +82,20 @@ Before converting an inbox proposal into a Worker 2 WO, verify that it has:
 
 If any item is missing, return the proposal for refinement or reject it with a reason. Do not fill the READY buffer with vague tasks.
 
+## Pilot and quality measurement
+
+Treat the first five Worker 2 closeouts after activation as a measured pilot. Worker 1 or Worker 3 should spot-review each closeout when practical, focusing on instruction-level correctness, unsupported inference, no-repeat compliance and Findings disposition. Reviewers append evidence-backed responses to the inbox; they do not edit Worker 2 reports or delay independent execution.
+
+Record these measures across the five tasks:
+- first-pass acceptance versus material correction/rework;
+- review effort needed per WO;
+- useful bounded traces completed;
+- escalation frequency and whether escalation was appropriate;
+- duplicate-work or no-repeat violations;
+- time spent waiting for eligible tasks rather than executing.
+
+The pilot is successful when the local worker reliably produces reusable, evidence-backed closeouts while materially reducing premium-model time spent on routine tracing. Do not judge it by raw WO count alone. Use the results to refine task eligibility and determine whether a larger local model or additional VRAM is justified.
+
 ## Initial transition
 
 The first local-execution tasks are the existing Worker 2 FIFO items, not newly invented tasks. The live register currently places WO66038 first and WO66041 next. WO66044 has appeared as a backlog reference but its `CONTROL/WO66044.md` report/specification could not be retrieved; it is not executable until the original specification is recovered or a new bounded task is formally issued. Do not infer its scope.
