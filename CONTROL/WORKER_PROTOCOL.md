@@ -1,6 +1,6 @@
 # EL19A Worker Protocol
 
-**Operating mode:** Repository-driven autonomous execution. The three worker sessions remain the project execution system. Worker 1 and Worker 3 retain their investigation/reasoning roles; Worker 2 is the dedicated full-time local execution agent. This role split does not create a fourth lane or change the shared queue authority. No coordinator or user action is required between ordinary bounded work orders.
+**Operating mode:** Three workers share one evidence-led task system. Workers 1 and 3 provide investigation and direction; Worker 2 is the local execution worker. The live register is the only task queue. Keep worker instructions and handoffs simple.
 
 **Authority:** CONTROL/active_work_orders.md is the sole live queue and lifecycle authority. This file defines execution rules. These rules supersede older coordinator-only, parity-pick, self-selection prohibition, separate-branch and PR instructions retained in historical notes. Ordinary technical work remains independent across lanes; the temporary integration lock below is the only cross-lane publication pause.
 
@@ -9,7 +9,7 @@
 Run exactly one session per slot:
 
 - Worker 1: "You are Worker 1. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
-- Worker 2: "You are Worker 2, the full-time local execution agent for EL19A. Use your configured local model/runtime. Follow CONTROL/WORKER_PROTOCOL.md and CONTROL/LOCAL_WORKER2_EXECUTION.md. Run your autonomous FIFO execution loop until no eligible local-execution work remains; process the Worker 2 proposal inbox at queue/replenishment boundaries and escalate rather than guess."
+- Worker 2: "You are Worker 2, the local execution worker. Follow CONTROL/WORKER_PROTOCOL.md. Execute the earliest READY WO in the Worker 2 FIFO, one at a time. Do not create tasks or change priorities. Stop when no READY work remains."
 - Worker 3: "You are Worker 3. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
 
 Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot for assignment or technical execution. Workers must observe the temporary integration lock before publishing repository changes.
@@ -18,37 +18,25 @@ Never run two sessions under the same slot. All three slots may start immediatel
 
 All work is committed directly to shared main when the integration status is UNLOCKED. No feature branches, PRs, merges, cherry-picks, resets, force-pushes or history rewrites.
 
-**Live assignments are defined only by `CONTROL/active_work_orders.md`.** Do not use historical queue tables or older assignment notes embedded elsewhere in the register to infer current ownership. A closed WO is not an active assignment even if an old paragraph still names its former owner. Explicit current lane assignments in the live register override the modulo rule for already-existing WOs.
+**Live assignments are defined only by `CONTROL/active_work_orders.md`.** Do not use historical queue tables or older assignment notes embedded elsewhere in the register to infer current ownership. A closed WO is not an active assignment even if an old paragraph still names its former owner. Explicit owner and FIFO placement in the live register determine every WO. WO numbers do not encode worker ownership.
 
 Each slot owns its lane. It selects only its own READY/ASSIGNED work in the live register and performs at most one active investigation at a time. It may accumulate multiple technically completed, publication-pending WOs in FIFO order while continuing later READY work, including while the integration gate is LOCKED. It updates only its own lane's lifecycle records when the batch is published. Do not borrow another slot's WO, change another slot's owner/status, or wait for another slot.
 
-**New WO ID allocation is collision-free by lane:** for WOs created under this protocol, assign by ID remainder:
-- ID mod 3 = 1: Worker 1
-- ID mod 3 = 2: Worker 2
-- ID mod 3 = 0: Worker 3
+**New WO IDs are global and sequential.** Use the next unused number after the highest existing WO ID; ownership is stated explicitly in the WO and live register, not encoded in the number. Before creating a report, refresh the register and confirm the report path is absent. Create the report, then add its queue row. If another worker creates the same path first, refresh and take the next unused number. If the register update conflicts, refresh and retry once. Never renumber existing WOs.
 
-Start at the next unused WO ID after 65217. Advance by 3 until the ID is absent from both the register and CONTROL/WO<ID>.md. Legacy assignments listed in the register remain assigned as written; do not renumber or reassign them. A worker creates new WOs only in its own modulo lane.
+Workers 1 and 3 may create WOs for their own lanes or create fully specified, local-execution-suitable WOs assigned directly to Worker 2. A Worker 2 task must be added to Worker 2's READY FIFO with owner/status explicit; after registration, Worker 2 owns execution and the creator must not change its lifecycle. Worker 2 executes its FIFO and does not create or prioritize new tasks.
 
-**Explicit user-directed transfer exception:** A direct user instruction may transfer an existing, unstarted READY WO to another slot when a lane is offline or exhausted. This is an exception to the default no-reassignment rule. Preserve WO IDs, technical scope, dependencies, evidence anchors, no-repeat boundaries and FIFO order. In one atomic `main` commit, update the WO report's assigned status, owner and sequencing language together with the live register's current/backlog entries. Retain the original modulo allocation as historical metadata; the updated live register determines the new lane. Do not transfer in-progress work unless the user explicitly names it and the handoff boundary is recorded. This makes concurrent WO creation use distinct IDs and report paths.
+**Explicit user-directed transfer exception:** A direct user instruction may transfer an existing, unstarted READY WO to another slot when a lane is offline or exhausted. This is an exception to the default no-reassignment rule. Preserve WO IDs, technical scope, dependencies, evidence anchors, no-repeat boundaries and FIFO order. In one atomic `main` commit, update the WO report's assigned status, owner and sequencing language together with the live register's current/backlog entries. Retain original ownership/allocation as historical metadata; the updated live register determines the current owner. Do not transfer in-progress work unless the user explicitly names it and the handoff boundary is recorded. This makes concurrent WO creation use distinct IDs and report paths.
 
 One session per lane plus explicit lane ownership prevents duplicate task execution. The register's SHA protects concurrent writes to the shared queue. The integration lock is a short, explicit exception: it serializes publication only, not technical work or task assignment.
 
-## Worker 2 — full-time local execution role
+## Worker 2 — local execution role
 
-Worker 2 remains the existing modulo-3 lane (WO ID remainder 2). Do not create a fourth worker lane, renumber WOs, change the modulo-3 allocator, or transfer another lane's existing WO. Worker 2 uses the configured local model/runtime as a continuous execution worker; Worker 1 and Worker 3 remain the project's external investigation/reasoning contributors.
+Worker 2 uses the local model and executes only its own FIFO in `CONTROL/active_work_orders.md`. It does not set project strategy, invent tasks, allocate work, or maintain a separate inbox/profile.
 
-**Existing queue first:** Worker 2 executes its currently assigned WO and READY FIFO backlog in their existing order. The role change does not skip, rewrite, reassign or widen an already-issued WO. Each task still has one active investigation at a time and follows the normal findings, publication-pending, integration-lock and readback rules.
+Workers 1 and 3 supply Worker 2 directly: when they identify a useful bounded trace that does not require premium-level semantic synthesis, they create a complete WO with **Owner: Worker 2** and add it to Worker 2's READY FIFO. Suitable tasks include bounded caller/callee traces, RAM reader/writer provenance, lookup-query mechanics, branch/delay-slot verification, and first-consumer traces. The task must include exact addresses/functions, available dependencies, evidence to reuse, no-repeat boundaries and a clear stop condition. Do not send vague proposals; create the actual WO.
 
-**Proposal intake:** `CONTROL/LOCAL_WORKER2_INBOX.md` is a non-authoritative proposal/review inbox, not a WO queue or lifecycle register. Worker 1, Worker 3 and the coordinator may append bounded task proposals or review responses there. Proposals must not reserve WO IDs, change ownership/status, or be treated as assigned work. Worker 2 checks the inbox at startup and when replenishing its READY backlog. Worker 2 alone validates a proposal, allocates its own next unused modulo-3-remainder-2 WO ID, creates the full `CONTROL/WO<ID>.md` and registers it in `CONTROL/active_work_orders.md`. A proposal becomes executable only after that registration and normal dependency checks succeed. Rejected, duplicate or blocked proposals receive a short reason in the inbox; do not create placeholder WOs.
-
-**Local-execution suitability:** A Worker 2 WO must be independently executable with the available local evidence and tools. It must specify a falsifiable technical question, exact ROM/RAM addresses or routine windows, known inputs/dependencies, reuse/no-repeat boundaries, expected evidence and a bounded stop condition. Preferred work includes exact caller/callee and producer/consumer traces, RAM read/write provenance, lookup reader/query mechanics, branch/delay-slot verification, axis/storage checks, first-consumer traces, bounded cross-reference validation and narrowly scoped findings reconciliation. Use deterministic scripts/searches for mechanical extraction when available; the model interprets the selected evidence. Keep context to the relevant source windows and indexed records rather than loading huge listings wholesale.
-
-Semantic tasks are allowed only when the WO supplies a falsifiable hypothesis, target-side evidence, a cheap discriminator and a precise identity layer/stop boundary. Worker 2 may establish software behavior and qualified input/output paths; it must not promote a physical sensor, calibration function, units or actuator meaning from names, shapes, donor labels or plausible values alone. Broad project strategy, open-ended discovery, multi-family semantic synthesis, unavailable external-source work and tasks requiring unbounded context are not local-execution eligible; return them to the proposal inbox for redesign or leave them with the reasoning lanes.
-
-**Escalation instead of guessing:** When a meaningful ambiguity exceeds the WO's local-execution boundary, record an `EXTERNAL REVIEW REQUEST` in the WO report with (1) exact question, (2) competing interpretations, (3) verified evidence/PCs/addresses, (4) what is still unknown, and (5) the smallest discriminating test. Worker 1/3 or the coordinator may append a response keyed to that WO in the proposal inbox; no one edits Worker 2's report or lifecycle. Worker 2 evaluates any response against ROM evidence and records its disposition additively. Do not wait idle for review: close a bounded task when its issued question has been answered to its stop boundary, or mark it BLOCKED only for a genuinely unavailable required dependency, then continue with the next independent FIFO task. Physical meaning remaining unresolved is not itself a blocker.
-
-**Backlog replenishment:** Worker 2 retains the standard target of three READY follow-on WOs beyond its current task. Prefer accepted inbox proposals first, ranked by information gain and local suitability; then create a defensible bounded task from the existing protocol priorities if no suitable proposal exists. Never lower evidence standards or invent work merely to keep the local model busy.
-
+Worker 2 takes the earliest READY task, follows its stated scope and the normal evidence/Findings closeout rules, then continues to the next READY task. If evidence is ambiguous, record the uncertainty and stop at the WO boundary; do not guess or expand scope. If its queue is empty, it stops. Workers 1 and 3 replenish it during their normal queue-generation work when defensible local tasks exist. No separate proposal, review-response or approval workflow is used.
 
 ## Autonomous execution loop
 
@@ -67,7 +55,7 @@ An existing ASSIGNED — WORKER N — READY entry reserves that task to its slot
 
 ## Technical direction and WO replenishment
 
-Workers 1 and 3 maintain investigation priorities and technical direction inside their own lanes. Worker 2's role is execution-first: its next work comes from its current FIFO and accepted local-execution proposals; it may create its own bounded lane-2 task only when no suitable proposal is available. Do not wait for ChatGPT or a coordinator to invent ordinary work, and do not confuse Worker 2's execution queue with a strategic research lane.
+Workers 1 and 3 maintain investigation priorities and technical direction. Worker 2 executes bounded tasks supplied directly by Workers 1 and 3 in its FIFO. When creating follow-on work, Workers 1 and 3 should route suitable routine traces to Worker 2 rather than performing every trace themselves. Worker 2 does not create or prioritize work.
 
 When your lane's READY backlog is below target depth, choose the highest-payoff unresolved question using this order:
 
@@ -87,11 +75,10 @@ When your lane has fewer than three READY follow-on WOs queued beyond its curren
 - the expected evidence and stop boundary;
 - dependencies and their actual current status;
 - only its own report path as an authorized output unless another output is specifically necessary and safe.
-- for Worker 2 WOs, a `LOCAL EXECUTION FIT` of YES or CONDITIONAL, with the evidence-based reason and exact escalation point.
 
-Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with your slot ownership, priority, dependencies, branch main and exact allowed paths. Use the modulo ID rule above. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
+Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with explicit owner, priority, dependencies, branch main and exact allowed paths. Use the global sequential ID rule above. When suitable, create bounded WOs assigned to Worker 2 and append them to its FIFO. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
 
-Maintain a target backlog of **three READY follow-on WOs per lane**, in addition to the current in-progress WO. This is an operating buffer, not a limit: an explicit user request may authorize a larger queue. Queue tasks in a clear FIFO order; all queued WOs remain assigned to their modulo lane, but the worker starts only the earliest READY item and never runs two WOs concurrently in the same lane. Create replacements as work is completed so the buffer is replenished without a user prompt. Do not create filler: every queued WO must have a distinct, defensible technical question, exact scope, reuse/no-repeat boundary and stop condition. Do not queue work already covered, completed or blocked by an unavailable dependency.
+Maintain a target backlog of **three READY follow-on WOs per active lane** where defensible work exists. Workers 1 and 3 may also maintain up to three READY tasks in Worker 2's FIFO by assigning bounded trace WOs directly to Worker 2. Worker 2 executes FIFO and does not replenish the queue itself. Do not create filler: every WO must have a distinct, defensible question, exact scope, available dependencies, reuse/no-repeat boundary and stop condition. Do not queue work already covered, completed or blocked.
 
 ## Mandatory findings-disposition closeout gate
 
@@ -214,7 +201,7 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 - Use main only. Do not create branches or PRs.
 - No separate claim commit. Do not make interim commits or routine status updates.
 - Publish a lane's accumulated pending packages as a batch, not as a separate integration transaction per WO. The batch may contain multiple reports, FND/REC records, index/inventory updates and one consolidated lane-register update. Publish records/reports before marking their WOs CLOSED in the register. A safe multi-file commit is preferred; if separate commits are required, keep the integration lock held until the entire batch is verified. Do not force-push or discard local pending packages.
-- A worker may edit only its own WO report, its own lane's queue/status entries, and its own lane's new WO specifications, plus the `FINDINGS/` paths permitted by the mandatory findings-disposition gate. It may append a reconciliation note when supported by its own report. **Limited cross-lane exception:** Worker 1, Worker 3 and the coordinator may append task proposals or evidence-backed review responses to `CONTROL/LOCAL_WORKER2_INBOX.md`; Worker 2 may update proposal dispositions and consume review responses there. This inbox is non-authoritative and cannot create/assign/close a WO or authorize edits to another worker's report. All inbox writes obey the integration lock and readback discipline. No worker may change another lane's assignment, active WO, status or report.
+- A worker may edit its own WO reports and lifecycle, plus its own new WO specifications and the `FINDINGS/` paths permitted by the mandatory findings-disposition gate. Workers 1 and 3 may also create new WO specifications assigned to Worker 2 and append those READY rows to Worker 2's FIFO; after registration, only Worker 2 changes that WO's lifecycle/report. No worker may change another lane's existing assignment, active WO, status or report.
 - Before each register write, fetch the latest active_work_orders.md and its current blob SHA. Apply only your own small change. If rejected by a concurrent update, refresh once, preserve the other worker's changes, recompute the edit and retry once. Never overwrite a stale full-file copy. If the safe retry fails, stop repository writes and report the exact error.
 - Verify every report, FND/REC record, index/inventory update and consolidated register change in the batch by remote readback. Only then remove its items from the local pending ledger or mark them published. Do not poll during technical work.
 - Use explicit file paths for staging/commits. Never use broad add-all or cleanup operations.
@@ -238,8 +225,8 @@ In particular, using youtube videos.txt is a user-owned local file and must rema
 
 | Slot | Owns |
 |---|---|
-| Worker 1 | Explicitly assigned Worker 1 tasks; new IDs where ID mod 3 = 1 |
-| Worker 2 | Explicitly assigned Worker 2 tasks; new IDs where ID mod 3 = 2 |
-| Worker 3 | Explicitly assigned Worker 3 tasks; new IDs where ID mod 3 = 0 |
+| Worker 1 | WOs explicitly assigned to Worker 1; may create bounded execution WOs for Worker 2 |
+| Worker 2 | WOs explicitly assigned to Worker 2; local FIFO execution only |
+| Worker 3 | WOs explicitly assigned to Worker 3; may create bounded execution WOs for Worker 2 |
 
-No first-pick gate or coordinator dependency. Lanes do not wait on one another for assignment or technical execution; they pause repository publication only while `CONTROL/INTEGRATION_STATUS.md` is `LOCKED`. Each lane investigates, reconciles, closes and replenishes itself.
+WO numbers are sequential; ownership is explicit. Workers 1 and 3 supply Worker 2 directly through the live FIFO. No separate inbox or approval step. Each lane executes only its own assigned tasks and follows the shared publication lock.
