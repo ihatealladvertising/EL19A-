@@ -100,6 +100,14 @@ Use exactly one disposition:
 
 **Historical closeouts:** This gate applies immediately to every open/in-progress WO and all new WOs. It does not authorize workers to reopen or edit another lane's closed WO. A closed WO whose material result was not promoted must be handled by a new, bounded findings-migration/reconciliation WO in an owning lane. Do not mass-migrate routine RAM traces.
 
+## Local pending-publication packages
+
+The local batch ledger is `CONTROL/PENDING_PUBLICATION_WORKER<N>.md` in that worker's own checkout/worktree. It is a local working artifact, not a remote lifecycle authority and not a reason to create a commit while locked. Keep one entry per completed WO, in FIFO order, with: WO ID; package state (`PREPARED` or `PUBLISHED`); report path; exact local FND/REC draft paths; inventory/index changes required; disposition; dependencies; and any unresolved publication-time allocation. Never overwrite one WO's report or drafts with the next WO. Preserve all pending files across worker-loop iterations and do not discard them on a rejected push.
+
+For a pending `PROMOTED` disposition, use ID-neutral draft filenames such as `FINDINGS/pending/WO<ID>-FND-draft.md` and `...-REC-draft.md` (or an equivalent clearly segregated local-only draft location). Do not allocate global FND/REC IDs, edit the shared index, or claim an FND/REC ID while publication is locked. At publication, the integrator allocates the next unused IDs against the latest remote index, materializes the canonical records, updates index/inventory pointers and replaces pending placeholders in the WO report. `NOT REQUIRED` packages need no FND/REC draft. `DEFERRED` packages must include the bounded follow-on WO draft/specification in the local package; its ID and register entry are finalized during publication.
+
+A pending package is technically complete when its evidence, reconciliation, disposition and all draft content are complete. It remains publication-pending—not remotely closed—until the integration procedure's readback gate passes. Workers may continue to the next READY WO after recording the package. The local ledger is not committed or pushed separately; it is included in the eventual batch only if useful as an audit record. The integrator must never rely on a worker's chat summary in place of the actual local package contents.
+
 ## Reconciliation rules
 
 Reconciliation is a normal part of every lane, not a coordinator-only duty.
