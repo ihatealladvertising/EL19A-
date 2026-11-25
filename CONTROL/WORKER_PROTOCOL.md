@@ -41,9 +41,10 @@ Repeat this loop for the lifetime of the worker session:
 2. If CONTROL/WO<ID>.md already exists, read it. If an assigned legacy WO has no report file yet, the queue row and its cited dependencies in active_work_orders.md are the authoritative specification: create CONTROL/WO<ID>.md with the objective, exact scope, owner, branch main, authorized paths, dependencies and stop boundary from that register entry. This is execution setup, not a separate claim commit; do not invent or widen scope.
 3. Perform the technical investigation to the specified stop boundary. Spend the effort on tracing, verification and interpretation, not administration.
 4. Before closeout, perform a bounded reconciliation against the exact prior findings cited by the WO and any directly affected claims discovered during the investigation. Distinguish confirmed corrections from hypotheses.
-5. Write the full result to your own CONTROL/WO<ID>.md report. Include verified facts, evidence anchors, calculations/branches, confidence, limits, no-repeat notes, changed paths and commit SHA.
-6. Close the WO in active_work_orders.md, update your lane's current/closed summary, and record any reconciliation disposition. Do not seek coordinator review or approval for a bounded closeout.
-7. Check your own lane. If a READY WO exists, take the earliest item in the lane's FIFO backlog immediately; execute only one WO at a time. If the backlog is below its target depth, replenish it under the technical-priority and WO-creation rules below. Continue without waiting for another slot or user prompt.
+5. Complete the mandatory **findings-disposition gate** below. A material result is not closed out by prose in the WO alone: promote it into `FINDINGS/`, update the index and supported inventory pointers, or create a linked follow-on reconciliation WO when the correction cannot be completed within the current scope.
+6. Write the full result to your own `CONTROL/WO<ID>.md` report. Include verified facts, evidence anchors, calculations/branches, confidence, limits, no-repeat notes, the findings disposition block, changed paths and commit SHA.
+7. Only after the findings disposition and all required readbacks are complete, close the WO in `active_work_orders.md`, update your lane's current/closed summary, and record concise FND/REC links or the linked deferral WO. Do not seek coordinator approval for a bounded promotion within this standing authorization.
+ If a READY WO exists, take the earliest item in the lane's FIFO backlog immediately; execute only one WO at a time. If the backlog is below its target depth, replenish it under the technical-priority and WO-creation rules below. Continue without waiting for another slot or user prompt.
 
 An existing ASSIGNED — WORKER N — READY entry reserves that task to its slot. Multiple READY entries may exist in a lane's FIFO backlog; they are not permission to execute concurrently. No separate claim commit is required. A worker may start only the earliest READY item after closing its current WO. Do not create routine claim, heartbeat, progress, handoff or status-polling commits. The current WO remains assigned to its slot until its closeout is recorded.
 
@@ -73,6 +74,31 @@ When your lane has fewer than three READY follow-on WOs queued beyond its curren
 Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with your slot ownership, priority, dependencies, branch main and exact allowed paths. Use the modulo ID rule above. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
 
 Maintain a target backlog of **three READY follow-on WOs per lane**, in addition to the current in-progress WO. This is an operating buffer, not a limit: an explicit user request may authorize a larger queue. Queue tasks in a clear FIFO order; all queued WOs remain assigned to their modulo lane, but the worker starts only the earliest READY item and never runs two WOs concurrently in the same lane. Create replacements as work is completed so the buffer is replenished without a user prompt. Do not create filler: every queued WO must have a distinct, defensible technical question, exact scope, reuse/no-repeat boundary and stop condition. Do not queue work already covered, completed or blocked by an unavailable dependency.
+
+## Mandatory findings-disposition closeout gate
+
+Every WO closeout must include this block in its report:
+
+```text
+FINDINGS DISPOSITION: PROMOTED | NOT REQUIRED | DEFERRED
+FND: <IDs or none>
+REC: <IDs or none>
+INDEX: <updated/read-back commit or SHA, or not applicable>
+INVENTORY: <finding-pointer update, unsupported format, or not applicable>
+RATIONALE / FOLLOW-ON: <brief reason; required for NOT REQUIRED or DEFERRED>
+```
+
+Use exactly one disposition:
+
+- **PROMOTED:** The result materially changes a calibration object's proposed identity, address, storage, geometry, axes/query domain, scaling, units, confidence, evidence status or XML inclusion/exclusion; corrects a prior material interpretation; or establishes a reusable evidence method that prevents a material false attribution. Create/update the stable FND record, create an additive REC when a prior interpretation is corrected, update the address lookup in `FINDINGS/INDEX.md`, and add inventory finding pointers only where the existing format supports a safe additive change. Record IDs and readback SHA.
+- **NOT REQUIRED:** The result is only routine technical tracing or a bounded negative that does not change any calibration candidate's interpretation/evidence status, a reusable method, an XML disposition or a prior claim. State specifically what was checked and why it has no durable calibration-knowledge impact. "No new table found" alone is not enough when it materially changes a candidate's status.
+- **DEFERRED:** A material correction is clear but cannot be fully reconciled within the current WO's scope or evidence. Before closing, create a bounded follow-on reconciliation WO in the responsible lane, cite both source reports/findings, define exact allowed paths and stop boundary, and record its ID here. Do not defer merely because physical meaning remains unknown; an appropriately qualified OPEN/DISPUTED finding can preserve that uncertainty now.
+
+**Standing authorization and permitted paths:** This protocol itself grants each worker standing, narrowly scoped authorization to create new files under `FINDINGS/records/` and `FINDINGS/reconciliations/`, update `FINDINGS/INDEX.md`, and add finding-ID pointers to an existing calibration inventory only where its current schema safely supports additive pointers, when needed to satisfy this gate for that worker's own WO. This applies even when a legacy WO's "Authorized output" list predates the Findings system or omits these paths. It does not authorize changes to ROM/LST, XML definitions, workbooks, A2L files, calibration values/geometries, catalogue data, scripts, protected evidence or another worker's report/lifecycle. No unsupported schema changes or broad migrations.
+
+**Record discipline:** Read the current index and relevant FND/REC records before allocating IDs. Allocate the next unused monotonically increasing ID, verify the target record path does not already exist, and never overwrite a record. If another worker wins the same ID, refresh and allocate the next unused ID. Update the index using its current blob SHA; on a concurrent-write rejection, refresh, preserve the other change and retry once. If safe publication still fails, leave the WO active with an explicit publication blocker rather than claiming the findings gate passed. Read back every created record and the index entry from remote `main` before closing.
+
+**Historical closeouts:** This gate applies immediately to every open/in-progress WO and all new WOs. It does not authorize workers to reopen or edit another lane's closed WO. A closed WO whose material result was not promoted must be handled by a new, bounded findings-migration/reconciliation WO in an owning lane. Do not mass-migrate routine RAM traces.
 
 ## Reconciliation rules
 
@@ -162,7 +188,7 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 - Use main only. Do not create branches or PRs.
 - No separate claim commit. Do not make interim commits or routine status updates.
 - Make one final technical report commit. Then make one minimal register closeout/replenishment commit. If the available Git operation supports a safe multi-file commit, they may be combined.
-- A worker may edit only its own WO report, its own lane's queue/status entries, and its own lane's new WO specifications. It may append a reconciliation note when supported by its own report. It must not change another lane's assignment, active WO, status or report.
+- A worker may edit only its own WO report, its own lane's queue/status entries, and its own lane's new WO specifications, plus the `FINDINGS/` paths permitted by the mandatory findings-disposition gate. It may append a reconciliation note when supported by its own report. It must not change another lane's assignment, active WO, status or report.
 - Before each register write, fetch the latest active_work_orders.md and its current blob SHA. Apply only your own small change. If rejected by a concurrent update, refresh once, preserve the other worker's changes, recompute the edit and retry once. Never overwrite a stale full-file copy. If the safe retry fails, stop repository writes and report the exact error.
 - Verify the committed report and register state by readback. Do not poll during technical work.
 - Use explicit file paths for staging/commits. Never use broad add-all or cleanup operations.
