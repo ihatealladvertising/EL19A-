@@ -190,4 +190,4 @@ In particular, using youtube videos.txt is a user-owned local file and must rema
 | Worker 2 | Explicitly assigned Worker 2 tasks; new IDs where ID mod 3 = 2 |
 | Worker 3 | Explicitly assigned Worker 3 tasks; new IDs where ID mod 3 = 0 |
 
-No first-pick gate. No cross-worker waiting. No coordinator dependency. Each lane investigates, reconciles, closes and replenishes itself.
+No first-pick gate or coordinator dependency. Lanes do not wait on one another for assignment or technical execution; they pause repository publication only while `CONTROL/INTEGRATION_STATUS.md` is `LOCKED`. Each lane investigates, reconciles, closes and replenishes itself.
