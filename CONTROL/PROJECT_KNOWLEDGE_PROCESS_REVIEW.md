@@ -40,4 +40,13 @@ A PASS requires that the live register, operating protocol, findings/reconciliat
 
 ## Review log
 
-No formal review entries yet. The first review is due after this procedure is adopted and the next trigger is reached.
+## Review entry — 2026-11-25
+
+- **Date / reviewer / trigger:** 2026-11-25 / ChatGPT integrator / first review after the findings-preservation control was adopted; more than ten additional WO closeouts were visible across the lanes.
+- **Coverage:** Recent WO-only material includes the MAF scaling FOUND result (0x0F712 axis / 0x10F8A curve), the 0x848A/0x848B object-type distinction, the 0x8550 mDSHCUT premise conflict, and the corrected GBR-derived addresses in WO65865/WO65883/WO65886. WO66032 is queued to perform the bounded backfill; no FND/REC promotion is claimed by this review.
+- **Contradictions:** WO65865's no-reader/no-writer result for FFFF1DB4 conflicts with WO65817's proposed mDSHCUT bit gate; WO65847's RAM-vs-ROM result for 0x848A/0x848B limits the earlier paired D/N interpretation in FND-000004/REC-000004; WO65883 corrects the staging/source addresses previously called FFFF109E and FFFF1054+0x2EC. These require source-linked reconciliation, not edits to historical WO reports.
+- **Efficiency:** The highest-value method correction is per-function GBR resolution across function boundaries; fixed line windows and reuse of a nearby routine's GBR base are unsafe. Routine flag-consumer follow-ons should not be multiplied once a bounded internal-state/no-output result is established.
+- **Methods:** Added a mandatory WO findings-disposition gate, a standing narrow authorization for FND/REC/index and safe existing inventory-pointer updates, collision-safe ID/index publication instructions, and a DEFERRED rule requiring a queued reconciliation WO.
+- **Fresh-session test:** PARTIAL. The live register, worker protocol, Findings README/index and relevant recent WO reports were checked. The context-recovery guide and current baseline/build-manifest state were not re-audited in this maintenance pass; WO66032 remains pending for the historical findings backfill.
+- **Actions:** Updated `CONTROL/WORKER_PROTOCOL.md`, `FINDINGS/README.md`, created `CONTROL/WO66032.md`, and assigned WO66032 to Worker 2 in `CONTROL/active_work_orders.md`. Commits: `2e39c794`, `346538a1`, `e9725cc1`, `a8b68d6d`, `e84e1522`, `c2ad9f5e`. Readback verification pending final integration check.
+
