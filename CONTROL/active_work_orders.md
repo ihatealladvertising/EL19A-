@@ -1,7 +1,7 @@
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** This file is the sole current source of truth for work-order lifecycle, assignments, priorities, continuation, and handoff. Technical evidence belongs in individual `WO<ID>.md` records.
-**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-24
+**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-25
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
@@ -20,7 +20,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
 | Worker 1 | WO66019 → WO66022 → WO66025 → WO66028 | 3 |
-| Worker 2 |  | 0 |
+| Worker 2 | WO66035 → WO66038 → WO66041 | 3 |
 | Worker 3 | WO65892 → WO65895 → WO65898 | 3 |
 
 
