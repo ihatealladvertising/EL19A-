@@ -471,21 +471,21 @@ def main():
                 expected_byte_off = raw_disp * op_scale
                 assert disp == expected_byte_off, (
                     f"Disp mismatch at {rec['pc']:08X}: lst={disp} vs raw {raw_disp}*{op_scale}")
-                op_val = "PASS_ROM_OPCODE"
+                op_val = "PASS_ROM"
             elif form == "gbr_r0":
                 assert dec_form == "gbr_r0" and dec_w == width, f"Opcode mismatch at {rec['pc']:08X}"
-                op_val = "PASS_ROM_OPCODE"
+                op_val = "PASS_ROM"
             elif form == "base_r0":
                 assert dec_form == "base_r0" and dec_w == width and dec_acc == acc, f"Opcode mismatch at {rec['pc']:08X}"
-                op_val = "PASS_ROM_OPCODE"
+                op_val = "PASS_ROM"
             elif form == "base_indirect":
                 if dec_form == "base_indirect_branch":
                     assert width == "l" and acc == "read", f"Branch indirect mismatch at {rec['pc']:08X}"
-                    op_val = "PASS_ROM_OPCODE_BRANCH_TARGET"
+                    op_val = "PASS_ROM_BR"
                 else:
                     assert dec_form == "base_indirect" and dec_w == width and dec_acc == acc, (
                         f"Indirect opcode mismatch at {rec['pc']:08X}: {op_hex}")
-                    op_val = "PASS_ROM_OPCODE"
+                    op_val = "PASS_ROM"
             else:
                 raise AssertionError(f"Unexpected form {form}")
 
@@ -496,29 +496,19 @@ def main():
             if form in ("gbr_disp", "base_disp"):
                 if width in ("w", "l") and ea_changed:
                     c_status = "corrected_double_scale"
-                    c_reason = (
-                        f"lst_disp_already_byte_scaled_removed_extra_x{scale}_scale "
-                        f"(raw_op_disp=0x{raw_disp:02X}*x{op_scale}=0x{off_corr:X}; "
-                        f"wo65118_old_off=0x{off_hist:X})"
-                    )
+                    c_reason = f"0x{raw_disp:02X}*x{op_scale}=+0x{off_corr:X};old=+0x{off_hist:X}"
                 elif width in ("w", "l") and not ea_changed:
                     c_status = "unchanged_nonbyte_zero_disp"
-                    c_reason = (
-                        f"zero_disp_invariant_on_affected_x{scale}_path "
-                        f"(raw_op_disp=0x00; byte_off=0x0)"
-                    )
+                    c_reason = f"0x00*x{op_scale}=+0x0"
                 else:
                     c_status = "unchanged_byte_scale1"
-                    c_reason = f"byte_width_scale_1_unaffected (raw_op_disp=0x{raw_disp:02X})"
+                    c_reason = f"0x{raw_disp:02X}"
             elif form in ("gbr_r0", "base_r0"):
                 c_status = "unchanged_unscaled_form"
-                c_reason = "r0_index_unscaled_unaffected"
+                c_reason = "r0"
             else:
                 c_status = "unchanged_unscaled_form"
-                if dec_form == "base_indirect_branch":
-                    c_reason = "base_indirect_zero_offset_branch_target_default_width_l"
-                else:
-                    c_reason = "base_indirect_zero_offset_unaffected"
+                c_reason = "@rN_br" if dec_form == "base_indirect_branch" else "@rN"
 
             idx_row = len(rows)
             row_index[(rec["pc"], ea_hist)] = idx_row
