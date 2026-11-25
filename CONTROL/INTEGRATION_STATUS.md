@@ -1,20 +1,15 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Integrator:** ChatGPT
+**Integrator:** none
 
-**Purpose:** No active integration window. Workers may publish a complete accumulated lane batch to `main` under `CONTROL/WORKER_PROTOCOL.md` and `CONTROL/INTEGRATION_PROCEDURE.md`. The lock serializes publication only; workers continue technical work and may accumulate multiple local publication-pending WOs per lane.
+**Purpose:** No active integration window. Workers use the QUICK START block in `CONTROL/active_work_orders.md` for assignments. Shared-main publication may resume.
 
-**Last integration:** 2026-11-25 — Worker 2 local-agent adaptation; published protocol/profile/inbox, Worker 2 queue and pilot annotations, and integration-procedure update; all readbacks passed.
+**Last integration:** 2026-11-25 — Simplified Worker 2 workflow; removed the separate profile/inbox, made new WO IDs globally sequential, allowed Workers 1/3 to assign bounded execution WOs directly to Worker 2, and added a fast authoritative assignment block at the top of the live register.
 
-**Last release:** 2026-11-25 19:52:02 -03:00 — Worker 2 local-agent adaptation read back from remote `main`; publication may resume.
+**Last release:** 2026-11-25 20:05:33 -03:00 — Simplification and readback complete.
 
-
-**Previous lock:** 2026-11-25 19:47 -03:00 — ChatGPT, Worker 2 local-agent adaptation. Released after protocol, profile, inbox, queue, WO and procedure readback.
-
-**Lock acquired:** 2026-11-25 19:47 -03:00. Worker 2 local-agent adaptation. All other technical work may continue; no worker may publish until release.
-
-**Lock acquired:** 2026-11-25 19:52 -03:00. Simplification of Worker 2 local-agent workflow. Workers may continue technical work; no shared-main publication until release.
+**Previous lock:** 2026-11-25 19:52 -03:00 — ChatGPT, Worker 2 workflow simplification. Released after protocol, register, WO, and integration procedure readback.
 
 This file is the publication gate. Workers must fetch/read its current state immediately before any shared-main publication. A missing or unreadable status file is fail-closed for publication: do not publish until the state is confirmed. It does not stop technical work or local pending-package preparation.
