@@ -52,6 +52,26 @@ Do not silently overwrite a finding. Corrections are additive: create a reconcil
 
 For every calibration candidate, retain the current proposed name, address, storage, geometry, axes/domains, scaling/units, confidence tier, evidence grade and source finding IDs. Keep observed facts separate from hypotheses. A missing finding link means the claim is not yet promoted by this system.
 
+## Promotion workflow and WO closeout integration
+
+Promotion is part of ordinary WO closeout, not a separate optional coordinator task. The controlling checklist and standing worker authorization are in `CONTROL/WORKER_PROTOCOL.md`.
+
+For each completed WO, the owner must record one disposition in the WO report:
+
+- **PROMOTED:** Material calibration interpretation/evidence changes are captured in one or more stable FND records; prior material interpretations are preserved by additive REC records; the address lookup is updated; and supported inventory finding-ID pointers are updated.
+- **NOT REQUIRED:** The work is a routine trace or bounded negative with no change to a calibration candidate's identity, evidence status, XML inclusion/exclusion, a prior claim, or a reusable evidence method. State the exact reason; do not use this category to avoid recording an important negative.
+- **DEFERRED:** A material correction is known but cannot be completed within the WO boundary. Create and queue a bounded reconciliation WO before closing the current WO, and name that follow-on in the report.
+
+A material negative is still a finding when it removes support for a proposed calibration name, invalidates a reader/axis/consumer claim, changes a candidate's confidence or evidence status, rules an object out of an XML definition, or establishes a reusable method that prevents false address attribution. Lack of a physical endpoint does not prevent recording a qualified structural or functional finding.
+
+Routine RAM-cell endpoint traces are not automatically FND records. Do not flood this system with internal state observations unless they materially alter a calibration interpretation or establish a reusable evidence method.
+
+### Standing authorization and safe publication
+
+The worker protocol grants each worker narrowly scoped standing authorization to create FND/REC records, update this index, and add finding-ID pointers to an existing inventory only where its current schema supports safe additive changes. This covers legacy WOs whose original authorized-path list predates this system. It does not authorize edits to calibration values, XML, workbooks, ROM/LST, A2Ls, catalogue data, scripts, protected evidence, or another worker's report/lifecycle.
+
+Before allocating an ID, read the current index and confirm the next monotonically increasing ID and target path are unused. Never replace an existing FND/REC file to make a correction; create a new REC and update current pointers. Update the index against its current blob SHA, retry once after refreshing if a concurrent write is rejected, and read back every new record and index change from remote `main`. If safe publication fails after the permitted retry, keep the WO open and report the blocker.
+
 ## Required build gate
 
 Before creating or revising any RomRaider/XML definition:
@@ -64,6 +84,6 @@ Before creating or revising any RomRaider/XML definition:
 
 A build is not reconciled merely because the latest WO summaries were read.
 
-## Initial migration policy
+## Migration policy
 
-Migrate high-value calibration interpretation findings first, including user-finalized screenshot evidence and corrections that change axes, units, dimensions, scaling, labels or XML disposition. Do not mass-copy every RAM-cell consumer WO into this index; only findings that affect calibration interpretation or a reusable evidence method belong here. The initial index may contain no migrated records until the migration WO closes; never imply migration is complete prematurely.
+Promote material findings as each WO closes. Do not wait for a periodic review or a bulk migration WO to capture new results. Historical WO-only findings that predate this gate should be migrated through bounded reconciliation WOs, prioritizing corrections that affect calibration identity, axes, scaling, units, confidence, XML disposition or reusable evidence methods. Do not mass-copy every RAM-cell consumer WO into this index.
