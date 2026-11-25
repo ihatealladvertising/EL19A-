@@ -42,7 +42,6 @@ If a worker has no separate worktree or cannot safely preserve local packages in
 4. Workers do not edit the remote active register while locked. They may continue selecting their own earliest READY work from the last verified remote FIFO, then record locally completed packages. They must not borrow another lane's tasks.
 5. If the gate is missing or unreadable, workers treat publication as LOCKED and continue technical work/local preparation. Only the named integrator may write to shared `main` while locked.
 
-The non-authoritative `CONTROL/LOCAL_WORKER2_INBOX.md` is a shared proposal/review artifact. Contributions to it obey the same integration gate: append/read back only while UNLOCKED; while LOCKED, preserve the proposal or review locally and publish it after release. Inbox entries do not create WOs, reserve IDs or change lifecycle. Worker 2 must create and register a complete lane-2 WO before executing a proposal.
 
 The lock is a publication mutex, not a global work stop.
 
@@ -56,7 +55,7 @@ For each lane, preserve FIFO order. Across lanes, publication order may be chose
 - compare package paths and content against remote state; preserve all unrelated and concurrent changes;
 - identify duplicate/provisional FND/REC allocations across lanes and assign unique IDs serially from the latest index;
 - reconcile shared index edits additively; never overwrite a different lane's entries;
-- resolve deferred WO IDs by the modulo lane rule and verify both report path and register absence;
+- resolve deferred WO IDs using the next unused global sequential number; set owner explicitly in the report/register and verify both report path and register absence;
 - verify each package's mandatory findings-disposition block and ensure its disposition matches its drafts and intended register status;
 - retain all historical reports; corrections are additive REC records, not silent edits to another worker's closeout.
 
