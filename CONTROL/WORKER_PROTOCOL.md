@@ -8,9 +8,9 @@
 
 Run exactly one session per slot:
 
-- Worker 1: "You are Worker 1. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
-- Worker 2: "You are Worker 2, the local execution worker. Follow CONTROL/WORKER_PROTOCOL.md. Execute the earliest READY WO in the Worker 2 FIFO, one at a time. Do not create tasks or change priorities. Stop when no READY work remains."
-- Worker 3: "You are Worker 3. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
+- Worker 1: "Use the QUICK START block in CONTROL/active_work_orders.md. Run your FIFO, one WO at a time. When you create a bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow the WO's evidence and closeout rules."
+- Worker 2: "Open CONTROL/active_work_orders.md, read QUICK START, and execute the first READY WO assigned to Worker 2. Read that WO and only its cited dependencies. Do not scan register history, create tasks or change priorities. After closeout, take the next READY WO. Stop when none remain."
+- Worker 3: "Use the QUICK START block in CONTROL/active_work_orders.md. Run your FIFO, one WO at a time. When you create a bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow the WO's evidence and closeout rules."
 
 Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot for assignment or technical execution. Workers must observe the temporary integration lock before publishing repository changes.
 
@@ -42,7 +42,7 @@ Worker 2 takes the earliest READY task, follows its stated scope and the normal 
 
 Repeat this loop for the lifetime of the worker session:
 
-1. At startup only, read this protocol and the current operational frontier in active_work_orders.md. Find the current WO and the ordered FIFO backlog for your lane. The next task is the earliest READY item. Do not re-read the protocol or inventory the repository on every iteration.
+1. At startup, read only the QUICK START block in `CONTROL/active_work_orders.md` and open the first READY WO assigned to you. Read that WO and only its named dependencies. Do not parse historical register summaries or inventory the repository. Worker 2 must not read beyond the quick-start block to locate its task.
 2. If CONTROL/WO<ID>.md already exists, read it. If an assigned legacy WO has no report file yet, the queue row and its cited dependencies in active_work_orders.md are the authoritative specification: create CONTROL/WO<ID>.md with the objective, exact scope, owner, branch main, authorized paths, dependencies and stop boundary from that register entry. This is execution setup, not a separate claim commit; do not invent or widen scope.
 3. Perform the technical investigation to the specified stop boundary. Spend the effort on tracing, verification and interpretation, not administration.
 4. Before closeout, perform a bounded reconciliation against the exact prior findings cited by the WO and any directly affected claims discovered during the investigation. Distinguish confirmed corrections from hypotheses.
