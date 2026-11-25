@@ -2,7 +2,7 @@
 
 **Operating mode:** Repository-driven autonomous execution. The three worker sessions are the operating system for investigation, technical prioritization, reconciliation and queue replenishment. No coordinator, ChatGPT session or user action is required between ordinary work orders.
 
-**Authority:** CONTROL/active_work_orders.md is the sole live queue and lifecycle authority. This file defines execution rules. These rules supersede older coordinator-only, cross-worker waiting, parity-pick, self-selection prohibition, separate-branch and PR instructions retained in historical notes.
+**Authority:** CONTROL/active_work_orders.md is the sole live queue and lifecycle authority. This file defines execution rules. These rules supersede older coordinator-only, parity-pick, self-selection prohibition, separate-branch and PR instructions retained in historical notes. Ordinary technical work remains independent across lanes; the temporary integration lock below is the only cross-lane publication pause.
 
 ## Start prompts
 
@@ -12,11 +12,11 @@ Run exactly one session per slot:
 - Worker 2: "You are Worker 2. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
 - Worker 3: "You are Worker 3. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
 
-Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot to claim, finish, or authorize work.
+Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot for assignment or technical execution. Workers must observe the temporary integration lock before publishing repository changes.
 
 ## Worker lanes and collision prevention
 
-All work is committed directly to shared main. No feature branches, PRs, merges, cherry-picks, resets, force-pushes or history rewrites.
+All work is committed directly to shared main when the integration status is UNLOCKED. No feature branches, PRs, merges, cherry-picks, resets, force-pushes or history rewrites.
 
 **Live assignments are defined only by `CONTROL/active_work_orders.md`.** Do not use historical queue tables or older assignment notes embedded elsewhere in the register to infer current ownership. A closed WO is not an active assignment even if an old paragraph still names its former owner. Explicit current lane assignments in the live register override the modulo rule for already-existing WOs.
 
@@ -31,7 +31,7 @@ Start at the next unused WO ID after 65217. Advance by 3 until the ID is absent 
 
 **Explicit user-directed transfer exception:** A direct user instruction may transfer an existing, unstarted READY WO to another slot when a lane is offline or exhausted. This is an exception to the default no-reassignment rule. Preserve WO IDs, technical scope, dependencies, evidence anchors, no-repeat boundaries and FIFO order. In one atomic `main` commit, update the WO report's assigned status, owner and sequencing language together with the live register's current/backlog entries. Retain the original modulo allocation as historical metadata; the updated live register determines the new lane. Do not transfer in-progress work unless the user explicitly names it and the handoff boundary is recorded. This makes concurrent WO creation use distinct IDs and report paths.
 
-One session per lane plus explicit lane ownership prevents duplicate task execution. The register's SHA protects concurrent writes to the shared queue; it is not a reason to introduce cross-worker waiting.
+One session per lane plus explicit lane ownership prevents duplicate task execution. The register's SHA protects concurrent writes to the shared queue. The integration lock is a short, explicit exception: it serializes publication only, not technical work or task assignment.
 
 ## Autonomous execution loop
 
@@ -145,6 +145,19 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 - Do not widen scope merely because a downstream physical meaning remains unresolved. Record the exact stop boundary and create a separate follow-on only when it has a concrete discriminator.
 
 ## Git and shared-register discipline
+
+### Temporary integration lock
+
+`CONTROL/INTEGRATION_STATUS.md` is the publication gate. Its state is either `UNLOCKED` or `LOCKED`.
+
+- Before any final commit or push, every worker must fetch/read the current `CONTROL/INTEGRATION_STATUS.md`. Do not rely on a cached copy from startup.
+- If the state is `LOCKED`, or the file is missing/unreadable, do not commit, push, or make any repository write. Continue read-only technical work if useful; keep completed report/register changes local and unpublished until the lock is released. Do not stage or create local commits while locked.
+- Only the named integrator may write to the repository while the state is `LOCKED`. Workers must not bypass, remove, or change the lock.
+- To acquire the lock, the integrator fetches current `main` and commits `LOCKED`, with owner, start time and purpose, to `CONTROL/INTEGRATION_STATUS.md`. If a concurrent push rejects that update, fetch again and retry against the new main; the lock is not active until the `LOCKED` commit is on remote `main`.
+- Once the lock commit is on remote `main`, workers pause publication. The integrator fetches the latest main, reconciles incoming work, verifies the result, and pushes the integrated state.
+- To release the lock, the integrator changes the status to `UNLOCKED`, records the integration commit and release time, and pushes that change. Workers resume only after the `UNLOCKED` state is visible on remote `main`.
+- If any integration push is rejected, keep the lock `LOCKED`; fetch, reconcile, and retry. Never force-push. Keep the lock brief and release it as soon as synchronization is verified.
+- A worker that discovers a lock during closeout may finish its technical reasoning, but must defer its report and queue writes until `UNLOCKED`; after release, refresh main and reapply only its own changes against current files.
 
 - Use main only. Do not create branches or PRs.
 - No separate claim commit. Do not make interim commits or routine status updates.
