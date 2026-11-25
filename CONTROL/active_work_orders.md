@@ -5,6 +5,18 @@
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
+## QUICK START — READ THIS FIRST
+
+Use this table to find your next task. Do not search the historical summaries below for assignment information. Open only your first READY WO and its named dependencies.
+
+| Worker | Current task | Next READY tasks |
+|---|---|---|
+| Worker 1 | None — lane exhausted | None |
+| Worker 2 — local executor | **WO66038** | WO66041 |
+| Worker 3 | **WO65913** | WO65916 → WO65919 → WO65922 |
+
+Rules: execute one WO at a time, in FIFO order. Worker 1 and Worker 3 may add fully specified, bounded tasks directly to Worker 2's FIFO. Worker 2 only executes its queue; it does not plan or create tasks. If your current cell is empty, stop. The WO file contains the task instructions. The detailed summaries below are historical context, not startup reading.
+
 ## Autonomous worker-lane protocol (effective 2026-11-22)
 
 The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTOCOL.md). The three lanes operate independently; no ChatGPT/coordinator assignment, first-pick gate, runtime approval or cross-worker wait is required.
