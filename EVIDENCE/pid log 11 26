@@ -1,0 +1,1007 @@
+```python
+import pandas as pd
+import numpy as np
+from io import StringIO
+
+for fname in ["trackLog-2026-Nov-25_17-33-30.csv", "trackLog-2026-Nov-25_17-33-47.csv"]:
+    print(f"================ {fname} ================")
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    print("Total raw lines:", len(raw))
+    for i in range(min(15, len(raw))):
+        print(f"  [{i}] {raw[i]}")
+    header = raw[0]
+    hdr_idxs = [i for i, l in enumerate(raw) if l == header]
+    print("Repeated header indices:", hdr_idxs)
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    print("Clean rows:", len(df), "| Columns:", list(df.columns))
+    for c in df.columns:
+        if c != "Device Time":
+            s = pd.to_numeric(df[c], errors="coerce")
+            print(f"  {c!r}: count={s.notna().sum()}, min={s.min()}, p25={np.nanpercentile(s,25):.2f}, median={s.median():.2f}, p75={np.nanpercentile(s,75):.2f}, max={s.max()}, mean={s.mean():.2f}, std={s.std():.2f}, unique={s.nunique()}")
+            print(f"    top: {s.value_counts().head(8).to_dict()}")
+    print("First 10 rows:")
+    print(df.head(10).to_string())
+    print("Last 10 rows:")
+    print(df.tail(10).to_string())
+    print()
+
+
+```
+
+```text
+================ trackLog-2026-Nov-25_17-33-30.csv ================
+Total raw lines: 429
+  [0] Device Time, accel pedal(g/s),engine coolant temperature (degrees Celsius ),Engine RPM (rpm),intake air temperature (degrees Celsius ),mass airflow sensor(g/s),throttle position (unk)
+  [1] 25-Nov-2026 17:33:48.239,-,-,-,-,-,-
+  [2] 25-Nov-2026 17:33:48.306,-,-,-,-,-,-
+  [3] 25-Nov-2026 17:33:49.238,-,-,-,-,-,-
+  [4] 25-Nov-2026 17:33:49.306,-,-,-,-,-,-
+  [5] 25-Nov-2026 17:33:50.238,-,-,-,-,-,-
+  [6] 25-Nov-2026 17:33:50.307,-,-,-,-,-,-
+  [7] 25-Nov-2026 17:33:51.238,-,-,-,-,-,-
+  [8] 25-Nov-2026 17:33:51.306,-,-,-,-,-,-
+  [9] 25-Nov-2026 17:33:52.238,-,32.0,-,37.0,-,-
+  [10] 25-Nov-2026 17:33:52.307,-,32.0,-,37.0,-,-
+  [11] 25-Nov-2026 17:33:53.239,0,32,1462.5,37,5.13000011,5.09803915
+  [12] 25-Nov-2026 17:33:53.307,0,32,1462.5,37,5.13000011,5.09803915
+  [13] 25-Nov-2026 17:33:54.239,0,32,1412.5,37,4.80999994,5.09803915
+  [14] 25-Nov-2026 17:33:54.308,0,32,1412.5,37,4.80999994,5.09803915
+Repeated header indices: [0]
+Clean rows: 428 | Columns: ['Device Time', 'accel pedal(g/s)', 'engine coolant temperature (degrees Celsius )', 'Engine RPM (rpm)', 'intake air temperature (degrees Celsius )', 'mass airflow sensor(g/s)', 'throttle position (unk)']
+  'accel pedal(g/s)': count=418, min=0.0, p25=0.00, median=0.00, p75=0.00, max=0.0, mean=0.00, std=0.00, unique=1
+    top: {0.0: 418}
+  'engine coolant temperature (degrees Celsius )': count=420, min=32.0, p25=41.00, median=46.00, p75=52.00, max=57.0, mean=45.71, std=6.86, unique=26
+    top: {53.0: 28, 42.0: 26, 48.0: 23, 49.0: 22, 47.0: 21, 55.0: 20, 56.0: 20, 54.0: 20}
+  'Engine RPM (rpm)': count=418, min=925.0, p25=987.50, median=1025.00, p75=1050.00, max=1462.5, mean=1056.31, std=121.70, unique=37
+    top: {1025.0: 63, 1012.5: 53, 1037.5: 48, 937.5: 34, 1000.0: 27, 975.0: 24, 1050.0: 23, 962.5: 22}
+  'intake air temperature (degrees Celsius )': count=420, min=36.0, p25=37.00, median=38.00, p75=39.00, max=39.0, mean=37.74, std=1.07, unique=4
+    top: {39.0: 134, 37.0: 114, 38.0: 107, 36.0: 65}
+  'mass airflow sensor(g/s)': count=418, min=2.76999998, p25=3.19, median=3.36, p75=3.56, max=5.65999985, mean=3.55, std=0.66, unique=96
+    top: {3.3599999: 18, 2.77999997: 16, 3.26999998: 14, 3.24000001: 13, 3.27999997: 13, 3.36999989: 12, 3.23000002: 12, 3.13000011: 10}
+  'throttle position (unk)': count=418, min=3.13725495, p25=3.53, median=3.53, p75=3.53, max=5.49019623, mean=3.69, std=0.59, unique=7
+    top: {3.52941179: 242, 3.13725495: 90, 5.09803915: 38, 4.70588255: 16, 4.31372547: 14, 3.92156863: 14, 5.49019623: 4}
+First 10 rows:
+                Device Time accel pedal(g/s) engine coolant temperature (degrees Celsius ) Engine RPM (rpm) intake air temperature (degrees Celsius ) mass airflow sensor(g/s) throttle position (unk)
+0  25-Nov-2026 17:33:48.239                -                                             -                -                                         -                        -                       -
+1  25-Nov-2026 17:33:48.306                -                                             -                -                                         -                        -                       -
+2  25-Nov-2026 17:33:49.238                -                                             -                -                                         -                        -                       -
+3  25-Nov-2026 17:33:49.306                -                                             -                -                                         -                        -                       -
+4  25-Nov-2026 17:33:50.238                -                                             -                -                                         -                        -                       -
+5  25-Nov-2026 17:33:50.307                -                                             -                -                                         -                        -                       -
+6  25-Nov-2026 17:33:51.238                -                                             -                -                                         -                        -                       -
+7  25-Nov-2026 17:33:51.306                -                                             -                -                                         -                        -                       -
+8  25-Nov-2026 17:33:52.238                -                                          32.0                -                                      37.0                        -                       -
+9  25-Nov-2026 17:33:52.307                -                                          32.0                -                                      37.0                        -                       -
+Last 10 rows:
+                  Device Time accel pedal(g/s) engine coolant temperature (degrees Celsius ) Engine RPM (rpm) intake air temperature (degrees Celsius ) mass airflow sensor(g/s) throttle position (unk)
+418  25-Nov-2026 17:37:17.238                0                                            56            937.5                                        39                2.8499999              3.13725495
+419  25-Nov-2026 17:37:17.308                0                                            56            937.5                                        39                2.8499999              3.13725495
+420  25-Nov-2026 17:37:18.238                0                                            56              925                                        39               3.13000011              3.13725495
+421  25-Nov-2026 17:37:18.307                0                                            56            937.5                                        39               3.13000011              3.13725495
+422  25-Nov-2026 17:37:19.238                0                                            56            937.5                                        39               3.16000009              3.13725495
+423  25-Nov-2026 17:37:19.307                0                                            56            937.5                                        39               3.16000009              3.13725495
+424  25-Nov-2026 17:37:20.239                0                                            57            937.5                                        39               3.02999997              3.13725495
+425  25-Nov-2026 17:37:20.306                0                                            57            937.5                                        39               3.02999997              3.13725495
+426  25-Nov-2026 17:37:21.238                0                                            57            937.5                                        39               2.98000002              3.13725495
+427  25-Nov-2026 17:37:21.308                0                                            57              925                                        39               3.03999996              3.13725495
+
+================ trackLog-2026-Nov-25_17-33-47.csv ================
+Total raw lines: 805
+  [0] Device Time, accel pedal(g/s),engine coolant temperature (degrees Celsius ),Engine RPM (rpm),intake air temperature (degrees Celsius ),mass airflow sensor(g/s),throttle position (unk)
+  [1] 25-Nov-2026 17:37:22.314,0,57,950,39,3.13000011,3.13725495
+  [2] 25-Nov-2026 17:37:22.515,0,57,950,39,3.13000011,3.13725495
+  [3] 25-Nov-2026 17:37:23.307,0,57,950,39,3.22000003,3.13725495
+  [4] 25-Nov-2026 17:37:23.514,0,57,912.5,39,3.1099999,2.74509811
+  [5] 25-Nov-2026 17:37:24.309,0,57,925,39,2.92000008,2.74509811
+  [6] 25-Nov-2026 17:37:24.516,0,57,925,39,2.92000008,2.74509811
+  [7] 25-Nov-2026 17:37:25.308,0,57,912.5,39,2.99000001,3.13725495
+  [8] 25-Nov-2026 17:37:25.515,0,57,925,39,3.02999997,3.13725495
+  [9] 25-Nov-2026 17:37:26.308,0,57,937.5,39,2.8900001,3.13725495
+  [10] 25-Nov-2026 17:37:26.519,0,57,937.5,39,2.8900001,3.13725495
+  [11] 25-Nov-2026 17:37:27.308,5.09803915,57,1050,39,5.65999985,5.09803915
+  [12] 25-Nov-2026 17:37:27.515,5.09803915,57,1050,39,5.65999985,5.09803915
+  [13] 25-Nov-2026 17:37:28.308,5.09803915,57,1087.5,39,5.26999998,5.09803915
+  [14] 25-Nov-2026 17:37:28.515,0,57,650,39,3.66000009,3.52941179
+Repeated header indices: [0]
+Clean rows: 804 | Columns: ['Device Time', 'accel pedal(g/s)', 'engine coolant temperature (degrees Celsius )', 'Engine RPM (rpm)', 'intake air temperature (degrees Celsius )', 'mass airflow sensor(g/s)', 'throttle position (unk)']
+  'accel pedal(g/s)': count=804, min=0.0, p25=0.00, median=0.39, p75=10.20, max=92.15686035, mean=5.61, std=8.76, unique=53
+    top: {0.0: 399, 9.4117651: 32, 10.1960783: 27, 8.23529434: 19, 10.98039246: 18, 11.37254906: 17, 12.15686321: 17, 0.39215687: 16}
+  'engine coolant temperature (degrees Celsius )': count=804, min=57, p25=68.00, median=79.00, p75=84.00, max=87, mean=75.80, std=9.75, unique=31
+    top: {84: 134, 86: 83, 85: 79, 60: 29, 72: 27, 78: 26, 58: 26, 71: 26}
+  'Engine RPM (rpm)': count=804, min=0.0, p25=1037.50, median=1387.50, p75=1650.00, max=3237.5, mean=1335.95, std=439.15, unique=115
+    top: {0.0: 20, 1387.5: 20, 937.5: 17, 1475.0: 17, 1037.5: 16, 1687.5: 16, 1675.0: 16, 975.0: 14}
+  'intake air temperature (degrees Celsius )': count=804, min=33, p25=33.00, median=35.00, p75=37.00, max=40, mean=35.38, std=2.24, unique=8
+    top: {33: 209, 34: 180, 37: 119, 35: 79, 36: 77, 40: 62, 39: 46, 38: 32}
+  'mass airflow sensor(g/s)': count=804, min=0.92000002, p25=3.27, median=4.35, p75=7.22, max=32.04999924, mean=5.65, std=3.67, unique=332
+    top: {0.92000002: 16, 3.38000011: 10, 2.75: 10, 3.25: 8, 4.0999999: 8, 3.17000008: 7, 3.08999991: 7, 3.27999997: 7}
+  'throttle position (unk)': count=804, min=0.0, p25=3.14, median=4.31, p75=6.67, max=69.01960754, mean=5.60, std=4.85, unique=37
+    top: {3.13725495: 151, 3.52941179: 76, 2.74509811: 70, 4.31372547: 55, 6.27450991: 48, 3.92156863: 46, 6.66666651: 41, 5.09803915: 36}
+First 10 rows:
+                Device Time  accel pedal(g/s)  engine coolant temperature (degrees Celsius )  Engine RPM (rpm)  intake air temperature (degrees Celsius )  mass airflow sensor(g/s)  throttle position (unk)
+0  25-Nov-2026 17:37:22.314               0.0                                             57             950.0                                         39                      3.13                 3.137255
+1  25-Nov-2026 17:37:22.515               0.0                                             57             950.0                                         39                      3.13                 3.137255
+2  25-Nov-2026 17:37:23.307               0.0                                             57             950.0                                         39                      3.22                 3.137255
+3  25-Nov-2026 17:37:23.514               0.0                                             57             912.5                                         39                      3.11                 2.745098
+4  25-Nov-2026 17:37:24.309               0.0                                             57             925.0                                         39                      2.92                 2.745098
+5  25-Nov-2026 17:37:24.516               0.0                                             57             925.0                                         39                      2.92                 2.745098
+6  25-Nov-2026 17:37:25.308               0.0                                             57             912.5                                         39                      2.99                 3.137255
+7  25-Nov-2026 17:37:25.515               0.0                                             57             925.0                                         39                      3.03                 3.137255
+8  25-Nov-2026 17:37:26.308               0.0                                             57             937.5                                         39                      2.89                 3.137255
+9  25-Nov-2026 17:37:26.519               0.0                                             57             937.5                                         39                      2.89                 3.137255
+Last 10 rows:
+                  Device Time  accel pedal(g/s)  engine coolant temperature (degrees Celsius )  Engine RPM (rpm)  intake air temperature (degrees Celsius )  mass airflow sensor(g/s)  throttle position (unk)
+794  25-Nov-2026 17:43:59.307               0.0                                             85               0.0                                         37                      0.92                  6.27451
+795  25-Nov-2026 17:43:59.514               0.0                                             85               0.0                                         37                      0.92                  6.27451
+796  25-Nov-2026 17:44:00.308               0.0                                             85               0.0                                         37                      0.92                  6.27451
+797  25-Nov-2026 17:44:00.515               0.0                                             85               0.0                                         37                      0.92                  6.27451
+798  25-Nov-2026 17:44:01.307               0.0                                             85               0.0                                         37                      0.92                  6.27451
+799  25-Nov-2026 17:44:01.515               0.0                                             85               0.0                                         37                      0.92                  6.27451
+800  25-Nov-2026 17:44:02.307               0.0                                             85               0.0                                         37                      0.92                  6.27451
+801  25-Nov-2026 17:44:02.515               0.0                                             85               0.0                                         37                      0.92                  6.27451
+802  25-Nov-2026 17:44:03.307               0.0                                             85               0.0                                         37                      0.92                  6.27451
+803  25-Nov-2026 17:44:03.516               0.0                                             85               0.0                                         37                      0.92                  6.27451
+
+
+
+```
+
+```python
+import pandas as pd
+import numpy as np
+from io import StringIO
+
+def load_log(fname):
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    header = raw[0]
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    ren = {
+        "accel pedal(g/s)": "app",
+        "engine coolant temperature (degrees Celsius )": "ect",
+        "Engine RPM (rpm)": "rpm",
+        "intake air temperature (degrees Celsius )": "iat",
+        "mass airflow sensor(g/s)": "maf",
+        "throttle position (unk)": "tps",
+    }
+    df = df.rename(columns=ren)
+    for c in ["app", "ect", "rpm", "iat", "maf", "tps"]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df["dt"] = pd.to_datetime(df["Device Time"], format="%d-%b-%Y %H:%M:%S.%f")
+    return df
+
+df1 = load_log("trackLog-2026-Nov-25_17-33-30.csv")
+df2 = load_log("trackLog-2026-Nov-25_17-33-47.csv")
+
+# Check sample intervals and duplicate timestamps
+for name, d in [("Warmup (17-33-30)", df1), ("Blip/Decel (17-33-47)", df2)]:
+    t0 = d["dt"].iloc[0]
+    d["t"] = (d["dt"] - t0).dt.total_seconds()
+    dt_diffs = d["dt"].diff().dt.total_seconds().dropna()
+    print(f"=== {name} ===")
+    print(f"Time: {d['dt'].iloc[0]} -> {d['dt'].iloc[-1]} (span={d['t'].iloc[-1]:.2f}s), dt min={dt_diffs.min():.3f}s, median={dt_diffs.median():.3f}s, max={dt_diffs.max():.3f}s")
+    valid = d.dropna(subset=["rpm", "ect", "iat", "app", "tps", "maf"])
+    print(f"Valid (non-'-') rows: {len(valid)} / {len(d)} (first valid t={valid['t'].iloc[0]:.2f}s, last valid t={valid['t'].iloc[-1]:.2f}s)")
+    # Check RPM step sizes
+    rpm_vals = np.sort(valid["rpm"].unique())
+    rpm_steps = np.diff(rpm_vals)
+    print(f"RPM unique count={len(rpm_vals)}, min={rpm_vals.min()}, max={rpm_vals.max()}, common diffs={pd.Series(np.round(rpm_steps, 4)).value_counts().head(5).to_dict()}")
+    # Check TPS unique step sizes
+    tps_vals = np.sort(valid["tps"].unique())
+    tps_steps = np.diff(tps_vals)
+    print(f"TPS unique count={len(tps_vals)}, min={tps_vals.min():.4f}, max={tps_vals.max():.4f}, common diffs={pd.Series(np.round(tps_steps, 6)).value_counts().head(5).to_dict()}")
+    # Check APP unique step sizes
+    app_vals = np.sort(valid["app"].unique())
+    app_steps = np.diff(app_vals)
+    print(f"APP unique count={len(app_vals)}, min={app_vals.min():.4f}, max={app_vals.max():.4f}, common diffs={pd.Series(np.round(app_steps, 6)).value_counts().head(5).to_dict()}")
+
+# Detailed check of warm-up log (df1): ECT vs idle RPM
+v1 = df1.dropna(subset=["rpm", "ect"]).copy()
+print("\n=== Warmup log ECT vs RPM ===")
+for ect_val, grp in v1.groupby("ect"):
+    print(f"  ECT={ect_val:4.1f}°C: n={len(grp):3d}, t={grp['t'].iloc[0]:5.1f}..{grp['t'].iloc[-1]:5.1f}s, RPM min={grp['rpm'].min():6.1f}, med={grp['rpm'].median():6.1f}, max={grp['rpm'].max():6.1f}, TPS=[{grp['tps'].min():.2f}..{grp['tps'].max():.2f}%], MAF=[{grp['maf'].min():.2f}..{grp['maf'].max():.2f}]")
+
+# Detailed check of blip/decel log (df2): peaks, decel fuel-cut / idle return, and end-of-log engine-off
+v2 = df2.dropna(subset=["rpm", "ect"]).copy()
+print("\n=== Blip/Decel log phases & peaks ===")
+peaks = v2.nlargest(12, "rpm")[["t", "rpm", "ect", "iat", "app", "tps", "maf"]]
+print("Top 12 RPM rows:")
+print(peaks.round(2).to_string())
+
+# Find zero-pedal decel windows where RPM > 1100 and app == 0
+decel = v2[(v2["app"] == 0) & (v2["rpm"] >= 1100)]
+print(f"\nZero-pedal (app==0) rows with RPM >= 1100: {len(decel)}")
+if len(decel) > 0:
+    print(decel[["t", "rpm", "ect", "app", "tps", "maf"]].head(25).round(2).to_string())
+
+# Check when RPM drops to 0 at end of df2
+zero_rpm = v2[v2["rpm"] == 0]
+print(f"\nRPM == 0 rows: count={len(zero_rpm)}, t={zero_rpm['t'].min():.2f}s..{zero_rpm['t'].max():.2f}s")
+idx_first_zero = zero_rpm.index[0]
+print("Around first RPM == 0:")
+print(v2.loc[max(0, idx_first_zero-6):min(len(v2)-1, idx_first_zero+4), ["t", "rpm", "ect", "app", "tps", "maf"]].round(2).to_string())
+
+
+```
+
+```text
+=== Warmup (17-33-30) ===
+Time: 2026-11-25 17:33:48.239000 -> 2026-11-25 17:37:21.308000 (span=213.07s), dt min=0.061s, median=0.075s, max=0.939s
+Valid (non-'-') rows: 418 / 428 (first valid t=5.00s, last valid t=213.07s)
+RPM unique count=37, min=925.0, max=1462.5, common diffs={12.5: 30, 25.0: 5, 37.5: 1}
+TPS unique count=7, min=3.1373, max=5.4902, common diffs={0.392157: 6}
+APP unique count=1, min=0.0000, max=0.0000, common diffs={}
+=== Blip/Decel (17-33-47) ===
+Time: 2026-11-25 17:37:22.314000 -> 2026-11-25 17:44:03.516000 (span=401.20s), dt min=0.201s, median=0.216s, max=0.797s
+Valid (non-'-') rows: 804 / 804 (first valid t=0.00s, last valid t=401.20s)
+RPM unique count=115, min=0.0, max=3237.5, common diffs={12.5: 99, 25.0: 4, 50.0: 3, 137.5: 2, 512.5: 1}
+TPS unique count=37, min=0.0000, max=69.0196, common diffs={0.392157: 25, 0.784314: 2, 1.960784: 1, 0.392158: 1, 0.784313: 1}
+APP unique count=53, min=0.0000, max=92.1569, common diffs={0.392157: 36, 0.392158: 6, 0.784314: 2, 1.960784: 1, 1.568628: 1}
+
+=== Warmup log ECT vs RPM ===
+  ECT=32.0°C: n=  4, t=  5.0..  6.1s, RPM min=1412.5, med=1437.5, max=1462.5, TPS=[5.10..5.10%], MAF=[4.81..5.13]
+  ECT=33.0°C: n= 16, t=  7.0.. 14.1s, RPM min=1387.5, med=1400.0, max=1425.0, TPS=[5.10..5.49%], MAF=[5.00..5.66]
+  ECT=34.0°C: n= 10, t= 15.0.. 19.1s, RPM min=1350.0, med=1387.5, max=1387.5, TPS=[5.10..5.10%], MAF=[4.84..5.32]
+  ECT=35.0°C: n= 12, t= 20.0.. 25.1s, RPM min=1275.0, med=1306.2, max=1325.0, TPS=[5.10..5.10%], MAF=[4.48..5.45]
+  ECT=36.0°C: n= 12, t= 26.0.. 31.1s, RPM min=1200.0, med=1218.8, max=1275.0, TPS=[4.71..4.71%], MAF=[4.38..4.96]
+  ECT=37.0°C: n=  8, t= 32.0.. 35.1s, RPM min=1125.0, med=1168.8, max=1187.5, TPS=[4.31..4.71%], MAF=[4.31..4.56]
+  ECT=38.0°C: n= 10, t= 36.0.. 40.1s, RPM min=1100.0, med=1125.0, max=1162.5, TPS=[4.31..4.31%], MAF=[3.99..4.48]
+  ECT=39.0°C: n= 14, t= 41.0.. 47.1s, RPM min=1062.5, med=1087.5, max=1125.0, TPS=[3.92..3.92%], MAF=[3.51..3.97]
+  ECT=40.0°C: n= 13, t= 48.0.. 54.0s, RPM min=1012.5, med=1062.5, max=1075.0, TPS=[3.53..3.53%], MAF=[3.41..3.68]
+  ECT=41.0°C: n= 15, t= 54.1.. 61.1s, RPM min=1012.5, med=1025.0, max=1037.5, TPS=[3.53..3.53%], MAF=[3.21..3.56]
+  ECT=42.0°C: n= 26, t= 62.0.. 74.1s, RPM min=1000.0, med=1025.0, max=1050.0, TPS=[3.53..3.53%], MAF=[3.18..3.86]
+  ECT=43.0°C: n= 18, t= 75.0.. 83.1s, RPM min=1012.5, med=1037.5, max=1050.0, TPS=[3.53..3.53%], MAF=[3.19..3.57]
+  ECT=44.0°C: n= 16, t= 84.0.. 91.1s, RPM min=1012.5, med=1037.5, max=1050.0, TPS=[3.53..3.53%], MAF=[3.15..3.74]
+  ECT=45.0°C: n= 18, t= 92.0..100.1s, RPM min= 987.5, med=1037.5, max=1050.0, TPS=[3.53..3.53%], MAF=[3.10..3.71]
+  ECT=46.0°C: n= 20, t=101.0..110.1s, RPM min= 987.5, med=1025.0, max=1050.0, TPS=[3.53..3.53%], MAF=[3.13..3.57]
+  ECT=47.0°C: n= 21, t=111.0..121.0s, RPM min=1012.5, med=1025.0, max=1037.5, TPS=[3.53..3.53%], MAF=[3.32..3.55]
+  ECT=48.0°C: n= 23, t=121.1..132.1s, RPM min=1012.5, med=1025.0, max=1050.0, TPS=[3.53..3.53%], MAF=[3.24..3.47]
+  ECT=49.0°C: n= 22, t=133.0..143.1s, RPM min=1000.0, med=1000.0, max=1025.0, TPS=[3.53..3.53%], MAF=[3.26..3.49]
+  ECT=50.0°C: n= 18, t=144.0..152.1s, RPM min=1012.5, med=1012.5, max=1012.5, TPS=[3.53..3.53%], MAF=[3.07..3.36]
+  ECT=51.0°C: n= 11, t=153.0..158.0s, RPM min=1000.0, med=1012.5, max=1025.0, TPS=[3.53..3.53%], MAF=[3.21..3.41]
+  ECT=52.0°C: n= 19, t=158.1..167.1s, RPM min= 975.0, med= 975.0, max=1000.0, TPS=[3.14..3.53%], MAF=[2.89..3.30]
+  ECT=53.0°C: n= 28, t=168.0..181.1s, RPM min= 950.0, med= 962.5, max=1000.0, TPS=[3.14..3.53%], MAF=[2.78..3.30]
+  ECT=54.0°C: n= 20, t=182.0..191.1s, RPM min= 950.0, med= 968.8, max= 975.0, TPS=[3.14..3.14%], MAF=[2.85..3.23]
+  ECT=55.0°C: n= 20, t=192.0..201.1s, RPM min= 925.0, med= 937.5, max= 975.0, TPS=[3.14..3.14%], MAF=[2.84..3.29]
+  ECT=56.0°C: n= 20, t=202.0..211.1s, RPM min= 925.0, med= 937.5, max= 962.5, TPS=[3.14..3.14%], MAF=[2.77..3.16]
+  ECT=57.0°C: n=  4, t=212.0..213.1s, RPM min= 925.0, med= 937.5, max= 937.5, TPS=[3.14..3.14%], MAF=[2.98..3.04]
+
+=== Blip/Decel log phases & peaks ===
+Top 12 RPM rows:
+          t     rpm  ect  iat    app    tps    maf
+732  365.99  3237.5   84   34   0.00  44.31  17.73
+733  366.20  3237.5   84   34   0.00  44.31  17.73
+752  376.00  3187.5   84   34   0.00   5.10   5.94
+753  376.20  3187.5   84   34   0.00   5.10   5.94
+754  376.99  3187.5   84   34   0.00   5.10   5.94
+755  377.20  3075.0   84   34   0.00   5.10   5.94
+751  375.20  3025.0   84   34  92.16  69.02  32.05
+659  329.20  2400.0   87   33   0.00   5.10   5.99
+658  328.99  2350.0   87   33   0.00   5.10   5.99
+750  374.99  2287.5   84   34  92.16  69.02  32.05
+660  329.99  2275.0   87   33   0.00   3.92   4.06
+661  330.20  2275.0   87   33   0.39   3.92   4.06
+
+Zero-pedal (app==0) rows with RPM >= 1100: 186
+         t     rpm  ect  app   tps   maf
+24   11.99  1300.0   58  0.0  3.53  3.84
+25   12.20  1312.5   58  0.0  3.53  3.84
+26   13.00  1312.5   58  0.0  3.14  3.55
+36   17.99  1125.0   58  0.0  3.53  3.48
+37   18.20  1125.0   58  0.0  3.53  3.48
+41   20.20  1212.5   58  0.0  3.92  4.22
+50   24.99  1162.5   59  0.0  3.53  3.04
+51   25.20  1162.5   59  0.0  3.53  3.04
+79   39.20  1200.0   60  0.0  3.53  3.91
+80   39.99  1325.0   60  0.0  3.53  3.31
+81   40.20  1325.0   60  0.0  3.53  3.31
+92   45.99  1375.0   60  0.0  5.10  6.80
+100  49.99  1925.0   61  0.0  9.02  9.53
+101  50.20  1925.0   61  0.0  9.02  9.53
+112  56.00  1650.0   62  0.0  4.71  4.53
+113  56.20  1650.0   62  0.0  4.71  4.53
+124  62.00  1587.5   63  0.0  4.31  5.27
+125  62.20  1637.5   63  0.0  4.31  5.27
+126  63.00  1637.5   63  0.0  4.31  4.92
+127  63.20  1637.5   63  0.0  4.31  4.92
+128  63.99  1112.5   63  0.0  3.14  2.69
+129  64.20  1112.5   63  0.0  3.14  2.69
+142  70.99  1600.0   64  0.0  3.92  4.00
+143  71.20  1600.0   64  0.0  3.92  4.00
+158  78.99  1512.5   65  0.0  3.92  3.73
+
+RPM == 0 rows: count=20, t=391.99s..401.20s
+Around first RPM == 0:
+          t    rpm  ect  app   tps   maf
+778  388.99  737.5   84  0.0  1.96  1.91
+779  389.20  737.5   84  0.0  1.96  1.91
+780  389.99  687.5   84  0.0  1.96  1.91
+781  390.20  687.5   84  0.0  2.35  1.95
+782  390.99  137.5   85  0.0  3.14  1.49
+783  391.20  137.5   85  0.0  3.14  1.49
+784  391.99    0.0   85  0.0  3.14  1.49
+785  392.20    0.0   85  0.0  3.14  1.49
+786  392.99    0.0   85  0.0  0.00  1.02
+787  393.20    0.0   85  0.0  0.00  1.02
+788  393.99    0.0   85  0.0  6.27  0.92
+
+
+```
+
+```python
+import pandas as pd
+import numpy as np
+from io import StringIO
+
+def load_log(fname):
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    header = raw[0]
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    df = df.rename(columns={
+        "accel pedal(g/s)": "app",
+        "engine coolant temperature (degrees Celsius )": "ect",
+        "Engine RPM (rpm)": "rpm",
+        "intake air temperature (degrees Celsius )": "iat",
+        "mass airflow sensor(g/s)": "maf",
+        "throttle position (unk)": "tps",
+    })
+    for c in ["app", "ect", "rpm", "iat", "maf", "tps"]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df["dt"] = pd.to_datetime(df["Device Time"], format="%d-%b-%Y %H:%M:%S.%f")
+    return df
+
+df1 = load_log("trackLog-2026-Nov-25_17-33-30.csv")
+df2 = load_log("trackLog-2026-Nov-25_17-33-47.csv")
+
+# Inspect consecutive pair timing in both files
+for label, d in [("17-33-30", df1), ("17-33-47", df2)]:
+    diffs = d["dt"].diff().dt.total_seconds()
+    print(f"{label}: diff < 0.3s count = {(diffs < 0.3).sum()} / {len(diffs)-1}, diff >= 0.7s count = {(diffs >= 0.7).sum()}")
+    print("  First 12 dt diffs:", diffs.iloc[1:13].round(3).tolist())
+
+# Inspect the big throttle blip around t=365..378s in df2
+t0_2 = df2["dt"].iloc[0]
+df2["t"] = (df2["dt"] - t0_2).dt.total_seconds()
+sub_blip = df2[(df2["t"] >= 364.0) & (df2["t"] <= 380.0)]
+print("\n=== Blip window t=364..380s in 17-33-47 ===")
+print(sub_blip[["t", "rpm", "ect", "app", "tps", "maf"]].round(2).to_string())
+
+# Also inspect earlier blips in df2 (e.g. t=45..58s and t=325..335s)
+print("\n=== Window t=45..58s in 17-33-47 ===")
+print(df2[(df2["t"] >= 45.0) & (df2["t"] <= 58.0)][["t", "rpm", "ect", "app", "tps", "maf"]].round(2).to_string())
+
+print("\n=== Window t=325..335s in 17-33-47 ===")
+print(df2[(df2["t"] >= 325.0) & (df2["t"] <= 335.0)][["t", "rpm", "ect", "app", "tps", "maf"]].round(2).to_string())
+
+
+```
+
+```text
+17-33-30: diff < 0.3s count = 214 / 427, diff >= 0.7s count = 213
+  First 12 dt diffs: [0.067, 0.932, 0.068, 0.932, 0.069, 0.931, 0.068, 0.932, 0.069, 0.932, 0.068, 0.932]
+17-33-47: diff < 0.3s count = 402 / 803, diff >= 0.7s count = 401
+  First 12 dt diffs: [0.201, 0.792, 0.207, 0.795, 0.207, 0.792, 0.207, 0.793, 0.211, 0.789, 0.207, 0.793]
+
+=== Blip window t=364..380s in 17-33-47 ===
+          t     rpm  ect    app    tps    maf
+729  364.20   825.0   84   0.00   3.53   3.57
+730  364.99  1387.5   84  80.78  33.33  27.54
+731  365.20  1387.5   84  80.78  33.33  27.54
+732  365.99  3237.5   84   0.00  44.31  17.73
+733  366.20  3237.5   84   0.00  44.31  17.73
+734  367.00  1712.5   84   0.00   2.75   3.18
+735  367.20  1525.0   84   0.00   2.75   2.75
+736  368.00  1450.0   84   0.00   2.75   2.75
+737  368.20  1450.0   84   0.00   2.75   3.22
+738  368.99  1025.0   84   3.14   3.14   3.25
+739  369.20  1025.0   84   3.14   3.14   3.25
+740  370.00  1062.5   84   3.14   3.14   3.25
+741  370.20  1062.5   84   3.14   3.14   3.28
+742  370.99  1187.5   84   5.88   4.71   4.72
+743  371.20  1187.5   84   5.88   4.71   4.72
+744  371.99  1187.5   84   5.88   4.71   4.69
+745  372.20  1300.0   84   6.27   4.71   4.82
+746  373.00  1312.5   84   6.67   4.71   5.05
+747  373.20  1312.5   84   6.67   4.71   5.05
+748  373.99  1450.0   84  17.65   3.14   3.17
+749  374.20  1462.5   84  81.57   7.45   8.74
+750  374.99  2287.5   84  92.16  69.02  32.05
+751  375.20  3025.0   84  92.16  69.02  32.05
+752  376.00  3187.5   84   0.00   5.10   5.94
+753  376.20  3187.5   84   0.00   5.10   5.94
+754  376.99  3187.5   84   0.00   5.10   5.94
+755  377.20  3075.0   84   0.00   5.10   5.94
+756  377.99  1187.5   84   0.00   2.75   3.02
+757  378.20  1112.5   84   0.00   2.75   2.94
+758  378.99  1037.5   84   0.00   2.75   2.80
+759  379.20  1012.5   84   0.00   2.75   2.80
+760  380.00   950.0   84   0.00   2.75   2.99
+
+=== Window t=45..58s in 17-33-47 ===
+         t     rpm  ect    app   tps    maf
+91   45.20  1075.0   60   0.00  5.10   6.80
+92   45.99  1375.0   60   0.00  5.10   6.80
+93   46.20  1125.0   61  12.16  8.63   9.14
+94   46.99  1150.0   61  11.76  8.63   9.14
+95   47.20  1150.0   61  11.76  8.63  10.09
+96   47.99  1287.5   61   9.41  8.63  10.09
+97   48.20  1287.5   61   9.41  6.67   7.06
+98   49.00  1637.5   61  13.33  9.02  10.06
+99   49.20  1637.5   61  13.33  9.02  10.06
+100  49.99  1925.0   61   0.00  9.02   9.53
+101  50.20  1925.0   61   0.00  9.02   9.53
+102  50.99  1062.5   61  13.33  7.06   8.81
+103  51.20  1062.5   61  13.33  7.06   8.81
+104  51.99  1062.5   61  13.33  7.06   7.42
+105  52.20  1287.5   61  14.51  9.80   9.96
+106  52.99  1337.5   61  14.51  9.80   9.89
+107  53.20  1337.5   61  14.51  9.80   9.89
+108  54.00  1500.0   62  12.16  7.84   8.78
+109  54.20  1500.0   62  12.16  7.84   8.78
+110  55.00  1500.0   62  12.16  7.84   8.42
+111  55.20  1612.5   62  12.16  7.84   8.42
+112  56.00  1650.0   62   0.00  4.71   4.53
+113  56.20  1650.0   62   0.00  4.71   4.53
+114  57.00  1587.5   62   6.27  4.71   4.15
+115  57.20  1587.5   62   6.27  4.71   4.15
+116  57.99  1600.0   62   6.27  4.71   4.15
+
+=== Window t=325..335s in 17-33-47 ===
+          t     rpm  ect    app   tps    maf
+651  325.20   862.5   87   0.00  2.75   2.39
+652  326.00   962.5   87   0.00  2.75   2.64
+653  326.20   962.5   87   0.00  2.75   2.52
+654  327.00   925.0   87   0.00  2.75   2.52
+655  327.20   925.0   87   0.00  2.75   2.52
+656  327.99   750.0   87   0.00  3.14   2.62
+657  328.20   750.0   87   0.00  3.14   2.62
+658  328.99  2350.0   87   0.00  5.10   5.99
+659  329.20  2400.0   87   0.00  5.10   5.99
+660  329.99  2275.0   87   0.00  3.92   4.06
+661  330.20  2275.0   87   0.39  3.92   4.06
+662  330.99  1812.5   87   0.39  3.53   3.61
+663  331.20  1400.0   87   9.41  5.88   5.29
+664  332.00  1400.0   87   9.41  5.88   5.74
+665  332.20  1500.0   87   9.41  5.88   5.74
+666  332.99  1775.0   86  13.73  9.02   9.78
+667  333.20  1775.0   86  13.73  9.02   9.78
+668  333.99  1825.0   86   0.00  9.02  10.10
+669  334.20  2137.5   86   0.00  9.02  10.10
+670  334.99  1250.0   86  16.08  8.63   9.62
+
+
+```
+
+Both new logs (`trackLog-2026-Nov-25_17-33-30.csv` and `trackLog-2026-Nov-25_17-33-47.csv`) captured **fine-resolution physical sensor data** (`12.5` RPM steps on RPM, `0.392%` steps on pedal/throttle, `0.01` g/s steps on MAF, and `1°C` steps on ECT/IAT), giving you a much clearer view of warm-up idle (`32°C -> 57°C`), throttle blips/decels up to `3,237.5` RPM (`57°C -> 87°C`), and engine shutoff (`RPM = 0`).
+
+### 1. Log 1: Warm-Up Idle (`trackLog-2026-Nov-25_17-33-30.csv`)
+
+* **Duration & Cadence:** `25-Nov-2026 17:33:48.239` to `17:37:21.308` (`213.07s`, `428` data rows after `1` header; `418` rows with full values after initial `-` dashes for the first ~5 seconds). Timestamps alternate on a `~0.07s` / `~0.93s` two-step cadence (~`1 Hz` effective update cycle).
+* **Thermal & Idle RPM Progression (`APP = 0.0%` throughout):**
+* At `ECT = 32.0°C` (`t = 5.0–6.1s`), RPM starts around `1,412.5–1,462.5` RPM (`TPS ≈ 5.10%`, `MAF ≈ 4.81–5.13` g/s).
+* As coolant warms through `33°C -> 40°C` (`t = 7.0–54.0s`), idle RPM steps down smoothly from `~1,400` RPM to `~1,062.5` RPM (`TPS` steps from `5.49%` down to `3.53%`).
+* Across `ECT = 41°C -> 51°C` (`t = 54.1–158.0s`), RPM sits on a warm-up plateau around `1,000–1,050` RPM (`TPS = 3.53%`, `MAF ≈ 3.07–3.86` g/s).
+* From `ECT = 52°C -> 57°C` (`t = 158.1–213.1s`), RPM steps down further to `925.0–975.0` RPM (`TPS = 3.14%`, `MAF ≈ 2.77–3.30` g/s), while `IAT` stays in a tight `36–39°C` band.
+
+
+
+### 2. Log 2: Throttle Blips, Decels & Shutoff (`trackLog-2026-Nov-25_17-33-47.csv`)
+
+* **Duration & Cadence:** `25-Nov-2026 17:37:22.314` to `17:44:03.516` (`401.20s`, `804` valid rows, `0` repeated headers), logging at ~`0.20s` / `0.80s` intervals.
+* **Operating Range:**
+* **Coolant (`ECT`):** Rises from `57°C` at the start to `87°C` max, settling around `84–85°C` near the end (`IAT` stays between `33°C` and `40°C`).
+* **RPM & Load:** Spans `0.0` to `3,237.5` RPM (mean `1,335.95` RPM), with accelerator pedal (`APP`) reaching `92.16%`, throttle (`TPS`) reaching `69.02%`, and `MAF` reaching `32.05` g/s.
+
+
+* **Key Dynamic Events to Inspect:**
+* **Large Late Blip & Decel (`t ≈ 364.2–380.0s`, `ECT = 84°C`):** RPM jumps from `825.0` to `1,387.5` (`APP = 80.78%`, `TPS = 33.33%`, `MAF = 27.54` g/s), spikes to `3,237.5` RPM at `t ≈ 366.0s` as pedal returns to `0.0%`, drops to `1,712.5` by `t = 367.0s` (`TPS = 2.75%`, `MAF ≈ 2.75–3.22` g/s), has a second push up to `3,025.0–3,187.5` RPM (`t ≈ 375.2–377.0s`, `APP = 92.16%` -> `0.0%`), and then decays cleanly (`1,187.5 -> 1,112.5 -> 1,037.5 -> 1,012.5 -> 950.0` RPM by `t = 380.0s`) with `APP = 0.0%` and `TPS = 2.75%`.
+* **Engine Shutoff (`t ≈ 390.2–392.0s`, `ECT = 84–85°C`):** RPM falls from `687.5` (`t = 390.2s`) to `137.5` (`t = 391.0–391.2s`) and hits `0.0` at `t = 392.0s` (`MAF` drops from `1.95` -> `1.49` -> `1.02` -> `0.92` g/s).
+* **Timestamp / Sampling Lag Notice:** In both files, pairs of samples appear `~0.07s` or `~0.21s` apart followed by a `~0.79s–0.93s` gap, and in a few transient blip rows (`t = 366.0s` and `t = 376.0s`), `APP` already reads `0.0%` while `TPS` (`44.31%` or `5.10%`) and `RPM` (`3,237.5` or `3,187.5`) still reflect the prior state—typical of asynchronous OBD-II/Bluetooth polling across multiple PIDs.
+
+
+
+### 3. How These Two Logs Advance `EL19A` (`f501.bin`) Work
+
+1. **Tight Idle & Warm-Up RPM Reference (`925–1,462.5` RPM across `32–57°C`, then `~687.5–950` RPM at `84–87°C`):** Because RPM now has `12.5` RPM steps instead of `64` RPM steps, you can compare exact idle RPM values and warm-up decay rates against RPM breakpoint tables (`0x00FC10` `[400..1850]`, `0x00FC30` `[400..1850]`, and the `0x00C1xx` family) and coolant-indexed warm-up curves.
+2. **Zero-Pedal Decel & Throttle-Settle Traces:** The `t = 366–380s` and `t = 376–380s` lift-off windows give concrete `APP = 0%` / `TPS ≈ 2.75%` RPM-decay trajectories (`3,187.5 -> 1,187.5 -> 950.0` RPM in ~`2–3s`) for cross-checking throttle-closing/idle-return behavior once you map the corresponding routines in `f501.bin`.
+
+```python
+import os, struct
+import pandas as pd
+import numpy as np
+from io import StringIO
+
+print("Files in cwd:", os.listdir("."))
+
+def load_log(fname):
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    header = raw[0]
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    df = df.rename(columns={
+        "accel pedal(g/s)": "app",
+        "engine coolant temperature (degrees Celsius )": "ect",
+        "Engine RPM (rpm)": "rpm",
+        "intake air temperature (degrees Celsius )": "iat",
+        "mass airflow sensor(g/s)": "maf",
+        "throttle position (unk)": "tps",
+    })
+    for c in ["app", "ect", "rpm", "iat", "maf", "tps"]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df["dt"] = pd.to_datetime(df["Device Time"], format="%d-%b-%Y %H:%M:%S.%f")
+    df["t"] = (df["dt"] - df["dt"].iloc[0]).dt.total_seconds()
+    return df
+
+df1 = load_log("trackLog-2026-Nov-25_17-33-30.csv").dropna(subset=["rpm", "ect"])
+df2 = load_log("trackLog-2026-Nov-25_17-33-47.csv").dropna(subset=["rpm", "ect"])
+
+print("df1 valid rows:", len(df1), "ECT:", df1["ect"].min(), "->", df1["ect"].max(), "RPM:", df1["rpm"].min(), "->", df1["rpm"].max())
+print("df2 valid rows:", len(df2), "ECT:", df2["ect"].min(), "->", df2["ect"].max(), "RPM:", df2["rpm"].min(), "->", df2["rpm"].max())
+
+if os.path.exists("f501.bin"):
+    with open("f501.bin", "rb") as f:
+        rom = f.read()
+    print("f501.bin loaded:", len(rom), "bytes")
+else:
+    print("f501.bin NOT in cwd!")
+
+
+```
+
+```text
+Files in cwd: ['trackLog-2026-Nov-25_17-33-47.csv', 'trackLog-2026-Nov-25_17-33-30.csv', 'f501.bin', 'input_file_0.png', 'torque pid.txt', 'trackLog-2026-Nov-24_16-34-19.csv']
+df1 valid rows: 418 ECT: 32.0 -> 57.0 RPM: 925.0 -> 1462.5
+df2 valid rows: 804 ECT: 57 -> 87 RPM: 0.0 -> 3237.5
+f501.bin loaded: 1048576 bytes
+
+
+```
+
+```python
+import struct
+import pandas as pd
+import numpy as np
+from io import StringIO
+import matplotlib.pyplot as plt
+
+def load_log(fname):
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    header = raw[0]
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    df = df.rename(columns={
+        "accel pedal(g/s)": "app",
+        "engine coolant temperature (degrees Celsius )": "ect",
+        "Engine RPM (rpm)": "rpm",
+        "intake air temperature (degrees Celsius )": "iat",
+        "mass airflow sensor(g/s)": "maf",
+        "throttle position (unk)": "tps",
+    })
+    for c in ["app", "ect", "rpm", "iat", "maf", "tps"]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df["dt"] = pd.to_datetime(df["Device Time"], format="%d-%b-%Y %H:%M:%S.%f")
+    df["t"] = (df["dt"] - df["dt"].iloc[0]).dt.total_seconds()
+    return df
+
+df1 = load_log("trackLog-2026-Nov-25_17-33-30.csv").dropna(subset=["rpm", "ect"])
+df2 = load_log("trackLog-2026-Nov-25_17-33-47.csv").dropna(subset=["rpm", "ect"])
+
+with open("f501.bin", "rb") as f:
+    rom = f.read()
+n = len(rom)
+
+# 1. Analyze df1 warm-up curve breakpoints (ECT -> median RPM, TPS, MAF)
+wu = df1.groupby("ect").agg(
+    n=("rpm", "count"),
+    rpm_med=("rpm", "median"),
+    rpm_min=("rpm", "min"),
+    rpm_max=("rpm", "max"),
+    tps_med=("tps", "median"),
+    maf_med=("maf", "median"),
+).reset_index()
+print("=== Log 1 Warmup Summary (ECT -> Median RPM/TPS/MAF) ===")
+print(wu.to_string(index=False))
+
+# Check hot idle at the end of Log 2 (when app==0 and steady low RPM, e.g., t=379..390s)
+hot_idle = df2[(df2["app"] == 0) & (df2["ect"] >= 80) & (df2["rpm"] > 500) & (df2["rpm"] < 1000)]
+print("\n=== Log 2 Hot Idle (ECT >= 80°C, APP == 0, 500 < RPM < 1000) ===")
+print(f"Count={len(hot_idle)}, RPM min={hot_idle['rpm'].min()}, p25={np.percentile(hot_idle['rpm'],25)}, med={hot_idle['rpm'].median()}, p75={np.percentile(hot_idle['rpm'],75)}, max={hot_idle['rpm'].max()}")
+print("Top hot idle RPMs:", hot_idle["rpm"].value_counts().head(8).to_dict())
+print("Top hot idle TPS:", hot_idle["tps"].round(2).value_counts().head(6).to_dict())
+print("Top hot idle MAF:", hot_idle["maf"].round(2).value_counts().head(6).to_dict())
+
+# 2. Scan f501.bin for candidate tables/curves matching:
+# (A) Warm-up target idle RPM curve: ~1437.5 @ 32°C -> ~1025 @ 41-50°C -> ~937.5 @ 56-57°C -> ~687.5-737.5 @ 84°C
+# Notice: if raw uint16 is RPM directly (e.g. 1437 -> 1025 -> 937 -> 700), or uint8 * 12.5 (115 -> 82 -> 75 -> 56), or uint16 * 12.5!
+print("\n=== Scanning f501.bin for Warmup Idle Target Curves (decreasing with temp) ===")
+# Check uint16 BE decreasing/non-increasing arrays of len 6..16 where start in [1300..1650] and end in [600..850]
+for off in range(0, n - 32, 2):
+    vals = [struct.unpack(">H", rom[off + 2*k : off + 2*k + 2])[0] for k in range(16)]
+    # Check lengths 6..16
+    for L in range(6, 17):
+        sub = vals[:L]
+        if 1250 <= sub[0] <= 1700 and 600 <= sub[-1] <= 850:
+            if all(sub[i] >= sub[i+1] and (sub[i] - sub[i+1]) <= 300 for i in range(L-1)):
+                if len(set(sub)) >= 4 and all(v % 5 == 0 or v % 12 == 0 or v % 13 == 0 for v in sub):
+                    print(f"  [u16BE 1x RPM] 0x{off:06X} (len={L:2d}): {sub}")
+                    break
+
+# Also check uint8 decreasing arrays of len 6..16 where u8 * 12.5 starts in [1250..1700] (raw 100..136) and ends in [600..850] (raw 48..68)
+for off in range(0, n - 16):
+    vals = list(rom[off:off+16])
+    for L in range(6, 17):
+        sub = vals[:L]
+        if 100 <= sub[0] <= 136 and 48 <= sub[-1] <= 68:
+            if all(sub[i] >= sub[i+1] and (sub[i] - sub[i+1]) <= 24 for i in range(L-1)):
+                if len(set(sub)) >= 4:
+                    rpm_s = [round(v * 12.5, 1) for v in sub]
+                    print(f"  [u8 * 12.5 RPM] 0x{off:06X} (len={L:2d}): raw={sub} -> RPM={rpm_s}")
+                    break
+
+# 3. Scan f501.bin for RPM axes covering both 925..1462.5 RPM AND 3237.5 RPM (e.g. up to 3200..7000 RPM)
+print("\n=== Scanning f501.bin for Broad RPM Axes (spanning <= 1000 to >= 3200 RPM) ===")
+u16_inc = []
+for off in range(0, n - 12, 2):
+    vals = [struct.unpack(">H", rom[off:off+2])[0]]
+    for k in range(1, 24):
+        p = off + 2*k
+        if p + 2 > n: break
+        v = struct.unpack(">H", rom[p:p+2])[0]
+        if v > vals[-1] and (v - vals[-1]) <= 2000:
+            vals.append(v)
+        else:
+            break
+    if len(vals) >= 6:
+        u16_inc.append((off, vals))
+
+# Deduplicate
+u16_inc_dedup = []
+for off, vals in u16_inc:
+    end = off + 2*len(vals)
+    if not any(f_o <= off and end <= f_o + 2*len(f_v) for f_o, f_v in u16_inc if f_o != off):
+        u16_inc_dedup.append((off, vals))
+
+for off, vals in u16_inc_dedup:
+    for scale_name, mult in [("1x RPM", 1.0), ("12.5x RPM", 12.5), ("50x RPM", 50.0)]:
+        sc = [v * mult for v in vals]
+        if sc[0] <= 1000 and sc[-1] >= 3200 and sc[-1] <= 8000:
+            if mult == 1.0 and all(v % 25 == 0 for v in vals):
+                print(f"  0x{off:06X} (len={len(vals):2d}, {scale_name}): {vals}")
+            elif mult > 1.0 and all(v % 4 == 0 or v % 5 == 0 or v % 8 == 0 for v in vals):
+                print(f"  0x{off:06X} (len={len(vals):2d}, {scale_name}): raw={vals} -> RPM={[int(x) if x.is_integer() else x for x in sc]}")
+
+
+```
+
+```text
+=== Log 1 Warmup Summary (ECT -> Median RPM/TPS/MAF) ===
+ ect  n  rpm_med  rpm_min  rpm_max  tps_med  maf_med
+32.0  4  1437.50   1412.5   1462.5 5.098039    4.970
+33.0 16  1400.00   1387.5   1425.0 5.098039    5.410
+34.0 10  1387.50   1350.0   1387.5 5.098039    4.930
+35.0 12  1306.25   1275.0   1325.0 5.098039    4.975
+36.0 12  1218.75   1200.0   1275.0 4.705883    4.665
+37.0  8  1168.75   1125.0   1187.5 4.509804    4.515
+38.0 10  1125.00   1100.0   1162.5 4.313725    4.310
+39.0 14  1087.50   1062.5   1125.0 3.921569    3.870
+40.0 13  1062.50   1012.5   1075.0 3.529412    3.520
+41.0 15  1025.00   1012.5   1037.5 3.529412    3.380
+42.0 26  1025.00   1000.0   1050.0 3.529412    3.410
+43.0 18  1037.50   1012.5   1050.0 3.529412    3.420
+44.0 16  1037.50   1012.5   1050.0 3.529412    3.430
+45.0 18  1037.50    987.5   1050.0 3.529412    3.370
+46.0 20  1025.00    987.5   1050.0 3.529412    3.350
+47.0 21  1025.00   1012.5   1037.5 3.529412    3.370
+48.0 23  1025.00   1012.5   1050.0 3.529412    3.280
+49.0 22  1000.00   1000.0   1025.0 3.529412    3.270
+50.0 18  1012.50   1012.5   1012.5 3.529412    3.360
+51.0 11  1012.50   1000.0   1025.0 3.529412    3.350
+52.0 19   975.00    975.0   1000.0 3.529412    3.230
+53.0 28   962.50    950.0   1000.0 3.137255    2.870
+54.0 20   968.75    950.0    975.0 3.137255    2.870
+55.0 20   937.50    925.0    975.0 3.137255    3.060
+56.0 20   937.50    925.0    962.5 3.137255    3.060
+57.0  4   937.50    925.0    937.5 3.137255    3.030
+
+=== Log 2 Hot Idle (ECT >= 80°C, APP == 0, 500 < RPM < 1000) ===
+Count=60, RPM min=687.5, p25=737.5, med=900.0, p75=962.5, max=987.5
+Top hot idle RPMs: {737.5: 8, 962.5: 7, 950.0: 6, 975.0: 6, 712.5: 4, 937.5: 4, 925.0: 4, 687.5: 4}
+Top hot idle TPS: {3.14: 24, 1.96: 17, 2.75: 12, 3.92: 4, 3.53: 2, 2.35: 1}
+Top hot idle MAF: {2.02: 5, 2.37: 4, 2.52: 3, 2.97: 3, 2.99: 3, 1.91: 3}
+
+=== Scanning f501.bin for Warmup Idle Target Curves (decreasing with temp) ===
+  [u8 * 12.5 RPM] 0x00B082 (len= 6): raw=[128, 111, 92, 79, 69, 56] -> RPM=[1600.0, 1387.5, 1150.0, 987.5, 862.5, 700.0]
+  [u8 * 12.5 RPM] 0x00B092 (len= 7): raw=[128, 128, 119, 102, 90, 72, 60] -> RPM=[1600.0, 1600.0, 1487.5, 1275.0, 1125.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00B093 (len= 6): raw=[128, 119, 102, 90, 72, 60] -> RPM=[1600.0, 1487.5, 1275.0, 1125.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00B094 (len= 6): raw=[119, 102, 90, 72, 60, 51] -> RPM=[1487.5, 1275.0, 1125.0, 900.0, 750.0, 637.5]
+  [u8 * 12.5 RPM] 0x00B0A2 (len= 8): raw=[128, 128, 128, 128, 112, 89, 75, 64] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1112.5, 937.5, 800.0]
+  [u8 * 12.5 RPM] 0x00B0A3 (len= 7): raw=[128, 128, 128, 112, 89, 75, 64] -> RPM=[1600.0, 1600.0, 1600.0, 1400.0, 1112.5, 937.5, 800.0]
+  [u8 * 12.5 RPM] 0x00B0A4 (len= 6): raw=[128, 128, 112, 89, 75, 64] -> RPM=[1600.0, 1600.0, 1400.0, 1112.5, 937.5, 800.0]
+  [u8 * 12.5 RPM] 0x00B0A5 (len= 6): raw=[128, 112, 89, 75, 64, 56] -> RPM=[1600.0, 1400.0, 1112.5, 937.5, 800.0, 700.0]
+  [u8 * 12.5 RPM] 0x00B0A6 (len= 6): raw=[112, 89, 75, 64, 56, 50] -> RPM=[1400.0, 1112.5, 937.5, 800.0, 700.0, 625.0]
+  [u8 * 12.5 RPM] 0x00B0B2 (len=10): raw=[128, 128, 128, 128, 128, 110, 92, 79, 69, 61] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5]
+  [u8 * 12.5 RPM] 0x00B0B3 (len= 9): raw=[128, 128, 128, 128, 110, 92, 79, 69, 61] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5]
+  [u8 * 12.5 RPM] 0x00B0B4 (len= 8): raw=[128, 128, 128, 110, 92, 79, 69, 61] -> RPM=[1600.0, 1600.0, 1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5]
+  [u8 * 12.5 RPM] 0x00B0B5 (len= 7): raw=[128, 128, 110, 92, 79, 69, 61] -> RPM=[1600.0, 1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5]
+  [u8 * 12.5 RPM] 0x00B0B6 (len= 6): raw=[128, 110, 92, 79, 69, 61] -> RPM=[1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5]
+  [u8 * 12.5 RPM] 0x00B0B7 (len= 6): raw=[110, 92, 79, 69, 61, 55] -> RPM=[1375.0, 1150.0, 987.5, 862.5, 762.5, 687.5]
+  [u8 * 12.5 RPM] 0x00B0C2 (len=11): raw=[128, 128, 128, 128, 128, 128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C3 (len=10): raw=[128, 128, 128, 128, 128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C4 (len= 9): raw=[128, 128, 128, 128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C5 (len= 8): raw=[128, 128, 128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C6 (len= 7): raw=[128, 128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C7 (len= 6): raw=[128, 110, 95, 83, 74, 66] -> RPM=[1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0]
+  [u8 * 12.5 RPM] 0x00B0C8 (len= 6): raw=[110, 95, 83, 74, 66, 60] -> RPM=[1375.0, 1187.5, 1037.5, 925.0, 825.0, 750.0]
+  [u8 * 12.5 RPM] 0x00B0D2 (len=13): raw=[128, 128, 128, 128, 128, 128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D3 (len=12): raw=[128, 128, 128, 128, 128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D4 (len=11): raw=[128, 128, 128, 128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D5 (len=10): raw=[128, 128, 128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D6 (len= 9): raw=[128, 128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D7 (len= 8): raw=[128, 128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D8 (len= 7): raw=[128, 112, 98, 87, 79, 71, 66] -> RPM=[1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0D9 (len= 6): raw=[112, 98, 87, 79, 71, 66] -> RPM=[1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E2 (len=15): raw=[128, 128, 128, 128, 128, 128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E3 (len=14): raw=[128, 128, 128, 128, 128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E4 (len=13): raw=[128, 128, 128, 128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E5 (len=12): raw=[128, 128, 128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E6 (len=11): raw=[128, 128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E7 (len=10): raw=[128, 128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E8 (len= 9): raw=[128, 128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0E9 (len= 8): raw=[128, 115, 103, 92, 84, 77, 71, 66] -> RPM=[1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0EA (len= 7): raw=[115, 103, 92, 84, 77, 71, 66] -> RPM=[1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00B0EB (len= 6): raw=[103, 92, 84, 77, 71, 66] -> RPM=[1287.5, 1150.0, 1050.0, 962.5, 887.5, 825.0]
+  [u8 * 12.5 RPM] 0x00EDA0 (len=12): raw=[120, 120, 120, 120, 120, 112, 88, 84, 80, 76, 72, 56] -> RPM=[1500.0, 1500.0, 1500.0, 1500.0, 1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDA1 (len=11): raw=[120, 120, 120, 120, 112, 88, 84, 80, 76, 72, 56] -> RPM=[1500.0, 1500.0, 1500.0, 1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDA2 (len=10): raw=[120, 120, 120, 112, 88, 84, 80, 76, 72, 56] -> RPM=[1500.0, 1500.0, 1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDA3 (len= 9): raw=[120, 120, 112, 88, 84, 80, 76, 72, 56] -> RPM=[1500.0, 1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDA4 (len= 8): raw=[120, 112, 88, 84, 80, 76, 72, 56] -> RPM=[1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDA5 (len= 7): raw=[112, 88, 84, 80, 76, 72, 56] -> RPM=[1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0]
+  [u8 * 12.5 RPM] 0x00EDB8 (len=12): raw=[112, 112, 112, 108, 104, 100, 96, 96, 88, 80, 72, 60] -> RPM=[1400.0, 1400.0, 1400.0, 1350.0, 1300.0, 1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDB9 (len=11): raw=[112, 112, 108, 104, 100, 96, 96, 88, 80, 72, 60] -> RPM=[1400.0, 1400.0, 1350.0, 1300.0, 1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDBA (len=10): raw=[112, 108, 104, 100, 96, 96, 88, 80, 72, 60] -> RPM=[1400.0, 1350.0, 1300.0, 1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDBB (len= 9): raw=[108, 104, 100, 96, 96, 88, 80, 72, 60] -> RPM=[1350.0, 1300.0, 1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDBC (len= 8): raw=[104, 100, 96, 96, 88, 80, 72, 60] -> RPM=[1300.0, 1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDBD (len= 7): raw=[100, 96, 96, 88, 80, 72, 60] -> RPM=[1250.0, 1200.0, 1200.0, 1100.0, 1000.0, 900.0, 750.0]
+  [u8 * 12.5 RPM] 0x00EDF0 (len=11): raw=[100, 100, 99, 99, 98, 97, 97, 96, 82, 80, 68] -> RPM=[1250.0, 1250.0, 1237.5, 1237.5, 1225.0, 1212.5, 1212.5, 1200.0, 1025.0, 1000.0, 850.0]
+  [u8 * 12.5 RPM] 0x00EDF1 (len=10): raw=[100, 99, 99, 98, 97, 97, 96, 82, 80, 68] -> RPM=[1250.0, 1237.5, 1237.5, 1225.0, 1212.5, 1212.5, 1200.0, 1025.0, 1000.0, 850.0]
+  [u8 * 12.5 RPM] 0x00EF9D (len= 6): raw=[100, 92, 80, 68, 68, 68] -> RPM=[1250.0, 1150.0, 1000.0, 850.0, 850.0, 850.0]
+  [u8 * 12.5 RPM] 0x00F01C (len=12): raw=[108, 108, 108, 108, 108, 100, 96, 92, 88, 84, 76, 60] -> RPM=[1350.0, 1350.0, 1350.0, 1350.0, 1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F01D (len=11): raw=[108, 108, 108, 108, 100, 96, 92, 88, 84, 76, 60] -> RPM=[1350.0, 1350.0, 1350.0, 1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F01E (len=10): raw=[108, 108, 108, 100, 96, 92, 88, 84, 76, 60] -> RPM=[1350.0, 1350.0, 1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F01F (len= 9): raw=[108, 108, 100, 96, 92, 88, 84, 76, 60] -> RPM=[1350.0, 1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F020 (len= 8): raw=[108, 100, 96, 92, 88, 84, 76, 60] -> RPM=[1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F021 (len= 7): raw=[100, 96, 92, 88, 84, 76, 60] -> RPM=[1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0]
+  [u8 * 12.5 RPM] 0x00F34E (len= 6): raw=[109, 109, 109, 87, 64, 53] -> RPM=[1362.5, 1362.5, 1362.5, 1087.5, 800.0, 662.5]
+  [u8 * 12.5 RPM] 0x00F38E (len=11): raw=[125, 124, 118, 110, 102, 96, 90, 83, 77, 70, 64] -> RPM=[1562.5, 1550.0, 1475.0, 1375.0, 1275.0, 1200.0, 1125.0, 1037.5, 962.5, 875.0, 800.0]
+  [u8 * 12.5 RPM] 0x00F38F (len=10): raw=[124, 118, 110, 102, 96, 90, 83, 77, 70, 64] -> RPM=[1550.0, 1475.0, 1375.0, 1275.0, 1200.0, 1125.0, 1037.5, 962.5, 875.0, 800.0]
+  [u8 * 12.5 RPM] 0x00F390 (len= 9): raw=[118, 110, 102, 96, 90, 83, 77, 70, 64] -> RPM=[1475.0, 1375.0, 1275.0, 1200.0, 1125.0, 1037.5, 962.5, 875.0, 800.0]
+  [u8 * 12.5 RPM] 0x00F391 (len= 8): raw=[110, 102, 96, 90, 83, 77, 70, 64] -> RPM=[1375.0, 1275.0, 1200.0, 1125.0, 1037.5, 962.5, 875.0, 800.0]
+  [u8 * 12.5 RPM] 0x00F392 (len= 7): raw=[102, 96, 90, 83, 77, 70, 64] -> RPM=[1275.0, 1200.0, 1125.0, 1037.5, 962.5, 875.0, 800.0]
+  [u8 * 12.5 RPM] 0x00F40E (len=16): raw=[128, 122, 118, 113, 109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1600.0, 1525.0, 1475.0, 1412.5, 1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F40F (len=15): raw=[122, 118, 113, 109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1525.0, 1475.0, 1412.5, 1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F410 (len=14): raw=[118, 113, 109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1475.0, 1412.5, 1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F411 (len=13): raw=[113, 109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1412.5, 1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F412 (len=12): raw=[109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F413 (len=11): raw=[105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+  [u8 * 12.5 RPM] 0x00F414 (len=10): raw=[101, 97, 93, 90, 86, 82, 78, 74, 70, 66] -> RPM=[1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0]
+
+=== Scanning f501.bin for Broad RPM Axes (spanning <= 1000 to >= 3200 RPM) ===
+  0x00F790 (len=17, 12.5x RPM): raw=[0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512] -> RPM=[0, 400, 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400, 4800, 5200, 5600, 6000, 6400]
+  0x00FA32 (len= 8, 50x RPM): raw=[0, 16, 32, 48, 64, 80, 96, 112] -> RPM=[0, 800, 1600, 2400, 3200, 4000, 4800, 5600]
+  0x00FBB8 (len= 8, 12.5x RPM): raw=[0, 40, 80, 160, 240, 320, 400, 480] -> RPM=[0, 500, 1000, 2000, 3000, 4000, 5000, 6000]
+  0x00FBC8 (len= 8, 12.5x RPM): raw=[0, 48, 64, 80, 96, 112, 128, 480] -> RPM=[0, 600, 800, 1000, 1200, 1400, 1600, 6000]
+  0x00FD7C (len= 8, 50x RPM): raw=[0, 16, 32, 48, 64, 80, 96, 112] -> RPM=[0, 800, 1600, 2400, 3200, 4000, 4800, 5600]
+  0x00FD8C (len= 8, 50x RPM): raw=[16, 32, 48, 64, 80, 96, 112, 128] -> RPM=[800, 1600, 2400, 3200, 4000, 4800, 5600, 6400]
+  0x00FFCE (len= 8, 12.5x RPM): raw=[0, 64, 128, 192, 256, 320, 384, 480] -> RPM=[0, 800, 1600, 2400, 3200, 4000, 4800, 6000]
+  0x01005C (len=17, 50x RPM): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> RPM=[0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000]
+  0x0104EC (len= 8, 12.5x RPM): raw=[0, 40, 80, 120, 160, 200, 240, 320] -> RPM=[0, 500, 1000, 1500, 2000, 2500, 3000, 4000]
+  0x011288 (len=17, 50x RPM): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> RPM=[0, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000]
+  0x0112BA (len= 8, 12.5x RPM): raw=[0, 150, 160, 170, 180, 200, 210, 400] -> RPM=[0, 1875, 2000, 2125, 2250, 2500, 2625, 5000]
+
+
+```
+
+```python
+import struct
+import pandas as pd
+import numpy as np
+from io import StringIO
+import matplotlib.pyplot as plt
+
+def load_log(fname):
+    with open(fname, "r", encoding="utf-8", errors="replace") as f:
+        raw = [l.rstrip("\r\n") for l in f]
+    header = raw[0]
+    rows = [l for i, l in enumerate(raw) if i > 0 and l != header]
+    df = pd.read_csv(StringIO(header + "\n" + "\n".join(rows)))
+    df.columns = [c.strip() for c in df.columns]
+    df = df.rename(columns={
+        "accel pedal(g/s)": "app",
+        "engine coolant temperature (degrees Celsius )": "ect",
+        "Engine RPM (rpm)": "rpm",
+        "intake air temperature (degrees Celsius )": "iat",
+        "mass airflow sensor(g/s)": "maf",
+        "throttle position (unk)": "tps",
+    })
+    for c in ["app", "ect", "rpm", "iat", "maf", "tps"]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df["dt"] = pd.to_datetime(df["Device Time"], format="%d-%b-%Y %H:%M:%S.%f")
+    df["t"] = (df["dt"] - df["dt"].iloc[0]).dt.total_seconds()
+    return df
+
+df1 = load_log("trackLog-2026-Nov-25_17-33-30.csv").dropna(subset=["rpm", "ect"])
+df2 = load_log("trackLog-2026-Nov-25_17-33-47.csv").dropna(subset=["rpm", "ect"])
+
+with open("f501.bin", "rb") as f:
+    rom = f.read()
+
+# Inspect the 0x00B070..0x00B110 block and 0x00ED90..0x00F430 candidates in detail!
+def dump_u8_block(title, start, end):
+    print(f"=== {title} (0x{start:06X}..0x{end:06X}) ===")
+    for off in range(start, end, 16):
+        blk = list(rom[off:off+16])
+        hex_s = " ".join(f"{b:02X}" for b in blk)
+        rpm_s = [round(b * 12.5, 1) for b in blk]
+        print(f"0x{off:06X}: {hex_s:<47} | u8={blk} | *12.5={rpm_s}")
+
+dump_u8_block("0x00B070..0x00B110 Warmup Idle Candidate Block", 0x00B070, 0x00B110)
+print()
+dump_u8_block("0x00ED90..0x00EDD0 Candidate Block", 0x00ED90, 0x00EDD0)
+print()
+dump_u8_block("0x00F010..0x00F030 Candidate Block", 0x00F010, 0x00F030)
+print()
+dump_u8_block("0x00F400..0x00F430 Candidate Block", 0x00F400, 0x00F430)
+
+# Also check if there is a 16-pt coolant axis near 0x00B070..0x00B110 or in the axis region 0x00F700..0x011300
+print("\n=== Checking for 16-pt temp axes in 0x00F700..0x011300 (u16BE) ===")
+for off in range(0x00F700, 0x011300, 2):
+    vals = [struct.unpack(">H", rom[off+2*k:off+2*k+2])[0] for k in range(16)]
+    if all(vals[i] < vals[i+1] for i in range(15)):
+        # Check -40, -50, or 0.1°C
+        if vals[0] <= 72 and vals[-1] >= 116 and vals[-1] <= 170:
+            print(f"  0x{off:06X} (u16BE - 40): raw={vals} -> °C={[v-40 for v in vals]}")
+        if vals[0] <= 82 and vals[-1] >= 126 and vals[-1] <= 180:
+            print(f"  0x{off:06X} (u16BE - 50): raw={vals} -> °C={[v-50 for v in vals]}")
+
+# Build a visual summary plot comparing Log 1 Warmup + Log 2 Blip/Decel against candidate curves & axes
+fig, axes = plt.subplots(1, 2, figsize=(13, 5))
+
+# Left plot: Log 1 Warm-up ECT vs RPM + Log 2 hot idle floor + candidate ROM curve 0x00B0E2 (scaled 12.5x)
+wu = df1.groupby("ect")["rpm"].agg(["min", "median", "max"]).reset_index()
+axes[0].fill_between(wu["ect"], wu["min"], wu["max"], alpha=0.22, color="#1f77b4", label="Log 1 RPM min–max band")
+axes[0].plot(wu["ect"], wu["median"], "o-", color="#1f77b4", linewidth=2, markersize=4, label="Log 1 median idle RPM (32–57°C)")
+
+# Add Log 2 steady hot idle points (84-87°C, APP=0, RPM < 800)
+hot_floor = df2[(df2["app"] == 0) & (df2["ect"] >= 80) & (df2["rpm"] > 500) & (df2["rpm"] <= 800)]
+if len(hot_floor) > 0:
+    axes[0].scatter(hot_floor["ect"], hot_floor["rpm"], color="#d62728", s=24, zorder=4, label="Log 2 hot idle floor (84–87°C)")
+
+# Overlay 0x00B0E2..0x00B0F0 mapped across standard Nissan 16-pt coolant axis (-30 to 120°C in 10°C steps: -30,-20,-10,0,10,20,30,40,50,60,70,80,90,100,110,120)
+std_ect_16 = [-30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+rom_b0e2 = [b * 12.5 for b in rom[0x00B0E2:0x00B0E2+16]]
+axes[0].plot(std_ect_16[6:14], rom_b0e2[6:14], "s--", color="#2ca02c", linewidth=2, label="f501.bin 0x00B0E2 (u8 × 12.5, 30–100°C)")
+axes[0].set_title("Warm-Up Idle RPM vs. Coolant Temp")
+axes[0].set_xlabel("Coolant Temperature (°C)")
+axes[0].set_ylabel("Engine Speed (RPM)")
+axes[0].grid(True, alpha=0.3)
+axes[0].legend(fontsize=8.5, loc="upper right")
+
+# Right plot: Log 2 Big Throttle Blip & Decel (t = 363..382s) with ROM RPM axis breakpoints
+sub_b = df2[(df2["t"] >= 363.0) & (df2["t"] <= 382.0)]
+axes[1].plot(sub_b["t"], sub_b["rpm"], "o-", color="#1f77b4", linewidth=1.8, markersize=3.5, label="Engine RPM")
+ax2_twin = axes[1].twinx()
+ax2_twin.plot(sub_b["t"], sub_b["app"], "--", color="#ff7f0e", linewidth=1.4, label="Accel Pedal (%)")
+ax2_twin.plot(sub_b["t"], sub_b["tps"], ":", color="#2ca02c", linewidth=1.6, label="Throttle Pos (%)")
+
+# Horizontal dashed lines for key ROM RPM breakpoints (0x00FBC8: 600,800,1000,1200,1400,1600; 0x00F790: 2000,2400,2800,3200)
+for y_bp in [700, 1000, 1400, 1600, 2400, 3200]:
+    axes[1].axhline(y_bp, color="gray", linestyle="-.", linewidth=0.8, alpha=0.55)
+    axes[1].text(363.2, y_bp + 35, f"{y_bp} RPM", fontsize=7.5, color="#444444")
+
+axes[1].set_title("Log 2 Throttle Blip & Decel Return (t = 363–382s)")
+axes[1].set_xlabel("Log Time (s)")
+axes[1].set_ylabel("Engine Speed (RPM)", color="#1f77b4")
+ax2_twin.set_ylabel("Pedal / Throttle (%)", color="#ff7f0e")
+axes[1].grid(True, alpha=0.3)
+axes[1].legend(loc="upper left", fontsize=8.5)
+ax2_twin.legend(loc="upper right", fontsize=8.5)
+
+plt.tight_layout()
+plt.savefig("el19a_log_vs_rom_comparison.png", dpi=150)
+print("\nSaved el19a_log_vs_rom_comparison.png")
+
+
+```
+
+```text
+=== 0x00B070..0x00B110 Warmup Idle Candidate Block (0x00B070..0x00B110) ===
+0x00B070: 1C 1C 67 52 45 3B 34 29 23 1E 1A 1B 1D 1D 1C 1E | u8=[28, 28, 103, 82, 69, 59, 52, 41, 35, 30, 26, 27, 29, 29, 28, 30] | *12.5=[350.0, 350.0, 1287.5, 1025.0, 862.5, 737.5, 650.0, 512.5, 437.5, 375.0, 325.0, 337.5, 362.5, 362.5, 350.0, 375.0]
+0x00B080: 20 20 80 6F 5C 4F 45 38 2E 28 23 1F 1F 1F 1F 21 | u8=[32, 32, 128, 111, 92, 79, 69, 56, 46, 40, 35, 31, 31, 31, 31, 33] | *12.5=[400.0, 400.0, 1600.0, 1387.5, 1150.0, 987.5, 862.5, 700.0, 575.0, 500.0, 437.5, 387.5, 387.5, 387.5, 387.5, 412.5]
+0x00B090: 23 23 80 80 77 66 5A 48 3C 33 2D 28 24 22 22 24 | u8=[35, 35, 128, 128, 119, 102, 90, 72, 60, 51, 45, 40, 36, 34, 34, 36] | *12.5=[437.5, 437.5, 1600.0, 1600.0, 1487.5, 1275.0, 1125.0, 900.0, 750.0, 637.5, 562.5, 500.0, 450.0, 425.0, 425.0, 450.0]
+0x00B0A0: 26 26 80 80 80 80 70 59 4B 40 38 32 2D 29 26 25 | u8=[38, 38, 128, 128, 128, 128, 112, 89, 75, 64, 56, 50, 45, 41, 38, 37] | *12.5=[475.0, 475.0, 1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1112.5, 937.5, 800.0, 700.0, 625.0, 562.5, 512.5, 475.0, 462.5]
+0x00B0B0: 26 26 80 80 80 80 80 6E 5C 4F 45 3D 37 32 2E 2B | u8=[38, 38, 128, 128, 128, 128, 128, 110, 92, 79, 69, 61, 55, 50, 46, 43] | *12.5=[475.0, 475.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1150.0, 987.5, 862.5, 762.5, 687.5, 625.0, 575.0, 537.5]
+0x00B0C0: 28 26 80 80 80 80 80 80 6E 5F 53 4A 42 3C 37 33 | u8=[40, 38, 128, 128, 128, 128, 128, 128, 110, 95, 83, 74, 66, 60, 55, 51] | *12.5=[500.0, 475.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1375.0, 1187.5, 1037.5, 925.0, 825.0, 750.0, 687.5, 637.5]
+0x00B0D0: 30 2C 80 80 80 80 80 80 80 70 62 57 4F 47 42 3D | u8=[48, 44, 128, 128, 128, 128, 128, 128, 128, 112, 98, 87, 79, 71, 66, 61] | *12.5=[600.0, 550.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1400.0, 1225.0, 1087.5, 987.5, 887.5, 825.0, 762.5]
+0x00B0E0: 38 35 80 80 80 80 80 80 80 80 73 67 5C 54 4D 47 | u8=[56, 53, 128, 128, 128, 128, 128, 128, 128, 128, 115, 103, 92, 84, 77, 71] | *12.5=[700.0, 662.5, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1437.5, 1287.5, 1150.0, 1050.0, 962.5, 887.5]
+0x00B0F0: 42 3E 80 80 80 80 80 80 80 80 80 77 6B 62 59 53 | u8=[66, 62, 128, 128, 128, 128, 128, 128, 128, 128, 128, 119, 107, 98, 89, 83] | *12.5=[825.0, 775.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1487.5, 1337.5, 1225.0, 1112.5, 1037.5]
+0x00B100: 4D 48 80 80 80 80 80 80 80 80 80 80 7B 70 67 5F | u8=[77, 72, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 123, 112, 103, 95] | *12.5=[962.5, 900.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1600.0, 1537.5, 1400.0, 1287.5, 1187.5]
+
+=== 0x00ED90..0x00EDD0 Candidate Block (0x00ED90..0x00EDD0) ===
+0x00ED90: 00 00 00 00 00 00 00 00 00 00 00 00 00 3B 4A 5E | u8=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 74, 94] | *12.5=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 737.5, 925.0, 1175.0]
+0x00EDA0: 78 78 78 78 78 70 58 54 50 4C 48 38 38 38 38 38 | u8=[120, 120, 120, 120, 120, 112, 88, 84, 80, 76, 72, 56, 56, 56, 56, 56] | *12.5=[1500.0, 1500.0, 1500.0, 1500.0, 1500.0, 1400.0, 1100.0, 1050.0, 1000.0, 950.0, 900.0, 700.0, 700.0, 700.0, 700.0, 700.0]
+0x00EDB0: 00 00 00 00 00 00 00 00 70 70 70 6C 68 64 60 60 | u8=[0, 0, 0, 0, 0, 0, 0, 0, 112, 112, 112, 108, 104, 100, 96, 96] | *12.5=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1400.0, 1400.0, 1400.0, 1350.0, 1300.0, 1250.0, 1200.0, 1200.0]
+0x00EDC0: 58 50 48 3C 36 36 36 40 40 40 40 40 40 40 40 40 | u8=[88, 80, 72, 60, 54, 54, 54, 64, 64, 64, 64, 64, 64, 64, 64, 64] | *12.5=[1100.0, 1000.0, 900.0, 750.0, 675.0, 675.0, 675.0, 800.0, 800.0, 800.0, 800.0, 800.0, 800.0, 800.0, 800.0, 800.0]
+
+=== 0x00F010..0x00F030 Candidate Block (0x00F010..0x00F030) ===
+0x00F010: 78 80 88 90 00 00 00 00 00 00 00 00 6C 6C 6C 6C | u8=[120, 128, 136, 144, 0, 0, 0, 0, 0, 0, 0, 0, 108, 108, 108, 108] | *12.5=[1500.0, 1600.0, 1700.0, 1800.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1350.0, 1350.0, 1350.0, 1350.0]
+0x00F020: 6C 64 60 5C 58 54 4C 3C 3C 3C 3C 3C 26 30 36 3E | u8=[108, 100, 96, 92, 88, 84, 76, 60, 60, 60, 60, 60, 38, 48, 54, 62] | *12.5=[1350.0, 1250.0, 1200.0, 1150.0, 1100.0, 1050.0, 950.0, 750.0, 750.0, 750.0, 750.0, 750.0, 475.0, 600.0, 675.0, 775.0]
+
+=== 0x00F400..0x00F430 Candidate Block (0x00F400..0x00F430) ===
+0x00F400: 46 2B 2B 2B 2B 2B FF F1 C8 AE A0 95 8D 86 80 7A | u8=[70, 43, 43, 43, 43, 43, 255, 241, 200, 174, 160, 149, 141, 134, 128, 122] | *12.5=[875.0, 537.5, 537.5, 537.5, 537.5, 537.5, 3187.5, 3012.5, 2500.0, 2175.0, 2000.0, 1862.5, 1762.5, 1675.0, 1600.0, 1525.0]
+0x00F410: 76 71 6D 69 65 61 5D 5A 56 52 4E 4A 46 42 3D 39 | u8=[118, 113, 109, 105, 101, 97, 93, 90, 86, 82, 78, 74, 70, 66, 61, 57] | *12.5=[1475.0, 1412.5, 1362.5, 1312.5, 1262.5, 1212.5, 1162.5, 1125.0, 1075.0, 1025.0, 975.0, 925.0, 875.0, 825.0, 762.5, 712.5]
+0x00F420: 33 2D 26 1B 08 00 66 66 63 60 5D 5A 57 54 52 50 | u8=[51, 45, 38, 27, 8, 0, 102, 102, 99, 96, 93, 90, 87, 84, 82, 80] | *12.5=[637.5, 562.5, 475.0, 337.5, 100.0, 0.0, 1275.0, 1275.0, 1237.5, 1200.0, 1162.5, 1125.0, 1087.5, 1050.0, 1025.0, 1000.0]
+
+=== Checking for 16-pt temp axes in 0x00F700..0x011300 (u16BE) ===
+  0x00FDCC (u16BE - 40): raw=[0, 6, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 104, 120] -> °C=[-40, -34, -32, -28, -24, -16, -8, 0, 8, 16, 24, 32, 40, 48, 64, 80]
+  0x01005C (u16BE - 40): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150] -> °C=[-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+  0x01005C (u16BE - 50): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150] -> °C=[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  0x01005E (u16BE - 40): raw=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> °C=[-30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+  0x01005E (u16BE - 50): raw=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> °C=[-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+  0x011288 (u16BE - 40): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150] -> °C=[-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+  0x011288 (u16BE - 50): raw=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150] -> °C=[-50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+  0x01128A (u16BE - 40): raw=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> °C=[-30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+  0x01128A (u16BE - 50): raw=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160] -> °C=[-40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+
+Saved el19a_log_vs_rom_comparison.png
+
+
+```
+
+Cross-checking the high-resolution warm-up trajectory (`trackLog-2026-Nov-25_17-33-30.csv`: `925.0–1,462.5` RPM across `32–57°C`) and the blip/decel trace (`trackLog-2026-Nov-25_17-33-47.csv`: up to `3,237.5` RPM and `84–87°C` hot idle) against `f501.bin` pinpoints how the physical idle curve and transient rev-return align with candidate curves and RPM/coolant breakpoint arrays in the ROM.
+
+### 1. Log 1 Warm-Up Curve (`32–57°C`) & Hot-Idle Floor (`84–87°C`) vs. `f501.bin`
+
+Across the `418` valid warm-up rows in Log 1 (`APP = 0.0%`) and the `60` zero-pedal hot-idle samples (`ECT >= 80°C`, `500 < RPM < 1,000`) in Log 2, the engine follows a multi-stage thermal profile:
+
+| Coolant Temp (`°C`) | Log Median RPM | Log Min–Max RPM | Log TPS / MAF | Closest `f501.bin` Curve Matches (`uint8 × 12.5` RPM) |
+| --- | --- | --- | --- | --- |
+| **`32–34°C`** | `1,387.5–1,437.5` | `1,350.0–1,462.5` | `5.10%` / `4.93–5.41` g/s | `0x00B082` (`1,387.5` RPM), `0x00B0B7` (`1,375.0` RPM), `0x00B0E2` (`1,437.5` RPM), `0x00EDA5` (`1,400.0` RPM) |
+| **`36–39°C`** | `1,087.5–1,218.8` | `1,062.5–1,275.0` | `3.92–4.71%` / `3.87–4.67` g/s | Steep initial decay matching `0x00B082` (`1,150.0` RPM) and `0x00B0A6` (`1,112.5` RPM) |
+| **`41–51°C`** | `1,000.0–1,037.5` | `987.5–1,050.0` | `3.53%` / `3.27–3.43` g/s | Flat mid-warm-up plateau matching `0x00EDA0` (`1,050.0 -> 1,000.0` RPM) and `0x00F01C` (`1,050.0` RPM) |
+| **`52–57°C`** | `937.5–975.0` | `925.0–1,000.0` | `3.14–3.53%` / `2.87–3.23` g/s | Second step-down matching `0x00EDA0` (`950.0 -> 900.0` RPM), `0x00F01C` (`950.0` RPM), and `0x00B0A6` (`937.5` RPM) |
+| **`84–87°C` (Hot Idle)** | `712.5–737.5` (floor) | `687.5–800.0` (steady) | `1.96–2.75%` / `1.91–2.52` g/s | Hot-idle floor matching `0x00B082` (`700.0` RPM), `0x00B0A6` (`700.0` RPM), `0x00EDA0` (`700.0` RPM), and `0x00EDC0` (`675.0` RPM) |
+
+* **Why `0x00EDA0`–`0x00EDCD` & `0x00F01C`–`0x00F02B` Stand Out for Warm-Up Idle:**
+* Unlike the `0x00B080`–`0x00B10F` `16×N` `uint8` block (which holds a multi-row `16`-byte-per-row table clamping at `0x80` = `1,600` RPM on the left and tapering down to `350–962.5` RPM on the right—likely an airflow/load or upper-RPM boundary table), **`0x00EDA0`–`0x00EDAB**` (`[120, 120, 120, 120, 120, 112, 88, 84, 80, 76, 72, 56]` -> **`[1500, 1500, 1500, 1500, 1500, 1400, 1100, 1050, 1000, 950, 900, 700]` RPM** under `×12.5`) reproduces the exact plateau-and-step-down behavior seen in your log: `1,400` RPM around `33°C`, a tight `1,050 -> 1,000` RPM shelf across `41–51°C`, `950` RPM at `53–57°C`, and a `700` RPM hot-idle floor at `84–87°C`.
+* **`0x00F01C`–`0x00F027**` (`[108, 108, 108, 108, 108, 100, 96, 92, 88, 84, 76, 60]` -> **`[1350..1250, 1200, 1150, 1100, 1050, 950, 750]` RPM**) shows the same `12`-byte zero-padded `uint8` structure and tracks the `1,050 -> 950 -> 750` RPM steps closely (likely an A/C-on or in-gear companion curve).
+
+
+* **Matching `16`-Point Coolant Axes in `f501.bin`:**
+* **`0x01005E`–`0x01007D**` and **`0x01128A`–`0x0112A9**` (`uint16` BE `[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]`) map to **`-30°C` to `+120°C` in `10°C` steps** under `raw - 40` (`-40°C` to `+110°C` under `raw - 50`), placing exact breakpoints at `30°C`, `40°C`, `50°C`, `60°C`, `80°C`, and `90°C` right across your two logs.
+* **`0x00FDCC`–`0x00FDEB**` (`uint16` BE `[0, 6, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 104, 120]`) maps to **`-40°C` to `+80°C` in `8°C` steps** across the warm-up zone (`24°C, 32°C, 40°C, 48°C, 64°C, 80°C` under `raw - 40`), matching the exact `32°C`, `40°C`, and `48°C` transitions where your log's idle RPM shifts shelves.
+
+
+
+### 2. Log 2 Blip/Decel Trace (`3,237.5` RPM Peak -> `950` RPM Return) vs. `f501.bin` RPM Axes
+
+During the main `84°C` blip/decel sequence (`t = 364.2–380.0s`), the engine sweeps through distinct RPM zones after pedal lift (`APP = 0.0%`):
+
+1. **Peak Excursion (`3,187.5–3,237.5` RPM at `t = 366.0s` and `376.0–377.0s`):** Sits right on the **`3,200` RPM** breakpoint found in `0x00F790` (`17`-pt `×12.5` axis: `[0, 400, 800, 1200, 1600, 2000, 2400, 2800, 3200, ..., 6400]`) and the `8`-pt `×50` axes at `0x00FA32`, `0x00FD7C`, and `0x00FD8C` (`[0/800, 1600, 2400, 3200, 4000, 4800, 5600/6400]`).
+2. **Initial Rapid Drop (`3,237.5 -> 1,712.5 -> 1,450.0` RPM at `t = 366.0–368.2s`, and `3,075.0 -> 1,187.5` RPM at `t = 377.2–378.0s`):** Once throttle closes to its `2.75%` floor (`MAF = 2.75–3.22` g/s), RPM falls freely down to the **`1,400–1,600` RPM** band before deceleration damping/dashpot catches it.
+3. **Dashpot / Idle-Return Catch (`1,187.5 -> 1,112.5 -> 1,037.5 -> 1,012.5 -> 950.0` RPM over `t = 378.0–380.0s`):** Below `~1,400` RPM, the drop rate slows markedly as the ECU cushions entry into idle—aligning directly with the dense low-RPM grid in **`0x00FBC8`–`0x00FBD7**` (`[0, 600, 800, 1000, 1200, 1400, 1600, 6000]` RPM) and **`0x00FC10`–`0x00FC2F**` (`[400, 500, 600, ..., 1600, 1700, 1800, 1850]` RPM), which pack fine `100–200` RPM resolution specifically between `600` and `1,600` RPM while jumping straight to `6,000` RPM above `1,600`.
+
+### 3. Recommended Verification in `f501.bin`
+
+* **Trace Pointers to `0x00EDA0` and `0x00F01C`:** Checking `32`-bit BE references to `0x0000EDA0` and `0x0000F01C` (and their surrounding `12`-byte zero-padded blocks) will confirm whether `0x00EDA0` is the primary warm-up target idle curve (`1,500 -> 700` RPM) and `0x00F01C` is its A/C-on or gear-loaded counterpart (`1,350 -> 750` RPM).
+* **Inspect the Table Linked to `0x00FBC8` (`[0, 600, 800, 1000, 1200, 1400, 1600, 6000]`):** Because its breakpoints (`1,600`, `1,400`, `1,200`, `1,000`, `800`, `600` RPM) match the exact catch-and-settle zone in your `t = 367–380s` decel trace, checking the data rows immediately following `0x00FBC8` can verify whether it governs dashpot airflow/opening or deceleration fuel-cut recovery.
