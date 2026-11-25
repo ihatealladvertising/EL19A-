@@ -67,7 +67,7 @@ An existing ASSIGNED — WORKER N — READY entry reserves that task to its slot
 
 ## Technical direction and WO replenishment
 
-Workers are responsible for maintaining technical direction inside their own lanes. Do not wait for ChatGPT or a coordinator to invent the next WO.
+Workers 1 and 3 maintain investigation priorities and technical direction inside their own lanes. Worker 2's role is execution-first: its next work comes from its current FIFO and accepted local-execution proposals; it may create its own bounded lane-2 task only when no suitable proposal is available. Do not wait for ChatGPT or a coordinator to invent ordinary work, and do not confuse Worker 2's execution queue with a strategic research lane.
 
 When your lane's READY backlog is below target depth, choose the highest-payoff unresolved question using this order:
 
@@ -87,6 +87,7 @@ When your lane has fewer than three READY follow-on WOs queued beyond its curren
 - the expected evidence and stop boundary;
 - dependencies and their actual current status;
 - only its own report path as an authorized output unless another output is specifically necessary and safe.
+- for Worker 2 WOs, a `LOCAL EXECUTION FIT` of YES or CONDITIONAL, with the evidence-based reason and exact escalation point.
 
 Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with your slot ownership, priority, dependencies, branch main and exact allowed paths. Use the modulo ID rule above. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
 
@@ -213,7 +214,7 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 - Use main only. Do not create branches or PRs.
 - No separate claim commit. Do not make interim commits or routine status updates.
 - Publish a lane's accumulated pending packages as a batch, not as a separate integration transaction per WO. The batch may contain multiple reports, FND/REC records, index/inventory updates and one consolidated lane-register update. Publish records/reports before marking their WOs CLOSED in the register. A safe multi-file commit is preferred; if separate commits are required, keep the integration lock held until the entire batch is verified. Do not force-push or discard local pending packages.
-- A worker may edit only its own WO report, its own lane's queue/status entries, and its own lane's new WO specifications, plus the `FINDINGS/` paths permitted by the mandatory findings-disposition gate. It may append a reconciliation note when supported by its own report. **Limited cross-lane exception:** Worker 1 and Worker 3 may append task proposals or evidence-backed review responses to `CONTROL/LOCAL_WORKER2_INBOX.md`; Worker 2 may update proposal dispositions and consume review responses there. This inbox is non-authoritative and cannot create/assign/close a WO or authorize edits to another worker's report. All inbox writes obey the integration lock and readback discipline. No worker may change another lane's assignment, active WO, status or report.
+- A worker may edit only its own WO report, its own lane's queue/status entries, and its own lane's new WO specifications, plus the `FINDINGS/` paths permitted by the mandatory findings-disposition gate. It may append a reconciliation note when supported by its own report. **Limited cross-lane exception:** Worker 1, Worker 3 and the coordinator may append task proposals or evidence-backed review responses to `CONTROL/LOCAL_WORKER2_INBOX.md`; Worker 2 may update proposal dispositions and consume review responses there. This inbox is non-authoritative and cannot create/assign/close a WO or authorize edits to another worker's report. All inbox writes obey the integration lock and readback discipline. No worker may change another lane's assignment, active WO, status or report.
 - Before each register write, fetch the latest active_work_orders.md and its current blob SHA. Apply only your own small change. If rejected by a concurrent update, refresh once, preserve the other worker's changes, recompute the edit and retry once. Never overwrite a stale full-file copy. If the safe retry fails, stop repository writes and report the exact error.
 - Verify every report, FND/REC record, index/inventory update and consolidated register change in the batch by remote readback. Only then remove its items from the local pending ledger or mark them published. Do not poll during technical work.
 - Use explicit file paths for staging/commits. Never use broad add-all or cleanup operations.
