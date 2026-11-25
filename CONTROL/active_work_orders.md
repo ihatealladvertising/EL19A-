@@ -7,7 +7,7 @@
 
 ## QUICK START — READ THIS FIRST
 
-Use this table to find your next task. Do not search the historical summaries below for assignment information. Open only your first READY WO and its named dependencies.
+This is the authoritative live assignment/FIFO summary for all workers. It overrides older status and queue summaries later in this file. Read this block, open your first READY WO, and its named dependencies only; do not search historical summaries for assignment information.
 
 | Worker | Current task | Next READY tasks |
 |---|---|---|
@@ -17,9 +17,9 @@ Use this table to find your next task. Do not search the historical summaries be
 
 Rules: execute one WO at a time, in FIFO order. Worker 1 and Worker 3 may add fully specified, bounded tasks directly to Worker 2's FIFO. Worker 2 only executes its queue; it does not plan or create tasks. If your current cell is empty, stop. The WO file contains the task instructions. The detailed summaries below are historical context, not startup reading.
 
-## Autonomous worker-lane protocol (effective 2026-11-22)
+## Historical lane/status summaries — not an assignment source
 
-The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTOCOL.md). The three lanes operate independently; no ChatGPT/coordinator assignment, first-pick gate, runtime approval or cross-worker wait is required.
+These detailed lane summaries preserve historical closeout context only. For current ownership, use the QUICK START block above. For execution rules, use [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTOCOL.md).
 
 | Slot | Current assigned work | Ownership |
 |---|---|---|
