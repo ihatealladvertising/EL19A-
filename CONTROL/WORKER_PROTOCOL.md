@@ -1,6 +1,6 @@
 # EL19A Worker Protocol
 
-**Operating mode:** Repository-driven autonomous execution. The three worker sessions are the operating system for investigation, technical prioritization, reconciliation and queue replenishment. No coordinator, ChatGPT session or user action is required between ordinary work orders.
+**Operating mode:** Repository-driven autonomous execution. The three worker sessions remain the project execution system. Worker 1 and Worker 3 retain their investigation/reasoning roles; Worker 2 is the dedicated full-time local execution agent. This role split does not create a fourth lane or change the shared queue authority. No coordinator or user action is required between ordinary bounded work orders.
 
 **Authority:** CONTROL/active_work_orders.md is the sole live queue and lifecycle authority. This file defines execution rules. These rules supersede older coordinator-only, parity-pick, self-selection prohibition, separate-branch and PR instructions retained in historical notes. Ordinary technical work remains independent across lanes; the temporary integration lock below is the only cross-lane publication pause.
 
@@ -9,7 +9,7 @@
 Run exactly one session per slot:
 
 - Worker 1: "You are Worker 1. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
-- Worker 2: "You are Worker 2. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
+- Worker 2: "You are Worker 2, the full-time local execution agent for EL19A. Use your configured local model/runtime. Follow CONTROL/WORKER_PROTOCOL.md and CONTROL/LOCAL_WORKER2_EXECUTION.md. Run your autonomous FIFO execution loop until no eligible local-execution work remains; process the Worker 2 proposal inbox at queue/replenishment boundaries and escalate rather than guess."
 - Worker 3: "You are Worker 3. Follow CONTROL/WORKER_PROTOCOL.md and run your autonomous lane until no defensible work remains."
 
 Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot for assignment or technical execution. Workers must observe the temporary integration lock before publishing repository changes.
@@ -32,6 +32,23 @@ Start at the next unused WO ID after 65217. Advance by 3 until the ID is absent 
 **Explicit user-directed transfer exception:** A direct user instruction may transfer an existing, unstarted READY WO to another slot when a lane is offline or exhausted. This is an exception to the default no-reassignment rule. Preserve WO IDs, technical scope, dependencies, evidence anchors, no-repeat boundaries and FIFO order. In one atomic `main` commit, update the WO report's assigned status, owner and sequencing language together with the live register's current/backlog entries. Retain the original modulo allocation as historical metadata; the updated live register determines the new lane. Do not transfer in-progress work unless the user explicitly names it and the handoff boundary is recorded. This makes concurrent WO creation use distinct IDs and report paths.
 
 One session per lane plus explicit lane ownership prevents duplicate task execution. The register's SHA protects concurrent writes to the shared queue. The integration lock is a short, explicit exception: it serializes publication only, not technical work or task assignment.
+
+## Worker 2 — full-time local execution role
+
+Worker 2 remains the existing modulo-3 lane (WO ID remainder 2). Do not create a fourth worker lane, renumber WOs, change the modulo-3 allocator, or transfer another lane's existing WO. Worker 2 uses the configured local model/runtime as a continuous execution worker; Worker 1 and Worker 3 remain the project's external investigation/reasoning contributors.
+
+**Existing queue first:** Worker 2 executes its currently assigned WO and READY FIFO backlog in their existing order. The role change does not skip, rewrite, reassign or widen an already-issued WO. Each task still has one active investigation at a time and follows the normal findings, publication-pending, integration-lock and readback rules.
+
+**Proposal intake:** `CONTROL/LOCAL_WORKER2_INBOX.md` is a non-authoritative proposal/review inbox, not a WO queue or lifecycle register. Worker 1, Worker 3 and the coordinator may append bounded task proposals or review responses there. Proposals must not reserve WO IDs, change ownership/status, or be treated as assigned work. Worker 2 checks the inbox at startup and when replenishing its READY backlog. Worker 2 alone validates a proposal, allocates its own next unused modulo-3-remainder-2 WO ID, creates the full `CONTROL/WO<ID>.md` and registers it in `CONTROL/active_work_orders.md`. A proposal becomes executable only after that registration and normal dependency checks succeed. Rejected, duplicate or blocked proposals receive a short reason in the inbox; do not create placeholder WOs.
+
+**Local-execution suitability:** A Worker 2 WO must be independently executable with the available local evidence and tools. It must specify a falsifiable technical question, exact ROM/RAM addresses or routine windows, known inputs/dependencies, reuse/no-repeat boundaries, expected evidence and a bounded stop condition. Preferred work includes exact caller/callee and producer/consumer traces, RAM read/write provenance, lookup reader/query mechanics, branch/delay-slot verification, axis/storage checks, first-consumer traces, bounded cross-reference validation and narrowly scoped findings reconciliation. Use deterministic scripts/searches for mechanical extraction when available; the model interprets the selected evidence. Keep context to the relevant source windows and indexed records rather than loading huge listings wholesale.
+
+Semantic tasks are allowed only when the WO supplies a falsifiable hypothesis, target-side evidence, a cheap discriminator and a precise identity layer/stop boundary. Worker 2 may establish software behavior and qualified input/output paths; it must not promote a physical sensor, calibration function, units or actuator meaning from names, shapes, donor labels or plausible values alone. Broad project strategy, open-ended discovery, multi-family semantic synthesis, unavailable external-source work and tasks requiring unbounded context are not local-execution eligible; return them to the proposal inbox for redesign or leave them with the reasoning lanes.
+
+**Escalation instead of guessing:** When a meaningful ambiguity exceeds the WO's local-execution boundary, record an `EXTERNAL REVIEW REQUEST` in the WO report with (1) exact question, (2) competing interpretations, (3) verified evidence/PCs/addresses, (4) what is still unknown, and (5) the smallest discriminating test. Worker 1/3 or the coordinator may append a response keyed to that WO in the proposal inbox; no one edits Worker 2's report or lifecycle. Worker 2 evaluates any response against ROM evidence and records its disposition additively. Do not wait idle for review: close a bounded task when its issued question has been answered to its stop boundary, or mark it BLOCKED only for a genuinely unavailable required dependency, then continue with the next independent FIFO task. Physical meaning remaining unresolved is not itself a blocker.
+
+**Backlog replenishment:** Worker 2 retains the standard target of three READY follow-on WOs beyond its current task. Prefer accepted inbox proposals first, ranked by information gain and local suitability; then create a defensible bounded task from the existing protocol priorities if no suitable proposal exists. Never lower evidence standards or invent work merely to keep the local model busy.
+
 
 ## Autonomous execution loop
 
