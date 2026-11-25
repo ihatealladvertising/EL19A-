@@ -1,13 +1,11 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** none
+**Integrator:** ChatGPT (work-order queue generation)
 
-**Purpose:** No active integration window. Workers may publish to `main` under `CONTROL/WORKER_PROTOCOL.md`.
+**Purpose:** Create three bounded Worker 2 follow-on WOs (WO66035, WO66038, WO66041) for the user-supplied idle-speed/temperature calibration leads; update the Worker 2 FIFO queue; verify all remote files before release.
 
-**Last integration:** Findings closeout-gate repair, Findings README workflow, WO66032 creation/assignment, and process-review entry verified on remote `main` on 2026-11-25.
-
-**Last release:** 2026-11-25 — integration readbacks verified; publication may resume.
+**Lock started:** 2026-11-25
 
 This file is the publication gate. Workers must fetch/read its current state immediately before committing or pushing. A missing or unreadable status file is fail-closed: do not publish until the state is confirmed.
