@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** Worker 2 (kilo-auto/free)
+**Integrator:** ChatGPT — owner-directed Release 1 integration
 
-**Purpose:** Batch publication of Worker 2 completed WOs: WO65816, WO66032, WO66035, WO66038, WO66041, WO66044 + active_work_orders.md register update
+**Purpose:** Owner-directed integration of WO70003 consultant scope-freeze findings and Release 1 successor XML construction, validation package and manifest.
 
-**Lock acquired:** 2026-11-25 22:27 UTC
+**Lock acquired:** 2026-11-26 — immediately before Release 1 publication batch
 
 **Lock released:** 2026-11-25 23:32 UTC
 
