@@ -1066,7 +1066,7 @@
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 101, 0x0CD56; physical meaning unresolved. -->
 		<table name="EL19A Raw UINT16 Surface @ 0x0CD56" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
-			<table name="X Axis Raw @ 0x0E2C9" type="X Axis" storageaddress="0x0E2C9" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="X Axis Raw @ 0x0E2C9" type="X Axis" storageaddress="0x0E2C9" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0FEC0" type="Y Axis" storageaddress="0x0FEC0" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 102, 0x0D456; physical meaning unresolved. -->
@@ -2428,7 +2428,7 @@
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 235, 0x11FC4; physical meaning unresolved. -->
 		<table name="EL19A Raw UINT16 Surface @ 0x11FC4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x11FC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
-			<table name="X Axis Raw @ 0x128AE" type="X Axis" storageaddress="0x128AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="X Axis Raw @ 0x128AE" type="X Axis" storageaddress="0x128AE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x129EE" type="Y Axis" storageaddress="0x129EE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 236, 0x121C4; physical meaning unresolved. -->
