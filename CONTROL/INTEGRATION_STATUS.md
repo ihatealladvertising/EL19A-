@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — owner-directed Release 1 header correction / import checkpoint
 
-**Purpose:** Completed Release 1 duplicate-header correction and recorded owner-reported RomRaider initial tree-load milestone; table-level review remains pending.
+**Purpose:** Correct the stale 0x08CD3 axis pointer on 0x0EFFC to its proven implicit fixed grid; record correction and final readback.
 
-**Lock acquired:** 2026-11-26 — Release 1 duplicate-header correction
+**Lock acquired:** 2026-11-26 — 0x0EFFC fixed-grid correction
 
 **Lock released:** 2026-11-26 — XML, manifest, WO and plan readbacks verified
 
