@@ -16,7 +16,7 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `89899d5ed8860a3eab8b550f37f3551c18fc2a0fa27033074aa7bb59ac302549` | `f3fcc06d94a920191a5b391c2205fa074c75f85d` |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `f311bf98007865d6e5f8ff0fce8aa0bc6bde2d9e4250bbb19feb67281512b90d` | `33a798efcbf2b8a1d80dc88be25af02d12297ce7` |
 | Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | `0cb93ce51d74d2fba2f85ec4e15982ae8bf424a3483442d3e3aa5cd7431a4ed7` | `f9fa05cafc99a338a9c0fcad94796762af3fd8af` |
 
 The selected baseline and original consultant CSV are retained unchanged.
@@ -57,12 +57,14 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 - All 145 ROM-backed axis bindings were checked against the revised matrix descriptor; the final audit found zero width/scaling mismatches. Mixed-width pairs at data objects `0x0CD56` and `0x11FC4` were corrected to UBYTE X axes / UWORD Y axes.
 - ROM axis pointers and calibration data extents are within the 1 MiB address range.
 - 9B2E orientation verified in successor; `0x0E21A` is not attached as a ROM axis to the three selector tables.
+- Final post-correction audit checked 145 ROM-backed axes and 125 static axes; no matrix/XML axis pointer, storage-width, static-length, data-extent or object-count mismatches remained.
 - Remote readback of XML and revised matrix matched the exact generated content.
 
 ## Validation not yet performed — do not overstate release status
 
 - **Initial RomRaider import/tree load:** user-reported PASS on 2026-11-26 after removing the duplicate XML declaration; the ROM loads and the definition tree displays many tables. This is an owner-reported result, not an independently observed test; RomRaider version was not supplied.
 - **Table-level visual validation:** still pending. Individual maps/curves, rendered dimensions, axis values, and selected table bytes have not yet been exhaustively checked in RomRaider.
+- **Post-import axis correction:** a matrix/XML audit found stale Y-axis ROM pointers on `0x0EFFC`, `0x1109A` and `0x12D98`, although the reader evidence specifies implicit fixed grids. The successor now uses static UBYTE `0,32,…,224` for `0x0EFFC` and static UWORD `0,4096,…,61440` for `0x1109A` and `0x12D98`. Reload the current canonical XML in RomRaider; the prior UI result predates these changes.
 - **Independent byte-by-byte ROM extraction:** not performed here. Address/width/axis mechanics are based on the current scope matrix and referenced ROM/LST audit; the ROM SHA-256 above is consultant-reported.
 - **Visual inspection of all 254 objects in RomRaider:** pending.
 
