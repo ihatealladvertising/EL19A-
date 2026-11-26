@@ -1,6 +1,6 @@
 # EL19A Conservative Release 1 — Build Manifest
 
-**Build state:** BUILT — STRUCTURALLY CHECKED; RomRaider import validation pending  
+**Build state:** BUILT — STRUCTURALLY CHECKED; initial RomRaider tree load user-reported PASS; table-level review pending  
 **Build date:** 2026-11-26  
 **Target:** 2008 Nissan Versa/Sentra C11X MT, EL19A / MR18DE, FID `8CMCKRN5`, SH7058/SH705822N
 
@@ -16,7 +16,7 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `126608ee577035e6e38cd8f05ec6c40d4b284a0e07743ff7707f2a4ced0528c7` | `7dea41a39361dc4556b8c484c5a74892ee58fda7` |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `89899d5ed8860a3eab8b550f37f3551c18fc2a0fa27033074aa7bb59ac302549` | `f3fcc06d94a920191a5b391c2205fa074c75f85d` |
 | Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | `0cb93ce51d74d2fba2f85ec4e15982ae8bf424a3483442d3e3aa5cd7431a4ed7` | `f9fa05cafc99a338a9c0fcad94796762af3fd8af` |
 
 The selected baseline and original consultant CSV are retained unchanged.
@@ -61,7 +61,8 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 
 ## Validation not yet performed — do not overstate release status
 
-- **RomRaider desktop import/tree validation:** not run from this integration environment.
+- **Initial RomRaider import/tree load:** user-reported PASS on 2026-11-26 after removing the duplicate XML declaration; the ROM loads and the definition tree displays many tables. This is an owner-reported result, not an independently observed test; RomRaider version was not supplied.
+- **Table-level visual validation:** still pending. Individual maps/curves, rendered dimensions, axis values, and selected table bytes have not yet been exhaustively checked in RomRaider.
 - **Independent byte-by-byte ROM extraction:** not performed here. Address/width/axis mechanics are based on the current scope matrix and referenced ROM/LST audit; the ROM SHA-256 above is consultant-reported.
 - **Visual inspection of all 254 objects in RomRaider:** pending.
 
