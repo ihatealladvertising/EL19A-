@@ -76,116 +76,116 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 002, 0x0848A; physical meaning unresolved. -->
-		<table name="Throttle Reduction Rate | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x0848A" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Throttle Reduction Rate | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x0848A" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 003, 0x0848B; physical meaning unresolved. -->
-		<table name="Throttle Reduction Rate (Neutral) | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x0848B" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Throttle Reduction Rate (Neutral) | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x0848B" type="1D" scaling="Percent_ThrottleReduction" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 004, 0x08550; physical meaning unresolved. -->
-		<table name="Coolant Temp Min for Rev Hang | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x08550" type="1D" scaling="Temp_Coolant_Min" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Coolant Temp Min for Rev Hang | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Throttle Control Decel" storageaddress="0x08550" type="1D" scaling="Temp_Coolant_Min" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 005, 0x0F3D6; physical meaning unresolved. -->
-		<table name="TVO Upper Limit Table | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0x0F3D6" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+		<table name="[P] TVO Upper Limit Table | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0x0F3D6" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
 			<table name="Y Axis Raw @ 0x0F3C6" type="Y Axis" storageaddress="0x0F3C6" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 006, 0x0F3DE; physical meaning unresolved. -->
-		<table name="TVO Upper Limit Table 2 | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0x0F3DE" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
+		<table name="[P] TVO Upper Limit Table 2 | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Limiters//Degree Based" storageaddress="0x0F3DE" type="2D" scaling="TVO_Degrees_Ref" storagetype="uint8" endian="big" sizey="8">
 			<table name="Y Axis Raw @ 0x0F3CE" type="Y Axis" storageaddress="0x0F3CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 007, 0x0B012; physical meaning unresolved. -->
-		<table name="Knock Slice Map 1 [S] (B012)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] Knock Slice Map 1 [S] (B012)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 008, 0x0B112; physical meaning unresolved. -->
-		<table name="Knock Slice Map 2 [S] (B112)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] Knock Slice Map 2 [S] (B112)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 009, 0x0B212; physical meaning unresolved. -->
-		<table name="Knock Slice Map 3 [S] (B212)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] Knock Slice Map 3 [S] (B212)" category="SPEC//Ignition Timing//Knock Control//Thresholds" storageaddress="0x0B212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 010, 0x09B2E; physical meaning unresolved. -->
-		<table name="Cold Ignition Timing Map (16x16) [S] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x09B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] Cold Ignition Timing Map (16x16) [S] (9B2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x09B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 011, 0x09C2E; physical meaning unresolved. -->
-		<table name="High Octane Ignition Timing Map (16x16) [S] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x09C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] High Octane Ignition Timing Map (16x16) [S] (9C2E)" category="SPEC//Ignition Timing//Main" storageaddress="0x09C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 012, 0x09DAE; physical meaning unresolved. -->
-		<table name="High Detonation Ignition Timing Map (16x16) [S] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x09DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] High Detonation Ignition Timing Map (16x16) [S] (9DAE)" category="SPEC//Ignition Timing//Main" storageaddress="0x09DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 013, 0x0A452; physical meaning unresolved. -->
-		<table name="Idle Ignition Advance Map [S] (A452)" category="SPEC//Ignition Timing//Main" storageaddress="0x0A452" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Idle Ignition Advance Map [S] (A452)" category="SPEC//Ignition Timing//Main" storageaddress="0x0A452" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0F57E" type="X Axis" storageaddress="0x0F57E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0F576" type="Y Axis" storageaddress="0x0F576" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 014, 0x0A552; physical meaning unresolved. -->
-		<table name="Fuel Compensation Map (16x16) [S] (A552)" category="SPEC//Fuel Delivery//Main" storageaddress="0x0A552" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" sizey="16">
+		<table name="[P] Fuel Compensation Map (16x16) [S] (A552)" category="SPEC//Fuel Delivery//Main" storageaddress="0x0A552" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E339" type="X Axis" storageaddress="0x0E339" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0E291" type="Y Axis" storageaddress="0x0E291" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 015, 0x0AC62; physical meaning unresolved. -->
-		<table name="Fuel Compensation Map (Transient Throttle) 1A [S] (AC62)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0AC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Fuel Compensation Map (Transient Throttle) 1A [S] (AC62)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0AC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 016, 0x0ACA2; physical meaning unresolved. -->
-		<table name="Fuel Compensation Map (Transient Throttle) 1B [S] (ACA2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0ACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Fuel Compensation Map (Transient Throttle) 1B [S] (ACA2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0ACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 017, 0x0ACE2; physical meaning unresolved. -->
-		<table name="Fuel Compensation Map (Transient Throttle) 2A [S] (ACE2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0ACE2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Fuel Compensation Map (Transient Throttle) 2A [S] (ACE2)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0ACE2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 018, 0x0AD22; physical meaning unresolved. -->
-		<table name="Fuel Compensation Map (Transient Throttle) 2B [S] (AD22)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0AD22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Fuel Compensation Map (Transient Throttle) 2B [S] (AD22)" category="SPEC//Fuel Delivery//Transient Correction" storageaddress="0x0AD22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 019, 0x0AB22; physical meaning unresolved. -->
-		<table name="Operating Correction Map [S] (AB22)" category="SPEC//Unassigned" storageaddress="0x0AB22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+		<table name="[P] Operating Correction Map [S] (AB22)" category="SPEC//Unassigned" storageaddress="0x0AB22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Axis Raw @ 0x0E022" type="X Axis" storageaddress="0x0E022" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
 			<table name="Y Axis Raw @ 0x0E24D" type="Y Axis" storageaddress="0x0E24D" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 020, 0x0AB72; physical meaning unresolved. -->
-		<table name="Fuel Cut Timing Map 1 [S] (AB72)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0AB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Fuel Cut Timing Map 1 [S] (AB72)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0AB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0F552" type="X Axis" storageaddress="0x0F552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0F54E" type="Y Axis" storageaddress="0x0F54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 021, 0x0AB62; physical meaning unresolved. -->
-		<table name="Fuel Cut Timing Map 2 [S] (AB62)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0AB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Fuel Cut Timing Map 2 [S] (AB62)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0AB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0F552" type="X Axis" storageaddress="0x0F552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0F54E" type="Y Axis" storageaddress="0x0F54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 022, 0x0A0E2; physical meaning unresolved. -->
-		<table name="Accelerator Pedal to Throttle Target Map [S] (A0E2)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0x0A0E2" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Accelerator Pedal to Throttle Target Map [S] (A0E2)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0x0A0E2" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0E002" type="X Axis" storageaddress="0x0E002" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0E006" type="Y Axis" storageaddress="0x0E006" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 023, 0x0A272; physical meaning unresolved. -->
-		<table name="Accelerator Pedal to Throttle Target Map B [S] (A272)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0x0A272" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Accelerator Pedal to Throttle Target Map B [S] (A272)" category="SPEC//Electronic Throttle Control//Accelerator Pedal//Main" storageaddress="0x0A272" type="3D" scaling="Data_Pct_x0p78125" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0E002" type="X Axis" storageaddress="0x0E002" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0E006" type="Y Axis" storageaddress="0x0E006" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 024, 0x0AC12; physical meaning unresolved. -->
-		<table name="Idle Speed Correction Map 1 [S] (AC12)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0AC12" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Idle Speed Correction Map 1 [S] (AC12)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0AC12" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0E0A2" type="X Axis" storageaddress="0x0E0A2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0E2A1" type="Y Axis" storageaddress="0x0E2A1" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 025, 0x0A652; physical meaning unresolved. -->
-		<table name="Idle Speed Correction Map 2 [S] (A652)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0A652" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+		<table name="[P] Idle Speed Correction Map 2 [S] (A652)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0A652" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
 			<table name="X Axis Raw @ 0x0E0A2" type="X Axis" storageaddress="0x0E0A2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
 			<table name="Y Axis Raw @ 0x0E2A1" type="Y Axis" storageaddress="0x0E2A1" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 026, 0x0ED64; physical meaning unresolved. -->
-		<table name="Fuel Cut Bosch [S] (ED64)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0ED64" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Fuel Cut Bosch [S] (ED64)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0ED64" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -206,7 +206,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 027, 0x0EDA0; physical meaning unresolved. -->
-		<table name="Fuel Cut JECS [S] (EDA0)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0EDA0" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Fuel Cut JECS [S] (EDA0)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0EDA0" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -227,7 +227,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 028, 0x0EE68; physical meaning unresolved. -->
-		<table name="Fuel Restore JECS [S] (EE68)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0EE68" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Fuel Restore JECS [S] (EE68)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0EE68" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -248,7 +248,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 029, 0x0F01C; physical meaning unresolved. -->
-		<table name="Fuel Restore Bosch [S] (F01C)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0F01C" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Fuel Restore Bosch [S] (F01C)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0F01C" type="2D" scaling="Rpm_x25" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -269,7 +269,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 030, 0x0EFA4; physical meaning unresolved. -->
-		<table name="QDSPT Basic Value Table (Third Mode) [S] (EFA4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x0EFA4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] QDSPT Basic Value Table (Third Mode) [S] (EFA4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x0EFA4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -290,11 +290,11 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 032, 0x0F062; physical meaning unresolved. -->
-		<table name="Ambient Pressure Reference Curve [S] mTRPAMB (F062)" category="SPEC//Airflow//Main" storageaddress="0x0F062" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Ambient Pressure Reference Curve [S] mTRPAMB (F062)" category="SPEC//Airflow//Main" storageaddress="0x0F062" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Axis Raw @ 0x0E0CE" type="Y Axis" storageaddress="0x0E0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 033, 0x0E424; physical meaning unresolved. -->
-		<table name="Post-Start Correction [S] mTA5N (E424)" category="SPEC//Engine Start Performance//After Start" storageaddress="0x0E424" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Post-Start Correction [S] mTA5N (E424)" category="SPEC//Engine Start Performance//After Start" storageaddress="0x0E424" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -315,7 +315,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 034, 0x0F10E; physical meaning unresolved. -->
-		<table name="Cranking Fuel Value vs Coolant [S] mTSTNGTM (F10E)" category="SPEC//Engine Start Performance//Cranking Control//Main" storageaddress="0x0F10E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Cranking Fuel Value vs Coolant [S] mTSTNGTM (F10E)" category="SPEC//Engine Start Performance//Cranking Control//Main" storageaddress="0x0F10E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -336,7 +336,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 035, 0x0F2B2; physical meaning unresolved. -->
-		<table name="After-Start Correction vs Rotations [S] mTTNKAS (F2B2)" category="SPEC//Engine Start Performance//After Start" storageaddress="0x0F2B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] After-Start Correction vs Rotations [S] mTTNKAS (F2B2)" category="SPEC//Engine Start Performance//After Start" storageaddress="0x0F2B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -357,7 +357,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 036, 0x0F426; physical meaning unresolved. -->
-		<table name="Engine Speed Threshold Curve [S] mTTXNEL (F426)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0F426" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Engine Speed Threshold Curve [S] mTTXNEL (F426)" category="SPEC//Fuel Delivery//Fuel Cut//Main" storageaddress="0x0F426" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -378,7 +378,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 037, 0x0E974; physical meaning unresolved. -->
-		<table name="Correction Chain Enable Gate (low-input detect) [S] (E974)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0E974" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Correction Chain Enable Gate (low-input detect) [S] (E974)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0E974" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -399,7 +399,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 038, 0x0EE08; physical meaning unresolved. -->
-		<table name="Throttle Correction Rate Curve A [S] (EE08)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0EE08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Throttle Correction Rate Curve A [S] (EE08)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0EE08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -420,7 +420,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 039, 0x0EE28; physical meaning unresolved. -->
-		<table name="Throttle Correction Rate Curve B [S] (EE28)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0EE28" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Throttle Correction Rate Curve B [S] (EE28)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0EE28" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -441,7 +441,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 040, 0x0F33E; physical meaning unresolved. -->
-		<table name="Idle Decay Rate Curve 1 [S] (F33E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F33E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Decay Rate Curve 1 [S] (F33E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F33E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -462,7 +462,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 041, 0x0F34E; physical meaning unresolved. -->
-		<table name="Idle Decay Rate Curve 2 [S] (F34E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F34E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Decay Rate Curve 2 [S] (F34E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F34E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -483,7 +483,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 042, 0x0F35E; physical meaning unresolved. -->
-		<table name="Idle Decay Rate Curve 3 [S] (F35E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F35E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Decay Rate Curve 3 [S] (F35E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F35E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -504,7 +504,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 043, 0x0F36E; physical meaning unresolved. -->
-		<table name="Idle Decay Rate Curve 4 [S] (F36E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F36E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Decay Rate Curve 4 [S] (F36E)" category="SPEC//Idle Speed Control//Limiters//General Limiters" storageaddress="0x0F36E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -525,7 +525,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 044, 0x0E510; physical meaning unresolved. -->
-		<table name="Operating Correction Rising Curve [S] (E510)" category="SPEC//Unassigned" storageaddress="0x0E510" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Operating Correction Rising Curve [S] (E510)" category="SPEC//Unassigned" storageaddress="0x0E510" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -546,7 +546,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 045, 0x0EB40; physical meaning unresolved. -->
-		<table name="Operating Correction Falling Curve [S] (EB40)" category="SPEC//Unassigned" storageaddress="0x0EB40" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Operating Correction Falling Curve [S] (EB40)" category="SPEC//Unassigned" storageaddress="0x0EB40" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -567,7 +567,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 046, 0x0E800; physical meaning unresolved. -->
-		<table name="Warm-Up Decay Curve [S] (E800)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0E800" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Warm-Up Decay Curve [S] (E800)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0E800" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -588,7 +588,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 047, 0x0EA2C; physical meaning unresolved. -->
-		<table name="Decay Curve A [S] (EA2C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0EA2C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Decay Curve A [S] (EA2C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0EA2C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -609,7 +609,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 048, 0x0EA3C; physical meaning unresolved. -->
-		<table name="Decay Curve B [S] (EA3C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0EA3C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Decay Curve B [S] (EA3C)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0EA3C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -630,7 +630,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 049, 0x0ECCE; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Rise [S] (ECCE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECCE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Rise [S] (ECCE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECCE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -651,7 +651,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 050, 0x0ECDE; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Slow Rise [S] (ECDE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Slow Rise [S] (ECDE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -672,7 +672,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 051, 0x0ECEE; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Fall A [S] (ECEE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECEE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Fall A [S] (ECEE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECEE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -693,7 +693,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 052, 0x0ECFE; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Fall B [S] (ECFE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECFE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Fall B [S] (ECFE)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ECFE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -714,7 +714,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 053, 0x0ED0E; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Fall C [S] (ED0E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ED0E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Fall C [S] (ED0E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ED0E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -735,7 +735,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 054, 0x0ED1E; physical meaning unresolved. -->
-		<table name="Idle Coolant Compensation Curve Fall D [S] (ED1E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ED1E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Idle Coolant Compensation Curve Fall D [S] (ED1E)" category="SPEC//Idle Speed Control//PID Control//Main" storageaddress="0x0ED1E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -756,7 +756,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 055, 0x0EDC8; physical meaning unresolved. -->
-		<table name="Operating Limit Clamp Curve 1 [S] (EDC8)" category="SPEC//Unassigned" storageaddress="0x0EDC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Operating Limit Clamp Curve 1 [S] (EDC8)" category="SPEC//Unassigned" storageaddress="0x0EDC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -777,7 +777,7 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 056, 0x0EDD8; physical meaning unresolved. -->
-		<table name="Operating Limit Clamp Curve 2 [S] (EDD8)" category="SPEC//Unassigned" storageaddress="0x0EDD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+		<table name="[P] Operating Limit Clamp Curve 2 [S] (EDD8)" category="SPEC//Unassigned" storageaddress="0x0EDD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
 			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
 				<data>0</data>
 				<data>16</data>
@@ -798,43 +798,43 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 057, 0x08808; physical meaning unresolved. -->
-		<table name="Gate Threshold A [S] (8808)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08808" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Gate Threshold A [S] (8808)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08808" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 058, 0x08809; physical meaning unresolved. -->
-		<table name="Set Threshold A [S] (8809)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08809" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Set Threshold A [S] (8809)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08809" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 059, 0x082E0; physical meaning unresolved. -->
-		<table name="Gate Threshold B [S] (82E0)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x082E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Gate Threshold B [S] (82E0)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x082E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 060, 0x082E1; physical meaning unresolved. -->
-		<table name="Set Threshold B [S] (82E1)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x082E1" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Set Threshold B [S] (82E1)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x082E1" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 061, 0x08231; physical meaning unresolved. -->
-		<table name="Integrator Lower Limit A [S] (8231)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08231" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Integrator Lower Limit A [S] (8231)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08231" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 062, 0x0892D; physical meaning unresolved. -->
-		<table name="Input Qualifier Minimum [S] (892D)" category="SPEC//Unassigned//Scalars" storageaddress="0x0892D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Input Qualifier Minimum [S] (892D)" category="SPEC//Unassigned//Scalars" storageaddress="0x0892D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 063, 0x08B22; physical meaning unresolved. -->
-		<table name="Input Valid Lower Bound x128 [S] (8B22)" category="SPEC//Unassigned//Scalars" storageaddress="0x08B22" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Input Valid Lower Bound x128 [S] (8B22)" category="SPEC//Unassigned//Scalars" storageaddress="0x08B22" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 064, 0x08367; physical meaning unresolved. -->
-		<table name="Input Filter Coefficient k/128 [S] (8367)" category="SPEC//Unassigned//Scalars" storageaddress="0x08367" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Input Filter Coefficient k/128 [S] (8367)" category="SPEC//Unassigned//Scalars" storageaddress="0x08367" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 065, 0x0841D; physical meaning unresolved. -->
-		<table name="Actuator Command Base [S] (841D)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0841D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Actuator Command Base [S] (841D)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x0841D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 066, 0x08E5B; physical meaning unresolved. -->
-		<table name="Actuator Command Offset Plus [S] (8E5B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08E5B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Actuator Command Offset Plus [S] (8E5B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08E5B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 067, 0x08435; physical meaning unresolved. -->
-		<table name="Actuator Command Offset Minus [S] (8435)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08435" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Actuator Command Offset Minus [S] (8435)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08435" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 068, 0x08A9B; physical meaning unresolved. -->
-		<table name="Actuator Command Active Limit [S] (8A9B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08A9B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Actuator Command Active Limit [S] (8A9B)" category="SPEC//Electronic Throttle Control//Main" storageaddress="0x08A9B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 069, 0x0924E; physical meaning unresolved. -->
-		<table name="QDSPT APO Compensation Change Rate [S] mDDPAPO (924E)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x0924E" type="1D" scaling="Percent_UWORD_100_256" storagetype="uint16" endian="big" sizex="1" sizey="1" />
+		<table name="[P] QDSPT APO Compensation Change Rate [S] mDDPAPO (924E)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x0924E" type="1D" scaling="Percent_UWORD_100_256" storagetype="uint16" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 070, 0x092C4; physical meaning unresolved. -->
-		<table name="QDSPT APO Compensation Threshold [S] (92C4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x092C4" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="1" sizey="1" />
+		<table name="[P] QDSPT APO Compensation Threshold [S] (92C4)" category="SPEC//Electronic Throttle Control//Dashpot" storageaddress="0x092C4" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 071, 0x083A4; physical meaning unresolved. -->
-		<table name="Unknown Count or Flag [S] (83A4)" category="SPEC//Unassigned//Scalars" storageaddress="0x083A4" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Unknown Count or Flag [S] (83A4)" category="SPEC//Unassigned//Scalars" storageaddress="0x083A4" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 072, 0x083B8; physical meaning unresolved. -->
-		<table name="Unknown Threshold 83B8 [S] (83B8)" category="SPEC//Unassigned//Scalars" storageaddress="0x083B8" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Unknown Threshold 83B8 [S] (83B8)" category="SPEC//Unassigned//Scalars" storageaddress="0x083B8" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 073, 0x08620; physical meaning unresolved. -->
-		<table name="Unknown Threshold 8620 [S] (8620)" category="SPEC//Unassigned//Scalars" storageaddress="0x08620" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Unknown Threshold 8620 [S] (8620)" category="SPEC//Unassigned//Scalars" storageaddress="0x08620" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 074, 0x085E0; physical meaning unresolved. -->
-		<table name="Input Threshold vs FFFF84B5 [S] (85E0)" category="SPEC//Unassigned//Scalars" storageaddress="0x085E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Input Threshold vs FFFF84B5 [S] (85E0)" category="SPEC//Unassigned//Scalars" storageaddress="0x085E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 075, 0x08485; physical meaning unresolved. -->
-		<table name="Init-Copied Scalar to FFFF36C1 [S] (8485)" category="SPEC//Unassigned//Scalars" storageaddress="0x08485" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<table name="[P] Init-Copied Scalar to FFFF36C1 [S] (8485)" category="SPEC//Unassigned//Scalars" storageaddress="0x08485" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
 		<!-- Release 1 RAW/PROVISIONAL; row 082, 0x0A0F2; physical meaning unresolved. -->
 		<table name="[P] Engine Operating Correction Map (0A0F2)" category="SPEC//Engine Control//Corrections" storageaddress="0x0A0F2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
 			<table name="X Sample Index 0..7 (physical query unresolved)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
@@ -1071,7 +1071,8 @@
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 101, 0x0CD56; physical meaning unresolved. -->
-		<table name="[P] Throttle / Pedal Control Correction Table (0CD56)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+		<!-- LINKED STORAGE WARNING: Row 0 of this 16x16 surface is the query axis for the 0x0FEC0 curve; its own Y axis is the 16-point array at 0x0FEC0. Changes to row 0 affect that curve's query axis. Review this table together with 0x0FEC0. -->
+		<table name="[P] [LINKED] Throttle / Pedal Control Correction Table (0CD56)" category="SPEC//Electronic Throttle Control//Corrections" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
 			<table name="X Axis Raw @ 0x0E2C9" type="X Axis" storageaddress="0x0E2C9" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
 			<table name="Y Axis Raw @ 0x0FEC0" type="Y Axis" storageaddress="0x0FEC0" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
 		</table>
@@ -2134,7 +2135,8 @@
 			<table name="Y Axis Raw @ 0x111EA" type="Y Axis" storageaddress="0x111EA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 194, 0x0FEC0; physical meaning unresolved. -->
-		<table name="[P] Engine Operating Correction Curve (0FEC0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEC0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+		<!-- LINKED STORAGE WARNING: This 16-point curve's values are the Y axis of the 0x0CD56 surface; its query axis is row 0 of 0x0CD56. Changes to these values affect the surface's breakpoints. Review this curve together with 0x0CD56. -->
+		<table name="[P] [LINKED] Engine Operating Correction Curve (0FEC0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEC0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
 			<table name="Y Axis Raw @ 0x0CD56" type="Y Axis" storageaddress="0x0CD56" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 195, 0x0FEE0; physical meaning unresolved. -->
