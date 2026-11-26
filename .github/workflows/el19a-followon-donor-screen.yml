@@ -24,8 +24,7 @@ jobs:
           from sh7058_cross_rom_scanner import discover_helpers, extract_calls
 
           names = [
-            'E1BR20E.dat','E1BR21E.dat','E1BR22E.dat','E1BR23E.dat',
-            'E1BR50E.dat','E1BT40A.dat','E1JD81D.dat',
+            'E1BR20E.dat','E1BR50E.dat','E1BT40A.dat','E1JD81D.dat',
             'D9_BR60B.dat','D9_BR61B.dat','D9_JD08B.dat','D9_JD09C.dat',
             '310364EM1C.dat','310364EP1B.dat'
           ]
