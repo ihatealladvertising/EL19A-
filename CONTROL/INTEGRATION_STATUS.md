@@ -1,10 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** none
+**Integrator:** ChatGPT
 
-**Purpose:** No active integration window. Workers use the live FIFO in `CONTROL/active_work_orders.md`. Shared-main publication may resume.
+**Purpose:** Align the process-review recurrence and clarify supersession of the obsolete fixed WO backlog target.
+
+**Lock started:** 2026-11-26T00:37:36.561Z
 
 **Last integration:** 2026-11-26T00:37:06.979Z — updated `CONTROL/WORKER_PROTOCOL.md`, `FINDINGS/README.md`, `CALIBRATIONS/README.md`, and created `CALIBRATIONS/RELEASE1_PLAN.md`. No XML, workbook, inventory, ROM/LST, evidence, or live-register changes.
 
