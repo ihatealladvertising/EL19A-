@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -132,3 +132,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock released:** 2026-11-26 — one-shot CONSULT donor scan, decoder comparison and bounded MR16DDT format diagnostics completed. Temporary workflow `.github/workflows/el19a-dat-donor-batch.yml` removed and absence verified. Evidence report: `EVIDENCE/TEN_CONSULT_DAT_DONOR_SCREEN_2026-11-26.md` (blob `46ecf37a12fd2528c1f3499662368d284a0f663f`). Scan/diff run `45906082083` succeeded; final diagnostic run `45906621594` succeeded. No workbench/scanner source, regression tests, XML, catalogue, scope matrix, workbook, Findings, ROM/LST/A2L or worker queues were changed. Donor binaries already present in EVIDENCE were read-only inputs.
+
+
+**Lock acquired:** 2026-11-26 — user-requested read-only workbench screening of eight newly added `.dat` files in EVIDENCE (EM61B/EM63B/EM65A/EM66A, 310364EM1C/310364EP1B, e1bc11b/e1bc12b). A temporary one-shot GitHub Actions workflow may be added and removed solely to execute existing loader/scanner commands and collect results. No tool source, tests, calibration XML, catalogue, scope matrix, workbook, Findings, ROM/LST/A2L or worker-lane files may be modified.
