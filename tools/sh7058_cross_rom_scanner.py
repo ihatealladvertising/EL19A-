@@ -481,13 +481,15 @@ def _export_span(rom: bytes, addr: Optional[int], count: int, elem_type: str) ->
         }
     end = addr + count * width
     in_bounds = 0 <= addr < end <= len(rom)
+    payload = rom[addr:end] if in_bounds else None
     return {
         "start": addr, "start_hex": _address_hex(addr), "count": count,
         "element_type": elem_type, "element_width_bytes": width,
         "byte_length": count * width, "end_exclusive": end,
         "end_exclusive_hex": _address_hex(end), "in_bounds": in_bounds,
         "status": "in_bounds" if in_bounds else "out_of_bounds",
-        "sha256": hashlib.sha256(rom[addr:end]).hexdigest() if in_bounds else None,
+        "sha256": hashlib.sha256(payload).hexdigest() if payload is not None else None,
+        "distinct_byte_values": len(set(payload)) if payload is not None else None,
     }
 
 
@@ -597,6 +599,7 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
                 "byte_length": data_span["byte_length"], "end_exclusive": data_span["end_exclusive"],
                 "end_exclusive_hex": data_span["end_exclusive_hex"], "in_bounds": data_span["in_bounds"],
                 "payload_sha256": data_span["sha256"],
+                "distinct_byte_values": data_span["distinct_byte_values"],
             }
             if variant not in group["geometry_variants"]:
                 group["geometry_variants"].append(variant)
@@ -690,12 +693,85 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
     }
 
 
+
+def build_cross_rom_comparisons(scans: List[dict]) -> List[dict]:
+    """Compare exported unique table bases by address/kind and exact payload hash+length."""
+    if len(scans) < 2:
+        return []
+    target = scans[0]
+    target_tables = target["tables"]
+    target_by_addr = {row["table"]: row for row in target_tables}
+    comparisons = []
+    for sibling in scans[1:]:
+        same_address_kind = 0
+        exact_matches = []
+        nontrivial_matches = 0
+        for sibling_table in sibling["tables"]:
+            target_at_address = target_by_addr.get(sibling_table["table"])
+            if target_at_address and set(target_at_address["helper_kinds"]) & set(sibling_table["helper_kinds"]):
+                same_address_kind += 1
+
+            pairs = []
+            for sibling_variant in sibling_table["geometry_variants"]:
+                shash = sibling_variant["payload_sha256"]
+                ssize = sibling_variant["byte_length"]
+                if shash is None or ssize is None:
+                    continue
+                for target_table in target_tables:
+                    for target_variant in target_table["geometry_variants"]:
+                        if target_variant["byte_length"] == ssize and target_variant["payload_sha256"] == shash:
+                            pairs.append({
+                                "target_table": target_table["table"],
+                                "target_table_hex": target_table["table_hex"],
+                                "sibling_table": sibling_table["table"],
+                                "sibling_table_hex": sibling_table["table_hex"],
+                                "byte_length": ssize,
+                                "payload_sha256": shash,
+                                "distinct_byte_values": sibling_variant["distinct_byte_values"],
+                            })
+            if pairs:
+                exact_matches.append({
+                    "sibling_table": sibling_table["table"],
+                    "sibling_table_hex": sibling_table["table_hex"],
+                    "target_matches": pairs,
+                })
+                if any(pair["distinct_byte_values"] is not None and pair["distinct_byte_values"] > 2 for pair in pairs):
+                    nontrivial_matches += 1
+
+        exact_bases = {row["sibling_table"] for row in exact_matches}
+        relocated_bases = {
+            addr for addr in exact_bases
+            if not (addr in target_by_addr and set(target_by_addr[addr]["helper_kinds"]) &
+                    set(next((t["helper_kinds"] for t in sibling["tables"] if t["table"] == addr), [])))
+        }
+        comparisons.append({
+            "target_rom": target["input"]["path"],
+            "target_rom_sha256": target["input"]["decoded_rom_sha256"],
+            "sibling_rom": sibling["input"]["path"],
+            "sibling_rom_sha256": sibling["input"]["decoded_rom_sha256"],
+            "comparison_method": "same-address+shared-helper-kind; exact-payload SHA-256 plus byte-length; unique sibling table bases",
+            "target_unique_table_bases": len(target_tables),
+            "sibling_unique_table_bases": len(sibling["tables"]),
+            "same_address_and_helper_kind_count": same_address_kind,
+            "exact_payload_match_count": len(exact_bases),
+            "nontrivial_exact_payload_match_count": nontrivial_matches,
+            "relocated_exact_payload_match_count": len(relocated_bases),
+            "exact_payload_matches": exact_matches,
+        })
+    return comparisons
+
+
+
 def write_machine_exports(json_path: Optional[Path], tsv_dir: Optional[Path], scans: List[dict]) -> None:
     """Write one combined JSON evidence file and optional per-ROM TSV companions."""
     if json_path is not None:
         json_path.parent.mkdir(parents=True, exist_ok=True)
         with json_path.open("w", encoding="utf-8", newline="\n") as stream:
-            json.dump({"schema": "sh7058-cross-rom-batch-v1", "scans": scans}, stream, indent=2, sort_keys=True)
+            json.dump({
+                "schema": "sh7058-cross-rom-batch-v1",
+                "scans": scans,
+                "cross_rom_comparisons": build_cross_rom_comparisons(scans),
+            }, stream, indent=2, sort_keys=True)
             stream.write("\n")
     if tsv_dir is None:
         return
