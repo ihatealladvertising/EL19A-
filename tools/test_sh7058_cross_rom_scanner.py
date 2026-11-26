@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sh7058_cross_rom_scanner import HelperSpec, _export_span, build_scan_export, write_machine_exports
+from sh7058_cross_rom_scanner import HelperSpec, _export_span, build_scan_export, extract_calls, write_machine_exports
 
 
 def make_call(helper, pc, table, axis1, dim1, dim2, raw_r4, raw_r5):
@@ -36,6 +36,21 @@ def make_call(helper, pc, table, axis1, dim1, dim2, raw_r4, raw_r5):
 
 
 class ScannerExportTests(unittest.TestCase):
+    def test_unsigned_byte_extension_in_call_delay_slot_is_tracked(self):
+        rom = bytearray(0x8000)
+        helper_addr = 0x2500
+        # mov #-1,r0; bsr helper; extu.b r0,r5 (delay slot)
+        struct.pack_into(">H", rom, 0x27FE, 0xE0FF)
+        struct.pack_into(">H", rom, 0x2800, 0xBE7E)  # target 0x2500
+        struct.pack_into(">H", rom, 0x2802, 0x650C)
+        helper = HelperSpec(helper_addr, "2D_AXIS", "uint8", 16, 1, "uint8", "", 0, 0)
+        calls = extract_calls(bytes(rom), {helper_addr: helper})
+        matched = [call for call in calls if call["call_pc"] == 0x2800]
+        self.assertEqual(len(matched), 1)
+        self.assertEqual(matched[0]["call_form"], "bsr")
+        self.assertEqual(matched[0]["delay_slot"], 0x650C)
+        self.assertEqual(matched[0]["raw_r5"], 0xFF)
+
     def test_span_uses_exclusive_end_and_hashes_full_payload(self):
         rom = bytes(range(32))
         span = _export_span(rom, 4, 4, "uint16")
