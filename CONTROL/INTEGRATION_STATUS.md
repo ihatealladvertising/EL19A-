@@ -1,11 +1,13 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — reconcile Worker 2 READY backlog depth after WO70013 (2026-11-26)
 **Purpose:** Correct the Worker 2 backlog-depth summary to reflect the just-closed FIFO. Preserve all lane heads; no technical WO or calibration artifacts are changed.
 
 **Lock acquired:** 2026-11-26 — Worker 2 backlog-depth reconciliation
+**Live register:** `CONTROL/active_work_orders.md` — blob `db79ae82b4a2131db9c295abc6bdcbe22792c619`; correction commit `558ff34e6ec47a2888f18b0695b5867882881efc`.
+**Lock released:** 2026-11-26 — Worker 2 backlog depth read back as zero; Worker 1/2/3 FIFO heads preserved.
 **WO70013 report:** `CONTROL/WO70013.md` — blob `aaf49a7082a4279ffe46bee37e112a022036071e`; report commit `1485da52689db055d1cfad14185c552bf7ce09db`.
 **Finding:** `FINDINGS/records/FND-000026.md` — blob `6447a9360f62ac182b871636e6c043b252b009d3`; record commit `dbd00cac125c9296476689dc1b4f99a1a3038176`.
 **Findings index:** `FINDINGS/INDEX.md` — blob `eb1f34429ba5397ff1c2a41470381778b0384510`; index commit `14229c4215cd64471710fd56b3e9437723f972f3`.
