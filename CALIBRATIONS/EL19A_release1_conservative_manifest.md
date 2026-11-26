@@ -8,7 +8,7 @@
 
 | Input | Path / identity | Hash |
 |---|---|---|
-| Target ROM | `EVIDENCE/VERSA f501.bin`, 1,048,576 bytes | MD5 `46991697c502052752a2cabcb84c9e27`; SHA-256 `bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a` (reported in WO70003; not independently rehashed in this integration session) |
+| Target ROM | `EVIDENCE/VERSA f501.bin`, 1,048,576 bytes | MD5 `46991697c502052752a2cabcb84c9e27`; SHA-256 `bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a` (independently rehashed from the locally mounted target ROM in WO70007) |
 | Selected baseline XML | `CALIBRATIONS/EL19A_best_guess_provisional_full_definition.xml` | Git blob `77b00f4ea3046050dbd791644752e5c01857b75f`; source SHA-256 `54d396013125d639f226029b938556a151c99844e06fa0f8eadd938afbbd7f8d` |
 | Original consultant scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX.csv` | Git blob `fece677945a6e95b92d8cc993f03998e7e63c702`; SHA-256 `5bde1d62cf8cbd377e1c3ffd4af83ab857557594d041b5a460c2cee079383141` |
 
@@ -16,10 +16,14 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | Not recomputed after label/comment update | `9f16c8ba461a2f0ce162a14688efdf96a6de1345` |
-| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | Not recomputed after linked-warning update | `2a7f6bb77277f27620ebc648e26c286885efdf21` |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | SHA-256 `56728e0023251e77786eac1916df5c4ca526d90851690fe195b55cb86f410acb` | `4bab8bced09047c461520c6044415ca5357b0110` |
+| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | SHA-256 `7ae01f429ce678193805f4005a661fee77e0402a878da3c99c687a1ef8539423` | `52fe30fdd760d3a13885007fe9391dead425ec21` |
 
 The selected baseline and original consultant CSV are retained unchanged.
+
+## Additional Release 1 correction — WO70007
+
+- **0x0FEE0:** 64×1 UWORD BE, complete extent `0x0FEE0–0x0FF5F` (128 B); static sample index 0..63 only; runtime query UWORD[`FFFF184C`] ×16; helper threshold `0x3F00`. Exact displayed query breakpoints and physical meaning remain unresolved. Full payload slice SHA-256 `71cf0268e20b79013e347f52ee20ee2c15839c0ffbb8f045e30327ad7fe87be7`. First 32 UWORD values match the historical WO65132 extraction exactly. The adjacent 16 bytes `0x0FF60–0x0FF6F` were separately inspected and are zero; no wider padding claim is made.
 
 ## Final scope
 
@@ -68,7 +72,7 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 - **Corrected axis details:** 0x11FC4 uses X=0x128AE UBYTE and Y=0x129EE UWORD; 0x0EFFC uses static UBYTE 0,32,…,224; 0x1109A and 0x12D98 use static UWORD 0,4096,…,61440.
 - **Structural audit:** 254 included objects; 145 ROM-backed axes and 125 static axes checked; no detected pointer, width, geometry, extent or static-axis-length mismatches.
 - **Best-guess presentation:** 254 names/categories restored from the selected best-guess baseline and reconciled scope matrix. Six candidate data conversions are restored: Percent_ThrottleReduction, Temp_Coolant_Min, TVO_Degrees_Ref, Data_Pct_x0p78125, Rpm_x25 and Percent_UWORD_100_256. These are deliberate provisional display hypotheses and should be refined, not treated as verified physical conversions.
-- **Remaining:** no exhaustive visual review of all 254 objects; no independent byte-by-byte ROM extraction in this integration session; no vehicle testing. Continue refining names, categories and conversions as the remaining reader/caller work yields better evidence. None of those tasks blocks use of this working definition.
+- **Remaining:** no exhaustive visual review of all 254 objects; no vehicle testing. WO70007 independently rehashed the target ROM and verified the complete 0x0FEE0 payload. RomRaider GUI import of this specific correction was unavailable in the execution environment; no new GUI import test is claimed.
 
 ## Exclusions and unresolved boundaries
 
