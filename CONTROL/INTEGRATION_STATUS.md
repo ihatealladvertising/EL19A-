@@ -1,11 +1,17 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70015 release-inventory reconciliation (2026-11-26)
 **Purpose:** Publish one coordinator-owned, user-directed inventory-reconciliation WO and its closeout report only. The three worker lanes and their FIFO assignments remain untouched; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L, tool source or Findings records will be edited in this batch.
 
 **Lock acquired:** 2026-11-26 — WO70015 release-inventory reconciliation
+
+**Lock released:** 2026-11-26 — WO70015 report and live-register lifecycle pointer read back; Worker 1/2/3 FIFO heads verified unchanged.
+**WO70015:** `CONTROL/WO70015.md` — blob `dd4eed332f9b0e978de3c3dbcfdeab53cc81167d`, closeout commit `761c51bcfaa256018340a3f82b8c205ce6bf9441`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `48797f136b42dbfa4ca523102bb597e20a7621b3`, register commit `d58339ddc801973c92bb5c8c9e8e811731d16e6d`.
+
+No worker WO, worker FIFO, Findings record/index, calibration XML, scope matrix, catalogue, workbook, ROM/LST/A2L, scanner/workbench source or protected evidence was changed in this batch.
 
 
 **Integrator:** ChatGPT — follow-on work allocation for fingerprint join (2026-11-26)
