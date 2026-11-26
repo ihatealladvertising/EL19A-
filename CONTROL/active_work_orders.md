@@ -21,7 +21,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 |---|---|---:|
 | Worker 1 | — | 0 |
 | Worker 2 | — | 0 |
-| Worker 3 | WO66049 → WO66051 → WO70005 | 3 |
+| Worker 3 | WO66049 → WO66051 → WO70005 → WO70006 | 4 |
 
 
 - **User-directed donor alignment/scalar crosswalk WOs (2026-11-24):** created WO65815 (Worker 1; validate Claude's alignment algorithm and donor-2 mapping), WO65816 (Worker 2; reconcile two-donor A2L agreement/disagreement classifications, dependent on WO65815), and WO65817 (Worker 3; target-side validation of mDSHCUT, mDDSHPTD/N and disputed mDDPAPO candidates, dependent on WO65815/65816). The 1,863 common-symbol and 842 agreement figures remain reported inputs, not independently verified results. Each WO prohibits semantic promotion from donor matching alone and protects XML, workbook, inventory, A2L, ROM/LST and Findings index.
