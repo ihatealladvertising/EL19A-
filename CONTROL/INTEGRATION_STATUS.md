@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — owner-directed Release 1 integration
+**Integrator:** ChatGPT — owner-directed Release 1 header correction / import checkpoint
 
-**Purpose:** Completed owner-directed WO70003 integration and Conservative Release 1 structural build; RomRaider desktop import remains pending.
+**Purpose:** Correct duplicate XML declaration in Release 1 successor and record user-reported RomRaider import/tree-load milestone.
 
-**Lock acquired:** 2026-11-26 — owner-directed Release 1 batch
+**Lock acquired:** 2026-11-26 — Release 1 duplicate-header correction
 
 **Lock released:** 2026-11-26 — all batch readbacks verified
 
