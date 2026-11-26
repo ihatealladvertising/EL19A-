@@ -27,13 +27,13 @@ The JSON contains a top-level sh7058-cross-rom-batch-v1 object with one scan obj
 - input, tool, layout and summary: container and decoded-ROM hashes/sizes, selected ZIP member, scanner-source hash, command line, inferred layout, transfer-form counts and unresolved/invalid-extent counts;
 - table_span, axis1_span, axis2_span: storage width, element count, byte length, exclusive end address, in-bounds flag and SHA-256 when the full span is available.
 
-The optional TSV directory receives one .calls.tsv, .tables.tsv and .helpers.tsv file per scanned ROM. Nested evidence fields are JSON-encoded inside TSV cells. JSON is the canonical full-fidelity output.
+The optional TSV directory receives one .calls.tsv, .tables.tsv and .helpers.tsv file per scanned ROM. Nested evidence fields are JSON-encoded inside TSV cells. JSON is the canonical full-fidelity output. The cross-ROM comparison separates same-address/shared-helper-kind, same-address exact-payload and relocated-only exact-payload counts. Each count is by unique sibling table base, and exact address mappings are included.
 
 ### Machine-export evidence limits
 
 The export makes the scanner's current observations reproducible; it does **not** turn its static analysis into a full disassembler or data-flow engine:
 
-- R4/R5/R6 are values inferred by the existing bounded linear window (56 bytes before the call, plus the delay slot). The export preserves the exact instruction words so callers can be checked independently; it does not claim complete register provenance across branches, earlier calls, stack spills or computed pointer chains.
+- R4/R5/R6 are values inferred by the existing bounded linear window (56 bytes before the call, plus the delay slot). Helper-address literal loads follow simple register-to-register copies up to the transfer; overwrites, branch instructions and intervening transfers terminate the search. Signed/unsigned byte/word extensions in the delay slot are modelled. The export preserves the exact instruction words so callers can be checked independently; it does not claim complete register provenance across branches, earlier calls, stack spills or computed pointer chains.
 - caller_start_candidate is only the nearest 0x4F22 prologue-shaped word within 0x800 bytes. It is not a proven function boundary or symbol.
 - indirect_jsr and indirect_jmp are distinguished. A jmp may be a tail transfer and must not automatically be treated as an ordinary returning call.
 - A resolved R4 pointer is a candidate inside the inferred calibration window, not proof that the helper consumes a valid calibration table. Extents are derived from inferred helper geometry; unresolved width, invalid dimensions and out-of-ROM extents are explicitly flagged and do not receive payload hashes. Target-side checks remain necessary.
