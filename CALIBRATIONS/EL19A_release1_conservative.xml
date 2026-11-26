@@ -1,0 +1,2665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<roms>
+	<rom>
+		<romid>
+			<xmlid>EL19A_Release1_Conservative</xmlid>
+			<internalidaddress>0x13A98</internalidaddress>
+			<internalidstring>8CMCKRN5</internalidstring>
+			<ecuid>1EL19A</ecuid>
+			<year>2008</year>
+			<market>USDM</market>
+			<make>Nissan</make>
+			<model>Versa</model>
+			<submodel>MT</submodel>
+			<memmodel>SH7058</memmodel>
+			<endian>Big</endian>
+			<flashmethod>Nisprog</flashmethod>
+			<filesize>1024kb</filesize>
+		</romid>
+		<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+		<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+		<scaling name="Raw_UBYTE" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Raw_UWORD" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint16" endian="big" />
+		<scaling name="Axis_Raw" units="raw" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="uint8" endian="big" />
+		<scaling name="Raw_SBYTE" units="raw signed" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="int8" endian="big" />
+		<scaling name="Raw_SWORD" units="raw signed" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="5" storagetype="int16" endian="big" />
+		<!-- EL19A Conservative Release 1: 254 objects; raw/provisional objects are not tune-ready. See manifest. -->
+		<table name="Rev Hang Airflow | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE678" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<table name="Rev Hang Airflow Alt | VERSA_EL19A_8CMCKRN5_SH705822N_Stock.bin" category="Electronic Throttle Control//Dashpot" storageaddress="0xE688" type="2D" scaling="Airflow_LitersPerMin" storagetype="uint8" endian="big" sizey="16">
+			<scaling name="Airflow_LitersPerMin" units="liter/min" expression="x*2" to_byte="x/2" format="0" fineincrement="2" coarseincrement="10" storagetype="uint8" endian="big" />
+			<table name="RPM" type="Static Y Axis" scaling="RPM_Static" storagetype="uint16" endian="big" sizey="16">
+				<scaling name="RPM_Static" units="RPM" expression="x" to_byte="x" format="0" fineincrement="1" coarseincrement="100" storagetype="uint16" endian="big" />
+				<data>0</data>
+				<data>400</data>
+				<data>800</data>
+				<data>1200</data>
+				<data>1600</data>
+				<data>2000</data>
+				<data>2400</data>
+				<data>2800</data>
+				<data>3200</data>
+				<data>3600</data>
+				<data>4000</data>
+				<data>4400</data>
+				<data>4800</data>
+				<data>5200</data>
+				<data>5600</data>
+				<data>6000</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 002, 0x0848A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x0848A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0848A" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 003, 0x0848B; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x0848B" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0848B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 004, 0x08550; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08550" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08550" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 005, 0x0F3D6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F3D6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F3D6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F3C6" type="Y Axis" storageaddress="0x0F3C6" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 006, 0x0F3DE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F3DE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F3DE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F3CE" type="Y Axis" storageaddress="0x0F3CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 007, 0x0B012; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0B012" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B012" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 008, 0x0B112; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0B112" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B112" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 009, 0x0B212; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0B212" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B212" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E0E2" type="X Axis" storageaddress="0x0E0E2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E0BE" type="Y Axis" storageaddress="0x0E0BE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 010, 0x09B2E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x09B2E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x09B2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 011, 0x09C2E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x09C2E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x09C2E" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 012, 0x09DAE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x09DAE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x09DAE" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E4AC" type="X Axis" storageaddress="0x0E4AC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E4BC" type="Y Axis" storageaddress="0x0E4BC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 013, 0x0A452; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A452" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A452" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F57E" type="X Axis" storageaddress="0x0F57E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F576" type="Y Axis" storageaddress="0x0F576" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 014, 0x0A552; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A552" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A552" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E339" type="X Axis" storageaddress="0x0E339" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0E291" type="Y Axis" storageaddress="0x0E291" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 015, 0x0AC62; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AC62" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AC62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 016, 0x0ACA2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0ACA2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ACA2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 017, 0x0ACE2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0ACE2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ACE2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 018, 0x0AD22; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AD22" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AD22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F22E" type="X Axis" storageaddress="0x0F22E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F226" type="Y Axis" storageaddress="0x0F226" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 019, 0x0AB22; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AB22" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AB22" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0E022" type="X Axis" storageaddress="0x0E022" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0E24D" type="Y Axis" storageaddress="0x0E24D" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 020, 0x0AB72; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AB72" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AB72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0F552" type="X Axis" storageaddress="0x0F552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0F54E" type="Y Axis" storageaddress="0x0F54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 021, 0x0AB62; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AB62" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AB62" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0F552" type="X Axis" storageaddress="0x0F552" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0F54E" type="Y Axis" storageaddress="0x0F54E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 022, 0x0A0E2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A0E2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A0E2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0E002" type="X Axis" storageaddress="0x0E002" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0E006" type="Y Axis" storageaddress="0x0E006" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 023, 0x0A272; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A272" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A272" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0E002" type="X Axis" storageaddress="0x0E002" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0E006" type="Y Axis" storageaddress="0x0E006" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 024, 0x0AC12; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AC12" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AC12" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0E0A2" type="X Axis" storageaddress="0x0E0A2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0E2A1" type="Y Axis" storageaddress="0x0E2A1" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 025, 0x0A652; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A652" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A652" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="4" sizey="4">
+			<table name="X Axis Raw @ 0x0E0A2" type="X Axis" storageaddress="0x0E0A2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="4" />
+			<table name="Y Axis Raw @ 0x0E2A1" type="Y Axis" storageaddress="0x0E2A1" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 026, 0x0ED64; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED64" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED64" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 027, 0x0EDA0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EDA0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EDA0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 028, 0x0EE68; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EE68" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EE68" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 029, 0x0F01C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F01C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F01C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 030, 0x0EFA4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EFA4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EFA4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 032, 0x0F062; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F062" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F062" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0E0CE" type="Y Axis" storageaddress="0x0E0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 033, 0x0E424; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E424" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E424" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 034, 0x0F10E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F10E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F10E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 035, 0x0F2B2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F2B2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F2B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 036, 0x0F426; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F426" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F426" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 037, 0x0E974; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E974" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E974" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 038, 0x0EE08; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EE08" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EE08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 039, 0x0EE28; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EE28" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EE28" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 040, 0x0F33E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F33E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F33E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 041, 0x0F34E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F34E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F34E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 042, 0x0F35E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F35E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F35E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 043, 0x0F36E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F36E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F36E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 044, 0x0E510; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E510" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E510" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 045, 0x0EB40; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EB40" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EB40" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 046, 0x0E800; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E800" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E800" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 047, 0x0EA2C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA2C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA2C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 048, 0x0EA3C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA3C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA3C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 049, 0x0ECCE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ECCE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ECCE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 050, 0x0ECDE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ECDE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ECDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 051, 0x0ECEE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ECEE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ECEE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 052, 0x0ECFE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ECFE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ECFE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 053, 0x0ED0E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED0E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED0E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 054, 0x0ED1E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED1E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED1E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 055, 0x0EDC8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EDC8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EDC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 056, 0x0EDD8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EDD8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EDD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Raw Query Grid 0..240" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>16</data>
+				<data>32</data>
+				<data>48</data>
+				<data>64</data>
+				<data>80</data>
+				<data>96</data>
+				<data>112</data>
+				<data>128</data>
+				<data>144</data>
+				<data>160</data>
+				<data>176</data>
+				<data>192</data>
+				<data>208</data>
+				<data>224</data>
+				<data>240</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 057, 0x08808; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08808" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08808" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 058, 0x08809; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08809" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08809" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 059, 0x082E0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x082E0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x082E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 060, 0x082E1; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x082E1" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x082E1" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 061, 0x08231; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08231" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08231" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 062, 0x0892D; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x0892D" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0892D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 063, 0x08B22; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08B22" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08B22" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 064, 0x08367; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08367" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08367" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 065, 0x0841D; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x0841D" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0841D" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 066, 0x08E5B; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08E5B" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08E5B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 067, 0x08435; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08435" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08435" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 068, 0x08A9B; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08A9B" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08A9B" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 069, 0x0924E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Scalar @ 0x0924E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0924E" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 070, 0x092C4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Scalar @ 0x092C4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x092C4" type="1D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 071, 0x083A4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x083A4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x083A4" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 072, 0x083B8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x083B8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x083B8" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 073, 0x08620; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08620" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08620" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 074, 0x085E0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x085E0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x085E0" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 075, 0x08485; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Scalar @ 0x08485" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08485" type="1D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="1" sizey="1" />
+		<!-- Release 1 RAW/PROVISIONAL; row 082, 0x0A0F2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A0F2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A0F2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (physical query unresolved)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 083, 0x0A8A2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A8A2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A8A2" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (physical query unresolved)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 084, 0x0E904; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E904" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E904" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FA62" type="Y Axis" storageaddress="0x0FA62" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 085, 0x0E914; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E914" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E914" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FA82" type="Y Axis" storageaddress="0x0FA82" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 086, 0x0E934; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E934" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E934" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0E082" type="Y Axis" storageaddress="0x0E082" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 087, 0x0E9AC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9AC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9AC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0F51E" type="Y Axis" storageaddress="0x0F51E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 088, 0x0F406; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F406" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F406" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="32">
+			<table name="Y Sample Index 0..31 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="32">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+				<data>16</data>
+				<data>17</data>
+				<data>18</data>
+				<data>19</data>
+				<data>20</data>
+				<data>21</data>
+				<data>22</data>
+				<data>23</data>
+				<data>24</data>
+				<data>25</data>
+				<data>26</data>
+				<data>27</data>
+				<data>28</data>
+				<data>29</data>
+				<data>30</data>
+				<data>31</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 089, 0x0DE5E; physical meaning unresolved. -->
+		<table name="EL19A Raw INT8 Curve @ 0x0DE5E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0DE5E" type="2D" scaling="Raw_SBYTE" storagetype="int8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 090, 0x0E4D4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E4D4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E4D4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4">
+			<table name="Y Sample Index 0..3 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 091, 0x0F4BE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F4BE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F4BE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4">
+			<table name="Y Sample Index 0..3 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 092, 0x0ED9C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED9C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED9C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4">
+			<table name="Bin Index 0..3 (selector thresholds [6,8,12] @ 0x0E21A)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 093, 0x0F2AE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F2AE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F2AE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="4">
+			<table name="Bin Index 0..3 (selector thresholds [6,8,12] @ 0x0E21A)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 094, 0x107CC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x107CC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x107CC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4">
+			<table name="Bin Index 0..3 (selector thresholds [6,8,12] @ 0x0E21A)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 095, 0x10D12; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10D12" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10D12" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4">
+			<table name="Y Sample Index 0..3 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 096, 0x10D1A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10D1A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10D1A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="4">
+			<table name="Y Sample Index 0..3 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="4">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 097, 0x10974; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10974" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10974" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 098, 0x10E6A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10E6A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10E6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 099, 0x10FEA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10FEA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10FEA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 100, 0x1501C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1501C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1501C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 101, 0x0CD56; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0CD56" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0CD56" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0E2C9" type="X Axis" storageaddress="0x0E2C9" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0FEC0" type="Y Axis" storageaddress="0x0FEC0" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 102, 0x0D456; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0D456" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0D456" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0F6F2" type="X Axis" storageaddress="0x0F6F2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x1133A" type="Y Axis" storageaddress="0x1133A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 103, 0x0C756; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0C756" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0C756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0FCBC" type="X Axis" storageaddress="0x0FCBC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0FCDC" type="Y Axis" storageaddress="0x0FCDC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 104, 0x10206; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10206" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10206" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x109B4" type="Y Axis" storageaddress="0x109B4" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 105, 0x10954; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10954" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10954" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0F912" type="Y Axis" storageaddress="0x0F912" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 106, 0x1100A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1100A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1100A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x10EEA" type="Y Axis" storageaddress="0x10EEA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 107, 0x08EA0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x08EA0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x08EA0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 108, 0x0A342; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0A342" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0A342" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0DFF2" type="X Axis" storageaddress="0x0DFF2" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0DFFA" type="Y Axis" storageaddress="0x0DFFA" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 109, 0x0AF72; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Surface @ 0x0AF72" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0AF72" type="3D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F49E" type="X Axis" storageaddress="0x0F49E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F50A" type="Y Axis" storageaddress="0x0F50A" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 110, 0x0B622; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0B622" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B622" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0F7D2" type="X Axis" storageaddress="0x0F7D2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0F7E2" type="Y Axis" storageaddress="0x0F7E2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 111, 0x0B756; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0B756" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B756" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0FCFC" type="X Axis" storageaddress="0x0FCFC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0FD3C" type="Y Axis" storageaddress="0x0FD3C" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 112, 0x0B956; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0B956" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B956" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x10994" type="X Axis" storageaddress="0x10994" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0FDAC" type="Y Axis" storageaddress="0x0FDAC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 113, 0x0C0D6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0C0D6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0C0D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0FB02" type="X Axis" storageaddress="0x0FB02" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0FBF0" type="Y Axis" storageaddress="0x0FBF0" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 114, 0x0C3D6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0C3D6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0C3D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" sizey="8">
+			<table name="X Axis Raw @ 0x0FE20" type="X Axis" storageaddress="0x0FE20" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="8" />
+			<table name="Y Axis Raw @ 0x0FE10" type="Y Axis" storageaddress="0x0FE10" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 115, 0x0C956; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0C956" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0C956" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0FCBC" type="X Axis" storageaddress="0x0FCBC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x0FCDC" type="Y Axis" storageaddress="0x0FCDC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 116, 0x0D656; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0D656" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0D656" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x0F6F2" type="X Axis" storageaddress="0x0F6F2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x1133A" type="Y Axis" storageaddress="0x1133A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 117, 0x0D8D6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x0D8D6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0D8D6" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Raw Query Grid 0..61440" type="Static X Axis" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16">
+				<data>0</data>
+				<data>4096</data>
+				<data>8192</data>
+				<data>12288</data>
+				<data>16384</data>
+				<data>20480</data>
+				<data>24576</data>
+				<data>28672</data>
+				<data>32768</data>
+				<data>36864</data>
+				<data>40960</data>
+				<data>45056</data>
+				<data>49152</data>
+				<data>53248</data>
+				<data>57344</data>
+				<data>61440</data>
+			</table>
+			<table name="Y Raw Query Grid 0..61440" type="Static Y Axis" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+				<data>0</data>
+				<data>4096</data>
+				<data>8192</data>
+				<data>12288</data>
+				<data>16384</data>
+				<data>20480</data>
+				<data>24576</data>
+				<data>28672</data>
+				<data>32768</data>
+				<data>36864</data>
+				<data>40960</data>
+				<data>45056</data>
+				<data>49152</data>
+				<data>53248</data>
+				<data>57344</data>
+				<data>61440</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 118, 0x0DAD6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0DAD6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0DAD6" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 119, 0x0E4CC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E4CC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E4CC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 120, 0x0E4E4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E4E4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E4E4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 121, 0x0E4EC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E4EC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E4EC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 122, 0x0E520; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E520" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E520" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E032" type="Y Axis" storageaddress="0x0E032" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 123, 0x0E634; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E634" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E634" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 124, 0x0E63C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E63C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E63C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 125, 0x0E6F8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E6F8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E6F8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 126, 0x0E700; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E700" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E700" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 127, 0x0E708; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E708" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E708" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 128, 0x0E748; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E748" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E748" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 129, 0x0E788; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E788" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E788" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 130, 0x0E7D0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E7D0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E7D0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 131, 0x0E7D8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E7D8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E7D8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 132, 0x0E7E0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E7E0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E7E0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 133, 0x0E828; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E828" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E828" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 134, 0x0E840; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E840" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E840" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 135, 0x0E878; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E878" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E878" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 136, 0x0E880; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E880" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E880" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 137, 0x0E888; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E888" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E888" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 138, 0x0E898; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E898" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E898" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 139, 0x0E924; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E924" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E924" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 140, 0x0E954; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E954" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E954" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 141, 0x0E984; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E984" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E984" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 142, 0x0E9BC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9BC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9BC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 143, 0x0E9C4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9C4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9C4" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E8DC" type="Y Axis" storageaddress="0x0E8DC" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 144, 0x0E9DC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9DC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9DC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 145, 0x0E9EC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9EC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9EC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 146, 0x0E9FC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0E9FC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0E9FC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 147, 0x0EA14; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA14" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA14" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 148, 0x0EA4C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA4C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA4C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 149, 0x0EA54; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA54" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA54" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 150, 0x0EA90; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EA90" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EA90" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 151, 0x0EB30; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EB30" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EB30" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 152, 0x0EBC0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EBC0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EBC0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E11C" type="Y Axis" storageaddress="0x0E11C" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 153, 0x0EBC8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EBC8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EBC8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 154, 0x0EBD8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EBD8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EBD8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E092" type="Y Axis" storageaddress="0x0E092" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 155, 0x0EBE8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EBE8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EBE8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E09A" type="Y Axis" storageaddress="0x0E09A" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 156, 0x0EC08; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EC08" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EC08" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F0CE" type="Y Axis" storageaddress="0x0F0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 157, 0x0EC30; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EC30" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EC30" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F0CE" type="Y Axis" storageaddress="0x0F0CE" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 158, 0x0ED44; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED44" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED44" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 159, 0x0ED4C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0ED4C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0ED4C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 160, 0x0EDE8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EDE8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EDE8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 161, 0x0EDF0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EDF0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EDF0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 162, 0x0EE96; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EE96" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EE96" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 163, 0x0EEDE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EEDE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EEDE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E04A" type="Y Axis" storageaddress="0x0E04A" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 164, 0x0EF94; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EF94" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EF94" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 165, 0x0EF9C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EF9C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EF9C" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 166, 0x0EFDC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EFDC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EFDC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 167, 0x0EFFC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0EFFC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0EFFC" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x08CD3" type="Y Axis" storageaddress="0x08CD3" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 168, 0x0F072; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F072" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F072" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 169, 0x0F082; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F082" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F082" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 170, 0x0F092; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F092" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F092" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 171, 0x0F0B2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F0B2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F0B2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 172, 0x0F0DE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F0DE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F0DE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 173, 0x0F0E6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F0E6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F0E6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 174, 0x0F0FE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F0FE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F0FE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 175, 0x0F12E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F12E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F12E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 176, 0x0F21E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F21E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F21E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0EBB8" type="Y Axis" storageaddress="0x0EBB8" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 177, 0x0F256; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F256" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F256" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 178, 0x0F2A6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F2A6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F2A6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E108" type="Y Axis" storageaddress="0x0E108" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 179, 0x0F2DA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F2DA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F2DA" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 180, 0x0F2F2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F2F2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F2F2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 181, 0x0F38E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F38E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F38E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 182, 0x0F39E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F39E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F39E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0E124" type="Y Axis" storageaddress="0x0E124" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 183, 0x0F3E6; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F3E6" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F3E6" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 184, 0x0F3FE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F3FE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F3FE" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 185, 0x0F48E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F48E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F48E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 186, 0x0F4C2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F4C2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F4C2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F49E" type="Y Axis" storageaddress="0x0F49E" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 187, 0x0F52E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x0F52E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F52E" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 188, 0x0F6B2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0F6B2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F6B2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x1128A" type="Y Axis" storageaddress="0x1128A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 189, 0x0F6D2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0F6D2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F6D2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x1128A" type="Y Axis" storageaddress="0x1128A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 190, 0x0F712; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0F712" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F712" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x10F8A" type="Y Axis" storageaddress="0x10F8A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 191, 0x0F7F2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0F7F2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F7F2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x1128A" type="Y Axis" storageaddress="0x1128A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 192, 0x0F8BE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0F8BE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0F8BE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F9C2" type="Y Axis" storageaddress="0x0F9C2" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 193, 0x0FC90; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0FC90" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0FC90" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x111EA" type="Y Axis" storageaddress="0x111EA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 194, 0x0FEC0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0FEC0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0FEC0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0CD56" type="Y Axis" storageaddress="0x0CD56" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 195, 0x0FEE0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x0FEE0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0FEE0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Sample Index 0..31 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="32">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+				<data>16</data>
+				<data>17</data>
+				<data>18</data>
+				<data>19</data>
+				<data>20</data>
+				<data>21</data>
+				<data>22</data>
+				<data>23</data>
+				<data>24</data>
+				<data>25</data>
+				<data>26</data>
+				<data>27</data>
+				<data>28</data>
+				<data>29</data>
+				<data>30</data>
+				<data>31</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 196, 0x1003E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1003E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1003E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FBA8" type="Y Axis" storageaddress="0x0FBA8" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 197, 0x1007E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1007E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1007E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x112AA" type="Y Axis" storageaddress="0x112AA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 198, 0x1008E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1008E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1008E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x112BA" type="Y Axis" storageaddress="0x112BA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 199, 0x100BE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x100BE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x100BE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 200, 0x100DE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x100DE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x100DE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 201, 0x10226; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10226" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10226" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x109B4" type="Y Axis" storageaddress="0x109B4" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 202, 0x10286; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10286" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10286" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x1072C" type="Y Axis" storageaddress="0x1072C" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 203, 0x1031C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1031C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1031C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0F962" type="Y Axis" storageaddress="0x0F962" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 204, 0x1033C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1033C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1033C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 205, 0x1040C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1040C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1040C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x1046C" type="Y Axis" storageaddress="0x1046C" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 206, 0x104EC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x104EC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x104EC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0F932" type="Y Axis" storageaddress="0x0F932" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 207, 0x105FC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x105FC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x105FC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FA42" type="Y Axis" storageaddress="0x0FA42" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 208, 0x1061C; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1061C" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1061C" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0F982" type="Y Axis" storageaddress="0x0F982" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 209, 0x108B4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x108B4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x108B4" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 210, 0x10984; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10984" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10984" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FBC8" type="Y Axis" storageaddress="0x0FBC8" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 211, 0x10A54; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10A54" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10A54" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FB22" type="Y Axis" storageaddress="0x0FB22" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 212, 0x10A64; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10A64" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10A64" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FB22" type="Y Axis" storageaddress="0x0FB22" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 213, 0x10A84; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10A84" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10A84" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 214, 0x10AF4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10AF4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10AF4" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FC10" type="Y Axis" storageaddress="0x0FC10" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 215, 0x10B14; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10B14" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10B14" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FC10" type="Y Axis" storageaddress="0x0FC10" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 216, 0x10B34; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10B34" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10B34" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FC30" type="Y Axis" storageaddress="0x0FC30" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 217, 0x10B44; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10B44" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10B44" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FC30" type="Y Axis" storageaddress="0x0FC30" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 218, 0x10BC8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10BC8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10BC8" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x10BD8" type="Y Axis" storageaddress="0x10BD8" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 219, 0x10BE8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10BE8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10BE8" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x0FB68" type="Y Axis" storageaddress="0x0FB68" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 220, 0x10CE2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10CE2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10CE2" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x109B4" type="Y Axis" storageaddress="0x109B4" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 221, 0x10D42; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10D42" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10D42" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 222, 0x10D6A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10D6A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10D6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x10BB8" type="Y Axis" storageaddress="0x10BB8" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 223, 0x10EAA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10EAA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10EAA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x105DC" type="Y Axis" storageaddress="0x105DC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 224, 0x10ECA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10ECA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10ECA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x105DC" type="Y Axis" storageaddress="0x105DC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 225, 0x10EEA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10EEA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10EEA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x1100A" type="Y Axis" storageaddress="0x1100A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 226, 0x10F2A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10F2A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10F2A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x1104A" type="Y Axis" storageaddress="0x1104A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 227, 0x10F6A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10F6A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10F6A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x112EA" type="Y Axis" storageaddress="0x112EA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 228, 0x10F7A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10F7A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10F7A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x112EA" type="Y Axis" storageaddress="0x112EA" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 229, 0x10F8A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x10F8A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x10F8A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x0F712" type="Y Axis" storageaddress="0x0F712" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 230, 0x1104A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1104A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1104A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x10F2A" type="Y Axis" storageaddress="0x10F2A" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 231, 0x1109A; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x1109A" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x1109A" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x093F4" type="Y Axis" storageaddress="0x093F4" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 232, 0x110DA; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x110DA" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x110DA" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x0FC40" type="Y Axis" storageaddress="0x0FC40" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 233, 0x119C4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x119C4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x119C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x1298E" type="X Axis" storageaddress="0x1298E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x129AE" type="Y Axis" storageaddress="0x129AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 234, 0x11BC4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x11BC4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x11BC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x1298E" type="X Axis" storageaddress="0x1298E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x129AE" type="Y Axis" storageaddress="0x129AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 235, 0x11FC4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x11FC4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x11FC4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x128AE" type="X Axis" storageaddress="0x128AE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x129EE" type="Y Axis" storageaddress="0x129EE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 236, 0x121C4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x121C4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x121C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x128DE" type="X Axis" storageaddress="0x128DE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x12E18" type="Y Axis" storageaddress="0x12E18" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 237, 0x123C4; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Surface @ 0x123C4" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x123C4" type="3D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" sizey="16">
+			<table name="X Axis Raw @ 0x128DE" type="X Axis" storageaddress="0x128DE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizex="16" />
+			<table name="Y Axis Raw @ 0x12E18" type="Y Axis" storageaddress="0x12E18" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 238, 0x128FE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x128FE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x128FE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x12D58" type="Y Axis" storageaddress="0x12D58" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 239, 0x12A0E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12A0E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12A0E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 240, 0x12A2E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12A2E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12A2E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Sample Index 0..15 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+				<data>8</data>
+				<data>9</data>
+				<data>10</data>
+				<data>11</data>
+				<data>12</data>
+				<data>13</data>
+				<data>14</data>
+				<data>15</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 241, 0x12A6E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12A6E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12A6E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x12C3E" type="Y Axis" storageaddress="0x12C3E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 242, 0x12B0E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12B0E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12B0E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x1297E" type="Y Axis" storageaddress="0x1297E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 243, 0x12B3E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12B3E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12B3E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x12B7E" type="Y Axis" storageaddress="0x12B7E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 244, 0x12B5E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12B5E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12B5E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x12B7E" type="Y Axis" storageaddress="0x12B7E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 245, 0x12B9E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12B9E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12B9E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x12C7E" type="Y Axis" storageaddress="0x12C7E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 246, 0x12BDE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12BDE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12BDE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x12CBE" type="Y Axis" storageaddress="0x12CBE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 247, 0x12C7E; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12C7E" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12C7E" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x12B9E" type="Y Axis" storageaddress="0x12B9E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 248, 0x12CBE; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12CBE" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12CBE" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x12BDE" type="Y Axis" storageaddress="0x12BDE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 249, 0x12D38; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12D38" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12D38" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x12C3E" type="Y Axis" storageaddress="0x12C3E" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 250, 0x12D58; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12D58" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12D58" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
+			<table name="Y Axis Raw @ 0x128FE" type="Y Axis" storageaddress="0x128FE" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 251, 0x12D98; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x12D98" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x12D98" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
+			<table name="Y Axis Raw @ 0x1170A" type="Y Axis" storageaddress="0x1170A" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="16" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 252, 0x14EE2; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x14EE2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x14EE2" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x14EDA" type="Y Axis" storageaddress="0x14EDA" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 253, 0x14FDC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x14FDC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x14FDC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x14FCC" type="Y Axis" storageaddress="0x14FCC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 254, 0x14FFC; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT16 Curve @ 0x14FFC" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x14FFC" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8">
+			<table name="Y Axis Raw @ 0x14FEC" type="Y Axis" storageaddress="0x14FEC" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="8" />
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 255, 0x154D0; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x154D0" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x154D0" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 256, 0x154D8; physical meaning unresolved. -->
+		<table name="EL19A Raw UINT8 Curve @ 0x154D8" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x154D8" type="2D" scaling="Raw_UBYTE" storagetype="uint8" endian="big" sizey="8">
+			<table name="Y Sample Index 0..7 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 257, 0x0B422; physical meaning unresolved. -->
+		<table name="EL19A Raw INT16 Surface @ 0x0B422" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B422" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (inline index)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (inline index)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 258, 0x0B4A2; physical meaning unresolved. -->
+		<table name="EL19A Raw INT16 Surface @ 0x0B4A2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B4A2" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (inline index)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (inline index)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 259, 0x0B522; physical meaning unresolved. -->
+		<table name="EL19A Raw INT16 Surface @ 0x0B522" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B522" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (inline index)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (inline index)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+		<!-- Release 1 RAW/PROVISIONAL; row 260, 0x0B5A2; physical meaning unresolved. -->
+		<table name="EL19A Raw INT16 Surface @ 0x0B5A2" category="SPEC//Release 1 Raw Calibration Data" storageaddress="0x0B5A2" type="3D" scaling="Raw_SWORD" storagetype="int16" endian="big" sizex="8" sizey="8">
+			<table name="X Sample Index 0..7 (inline index)" type="Static X Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizex="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+			<table name="Y Sample Index 0..7 (inline index)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="8">
+				<data>0</data>
+				<data>1</data>
+				<data>2</data>
+				<data>3</data>
+				<data>4</data>
+				<data>5</data>
+				<data>6</data>
+				<data>7</data>
+			</table>
+		</table>
+	</rom>
+</roms>
