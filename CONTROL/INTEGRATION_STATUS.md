@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — EL19A target-side cross-ROM fingerprint join publication (2026-11-26)
+
+**Purpose:** Publish `EVIDENCE/EL19A_22_FINGERPRINT_JOIN_2026-11-26.md`; no lifecycle, calibration definition, or Findings changes.
 
 **Integrator:** ChatGPT — cross-ROM research record publication (2026-11-26)
 
