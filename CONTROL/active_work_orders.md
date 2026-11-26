@@ -44,6 +44,14 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 
 **User-authorized lane transfer — 2026-11-22:** WO65226, WO65229, WO65232, WO65235, WO65238 and WO65241 were unstarted READY tasks in Worker 3's FIFO queue. At the user's direction, all six were transferred to Worker 2 without changing IDs, technical scope, dependencies or order. WO65226 and WO65229 are CLOSED — BOUNDED COMPLETE; WO65232 and WO65235 are CLOSED — BOUNDED COMPLETE; WO65241 and WO65246 are CLOSED — BOUNDED COMPLETE; the remaining two form its FIFO backlog. Worker 3 is offline and now has no assigned task or backlog. Original modulo-3 allocations remain historical metadata. WO65240 and WO65243 were found as extra READY artifacts in the fetched main snapshot; per the user's lane-state correction they are withdrawn from the active pool and retained only as non-operative records.
 
+## Coordinator / integrator-owned WOs (outside the three worker lanes)
+
+This section records only explicit user-directed, one-off coordinator WOs. It does not create a fourth worker lane and never changes the three worker FIFOs above.
+
+| Work order | Owner | Status | Result |
+|---|---|---|---|
+| [WO70015](WO70015.md) | ChatGPT — coordinator/integrator | CLOSED — BOUNDED COMPLETE (2026-11-26) | Release 1 full baseline / scope / XML reconciled exactly; 254 included objects, 185 catalogue entries (179 in Release 1; six verified map/axis entries outside), plus FND-backed 0x0F02C and reciprocal 0x0DE6E/0x0E2ED deferred pair. ROM-wide census remains bounded by WO70006's raw-output gate. |
+
 ## Current project assets and operational frontier
 
 - **Current workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
