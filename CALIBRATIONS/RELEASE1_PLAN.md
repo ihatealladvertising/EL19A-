@@ -50,7 +50,7 @@ These may support later releases or be pursued where they resolve a concrete Rel
 
 ## Owner integration checkpoint — 2026-11-26
 
-The selected V58 baseline is reconciled against the 261-row consultant scope matrix. The owner-corrected matrix is `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` (2 ESTABLISHED / 252 RAW-PROVISIONAL / 7 EXCLUDE). The separate successor `CALIBRATIONS/EL19A_release1_conservative.xml` is built and structurally checked; the baseline is unchanged. Findings `FND-000016/017` and `REC-000019/020` capture the new material interpretations. See `CALIBRATIONS/EL19A_release1_conservative_manifest.md` for hashes and the explicit validation boundary. RomRaider desktop import and visual checks remain pending; do not describe the candidate as a RomRaider-validated final release.
+The selected V58 baseline is reconciled against the 261-row consultant scope matrix. The owner-corrected matrix is `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` (2 ESTABLISHED / 252 RAW-PROVISIONAL / 7 EXCLUDE). The separate successor `CALIBRATIONS/EL19A_release1_conservative.xml` is built and structurally checked; the baseline is unchanged. Findings `FND-000016/017` and `REC-000019/020` capture the new material interpretations. See `CALIBRATIONS/EL19A_release1_conservative_manifest.md` for hashes and the explicit validation boundary. Initial RomRaider ROM-load / definition-tree creation is USER-REPORTED PASS after duplicate-header removal; individual table rendering, axis/data spot-checks and full visual review remain pending. Do not describe all 254 objects as fully validated.
 
 
 ## RomRaider import checkpoint — 2026-11-26
