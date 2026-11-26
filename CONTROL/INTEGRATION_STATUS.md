@@ -1,10 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO70007–WO70011 work-order allocation
+**Integrator:** ChatGPT — project-direction and outside-analyst prompt publication (2026-11-26)
 
-**Purpose:** Allocate five bounded work orders to the three worker FIFO lanes. No calibration artifacts or Findings records were changed in this publication batch.
+**Purpose:** Publish the current project-direction record and outside-analyst prompt. No work-order lifecycle or calibration artifacts are being changed in this batch.
+
+**Lock acquired:** 2026-11-26 — project-direction / outside-analyst documentation batch
 
 **Lock acquired:** 2026-11-26 — WO70007–WO70011 allocation batch
 **Lock released:** 2026-11-26 — five work-order reports and live register read back; lane assignments and FIFO order verified
