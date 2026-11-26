@@ -32,6 +32,9 @@ jobs:
                   if pos+frame_len>len(raw): raise ValueError(f'truncated frame at {pos:#x}')
                   blk=raw[pos:pos+frame_len]
                   if (sum(blk[:-1])&0xff)!=blk[-1]: bad.append(pos)
+                  if blk[4:6]==bytes.fromhex('3481'):
+                      terminal={'offset':hex(pos),'frame_length':frame_len,'checksum_ok':(sum(blk[:-1])&0xff)==blk[-1],'header':blk[:16].hex()}
+                      break
                   if blk[4:6]!=bytes.fromhex('3482'): raise ValueError(f'unexpected service {blk[4:6].hex()} at {pos:#x}')
                   addr=int.from_bytes(blk[6:9],'big'); plen=blk[9]
                   if plen%4 or 10+plen>frame_len-1: raise ValueError(f'invalid payload length {plen} at {pos:#x}')
