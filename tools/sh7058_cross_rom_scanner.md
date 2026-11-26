@@ -24,7 +24,7 @@ The JSON contains a top-level sh7058-cross-rom-batch-v1 object with one scan obj
 - helpers: every discovered helper signature and inferred dimensions/types;
 - calls: every detected call, including unresolved R4/table pointers, raw R4/R5/R6 values, call instruction and form, delay-slot word, target-load PC, bounded instruction words and a candidate caller-start boundary;
 - tables: one grouped row per resolved base, retaining every distinct geometry/extent/axis variant and flagging conflicts;
-- input, tool, layout and summary: container and decoded-ROM hashes/sizes, scanner-source hash, command line, inferred layout and counts;
+- input, tool, layout and summary: container and decoded-ROM hashes/sizes, selected ZIP member, scanner-source hash, command line, inferred layout, transfer-form counts and unresolved/invalid-extent counts;
 - table_span, axis1_span, axis2_span: storage width, element count, byte length, exclusive end address, in-bounds flag and SHA-256 when the full span is available.
 
 The optional TSV directory receives one .calls.tsv, .tables.tsv and .helpers.tsv file per scanned ROM. Nested evidence fields are JSON-encoded inside TSV cells. JSON is the canonical full-fidelity output.
@@ -36,7 +36,7 @@ The export makes the scanner's current observations reproducible; it does **not*
 - R4/R5/R6 are values inferred by the existing bounded linear window (56 bytes before the call, plus the delay slot). The export preserves the exact instruction words so callers can be checked independently; it does not claim complete register provenance across branches, earlier calls, stack spills or computed pointer chains.
 - caller_start_candidate is only the nearest 0x4F22 prologue-shaped word within 0x800 bytes. It is not a proven function boundary or symbol.
 - indirect_jsr and indirect_jmp are distinguished. A jmp may be a tail transfer and must not automatically be treated as an ordinary returning call.
-- A resolved R4 pointer is a candidate inside the inferred calibration window, not proof that the helper consumes a valid calibration table. Extents are derived from inferred helper geometry and are flagged when outside the ROM; target-side checks remain necessary.
+- A resolved R4 pointer is a candidate inside the inferred calibration window, not proof that the helper consumes a valid calibration table. Extents are derived from inferred helper geometry; unresolved width, invalid dimensions and out-of-ROM extents are explicitly flagged and do not receive payload hashes. Target-side checks remain necessary.
 - Query register/source, signedness, arithmetic, helper interpolation/clamping, result register and immediate consumer are intentionally left unresolved by this export.
 
 The JSON schema is versioned: sh7058-cross-rom-scan-v1 per ROM and sh7058-cross-rom-batch-v1 per batch. Preserve original exports unchanged and hash them before manual filtering or annotation.
