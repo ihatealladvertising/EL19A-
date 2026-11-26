@@ -1,13 +1,16 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70016 five-object target inventory reconciliation (2026-11-26)
 **Purpose:** Publish one coordinator-owned, read-only reconciliation report and lifecycle pointer for five previously reported map objects. The three worker lanes and their FIFO assignments remain untouched; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L, tool source or Findings records will be edited in this batch.
 
 **Lock acquired:** 2026-11-26 — WO70016 five-object target inventory reconciliation
+**WO70016 report:** `CONTROL/WO70016.md` — blob `f7c85eb0225ffb90eb5bb292ecd052b9c74c31f4`; report commit `d5c59bbf2779585e75fc877349df97d68d50e87a`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `a69d4caedc5c1e37ae31c71b5d064d608221106f`; register commit `7a74f2f3f2eeb79244c69597848d858bf8a92e05`.
+**Lock commit:** `7e18f866d99f493c611590cd5ac614cb7c31455f`.
 
-**Lock released:** PENDING — WO70016 report and live-register lifecycle pointer not yet published/read back.
+**Lock released:** 2026-11-26 — WO70016 report and lifecycle pointer read back; all three worker FIFO heads verified unchanged.
 **WO70015:** `CONTROL/WO70015.md` — blob `dd4eed332f9b0e978de3c3dbcfdeab53cc81167d`, closeout commit `761c51bcfaa256018340a3f82b8c205ce6bf9441`.
 **Live register:** `CONTROL/active_work_orders.md` — blob `48797f136b42dbfa4ca523102bb597e20a7621b3`, register commit `d58339ddc801973c92bb5c8c9e8e811731d16e6d`.
 
