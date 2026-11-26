@@ -5,11 +5,42 @@ Pure Python 3 (standard library only) read-only SH-2 big-endian scanner for Niss
 ## What It Does
 
 1. **Auto-discovers lookup helpers** (`2D_IMPL`, `2D_AXIS`, `3D_IMPL`, `3D_AXIS`) across both post-calibration (`0x15xxx..0x27xxx`, `mov.l` `0xD7xx`/`0xD6xx`) and early pre-calibration (`0x05xxx..0x07xxx`, `mov.w` `0x97xx`/`0x96xx`) Nissan/Hitachi SH-2 helper layouts (`0x04000..0x80000`), recovering element type (`uint8`/`int8`/`uint16`/`int16`), dimensions, and axis widths without requiring a disassembly `.lst` or symbol file.
-2. **Infers ROM layout & tracks call-site arguments** across executable code using a bounded SH-2 forward register window (`r4` = table pointer, `r5` / `r6` = axis pointers, supporting both `mov.l` and `mov.w` helper/table loads up to a 20-instruction load-to-call window).
+2. **Infers ROM layout & tracks call-site arguments** across executable code using the existing bounded SH-2 register window (best-effort; not full control-flow/data-flow analysis). It preserves unresolved calls rather than requiring a resolved table pointer.
 3. **Audits EL19A against Release 1 XML** (`CALIBRATIONS/EL19A_release1_conservative.xml`), identifying caller-backed tables absent from the XML and geometry/type disagreements (`CF48D.xml` is also checked when `CF48D.bin` is scanned).
 4. **Cross-matches sibling ROMs** by same-address+kind and exact table payload bytes (reporting total matches and non-trivial matches with `>2` distinct byte values).
+5. **Exports audit-ready machine records** for every discovered helper and detected call, plus one grouped record per resolved table base. Exports include ROM/container hashes, call PC and instruction, call form, delay slot, target-load PC for indirect calls, candidate caller boundary, raw R4/R5/R6 values, the exact bounded instruction-word window, geometry, exclusive-end extents, payload/axis hashes, unresolved reasons and geometry conflicts.
 
 ## Usage
+
+
+### Persist complete machine-readable records
+
+Run the scanner with --json-out and, optionally, --tsv-dir. Example command:
+
+python3 tools/sh7058_cross_rom_scanner.py --json-out EVIDENCE/scanner_exports/cross_rom_scan.json --tsv-dir EVIDENCE/scanner_exports/tsv
+
+The JSON contains a top-level sh7058-cross-rom-batch-v1 object with one scan object per ROM. Each scan contains:
+
+- helpers: every discovered helper signature and inferred dimensions/types;
+- calls: every detected call, including unresolved R4/table pointers, raw R4/R5/R6 values, call instruction and form, delay-slot word, target-load PC, bounded instruction words and a candidate caller-start boundary;
+- tables: one grouped row per resolved base, retaining every distinct geometry/extent/axis variant and flagging conflicts;
+- input, tool, layout and summary: container and decoded-ROM hashes/sizes, scanner-source hash, command line, inferred layout and counts;
+- table_span, axis1_span, axis2_span: storage width, element count, byte length, exclusive end address, in-bounds flag and SHA-256 when the full span is available.
+
+The optional TSV directory receives one .calls.tsv, .tables.tsv and .helpers.tsv file per scanned ROM. Nested evidence fields are JSON-encoded inside TSV cells. JSON is the canonical full-fidelity output.
+
+### Machine-export evidence limits
+
+The export makes the scanner's current observations reproducible; it does **not** turn its static analysis into a full disassembler or data-flow engine:
+
+- R4/R5/R6 are values inferred by the existing bounded linear window (56 bytes before the call, plus the delay slot). The export preserves the exact instruction words so callers can be checked independently; it does not claim complete register provenance across branches, earlier calls, stack spills or computed pointer chains.
+- caller_start_candidate is only the nearest 0x4F22 prologue-shaped word within 0x800 bytes. It is not a proven function boundary or symbol.
+- indirect_jsr and indirect_jmp are distinguished. A jmp may be a tail transfer and must not automatically be treated as an ordinary returning call.
+- A resolved R4 pointer is a candidate inside the inferred calibration window, not proof that the helper consumes a valid calibration table. Extents are derived from inferred helper geometry and are flagged when outside the ROM; target-side checks remain necessary.
+- Query register/source, signedness, arithmetic, helper interpolation/clamping, result register and immediate consumer are intentionally left unresolved by this export.
+
+The JSON schema is versioned: sh7058-cross-rom-scan-v1 per ROM and sh7058-cross-rom-batch-v1 per batch. Preserve original exports unchanged and hash them before manual filtering or annotation.
+
 
 Run from repository root:
 
@@ -26,7 +57,9 @@ python3 tools/sh7058_cross_rom_scanner.py \
   --siblings "EVIDENCE/23710-EE310-07-C11-MR18DE-MT.bin" "EVIDENCE/CF48D.bin"
 ```
 
-## Verified Benchmark Across All 8 Raw Repository ROMs
+## Historical Console Benchmark Claims — Require Regenerated Raw Exports
+
+The figures below are historical console summaries retained for comparison. They are **not** a substitute for complete per-call/per-table exports. Regenerate machine-readable outputs from the exact ROM files before treating any total or cross-ROM match count as verified census evidence.
 
 ### Baseline (`VERSA f501.bin` — EL19A, `8CMCKRN5`, `SH705822N`, SHA-256 `bfe037e8e6c3...`)
 
