@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -135,3 +135,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock acquired:** 2026-11-26 — user-requested read-only workbench screening of eight newly added `.dat` files in EVIDENCE (EM61B/EM63B/EM65A/EM66A, 310364EM1C/310364EP1B, e1bc11b/e1bc12b). A temporary one-shot GitHub Actions workflow may be added and removed solely to execute existing loader/scanner commands and collect results. No tool source, tests, calibration XML, catalogue, scope matrix, workbook, Findings, ROM/LST/A2L or worker-lane files may be modified.
+
+
+**Lock released:** 2026-11-26 — eight new EVIDENCE .dat files screened using the existing read-only workbench. Report `EVIDENCE/NEW_DAT_ADDITIONS_SCREEN_2026-11-26.md` (published and read back). Successful run `45907252456`; scan output artifact `el19a-new-dat-screen` SHA-256 `2309a63740ac69fe6c4dcfb79eb4b2a985737979382bb50b64176cffbfb18201`. Four EM revisions decode as SH705519N and have 274/274 helper-backed payloads identical to adjacent existing revisions; 310364 and E1BC pairs remain unsupported by current decoder. Temporary workflow `.github/workflows/el19a-new-dat-screen.yml` removed and absence verified. No tool source/tests, XML, catalogue, scope matrix, workbook, Findings, worker queue, ROM/LST/A2L files changed.
