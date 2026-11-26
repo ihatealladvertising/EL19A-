@@ -26,7 +26,7 @@ jobs:
           def load_8019_candidate(raw):
               pos=raw.find(bytes.fromhex('8019fc'),0,0x400)
               if pos<0: raise ValueError('No 0x8019FC frame marker')
-              recs=[]; frames=0; bad=[]; total=0; first=pos; prev=None; terminal=None
+              recs=[]; frames=0; bad=[]; total=0; first=pos; prev=None; terminal=None; ranges=[]
               while pos+11<=len(raw) and raw[pos:pos+2]==bytes.fromhex('8019'):
                   kwp_len=raw[pos+3]; frame_len=4+kwp_len+1
                   if pos+frame_len>len(raw): raise ValueError(f'truncated frame at {pos:#x}')
@@ -43,12 +43,19 @@ jobs:
                   for off in range(0,plen,4):
                       w=int.from_bytes(enc[off:off+4],'big')
                       dec[off:off+4]=wb.decrypt_consult_dat_word(w).to_bytes(4,'big')
-                  recs.append((addr,bytes(dec))); total+=plen; frames+=1; prev=pos
+                  recs.append((addr,bytes(dec))); ranges.append((addr,addr+plen)); total+=plen; frames+=1; prev=pos
                   pos+=frame_len
               if not frames: raise ValueError('No 0x8019 transfer frames walked')
               buf=bytearray([0xff]*0x80000)
               for addr,data in recs: buf[addr:addr+len(data)]=data
+              merged=[]
+              for lo,hi in sorted(ranges):
+                  if not merged or lo>merged[-1][1]: merged.append([lo,hi])
+                  else: merged[-1][1]=max(merged[-1][1],hi)
+              covered=sum(hi-lo for lo,hi in merged)
               return bytes(buf), {'marker_offset':first,'frames':frames,'terminal_frame':terminal,'bad_checksums':len(bad),
+                                   'min_address':hex(min(x[0] for x in ranges)),'max_end':hex(max(x[1] for x in ranges)),
+                                   'unique_covered_bytes':covered,'range_count':len(merged),
                                    'bad_checksum_offsets':[hex(x) for x in bad[:12]],
                                    'transferred_bytes_including_repeats':total,
                                    'first_frame_offset':hex(first),'last_frame_offset':hex(prev),
@@ -79,8 +86,9 @@ jobs:
                   helpers = discover_helpers(rom)
                   calls = extract_calls(rom, helpers)
                   tables = wb.summarize_tables(rom, calls)
-                  ent.update({'decode':'OK','decoded_size':len(rom),'decoded_sha256':fp['sha256'],
-                              'cpu_tags':fp['cpu_tags'],'fid_tags':fp['fid_tags'],
+                  ent.update({'decode':'OK','decoded_size':len(rom),'decoded_sha256':fp['sha256'],'active_end':fp['active_end'],
+                              'reset_pc':fp['reset_pc'],'reset_sp':fp['reset_sp'],'non_ff_bytes':sum(b!=255 for b in rom),
+                              'first_32_image_bytes':rom[:32].hex(),'cpu_tags':fp['cpu_tags'],'fid_tags':fp['fid_tags'],
                               'helpers':len(helpers),'calls':len(calls),
                               'resolved_calls':sum(c['table'] is not None for c in calls),
                               'unique_tables':len(tables),
@@ -99,6 +107,8 @@ jobs:
               lines.append(f"- **{name}** — raw {e['raw_size']:,} B, SHA256 {e['raw_sha256']}; decode **{e['decode']}**.")
               if e['decode']=='OK':
                   lines.append(f"  - Image {e['decoded_size']:,} B, SHA256 {e['decoded_sha256']}; CPU tags {e['cpu_tags']}; FID-like tags {e['fid_tags']}; helpers {e['helpers']}; calls {e['calls']} ({e['resolved_calls']} resolved); unique tables {e['unique_tables']}.")
+                  lines.append(f"  - Reset PC/SP {e['reset_pc']:#010x}/{e['reset_sp']:#010x}; active_end {e['active_end']:#x}; non-FF bytes {e['non_ff_bytes']:,}; image[0:32] {e['first_32_image_bytes']}.")
+                  lines.append(f"  - Loader: {e.get('loader')}; variant metadata: {json.dumps(e.get('variant_frame_meta',{}),sort_keys=True)}")
                   lines.append(f"  - Shapes: {json.dumps(e['table_shapes'],sort_keys=True)}")
               else:
                   lines.append(f"  - Parser rejection: {e['error']}; 0x8015FC occurrences {e['marker_8015fc_count']}; 0x8015 occurrences {e['marker_8015_count']}; first 64 bytes {e['header64']}.")
