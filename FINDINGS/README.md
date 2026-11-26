@@ -75,14 +75,16 @@ Before allocating an ID, read the current index and confirm the next monotonical
 ## Required build gate
 
 Before creating or revising any RomRaider/XML definition:
-1. Read the current calibration inventory and this index.
-2. Resolve all current findings and reconciliation records affecting each included object.
-3. Check that name, address, type, dimensions, axes, scaling, units and runtime/query domain agree with supported findings.
-4. Preserve known exceptions and unresolved conflicts explicitly.
-5. Link each XML object to its supporting finding IDs in a companion build manifest or comments where supported.
-6. Record exclusions, unresolved conflicts and the index revision used for the build.
 
-A build is not reconciled merely because the latest WO summaries were read.
+1. Read the current calibration inventory, the selected XML baseline, this index and every current finding/reconciliation record that affects an included or excluded object.
+2. **Reconcile** each affected record: identify what is supported, superseded, disputed or still unknown. Reconciliation does not mean that every semantic question must be solved before release.
+3. Verify the representation-critical fields for every included object: ROM address and extent, storage type/width, byte order, dimensionality, dimensions, orientation, and the source and ordering of any displayed axes.
+4. Verify every displayed engineering conversion against target-side evidence. When physical units or conversion are not established, retain raw values and a generic name. If a physical axis is not established, use a clearly labelled sample-index presentation only where the target structure and RomRaider representation support it without implying a real operating domain; otherwise exclude the object.
+5. An unresolved physical function/name is not, by itself, a build blocker for an otherwise structurally correct raw/provisional object. An unresolved address, extent, type, geometry, misleading axis, unsupported conversion, or material contradiction in the representation is a build blocker.
+6. Link each XML object to supporting finding IDs in a companion build manifest or comments where supported. Record the Findings index revision used.
+7. Record all three dispositions—established, raw/provisional, excluded—plus the reason for every exclusion and the unresolved semantic boundaries.
+
+The build manifest and XML must not imply that raw/provisional objects are tune-ready or that sample-index axes are physical calibration breakpoints. A build is not reconciled merely because the latest WO summaries were read, but it also does not require complete firmware-semantic reconstruction.
 
 ## Migration policy
 
