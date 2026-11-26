@@ -2,7 +2,7 @@
 
 **Status:** SEEDED — TWO A2L SYNTHESIS BATCHES MIGRATED; ONGOING  
 **Authority:** This index is the entry point for calibration interpretation. See [README](README.md) for the full schemas and the mandatory XML build gate.  
-**Index revision:** `FND-000014` generic bidirectional 32-point UWORD transfer pair with physical domain unresolved, plus `REC-000016` split forward-query operand provenance (WO66047, 2026-11-25); `FND-000013` bit-publication split across a branch delay slot (WO65910, 2026-11-25); `FND-000012`/`REC-000013` GBR-relative address rule and four attribution corrections (WO65895, 2026-11-25); `FND-000011` donor-only ignition trimming/display and compensation context; `FND-000010`/`REC-000010` firmware-RAM band reconciliation (WO65811); `REC-000011` WO65808 initializer/publisher correction; and `REC-000012` WO65739 copy-helper extent erratum — the latter recorded 2026-11-24.
+**Index revision:** `FND-000015`/`REC-000017` `FFFF A074` is a 198-entry live (229-entry capacity) diagnostic status table with located per-entry flag setters, and the `FFFF34F5.bit5` gate polarity is inverted relative to WO65877 (WO65916, 2026-11-26); `FND-000014` generic bidirectional 32-point UWORD transfer pair with physical domain unresolved, plus `REC-000016` split forward-query operand provenance (WO66047, 2026-11-25); `FND-000013` bit-publication split across a branch delay slot (WO65910, 2026-11-25); `FND-000012`/`REC-000013` GBR-relative address rule and four attribution corrections (WO65895, 2026-11-25); `FND-000011` donor-only ignition trimming/display and compensation context; `FND-000010`/`REC-000010` firmware-RAM band reconciliation (WO65811); `REC-000011` WO65808 initializer/publisher correction; and `REC-000012` WO65739 copy-helper extent erratum — the latter recorded 2026-11-24.
 
 ## Record schema
 
@@ -26,8 +26,10 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `FFFF2B6C`–`FFFF2BA4` band of `unk_FFFF2150`; clamp edges `FFFF2B6E`/`FFFF2B72` used by `FFFF1640` | `FND-000010` | `REC-000010`–`REC-000012` | Firmware-initialised RAM, not calibration: fourteen initializer fields receive `0x7FFF`, A52 receives `0x8000`, and the bound publisher uses signed-minimum selection; remains opaque, with no definition or name. |
 | Nissan ignition trimming / knock-window / VTC compensation architecture (cross-ROM context; no EL19A address promotion) | `FND-000011` | — | Donor A2Ls establish a trimming-map `X-64deg` display conversion, not a final-timing arithmetic step; 0x80 flag semantics and all donor-to-EL19A transfers remain unproven on EL19A. |
 | `0x0F712` / `0x10F8A`; query operands `FFFF1064` / `FFFF1066` / `FFFF10A0`; related `FFFF33EA` / `FFFF14E0` | `FND-000014` | `REC-000016` | Reader-verified bidirectional 32×1 UWORD transfer pair; `FFFF1066` is a computed internal result, `FFFF1064` has a partial prior lookup-result path, `FFFF10A0` remains unresolved; capture source and physical MAF/airflow/RPM identity not established. |
+| `FND-000015` | WO65916, WO65904 (descriptor bounds, zero-fill), WO65877 (gate and counter), WO65892 (`sub_228F0` byte1), WO65901 | none — `FFFF A074` is firmware RAM with no ROM image; no CSV/XML object is supported by the current schema |
 | `FFFF3579` bit4 (GBR `FFFF34B3+0xC6` and `FFFF34C1+0xB8`), set via `or #h'10` in the `bra` delay slot at `0x07EBBE`, cleared at `0x07EBD0`, stored at `0x07EBD2` | `FND-000013` | — | Bit publication can be merged across a branch delay slot, so a store preceded by `and #h'~mask` may still be the SET path; decompile every incoming edge including delay slots before characterising a status-bit write. No calibration object affected. |
 | `FFFF34E7` (= GBR `FFFF34C1+0x26` = `FFFF34B3+0x34`); `FFFF10FE`; `FFFF36BE`; `FFFFB552`; `FFFF355D`; `FFFF8E9E` | `FND-000012` | `REC-000013` | A GBR displacement is not an address until the routine's own base is resolved: `FFFF34E7` is one shared five-bit status byte, the eight `@(h'AA,gbr)` sites are three other cells, `FFFF109E` does not exist, and `FFFF355D`'s readers remain only `0x07EB14`/`0x0935C2`; no calibration object affected. |
+| `FFFF A074`-`FFFFA322` (3-byte entries, 198 live / 229 capacity); `FFFF34F5` bit5; `FFFFB526` | `FND-000015` | `REC-000017` | Diagnostic monitor status array: 198 live entries from the compile-time immediate `0xC6` (`0x08B33C`, `0x07437A`, `0x075DD4`, `0x075E9C`, `0x0800A2`), per-entry flags written by `sub_8081C`/`sub_8085E`/`sub_80884`, and the `FFFF34F5.bit5` latch arms when **no** evaluated entry has byte2 bit3 set. |
 
 ## Current priority migrations
 
@@ -42,13 +44,14 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - [x] Donor-only ignition trimming/display and compensation context captured as `FND-000011`; EL19A raw UBYTE and no-`-64` dispositions remain unchanged.
 - [x] GBR-relative address rule captured as `FND-000012` with the four attribution corrections in `REC-000013`; `FFFF109E`, `FFFF34E4`-at-`0x0A19B8` and the eight-extra-`FFFF355D`-readers statements are superseded and must not be reused.
 - [x] `0x0F712` / `0x10F8A` target-side transfer-pair identity qualified; the MAF/Flow catalogue label remains a hypothesis, and input-source/physical-domain boundaries are explicitly recorded (`FND-000014` / `REC-000016`).
+- [x] `FFFF A074` entry count, capacity, populate path and `FFFF34F5.bit5` gate polarity settled (`FND-000015` / `REC-000017`); the 198-versus-229 contradiction was a live-count/descriptor-capacity conflation, and WO65877's all-bit3-set gate is inverted.
 - [ ] Broader geometry corrections only when they change an axis, unit, dimension, scaling, label or XML disposition. Routine RAM-cell endpoint traces remain outside this index — with the recorded exception of `FND-000010`, retained because it forecloses a calibration definition rather than merely tracing a cell.
 - [ ] Further A2L synthesis migrations only from a closed report with new material calibration-interpretation evidence; do not re-screen the 179-row catalogue or repeat completed donor comparisons.
 
 ## Record locations
 
-- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000014.md`
-- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000013.md`, plus `REC-000016.md` (`REC-000014/015` remain referenced by the WO66032 register summary but were not present in the canonical Findings tree at WO66047 preflight and were not reused).
+- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000015.md`
+- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000013.md`, plus `REC-000016.md` and `REC-000017.md` (`REC-000014/015` remain referenced by the WO66032 register summary but were not present in the canonical Findings tree at WO66047 preflight and were not reused).
 - Evidence references: `FINDINGS/evidence/EVD-xxxxxx.md` (schema reserved; no EVD records created in this revision)
 
 ## Migration coverage and cross-links
@@ -85,6 +88,7 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - WO65733's broad “all sixteen fields are `0x7FFF`” and signed-maximum publisher descriptions versus WO65808's fourteen `0x7FFF` fields, A52/A58 `0x8000` values, and signed-minimum publisher (`REC-000011`).
 - WO65733's `copy_longwords_by_size` maximum `+0x3C` statement versus WO65739's length-`0x60` generic path reaching `+0x5C` at the different `FFFF84D4` destination; no effect on the `FFFF2150` no-copy conclusion (`REC-000012`).
 - WO65098's grouped no-writer disposition for `FFFF1064/FFFF1066/FFFF10A0` versus WO65089's `FFFF1066` store and the consumer-index `FFFF1064` prior-result path; split additively in `REC-000016`, with `FFFF10A0` still unresolved and no physical MAF/RPM identity promoted.
+- WO65877's "all 198 entries have bit3 set" gate and WO65904's "229 entries / no populate path located / byte1 bit3" reading of `FFFF A074` versus the instruction-level 198-count, the byte2 bit3 all-clear polarity, and the located `sub_8081C`/`sub_8085E`/`sub_80884` per-entry flag setters; corrected additively in `REC-000017` with both source reports unedited (`FND-000015`).
 - WO65865's `0x0A19B8`→`FFFF34E4` under base `FFFF34B0`, WO65838/WO65859's non-existent `FFFF109E`, and WO65886's "eight further `FFFF355D` readers" versus own-base resolution to `FFFF34E7`, `FFFF8E9E`, `FFFF10FE`, `FFFF36BE` and `FFFFB552`; superseded addresses retained only as history (`REC-000013`, method rule in `FND-000012`).
 
 ## Promotion rule
