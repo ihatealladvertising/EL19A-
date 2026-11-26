@@ -19,6 +19,7 @@ def make_call(helper, pc, table, axis1, dim1, dim2, raw_r4, raw_r5):
         "call_form": "indirect_jsr",
         "target_load_pc": pc - 8,
         "target_register": 3,
+        "target_register_moves": [],
         "call_instruction": 0x430B,
         "delay_slot": 0x654C,
         "scan_start": 0x5200,
