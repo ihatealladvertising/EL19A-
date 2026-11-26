@@ -94,7 +94,7 @@ A first-consumer trace is not a universal inclusion gate. For a structurally sou
 
 - Combine related objects into one bounded batch WO when they share a reader/helper, geometry family, evidence source or concrete technical question. Require per-object results in the report; do not create one WO per address by default.
 - Keep a WO narrowly discriminating, but avoid administrative fragmentation. One report may cover several sibling tables if the same bounded method answers them.
-- Do not maintain a fixed three-WO backlog or create filler to meet a queue-depth target. Create the next task only when it has a distinct, defensible payoff and a real dependency or available worker.
+- Do not maintain a fixed three-WO backlog or create filler to meet a queue-depth target. Create the next task only when it has a distinct, defensible payoff and a real dependency or available worker. This explicitly supersedes any older three-WO target-depth wording retained in `CONTROL/active_work_orders.md`; the live QUICK START still controls actual assignments, but no minimum backlog is required.
 - When a lane is empty, its worker may stop. Do not manufacture follow-on traces merely to keep a worker occupied.
 - Route routine bounded extraction/caller/reader tasks to Worker 2 where suitable. Worker 2 remains execution-only and stops when its FIFO is empty.
 - Preserve FIFO and one active investigation per lane. Multiple completed publication-pending packages remain permitted under the integration procedure.
