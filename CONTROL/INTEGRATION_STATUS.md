@@ -1,12 +1,17 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — cross-ROM research record publication (2026-11-26)
 
 **Purpose:** Publish the current project-direction record and outside-analyst prompt. No work-order lifecycle or calibration artifacts are being changed in this batch.
 
 **Lock acquired:** 2026-11-26 — cross-ROM discovery research note
+**Lock released:** 2026-11-26 — research note read back; current live queue read back and left unchanged
+
+**Research note:** `EVIDENCE/CROSS_ROM_DISCOVERY_BATCH_2026-11-26.md` — blob `c7fb0346fed3bbd5ea21195d118d28fdb697b4a8`; commit `7e4ae9317a2c90dfa0f646e4c80ba45e939e2d67`.
+
+No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, catalogue, workbook, ROM/LST/A2L, or tool source was modified in this publication batch.
 **Lock released:** 2026-11-26 — both documents and live-register pointer read back; existing lane assignments and FIFO verified unchanged
 
 **Documentation batch commits:** gate lock `7a34fdf845803d7cb67044cabe30af27132c82ae`; project direction `4a81c8b2521e767526bce37b7eaa25d0902c8ea7`; outside analyst prompt `07a60cd179e4bc4d1d81b5bdb68f02e4428d0d7e`; register pointer `f722e2229019b0fc3630c1c54ce46cb8bbca95f3`.
