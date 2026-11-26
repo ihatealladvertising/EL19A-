@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** none
+**Integrator:** ChatGPT
 
-**Purpose:** Publish WO70003 and assign the Release 1 scope-freeze task to Worker 1. Preserve all other FIFO assignments.
+**Purpose:** Compact `CONTROL/active_work_orders.md` into a current operational register; preserve existing archive and per-WO history; verify updated register and archive note before release.
 
-**Lock started:** 2026-11-26T00:39:03.425Z
+**Lock started:** 2026-11-25 (local project date)
 
 **Last integration:** 2026-11-26T00:37:54.897Z — aligned the process-review interval to 25 closeouts/30 days and explicitly retired the fixed three-WO backlog target. No WO assignments or XML/workbook/inventory files changed.
 
