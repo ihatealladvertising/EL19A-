@@ -5,8 +5,8 @@
 ## Recurrence
 
 Run a short review at the first of:
-- every 10 additional WO closeouts across all lanes; or
-- 7 calendar days after the previous review.
+- every 25 additional WO closeouts across all lanes; or
+- 30 calendar days after the previous review.
 
 The first worker/session to notice the threshold performs the review from current `main`. Check this log before starting; if another session has already recorded the due interval, do not duplicate it. A review is a bounded repository-maintenance task, not a new technical WO and not permission to change another lane's lifecycle. Re-read the latest file SHA before appending and verify readback.
 
