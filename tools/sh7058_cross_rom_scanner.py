@@ -9,7 +9,10 @@ Read-only cross-ROM analysis tool:
      and audits EL19A (and optionally CF48D) against RomRaider XML definitions.
 """
 import argparse
+import csv
 import hashlib
+import json
+import sys
 import struct
 import xml.etree.ElementTree as ET
 import zipfile
@@ -388,6 +391,12 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
             ax2 = r6 if (h.kind == "3D_AXIS" and is_rom_cal(r6)) else None
             calls.append({
                 "call_pc": call_pc,
+                "call_form": "bsr" if treg is None else "indirect_jsr",
+                "target_load_pc": None if treg is None else pc,
+                "target_register": treg,
+                "call_instruction": u16(rom, call_pc),
+                "delay_slot": delay,
+                "scan_start": scan_start,
                 "helper": target,
                 "kind": h.kind,
                 "elem_type": h.elem_type,
@@ -430,6 +439,266 @@ def load_xml_tables(xml_path: Path) -> Dict[int, dict]:
     return out
 
 
+
+def _element_width(elem_type: str) -> Optional[int]:
+    """Return storage width in bytes for a recognized scalar element type."""
+    if elem_type in ("uint8", "int8"):
+        return 1
+    if elem_type in ("uint16", "int16"):
+        return 2
+    return None
+
+
+def _address_hex(value: Optional[int]) -> Optional[str]:
+    return None if value is None else f"0x{value:05X}"
+
+
+def _export_span(rom: bytes, addr: Optional[int], count: int, elem_type: str) -> dict:
+    """Describe an exclusive-end ROM span; never silently truncate an invalid extent."""
+    width = _element_width(elem_type)
+    if addr is None or width is None or count <= 0:
+        return {
+            "start": addr, "start_hex": _address_hex(addr), "count": count,
+            "element_type": elem_type, "element_width_bytes": width,
+            "byte_length": None, "end_exclusive": None, "end_exclusive_hex": None,
+            "in_bounds": False, "sha256": None,
+        }
+    end = addr + count * width
+    in_bounds = 0 <= addr < end <= len(rom)
+    return {
+        "start": addr, "start_hex": _address_hex(addr), "count": count,
+        "element_type": elem_type, "element_width_bytes": width,
+        "byte_length": count * width, "end_exclusive": end,
+        "end_exclusive_hex": _address_hex(end), "in_bounds": in_bounds,
+        "sha256": hashlib.sha256(rom[addr:end]).hexdigest() if in_bounds else None,
+    }
+
+
+def _call_context(rom: bytes, call_pc: int, scan_start: int) -> dict:
+    """Preserve the exact bounded instruction words used for the register-window audit."""
+    window_start = max(scan_start, call_pc - 56)
+    for p in range(call_pc - 2, window_start - 2, -2):
+        if 0 <= p <= len(rom) - 2 and u16(rom, p) == 0x000B:
+            window_start = p + 4
+            break
+    window_end = min(len(rom) - (len(rom) % 2), call_pc + 4)
+    words = [
+        {"pc": p, "pc_hex": _address_hex(p), "word": u16(rom, p), "word_hex": f"0x{u16(rom, p):04X}"}
+        for p in range(window_start, window_end, 2)
+        if 0 <= p <= len(rom) - 2
+    ]
+    caller_candidate = None
+    caller_floor = max(scan_start, call_pc - 0x800)
+    for p in range(call_pc - 2, caller_floor - 2, -2):
+        if 0 <= p <= len(rom) - 2 and u16(rom, p) == 0x4F22:
+            caller_candidate = p
+            break
+    return {
+        "window_start": window_start,
+        "window_start_hex": _address_hex(window_start),
+        "window_end_exclusive": window_end,
+        "window_end_exclusive_hex": _address_hex(window_end),
+        "instruction_words": words,
+        "caller_start_candidate": caller_candidate,
+        "caller_start_candidate_hex": _address_hex(caller_candidate),
+        "caller_boundary_method": "nearest_0x4F22_within_0x800_bytes_heuristic" if caller_candidate is not None else "not_found",
+    }
+
+
+def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec], calls: List[dict],
+                      xml_path: Optional[str] = None, xml_tables: Optional[Dict[int, dict]] = None) -> dict:
+    """Build a complete, JSON-safe per-helper, per-call and per-table audit record."""
+    code_start, cal_lo, cal_hi = infer_layout(rom, helpers)
+    call_rows = []
+    table_groups = {}
+
+    for call in calls:
+        helper = helpers[call["helper"]]
+        width = _element_width(call["elem_type"])
+        point_count = call["dim1"] * call["dim2"] if call["dim1"] > 0 and call["dim2"] > 0 else 0
+        data_span = _export_span(rom, call["table"], point_count, call["elem_type"])
+        axis1_span = _export_span(rom, call["axis1"], call["dim1"], call["axis1_type"]) if call["axis1"] is not None else None
+        axis2_span = _export_span(rom, call["axis2"], call["dim2"], call["axis2_type"]) if call["axis2"] is not None else None
+
+        raw_regs = {}
+        for reg in (4, 5, 6):
+            value = call.get(f"raw_r{reg}")
+            raw_regs[f"r{reg}"] = {"value": value, "hex": _address_hex(value)}
+
+        context = _call_context(rom, call["call_pc"], code_start)
+        if call["table"] is not None:
+            resolution = "resolved_r4_candidate_inside_inferred_calibration_window"
+        elif call.get("raw_r4") is None:
+            resolution = "unresolved_r4_in_bounded_register_window"
+        else:
+            resolution = "r4_value_outside_inferred_calibration_window_or_excluded_helper_band"
+
+        row = {
+            "call_pc": call["call_pc"], "call_pc_hex": _address_hex(call["call_pc"]),
+            "call_instruction": call["call_instruction"], "call_instruction_hex": f"0x{call['call_instruction']:04X}",
+            "call_form": call["call_form"], "target_load_pc": call["target_load_pc"],
+            "target_load_pc_hex": _address_hex(call["target_load_pc"]), "target_register": call["target_register"],
+            "delay_slot": call["delay_slot"],
+            "delay_slot_hex": None if call["delay_slot"] is None else f"0x{call['delay_slot']:04X}",
+            "helper": call["helper"], "helper_hex": _address_hex(call["helper"]),
+            "helper_kind": call["kind"], "element_type": call["elem_type"], "element_width_bytes": width,
+            "dim1": call["dim1"], "dim2": call["dim2"],
+            "axis1_type": call["axis1_type"], "axis2_type": call["axis2_type"],
+            "table": call["table"], "table_hex": _address_hex(call["table"]),
+            "axis1": call["axis1"], "axis1_hex": _address_hex(call["axis1"]),
+            "axis2": call["axis2"], "axis2_hex": _address_hex(call["axis2"]),
+            "raw_registers": raw_regs, "resolution_status": resolution,
+            "table_span": data_span, "axis1_span": axis1_span, "axis2_span": axis2_span,
+            "argument_evidence_method": "bounded_linear_register_window_56_bytes_plus_call_delay_slot",
+            "argument_evidence_limits": [
+                "register values are static-window candidates, not full control-flow/data-flow proofs",
+                "instruction words are supplied for independent caller-side review",
+                "caller_start_candidate is a nearest-prologue heuristic, not a proven function boundary",
+                "query register/source, signedness and downstream consumer are not inferred by this export",
+            ],
+            "instruction_context": context,
+        }
+        call_rows.append(row)
+
+        if call["table"] is not None:
+            group = table_groups.setdefault(call["table"], {
+                "table": call["table"], "table_hex": _address_hex(call["table"]),
+                "call_pcs": [], "helper_addresses": [], "helper_kinds": [],
+                "geometry_variants": [], "axis1_variants": [], "axis2_variants": [],
+            })
+            group["call_pcs"].append(call["call_pc"])
+            group["helper_addresses"].append(call["helper"])
+            group["helper_kinds"].append(call["kind"])
+            variant = {
+                "helper_kind": call["kind"], "element_type": call["elem_type"],
+                "element_width_bytes": width, "dim1": call["dim1"], "dim2": call["dim2"],
+                "byte_length": data_span["byte_length"], "end_exclusive": data_span["end_exclusive"],
+                "end_exclusive_hex": data_span["end_exclusive_hex"], "in_bounds": data_span["in_bounds"],
+                "payload_sha256": data_span["sha256"],
+            }
+            if variant not in group["geometry_variants"]:
+                group["geometry_variants"].append(variant)
+            if axis1_span is not None:
+                av = {"address": call["axis1"], "type": call["axis1_type"], "count": call["dim1"],
+                      "end_exclusive": axis1_span["end_exclusive"], "sha256": axis1_span["sha256"]}
+                if av not in group["axis1_variants"]:
+                    group["axis1_variants"].append(av)
+            if axis2_span is not None:
+                av = {"address": call["axis2"], "type": call["axis2_type"], "count": call["dim2"],
+                      "end_exclusive": axis2_span["end_exclusive"], "sha256": axis2_span["sha256"]}
+                if av not in group["axis2_variants"]:
+                    group["axis2_variants"].append(av)
+
+    tables = []
+    for _, group in sorted(table_groups.items()):
+        group["call_pcs"] = sorted(set(group["call_pcs"]))
+        group["helper_addresses"] = sorted(set(group["helper_addresses"]))
+        group["helper_kinds"] = sorted(set(group["helper_kinds"]))
+        group["geometry_conflict"] = len(group["geometry_variants"]) > 1
+        group["axis1_conflict"] = len(group["axis1_variants"]) > 1
+        group["axis2_conflict"] = len(group["axis2_variants"]) > 1
+        tables.append(group)
+
+    helper_rows = []
+    for addr, helper in sorted(helpers.items()):
+        helper_rows.append({
+            "address": addr, "address_hex": _address_hex(addr), "kind": helper.kind,
+            "element_type": helper.elem_type, "dim1": helper.dim1, "dim2": helper.dim2,
+            "axis1_type": helper.axis1_type, "axis2_type": helper.axis2_type,
+            "sub_search1": helper.sub_search1, "sub_search1_hex": _address_hex(helper.sub_search1),
+            "sub_search2": helper.sub_search2, "sub_search2_hex": _address_hex(helper.sub_search2),
+        })
+
+    input_file_hash = None
+    input_file_size = None
+    try:
+        source_bytes = Path(input_path).read_bytes()
+        input_file_hash = hashlib.sha256(source_bytes).hexdigest()
+        input_file_size = len(source_bytes)
+    except OSError:
+        pass
+
+    xml_addrs = set((xml_tables or {}).keys())
+    resolved_addrs = set(table_groups.keys())
+    return {
+        "schema": "sh7058-cross-rom-scan-v1",
+        "input": {
+            "path": input_path, "container_size_bytes": input_file_size, "container_sha256": input_file_hash,
+            "decoded_rom_size_bytes": len(rom), "decoded_rom_sha256": hashlib.sha256(rom).hexdigest(),
+        },
+        "tool": {
+            "name": "sh7058_cross_rom_scanner.py",
+            "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            "python_version": sys.version.split()[0], "command_line": list(sys.argv),
+        },
+        "layout": {
+            "code_start": code_start, "code_start_hex": _address_hex(code_start),
+            "calibration_start": cal_lo, "calibration_start_hex": _address_hex(cal_lo),
+            "calibration_end_exclusive": cal_hi, "calibration_end_exclusive_hex": _address_hex(cal_hi),
+            "inference_method": "infer_layout_heuristic",
+        },
+        "summary": {
+            "helper_count": len(helpers), "helper_counts_by_kind": dict(Counter(h.kind for h in helpers.values())),
+            "call_count": len(call_rows), "call_counts_by_kind": dict(Counter(row["helper_kind"] for row in call_rows)),
+            "resolved_call_count": sum(1 for row in call_rows if row["table"] is not None),
+            "unresolved_call_count": sum(1 for row in call_rows if row["table"] is None),
+            "unique_resolved_table_bases": len(tables),
+            "tables_with_geometry_conflicts": sum(1 for row in tables if row["geometry_conflict"]),
+        },
+        "xml_comparison": None if xml_path is None else {
+            "path": xml_path, "xml_table_count": len(xml_tables or {}),
+            "scanner_bases_in_xml": len(resolved_addrs & xml_addrs),
+            "scanner_bases_missing_from_xml": sorted(resolved_addrs - xml_addrs),
+            "xml_table_bases_absent_from_scanner": sorted(xml_addrs - resolved_addrs),
+        },
+        "helpers": helper_rows, "calls": call_rows, "tables": tables,
+    }
+
+
+def write_machine_exports(json_path: Optional[Path], tsv_dir: Optional[Path], scans: List[dict]) -> None:
+    """Write one combined JSON evidence file and optional per-ROM TSV companions."""
+    if json_path is not None:
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        with json_path.open("w", encoding="utf-8", newline="\n") as stream:
+            json.dump({"schema": "sh7058-cross-rom-batch-v1", "scans": scans}, stream, indent=2, sort_keys=True)
+            stream.write("\n")
+    if tsv_dir is None:
+        return
+    tsv_dir.mkdir(parents=True, exist_ok=True)
+    for scan in scans:
+        stem = Path(scan["input"]["path"]).stem
+        suffix = scan["input"]["decoded_rom_sha256"][:8]
+        prefix = f"{stem}_{suffix}"
+        outputs = (
+            ("calls", scan["calls"], [
+                "call_pc_hex", "call_form", "target_load_pc_hex", "target_register", "caller_start_candidate_hex",
+                "helper_hex", "helper_kind", "table_hex", "element_type", "dim1", "dim2",
+                "axis1_hex", "axis1_type", "axis2_hex", "axis2_type", "resolution_status",
+                "table_span", "axis1_span", "axis2_span", "raw_registers", "instruction_context",
+            ]),
+            ("tables", scan["tables"], [
+                "table_hex", "call_pcs", "helper_addresses", "helper_kinds", "geometry_variants",
+                "geometry_conflict", "axis1_variants", "axis1_conflict", "axis2_variants", "axis2_conflict",
+            ]),
+            ("helpers", scan["helpers"], [
+                "address_hex", "kind", "element_type", "dim1", "dim2", "axis1_type", "axis2_type",
+                "sub_search1_hex", "sub_search2_hex",
+            ]),
+        )
+        for name, rows, fields in outputs:
+            path = tsv_dir / f"{prefix}.{name}.tsv"
+            with path.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=fields, delimiter="\t", lineterminator="\n")
+                writer.writeheader()
+                for row in rows:
+                    flat = {}
+                    for field in fields:
+                        value = row.get(field)
+                        flat[field] = json.dumps(value, sort_keys=True) if isinstance(value, (dict, list)) else value
+                    writer.writerow(flat)
+
+
+
 def main():
     ap = argparse.ArgumentParser(description="SH7055/SH7058 Nissan/Hitachi lookup-helper & table scanner")
     ap.add_argument("--el19a", default="EVIDENCE/VERSA f501.bin")
@@ -444,6 +713,8 @@ def main():
         "EVIDENCE/Nissan Tiida_C12W_3DD9A_705828N.bin",
         "EVIDENCE/Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip",
     ])
+    ap.add_argument("--json-out", type=Path, help="Write a combined JSON export with all helpers, calls, unresolved calls, table groups and ROM hashes")
+    ap.add_argument("--tsv-dir", type=Path, help="Write per-ROM calls/tables/helpers TSV companions into this directory")
     args = ap.parse_args()
 
     el_path = Path(args.el19a)
@@ -452,6 +723,7 @@ def main():
     el_calls = extract_calls(el_rom, el_helpers)
     xml_tables = load_xml_tables(Path(args.xml))
     cf_xml_tables = load_xml_tables(Path(args.cf48d_xml)) if Path(args.cf48d_xml).exists() else {}
+    machine_scans = [build_scan_export(str(el_path), el_rom, el_helpers, el_calls, str(Path(args.xml)), xml_tables)]
 
     print(f"=== {el_path.name} (SHA256 {hashlib.sha256(el_rom).hexdigest()[:12]}) ===")
     print(f"Auto-discovered helpers: {len(el_helpers)} (2D_IMPL={sum(1 for h in el_helpers.values() if h.kind=='2D_IMPL')}, "
@@ -504,6 +776,9 @@ def main():
         s_by_addr = defaultdict(list)
         for c in s_res:
             s_by_addr[c["table"]].append(c)
+        sibling_xml_path = args.cf48d_xml if "CF48D" in spath.name and Path(args.cf48d_xml).exists() else None
+        sibling_xml_tables = cf_xml_tables if sibling_xml_path else None
+        machine_scans.append(build_scan_export(str(spath), srom, s_helpers, s_calls, sibling_xml_path, sibling_xml_tables))
 
         same_addr = 0
         payload_match = 0
@@ -541,6 +816,13 @@ def main():
             print(f"  CF48D.xml ({len(cf_xml_tables)} tables) check: {len(cf_in)} matched ({cf_inherited} base-inherited dims), {len(cf_miss)} caller-backed outside XML, {len(cf_explicit_diffs)} explicit geometry diffs")
             for a, xt, c in cf_explicit_diffs[:10]:
                 print(f"    CF48D DIFF 0x{a:05X}: XML={xt['sizex']}x{xt['sizey']} | Code={c['dim1']}x{c['dim2']} ({xt['name']})")
+
+    if args.json_out is not None or args.tsv_dir is not None:
+        write_machine_exports(args.json_out, args.tsv_dir, machine_scans)
+        if args.json_out is not None:
+            print(f"Machine-readable JSON written: {args.json_out}")
+        if args.tsv_dir is not None:
+            print(f"Per-ROM TSV exports written under: {args.tsv_dir}")
 
 
 if __name__ == "__main__":
