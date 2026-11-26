@@ -16,8 +16,8 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | 099e21cb51bc3973d7d74744c053cfbd4384b801f7af87fed7286b8d7b359c75 | eb5536f7124feaf49f860f36c795119179053d10 |
-| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | 5dc7c465a71110386536d8e1ecc5894d501e8d79fe62d5d0ccba255923311ef4 | 38f57eaabef7cbca4547b3088b937027418117f6 |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | Not recomputed after label/comment update | `9f16c8ba461a2f0ce162a14688efdf96a6de1345` |
+| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | Not recomputed after linked-warning update | `2a7f6bb77277f27620ebc648e26c286885efdf21` |
 
 The selected baseline and original consultant CSV are retained unchanged.
 
@@ -80,3 +80,10 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 ## Owner directive — iterative best-guess definition
 
 On 2026-11-26 the project owner explicitly directed that this definition be built with best guesses and refined from there. The successor now restores working names, categories and candidate data conversions from the selected full-definition baseline while preserving the verified target-side storage geometry and corrected axes. The provisional objects are intended to be useful in RomRaider now; unresolved semantics are refinement work, not a hold on the definition.
+
+
+## Linked-storage editing warning — 0x0CD56 / 0x0FEC0
+
+The two reader-backed objects at 0x0CD56 and 0x0FEC0 share their axis/data storage reciprocally: the 0xFEC0 curve's values are the Y breakpoints for the 0xCD56 surface, and row 0 of the 0xCD56 surface supplies the query axis for the 0xFEC0 curve. Both remain in the XML because both are used by target lookup paths. Their RomRaider names are marked `[P] [LINKED]`, and XML comments describe the dependency. Treat the two objects as a coupled pair when editing either one; no read-only behavior is asserted. See REC-000021.
+
+All 252 provisional objects now carry a visible `[P]` marker; the two user-established E678/E688 entries retain their finalized labels.
