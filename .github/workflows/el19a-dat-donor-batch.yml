@@ -91,6 +91,22 @@ jobs:
           Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text(chr(10).join(out)+chr(10),encoding="utf-8")
           print(chr(10).join(out))
           PY
+      - name: Compare C12 and C13 MR16DDT image variants
+        shell: bash
+        run: |
+          mkdir -p donor-scan/diffs
+          for pair in "237103ZM1E.dat 237103ZM3A.dat" "237103ZM2E.dat 237103ZM4A.dat"; do
+            set -- $pair
+            slug="${1%.dat}__VS__${2%.dat}"
+            set +e
+            python3 tools/nissan_sh705x_workbench.py diff "EVIDENCE/$1" "EVIDENCE/$2" --raw-limit 20 > "donor-scan/diffs/$slug.log" 2>&1
+            rc=$?
+            set -e
+            echo "$rc" > "donor-scan/diffs/$slug.exit"
+            cat "donor-scan/diffs/$slug.log"
+            echo "EXIT_CODE=$rc"
+          done
+
       - name: Upload diagnostic
         if: always()
         uses: actions/upload-artifact@v4
