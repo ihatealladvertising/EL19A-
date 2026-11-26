@@ -56,3 +56,8 @@ The selected V58 baseline is reconciled against the 261-row consultant scope mat
 ## RomRaider import checkpoint — 2026-11-26
 
 The project owner reports that, after removing the duplicate XML declaration, the target ROM loads and the RomRaider definition tree displays many tables. The canonical GitHub successor was corrected to contain one XML declaration and read back successfully. Record this as a **user-reported initial import/tree-load PASS**; table-level rendering, axis/data spot-checks and full visual review of the 254 objects remain pending. See the updated build manifest and WO70003 owner integration checkpoint.
+
+
+## Post-import matrix/XML audit correction — 2026-11-26
+
+A post-import audit discovered that three entries describing implicit fixed grids also quoted their previous bad XML pointers. The generated XML had mistakenly retained those old pointers. The canonical successor has now been corrected: `0x0EFFC` uses a static UBYTE `0,32,…,224` Y grid; `0x1109A` and `0x12D98` use static UWORD `0,4096,…,61440` Y grids. All three stale ROM pointers (`0x08CD3`, `0x093F4`, `0x1170A`) have been removed. The final matrix/XML audit passed with 254 objects, 145 ROM-backed axes, 125 static axes and zero detected mismatches. Because this edit followed the owner's initial RomRaider tree-load report, reload the current canonical XML before continuing table-level verification.
