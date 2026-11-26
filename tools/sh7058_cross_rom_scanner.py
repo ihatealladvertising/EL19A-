@@ -763,10 +763,7 @@ def build_cross_rom_comparisons(scans: List[dict]) -> List[dict]:
             row["sibling_table"] for row in exact_matches
             if any(pair["target_table"] == row["sibling_table"] for pair in row["target_matches"])
         }
-        relocated_bases = {
-            row["sibling_table"] for row in exact_matches
-            if any(pair["target_table"] != row["sibling_table"] for pair in row["target_matches"])
-        }
+        relocated_bases = exact_bases - same_address_payload_bases
         comparisons.append({
             "target_rom": target["input"]["path"],
             "target_rom_sha256": target["input"]["decoded_rom_sha256"],
