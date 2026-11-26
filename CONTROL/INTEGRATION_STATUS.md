@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -126,3 +126,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock acquired:** 2026-11-26 — user-requested Nissan CONSULT .dat decoder / raw-diff checkpoint.
 **Checkpoint report:** EVIDENCE/WORKBENCH_CONSULT_DAT_CHECKPOINT_2026-11-26.md — blob ad9b901c0279b27921ac5a01c8435b4cb5f5fd62; commit b85ff2d1846448139990bcefcec42efbf9fc5763.
 **Lock released:** 2026-11-26 — checkpoint report read back; no work-order lifecycle, worker FIFO, Findings, calibration XML, scope matrix, catalogue, workbook, ROM/LST/A2L, or tool source/test files changed in this checkpoint batch.
+
+
+**Lock acquired:** 2026-11-26 — user-requested one-shot execution of the existing Nissan CONSULT workbench against the ten newly added donor `.dat` files. Temporary GitHub Actions workflow only; no tool, calibration, ROM, Findings, workbook, scope-matrix or catalogue edits authorized. Do not publish other shared-main work until the run is complete and the temporary workflow has been removed.
