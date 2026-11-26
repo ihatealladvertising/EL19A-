@@ -2139,9 +2139,9 @@
 		<table name="[P] [LINKED] Engine Operating Correction Curve (0FEC0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEC0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16">
 			<table name="Y Axis Raw @ 0x0CD56" type="Y Axis" storageaddress="0x0CD56" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="16" />
 		</table>
-		<!-- Release 1 RAW/PROVISIONAL; row 195, 0x0FEE0; physical meaning unresolved. -->
-		<table name="[P] Engine Operating Correction Curve (0FEE0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEE0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="32">
-			<table name="Y Sample Index 0..31 (physical query unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="32">
+		<!-- Release 1 RAW/PROVISIONAL; row 195, 0x0FEE0; 64 UWORD entries, extent 0x0FEE0-0x0FF5F; physical meaning and displayed query breakpoints unresolved (FND-000021 / REC-000024). -->
+		<table name="[P] Engine Operating Correction Curve (0FEE0)" category="SPEC//Engine Control//Curves" storageaddress="0x0FEE0" type="2D" scaling="Raw_UWORD" storagetype="uint16" endian="big" sizey="64">
+			<table name="Y Sample Index 0..63 (physical query domain unresolved)" type="Static Y Axis" scaling="Axis_Raw" storagetype="uint8" endian="big" sizey="64">
 				<data>0</data>
 				<data>1</data>
 				<data>2</data>
@@ -2174,6 +2174,38 @@
 				<data>29</data>
 				<data>30</data>
 				<data>31</data>
+<data>32</data>
+<data>33</data>
+<data>34</data>
+<data>35</data>
+<data>36</data>
+<data>37</data>
+<data>38</data>
+<data>39</data>
+<data>40</data>
+<data>41</data>
+<data>42</data>
+<data>43</data>
+<data>44</data>
+<data>45</data>
+<data>46</data>
+<data>47</data>
+<data>48</data>
+<data>49</data>
+<data>50</data>
+<data>51</data>
+<data>52</data>
+<data>53</data>
+<data>54</data>
+<data>55</data>
+<data>56</data>
+<data>57</data>
+<data>58</data>
+<data>59</data>
+<data>60</data>
+<data>61</data>
+<data>62</data>
+<data>63</data>
 			</table>
 		</table>
 		<!-- Release 1 RAW/PROVISIONAL; row 196, 0x1003E; physical meaning unresolved. -->
