@@ -1,11 +1,15 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70007 0x0FEE0 Release 1 extent correction (2026-11-26)
 **Purpose:** Execute the user-directed WO70007 Release 1 correction for the verified 64-entry 0x0FEE0 object. Worker 2's existing FIFO ownership is preserved; no other lane, XML object, workbook, ROM/LST/A2L or tool source is touched.
 
 **Lock acquired:** 2026-11-26 — WO70007 0x0FEE0 Release 1 extent correction
+**WO70007 report:** `CONTROL/WO70007.md` — blob `801a42debc7fed7ebfc9b2af22d4968526ac71d7`; report commit `5c73a34dd7f51594bfef852302715e67b92eda4c`.
+**Release 1 XML:** blob `4bab8bced09047c461520c6044415ca5357b0110`; **scope matrix:** blob `52fe30fdd760d3a13885007fe9391dead425ec21`; **catalogue:** blob `e8ee9f257e4cd114624cfc26dd08caecccdd59f7`; **manifest:** blob `657288a7e411dfd12ad2ecc0bea972c3165d7941`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `f504706813ff51abb74273d51e37dcfeb7ae1127`; register commit `f95944f9ed28383b1f33d3f5d10d684e8a629abb`.
+**Lock released:** 2026-11-26 — WO70007 artifacts and lifecycle change read back; Worker 2 FIFO advanced to WO70010; Worker 1 and Worker 3 heads unchanged.
 **WO70016 report:** `CONTROL/WO70016.md` — blob `f7c85eb0225ffb90eb5bb292ecd052b9c74c31f4`; report commit `d5c59bbf2779585e75fc877349df97d68d50e87a`.
 **Live register:** `CONTROL/active_work_orders.md` — blob `a69d4caedc5c1e37ae31c71b5d064d608221106f`; register commit `7a74f2f3f2eeb79244c69597848d858bf8a92e05`.
 **Lock commit:** `7e18f866d99f493c611590cd5ac614cb7c31455f`.
