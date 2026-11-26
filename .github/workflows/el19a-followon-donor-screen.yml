@@ -23,6 +23,34 @@ jobs:
           import nissan_sh705x_workbench as wb
           from sh7058_cross_rom_scanner import discover_helpers, extract_calls
 
+          def load_8019_candidate(raw):
+              pos=raw.find(bytes.fromhex('8019fc'),0,0x400)
+              if pos<0: raise ValueError('No 0x8019FC frame marker')
+              recs=[]; frames=0; bad=[]; total=0; first=pos; prev=None
+              while pos+11<=len(raw) and raw[pos:pos+2]==bytes.fromhex('8019'):
+                  kwp_len=raw[pos+3]; frame_len=4+kwp_len+1
+                  if pos+frame_len>len(raw): raise ValueError(f'truncated frame at {pos:#x}')
+                  blk=raw[pos:pos+frame_len]
+                  if (sum(blk[:-1])&0xff)!=blk[-1]: bad.append(pos)
+                  if blk[4:6]!=bytes.fromhex('3482'): raise ValueError(f'unexpected service {blk[4:6].hex()} at {pos:#x}')
+                  addr=int.from_bytes(blk[6:9],'big'); plen=blk[9]
+                  if plen%4 or 10+plen>frame_len-1: raise ValueError(f'invalid payload length {plen} at {pos:#x}')
+                  if addr+plen>0x80000: raise ValueError(f'destination outside 512KiB image at {pos:#x}: {addr:#x}+{plen:#x}')
+                  enc=blk[10:10+plen]; dec=bytearray(plen)
+                  for off in range(0,plen,4):
+                      w=int.from_bytes(enc[off:off+4],'big')
+                      dec[off:off+4]=wb.decrypt_consult_dat_word(w).to_bytes(4,'big')
+                  recs.append((addr,bytes(dec))); total+=plen; frames+=1; prev=pos
+                  pos+=frame_len
+              if not frames: raise ValueError('No 0x8019 transfer frames walked')
+              buf=bytearray([0xff]*0x80000)
+              for addr,data in recs: buf[addr:addr+len(data)]=data
+              return bytes(buf), {'marker_offset':first,'frames':frames,'bad_checksums':len(bad),
+                                   'bad_checksum_offsets':[hex(x) for x in bad[:12]],
+                                   'transferred_bytes_including_repeats':total,
+                                   'first_frame_offset':hex(first),'last_frame_offset':hex(prev),
+                                   'next_offset':hex(pos),'next_bytes':raw[pos:pos+16].hex()}
+
           names = [
             'E1BR20E.dat','E1BR50E.dat','E1BT40A.dat','E1JD81D.dat',
             'D9_BR60B.dat','D9_BR61B.dat','D9_JD08B.dat','D9_JD09C.dat',
@@ -36,7 +64,14 @@ jobs:
               raw = p.read_bytes()
               ent = {'raw_size':len(raw),'raw_sha256':hashlib.sha256(raw).hexdigest()}
               try:
-                  rom = wb.load_any_rom(p)
+                  try:
+                      rom = wb.load_any_rom(p)
+                      ent['loader']='existing 0x8015 loader'
+                  except Exception:
+                      if not name.startswith('D9_'): raise
+                      rom, variant_meta = load_8019_candidate(raw)
+                      ent['loader']='experimental 0x8019 / 0x3482 variant'
+                      ent['variant_frame_meta']=variant_meta
                   fp = wb.rom_fingerprint(rom)
                   helpers = discover_helpers(rom)
                   calls = extract_calls(rom, helpers)
