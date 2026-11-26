@@ -126,7 +126,7 @@ jobs:
                   for x in re.findall(rb"[ -~]{6,}",raw[:0x4000])[:100]
               ])
               out.append("8015_marker_count=%d first_offsets=%r" % (
-                  raw.count(bytes((0x80,0x15)),
+                  raw.count(bytes((0x80,0x15))),
                   [m.start() for m in re.finditer(bytes((0x80,0x15)),raw[:0x4000])][:20]))
           Path("dat-screen/headers/UNSUPPORTED_DAT_HEADERS.txt").write_text(
               "\\n".join(out)+"\\n",encoding="utf-8")
