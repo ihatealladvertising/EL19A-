@@ -1,9 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — user-authorized transfer and bounded closeout of WO70014/WO70012 (2026-11-26)
-**Purpose:** Execute both transferred READY WOs in Worker 2 FIFO order, publish bounded reports and register lifecycle updates; preserve WO70006's BLOCKED status.
+**Integrator:** ChatGPT — user-authorized read-only scanner tooling improvement (2026-11-26)
+**Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes are authorized in this batch.
+**Lock acquired:** 2026-11-26 — scanner tooling improvement; verified no concurrent integrator publication was in progress.
 
 **Lock acquired:** 2026-11-26 — user-authorized transfer of unstarted WO70012 and WO70014 to Worker 2.
 **Lock released:** 2026-11-26 — WO70014 and WO70012 reports and live register read back; Worker 1–3 READY queues empty; WO70006 remains BLOCKED at its complete raw-output input gate.
