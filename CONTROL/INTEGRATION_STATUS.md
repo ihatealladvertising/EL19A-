@@ -1,11 +1,11 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO70010 0x0F3EE target curve verification (2026-11-26)
-**Purpose:** Publish the bounded target-side result for Worker 2 FIFO item WO70010. Preserve all worker-lane ownership and unrelated artifacts; no calibration XML, workbook, ROM/LST/A2L or tool-source edits.
+**Integrator:** ChatGPT — WO70013 0x0F10E reader and output trace closeout (2026-11-26)
+**Purpose:** Publish WO70013 target-side reader/query/consumer evidence as FND-000026 and close the Worker 2 FIFO item. Preserve other lanes; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L or tool-source edits.
 
-**Lock acquired:** 2026-11-26 — WO70010 0x0F3EE target curve verification
+**Lock acquired:** 2026-11-26 — WO70013 0x0F10E reader and output trace closeout
 **WO70010 report:** `CONTROL/WO70010.md` — blob `2284f00284e7bbe84e173c87338c072a387f3f19`; report commit `e9fa35ecc2e8c2b3d8d7499a1c83bdb5694ab921`.
 **Live register:** `CONTROL/active_work_orders.md` — blob `7178415e3c31842b20cb773c44972e8fc5d3e978`; register commit `24dcafe1bf67d578f1cf4ee1cf38c3aefe709d73`.
 **Lock released:** 2026-11-26 — WO70010 report and lifecycle pointer read back; Worker 2 FIFO advanced to WO70013; Worker 1 and Worker 3 heads left unchanged.
