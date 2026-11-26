@@ -1,8 +1,8 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — user-authorized read-only scanner tooling improvement (2026-11-26)
+**Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
 **Lock acquired:** 2026-11-26 — scanner tooling improvement; verified no concurrent integrator publication was in progress.
 **Lock released:** 2026-11-26 — source, documentation, tests and workflow read back; GitHub Actions scanner test run 45900186172 passed (8 tests). No ROM binaries were available in this execution session, so no ROM census was run.
