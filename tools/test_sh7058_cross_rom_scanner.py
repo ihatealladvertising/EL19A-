@@ -143,10 +143,16 @@ class ScannerExportTests(unittest.TestCase):
         }
         target = {
             "input": {"path": "target.bin", "decoded_rom_sha256": "t" * 64},
-            "tables": [{
-                "table": 0x6000, "table_hex": "0x06000", "helper_kinds": ["2D_AXIS"],
-                "geometry_variants": [variant],
-            }],
+            "tables": [
+                {
+                    "table": 0x6000, "table_hex": "0x06000", "helper_kinds": ["2D_AXIS"],
+                    "geometry_variants": [variant],
+                },
+                {
+                    "table": 0x6100, "table_hex": "0x06100", "helper_kinds": ["2D_AXIS"],
+                    "geometry_variants": [variant],
+                },
+            ],
         }
         sibling = {
             "input": {"path": "sibling.bin", "decoded_rom_sha256": "s" * 64},
@@ -161,12 +167,17 @@ class ScannerExportTests(unittest.TestCase):
                         "byte_length": 8, "payload_sha256": "different", "distinct_byte_values": 1,
                     }],
                 },
+                {
+                    "table": 0x6100, "table_hex": "0x06100", "helper_kinds": ["2D_AXIS"],
+                    "geometry_variants": [variant],
+                },
             ],
         }
         comparison = build_cross_rom_comparisons([target, sibling])[0]
-        self.assertEqual(comparison["same_address_and_helper_kind_count"], 1)
-        self.assertEqual(comparison["exact_payload_match_count"], 1)
-        self.assertEqual(comparison["nontrivial_exact_payload_match_count"], 1)
+        self.assertEqual(comparison["same_address_and_helper_kind_count"], 3)
+        self.assertEqual(comparison["exact_payload_match_count"], 2)
+        self.assertEqual(comparison["same_address_exact_payload_match_count"], 1)
+        self.assertEqual(comparison["nontrivial_exact_payload_match_count"], 2)
         self.assertEqual(comparison["relocated_exact_payload_match_count"], 1)
 
     def test_json_and_tsv_exports_are_written(self):
