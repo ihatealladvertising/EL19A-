@@ -51,3 +51,8 @@ These may support later releases or be pursued where they resolve a concrete Rel
 ## Owner integration checkpoint — 2026-11-26
 
 The selected V58 baseline is reconciled against the 261-row consultant scope matrix. The owner-corrected matrix is `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` (2 ESTABLISHED / 252 RAW-PROVISIONAL / 7 EXCLUDE). The separate successor `CALIBRATIONS/EL19A_release1_conservative.xml` is built and structurally checked; the baseline is unchanged. Findings `FND-000016/017` and `REC-000019/020` capture the new material interpretations. See `CALIBRATIONS/EL19A_release1_conservative_manifest.md` for hashes and the explicit validation boundary. RomRaider desktop import and visual checks remain pending; do not describe the candidate as a RomRaider-validated final release.
+
+
+## RomRaider import checkpoint — 2026-11-26
+
+The project owner reports that, after removing the duplicate XML declaration, the target ROM loads and the RomRaider definition tree displays many tables. The canonical GitHub successor was corrected to contain one XML declaration and read back successfully. Record this as a **user-reported initial import/tree-load PASS**; table-level rendering, axis/data spot-checks and full visual review of the 254 objects remain pending. See the updated build manifest and WO70003 owner integration checkpoint.
