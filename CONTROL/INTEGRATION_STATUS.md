@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -129,3 +129,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock acquired:** 2026-11-26 — user-requested one-shot execution of the existing Nissan CONSULT workbench against the ten newly added donor `.dat` files. Temporary GitHub Actions workflow only; no tool, calibration, ROM, Findings, workbook, scope-matrix or catalogue edits authorized. Do not publish other shared-main work until the run is complete and the temporary workflow has been removed.
+
+
+**Lock released:** 2026-11-26 — one-shot CONSULT donor scan, decoder comparison and bounded MR16DDT format diagnostics completed. Temporary workflow `.github/workflows/el19a-dat-donor-batch.yml` removed and absence verified. Evidence report: `EVIDENCE/TEN_CONSULT_DAT_DONOR_SCREEN_2026-11-26.md` (blob `46ecf37a12fd2528c1f3499662368d284a0f663f`). Scan/diff run `45906082083` succeeded; final diagnostic run `45906621594` succeeded. No workbench/scanner source, regression tests, XML, catalogue, scope matrix, workbook, Findings, ROM/LST/A2L or worker queues were changed. Donor binaries already present in EVIDENCE were read-only inputs.
