@@ -1,10 +1,15 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-authorized read-only scanner tooling improvement (2026-11-26)
-**Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes are authorized in this batch.
+**Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
 **Lock acquired:** 2026-11-26 — scanner tooling improvement; verified no concurrent integrator publication was in progress.
+**Lock released:** 2026-11-26 — source, documentation, tests and workflow read back; GitHub Actions scanner test run 45900186172 passed (8 tests). No ROM binaries were available in this execution session, so no ROM census was run.
+**Scanner source:** tools/sh7058_cross_rom_scanner.py — blob bf2b68b7b0cf88fd526ede20d1af180cf0b7a703; latest source commit 8b8f97868ea102f73011541002c3a8b4966aa177.
+**Scanner documentation:** tools/sh7058_cross_rom_scanner.md — blob db619172ea73b4fbefeaf8dc02e8f3a9c13e7d3b.
+**Regression tests:** tools/test_sh7058_cross_rom_scanner.py — blob bbef0833f70d8c608eaa8b85d186903f8e4a5571.
+**CI workflow:** .github/workflows/sh7058-scanner-tests.yml — blob 731822940cdc3445e15050090899a4a2ecb72c06.
 
 **Lock acquired:** 2026-11-26 — user-authorized transfer of unstarted WO70012 and WO70014 to Worker 2.
 **Lock released:** 2026-11-26 — WO70014 and WO70012 reports and live register read back; Worker 1–3 READY queues empty; WO70006 remains BLOCKED at its complete raw-output input gate.
