@@ -1,4 +1,4 @@
-name: EL19A One-shot CONSULT Donor Batch
+name: EL19A CONSULT Donor Layout Diagnostic
 
 on:
   push:
@@ -10,189 +10,92 @@ permissions:
   contents: read
 
 jobs:
-  donor-scan:
+  diagnose-layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Scan ten new candidates and three controls
-        if: false
+      - name: Inspect valid frame addresses and decoded banks
         shell: bash
         run: |
-          set -u
-          mkdir -p donor-scan/scans donor-scan/diffs
-          files=(
-            "EVIDENCE/23710EM62B.dat"
-            "EVIDENCE/23710EM64A.dat"
-            "EVIDENCE/23710EM60B.dat"
-            "EVIDENCE/23710EM67A.dat"
-            "EVIDENCE/237103ZM3A.dat"
-            "EVIDENCE/237103ZM1E.dat"
-            "EVIDENCE/237103ZM4A.dat"
-            "EVIDENCE/237103ZM2E.dat"
-            "EVIDENCE/E1BR20E.dat"
-            "EVIDENCE/8201032726.dat"
-            "EVIDENCE/unknown_EM62B_SH7055.bin"
-            "EVIDENCE/237108W94B.dat"
-            "EVIDENCE/VERSA f501.bin"
-          )
-          for f in "${files[@]}"; do
-            name="$(basename "$f")"
-            stem="${name%.*}"
-            echo "===== SCAN $f ====="
-            set +e
-            python3 tools/nissan_sh705x_workbench.py scan "$f" \
-              --json "donor-scan/scans/$stem.json" \
-              --tsv "donor-scan/scans/$stem.tsv" \
-              > "donor-scan/scans/$stem.log" 2>&1
-            rc=$?
-            set -e
-            echo "$rc" > "donor-scan/scans/$stem.exit"
-            cat "donor-scan/scans/$stem.log"
-            echo "EXIT_CODE=$rc"
-          done
-
-      - name: Diagnose 2 MiB decoded layout and unsupported .dat headers
-        shell: bash
-        run: |
+          mkdir -p donor-scan
           python3 - <<'PY'
-          import re, struct
+          import re
           from pathlib import Path
-          from tools.nissan_sh705x_workbench import load_any_rom, summarize_tables
+          from tools.nissan_sh705x_workbench import load_any_rom
           from tools.sh7058_cross_rom_scanner import discover_helpers, extract_calls
+          from tools.nissan_sh705x_workbench import summarize_tables
 
-          files = [
+          out = []
+          for name in [
               "EVIDENCE/237103ZM1E.dat", "EVIDENCE/237103ZM2E.dat",
               "EVIDENCE/237103ZM3A.dat", "EVIDENCE/237103ZM4A.dat",
-          ]
-          out = []
-          for name in files:
+          ]:
               raw = Path(name).read_bytes()
               rom = load_any_rom(Path(name))
               out.append(chr(10) + "===== " + name + " =====")
-              out.append("container_size=%d decoded_size=%d header_hex=%s" % (
-                  len(raw), len(rom), raw[:96].hex()))
-              out.append("header_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:160]))
-              # Recover transfer-record address coverage using the existing framing fields.
-              pos = raw.find(b"\\x80\\x15\\xfc", 0, 0x200)
+              out.append("container_size=%d decoded_size=%d" % (len(raw), len(rom)))
+              pos = raw.find(bytes((0x80,0x15,0xFC)), 0, 0x200)
+              out.append("first_frame_offset=%s" % (hex(pos) if pos >= 0 else "not_found"))
               if pos < 0: pos = 0x43
               recs = []
-              while pos + 11 <= len(raw) and raw[pos:pos+2] == b"\\x80\\x15":
-                  ln = raw[pos+3]
-                  fl = 4 + ln + 1
-                  if pos + fl > len(raw): break
-                  blk = raw[pos:pos+fl]
-                  if (sum(blk[:-1]) & 0xff) != blk[-1] or blk[4:6] != b"\\x34\\x82": break
+              errors = []
+              while pos + 11 <= len(raw) and raw[pos:pos+2] == bytes((0x80,0x15)):
+                  kwp_len = raw[pos+3]
+                  frame_len = 4 + kwp_len + 1
+                  if pos + frame_len > len(raw):
+                      errors.append("truncated@" + hex(pos)); break
+                  blk = raw[pos:pos+frame_len]
+                  if (sum(blk[:-1]) & 0xff) != blk[-1]:
+                      errors.append("checksum@" + hex(pos)); break
+                  if blk[4:6] != bytes((0x34,0x82)):
+                      errors.append("command@" + hex(pos) + ":" + blk[4:6].hex()); break
                   addr = int.from_bytes(blk[6:9], "big")
                   plen = blk[9]
-                  recs.append((addr, plen))
-                  pos += fl
-              out.append("frames=%d min_addr=%s max_exclusive=%s first=%r last=%r" % (
-                  len(recs), hex(min((a for a,n in recs), default=0)),
-                  hex(max((a+n for a,n in recs), default=0)), recs[:6], recs[-6:]))
-              # Payload coverage by 512 KiB banks.
-              for lo in (0, 0x80000, 0x100000, 0x180000):
-                  hi = min(lo + 0x80000, len(rom))
+                  if 10 + plen > frame_len - 1:
+                      errors.append("payload_len@" + hex(pos)); break
+                  recs.append((addr, plen, pos))
+                  pos += frame_len
+              out.append("frames=%d min_addr=%s max_exclusive=%s errors=%r" % (
+                  len(recs), hex(min((a for a,n,p in recs), default=0)),
+                  hex(max((a+n for a,n,p in recs), default=0)), errors))
+              out.append("first_records=%r" % recs[:8])
+              out.append("last_records=%r" % recs[-8:])
+              for lo in (0,0x80000,0x100000,0x180000):
+                  hi = min(lo+0x80000,len(rom))
                   if lo >= hi: continue
-                  seg = rom[lo:hi]
+                  seg=rom[lo:hi]
                   out.append("bank_%06X_%06X non_ff=%d unique=%d head=%s" % (
-                      lo, hi, sum(b != 0xff for b in seg), len(set(seg)), seg[:16].hex()))
-              out.append("cpu_tags=%r" % sorted(set(x.decode() for x in re.findall(rb"SH70[0-9A-Z]{2,6}", rom))))
-              out.append("fid_like_strings=%r" % sorted(set(x.decode() for x in re.findall(rb"[0-9][A-Z0-9]{7}", rom)) )[:30])
-              # The scanner normally only searches helper PCs below 0x80000.
-              for base in (0, 0x80000, 0x100000, 0x180000):
+                      lo,hi,sum(b!=0xff for b in seg),len(set(seg)),seg[:16].hex()))
+              out.append("cpu_tags=%r" % sorted(set(x.decode() for x in re.findall(rb"SH70[0-9A-Z]{2,6}",rom))))
+              out.append("fid_like=%r" % sorted(set(x.decode() for x in re.findall(rb"[0-9][A-Z0-9]{7}",rom)))[:40])
+              for base in (0,0x80000,0x100000,0x180000):
                   if base >= len(rom): continue
-                  helpers = discover_helpers(rom, search_lo=base+0x4000, search_hi=min(base+0x80000, len(rom)))
-                  calls = extract_calls(rom, helpers, code_start=min(base+0x2000, len(rom)-2)) if helpers else []
-                  tables = summarize_tables(rom, calls) if calls else {}
+                  hi=min(base+0x80000,len(rom))
+                  helpers=discover_helpers(rom,search_lo=base+0x4000,search_hi=hi)
+                  calls=extract_calls(rom,helpers,code_start=min(base+0x2000,len(rom)-2)) if helpers else []
+                  tables=summarize_tables(rom,calls) if calls else {}
                   out.append("helper_window_%06X helpers=%d calls=%d resolved=%d tables=%d" % (
-                      base, len(helpers), len(calls), sum(c.get("table") is not None for c in calls), len(tables)))
-          for name in ("EVIDENCE/E1BR20E.dat", "EVIDENCE/8201032726.dat"):
-              raw = Path(name).read_bytes()
-              out.append(chr(10) + "===== RAW HEADER " + name + " =====")
-              out.append("size=%d head_hex=%s" % (len(raw), raw[:128].hex()))
-              out.append("head_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:200]))
-              out.append("8015_marker_count=%d" % raw.count(b"\\x80\\x15"))
-          Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text(chr(10).join(out) + chr(10), encoding="utf-8")
+                      base,len(helpers),len(calls),sum(c.get("table") is not None for c in calls),len(tables)))
+          for name in ["EVIDENCE/E1BR20E.dat","EVIDENCE/8201032726.dat"]:
+              raw=Path(name).read_bytes()
+              out.append(chr(10)+"===== RAW "+name+" =====")
+              out.append("size=%d marker_count=%d head_hex=%s" % (
+                  len(raw),raw.count(bytes((0x80,0x15))),raw[:128].hex()))
+              out.append("head_ascii=%r" % re.sub(rb"[^ -~]",b".",raw[:180]))
+          Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text(chr(10).join(out)+chr(10),encoding="utf-8")
           print(chr(10).join(out))
           PY
-
-      - name: Compare candidate firmware families and target
-        if: false
-        shell: bash
-        run: |
-          set -u
-          run_diff() {
-            a="$1"
-            b="$2"
-            slug="$(basename "${a%.*}")__VS__$(basename "${b%.*}")"
-            echo "===== DIFF $a vs $b ====="
-            set +e
-            python3 tools/nissan_sh705x_workbench.py diff "$a" "$b" --raw-limit 12 \
-              > "donor-scan/diffs/$slug.log" 2>&1
-            rc=$?
-            set -e
-            echo "$rc" > "donor-scan/diffs/$slug.exit"
-            cat "donor-scan/diffs/$slug.log"
-            echo "EXIT_CODE=$rc"
-          }
-          run_diff "EVIDENCE/23710EM62B.dat" "EVIDENCE/unknown_EM62B_SH7055.bin"
-          run_diff "EVIDENCE/23710EM60B.dat" "EVIDENCE/23710EM62B.dat"
-          run_diff "EVIDENCE/23710EM64A.dat" "EVIDENCE/23710EM62B.dat"
-          run_diff "EVIDENCE/23710EM67A.dat" "EVIDENCE/23710EM64A.dat"
-          run_diff "EVIDENCE/23710EM62B.dat" "EVIDENCE/237108W94B.dat"
-          run_diff "EVIDENCE/237103ZM3A.dat" "EVIDENCE/VERSA f501.bin"
-          run_diff "EVIDENCE/237103ZM1E.dat" "EVIDENCE/VERSA f501.bin"
-          run_diff "EVIDENCE/237103ZM4A.dat" "EVIDENCE/237103ZM3A.dat"
-          run_diff "EVIDENCE/237103ZM2E.dat" "EVIDENCE/237103ZM1E.dat"
-          run_diff "EVIDENCE/E1BR20E.dat" "EVIDENCE/VERSA f501.bin"
-          run_diff "EVIDENCE/8201032726.dat" "EVIDENCE/VERSA f501.bin"
-
-      - name: Build compact scan summary and input hashes
-        if: always()
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import glob, json, os
-          out = []
-          for path in sorted(glob.glob("donor-scan/scans/*.json")):
-              try:
-                  d = json.load(open(path, encoding="utf-8"))
-                  fp = d.get("fingerprint", {})
-                  stem = os.path.basename(path)
-                  logp = path[:-5] + ".log"
-                  log = open(logp, encoding="utf-8", errors="replace").read() if os.path.exists(logp) else ""
-                  call_line = next((x.strip() for x in log.splitlines() if x.startswith("Call sites:")), "Call sites: unavailable")
-                  out.append("%s | size=%s | MD5=%s | SHA256=%s | CPU=%s | FID=%s | helpers=%d | tables=%d | %s" % (
-                      stem, fp.get("size"), fp.get("md5"), fp.get("sha256"),
-                      ",".join(fp.get("cpu_tags", [])), ",".join(fp.get("fid_tags", [])),
-                      len(d.get("helpers", {})), len(d.get("tables", {})), call_line))
-              except Exception as e:
-                  out.append(os.path.basename(path) + " | SUMMARY_ERROR=" + repr(e))
-          with open("donor-scan/SUMMARY.txt", "w", encoding="utf-8") as f:
-              f.write("\n".join(out) + "\n")
-          print("\n".join(out))
-          PY
-          sha256sum \
-            "EVIDENCE/23710EM62B.dat" "EVIDENCE/23710EM64A.dat" \
-            "EVIDENCE/23710EM60B.dat" "EVIDENCE/23710EM67A.dat" \
-            "EVIDENCE/237103ZM3A.dat" "EVIDENCE/237103ZM1E.dat" \
-            "EVIDENCE/237103ZM4A.dat" "EVIDENCE/237103ZM2E.dat" \
-            "EVIDENCE/E1BR20E.dat" "EVIDENCE/8201032726.dat" \
-            > donor-scan/INPUT_SHA256.txt
-
-      - name: Upload scan and diff outputs
+      - name: Upload diagnostic
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: el19a-dat-donor-batch
+          name: el19a-dat-layout-diagnostic
           path: donor-scan/
           if-no-files-found: error
           retention-days: 14
