@@ -77,3 +77,10 @@ RomRaider screenshot review:
 - Captures 019–021 cover the three 0x0E21A selector arrays; Capture022 covers 0x0E678 and 0x0E688.
 
 Do not wait for full semantic closure of the remaining work orders before using or improving this definition. Continue the investigation in parallel and revise candidate labels, categories, scaling and axes as evidence warrants.
+
+
+## Explicit provisional and shared-storage UI markers — 2026-11-26
+
+All 252 provisional objects in the iterative best-guess successor use a visible `[P]` label prefix; the two established E678/E688 entries retain their user-finalized names. Functional categories and best-guess conversions remain enabled.
+
+The 0x0CD56 / 0x0FEC0 reciprocal shared-storage lookup pair is marked `[P] [LINKED]` in RomRaider. The 0x0FEC0 curve values are the 0x0CD56 surface Y axis; row 0 of 0x0CD56 is the 0x0FEC0 curve query axis. Preserve both objects and consider both before changing either. See REC-000021.
