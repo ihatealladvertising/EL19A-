@@ -1,0 +1,111 @@
+name: EL19A follow-on CONSULT donor screen
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/el19a-followon-donor-screen.yml'
+permissions:
+  contents: read
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Screen donor files and compare decoded structures
+        run: |
+          python - <<'PY'
+          import sys, json, hashlib, itertools
+          from pathlib import Path
+          sys.path.insert(0, 'tools')
+          import nissan_sh705x_workbench as wb
+          from sh7058_cross_rom_scanner import discover_helpers, extract_calls
+
+          names = [
+            'E1BR20E.dat','E1BR21E.dat','E1BR22E.dat','E1BR23E.dat',
+            'E1BR50E.dat','E1BT40A.dat','E1JD81D.dat',
+            'D9_BR60B.dat','D9_BR61B.dat','D9_JD08B.dat','D9_JD09C.dat',
+            '310364EM1C.dat','310364EP1B.dat'
+          ]
+          base = Path('EVIDENCE')
+          results = {}
+          lines = ['# Follow-on CONSULT donor screen', '', 'Read-only run using the committed workbench; no donor name or vehicle role inferred from filename.', '']
+          for name in names:
+              p = base / name
+              raw = p.read_bytes()
+              ent = {'raw_size':len(raw),'raw_sha256':hashlib.sha256(raw).hexdigest()}
+              try:
+                  rom = wb.load_any_rom(p)
+                  fp = wb.rom_fingerprint(rom)
+                  helpers = discover_helpers(rom)
+                  calls = extract_calls(rom, helpers)
+                  tables = wb.summarize_tables(rom, calls)
+                  ent.update({'decode':'OK','decoded_size':len(rom),'decoded_sha256':fp['sha256'],
+                              'cpu_tags':fp['cpu_tags'],'fid_tags':fp['fid_tags'],
+                              'helpers':len(helpers),'calls':len(calls),
+                              'resolved_calls':sum(c['table'] is not None for c in calls),
+                              'unique_tables':len(tables),
+                              'table_shapes':dict(__import__('collections').Counter(
+                                  f"{t['kind']}:{t['elem_type']}:{t['dim1']}x{t['dim2']}" for t in tables.values()))})
+                  ent['_rom']=rom
+                  ent['_tables']=tables
+              except Exception as e:
+                  ent.update({'decode':'REJECTED','error':str(e),
+                              'header64':raw[:64].hex(),
+                              'marker_8015fc_count':raw.count(bytes.fromhex('8015fc')),
+                              'marker_8015_count':raw.count(bytes.fromhex('8015'))})
+              results[name]=ent
+          lines += ['## Individual files','']
+          for name, e in results.items():
+              lines.append(f"- **{name}** — raw {e['raw_size']:,} B, SHA256 {e['raw_sha256']}; decode **{e['decode']}**.")
+              if e['decode']=='OK':
+                  lines.append(f"  - Image {e['decoded_size']:,} B, SHA256 {e['decoded_sha256']}; CPU tags {e['cpu_tags']}; FID-like tags {e['fid_tags']}; helpers {e['helpers']}; calls {e['calls']} ({e['resolved_calls']} resolved); unique tables {e['unique_tables']}.")
+                  lines.append(f"  - Shapes: {json.dumps(e['table_shapes'],sort_keys=True)}")
+              else:
+                  lines.append(f"  - Parser rejection: {e['error']}; 0x8015FC occurrences {e['marker_8015fc_count']}; 0x8015 occurrences {e['marker_8015_count']}; first 64 bytes {e['header64']}.")
+          lines += ['', '## Pairwise decoded-structure comparisons', '',
+                    'Counts below compare helper-backed table payloads; they do not assign physical meaning or vehicle role.', '']
+          valid=[n for n,e in results.items() if e['decode']=='OK']
+          pair_rows=[]
+          for a,b in itertools.combinations(valid,2):
+              ea,eb=results[a],results[b]
+              ta,tb=ea['_tables'],eb['_tables']
+              same_addr=set(ta)&set(tb)
+              same=sum(ta[x]['payload']==tb[x]['payload'] for x in same_addr)
+              changed=len(same_addr)-same
+              pa={t['payload'] for t in ta.values() if t['nontrivial']}
+              pb={t['payload'] for t in tb.values() if t['nontrivial']}
+              relocated=len((pa & pb)) - sum(1 for x in (pa & pb) if x in {ta[k]['payload'] for k in same_addr if ta[k]['payload']==tb[k]['payload']})
+              row={'a':a,'b':b,'same_address':len(same_addr),'identical_at_address':same,
+                   'changed_at_address':changed,'exact_payload_intersection_nontrivial':len(pa&pb)}
+              pair_rows.append(row)
+              lines.append(f"- {a} ↔ {b}: {len(same_addr)} same-address objects; {same} identical payloads; {changed} differing payloads; {len(pa&pb)} distinct exact nontrivial payloads shared.")
+          lines += ['', '## 310364 raw-container comparison', '']
+          a,b=results['310364EM1C.dat'],results['310364EP1B.dat']
+          ra=(base/'310364EM1C.dat').read_bytes(); rb=(base/'310364EP1B.dat').read_bytes()
+          if len(ra)==len(rb):
+              diffs=[i for i,(x,y) in enumerate(zip(ra,rb)) if x!=y]
+              lines.append(f"Equal raw lengths: {len(ra):,} B; differing bytes: {len(diffs):,}; first differing offsets: {[hex(x) for x in diffs[:32]]}.")
+              lines.append(f"First 256 bytes identical: {ra[:256]==rb[:256]}; longest identical prefix: {next((i for i,(x,y) in enumerate(zip(ra,rb)) if x!=y),len(ra)):#x}.")
+          else:
+              lines.append(f"Raw lengths differ: {len(ra):,} vs {len(rb):,} B.")
+          lines += ['', '## Interpretation boundary', '',
+                    '- Successful decoding establishes compatibility with the current parser, not a particular vehicle application.',
+                    '- Helper counts and table payload relationships are structural only.',
+                    '- Parser rejection is not proof that a file is not an ECU image; it means the current CONSULT loader did not recognize its frame sequence.',
+                    '- No calibration names, units, scaling, or 310364 ECU/TCM classification are promoted.', '']
+          Path('followon_donor_report.md').write_text('\n'.join(lines),encoding='utf-8')
+          Path('followon_donor_results.json').write_text(json.dumps(
+              {n:{k:v for k,v in e.items() if not k.startswith('_')} for n,e in results.items()},
+              indent=2),encoding='utf-8')
+          print('\n'.join(lines))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: el19a-followon-donor-screen
+          path: |
+            followon_donor_report.md
+            followon_donor_results.json
+          if-no-files-found: error
