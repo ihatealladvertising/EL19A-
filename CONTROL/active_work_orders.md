@@ -20,7 +20,7 @@ The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTO
 | Lane | Queue order after current WO | Depth |
 |---|---|---:|
 | Worker 1 | — | 0 |
-| Worker 2 | WO70010 | 1 |
+| Worker 2 | — | 0 |
 | Worker 3 | — | 0 |
 
 
