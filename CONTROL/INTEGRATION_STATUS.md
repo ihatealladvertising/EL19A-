@@ -1,13 +1,16 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70006 supplemental A2L matcher lead record
 
-**Purpose:** Append the user-reported A2L structural matcher run to WO70006 as unverified comparative leads, preserve prior V6/Juke ROM-to-A2L provenance caveats, and keep donor semantics separate from target-side Findings.
+**Purpose:** Record the user-reported A2L structural matcher results as unverified donor-comparison leads in WO70006; preserve V6 pairing and Juke address-mapping caveats. No FND/REC, XML, workbook, catalogue or inventory changes.
 
-**Lock acquired:** 2026-11-26 — WO70006 supplemental A2L matcher lead record  
+**Lock acquired:** 2026-11-26 — WO70006 supplemental A2L matcher lead record
+**Lock released:** 2026-11-26 — WO70006 addendum read back and blocked lifecycle status verified  
 **Lock released:** 2026-11-26 — all report, Findings, index and live-register readbacks verified
+
+**Supplemental addendum commit:** `a000824d9f123eaf510a0e71be07fbb81cfda704` — WO70006 blob `8dcdc12eb5d4bcb48607e3dc4c1d89bd2d364a27`.
 
 **Publication commits:**
 - Findings batch: `28f812a95046cb27979be92704d89de91c665a52`
