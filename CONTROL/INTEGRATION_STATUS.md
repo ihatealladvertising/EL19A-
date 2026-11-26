@@ -1,13 +1,15 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Integrator:** ChatGPT — user-authorized Worker 1/3 READY-WO transfer to Worker 2 and bounded closeout (2026-11-26)
-**Purpose:** Transfer unstarted WO70012 and WO70014 into the exhausted Worker 2 lane, then execute and publish their bounded closeouts. No other lane work is to be interrupted.
+**Integrator:** ChatGPT — user-authorized transfer and bounded closeout of WO70014/WO70012 (2026-11-26)
+**Purpose:** Execute both transferred READY WOs in Worker 2 FIFO order, publish bounded reports and register lifecycle updates; preserve WO70006's BLOCKED status.
 
-**Lock acquired:** 2026-11-26 — Worker 2 backlog-depth reconciliation
-**Live register:** `CONTROL/active_work_orders.md` — blob `db79ae82b4a2131db9c295abc6bdcbe22792c619`; correction commit `558ff34e6ec47a2888f18b0695b5867882881efc`.
-**Lock released:** 2026-11-26 — Worker 2 backlog depth read back as zero; Worker 1/2/3 FIFO heads preserved.
+**Lock acquired:** 2026-11-26 — user-authorized transfer of unstarted WO70012 and WO70014 to Worker 2.
+**Lock released:** 2026-11-26 — WO70014 and WO70012 reports and live register read back; Worker 1–3 READY queues empty; WO70006 remains BLOCKED at its complete raw-output input gate.
+**Live register:** `CONTROL/active_work_orders.md` — blob `3e22ca9bbafb7b36a25883f6c21ffcb264402d58`; publication commit `e5cc635845181b760dca3bb3a7214643e0c1fd2a`.
+**WO70012 report:** `CONTROL/WO70012.md` — blob `86a6cbde5f3566af9620809bb972dbc470cd3f24`; publication commit `e5cc635845181b760dca3bb3a7214643e0c1fd2a`.
+**WO70014 report:** `CONTROL/WO70014.md` — blob `322ab166075363f91e2cce80e7fedb6718e3aa96`; publication commit `9b3d067170f1a73c2bf1fe3af6bb2741eda4877c`.
 **WO70013 report:** `CONTROL/WO70013.md` — blob `aaf49a7082a4279ffe46bee37e112a022036071e`; report commit `1485da52689db055d1cfad14185c552bf7ce09db`.
 **Finding:** `FINDINGS/records/FND-000026.md` — blob `6447a9360f62ac182b871636e6c043b252b009d3`; record commit `dbd00cac125c9296476689dc1b4f99a1a3038176`.
 **Findings index:** `FINDINGS/INDEX.md` — blob `eb1f34429ba5397ff1c2a41470381778b0384510`; index commit `14229c4215cd64471710fd56b3e9437723f972f3`.
@@ -110,3 +112,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock acquired:** 2026-11-26 — user-authorized transfer of WO70012 and WO70014 into Worker 2; technical execution and consolidated closeout.
+
+
+**Lock released:** 2026-11-26 — user-authorized WO70014 → WO70012 Worker 2 sequence complete; both reports and active register verified on `main`; integration gate released UNLOCKED. WO70006 is the only remaining explicitly blocked scanner task; no READY lane work remains.
