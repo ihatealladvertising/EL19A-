@@ -58,6 +58,71 @@ jobs:
             echo "EXIT_CODE=$rc"
           done
 
+      - name: Diagnose 2 MiB decoded layout and unsupported .dat headers
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import re, struct
+          from pathlib import Path
+          from tools.nissan_sh705x_workbench import load_any_rom, summarize_tables
+          from tools.sh7058_cross_rom_scanner import discover_helpers, extract_calls
+
+          files = [
+              "EVIDENCE/237103ZM1E.dat", "EVIDENCE/237103ZM2E.dat",
+              "EVIDENCE/237103ZM3A.dat", "EVIDENCE/237103ZM4A.dat",
+          ]
+          out = []
+          for name in files:
+              raw = Path(name).read_bytes()
+              rom = load_any_rom(Path(name))
+              out.append("\\n===== " + name + " =====")
+              out.append("container_size=%d decoded_size=%d header_hex=%s" % (
+                  len(raw), len(rom), raw[:96].hex()))
+              out.append("header_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:160]))
+              # Recover transfer-record address coverage using the existing framing fields.
+              pos = raw.find(b"\\x80\\x15\\xfc", 0, 0x200)
+              if pos < 0: pos = 0x43
+              recs = []
+              while pos + 11 <= len(raw) and raw[pos:pos+2] == b"\\x80\\x15":
+                  ln = raw[pos+3]
+                  fl = 4 + ln + 1
+                  if pos + fl > len(raw): break
+                  blk = raw[pos:pos+fl]
+                  if (sum(blk[:-1]) & 0xff) != blk[-1] or blk[4:6] != b"\\x34\\x82": break
+                  addr = int.from_bytes(blk[6:9], "big")
+                  plen = blk[9]
+                  recs.append((addr, plen))
+                  pos += fl
+              out.append("frames=%d min_addr=%s max_exclusive=%s" % (
+                  len(recs), hex(min((a for a,n in recs), default=0)),
+                  hex(max((a+n for a,n in recs), default=0))))
+              # Payload coverage by 512 KiB banks.
+              for lo in (0, 0x80000, 0x100000, 0x180000):
+                  hi = min(lo + 0x80000, len(rom))
+                  if lo >= hi: continue
+                  seg = rom[lo:hi]
+                  out.append("bank_%06X_%06X non_ff=%d unique=%d head=%s" % (
+                      lo, hi, sum(b != 0xff for b in seg), len(set(seg)), seg[:16].hex()))
+              out.append("cpu_tags=%r" % sorted(set(x.decode() for x in re.findall(rb"SH70[0-9A-Z]{2,6}", rom))))
+              out.append("fid_like_strings=%r" % sorted(set(x.decode() for x in re.findall(rb"[0-9][A-Z0-9]{7}", rom)) )[:30])
+              # The scanner normally only searches helper PCs below 0x80000.
+              for base in (0, 0x80000, 0x100000, 0x180000):
+                  if base >= len(rom): continue
+                  helpers = discover_helpers(rom, search_lo=base+0x4000, search_hi=min(base+0x80000, len(rom)))
+                  calls = extract_calls(rom, helpers, code_start=min(base+0x2000, len(rom)-2)) if helpers else []
+                  tables = summarize_tables(rom, calls) if calls else {}
+                  out.append("helper_window_%06X helpers=%d calls=%d resolved=%d tables=%d" % (
+                      base, len(helpers), len(calls), sum(c.get("table") is not None for c in calls), len(tables)))
+          for name in ("EVIDENCE/E1BR20E.dat", "EVIDENCE/8201032726.dat"):
+              raw = Path(name).read_bytes()
+              out.append("\\n===== RAW HEADER " + name + " =====")
+              out.append("size=%d head_hex=%s" % (len(raw), raw[:128].hex()))
+              out.append("head_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:200]))
+              out.append("8015_marker_count=%d" % raw.count(b"\\x80\\x15"))
+          Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text("\\n".join(out) + "\\n", encoding="utf-8")
+          print("\\n".join(out))
+          PY
+
       - name: Compare candidate firmware families and target
         shell: bash
         run: |
