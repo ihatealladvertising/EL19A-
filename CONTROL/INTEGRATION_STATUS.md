@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — follow-on work allocation for fingerprint join (2026-11-26)
 
@@ -67,3 +67,14 @@ This file is the publication gate. Workers must fetch/read its current state imm
 **Research publication:** EVIDENCE/EL19A_22_FINGERPRINT_JOIN_2026-11-26.md — commit d3e16e515f404066a4c6dc869559936f00d34173; blob a95c3003f06d64d6e230dbc3a52b6d0329ef8b2e.
 
 No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calibration catalogue, workbook, ROM/LST/A2L or tool source was changed in this publication batch.
+
+
+**Lock released:** 2026-11-26 — WO70012–WO70014 and live FIFO register read back successfully.
+
+**Follow-on work-order allocation:**
+- WO70012 — Worker 1; report blob 607495ba95773f09d569be2abede9dded9c355c7.
+- WO70013 — Worker 2; report blob bcba3dff669d71f092c648436ae0fb069246e9f7.
+- WO70014 — Worker 3; report blob 8fb91bdc409d2161ef07d21b69985da0ac0e85a3.
+- Live register commit: 99f4203acf21f0e84809ae7850dea6a19585c974; blob 5ca957a868851ad53119c1975e16bafc193b86d4.
+
+**Verified FIFO:** Worker 1: WO70008 → WO70012. Worker 2: WO70007 → WO70010 → WO70013. Worker 3: WO70014. No existing assignment was changed or reordered. No Findings, XML, scope matrix, catalogue, workbook, ROM/LST/A2L or tool source was modified.
