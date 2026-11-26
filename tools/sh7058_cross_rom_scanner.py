@@ -759,10 +759,13 @@ def build_cross_rom_comparisons(scans: List[dict]) -> List[dict]:
                     nontrivial_matches += 1
 
         exact_bases = {row["sibling_table"] for row in exact_matches}
+        same_address_payload_bases = {
+            row["sibling_table"] for row in exact_matches
+            if any(pair["target_table"] == row["sibling_table"] for pair in row["target_matches"])
+        }
         relocated_bases = {
-            addr for addr in exact_bases
-            if not (addr in target_by_addr and set(target_by_addr[addr]["helper_kinds"]) &
-                    set(next((t["helper_kinds"] for t in sibling["tables"] if t["table"] == addr), [])))
+            row["sibling_table"] for row in exact_matches
+            if any(pair["target_table"] != row["sibling_table"] for pair in row["target_matches"])
         }
         comparisons.append({
             "target_rom": target["input"]["path"],
@@ -774,6 +777,7 @@ def build_cross_rom_comparisons(scans: List[dict]) -> List[dict]:
             "sibling_unique_table_bases": len(sibling["tables"]),
             "same_address_and_helper_kind_count": same_address_kind,
             "exact_payload_match_count": len(exact_bases),
+            "same_address_exact_payload_match_count": len(same_address_payload_bases),
             "nontrivial_exact_payload_match_count": nontrivial_matches,
             "relocated_exact_payload_match_count": len(relocated_bases),
             "exact_payload_matches": exact_matches,
