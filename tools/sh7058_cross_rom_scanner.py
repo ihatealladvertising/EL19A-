@@ -367,6 +367,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
             val = resolve_pc_pool(rom, pc, w)
             if val is not None and val in helper_set:
                 rn = (w >> 8) & 0xF
+                target_reg_moves = []
                 for k in range(1, 21):
                     cpc = pc + 2 * k
                     if cpc >= code_end:
@@ -379,9 +380,26 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                         treg = rn
                         call_form = "indirect_jsr" if cw == (0x400B | (rn << 8)) else "indirect_jmp"
                         break
-                    if cw == 0x000B:  # rts before call
+                    # Follow a simple register-to-register copy of the loaded helper pointer.
+                    if (cw & 0xF00F) == 0x6003:
+                        dst = (cw >> 8) & 0xF
+                        src = (cw >> 4) & 0xF
+                        if src == rn and dst != rn:
+                            target_reg_moves.append({"pc": cpc, "word": cw, "from_register": src, "to_register": dst})
+                            rn = dst
+                            continue
+                        if dst == rn and src != rn:
+                            break
+                    # Never carry a literal-load candidate through an intervening control transfer.
+                    if cw in (0x000B, 0x002B) or (cw >> 12) in (0xA, 0xB):
                         break
-                    if (cw >> 12) in (0xD, 0x9, 0xE) and ((cw >> 8) & 0xF) == rn:
+                    if (cw & 0xFF00) in (0x8900, 0x8B00, 0x8D00, 0x8F00):
+                        break
+                    if (cw & 0xF0FF) in (0x400B, 0x402B):
+                        break
+                    # Stop if a recognized immediate/load/arithmetic or general rN-writing instruction
+                    # overwrites the register currently carrying the helper address.
+                    if ((cw >> 12) in (0xD, 0x9, 0xE, 0x7, 0x6) and ((cw >> 8) & 0xF) == rn):
                         break
         elif top == 0xB:  # bsr
             tgt = pc + 4 + s12(w & 0xFFF) * 2
@@ -409,6 +427,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                 "call_form": call_form,
                 "target_load_pc": None if treg is None else pc,
                 "target_register": treg,
+                "target_register_moves": target_reg_moves if treg is not None else [],
                 "call_instruction": u16(rom, call_pc),
                 "delay_slot": delay,
                 "scan_start": scan_start,
@@ -559,6 +578,7 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
             "call_instruction": call["call_instruction"], "call_instruction_hex": f"0x{call['call_instruction']:04X}",
             "call_form": call["call_form"], "target_load_pc": call["target_load_pc"],
             "target_load_pc_hex": _address_hex(call["target_load_pc"]), "target_register": call["target_register"],
+            "target_register_moves": call["target_register_moves"],
             "delay_slot": call["delay_slot"],
             "delay_slot_hex": None if call["delay_slot"] is None else f"0x{call['delay_slot']:04X}",
             "helper": call["helper"], "helper_hex": _address_hex(call["helper"]),
