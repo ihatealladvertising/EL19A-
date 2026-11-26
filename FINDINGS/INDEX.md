@@ -2,7 +2,7 @@
 
 **Status:** SEEDED — TWO A2L SYNTHESIS BATCHES MIGRATED; ONGOING  
 **Authority:** This index is the entry point for calibration interpretation. See [README](README.md) for the full schemas and the mandatory XML build gate.  
-**Index revision:** `FND-000016` / `FND-000017` and `REC-000019` / `REC-000020` / `REC-000021` (Release 1 selector, axis geometry and linked-storage presentation corrections, 2026-11-26); previous `FND-000015` / `REC-000017`, `REC-000018`, `FND-000014` / `REC-000016` and earlier records retained as current where applicable.
+**Index revision:** `FND-000018` / `REC-000022` (WO66048: the `0x0ED64`/`0x0EDA0` pair are coolant-temperature-keyed single-query thresholds that publish only a verdict, 2026-11-26); previous `FND-000016` / `FND-000017` and `REC-000019` / `REC-000020` / `REC-000021` (Release 1 selector, axis geometry and linked-storage presentation corrections, 2026-11-26); previous `FND-000015` / `REC-000017`, `REC-000018`, `FND-000014` / `REC-000016` and earlier records retained as current where applicable.
 
 ## Record schema
 
@@ -36,6 +36,7 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 | `0x0AF72`, `0x0C3D6`, `0x0D8D6`, `0x0F6B2`, `0x0F6D2`, `0x0F7F2`, `0x10226`, `0x10CE2`, `0x10A54`, `0x10A64`, `0x10BC8`, `0x10EAA`, `0x10ECA`, `0x10EEA`, `0x10F6A`, `0x10F7A`, `0x0FEC0`, `0x1031C`, `0x0EFFC`, `0x1109A`, `0x12D98` and associated axes | `FND-000017` (reuse `FND-000002`, `FND-000005`, `FND-000014` where applicable) | `REC-000019` | Provisional ROM-axis pointers and implicit fixed grids recovered/corrected; physical domains remain unresolved. |
 | `FFFF284E` (= `FFFF2150+0x6FE`); `FFFF357A` bit2 (`FFFF34C1+0xB9`); gate `FFFF34F0` bit4 (`FFFF34C1+0x2F`) | — (method already covered by `FND-000012`/`FND-000013`) | `REC-000018` | Configuration-mask memo: five resolved access sites, `0xFF` init (`0x0775BC`, `0x0776D0`), `0x80` = no-bits (`0x078C52`), accepted mask (`0x078C46`), and the single read (`0x078C34`) is an overlap test inside the writing routine, so the mask never leaves `sub_77608`; its only outward product is `FFFF357A` bit2. WO65910's `FFFF34E2` gate attribution is corrected to `FFFF34F0`. |
 | `FFFF A074`-`FFFFA322` (3-byte entries, 198 live / 229 capacity); `FFFF34F5` bit5; `FFFFB526` | `FND-000015` | `REC-000017` | Diagnostic monitor status array: 198 live entries from the compile-time immediate `0xC6` (`0x08B33C`, `0x07437A`, `0x075DD4`, `0x075E9C`, `0x0800A2`), per-entry flags written by `sub_8081C`/`sub_8085E`/`sub_80884`, and the `FFFF34F5.bit5` latch arms when **no** evaluated entry has byte2 bit3 set. |
+| `0x0ED64`, `0x0EDA0`; query cell `FFFF84B8`; compared cell `FFFF85A9`; output `FFFF34D2` bit6 (`FFFF34C1+0x11`) | `FND-000018` (grid from `FND-000017`; GBR/`mov.w` discipline `FND-000012`) | `REC-000022` | Two 16×1 UBYTE coolant-temperature-keyed thresholds queried at **one** shared index `U8[FFFF84B4+0x04]` (rescaled AN27 NTC temp) in `sub_488BA` at `0x04893A`/`0x048948`; results are used only as single-sided `cmp/gt` limits against `FFFF85A9` and never published, so the entire outward product is `FFFF34D2` bit6 plus a 0/1 return feeding the `FFFF11F3` enum machine and gating a `sub_48C1E` word into `UWORD[FFFFB644]`/`U16[FFFF11F0]`; no idle/dashpot/actuator sink, and the `Rpm_x25` donor label is contradicted. |
 
 ## Current priority migrations
 
@@ -54,13 +55,14 @@ Reconciliation records use `REC-000001` onward and carry: affected address/objec
 - [x] `FFFF284E` mask memo settled as internal state with no outward consumer, and the `FFFF34E2`-versus-`FFFF34F0` gate attribution corrected (`REC-000018`); the `FFFF34xx` status block still terminates in status bytes, not an actuator.
 - [x] WO70003 Release 1 scope-freeze corrections: 0x0E21A selector and provisional ROM/fixed-grid axis recoveries recorded in FND-000016/017 and REC-000019/020; 9B2E orientation implements FND-000003/REC-000003.
 - [x] Reciprocal shared-storage warning for 0x0CD56/0x0FEC0: both reader-backed objects retained and marked [P] [LINKED], with edit-coupling documented in REC-000021.
+- [x] WO66048 settled the axis of the `0x0ED64`/`0x0EDA0` pair as a single shared coolant-temperature query with a verdict-only output (`FND-000018` / `REC-000022`); the pair are single-sided thresholds, not warm-up/idle tables, and the `Rpm_x25` donor label is contradicted rather than merely unsupported.
 - [ ] Broader geometry corrections only when they change an axis, unit, dimension, scaling, label or XML disposition. Routine RAM-cell endpoint traces remain outside this index — with the recorded exception of `FND-000010`, retained because it forecloses a calibration definition rather than merely tracing a cell.
 - [ ] Further A2L synthesis migrations only from a closed report with new material calibration-interpretation evidence; do not re-screen the 179-row catalogue or repeat completed donor comparisons.
 
 ## Record locations
 
-- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000015.md`
-- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000013.md`, plus `REC-000016.md`, `REC-000017.md` and `REC-000018.md` (`REC-000014/015` remain referenced by the WO66032 register summary but were not present in the canonical Findings tree at WO66047 preflight and were not reused).
+- Findings: `FINDINGS/records/FND-000001.md` … `FINDINGS/records/FND-000018.md`
+- Reconciliations: `FINDINGS/reconciliations/REC-000001.md` … `FINDINGS/reconciliations/REC-000013.md`, plus `REC-000016.md`, `REC-000017.md`, `REC-000018.md`, `REC-000019.md`, `REC-000020.md`, `REC-000021.md` and `REC-000022.md` (`REC-000014/015` remain referenced by the WO66032 register summary but were not present in the canonical Findings tree at WO66047 preflight and were not reused).
 - Evidence references: `FINDINGS/evidence/EVD-xxxxxx.md` (schema reserved; no EVD records created in this revision)
 
 ## Migration coverage and cross-links
