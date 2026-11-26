@@ -55,6 +55,43 @@ class ScannerExportTests(unittest.TestCase):
         self.assertEqual(matched[0]["delay_slot"], 0x650C)
         self.assertEqual(matched[0]["raw_r5"], 0xFF)
 
+    def test_indirect_helper_call_tracks_register_copy(self):
+        rom = bytearray(0x8000)
+        helper_addr = 0x2500
+        # mov.l @(8,PC),r1; mov r1,r2; nop; nop; jsr @r2; nop
+        struct.pack_into(">H", rom, 0x2800, 0xD108)
+        struct.pack_into(">H", rom, 0x2802, 0x6213)
+        struct.pack_into(">H", rom, 0x2804, 0x0009)
+        struct.pack_into(">H", rom, 0x2806, 0x0009)
+        struct.pack_into(">H", rom, 0x2808, 0x420B)
+        struct.pack_into(">H", rom, 0x280A, 0x0009)
+        struct.pack_into(">I", rom, 0x2824, helper_addr)
+        helper = HelperSpec(helper_addr, "2D_AXIS", "uint8", 16, 1, "uint8", "", 0, 0)
+
+        calls = extract_calls(bytes(rom), {helper_addr: helper})
+        matched = [call for call in calls if call["call_pc"] == 0x2808]
+        self.assertEqual(len(matched), 1)
+        self.assertEqual(matched[0]["call_form"], "indirect_jsr")
+        self.assertEqual(matched[0]["target_register"], 2)
+        self.assertEqual(matched[0]["target_load_pc"], 0x2800)
+        self.assertEqual(matched[0]["target_register_moves"], [{
+            "pc": 0x2802, "word": 0x6213, "from_register": 1, "to_register": 2,
+        }])
+
+    def test_indirect_helper_search_stops_at_conditional_branch(self):
+        rom = bytearray(0x8000)
+        helper_addr = 0x2500
+        # mov.l @(8,PC),r1; bt ...; jsr @r1; nop
+        struct.pack_into(">H", rom, 0x2800, 0xD108)
+        struct.pack_into(">H", rom, 0x2802, 0x8900)
+        struct.pack_into(">H", rom, 0x2804, 0x410B)
+        struct.pack_into(">H", rom, 0x2806, 0x0009)
+        struct.pack_into(">I", rom, 0x2824, helper_addr)
+        helper = HelperSpec(helper_addr, "2D_AXIS", "uint8", 16, 1, "uint8", "", 0, 0)
+
+        calls = extract_calls(bytes(rom), {helper_addr: helper})
+        self.assertFalse(any(call["call_pc"] == 0x2804 for call in calls))
+
     def test_span_uses_exclusive_end_and_hashes_full_payload(self):
         rom = bytes(range(32))
         span = _export_span(rom, 4, 4, "uint16")
