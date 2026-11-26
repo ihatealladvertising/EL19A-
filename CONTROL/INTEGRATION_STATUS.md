@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -143,3 +143,5 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Integrator:** ChatGPT — user-requested follow-on CONSULT donor comparison (2026-11-26)
 **Purpose:** Read-only screening of newly added E1BR/D9 donors and bounded structural comparison against E1BR20E and the unclassified 310364 pair. Temporary one-shot GitHub Actions workflow only; no source, calibration, Findings, workbook, catalogue, scope matrix, ROM/LST/A2L or worker-queue changes.
 **Lock acquired:** 2026-11-26 — follow-on donor screening; shared-main publication paused until temporary workflow removal and report readback.
+
+**Lock released:** 2026-11-26 — follow-on CONSULT donor screen completed; temporary workflow `.github/workflows/el19a-followon-donor-screen.yml` removed and absence verified (GitHub contents API returned 404). Successful diagnostic run `45913585933`; artifact `15160523766` (SHA-256 `97e76d6bb6a68d530065d57051ab7f1dee7e0cc74672a9ecfd6bb95fa5d82c3a`). Report `EVIDENCE/FOLLOWON_DAT_DONOR_SCREEN_2026-11-26.md` published and read back (blob `c81d17ae65532bfafd48ed062a308bc7d46c9c11`). D9 0x8019/0x3482 frame variant reconstructed four 512 KiB images with passing frame checksums and contiguous 0x8000–0x70000 coverage, but no SH705x helper/CPU fingerprint; E1BR/E1BT/E1JD and 310364 remain unresolved by current loader. No Findings, XML, catalogue, scope matrix, workbook, ROM/LST/A2L, tool source/tests or worker queue changes.
