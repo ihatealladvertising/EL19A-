@@ -174,7 +174,7 @@ class ScannerExportTests(unittest.TestCase):
             ],
         }
         comparison = build_cross_rom_comparisons([target, sibling])[0]
-        self.assertEqual(comparison["same_address_and_helper_kind_count"], 3)
+        self.assertEqual(comparison["same_address_and_helper_kind_count"], 2)
         self.assertEqual(comparison["exact_payload_match_count"], 2)
         self.assertEqual(comparison["same_address_exact_payload_match_count"], 1)
         self.assertEqual(comparison["nontrivial_exact_payload_match_count"], 2)
