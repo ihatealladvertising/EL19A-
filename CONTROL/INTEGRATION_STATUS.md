@@ -1,6 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — WO70015 release-inventory reconciliation (2026-11-26)
+**Purpose:** Publish one coordinator-owned, user-directed inventory-reconciliation WO and its closeout report only. The three worker lanes and their FIFO assignments remain untouched; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L, tool source or Findings records will be edited in this batch.
+
+**Lock acquired:** 2026-11-26 — WO70015 release-inventory reconciliation
+
 
 **Integrator:** ChatGPT — follow-on work allocation for fingerprint join (2026-11-26)
 
