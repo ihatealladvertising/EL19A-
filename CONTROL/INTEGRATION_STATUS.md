@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -138,3 +138,8 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock released:** 2026-11-26 — eight new EVIDENCE .dat files screened using the existing read-only workbench. Report `EVIDENCE/NEW_DAT_ADDITIONS_SCREEN_2026-11-26.md` (published and read back). Successful run `45907252456`; scan output artifact `el19a-new-dat-screen` SHA-256 `2309a63740ac69fe6c4dcfb79eb4b2a985737979382bb50b64176cffbfb18201`. Four EM revisions decode as SH705519N and have 274/274 helper-backed payloads identical to adjacent existing revisions; 310364 and E1BC pairs remain unsupported by current decoder. Temporary workflow `.github/workflows/el19a-new-dat-screen.yml` removed and absence verified. No tool source/tests, XML, catalogue, scope matrix, workbook, Findings, worker queue, ROM/LST/A2L files changed.
+
+
+**Integrator:** ChatGPT — user-requested follow-on CONSULT donor comparison (2026-11-26)
+**Purpose:** Read-only screening of newly added E1BR/D9 donors and bounded structural comparison against E1BR20E and the unclassified 310364 pair. Temporary one-shot GitHub Actions workflow only; no source, calibration, Findings, workbook, catalogue, scope matrix, ROM/LST/A2L or worker-queue changes.
+**Lock acquired:** 2026-11-26 — follow-on donor screening; shared-main publication paused until temporary workflow removal and report readback.
