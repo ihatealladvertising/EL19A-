@@ -53,32 +53,53 @@ Repeat this loop for the lifetime of the worker session:
 
 An existing ASSIGNED — WORKER N — READY entry reserves that task to its slot. Multiple READY entries may exist in a lane's FIFO backlog; they are not permission to execute concurrently. No separate claim commit is required. A worker may start only the earliest READY item after completing and locally recording the preceding WO's package; remote publication is not required to advance. Do not create routine claim, heartbeat, progress, handoff or status-polling commits. The active WO remains assigned to its slot until its remote closeout is published; its local pending package must remain separately identifiable and must not be overwritten.
 
-## Technical direction and WO replenishment
+## Release-first definition objective
 
-Workers 1 and 3 maintain investigation priorities and technical direction. Worker 2 executes bounded tasks supplied directly by Workers 1 and 3 in its FIFO. When creating follow-on work, Workers 1 and 3 should route suitable routine traces to Worker 2 rather than performing every trace themselves. Worker 2 does not create or prioritize work.
+The project's primary deliverable is a conservative, usable RomRaider definition for the exact EL19A `f501.bin` / FID `8CMCKRN5` ROM. Complete firmware-semantic reconstruction is not a release prerequisite. Apply rigorous target-side evidence to byte representation and displayed engineering values, but do not demand a physical function name where a truthful generic/raw representation is sufficient.
 
-When your lane's READY backlog is below target depth, choose the highest-payoff unresolved question using this order:
+### Object dispositions for Release 1
 
-1. Follow explicit current user priorities recorded in the operational frontier or a WO.
-2. Resolve an open P1 investigation, a concrete dependency, or a documented contradiction that blocks reliable downstream interpretation.
-3. Trace high-value 3D maps and 32-point curves through reader mechanics, query/axis construction, arithmetic, output storage and first meaningful consumers. Reuse completed helper and axis work; do not repeat it.
-4. Advance the reserved DTC/sensor-monitor and ROM configuration/option-byte tracks, including their unresolved inputs, guards and consumers.
-5. Investigate other specific calibration candidates only when existing evidence supplies a defensible address/geometry/reader lead and the new scope adds information.
-6. Consider metadata automation or donor-ROM comparison only when it directly improves EL19A evidence confidence. Donor labels and semantics are never transferred without independent target-side proof.
+Every candidate object receives one of these release dispositions:
 
-Explicit no-repeat boundaries in Guardrails and future priorities and in completed WO reports override this ranking. In particular, the 1D scalar/limiter sweep over 0x7800–0x9B00 is already complete under WO65090; do not recreate that interval census. Reuse the completed reader indexes, helper crosswalks, maps, curves, and prior bounded negatives.
+- **INCLUDE — ESTABLISHED:** address/extent, storage type, geometry, axes, and displayed scaling are supported; any physical name and units used are supported.
+- **INCLUDE — RAW/PROVISIONAL:** address/extent, storage type and geometry are supported, but function, physical units, or engineering conversion remain unresolved. Use a generic, non-misleading name and raw scaling. Where RomRaider needs an axis that is not established, use an explicitly labelled sample-index axis only if that presentation is unambiguous and technically supported; never present it as a physical breakpoint axis. Mark the object as not tune-ready on physical units/meaning.
+- **EXCLUDE:** address/extent, storage type, geometry, required display axis, or a material reader interpretation is too uncertain or contradictory to present without misleading the user.
 
-When your lane has fewer than three READY follow-on WOs queued beyond its current in-progress task, create enough new bounded WOs to restore the target depth, provided defensible unresolved questions exist. The new WO must state:
-- a precise technical question and why it has value;
-- exact target addresses/functions/records and required inputs;
-- named completed evidence to reuse and explicit no-repeat exclusions;
-- the expected evidence and stop boundary;
-- dependencies and their actual current status;
-- only its own report path as an authorized output unless another output is specifically necessary and safe.
+Unknown physical function alone is not grounds for exclusion. Conversely, a plausible name, donor label, shape resemblance or numeric coincidence never justifies an unsupported name, unit or conversion.
 
-Create CONTROL/WO<ID>.md and add its queue row to active_work_orders.md with explicit owner, priority, dependencies, branch main and exact allowed paths. Use the global sequential ID rule above. When suitable, create bounded WOs assigned to Worker 2 and append them to its FIFO. Never create placeholder/filler tasks to keep the queue count high. If no defensible task exists, record the specific exhausted boundary in your lane's latest closeout and stop.
+### Release acceptance
 
-Maintain a target backlog of **three READY follow-on WOs per active lane** where defensible work exists. Workers 1 and 3 may also maintain up to three READY tasks in Worker 2's FIFO by assigning bounded trace WOs directly to Worker 2. Worker 2 executes FIFO and does not replenish the queue itself. Do not create filler: every WO must have a distinct, defensible question, exact scope, available dependencies, reuse/no-repeat boundary and stop condition. Do not queue work already covered, completed or blocked.
+Release 1 is complete when:
+1. The definition identifies the exact target ROM and loads successfully in RomRaider.
+2. Every included object has a correct ROM address and extent, data type, byte order, dimensions and orientation.
+3. Every displayed physical axis is correctly sourced, ordered and scaled; any index-only display is clearly identified as an index, not an ECU query domain.
+4. Every engineering conversion is supported by target-side evidence. Unresolved values remain raw.
+5. Names do not claim more than the evidence supports; provisional objects are visibly identified.
+6. A companion build manifest records the source XML baseline, ROM identity/hash, Findings index revision, included objects, exclusions and unresolved issues.
+7. The output is checked against the exact ROM in RomRaider. No live-vehicle test is part of this acceptance test.
+
+### Release-first technical priorities and work-order creation
+
+Workers 1 and 3 maintain technical direction; Worker 2 remains a local execution worker for complete, bounded tasks supplied through its FIFO. Prioritize work in this order:
+
+1. **Release blockers:** freeze and reconcile the current Release 1 scope against the selected XML baseline, current engineering workbook and Findings index.
+2. **Representation correctness:** fix proven address, extent, storage, geometry, axis, ordering or scaling errors in objects selected for Release 1.
+3. **Minimal semantic discrimination:** trace query sources, mode/load selection or first consumers only when that evidence changes an object's name, axis/scaling, inclusion decision, or resolves a material conflict.
+4. **High-value new objects:** discover additional objects only when existing evidence suggests they materially improve Release 1 and their representation can be established economically.
+5. **Future-release investigations:** defer broad DTC/sensor-monitor, configuration and firmware-semantic exploration unless a user priority or a concrete Release 1 dependency requires it.
+
+A first-consumer trace is not a universal inclusion gate. For a structurally sound raw/provisional object, stop once address, storage, geometry and the non-misleading display representation are established. Continue into consumers when a functional identity or runtime behavior is actually being claimed or is needed to distinguish competing representations.
+
+### Efficient work-order rules
+
+- Combine related objects into one bounded batch WO when they share a reader/helper, geometry family, evidence source or concrete technical question. Require per-object results in the report; do not create one WO per address by default.
+- Keep a WO narrowly discriminating, but avoid administrative fragmentation. One report may cover several sibling tables if the same bounded method answers them.
+- Do not maintain a fixed three-WO backlog or create filler to meet a queue-depth target. Create the next task only when it has a distinct, defensible payoff and a real dependency or available worker.
+- When a lane is empty, its worker may stop. Do not manufacture follow-on traces merely to keep a worker occupied.
+- Route routine bounded extraction/caller/reader tasks to Worker 2 where suitable. Worker 2 remains execution-only and stops when its FIFO is empty.
+- Preserve FIFO and one active investigation per lane. Multiple completed publication-pending packages remain permitted under the integration procedure.
+
+The 1D scalar/limiter sweep over `0x7800–0x9B00` remains complete under WO65090. Do not repeat it. Reuse existing reader indexes, helper crosswalks, maps, curves, Findings records and prior bounded negatives.
 
 ## Mandatory findings-disposition closeout gate
 
@@ -138,7 +159,7 @@ The authoritative calibration knowledge layer is `FINDINGS/INDEX.md`, governed b
 
 ## Recurring Project Knowledge and Process Review
 
-Run the review defined in `CONTROL/PROJECT_KNOWLEDGE_PROCESS_REVIEW.md` every 10 additional WO closeouts across all lanes or every 7 calendar days, whichever comes first. The first worker/session to observe the due trigger performs it; check the review log first to avoid duplicate work. This is a short repository-only maintenance review, not a new technical WO and not authority to alter another lane's lifecycle.
+Run the review defined in `CONTROL/PROJECT_KNOWLEDGE_PROCESS_REVIEW.md` every 25 additional WO closeouts across all lanes or every 30 calendar days, whichever comes first. A user-requested process review or a material protocol change may trigger one sooner. The first worker/session to observe the due trigger performs it; check the review log first to avoid duplicate work. This is a short repository-only maintenance review, not a new technical WO and not authority to alter another lane's lifecycle.
 
 Use the five required lenses: knowledge coverage, contradictions, investigation efficiency, method improvement and fresh-session context integrity. Record a compact dated entry in the review log, including concrete actions or explicit no-change dispositions. Promote material calibration interpretations through the Findings system; preserve prior claims with additive reconciliation. Promote reusable methods to durable repository documentation. Do not treat chat history or saved memory as a substitute for missing repository evidence.
 
@@ -150,7 +171,7 @@ A fresh ChatGPT session must follow `CONTROL/CHATGPT_CONTEXT_RECOVERY.md`. Start
 
 ## Semantic evidence workstream
 
-Semantic investigations run alongside the three existing structural worker lanes; there is no fourth lane. The purpose is to move from verified locations and reader mechanics toward defensible input, function and output identities.
+Semantic investigations run alongside the three existing structural worker lanes; there is no fourth lane. The purpose is to move from verified locations and reader mechanics toward defensible input, function and output identities. The semantic hypothesis and identity-layer requirements below apply to WOs explicitly labelled `SEMANTIC`; they do not apply to every XML inclusion decision. Release 1 may include structurally verified objects under generic raw/provisional labels without resolving their full physical identity.
 
 For every new WO labeled `SEMANTIC`, and every existing semantic WO before execution/continuation, include a falsifiable hypothesis record with:
 - **Hypothesis:** proposed input, function, output or physical role/name.
@@ -177,7 +198,7 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 
 ## Evidence and technical standards
 
-- Record exact instruction PCs/listing anchors, effective addresses, widths, signedness, query and axis construction, search/interpolation/clamp behavior, branch conditions, arithmetic and first meaningful consumers as applicable.
+- Record exact instruction PCs/listing anchors, effective addresses, widths, signedness, query and axis construction, search/interpolation/clamp behavior and branch conditions as applicable. Trace arithmetic and the first meaningful consumer when establishing a functional identity, resolving a material conflict, or validating a claimed runtime role—not as a universal prerequisite for a structurally correct raw/provisional XML entry.
 - Separate verified facts, hypotheses and unknowns. A name resemblance, shape match, donor label or plausible units is not semantic proof.
 - A bounded negative is a valid result when the search method and coverage are stated.
 - Reuse named reports, indexes, reader mechanics and ROM/LST anchors. Do not repeat completed scans, helper censuses, inventories or broad searches.
