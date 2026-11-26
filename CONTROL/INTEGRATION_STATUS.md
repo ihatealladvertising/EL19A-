@@ -1,14 +1,22 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70007–WO70011 work-order allocation
 
-**Purpose:** Publish five bounded work orders and their explicit Worker 1/2/3 FIFO assignments. Includes the established 0x0FEE0 Release 1 correction, separate donor-comparison validation, and target-side verification of new candidate objects.
+**Purpose:** Allocate five bounded work orders to the three worker FIFO lanes. No calibration artifacts or Findings records were changed in this publication batch.
 
 **Lock acquired:** 2026-11-26 — WO70007–WO70011 allocation batch
+**Lock released:** 2026-11-26 — five work-order reports and live register read back; lane assignments and FIFO order verified
 **Lock released:** 2026-11-26 — WO70006 addendum read back and blocked lifecycle status verified  
 **Lock released:** 2026-11-26 — all report, Findings, index and live-register readbacks verified
+
+**WO allocation batch:** `WO70007`–`WO70011` created and read back on 2026-11-26.
+- Report commits: `cbd724226c8ff1c40737a343384830f0563b188d` (70007); `2a61c5b756476f9c40049984dde7b963074d84d2` (70008); `c5ced00611cbf71364d0333a3c7e2e37cb757ecf` (70009); `d2375abd86b41e34f78456704b2d3d09ba332d76` (70010); `35b020bec13776b613eed2e63ccf42e10773bd72` (70011).
+- Register commit: `ba29e52a24e4a9b846d934d76b5d1b22d4061d35`.
+- Readback blobs: `WO70007 cd8e5a7feb6e6dd6b6df9b3a84ff59dec6a7a189`; `WO70008 7ef17695db82f21f84bef4c5adf2a5948e720e6c`; `WO70009 b2353b4596a20cf6b50e3f994b2b5ae891837f36`; `WO70010 046aa70855113b0e5cc8a5783293192b8a0dd86a`; `WO70011 742ab4e77f6966534133593162fa241f7c651364`; register `b49a259cbdafdd3538c0a289d6520b12da6ea3aa`.
+- FIFO: Worker 1 `70008`; Worker 2 `70007 → 70010`; Worker 3 `70009 → 70011`.
+- No Findings, XML, catalogue, workbook, ROM, LST, A2L, or script files changed in this allocation batch.
 
 **Supplemental addendum commit:** `a000824d9f123eaf510a0e71be07fbb81cfda704` — WO70006 blob `8dcdc12eb5d4bcb48607e3dc4c1d89bd2d364a27`.
 
