@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — provisional visibility, linked-axis safety and queue reconciliation
+**Integrator:** ChatGPT — WO70006 partial findings package
 
-**Purpose:** Marked all 252 provisional RomRaider objects with [P], documented the reciprocal 0x0CD56/0x0FEC0 shared-storage relationship as REC-000021, added XML comments and matrix warnings, and registered WO66049 in the Worker 3 FIFO.
+**Purpose:** Publish WO70006's partial closeout: correct 0x0FEE0's truncated 32-point representation, promote the reciprocal 0x0DE6E/0x0E2ED lookup relationship, update Findings index and mark the wider scanner census blocked because complete raw call-site outputs are unavailable.
 
-**Lock acquired:** 2026-11-26 — linked-axis / provisional visibility correction
+**Lock acquired:** 2026-11-26 — WO70006 partial findings publication
 
 **Lock released:** 2026-11-26 — all artifact readbacks verified
 
