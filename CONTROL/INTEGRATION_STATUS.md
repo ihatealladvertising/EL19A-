@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — EL19A target-side cross-ROM fingerprint join publication (2026-11-26)
 
@@ -56,3 +56,10 @@ No work-order lifecycle, assignment, priority, calibration XML, scope matrix, ca
 **Prior integration history:** 2026-11-26 linked-axis / provisional-visibility release (`REC-000021`); 2026-11-26 process-review interval update and protocol publication; 2026-11-25 Worker 3 WO publication. Historical artifact SHAs and detail remain in Git history.
 
 This file is the publication gate. Workers must fetch/read its current state immediately before any shared-main publication. A missing or unreadable status file is fail-closed for publication. The gate does not stop technical investigation or local publication-pending preparation.
+
+
+**Lock released:** 2026-11-26 — EL19A target-side 22-fingerprint join report published and read back; live work-order register read back unchanged.
+
+**Research publication:** EVIDENCE/EL19A_22_FINGERPRINT_JOIN_2026-11-26.md — commit d3e16e515f404066a4c6dc869559936f00d34173; blob a95c3003f06d64d6e230dbc3a52b6d0329ef8b2e.
+
+No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calibration catalogue, workbook, ROM/LST/A2L or tool source was changed in this publication batch.
