@@ -1,14 +1,16 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — best-guess manifest consistency correction
 
-**Purpose:** Align manifest presentation-policy wording and title with the already published best-guess iterative XML.
+**Purpose:** Manifest title and presentation-policy wording aligned with the published iterative best-guess definition.
 
 **Lock acquired:** 2026-11-26 — manifest consistency correction
 
-Only the named integrator may publish to shared main until readback and gate release.
+**Lock released:** 2026-11-26 — manifest readback verified
+
+**Final manifest blob:** d845367c68db7d69a625b3cebfd4215ea40d52df.
 
 **Previous integration:** 2026-11-26T00:37:54.897Z — aligned the process-review interval to 25 closeouts/30 days and explicitly retired the fixed three-WO backlog target. No WO assignments or XML/workbook/inventory files changed.
 
