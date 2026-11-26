@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — project-direction and outside-analyst prompt publication (2026-11-26)
+**Integrator:** ChatGPT — cross-ROM research record publication (2026-11-26)
 
 **Purpose:** Publish the current project-direction record and outside-analyst prompt. No work-order lifecycle or calibration artifacts are being changed in this batch.
 
-**Lock acquired:** 2026-11-26 — project-direction / outside-analyst documentation batch
+**Lock acquired:** 2026-11-26 — cross-ROM discovery research note
 **Lock released:** 2026-11-26 — both documents and live-register pointer read back; existing lane assignments and FIFO verified unchanged
 
 **Documentation batch commits:** gate lock `7a34fdf845803d7cb67044cabe30af27132c82ae`; project direction `4a81c8b2521e767526bce37b7eaa25d0902c8ea7`; outside analyst prompt `07a60cd179e4bc4d1d81b5bdb68f02e4428d0d7e`; register pointer `f722e2229019b0fc3630c1c54ce46cb8bbca95f3`.
