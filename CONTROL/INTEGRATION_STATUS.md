@@ -1,10 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** none
+**Integrator:** ChatGPT
 
-**Purpose:** No active integration window. Workers use the live FIFO in `CONTROL/active_work_orders.md`. Shared-main publication may resume.
+**Purpose:** Apply the user-authorized Release 1 operating-policy changes to WORKER_PROTOCOL, FINDINGS build gate, CALIBRATIONS guide and Release 1 plan. Do not edit XML, workbook, inventory, ROM/LST or the live WO register in this batch.
+
+**Lock started:** 2026-11-26T00:37:06.979Z
 
 **Last integration:** 2026-11-25 — Created Worker 3 WOs 66048/66049 for bounded EL19A traces of `0xEDA0` and `0xF01C`; reconciled Worker 2 lane exhaustion and appended the new WOs after Worker 3's existing FIFO.
 
