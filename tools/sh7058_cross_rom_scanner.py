@@ -348,6 +348,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
         call_pc = None
         delay = None
         treg = None
+        call_form = None
         top = w >> 12
 
         if top in (0xD, 0x9):  # mov.l or mov.w @(d,PC),rN
@@ -364,6 +365,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                         call_pc = cpc
                         delay = u16(rom, cpc + 2)
                         treg = rn
+                        call_form = "indirect_jsr" if cw == (0x400B | (rn << 8)) else "indirect_jmp"
                         break
                     if cw == 0x000B:  # rts before call
                         break
@@ -375,6 +377,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                 target = tgt
                 call_pc = pc
                 delay = u16(rom, pc + 2)
+                call_form = "bsr"
 
         if target is not None and call_pc is not None:
             if min_h <= call_pc <= max_h + 0x100:
@@ -391,7 +394,7 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
             ax2 = r6 if (h.kind == "3D_AXIS" and is_rom_cal(r6)) else None
             calls.append({
                 "call_pc": call_pc,
-                "call_form": "bsr" if treg is None else "indirect_jsr",
+                "call_form": call_form,
                 "target_load_pc": None if treg is None else pc,
                 "target_register": treg,
                 "call_instruction": u16(rom, call_pc),
@@ -547,7 +550,10 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
             "table": call["table"], "table_hex": _address_hex(call["table"]),
             "axis1": call["axis1"], "axis1_hex": _address_hex(call["axis1"]),
             "axis2": call["axis2"], "axis2_hex": _address_hex(call["axis2"]),
-            "raw_registers": raw_regs, "resolution_status": resolution,
+            "raw_registers": raw_regs,
+            "caller_start_candidate": context["caller_start_candidate"],
+            "caller_start_candidate_hex": context["caller_start_candidate_hex"],
+            "resolution_status": resolution,
             "table_span": data_span, "axis1_span": axis1_span, "axis2_span": axis2_span,
             "argument_evidence_method": "bounded_linear_register_window_56_bytes_plus_call_delay_slot",
             "argument_evidence_limits": [
