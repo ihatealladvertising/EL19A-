@@ -23,5 +23,6 @@ The tiered WO65325 XML and merged V3 XML are useful historical comparison artifa
 - A structurally sound object should use the best available functional name/category and a plausible best-guess conversion where useful; mark it provisional and refine it as evidence improves.
 - Keep addresses, extents, dimensions and reader/axis mechanics evidence-led; do not invent table geometry.
 - A sample-index or fixed raw query axis must be labelled honestly; never imply physical units that are not supported.
+- Prefix provisional RomRaider object labels with `[P]`; use `[LINKED]` where one object's data also supplies another object's axis or query breakpoints, and warn users to edit linked objects together.
 - Semantic tracing refines candidate names/functions and conversions. It is not a universal prerequisite for including a useful best-guess object.
 - The release manifest must identify the ROM hash, XML baseline, Findings index revision, object dispositions, exclusions and unresolved items.
