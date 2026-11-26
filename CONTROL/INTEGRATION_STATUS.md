@@ -1,8 +1,8 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Integrator:** ChatGPT
+**Integrator:** none
 
 **Purpose:** Publish WO70003 and assign the Release 1 scope-freeze task to Worker 1. Preserve all other FIFO assignments.
 
