@@ -6,6 +6,9 @@ import struct
 import tempfile
 import unittest
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from sh7058_cross_rom_scanner import HelperSpec, _export_span, build_cross_rom_comparisons, build_scan_export, extract_calls, write_machine_exports
 
