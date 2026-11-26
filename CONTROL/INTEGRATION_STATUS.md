@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO70006 partial findings publication
+**Integrator:** ChatGPT — WO70006 supplemental A2L matcher lead record
 
-**Purpose:** Publish the supported partial WO70006 results: correct the `0x0FEE0` minimum extent from 32 to 64 UWORD entries and record the reciprocal `0x0DE6E`/`0x0E2ED` lookup pair. The full cross-ROM scanner census remains blocked because complete raw per-call/per-table output is unavailable.
+**Purpose:** Append the user-reported A2L structural matcher run to WO70006 as unverified comparative leads, preserve prior V6/Juke ROM-to-A2L provenance caveats, and keep donor semantics separate from target-side Findings.
 
-**Lock acquired:** 2026-11-26 — WO70006 partial findings publication  
+**Lock acquired:** 2026-11-26 — WO70006 supplemental A2L matcher lead record  
 **Lock released:** 2026-11-26 — all report, Findings, index and live-register readbacks verified
 
 **Publication commits:**
