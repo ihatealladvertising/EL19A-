@@ -23,6 +23,7 @@ jobs:
           python-version: "3.11"
 
       - name: Scan ten new candidates and three controls
+        if: false
         shell: bash
         run: |
           set -u
@@ -75,7 +76,7 @@ jobs:
           for name in files:
               raw = Path(name).read_bytes()
               rom = load_any_rom(Path(name))
-              out.append("\\n===== " + name + " =====")
+              out.append(chr(10) + "===== " + name + " =====")
               out.append("container_size=%d decoded_size=%d header_hex=%s" % (
                   len(raw), len(rom), raw[:96].hex()))
               out.append("header_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:160]))
@@ -93,9 +94,9 @@ jobs:
                   plen = blk[9]
                   recs.append((addr, plen))
                   pos += fl
-              out.append("frames=%d min_addr=%s max_exclusive=%s" % (
+              out.append("frames=%d min_addr=%s max_exclusive=%s first=%r last=%r" % (
                   len(recs), hex(min((a for a,n in recs), default=0)),
-                  hex(max((a+n for a,n in recs), default=0))))
+                  hex(max((a+n for a,n in recs), default=0)), recs[:6], recs[-6:]))
               # Payload coverage by 512 KiB banks.
               for lo in (0, 0x80000, 0x100000, 0x180000):
                   hi = min(lo + 0x80000, len(rom))
@@ -115,15 +116,16 @@ jobs:
                       base, len(helpers), len(calls), sum(c.get("table") is not None for c in calls), len(tables)))
           for name in ("EVIDENCE/E1BR20E.dat", "EVIDENCE/8201032726.dat"):
               raw = Path(name).read_bytes()
-              out.append("\\n===== RAW HEADER " + name + " =====")
+              out.append(chr(10) + "===== RAW HEADER " + name + " =====")
               out.append("size=%d head_hex=%s" % (len(raw), raw[:128].hex()))
               out.append("head_ascii=%r" % re.sub(rb"[^ -~]", b".", raw[:200]))
               out.append("8015_marker_count=%d" % raw.count(b"\\x80\\x15"))
-          Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text("\\n".join(out) + "\\n", encoding="utf-8")
-          print("\\n".join(out))
+          Path("donor-scan/FORMAT_DIAGNOSTICS.txt").write_text(chr(10).join(out) + chr(10), encoding="utf-8")
+          print(chr(10).join(out))
           PY
 
       - name: Compare candidate firmware families and target
+        if: false
         shell: bash
         run: |
           set -u
