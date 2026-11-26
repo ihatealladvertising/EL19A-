@@ -472,11 +472,12 @@ def _export_span(rom: bytes, addr: Optional[int], count: int, elem_type: str) ->
     """Describe an exclusive-end ROM span; never silently truncate an invalid extent."""
     width = _element_width(elem_type)
     if addr is None or width is None or count <= 0:
+        status = "unresolved_address" if addr is None else ("unknown_element_width" if width is None else "invalid_element_count")
         return {
             "start": addr, "start_hex": _address_hex(addr), "count": count,
             "element_type": elem_type, "element_width_bytes": width,
             "byte_length": None, "end_exclusive": None, "end_exclusive_hex": None,
-            "in_bounds": False, "sha256": None,
+            "in_bounds": False, "status": status, "sha256": None,
         }
     end = addr + count * width
     in_bounds = 0 <= addr < end <= len(rom)
@@ -485,6 +486,7 @@ def _export_span(rom: bytes, addr: Optional[int], count: int, elem_type: str) ->
         "element_type": elem_type, "element_width_bytes": width,
         "byte_length": count * width, "end_exclusive": end,
         "end_exclusive_hex": _address_hex(end), "in_bounds": in_bounds,
+        "status": "in_bounds" if in_bounds else "out_of_bounds",
         "sha256": hashlib.sha256(rom[addr:end]).hexdigest() if in_bounds else None,
     }
 
@@ -542,7 +544,9 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
 
         context = _call_context(rom, call["call_pc"], code_start)
         if call["table"] is not None:
-            resolution = "resolved_r4_candidate_inside_inferred_calibration_window"
+            resolution = ("candidate_r4_pointer_inside_inferred_calibration_window_and_extent_in_bounds"
+                          if data_span["status"] == "in_bounds"
+                          else "candidate_r4_pointer_inside_inferred_calibration_window_but_extent_unverified")
         elif call.get("raw_r4") is None:
             resolution = "unresolved_r4_in_bounded_register_window"
         else:
@@ -629,6 +633,16 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
 
     input_file_hash = None
     input_file_size = None
+    selected_archive_member = None
+    if Path(input_path).suffix.lower() == ".zip":
+        try:
+            with zipfile.ZipFile(input_path) as zf:
+                members = [info for info in zf.infolist() if not info.is_dir()]
+                bin_members = [m for m in members if m.filename.lower().endswith(".bin")]
+                target_member = max(bin_members or members, key=lambda m: m.file_size) if members else None
+                selected_archive_member = target_member.filename if target_member else None
+        except (OSError, zipfile.BadZipFile):
+            selected_archive_member = None
     try:
         source_bytes = Path(input_path).read_bytes()
         input_file_hash = hashlib.sha256(source_bytes).hexdigest()
@@ -642,6 +656,7 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
         "schema": "sh7058-cross-rom-scan-v1",
         "input": {
             "path": input_path, "container_size_bytes": input_file_size, "container_sha256": input_file_hash,
+            "selected_archive_member": selected_archive_member,
             "decoded_rom_size_bytes": len(rom), "decoded_rom_sha256": hashlib.sha256(rom).hexdigest(),
         },
         "tool": {
@@ -661,6 +676,7 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
             "transfer_counts_by_form": dict(Counter(row["call_form"] for row in call_rows)),
             "resolved_call_count": sum(1 for row in call_rows if row["table"] is not None),
             "unresolved_call_count": sum(1 for row in call_rows if row["table"] is None),
+            "resolved_calls_with_unverified_extent": sum(1 for row in call_rows if row["table"] is not None and row["table_span"]["status"] != "in_bounds"),
             "unique_resolved_table_bases": len(tables),
             "tables_with_geometry_conflicts": sum(1 for row in tables if row["geometry_conflict"]),
         },
