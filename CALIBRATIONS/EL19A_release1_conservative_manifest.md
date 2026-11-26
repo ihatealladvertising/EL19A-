@@ -16,7 +16,7 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `0fa6ed7cddf2bde262051fee76ab7288c286e7343ad1525a0927c91a658870a1` | `a0ce7611d537436297600027fcee749b68de154e` |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `126608ee577035e6e38cd8f05ec6c40d4b284a0e07743ff7707f2a4ced0528c7` | `7dea41a39361dc4556b8c484c5a74892ee58fda7` |
 | Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | `0cb93ce51d74d2fba2f85ec4e15982ae8bf424a3483442d3e3aa5cd7431a4ed7` | `f9fa05cafc99a338a9c0fcad94796762af3fd8af` |
 
 The selected baseline and original consultant CSV are retained unchanged.
@@ -54,6 +54,7 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 - Storage type, endian, dimensions and byte extent checked against each revised matrix row.
 - Every 2D curve has one displayed Y axis; every 3D surface has one X and one Y axis; scalar objects have no axes.
 - Static axes have the declared number of data points.
+- All 145 ROM-backed axis bindings were checked against the revised matrix descriptor; the final audit found zero width/scaling mismatches. Mixed-width pairs at data objects `0x0CD56` and `0x11FC4` were corrected to UBYTE X axes / UWORD Y axes.
 - ROM axis pointers and calibration data extents are within the 1 MiB address range.
 - 9B2E orientation verified in successor; `0x0E21A` is not attached as a ROM axis to the three selector tables.
 - Remote readback of XML and revised matrix matched the exact generated content.
