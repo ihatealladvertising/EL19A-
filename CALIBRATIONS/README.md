@@ -1,20 +1,27 @@
 # Calibration Register Guide
 
-The current engineering source is the V53 workbook, not the early seed CSVs in this repository.
+## Current engineering baseline
 
-Primary V53 sheets:
-- `Theory Handoff 2026-11-15` — provisional family hypotheses and discriminators.
-- `Project2 1D Crosswalk`
-- `EL19A 1D Lookup Candidates`
-- `P2 Candidate Register`
-- `P2 Handoff Log`
-- `Candidate Evidence Ledger`
+The current engineering workbook is **V58**:
+`WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets).
 
-The initial `candidate_register.csv` and `EVIDENCE/open_leads.csv` are compact historical seed subsets assembled from earlier project context. They are not a complete inventory and are superseded by the V53 registers. Do not promote their names/scales to confirmed XML semantics.
+Older V53–V57 workbooks are historical snapshots. Their sheet lists, inventory counts and handoff summaries must not be presented as current V58 accounting unless independently rechecked against V58.
 
-Current inventory accounting recorded in V53:
-- 122 unique V7 `storageaddress` placements.
-- 121 rows in the supplied pasted table; the omitted placement was identified as `AD22`.
-- 71 unique pointers from 84 `sub_22E10` callsites; all 71 addresses occur in V7.
-- Broader screenshot-scope inventory remains 175 = 122 + 53; the 53 expansion entries were not freshly audited in the V53 reconciliation.
-- E8C0/E94C remain out-of-V7 review candidates; E880 remains conditional/disputed.
+The initial `candidate_register.csv` and `EVIDENCE/open_leads.csv` are compact historical seed subsets, not complete inventories. `discovered_tables_catalog.csv` is discovery staging, not the release inclusion list. Use V58 together with `FINDINGS/INDEX.md` and its linked records for current interpretation.
+
+## Release 1
+
+The user-authorized full-definition starting point remains:
+`CALIBRATIONS/EL19A_best_guess_provisional_full_definition.xml`.
+
+It is a **provisional build baseline, not a validated release**. Preserve it unchanged and create a separate successor XML. Release decisions follow `CALIBRATIONS/RELEASE1_PLAN.md` and the Release 1 dispositions: INCLUDE — ESTABLISHED, INCLUDE — RAW/PROVISIONAL, or EXCLUDE.
+
+The tiered WO65325 XML and merged V3 XML are useful historical comparison artifacts; they are not silently substituted for the selected full-definition baseline. Reconcile their proven corrections and later Findings before constructing a successor.
+
+## Working rules
+
+- A structurally sound object may be included with a generic name and raw scaling when physical identity or units remain unknown.
+- Never invent an address, extent, dimension, axis, unit or conversion.
+- A sample-index axis is an index only, never a claim about the ECU's physical query domain.
+- Semantic tracing is required when needed to establish a claimed name/function, distinguish a material conflict, or justify a physical axis or conversion. It is not a universal inclusion requirement.
+- The release manifest must identify the ROM hash, XML baseline, Findings index revision, object dispositions, exclusions and unresolved items.
