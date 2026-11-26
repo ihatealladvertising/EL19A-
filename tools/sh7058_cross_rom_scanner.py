@@ -477,7 +477,7 @@ def _export_span(rom: bytes, addr: Optional[int], count: int, elem_type: str) ->
             "start": addr, "start_hex": _address_hex(addr), "count": count,
             "element_type": elem_type, "element_width_bytes": width,
             "byte_length": None, "end_exclusive": None, "end_exclusive_hex": None,
-            "in_bounds": False, "status": status, "sha256": None,
+            "in_bounds": False, "status": status, "sha256": None, "distinct_byte_values": None,
         }
     end = addr + count * width
     in_bounds = 0 <= addr < end <= len(rom)
