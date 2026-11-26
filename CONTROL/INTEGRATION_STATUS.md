@@ -1,9 +1,9 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — reconcile Worker 2 READY backlog depth after WO70013 (2026-11-26)
-**Purpose:** Correct the Worker 2 backlog-depth summary to reflect the just-closed FIFO. Preserve all lane heads; no technical WO or calibration artifacts are changed.
+**Integrator:** ChatGPT — user-authorized Worker 1/3 READY-WO transfer to Worker 2 and bounded closeout (2026-11-26)
+**Purpose:** Transfer unstarted WO70012 and WO70014 into the exhausted Worker 2 lane, then execute and publish their bounded closeouts. No other lane work is to be interrupted.
 
 **Lock acquired:** 2026-11-26 — Worker 2 backlog-depth reconciliation
 **Live register:** `CONTROL/active_work_orders.md` — blob `db79ae82b4a2131db9c295abc6bdcbe22792c619`; correction commit `558ff34e6ec47a2888f18b0695b5867882881efc`.
@@ -107,3 +107,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 - Live register commit: 99f4203acf21f0e84809ae7850dea6a19585c974; blob 5ca957a868851ad53119c1975e16bafc193b86d4.
 
 **Verified FIFO:** Worker 1: WO70008 → WO70012. Worker 2: WO70007 → WO70010 → WO70013. Worker 3: WO70014. No existing assignment was changed or reordered. No Findings, XML, scope matrix, catalogue, workbook, ROM/LST/A2L or tool source was modified.
+
+
+**Lock acquired:** 2026-11-26 — user-authorized transfer of WO70012 and WO70014 into Worker 2; technical execution and consolidated closeout.
