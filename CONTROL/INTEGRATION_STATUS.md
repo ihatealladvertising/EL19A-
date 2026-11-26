@@ -1,12 +1,12 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO70006 supplemental A2L matcher lead record
+**Integrator:** ChatGPT — WO70007–WO70011 work-order allocation
 
-**Purpose:** Record the user-reported A2L structural matcher results as unverified donor-comparison leads in WO70006; preserve V6 pairing and Juke address-mapping caveats. No FND/REC, XML, workbook, catalogue or inventory changes.
+**Purpose:** Publish five bounded work orders and their explicit Worker 1/2/3 FIFO assignments. Includes the established 0x0FEE0 Release 1 correction, separate donor-comparison validation, and target-side verification of new candidate objects.
 
-**Lock acquired:** 2026-11-26 — WO70006 supplemental A2L matcher lead record
+**Lock acquired:** 2026-11-26 — WO70007–WO70011 allocation batch
 **Lock released:** 2026-11-26 — WO70006 addendum read back and blocked lifecycle status verified  
 **Lock released:** 2026-11-26 — all report, Findings, index and live-register readbacks verified
 
