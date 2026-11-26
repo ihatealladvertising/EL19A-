@@ -1,16 +1,14 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — best-guess manifest consistency correction
+**Integrator:** ChatGPT — provisional visibility, linked-axis safety and queue reconciliation
 
-**Purpose:** Manifest title and presentation-policy wording aligned with the published iterative best-guess definition.
+**Purpose:** Mark every provisional calibration label visibly; identify the reciprocal shared-storage lookup pair at 0x0CD56/0x0FEC0; publish REC-000021; register existing WO66049 in Worker 3 FIFO; remove stale current-assignment summary.
 
-**Lock acquired:** 2026-11-26 — manifest consistency correction
+**Lock acquired:** 2026-11-26 — linked-axis / provisional visibility correction
 
-**Lock released:** 2026-11-26 — manifest readback verified
-
-**Final manifest blob:** d845367c68db7d69a625b3cebfd4215ea40d52df.
+Only the named integrator may publish to shared main until final readback and release.
 
 **Previous integration:** 2026-11-26T00:37:54.897Z — aligned the process-review interval to 25 closeouts/30 days and explicitly retired the fixed three-WO backlog target. No WO assignments or XML/workbook/inventory files changed.
 
