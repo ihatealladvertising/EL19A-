@@ -1,4 +1,4 @@
-# EL19A Conservative Release 1 — Build Manifest
+# EL19A Iterative Best-Guess Release 1 — Build Manifest
 
 **Build state:** ITERATIVE BEST-GUESS BUILD — RomRaider import and 18-table visual spot-check PASS; further refinement active  
 **Build date:** 2026-11-26  
@@ -16,8 +16,8 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | 099e21cb51bc3973d7d74744c053cfbd4384b801f7af87fed7286b8d7b359c75| eb5536f7124feaf49f860f36c795119179053d10|
-| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | 5dc7c465a71110386536d8e1ecc5894d501e8d79fe62d5d0ccba255923311ef4| 38f57eaabef7cbca4547b3088b937027418117f6|
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | 099e21cb51bc3973d7d74744c053cfbd4384b801f7af87fed7286b8d7b359c75 | eb5536f7124feaf49f860f36c795119179053d10 |
+| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | 5dc7c465a71110386536d8e1ecc5894d501e8d79fe62d5d0ccba255923311ef4 | 38f57eaabef7cbca4547b3088b937027418117f6 |
 
 The selected baseline and original consultant CSV are retained unchanged.
 
@@ -38,7 +38,7 @@ The two established entries are the user-finalized 0x0E678 and 0x0E688 presentat
 1. **9B2E family:** successor axes X=`0x0E4AC`, Y=`0x0E4BC` per `FND-000003` / `REC-000003`; both axes raw, unsupported physical conversions removed.
 2. **0x0E21A selector:** the three values `[6,8,12]` are thresholds producing index 0..3, not an interpolation axis. The three associated arrays are included against a static bin-index axis (`FND-000016` / `REC-000020`).
 3. **Provisional axes:** ROM-axis references and implicit fixed grids are restored from helper/caller evidence (`FND-000017` / `REC-000019`). `0x0F712` reuses `FND-000014`.
-4. **Display policy:** included provisional tables/axes use generic names/raw conversions. Donor-only RPM, percent, temperature, airflow and ignition conversions are not carried forward.
+4. **Working presentation:** best-guess functional labels and the original category structure are restored across the included objects. Six candidate data conversion families are enabled as provisional working guesses; the remaining objects retain raw display scaling unless the matrix records a conversion candidate. Keep refining these guesses as target-side evidence improves.
 
 ## Findings revision
 
@@ -73,7 +73,7 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 ## Exclusions and unresolved boundaries
 
 - Excluded: superseded `0x0E904` static-axis duplicate and six decoded ignition/knock overlays.
-- Physical operating domains, hardware source/sink identity and physical units remain unresolved for raw/provisional entries; these are deliberately not claimed by Release 1.
+- Physical operating domains, hardware source/sink identity and many physical units remain unresolved. Provisional names and conversions are intentional working hypotheses, not final semantic claims.
 - No live-vehicle testing was performed or authorized.
 
 
