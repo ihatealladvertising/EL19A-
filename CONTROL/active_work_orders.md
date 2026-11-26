@@ -51,6 +51,7 @@ This section records only explicit user-directed, one-off coordinator WOs. It do
 | Work order | Owner | Status | Result |
 |---|---|---|---|
 | [WO70015](WO70015.md) | ChatGPT — coordinator/integrator | CLOSED — BOUNDED COMPLETE (2026-11-26) | Release 1 full baseline / scope / XML reconciled exactly; 254 included objects, 185 catalogue entries (179 in Release 1; six verified map/axis entries outside), plus FND-backed 0x0F02C and reciprocal 0x0DE6E/0x0E2ED deferred pair. ROM-wide census remains bounded by WO70006's raw-output gate. |
+| [WO70016](WO70016.md) | ChatGPT — coordinator/integrator | CLOSED — BOUNDED COMPLETE (2026-11-26) | Reconciled 0x0BB56, 0x11744, 0x0A092, 0x0ADF2 and 0x11944 against prior target readers and current Release 1 inventory: three raw/provisional add candidates (BB56, ADF2, 11944); 11744 constant 0x8000 and A092 zero-filled; no XML/catalogue edits. WO70006 remains blocked at the scanner raw-output gate. |
 
 ## Current project assets and operational frontier
 
