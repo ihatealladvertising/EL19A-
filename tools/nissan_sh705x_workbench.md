@@ -9,18 +9,22 @@ It imports helper discovery and call extraction directly from `tools/sh7058_cros
 ## Subcommands
 
 ### 1. `scan` — Single-ROM Fingerprint & Lookup Inventory
-Loads raw `.bin`, `.zip` (`.bin`/`.s19`/`.hex` inside), Motorola `.s19`, or Intel `.hex`, prints MCU/FID/reset fingerprints, discovers SH-2 lookup helpers across layout generations (pre-cal `mov.w < 0x10000`, SH7055 mid-ROM `~0x15xxx`, SH7058 post-cal `>= 0x20000`), resolves table calls, and detects dual-used axes and reciprocal inverse table pairs.
+Loads raw `.bin`, `.zip` (`.bin`/`.s19`/`.hex`/`.dat` inside), Motorola `.s19`, Intel `.hex`, or Nissan Consult `.dat` (validating KWP `0x8015 0x3482` frame checksums and inverting the 2-round 16-bit Feistel cipher into a 512 KiB `0xFF`-bootblock-padded SH7055 image), prints MCU/FID/reset fingerprints, discovers SH-2 lookup helpers across layout generations (pre-cal `mov.w < 0x10000`, SH7055 mid-ROM `~0x15xxx`, SH7058 post-cal `>= 0x20000`), resolves table calls, and detects dual-used axes and reciprocal inverse table pairs.
 
 ```bash
 python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/VERSA f501.bin" --tsv /tmp/el19a_scan.tsv --json /tmp/el19a_scan.json
 python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip"
 python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/unknown_EM62B_SH7055.bin.zip"
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/237108W94B.dat"
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/sentra revhang/sentra_8U92A.bin"
 ```
 
 Verified `scan` results:
 - `EVIDENCE/VERSA f501.bin` (`SH705822N`, `8CMCKRN5`): `34` helpers, `379` call sites (`364` resolved → `293` unique tables; `14` dual-used as axes, `14` reciprocal-pair endpoints).
 - `Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip` (`SH705828N`, `1TRKH1HN`): `37` helpers, `604` call sites (`595` resolved → `483` unique tables).
 - `unknown_EM62B_SH7055.bin.zip` (`SH705519N`, `1CMC7QPD`): `34` helpers, `339` call sites (`335` resolved → `275` unique tables).
+- `237108W94B.dat` / `237108W95B.dat` / `23710EL58B.dat` / `23710EL59B.dat` (`SH705519N`, `4CMC7NPD`): `36` helpers, `319` call sites (`313` resolved → `254` unique tables).
+- `sentra_8U92A.bin` (`SH705513N`, pre-cal): `32` helpers, `270` call sites (`256` resolved → `212` unique tables).
 
 ---
 
@@ -59,17 +63,22 @@ python3 tools/nissan_sh705x_workbench.py inspect 0xFFFF85DA
 
 ---
 
-### 4. `diff` — Cross-ROM Table Diff (Exact Address + Relocated Payload)
-Compares helper-resolved lookup tables between any two ROMs (`.bin`/`.zip`/`.s19`/`.hex`), separating same-address matches, same-address differing calibrations, exact-payload relocations, and non-trivial unmatched/variant-specific tables.
+### 4. `diff` — Cross-ROM Table & Raw Scalar Diff
+Compares helper-resolved lookup tables between any two ROMs (`.bin`/`.zip`/`.s19`/`.hex`/`.dat`), separating same-address matches, same-address differing calibrations, exact-payload relocations, and non-trivial unmatched/variant-specific tables. When both ROMs have equal size, appends a raw byte/scalar cluster diff outside already-reported table diffs (with ASCII/u8/u16/u32 formatting, axis proximity, and 32-bit literal pool cross-references; use `--raw-limit N` or `0` for unlimited).
 
 ```bash
 python3 tools/nissan_sh705x_workbench.py diff "EVIDENCE/VERSA f501.bin" "EVIDENCE/23710-EL13A-08-C11-MR18DE-CVT.bin"
 python3 tools/nissan_sh705x_workbench.py diff "EVIDENCE/VERSA f501.bin" "EVIDENCE/23710-8W83B-08-C11-MR18DE-AT.bin"
+python3 tools/nissan_sh705x_workbench.py diff "EVIDENCE/sentra revhang/sentra_8U92A.bin" "EVIDENCE/sentra revhang/NoRevHang_Sentra_8U92A.bin"
+python3 tools/nissan_sh705x_workbench.py diff "EVIDENCE/237108W94B.dat" "EVIDENCE/237108W95B.dat"
 ```
 
 Verified `diff` metrics:
 - `EL19A` vs `EL13A` (CVT): `256` identical, `37` same-address differing payloads.
 - `EL19A` vs `8W83B` (AT): `1` same-addr identical, `4` same-addr differing, `258` relocated exact-payload matches (`153` non-trivial), `30` unmatched (`27` non-trivial variant-specific/changed candidates).
+- `sentra_8U92A.bin` vs `NoRevHang_Sentra_8U92A.bin`: `212` identical tables, `6` non-table differing bytes in `4` clusters (`0x05AF8` u8 `44->104`, `0x05B59` u8 `10->170`, `0x06500..0x06501`, `0x06508..0x06509`).
+- `unknown_EM62B_SH7055.bin` vs `r4r42r24r2.bin`: `275` identical tables, `8` differing bytes (`0x10404..0x1040B`, `pool32` refs `0x14320`, `0x1431C`).
+- `237108W94B.dat` vs `237108W95B.dat`: `253` identical tables, `1` same-address differing table (`0x0AFCE`), `21` non-table differing bytes in `11` clusters.
 
 ---
 

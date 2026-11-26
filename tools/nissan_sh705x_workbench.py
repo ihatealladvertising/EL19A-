@@ -3,12 +3,12 @@
 Nissan SH7055 / SH7058 Reverse-Engineering Workbench (`tools/nissan_sh705x_workbench.py`)
 
 Unified, read-only CLI combining:
-  1. Universal ROM loader (.bin, .zip, .s19, .hex) + MCU/FID fingerprinting
+  1. Universal ROM loader (.bin, .zip, .s19, .hex, Consult .dat) + MCU/FID fingerprinting
   2. Cross-generation SH-2 lookup-helper discovery & call-site extraction
      (pre-cal mov.w <0x10000, SH7055 mid-ROM ~0x15xxx, SH7058 post-cal >=0x20000)
   3. EL19A audit against Release 1 XML, discovered_tables_catalog.csv, and RELEASE1_SCOPE_MATRIX_R1.csv
      (flagging geometry/extent mismatches, shared-storage links, and reciprocal inverse pairs)
-  4. Variant-isolation cross-ROM diffing (EL19A vs EL13A / 8W83B / EE310 / EM62B / 3DD9A / Qashqai)
+  4. Variant-isolation & raw scalar/byte diffing across any two ROMs (.bin/.zip/.s19/.hex/.dat)
   5. Structural function-signature + A2L (CHARACTERISTIC / AXIS_PTS / COMPU_METHOD / MEASUREMENT) lead matching
      against `64810223F121200000.hex` (SH705822N) + `64811000p2_m.a2l` and `9APCTDEM06.s19` + `RFCC_2XHK19BDF1.a2l`.
 
@@ -78,6 +78,62 @@ def load_hex_bytes(raw: bytes) -> bytes:
     return bytes(buf)
 
 
+def _rol16(v: int, k: int) -> int:
+    return ((v << k) | (v >> (16 - k))) & 0xFFFF
+
+
+def decrypt_consult_dat_word(c: int) -> int:
+    """Invert Nissan Consult .dat 2-round 16-bit Feistel ECB cipher on one 32-bit BE word."""
+    ch, cl = (c >> 16) & 0xFFFF, c & 0xFFFF
+    a = (cl + 0xCA1B) & 0xFFFF
+    z = (a + _rol16(a, 1) + 0xFFFF) & 0xFFFF
+    r0 = ch ^ (z ^ _rol16(z, 4))
+    b = (r0 + 0x124D) & 0xFFFF
+    f1 = (b + _rol16(b, 2) + 0xFFFF) & 0xFFFF
+    l0 = cl ^ f1
+    return (l0 << 16) | r0
+
+
+def load_dat_bytes(raw: bytes) -> bytes:
+    """Unpack and decrypt a Nissan Consult .dat reprogramming container into a raw SH705x image."""
+    pos = raw.find(b"\x80\x15\xfc", 0, 0x200)
+    if pos == -1:
+        pos = 0x43
+    recs: List[Tuple[int, bytes]] = []
+    max_end = 0x80000
+    n_frames = 0
+    while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x15":
+        kwp_len = raw[pos + 3]
+        frame_len = 4 + kwp_len + 1
+        if pos + frame_len > len(raw):
+            raise ValueError(f"Truncated Consult .dat frame at 0x{pos:X}")
+        blk = raw[pos : pos + frame_len]
+        if (sum(blk[:-1]) & 0xFF) != blk[-1]:
+            raise ValueError(f"Consult .dat frame checksum mismatch at 0x{pos:X}")
+        if blk[4:6] != b"\x34\x82":
+            raise ValueError(f"Unexpected Consult .dat frame command {blk[4:6].hex()} at 0x{pos:X}")
+        addr = int.from_bytes(blk[6:9], "big")
+        plen = blk[9]
+        if plen % 4 != 0 or 10 + plen > frame_len - 1:
+            raise ValueError(f"Invalid Consult .dat payload length {plen} at 0x{pos:X}")
+        enc = blk[10 : 10 + plen]
+        dec = bytearray(plen)
+        for off in range(0, plen, 4):
+            w = struct.unpack_from(">I", enc, off)[0]
+            struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
+        recs.append((addr, bytes(dec)))
+        if addr + plen > max_end:
+            max_end = 0x100000 if addr + plen <= 0x100000 else addr + plen
+        pos += frame_len
+        n_frames += 1
+    if n_frames == 0:
+        raise ValueError("No valid Consult .dat 0x8015 transfer frames found")
+    buf = bytearray([0xFF] * max_end)
+    for addr, dec in recs:
+        buf[addr : addr + len(dec)] = dec
+    return bytes(buf)
+
+
 def load_any_rom(path: Path) -> bytes:
     suf = path.suffix.lower()
     if suf == ".zip":
@@ -85,7 +141,7 @@ def load_any_rom(path: Path) -> bytes:
             members = [m for m in zf.infolist() if not m.is_dir()]
             if not members:
                 raise ValueError(f"Empty zip archive: {path}")
-            pref = [m for m in members if m.filename.lower().endswith((".bin", ".s19", ".hex"))]
+            pref = [m for m in members if m.filename.lower().endswith((".bin", ".s19", ".hex", ".dat"))]
             target = max(pref or members, key=lambda m: m.file_size)
             raw = zf.read(target.filename)
             inner_suf = Path(target.filename).suffix.lower()
@@ -93,12 +149,16 @@ def load_any_rom(path: Path) -> bytes:
                 return load_s19_bytes(raw)
             if inner_suf == ".hex":
                 return load_hex_bytes(raw)
+            if inner_suf == ".dat":
+                return load_dat_bytes(raw)
             return raw
     raw = path.read_bytes()
     if suf == ".s19":
         return load_s19_bytes(raw)
     if suf == ".hex":
         return load_hex_bytes(raw)
+    if suf == ".dat":
+        return load_dat_bytes(raw)
     return raw
 
 
@@ -509,7 +569,8 @@ def cmd_scan(args):
 
     print(f"=== SCAN: {p} ===")
     print(f"Size: {fp['size']:,} B (active end 0x{fp['active_end']:X}) | MD5: {fp['md5']} | SHA256: {fp['sha256'][:16]}...")
-    print(f"Reset PC: 0x{fp['reset_pc']:08X} | SP: 0x{fp['reset_sp']:08X} | CPU: {fp['cpu_tags']} | FIDs: {fp['fid_tags']}")
+    boot_note = " (bootblock 0x00000-0x081FF 0xFF-padded / .dat)" if (fp["reset_pc"] == 0xFFFFFFFF and len(rom) >= 0x8200 and rom[:0x8200] == b"\xff" * 0x8200) else ""
+    print(f"Reset PC: 0x{fp['reset_pc']:08X} | SP: 0x{fp['reset_sp']:08X}{boot_note} | CPU: {fp['cpu_tags']} | FIDs: {fp['fid_tags']}")
     print(f"Helpers: {len(helpers)} ({dict(Counter(h.kind for h in helpers.values()))})")
     resolved = sum(1 for c in calls if c["table"] is not None)
     shared_axes = sum(1 for t in tables.values() if t["shared_as_axis_of"])
@@ -760,6 +821,47 @@ def cmd_inspect(args):
                 print(f"  Near matched lookup fn 0x{fn:05X} (literal @0x{h:05X}): V6_lead={v_top} Juke_lead={j_top}")
 
 
+def _format_cluster_values(ba: bytes, bb: bytes, start: int) -> str:
+    n = len(ba)
+    # Check if purely printable ASCII (e.g. FID/CALID changes)
+    if n >= 2 and all((32 <= x < 127) or x == 0 for x in ba + bb) and any(48 <= x < 127 for x in ba + bb):
+        sa = ba.decode("ascii", errors="replace").replace("\x00", "\\0")
+        sb = bb.decode("ascii", errors="replace").replace("\x00", "\\0")
+        return f'ASCII "{sa}" -> "{sb}"'
+    if n == 1:
+        va, vb = ba[0], bb[0]
+        return f"u8 {va} -> {vb} ({vb - va:+d})"
+    if n == 2 and start % 2 == 0:
+        va, vb = struct.unpack_from(">H", ba)[0], struct.unpack_from(">H", bb)[0]
+        return f"u16 0x{va:04X} ({va}) -> 0x{vb:04X} ({vb})"
+    if n == 4 and start % 4 == 0:
+        va, vb = struct.unpack_from(">I", ba)[0], struct.unpack_from(">I", bb)[0]
+        return f"u32 0x{va:08X} -> 0x{vb:08X}"
+    if n <= 12:
+        return f"{ba.hex()} -> {bb.hex()}"
+    return f"{ba[:8].hex()}... ({n}B) -> {bb[:8].hex()}..."
+
+
+def _build_pool32_index(rom: bytes) -> Dict[int, List[int]]:
+    idx: Dict[int, List[int]] = defaultdict(list)
+    for off in range(0, len(rom) - 3, 4):
+        v = struct.unpack_from(">I", rom, off)[0]
+        if 0 < v < len(rom):
+            idx[v].append(off)
+    return idx
+
+
+def _cluster_raw_diffs(ra: bytes, rb: bytes, start: int, end: int, covered_mask: bytearray, gap: int = 2) -> List[Tuple[int, int]]:
+    clusters: List[List[int]] = []
+    for i in range(start, end):
+        if ra[i] != rb[i] and not covered_mask[i]:
+            if clusters and i <= clusters[-1][1] + gap:
+                clusters[-1][1] = i
+            else:
+                clusters.append([i, i])
+    return [(s, e) for s, e in clusters]
+
+
 def cmd_diff(args):
     pa, pb = Path(args.rom_a), Path(args.rom_b)
     ra, rb = load_any_rom(pa), load_any_rom(pb)
@@ -808,12 +910,78 @@ def cmd_diff(args):
             xn = xml_tables[a]["name"] if a in xml_tables else "(NOT in R1 XML)"
             print(f"  0x{a:05X} ({ent['kind']} {ent['dim1']}x{ent['dim2']} {ent['elem_type']}): {xn}")
 
+    # Raw byte/scalar diff fallback when both ROMs share size
+    if len(ra) != len(rb):
+        print(f"\nRaw byte/scalar diff: skipped (ROM sizes differ: {len(ra):,} B vs {len(rb):,} B)")
+        return
+
+    covered = bytearray(len(ra))
+    for a in same_addr_diff_bytes:
+        ent = ta[a]
+        end_b = min(len(ra), ent["end"] + 1)
+        covered[a:end_b] = b"\x01" * (end_b - a)
+
+    # Detect unpopulated 0x00000..0x081FF bootblock in unpacked Consult .dat files
+    scan_start = 0
+    boot_note = ""
+    if len(ra) >= 0x8200:
+        a_ff = ra[:0x8200] == b"\xff" * 0x8200
+        b_ff = rb[:0x8200] == b"\xff" * 0x8200
+        if a_ff != b_ff:
+            scan_start = 0x8200
+            who = pa.name if a_ff else pb.name
+            boot_note = f" (bootblock 0x00000-0x081FF omitted: 0xFF-padded in {who})"
+
+    raw_total = sum(1 for i in range(scan_start, len(ra)) if ra[i] != rb[i])
+    clusters = _cluster_raw_diffs(ra, rb, scan_start, len(ra), covered, gap=2)
+    outside_bytes = sum(sum(1 for i in range(s, e + 1) if ra[i] != rb[i]) for s, e in clusters)
+
+    print(f"\nRaw byte/scalar diff (same size {len(ra):,} B){boot_note}: {raw_total:,} differing bytes ({outside_bytes:,} outside same-addr diff tables, {len(clusters)} clusters)")
+    if not clusters:
+        return
+
+    # Annotate clusters using table/axis spans and 32-bit literal pool references
+    table_ranges = [(a, ent["end"], ent) for a, ent in sorted(ta.items())]
+    axis_addrs: Dict[int, List[int]] = {}
+    for a, ent in ta.items():
+        for ax in ent["axis1s"] + ent["axis2s"]:
+            axis_addrs.setdefault(ax, []).append(a)
+    pool32 = _build_pool32_index(ra)
+
+    max_show = len(clusters) if args.raw_limit == 0 else args.raw_limit
+    print(f"Non-table raw diff clusters (showing {min(len(clusters), max_show)}/{len(clusters)}):")
+    for s, e in clusters[:max_show]:
+        ba, bb = ra[s : e + 1], rb[s : e + 1]
+        val_txt = _format_cluster_values(ba, bb, s)
+        notes = []
+        # Check enclosing table or axis
+        for ts, te, ent in table_ranges:
+            if ts <= s <= te or ts <= e <= te:
+                notes.append(f"in table 0x{ts:05X} ({ent['kind']} {ent['dim1']}x{ent['dim2']})")
+                break
+        ax_hits = [ax for ax in axis_addrs if ax <= s <= ax + 64]
+        if ax_hits:
+            notes.append(f"near axis 0x{ax_hits[0]:05X} (of {[f'0x{t:05X}' for t in axis_addrs[ax_hits[0]][:2]]})")
+        # Check exact/near 32-bit pool pointers (e.g. checksum/scalar descriptors)
+        hits = []
+        for probe in range(s & ~3, e + 1):
+            if probe in pool32:
+                for p in pool32[probe]:
+                    hits.append(f"0x{p:05X}->0x{probe:05X}")
+        if hits:
+            notes.append(f"pool32={hits[:4]}")
+        if s in xml_tables:
+            notes.append(f"XML:{xml_tables[s]['name']}")
+        note_str = f" | {'; '.join(notes)}" if notes else ""
+        addr_str = f"0x{s:05X}" if s == e else f"0x{s:05X}..0x{e:05X}"
+        print(f"  {addr_str:16s} ({e - s + 1:3d}B): {val_txt}{note_str}")
+
 
 def main():
     ap = argparse.ArgumentParser(description="Nissan SH7055/SH7058 Reverse-Engineering Workbench")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p_scan = sub.add_parser("scan", help="Scan any .bin/.zip/.s19/.hex ROM for lookup helpers and tables")
+    p_scan = sub.add_parser("scan", help="Scan any .bin/.zip/.s19/.hex/.dat ROM for lookup helpers and tables")
     p_scan.add_argument("rom")
     p_scan.add_argument("--tsv", help="Optional output TSV path")
     p_scan.add_argument("--json", help="Optional output JSON path")
@@ -839,10 +1007,11 @@ def main():
         p_sub.add_argument("--juke-a2l", default="EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/RFCC_2XHK19BDF1.a2l")
         p_sub.set_defaults(func=cmd_audit if name == "audit" else cmd_inspect)
 
-    p_diff = sub.add_parser("diff", help="Diff lookup tables across two ROMs (.bin/.zip/.s19/.hex)")
+    p_diff = sub.add_parser("diff", help="Diff lookup tables and raw scalars across two ROMs (.bin/.zip/.s19/.hex/.dat)")
     p_diff.add_argument("rom_a")
     p_diff.add_argument("rom_b")
     p_diff.add_argument("--xml", default="CALIBRATIONS/EL19A_release1_conservative.xml")
+    p_diff.add_argument("--raw-limit", type=int, default=40, help="Max non-table raw diff clusters to display (0 = all)")
     p_diff.set_defaults(func=cmd_diff)
 
     args = ap.parse_args()
