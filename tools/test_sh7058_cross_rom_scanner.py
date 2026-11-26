@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from sh7058_cross_rom_scanner import HelperSpec, _export_span, build_scan_export, extract_calls, write_machine_exports
+from sh7058_cross_rom_scanner import HelperSpec, _export_span, build_cross_rom_comparisons, build_scan_export, extract_calls, write_machine_exports
 
 
 def make_call(helper, pc, table, axis1, dim1, dim2, raw_r4, raw_r5):
@@ -93,6 +93,40 @@ class ScannerExportTests(unittest.TestCase):
         self.assertEqual(report["calls"][0]["caller_start_candidate"], 0x52F0)
         self.assertTrue(report["tables"][0]["geometry_conflict"])
         self.assertEqual(report["tables"][0]["call_pcs"], [0x5300, 0x5310])
+
+    def test_cross_rom_comparison_counts_unique_payload_matches(self):
+        variant = {
+            "byte_length": 8,
+            "payload_sha256": "abc123",
+            "distinct_byte_values": 4,
+        }
+        target = {
+            "input": {"path": "target.bin", "decoded_rom_sha256": "t" * 64},
+            "tables": [{
+                "table": 0x6000, "table_hex": "0x06000", "helper_kinds": ["2D_AXIS"],
+                "geometry_variants": [variant],
+            }],
+        }
+        sibling = {
+            "input": {"path": "sibling.bin", "decoded_rom_sha256": "s" * 64},
+            "tables": [
+                {
+                    "table": 0x7000, "table_hex": "0x07000", "helper_kinds": ["2D_AXIS"],
+                    "geometry_variants": [variant],
+                },
+                {
+                    "table": 0x6000, "table_hex": "0x06000", "helper_kinds": ["2D_AXIS"],
+                    "geometry_variants": [{
+                        "byte_length": 8, "payload_sha256": "different", "distinct_byte_values": 1,
+                    }],
+                },
+            ],
+        }
+        comparison = build_cross_rom_comparisons([target, sibling])[0]
+        self.assertEqual(comparison["same_address_and_helper_kind_count"], 1)
+        self.assertEqual(comparison["exact_payload_match_count"], 1)
+        self.assertEqual(comparison["nontrivial_exact_payload_match_count"], 1)
+        self.assertEqual(comparison["relocated_exact_payload_match_count"], 1)
 
     def test_json_and_tsv_exports_are_written(self):
         rom = bytearray(0x8000)
