@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — follow-on work allocation for fingerprint join (2026-11-26)
+
+**Purpose:** Publish WO70012–WO70014 for the three worker lanes and update the live FIFO register only.
 
 **Integrator:** ChatGPT — EL19A target-side cross-ROM fingerprint join publication (2026-11-26)
 
