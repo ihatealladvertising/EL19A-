@@ -1,11 +1,16 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70013 0x0F10E reader and output trace closeout (2026-11-26)
 **Purpose:** Publish WO70013 target-side reader/query/consumer evidence as FND-000026 and close the Worker 2 FIFO item. Preserve other lanes; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L or tool-source edits.
 
 **Lock acquired:** 2026-11-26 — WO70013 0x0F10E reader and output trace closeout
+**WO70013 report:** `CONTROL/WO70013.md` — blob `aaf49a7082a4279ffe46bee37e112a022036071e`; report commit `1485da52689db055d1cfad14185c552bf7ce09db`.
+**Finding:** `FINDINGS/records/FND-000026.md` — blob `6447a9360f62ac182b871636e6c043b252b009d3`; record commit `dbd00cac125c9296476689dc1b4f99a1a3038176`.
+**Findings index:** `FINDINGS/INDEX.md` — blob `eb1f34429ba5397ff1c2a41470381778b0384510`; index commit `14229c4215cd64471710fd56b3e9437723f972f3`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `a2df26eacc5fd0412102f1929aa458905262ec4c`; register commit `de1c7103fedc6ff6b02617eb63485805195569cf`.
+**Lock released:** 2026-11-26 — WO70013 report, FND-000026, index and Worker 2 lifecycle pointer read back; Worker 2 FIFO is exhausted; Worker 1 and Worker 3 heads unchanged.
 **WO70010 report:** `CONTROL/WO70010.md` — blob `2284f00284e7bbe84e173c87338c072a387f3f19`; report commit `e9fa35ecc2e8c2b3d8d7499a1c83bdb5694ab921`.
 **Live register:** `CONTROL/active_work_orders.md` — blob `7178415e3c31842b20cb773c44972e8fc5d3e978`; register commit `24dcafe1bf67d578f1cf4ee1cf38c3aefe709d73`.
 **Lock released:** 2026-11-26 — WO70010 report and lifecycle pointer read back; Worker 2 FIFO advanced to WO70013; Worker 1 and Worker 3 heads left unchanged.
