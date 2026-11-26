@@ -1,11 +1,14 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70010 0x0F3EE target curve verification (2026-11-26)
 **Purpose:** Publish the bounded target-side result for Worker 2 FIFO item WO70010. Preserve all worker-lane ownership and unrelated artifacts; no calibration XML, workbook, ROM/LST/A2L or tool-source edits.
 
 **Lock acquired:** 2026-11-26 — WO70010 0x0F3EE target curve verification
+**WO70010 report:** `CONTROL/WO70010.md` — blob `2284f00284e7bbe84e173c87338c072a387f3f19`; report commit `e9fa35ecc2e8c2b3d8d7499a1c83bdb5694ab921`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `7178415e3c31842b20cb773c44972e8fc5d3e978`; register commit `24dcafe1bf67d578f1cf4ee1cf38c3aefe709d73`.
+**Lock released:** 2026-11-26 — WO70010 report and lifecycle pointer read back; Worker 2 FIFO advanced to WO70013; Worker 1 and Worker 3 heads left unchanged.
 **WO70007 report:** `CONTROL/WO70007.md` — blob `801a42debc7fed7ebfc9b2af22d4968526ac71d7`; report commit `5c73a34dd7f51594bfef852302715e67b92eda4c`.
 **Release 1 XML:** blob `4bab8bced09047c461520c6044415ca5357b0110`; **scope matrix:** blob `52fe30fdd760d3a13885007fe9391dead425ec21`; **catalogue:** blob `e8ee9f257e4cd114624cfc26dd08caecccdd59f7`; **manifest:** blob `657288a7e411dfd12ad2ecc0bea972c3165d7941`.
 **Live register:** `CONTROL/active_work_orders.md` — blob `f504706813ff51abb74273d51e37dcfeb7ae1127`; register commit `f95944f9ed28383b1f33d3f5d10d684e8a629abb`.
