@@ -1,0 +1,33 @@
+name: SH7058 Scanner Regression Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/sh7058_cross_rom_scanner.py"
+      - "tools/test_sh7058_cross_rom_scanner.py"
+      - ".github/workflows/sh7058-scanner-tests.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "tools/sh7058_cross_rom_scanner.py"
+      - "tools/test_sh7058_cross_rom_scanner.py"
+      - ".github/workflows/sh7058-scanner-tests.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  scanner-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile scanner and tests
+        run: python3 -m py_compile tools/sh7058_cross_rom_scanner.py tools/test_sh7058_cross_rom_scanner.py
+      - name: Run synthetic scanner regression tests
+        run: python3 -m unittest -v tools/test_sh7058_cross_rom_scanner.py
