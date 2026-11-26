@@ -803,7 +803,7 @@ def write_machine_exports(json_path: Optional[Path], tsv_dir: Optional[Path], sc
         prefix = f"{stem}_{suffix}"
         outputs = (
             ("calls", scan["calls"], [
-                "call_pc_hex", "call_form", "target_load_pc_hex", "target_register", "caller_start_candidate_hex",
+                "call_pc_hex", "call_form", "target_load_pc_hex", "target_register", "target_register_moves", "caller_start_candidate_hex",
                 "helper_hex", "helper_kind", "table_hex", "element_type", "dim1", "dim2",
                 "axis1_hex", "axis1_type", "axis2_hex", "axis2_type", "resolution_status",
                 "table_span", "axis1_span", "axis2_span", "raw_registers", "instruction_context",
