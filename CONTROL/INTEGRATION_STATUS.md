@@ -1,12 +1,14 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Integrator:** ChatGPT
+**Integrator:** none
 
-**Purpose:** Align the process-review recurrence and clarify supersession of the obsolete fixed WO backlog target.
+**Purpose:** No active integration window. Workers use the live FIFO in `CONTROL/active_work_orders.md`. Shared-main publication may resume.
 
-**Lock started:** 2026-11-26T00:37:36.561Z
+**Last integration:** 2026-11-26T00:37:54.897Z — aligned the process-review interval to 25 closeouts/30 days and explicitly retired the fixed three-WO backlog target. No WO assignments or XML/workbook/inventory files changed.
+
+**Last release:** 2026-11-26T00:37:54.897Z — protocol and review guide verified by remote readback.
 
 **Last integration:** 2026-11-26T00:37:06.979Z — updated `CONTROL/WORKER_PROTOCOL.md`, `FINDINGS/README.md`, `CALIBRATIONS/README.md`, and created `CALIBRATIONS/RELEASE1_PLAN.md`. No XML, workbook, inventory, ROM/LST, evidence, or live-register changes.
 
