@@ -1,12 +1,18 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** Worker 2 (kilo-auto/free)
 
 **Purpose:** Batch publication of Worker 2 completed WOs: WO65816, WO66032, WO66035, WO66038, WO66041, WO66044 + active_work_orders.md register update
 
 **Lock acquired:** 2026-11-25 22:27 UTC
+
+**Lock released:** 2026-11-25 23:32 UTC
+
+**Integration commit:** 6eca1ef (Worker 2 batch: WO65816, WO66038, WO66041, WO66044 closeouts + register update)
+
+**Batch contents:** WO65816, WO66032, WO66035, WO66038, WO66041, WO66044 closeout reports; CONTROL/active_work_orders.md register update (Worker 2 lane exhausted)
 
 **Last integration:** 2026-11-25T22:02:57-03:00 — compacted `CONTROL/active_work_orders.md` to a 7.2 KB current operational register and created `CONTROL/active_work_orders_compaction_2026-11-25.md`. Preserved the exact pre-compaction register in Git history at commit `143cbe90dcb78ec24963771a9653c2ec4f476d03` (blob `6ef7365c3f99e2a829b09c22075ffd72e8ec1f7f`). No WO assignment, owner, FIFO order, technical report, XML, workbook, ROM/LST, evidence or inventory changed.
 
