@@ -26,7 +26,7 @@ jobs:
           def load_8019_candidate(raw):
               pos=raw.find(bytes.fromhex('8019fc'),0,0x400)
               if pos<0: raise ValueError('No 0x8019FC frame marker')
-              recs=[]; frames=0; bad=[]; total=0; first=pos; prev=None
+              recs=[]; frames=0; bad=[]; total=0; first=pos; prev=None; terminal=None
               while pos+11<=len(raw) and raw[pos:pos+2]==bytes.fromhex('8019'):
                   kwp_len=raw[pos+3]; frame_len=4+kwp_len+1
                   if pos+frame_len>len(raw): raise ValueError(f'truncated frame at {pos:#x}')
@@ -45,7 +45,7 @@ jobs:
               if not frames: raise ValueError('No 0x8019 transfer frames walked')
               buf=bytearray([0xff]*0x80000)
               for addr,data in recs: buf[addr:addr+len(data)]=data
-              return bytes(buf), {'marker_offset':first,'frames':frames,'bad_checksums':len(bad),
+              return bytes(buf), {'marker_offset':first,'frames':frames,'terminal_frame':terminal,'bad_checksums':len(bad),
                                    'bad_checksum_offsets':[hex(x) for x in bad[:12]],
                                    'transferred_bytes_including_repeats':total,
                                    'first_frame_offset':hex(first),'last_frame_offset':hex(prev),
