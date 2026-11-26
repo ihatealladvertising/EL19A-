@@ -308,6 +308,11 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                 st[n] = (st[m] & 0xFF) if st[m] is not None else None
             elif (w & 0xF00F) == 0x600D:
                 st[n] = (st[m] & 0xFFFF) if st[m] is not None else None
+            elif (w & 0xF00F) == 0x600E:
+                st[n] = s8(st[m] & 0xFF) & 0xFFFFFFFF if st[m] is not None else None
+            elif (w & 0xF00F) == 0x600F:
+                v = st[m] & 0xFFFF if st[m] is not None else None
+                st[n] = ((v - 65536) if v >= 32768 else v) & 0xFFFFFFFF if v is not None else None
             elif top == 0x7:
                 if st[n] is not None:
                     st[n] = (st[n] + s8(w & 0xFF)) & 0xFFFFFFFF
@@ -335,8 +340,15 @@ def extract_calls(rom: bytes, helpers: Dict[int, HelperSpec], code_start: Option
                 st[n] = s8(w & 0xFF) & 0xFFFFFFFF
             elif (w & 0xF00F) == 0x6003:
                 st[n] = st[m]
+            elif (w & 0xF00F) == 0x600C:
+                st[n] = (st[m] & 0xFF) if st[m] is not None else None
             elif (w & 0xF00F) == 0x600D:
                 st[n] = (st[m] & 0xFFFF) if st[m] is not None else None
+            elif (w & 0xF00F) == 0x600E:
+                st[n] = s8(st[m] & 0xFF) & 0xFFFFFFFF if st[m] is not None else None
+            elif (w & 0xF00F) == 0x600F:
+                v = st[m] & 0xFFFF if st[m] is not None else None
+                st[n] = ((v - 65536) if v >= 32768 else v) & 0xFFFFFFFF if v is not None else None
             elif top == 0x7 and st[n] is not None:
                 st[n] = (st[n] + s8(w & 0xFF)) & 0xFFFFFFFF
         return st
@@ -646,6 +658,7 @@ def build_scan_export(input_path: str, rom: bytes, helpers: Dict[int, HelperSpec
         "summary": {
             "helper_count": len(helpers), "helper_counts_by_kind": dict(Counter(h.kind for h in helpers.values())),
             "call_count": len(call_rows), "call_counts_by_kind": dict(Counter(row["helper_kind"] for row in call_rows)),
+            "transfer_counts_by_form": dict(Counter(row["call_form"] for row in call_rows)),
             "resolved_call_count": sum(1 for row in call_rows if row["table"] is not None),
             "unresolved_call_count": sum(1 for row in call_rows if row["table"] is None),
             "unique_resolved_table_bases": len(tables),
