@@ -6,7 +6,7 @@
 
 **Purpose:** Compact `CONTROL/active_work_orders.md` into a current operational register; preserve existing archive and per-WO history; verify updated register and archive note before release.
 
-**Lock started:** 2026-11-25 (local project date)
+**Lock started:** 2026-11-25T22:02:16-03:00
 
 **Last integration:** 2026-11-26T00:37:54.897Z — aligned the process-review interval to 25 closeouts/30 days and explicitly retired the fixed three-WO backlog target. No WO assignments or XML/workbook/inventory files changed.
 
