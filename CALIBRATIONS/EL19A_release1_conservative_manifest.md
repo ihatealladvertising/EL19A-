@@ -1,6 +1,6 @@
 # EL19A Conservative Release 1 — Build Manifest
 
-**Build state:** BUILT — STRUCTURALLY CHECKED; initial RomRaider tree load user-reported PASS; table-level review pending  
+**Build state:** ITERATIVE BEST-GUESS BUILD — RomRaider import and 18-table visual spot-check PASS; further refinement active  
 **Build date:** 2026-11-26  
 **Target:** 2008 Nissan Versa/Sentra C11X MT, EL19A / MR18DE, FID `8CMCKRN5`, SH7058/SH705822N
 
@@ -16,8 +16,8 @@
 
 | Artifact | Path | Content SHA-256 | Git blob |
 |---|---|---|---|
-| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | `f311bf98007865d6e5f8ff0fce8aa0bc6bde2d9e4250bbb19feb67281512b90d` | `33a798efcbf2b8a1d80dc88be25af02d12297ce7` |
-| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | `0cb93ce51d74d2fba2f85ec4e15982ae8bf424a3483442d3e3aa5cd7431a4ed7` | `f9fa05cafc99a338a9c0fcad94796762af3fd8af` |
+| Successor XML | `CALIBRATIONS/EL19A_release1_conservative.xml` | 099e21cb51bc3973d7d74744c053cfbd4384b801f7af87fed7286b8d7b359c75| eb5536f7124feaf49f860f36c795119179053d10|
+| Revised scope matrix | `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` | 5dc7c465a71110386536d8e1ecc5894d501e8d79fe62d5d0ccba255923311ef4| 38f57eaabef7cbca4547b3088b937027418117f6|
 
 The selected baseline and original consultant CSV are retained unchanged.
 
@@ -26,12 +26,12 @@ The selected baseline and original consultant CSV are retained unchanged.
 | Disposition | Objects |
 |---|---:|
 | INCLUDE — ESTABLISHED | 2 |
-| INCLUDE — RAW/PROVISIONAL | 252 |
+| INCLUDE — PROVISIONAL | 252 |
 | EXCLUDE | 7 |
 | **Total baseline objects** | **261** |
 | **Included in successor** | **254** |
 
-The two established entries are the user-finalized `0x0E678` and `0x0E688` presentation exceptions. The seven exclusions comprise the superseded `0x0E904` duplicate view and six decoded overlays on the 9B2E-family raw maps. The remaining included objects use generic names/raw scaling and do not claim unresolved physical units.
+The two established entries are the user-finalized 0x0E678 and 0x0E688 presentation exceptions. The other 252 included objects now use the selected baseline's best-guess names and functional categories; six candidate data conversions are restored where the matrix contains a plausible display hypothesis. These are working assumptions for refinement, not claims that all physical identities/units are proven. The seven exclusions comprise the superseded 0x0E904 duplicate view and six decoded overlays on the 9B2E-family maps.
 
 ## Material corrections implemented
 
@@ -60,18 +60,23 @@ Canonical address lookup: `FINDINGS/INDEX.md`. The existing calibration CSV sche
 - Final post-correction audit checked 145 ROM-backed axes and 125 static axes; no matrix/XML axis pointer, storage-width, static-length, data-extent or object-count mismatches remained.
 - Remote readback of XML and revised matrix matched the exact generated content.
 
-## Validation not yet performed — do not overstate release status
+## Validation state and remaining refinement
 
-- **Initial RomRaider import/tree load:** user-reported PASS on 2026-11-26 after removing the duplicate XML declaration; the ROM loads and the definition tree displays many tables. This is an owner-reported result, not an independently observed test; RomRaider version was not supplied.
-- **Table-level visual validation:** still pending. Individual maps/curves, rendered dimensions, axis values, and selected table bytes have not yet been exhaustively checked in RomRaider.
-- **Post-import axis correction:** a matrix/XML audit found stale Y-axis ROM pointers on `0x0EFFC`, `0x1109A` and `0x12D98`, although the reader evidence specifies implicit fixed grids. The successor now uses static UBYTE `0,32,…,224` for `0x0EFFC` and static UWORD `0,4096,…,61440` for `0x1109A` and `0x12D98`. Reload the current canonical XML in RomRaider; the prior UI result predates these changes.
-- **Independent byte-by-byte ROM extraction:** not performed here. Address/width/axis mechanics are based on the current scope matrix and referenced ROM/LST audit; the ROM SHA-256 above is consultant-reported.
-- **Visual inspection of all 254 objects in RomRaider:** pending.
-
-Before treating this as the fully validated release, load `EL19A_release1_conservative.xml` in RomRaider against the exact ROM above and inspect all table families. Prioritize static bin-index axes, the shared-row `0x0CD56` reference, UWORD BE axes and 9B2E X/Y orientation.
+- **RomRaider import:** user-reported PASS with the exact target f501.bin; the definition tree and tables load in RomRaider v1.1.0 (NOV26 2025).
+- **18-table sample:** visually reviewed from EVIDENCE/RR TABLES SS. Captures 001–015 cover the first 15 objects; Capture023 is the corrected 0x11FC4 recheck; Capture024 is the fresh recheck of 0x0EFFC, 0x1109A and 0x12D98, replacing stale Captures 016–018.
+- **Additional visual checks:** Captures 019–021 verify the three four-bin arrays using the static index 0..3; Capture022 verifies 0x0E678 and 0x0E688 in Electronic Throttle Control → Dashpot.
+- **Corrected axis details:** 0x11FC4 uses X=0x128AE UBYTE and Y=0x129EE UWORD; 0x0EFFC uses static UBYTE 0,32,…,224; 0x1109A and 0x12D98 use static UWORD 0,4096,…,61440.
+- **Structural audit:** 254 included objects; 145 ROM-backed axes and 125 static axes checked; no detected pointer, width, geometry, extent or static-axis-length mismatches.
+- **Best-guess presentation:** 254 names/categories restored from the selected best-guess baseline and reconciled scope matrix. Six candidate data conversions are restored: Percent_ThrottleReduction, Temp_Coolant_Min, TVO_Degrees_Ref, Data_Pct_x0p78125, Rpm_x25 and Percent_UWORD_100_256. These are deliberate provisional display hypotheses and should be refined, not treated as verified physical conversions.
+- **Remaining:** no exhaustive visual review of all 254 objects; no independent byte-by-byte ROM extraction in this integration session; no vehicle testing. Continue refining names, categories and conversions as the remaining reader/caller work yields better evidence. None of those tasks blocks use of this working definition.
 
 ## Exclusions and unresolved boundaries
 
 - Excluded: superseded `0x0E904` static-axis duplicate and six decoded ignition/knock overlays.
 - Physical operating domains, hardware source/sink identity and physical units remain unresolved for raw/provisional entries; these are deliberately not claimed by Release 1.
 - No live-vehicle testing was performed or authorized.
+
+
+## Owner directive — iterative best-guess definition
+
+On 2026-11-26 the project owner explicitly directed that this definition be built with best guesses and refined from there. The successor now restores working names, categories and candidate data conversions from the selected full-definition baseline while preserving the verified target-side storage geometry and corrected axes. The provisional objects are intended to be useful in RomRaider now; unresolved semantics are refinement work, not a hold on the definition.
