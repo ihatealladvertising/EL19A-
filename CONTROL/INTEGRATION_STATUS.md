@@ -1,11 +1,11 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO70013 0x0F10E reader and output trace closeout (2026-11-26)
-**Purpose:** Publish WO70013 target-side reader/query/consumer evidence as FND-000026 and close the Worker 2 FIFO item. Preserve other lanes; no XML, scope matrix, catalogue, workbook, ROM/LST/A2L or tool-source edits.
+**Integrator:** ChatGPT — reconcile Worker 2 READY backlog depth after WO70013 (2026-11-26)
+**Purpose:** Correct the Worker 2 backlog-depth summary to reflect the just-closed FIFO. Preserve all lane heads; no technical WO or calibration artifacts are changed.
 
-**Lock acquired:** 2026-11-26 — WO70013 0x0F10E reader and output trace closeout
+**Lock acquired:** 2026-11-26 — Worker 2 backlog-depth reconciliation
 **WO70013 report:** `CONTROL/WO70013.md` — blob `aaf49a7082a4279ffe46bee37e112a022036071e`; report commit `1485da52689db055d1cfad14185c552bf7ce09db`.
 **Finding:** `FINDINGS/records/FND-000026.md` — blob `6447a9360f62ac182b871636e6c043b252b009d3`; record commit `dbd00cac125c9296476689dc1b4f99a1a3038176`.
 **Findings index:** `FINDINGS/INDEX.md` — blob `eb1f34429ba5397ff1c2a41470381778b0384510`; index commit `14229c4215cd64471710fd56b3e9437723f972f3`.
