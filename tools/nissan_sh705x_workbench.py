@@ -94,44 +94,179 @@ def decrypt_consult_dat_word(c: int) -> int:
     return (l0 << 16) | r0
 
 
-def load_dat_bytes(raw: bytes) -> bytes:
-    """Unpack and decrypt a Nissan Consult .dat reprogramming container into a raw SH705x image."""
-    pos = raw.find(b"\x80\x15\xfc", 0, 0x200)
-    if pos == -1:
-        pos = 0x43
-    recs: List[Tuple[int, bytes]] = []
+
+
+
+def _check_nonflat_container(raw: bytes, label: str = "") -> None:
+    """Reject known non-flat/encrypted/non-ROM containers with actionable diagnostics."""
+    who = f" ({label})" if label else ""
+    if raw.startswith(b"UpRev Osiris ROM File Ver "):
+        ver = raw[:32].decode("ascii", errors="replace").strip()
+        sections = []
+        pos = 0x60
+        while pos + 20 < len(raw):
+            if raw[pos : pos + 10] == b"AITuneDesc":
+                tag, tlen = "AITuneDesc", 10
+            elif all(32 <= b < 127 for b in raw[pos : pos + 8]):
+                tag, tlen = raw[pos : pos + 8].decode("ascii").strip(), 8
+            else:
+                break
+            u0, u1, _u2 = struct.unpack_from("<III", raw, pos + tlen)
+            if u1 < tlen + 16 or pos + u1 > len(raw):
+                break
+            sections.append(f"{tag}({u0}B)")
+            pos += u1
+        sec_str = ", ".join(sections) if sections else "unknown layout"
+        raise ValueError(
+            f"UpRev Osiris encrypted container{who}: {ver}; sections=[{sec_str}]. "
+            "ROMData is encrypted and cannot be scanned directly without decryption."
+        )
+    if raw.startswith(b"WinOLS File") or raw[4:15] == b"WinOLS File":
+        raise ValueError(
+            f"WinOLS project container{who} ('WinOLS File', {len(raw):,} B) is not a flat ECU binary; "
+            "export a flat .bin/.hex/.s19 image first."
+        )
+    if raw.startswith(b"\x89PNG\r\n\x1a\n") and len(raw) >= 24:
+        w, h = struct.unpack_from(">II", raw, 16)
+        raise ValueError(f"File{who} is a PNG image ({w}x{h}, {len(raw):,} B), not an ECU ROM.")
+    if raw.startswith(b"%PDF-"):
+        raise ValueError(f"File{who} is a PDF document ({len(raw):,} B), not an ECU ROM.")
+    if raw.startswith(b"\xff\xd8\xff"):
+        raise ValueError(f"File{who} is a JPEG image ({len(raw):,} B), not an ECU ROM.")
+
+
+def _load_dat_percent6(raw: bytes, pos: int) -> bytes:
+    """Unpack & decrypt Nissan `%6` (0x25 0x36) 32-byte-block Consult .dat (e.g. E1BR20E.dat)."""
+    sbl_blocks = 0
+    rom_recs: List[Tuple[int, bytes]] = []
     max_end = 0x80000
-    n_frames = 0
-    while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x15":
-        kwp_len = raw[pos + 3]
-        frame_len = 4 + kwp_len + 1
-        if pos + frame_len > len(raw):
-            raise ValueError(f"Truncated Consult .dat frame at 0x{pos:X}")
+    while pos + 7 <= len(raw) and raw[pos : pos + 2] == b"%6":
+        idx = int.from_bytes(raw[pos + 2 : pos + 5], "big")
+        plen = raw[pos + 5]
+        frame_len = 6 + plen + 1
+        if plen == 0 or pos + frame_len > len(raw):
+            raise ValueError(f"Truncated Consult .dat %6 frame at 0x{pos:X}")
         blk = raw[pos : pos + frame_len]
         if (sum(blk[:-1]) & 0xFF) != blk[-1]:
-            raise ValueError(f"Consult .dat frame checksum mismatch at 0x{pos:X}")
-        if blk[4:6] != b"\x34\x82":
-            raise ValueError(f"Unexpected Consult .dat frame command {blk[4:6].hex()} at 0x{pos:X}")
-        addr = int.from_bytes(blk[6:9], "big")
-        plen = blk[9]
-        if plen % 4 != 0 or 10 + plen > frame_len - 1:
-            raise ValueError(f"Invalid Consult .dat payload length {plen} at 0x{pos:X}")
-        enc = blk[10 : 10 + plen]
-        dec = bytearray(plen)
-        for off in range(0, plen, 4):
-            w = struct.unpack_from(">I", enc, off)[0]
-            struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
-        recs.append((addr, bytes(dec)))
-        if addr + plen > max_end:
-            max_end = 0x100000 if addr + plen <= 0x100000 else addr + plen
+            raise ValueError(f"Consult .dat %6 frame checksum mismatch at 0x{pos:X}")
+        if 0x800000 <= idx < 0x820000:
+            sbl_blocks += 1
+        elif 0x820000 <= idx:
+            if plen % 4 != 0:
+                raise ValueError(f"Unaligned %6 payload length {plen} at 0x{pos:X}")
+            enc = blk[6 : 6 + plen]
+            dec = bytearray(plen)
+            for off in range(0, plen, 4):
+                w = struct.unpack_from(">I", enc, off)[0]
+                struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
+            rom_off = (idx - 0x820000) * 32
+            rom_recs.append((rom_off, bytes(dec)))
+            if rom_off + plen > max_end:
+                max_end = 0x100000 if rom_off + plen <= 0x100000 else rom_off + plen
         pos += frame_len
-        n_frames += 1
-    if n_frames == 0:
-        raise ValueError("No valid Consult .dat 0x8015 transfer frames found")
+    if not rom_recs:
+        raise ValueError(f"No ROM blocks (0x820000+) found in %6 Consult .dat (sbl_blocks={sbl_blocks})")
     buf = bytearray([0xFF] * max_end)
-    for addr, dec in recs:
-        buf[addr : addr + len(dec)] = dec
+    for off, dec in rom_recs:
+        buf[off : off + len(dec)] = dec
     return bytes(buf)
+
+
+def load_dat_bytes(raw: bytes) -> bytes:
+    """Unpack and decrypt a Nissan Consult .dat reprogramming container into a raw SH705x image."""
+    # Variant A: standard KWP 0x80 0x15 0xFC ... 0x34 0x82 frames
+    pos_ecu = raw.find(b"\x80\x15\xfc", 0, 0x200)
+    if pos_ecu != -1:
+        pos = pos_ecu
+        recs: List[Tuple[int, bytes]] = []
+        max_end = 0x80000
+        n_frames = 0
+        while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x15":
+            kwp_len = raw[pos + 3]
+            frame_len = 4 + kwp_len + 1
+            if pos + frame_len > len(raw):
+                raise ValueError(f"Truncated Consult .dat frame at 0x{pos:X}")
+            blk = raw[pos : pos + frame_len]
+            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
+                raise ValueError(f"Consult .dat frame checksum mismatch at 0x{pos:X}")
+            if blk[4:6] != b"\x34\x82":
+                raise ValueError(f"Unexpected Consult .dat frame command {blk[4:6].hex()} at 0x{pos:X}")
+            addr = int.from_bytes(blk[6:9], "big")
+            plen = blk[9]
+            if plen % 4 != 0 or 10 + plen > frame_len - 1:
+                raise ValueError(f"Invalid Consult .dat payload length {plen} at 0x{pos:X}")
+            enc = blk[10 : 10 + plen]
+            dec = bytearray(plen)
+            for off in range(0, plen, 4):
+                w = struct.unpack_from(">I", enc, off)[0]
+                struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
+            recs.append((addr, bytes(dec)))
+            if addr + plen > max_end:
+                max_end = 0x100000 if addr + plen <= 0x100000 else addr + plen
+            pos += frame_len
+            n_frames += 1
+        if n_frames > 0:
+            buf = bytearray([0xFF] * max_end)
+            for addr, dec in recs:
+                buf[addr : addr + len(dec)] = dec
+            return bytes(buf)
+
+    # Variant B: `%6` (0x25 0x36) 32-byte block format (e.g. E1BR20E.dat)
+    pos_p6 = raw.find(b"%6", 0, 0x200)
+    if pos_p6 != -1:
+        return _load_dat_percent6(raw, pos_p6)
+
+    # Variant C: Nissan/Hitachi TCM Consult .dat (KWP target 0x19, e.g. 310364EM1C.dat)
+    pos_tcm = raw.find(b"\x80\x19\xfc", 0, 0x200)
+    if pos_tcm != -1:
+        pos = pos_tcm
+        n_tcm = 0
+        min_a, max_a = 1 << 30, 0
+        while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x19":
+            fl = 4 + raw[pos + 3] + 1
+            if pos + fl > len(raw):
+                break
+            blk = raw[pos : pos + fl]
+            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
+                raise ValueError(f"TCM Consult .dat frame checksum mismatch at 0x{pos:X}")
+            addr = int.from_bytes(blk[6:9], "big")
+            min_a = min(min_a, addr)
+            max_a = max(max_a, addr + blk[9])
+            pos += fl
+            n_tcm += 1
+        hdr_ascii = "".join(chr(b) if 32 <= b < 127 else "" for b in raw[:0x25])
+        raise ValueError(
+            f"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='{hdr_ascii}', "
+            f"{n_tcm} checksum-verified frames 0x{min_a:X}..0x{max_a:X}) uses a distinct TCM cipher "
+            "and is not an SH705x ECU binary."
+        )
+
+    # Variant D: Unencrypted KWP2000 0xB8 0x15 0xF1 partial cal block (e.g. 8201032726.dat)
+    pos_kwp = raw.find(b"\xb8\x15\xf1", 0, 0x200)
+    if pos_kwp != -1:
+        pos = pos_kwp
+        n_kwp = 0
+        min_a, max_a = 1 << 30, 0
+        while pos + 4 <= len(raw) and raw[pos + 1 : pos + 3] == b"\x15\xf1":
+            dlen = raw[pos] & 0x3F
+            fl = 3 + dlen + 1
+            if pos + fl > len(raw):
+                break
+            blk = raw[pos : pos + fl]
+            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
+                raise ValueError(f"KWP2000 .dat checksum mismatch at 0x{pos:X}")
+            addr = int.from_bytes(blk[5:8], "big")
+            min_a = min(min_a, addr)
+            max_a = max(max_a, addr + max(0, dlen - 5))
+            pos += fl
+            n_kwp += 1
+        hdr_ascii = "".join(chr(b) if 32 <= b < 127 else "" for b in raw[:0x25])
+        raise ValueError(
+            f"Unencrypted KWP2000 partial calibration .dat (header='{hdr_ascii}', "
+            f"{n_kwp} verified frames covering 0x{min_a:X}..0x{max_a:X}) is not a full SH705x ECU image."
+        )
+
+    raise ValueError("Unrecognized Consult .dat container format")
 
 
 def load_any_rom(path: Path) -> bytes:
@@ -144,6 +279,7 @@ def load_any_rom(path: Path) -> bytes:
             pref = [m for m in members if m.filename.lower().endswith((".bin", ".s19", ".hex", ".dat"))]
             target = max(pref or members, key=lambda m: m.file_size)
             raw = zf.read(target.filename)
+            _check_nonflat_container(raw, target.filename)
             inner_suf = Path(target.filename).suffix.lower()
             if inner_suf == ".s19":
                 return load_s19_bytes(raw)
@@ -153,6 +289,7 @@ def load_any_rom(path: Path) -> bytes:
                 return load_dat_bytes(raw)
             return raw
     raw = path.read_bytes()
+    _check_nonflat_container(raw, path.name)
     if suf == ".s19":
         return load_s19_bytes(raw)
     if suf == ".hex":
@@ -162,20 +299,180 @@ def load_any_rom(path: Path) -> bytes:
     return raw
 
 
+def parse_nissan_metadata(rom: bytes) -> dict:
+    """
+    Parse nissutils-style BootLoader (`LOADERxx`), Application FID (`ROMID ... DATABASE ... SH705xxx`),
+    RAMF vector table count, and SH-2 IVT handler diversity.
+    """
+    dbs = []
+    for m in re.finditer(rb"([0-9A-Z]{6,12})\x00{2,16}DATABASE\x00+(?:[A-Z0-9]\x00+)?(SH70[0-9A-Z]{2,6})", rom):
+        tag, cpu = m.group(1).decode("ascii"), m.group(2).decode("ascii")
+        dbs.append({"addr": m.start(), "tag": tag, "cpu": cpu, "is_loader": tag.startswith("LOADER")})
+
+    loaders = [d for d in dbs if d["is_loader"]]
+    fids = [d for d in dbs if not d["is_loader"]]
+    app_fid = fids[-1] if fids else None
+
+    ramf_count = 0
+    if app_fid is not None and app_fid["addr"] + 0x94 <= len(rom):
+        fa = app_fid["addr"]
+        ramf_count = sum(
+            1
+            for off in range(fa + 0x3C, fa + 0x94, 4)
+            if 0xFFFF0000 <= struct.unpack_from(">I", rom, off)[0] <= 0xFFFFFFFF
+        )
+
+    bootblock_ff = len(rom) >= 0x8200 and rom[:0x8200] == b"\xff" * 0x8200
+    ivt_unique = 0
+    if not bootblock_ff and len(rom) >= 0x400:
+        vecs = struct.unpack_from(">256I", rom, 0)
+        reset_pc = vecs[0]
+        ivt_unique = len({v for v in vecs[2:] if v not in (0, 0xFFFFFFFF, reset_pc) and v < len(rom)})
+
+    return {
+        "loader": loaders[0]["tag"] if loaders else None,
+        "loader_addr": loaders[0]["addr"] if loaders else None,
+        "fid": app_fid["tag"] if app_fid else None,
+        "fid_addr": app_fid["addr"] if app_fid else None,
+        "fid_cpu": app_fid["cpu"] if app_fid else None,
+        "ramf_ptrs": ramf_count,
+        "bootblock_ff": bootblock_ff,
+        "ivt_unique": ivt_unique,
+    }
+
+
+def verify_checksums(rom: bytes, meta: Optional[dict] = None) -> dict:
+    """
+    Verify Nissan SH705x checksums:
+      - ck_std: full-ROM 32-bit (sumt, xort) skipping self (O(N) auto-detection in 0..0x40000)
+      - ck_alt2: LOADER80 512 KiB split 32-bit (sumt=FID-8, xort=FID-4) over [FID+0x94..FID+0x98]
+      - sum16: LOADER80 16-bit block checksums cal16@0x08200 & main16@(0x10000 or 0x20000)
+    """
+    if meta is None:
+        meta = parse_nissan_metadata(rom)
+    res: Dict[str, Optional[dict]] = {"ck_std": None, "ck_alt2": None, "cal16": None, "main16": None}
+    n_words = len(rom) // 4
+    if n_words < 0x1000:
+        return res
+
+    words = struct.unpack_from(f">{n_words}I", rom, 0)
+    full_sum = sum(words) & 0xFFFFFFFF
+    full_xor = 0
+    for w in words:
+        full_xor ^= w
+
+    # 1. ck_std: full-ROM sumt/xort separated by 1 or 2 dwords inside 0..0x40000
+    # Note: full_xor = excl_xor ^ sumt ^ xort = sumt (since xort == excl_xor); full_sum = 2*sumt + xort
+    scan_w = min(n_words - 2, 0x10000)
+    for i in range(scan_w):
+        for step in (2, 1):
+            j = i + step
+            if j >= n_words:
+                continue
+            wi, wj = words[i], words[j]
+            if wi == full_xor and ((wi * 2 + wj) & 0xFFFFFFFF) == full_sum:
+                res["ck_std"] = {"status": "OK", "sumt": i * 4, "xort": j * 4, "sum": wi, "xor": wj}
+                break
+            if wj == full_xor and ((wj * 2 + wi) & 0xFFFFFFFF) == full_sum:
+                res["ck_std"] = {"status": "OK", "sumt": j * 4, "xort": i * 4, "sum": wj, "xor": wi}
+                break
+        if res["ck_std"] is not None:
+            break
+
+    # 2. ck_alt2: FID-8 (sumt) / FID-4 (xort) over [FID+0x94 .. FID+0x98] inclusive
+    fa = meta.get("fid_addr")
+    if fa is not None and fa >= 0x8000 and fa + 0x9C <= len(rom):
+        st, en = struct.unpack_from(">II", rom, fa + 0x94)
+        if 0x4000 <= st < en < len(rom) and st % 4 == 0 and (en % 4 in (0, 3)):
+            end_inc = en if en % 4 == 0 else (en - 3)
+            s_pre, x_pre = struct.unpack_from(">II", rom, fa - 8)
+            s_c, x_c = 0, 0
+            for off in range(st, end_inc + 1, 4):
+                if off in (fa - 8, fa - 4):
+                    continue
+                w = struct.unpack_from(">I", rom, off)[0]
+                s_c = (s_c + w) & 0xFFFFFFFF
+                x_c ^= w
+            ok = (s_c == s_pre and x_c == x_pre)
+            res["ck_alt2"] = {
+                "status": "OK" if ok else "BAD",
+                "sumt": fa - 8,
+                "xort": fa - 4,
+                "start": st,
+                "end": en,
+                "stored_sum": s_pre,
+                "calc_sum": s_c,
+                "stored_xor": x_pre,
+                "calc_xor": x_c,
+            }
+
+    # 3. LOADER80 16-bit split checksums: cal16@0x08200 & main16@(0x10000 | 0x20000)
+    is_l80 = meta.get("loader") == "LOADER80" or (meta.get("bootblock_ff") and len(rom) in (0x80000, 0x100000))
+    if len(rom) >= 0x80000 and len(rom) % 2 == 0:
+        split = 0x10000 if len(rom) <= 0x80000 else 0x20000
+        if len(rom) > split + 2:
+            m_stored = struct.unpack_from(">H", rom, split)[0]
+            m_calc = sum(struct.unpack_from(f">{(len(rom) - split - 2) // 2}H", rom, split + 2)) & 0xFFFF
+            if is_l80 or m_stored == m_calc:
+                res["main16"] = {
+                    "status": "OK" if m_stored == m_calc else "BAD",
+                    "addr": split,
+                    "stored": m_stored,
+                    "calc": m_calc,
+                }
+        c_stored = struct.unpack_from(">H", rom, 0x8200)[0]
+        c_calc = sum(struct.unpack_from(f">{(split - 0x8202) // 2}H", rom, 0x8202)) & 0xFFFF
+        if (is_l80 and c_stored != 0xFFFF) or c_stored == c_calc:
+            res["cal16"] = {
+                "status": "OK" if c_stored == c_calc else "BAD",
+                "addr": 0x8200,
+                "end": split,
+                "stored": c_stored,
+                "calc": c_calc,
+            }
+
+    return res
+
+
+def checksum_byte_tags(rom: bytes) -> Dict[int, str]:
+    """Map byte offsets belonging to verified/located checksums -> human tag for cmd_diff."""
+    tags: Dict[int, str] = {}
+    cks = verify_checksums(rom)
+    if cks["ck_std"]:
+        cs = cks["ck_std"]
+        for a, lbl in ((cs["sumt"], "ck_std sumt"), (cs["xort"], "ck_std xort")):
+            for k in range(4):
+                tags[a + k] = lbl
+    if cks["ck_alt2"]:
+        ca = cks["ck_alt2"]
+        for a, lbl in ((ca["sumt"], f"ck_alt2 sumt [{ca['status']}]"), (ca["xort"], f"ck_alt2 xort [{ca['status']}]")):
+            for k in range(4):
+                tags[a + k] = lbl
+    if cks["cal16"]:
+        c16 = cks["cal16"]
+        for k in range(2):
+            tags[c16["addr"] + k] = f"LOADER80 cal16 [{c16['status']}]"
+    if cks["main16"]:
+        m16 = cks["main16"]
+        for k in range(2):
+            tags[m16["addr"] + k] = f"LOADER80 main16 [{m16['status']}]"
+    return tags
+
+
 def rom_fingerprint(rom: bytes) -> dict:
     reset_pc = struct.unpack_from(">I", rom, 0)[0] if len(rom) >= 8 else 0
     reset_sp = struct.unpack_from(">I", rom, 4)[0] if len(rom) >= 8 else 0
     cpu_tags = sorted({m.group().decode() for m in re.finditer(rb"SH70[0-9A-Z]{2,6}", rom)})
-    # Common Nissan FID tags (8 hex/alpha starting with digit, near ASCII strings)
     fid_tags = []
     for m in re.finditer(rb"[0-9][A-Z0-9]{7}", rom[: min(len(rom), 0x40000)]):
         s = m.group().decode()
         if any(c.isalpha() for c in s) and not s.startswith("SH70") and s not in fid_tags:
             fid_tags.append(s)
-    # Trim trailing 0xFF region end
     active_end = len(rom)
     while active_end > 0x10000 and rom[active_end - 0x10000 : active_end] == b"\xff" * 0x10000:
         active_end -= 0x10000
+    meta = parse_nissan_metadata(rom)
+    cks = verify_checksums(rom, meta)
     return {
         "size": len(rom),
         "active_end": active_end,
@@ -185,6 +482,8 @@ def rom_fingerprint(rom: bytes) -> dict:
         "reset_sp": reset_sp,
         "cpu_tags": cpu_tags[:6],
         "fid_tags": fid_tags[:8],
+        "nissan_meta": meta,
+        "checksums": cks,
     }
 
 
@@ -571,6 +870,34 @@ def cmd_scan(args):
     print(f"Size: {fp['size']:,} B (active end 0x{fp['active_end']:X}) | MD5: {fp['md5']} | SHA256: {fp['sha256'][:16]}...")
     boot_note = " (bootblock 0x00000-0x081FF 0xFF-padded / .dat)" if (fp["reset_pc"] == 0xFFFFFFFF and len(rom) >= 0x8200 and rom[:0x8200] == b"\xff" * 0x8200) else ""
     print(f"Reset PC: 0x{fp['reset_pc']:08X} | SP: 0x{fp['reset_sp']:08X}{boot_note} | CPU: {fp['cpu_tags']} | FIDs: {fp['fid_tags']}")
+    meta = fp["nissan_meta"]
+    meta_parts = []
+    if meta["loader"]:
+        meta_parts.append(f"Loader={meta['loader']}@0x{meta['loader_addr']:04X}")
+    if meta["fid"]:
+        meta_parts.append(f"FID={meta['fid']}@0x{meta['fid_addr']:05X} ({meta['fid_cpu']})")
+    if meta["ramf_ptrs"]:
+        meta_parts.append(f"RAMF_ptrs={meta['ramf_ptrs']}")
+    if meta["ivt_unique"]:
+        meta_parts.append(f"IVT_handlers={meta['ivt_unique']}")
+    if meta_parts:
+        print("Nissan Struct: " + " | ".join(meta_parts))
+    cks = fp["checksums"]
+    ck_parts = []
+    if cks["ck_std"]:
+        cs = cks["ck_std"]
+        ck_parts.append(f"ck_std={cs['status']}(sumt@0x{cs['sumt']:05X},xort@0x{cs['xort']:05X})")
+    if cks["ck_alt2"]:
+        ca = cks["ck_alt2"]
+        ck_parts.append(f"ck_alt2={ca['status']}(0x{ca['start']:05X}..0x{ca['end']:05X},sumt@0x{ca['sumt']:05X})")
+    if cks["cal16"]:
+        c16 = cks["cal16"]
+        ck_parts.append(f"cal16@0x{c16['addr']:05X}={c16['status']}(0x{c16['stored']:04X}/0x{c16['calc']:04X})")
+    if cks["main16"]:
+        m16 = cks["main16"]
+        ck_parts.append(f"main16@0x{m16['addr']:05X}={m16['status']}(0x{m16['stored']:04X}/0x{m16['calc']:04X})")
+    if ck_parts:
+        print("Checksums: " + " | ".join(ck_parts))
     print(f"Helpers: {len(helpers)} ({dict(Counter(h.kind for h in helpers.values()))})")
     resolved = sum(1 for c in calls if c["table"] is not None)
     shared_axes = sum(1 for t in tables.values() if t["shared_as_axis_of"])
@@ -940,13 +1267,15 @@ def cmd_diff(args):
     if not clusters:
         return
 
-    # Annotate clusters using table/axis spans and 32-bit literal pool references
+    # Annotate clusters using table/axis spans, checksum fields, and 32-bit literal pool references
     table_ranges = [(a, ent["end"], ent) for a, ent in sorted(ta.items())]
     axis_addrs: Dict[int, List[int]] = {}
     for a, ent in ta.items():
         for ax in ent["axis1s"] + ent["axis2s"]:
             axis_addrs.setdefault(ax, []).append(a)
     pool32 = _build_pool32_index(ra)
+    ck_tags_a = checksum_byte_tags(ra)
+    ck_tags_b = checksum_byte_tags(rb)
 
     max_show = len(clusters) if args.raw_limit == 0 else args.raw_limit
     print(f"Non-table raw diff clusters (showing {min(len(clusters), max_show)}/{len(clusters)}):")
@@ -954,6 +1283,15 @@ def cmd_diff(args):
         ba, bb = ra[s : e + 1], rb[s : e + 1]
         val_txt = _format_cluster_values(ba, bb, s)
         notes = []
+        # Checksums touched in either ROM A or ROM B
+        ck_lbls = []
+        for off in range(s, e + 1):
+            if off in ck_tags_a:
+                ck_lbls.append(f"A:{ck_tags_a[off]}")
+            if off in ck_tags_b:
+                ck_lbls.append(f"B:{ck_tags_b[off]}")
+        if ck_lbls:
+            notes.append(f"checksum={list(dict.fromkeys(ck_lbls))}")
         # Check enclosing table or axis
         for ts, te, ent in table_ranges:
             if ts <= s <= te or ts <= e <= te:
