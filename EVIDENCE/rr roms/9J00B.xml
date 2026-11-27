@@ -1,0 +1,293 @@
+﻿<rom>
+	<romid>
+		<xmlid>3TREE21N19</xmlid>
+		<internalidaddress>747c</internalidaddress>
+		<internalidstring>9J00B</internalidstring>
+		<ecuid>9j00b</ecuid>
+		<make>Nissan</make>
+		<market>usDM</market>
+		<submodel>altima</submodel>
+		<transmission>MT</transmission>
+		<year>03</year>
+		<flashmethod>wrx02</flashmethod>
+		<memmodel>SH7055</memmodel>
+	</romid>
+
+	<scaling name="1byteDec" units="units" toexpr="x" frexpr="x" format="%.0f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="1byteHex" units="units" toexpr="x" frexpr="x" format="%.0x" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="2byteDec" units="units" toexpr="x" frexpr="x" format="%.0f" min="0" max="65535" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="2byteHex" units="units" toexpr="x" frexpr="x" format="%.0x" min="0" max="65535" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="2byteHexNarrow" units="units" toexpr="x" frexpr="x" format="%.0x" min="28672" max="32767" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="A/Fratio" units="A/F ratio" toexpr="14.7/(x*.0078125)" frexpr="(14.7/x)/.0078125" format="%.2f" min="8.4" max="14.7" inc="0.06" storagetype="uint8" endian="big"/>
+	<scaling name="BSF" units="BSF" toexpr="x * 0.151875" frexpr="x / 0.151875" format="%.2f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="CAM deg" units="units" toexpr="(x*0.5)-64" frexpr="(x+64)*2" format="%.0f" min="0" max="60" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="Celsius" units="units" toexpr="(x-32)/1.8" frexpr="(x+32)*1.8" format="%.0f" min="0" max="237222" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="ECU ID" units="units" toexpr="x" frexpr="x" format="%08x" min="0" max="1e+08" inc="1" storagetype="uint32" endian="big"/>
+	<scaling name="ETC" units="units" toexpr="x" frexpr="x" format="%.0x" min="28672" max="36863" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="FuelComp" units="units" toexpr="x" frexpr="x" format="%.0x" min="100" max="130" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="RPM" units="RPM" toexpr="x * 50" frexpr="x \ 50" format="%.0f" min="0" max="8750" inc="50" storagetype="uint8" endian="big"/>
+	<scaling name="RPM2" units="RPM" toexpr="x * 12.5" frexpr="x \ 12.5" format="%.0f" min="100" max="1800" inc="2" storagetype="uint8" endian="big"/>
+	<scaling name="Timing" units="units" toexpr="x * 0.26" frexpr="x / 0.26" format="%.0f" min="40" max="80" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="TimingDet" units="units" toexpr="x * 0.26" frexpr="x / 0.26" format="%.0f" min="40" max="190" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="ecuid1" storagetype="bloblist" storagebits="8">
+		<data name="MB" value="10"/>
+		<data name="8" value="56"/>
+		<data name="U" value="85"/>
+		<data name="0" value="48"/>
+		<data name="2" value="50"/>
+		<data name="3" value="51"/>
+		<data name="5" value="53"/>
+	</scaling>
+	<scaling name="fuel compensation" units="porcentage" toexpr="x=100" frexpr="x=100" format="%.0f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="gm/s" units="units" toexpr="x*.006103515625" frexpr="x/.006103515625" format="%.0f" min="0" max="255" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="load" units="porcentage" toexpr="x" frexpr="x" format="%.0f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="porcentage" units="porcentage" toexpr="x/255*100*2" frexpr="x*255/100/2" format="%.0f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="pulsewitdh" units="units" toexpr="x/116" frexpr="x*116" format="%.0f" min="0" max="255" inc="1" storagetype="uint8" endian="big"/>
+	<scaling name="rpm3" units="units" toexpr="x * 12.5" frexpr="x / 12.5" format="%.0f" min="0" max="65535" inc="1" storagetype="uint16" endian="big"/>
+	<scaling name="blobbits" storagetype="bloblist" storagebits="1">
+		<data name="0" value="00"/>
+		<data name="1" value="01"/>
+	</scaling>
+
+
+	<table name="Timing main" category="Timing" address="5721" type="3D" level="4" flipy="true" scaling="1byteDec">
+		<table name="Load" address="77c5" type="X Axis" elements="16" scaling="load"/>
+		<table name="Rpm" address="76ae" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+	<table name="ECU Periphery00 (F9A) Bits" category="ECUPeriphery" address="f9a" type="2D" level="2" scaling="blobbits">
+		<table name="Periphery Bit Number" type="Static Y Axis" flipy="true" elements="16">
+			<data>bit.15</data>
+			<data>bit.14</data>
+			<data>bit.13</data>
+			<data>bit.12</data>
+			<data>bit.11</data>
+			<data>bit.10</data>
+			<data>bit.9</data>
+			<data>bit.8</data>
+			<data>bit.7</data>
+			<data>bit.6</data>
+			<data>bit.5</data>
+			<data>bit.4</data>
+			<data>bit.3</data>
+			<data>bit.2</data>
+			<data>bit.1</data>
+			<data>bit.0</data>
+		</table>
+	</table>
+
+	<table name="ECU Periphery0 (FAA) Bits" category="ECUPeriphery" address="faa" type="2D" level="2" scaling="blobbits">
+		<table name="Periphery Bit Number" type="Static Y Axis" flipy="true" elements="16">
+			<data>bit.15</data>
+			<data>front o2 sensor heater circuit </data>
+			<data>bit.13</data>
+			<data>bit.12</data>
+			
+			<data>bit.5</data>
+			
+			<data>Immobilizer (1=enable 0=disabl)</data>
+			<data>bit.2</data>
+			<data>rear o2</data>
+			<data>bit.0</data>
+		</table>
+	</table>
+
+
+	<table name="Timing lowdet" category="Timing" address="5821" type="3D" level="4" scaling="1byteDec">
+		<table name="Load" address="77c5" type="X Axis" elements="16" scaling="load"/>
+		<table name="Rpm" address="76ae" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="Timing high det" category="Timing" address="5921" type="3D" level="4" scaling="1byteDec">
+		<table name="Load" address="77c5" type="X Axis" elements="16" scaling="load"/>
+		<table name="Rpm" address="76ae" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="Air fuel Target" category="Fuel" address="5df1" type="3D" level="4" scaling="A/Fratio">
+		<table name="Load" address="7569" type="X Axis" elements="8" scaling="load"/>
+		<table name="Rpm" address="7561" type="Y Axis" elements="8" scaling="RPM"/>
+	</table>
+
+	<table name="Max rpm cut" category="Limits" address="53d4" type="3D" level="1" scaling="rpm3">
+		<table name="X" address="53d4" type="X Axis" elements="1" scaling="1byteHex"/>
+		<table name="Y" address="53d4" type="Y Axis" elements="1" scaling="1byteHex"/>
+	</table>
+
+	<table name="ETC 3" category="Intake" address="6870" type="3D" level="4" scaling="2byteDec">
+		<table name="X" address="7672" type="X Axis" elements="16" scaling="2byteHex"/>
+		<table name="Y" address="8486" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="ETC 2" category="Intake" address="6670" type="3D" level="4" scaling="2byteDec">
+		<table name="X" address="83e2" type="X Axis" elements="16" scaling="2byteHex"/>
+		<table name="Y" address="8402" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="No load-rpm cut" category="Limits" address="53d6" type="3D" level="1" scaling="rpm3">
+		<table name="X" address="53d6" type="X Axis" elements="1" scaling="2byteHex"/>
+		<table name="Y" address="53d6" type="Y Axis" elements="1" scaling="2byteHex"/>
+	</table>
+
+	<table name="ETC 1" category="Intake" address="6470" type="3D" level="1" scaling="2byteDec">
+		<table name="X" address="83e2" type="X Axis" elements="16" scaling="2byteHex"/>
+		<table name="Y" address="8402" type="Y Axis" elements="16" scaling="2byteHex"/>
+	</table>
+
+	<table name="Cold ign timing" category="Timing" address="5c21" type="3D" level="1" scaling="TimingDet">
+		<table name="load" address="77c5" type="X Axis" elements="16" scaling="1byteDec"/>
+		<table name="Rpm" address="76ae" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="Fuel compesation" category="Fuel" address="6241" type="3D" level="4" scaling="1byteDec">
+		<table name="Load" address="77c5" type="X Axis" elements="16" scaling="load"/>
+		<table name="Rpm" address="76ae" type="Y Axis" elements="16" scaling="RPM"/>
+	</table>
+
+	<table name="Maf Scale" category="Fuel" address="850a" type="2D" level="1" scaling="gm/s">
+		<table name="X" address="3c80" type="Static Y Axis" elements="64" scaling="2byteHex">
+			<data>0.08v</data>
+			<data>0.16v</data>
+			<data>0.23v</data>
+			<data>0.31v</data>
+			<data>0.39v</data>
+			<data>0.47v</data>
+			<data>0.55v</data>
+			<data>0.63v</data>
+			<data>0.70v</data>
+			<data>0.78v</data>
+			<data>0.86v</data>
+			<data>0.94v</data>
+			<data>1.02v</data>
+			<data>1.09v</data>
+			<data>1.17v</data>
+			<data>1.25v</data>
+			<data>1.33v</data>
+			<data>1.41v</data>
+			<data>1.48v</data>
+			<data>1.56v</data>
+			<data>1.64v</data>
+			<data>1.72v</data>
+			<data>1.80v</data>
+			<data>1.88v</data>
+			<data>1.95v</data>
+			<data>2.03v</data>
+			<data>2.11v</data>
+			<data>2.19v</data>
+			<data>2.27v</data>
+			<data>2.34v</data>
+			<data>2.42v</data>
+			<data>2.50v</data>
+			<data>2.58v</data>
+			<data>2.66v</data>
+			<data>2.73v</data>
+			<data>2.81v</data>
+			<data>2.89v</data>
+			<data>2.97v</data>
+			<data>3.05v</data>
+			<data>3.13v</data>
+			<data>3.20v</data>
+			<data>3.28v</data>
+			<data>3.36v</data>
+			<data>3.44v</data>
+			<data>3.52v</data>
+			<data>3.59v</data>
+			<data>3.67v</data>
+			<data>3.75v</data>
+			<data>3.83v</data>
+			<data>3.91v</data>
+			<data>3.98v</data>
+			<data>4.06v</data>
+			<data>4.14v</data>
+			<data>4.22v</data>
+			<data>4.30v</data>
+			<data>4.38v</data>
+			<data>4.45v</data>
+			<data>4.53v</data>
+			<data>4.61v</data>
+			<data>4.69v</data>
+			<data>4.77v</data>
+			<data>4.84v</data>
+			<data>4.92v</data>
+			<data>5.00v</data>
+		</table>
+	</table>
+
+	<table name="K Fuel injection multiplier" category="Fuel" address="5366" type="1D" level="1" scaling="2byteDec"/>
+
+	<table name="Intake cam warm advance" category="CAMSHAFT" address="5fe1" type="3D" level="1" scaling="CAM deg">
+		<table name="Load" address="7579" type="X Axis" elements="8" scaling="load"/>
+		<table name="Rpm" address="81b3" type="Y Axis" elements="8" scaling="RPM"/>
+	</table>
+
+	<table name="Idle Control" category="Idle" address="7d77" type="2D" level="4" scaling="RPM2">
+		<table name="Deg" address="8993" type="Static Y Axis" flipy="true" elements="16" scaling="1byteHex">
+			<data>-40</data>
+			<data>-30</data>
+			<data>-20</data>
+			<data>-10</data>
+			<data>0</data>
+			<data>10</data>
+			<data>20</data>
+			<data>30</data>
+			<data>40</data>
+			<data>50</data>
+			<data>60</data>
+			<data>70</data>
+			<data>80</data>
+			<data>90</data>
+			<data>100</data>
+			<data>110</data>
+		</table>
+	</table>
+
+	<table name="ECU ID" category="Limits" address="747c" type="2D" level="4" scaling="1byteHex">
+		<table name="X" type="Static X Axis" elements="5">
+			<data>1</data>
+			<data>2</data>
+			<data>3</data>
+			<data>4</data>
+			<data>5</data>
+		</table>
+	</table>
+
+	<table name="Rpm cut-fuel restore" category="Limits" address="53d8" type="3D" level="1" scaling="rpm3">
+		<table name="X" address="53d8" type="X Axis" elements="1" scaling="1byteDec"/>
+		<table name="Y" address="53d8" type="Y Axis" elements="1" scaling="1byteDec"/>
+	</table>
+
+	<table name="No load-fuel restore" category="Limits" address="53da" type="3D" level="1" scaling="rpm3">
+		<table name="X" address="53da" type="X Axis" elements="1" scaling="1byteDec"/>
+		<table name="Y" address="53da" type="Y Axis" elements="1" scaling="1byteDec"/>
+	</table>
+
+	<table name="ETC related table" category="Intake" address="91a4" type="3D" level="1" scaling="2byteDec">
+		<table name="X" address="83e2" type="X Axis" elements="16" scaling="1byteHex"/>
+		<table name="Y" address="8402" type="Y Axis" elements="16" scaling="1byteHex"/>
+	</table>
+
+	<table name="Idle Control 2" category="Idle" address="7d63" type="2D" level="1" scaling="RPM2">
+		<table name="deg" type="Static Y Axis" flipy="true" elements="16">
+			<data>-40</data>
+			<data>-30</data>
+			<data>-20</data>
+			<data>-10</data>
+			<data>0</data>
+			<data>10</data>
+			<data>20</data>
+			<data>30</data>
+			<data>40</data>
+			<data>50</data>
+			<data>60</data>
+			<data>70</data>
+			<data>80</data>
+			<data>90</data>
+			<data>100</data>
+			<data>110</data>
+		</table>
+	</table>
+
+	<table name="Intake cam cold advance" category="CAMSHAFT" address="5fa1" type="3D" level="1" scaling="CAM deg">
+		<table name="X" address="7579" type="X Axis" elements="8" scaling="load"/>
+		<table name="Y" address="81b3" type="Y Axis" elements="8" scaling="RPM"/>
+	</table>
+
+</rom>

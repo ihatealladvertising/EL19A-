@@ -1,0 +1,23 @@
+<rom base="6Y303">
+<romid>
+<xmlid>6Y324</xmlid>
+<hwid>1TKE8Z5N59</hwid>
+<internalidaddress>6C61</internalidaddress>
+<internalidstring>6Y324</internalidstring>
+<ecuid>6Y324</ecuid>
+<year>03</year>
+<market>USDM</market>
+<make>Nissan</make>
+<model>Maxima</model>
+<submodel>GLE</submodel>
+<transmission>AT</transmission>
+<memmodel>SH7055</memmodel>
+<flashmethod>nisprog</flashmethod>
+<filesize>512kb</filesize>
+</romid>
+
+<table name="Engine torque value map" storageaddress="0x68f4"/>
+
+<checksum type="std" start="0" end="0x7FFFF" sumloc="0x51c0" xorloc="0x51b8" />
+5bf492491a8f943583ca50f6c66738c8
+</rom>
