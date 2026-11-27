@@ -1,5 +1,13 @@
 # Repository Integration Status
 
+**State:** LOCKED
+
+**Integrator:** ChatGPT — worker startup control repair (2026-11-27)
+**Purpose:** Repair the worker startup documentation only: add the missing QUICK START block to CONTROL/active_work_orders.md and align CONTROL/WORKER_PROTOCOL.md prompts with that block. No worker assignment, FIFO, WO lifecycle, technical evidence, calibration, workbook, Findings, or tool files may change.
+**Lock acquired:** 2026-11-27 — freshly read main gate UNLOCKED; serialized control-document repair.
+
+# Repository Integration Status
+
 **State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-confirmed V6 A2L/HEX pair and full declaration payload readback (2026-11-27)
