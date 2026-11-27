@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
+**Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
+**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; serialize plan/work-order/register publication.
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
