@@ -1,12 +1,16 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested three-donor V6/Juke/Tiida alignment validation WO70030 (2026-11-27)
 **Purpose:** Publish one bounded Worker 3 work order and append it to that lane's existing FIFO. No technical evidence, Findings, ROM/LST/A2L, calibration XML, workbook, catalogue, scripts or tool source are changed in this allocation batch.
 **Lock acquired:** 2026-11-27 — prior state UNLOCKED; live register and next unused WO ID freshly verified.
 
 **Previous state:** UNLOCKED
+
+**Lock released:** 2026-11-27 — WO70030 report and Worker 3 FIFO registration published and read back from remote main. Worker 3 queue is WO70026 → WO70029 → WO70030. No Findings IDs, ROM/A2L/LST, calibration XML, workbook, catalogue, scripts, tool source or tests changed.
+**WO70030 report:** `CONTROL/WO70030.md` — blob `cd53ec8b934b49a22285c264f24b2de47dac30d9`; report commit `7224536791c89bbabefede9f20388a1c89daa58a`.
+**Live register:** `CONTROL/active_work_orders.md` — blob `d5586e21c4279bd2e816331b0436090d2a45eaa2`; register commit `321099205384a4961b3b376e74492011ee871518`.
 
 **Released lock:** ChatGPT — 2026-11-27 workbench census preservation and four-WO allocation. Evidence intake and WO70026–WO70029 published and remotely read back; active register updated and read back. No Findings IDs allocated because the intake is explicitly reported/unverified; calibration interpretation is deferred to WO70026. No ROM, XML, workbook, tool-source or existing Findings edits.
 
