@@ -1,10 +1,11 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-confirmed V6 A2L/HEX pair and full declaration payload readback (2026-11-27)
-**Purpose:** Treat `64810223F121200000.hex` as the user-confirmed paired ROM for `64811000p2_m.a2l`; validate all A2L-declared calibration object extents against the HEX image; publish raw V6 VALUE/CURVE/MAP/AXIS_PTS payloads and correct the existing pairing and WO65324 reports. No target EL19A ROM/XML, source A2L, workbook, scope matrix, catalogue, Findings or worker queue edits.
-**Lock acquired:** 2026-11-27 — fresh main gate UNLOCKED; user directly confirmed the V6 A2L/HEX pairing. Worker lanes rechecked unchanged.
+**Purpose:** Published and verified the user-confirmed V6 A2L/HEX pairing, complete V6/Juke raw calibration payload extracts, shared-symbol byte comparison, and superseding project-control addenda. No target calibration or tool source was modified.
+**Lock acquired:** 2026-11-27 — fresh main gate UNLOCKED; user-confirmed V6 pairing; work limited to donor readback and project reconciliation.
+**Lock released:** 2026-11-27 — User-confirmed V6 A2L/HEX pair validated across all 4,614 A2L calibration declarations. Published and read back: V6 full raw payload TSV (4,614 rows; Git blob `b074f7c2b9023938f025d56cec29b4147c6febf8`; commit `018d2ae78b4dc5a9f1e438f1b6b5bc7629d5f246`); Juke full raw payload TSV (7,676 rows; Git blob `ccc441501b37ad112f188d8d0d0c6f75a6fe6c06`; commit `b57c7dc9a7da75cafa339e26200d4eee3c5d2ab8`); V6/Juke shared-symbol comparison (2,628 rows; Git blob `a0ddab3edc7d8adef5b23007e7bcf3fe2f47a443`; commit `0ca96d667a8acaf57b8aa424f33251cfac28f39b`). Corrected WO65212, WO70017, WO70006 and WO65324; register now reflects the superseded pairing caveat. Three-image exact mADVPIAT/EL19A 0x0DE6E axis match recorded. No EL19A calibration XML, target ROM, A2L, workbook, scope matrix, catalogue, Findings or worker FIFO changed. Worker 1 remains WO70031 READY; Worker 2/3 unchanged.
 
 **Lock released:** 2026-11-27 — `EVIDENCE/JUKE_9APCTDEM06_A2L_SCALARS_AND_AXES_2026-11-27.tsv` (6,748 rows; blob `10a484c5dc946e22b81605bb29b94203cfdf7f8a`; commit `1defbfe75bb4273c5192acc83f4f0d53ff4898d2`) and `CONTROL/WO65324.md` (final blob `c3a88d478a791343916f42d3bc9e575a3287a9f5`; final correction commit `d3b52e2a8e1754d0af59c98bdb44f5bcb21c693c`) published and read back. Findings disposition NOT REQUIRED; no protected calibration or worker-lane files edited.
 
