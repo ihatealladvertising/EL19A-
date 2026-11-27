@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — rerun RR ROM workbench batch after user added extracted BIN images (2026-11-27)
 **Purpose:** Re-run the existing read-only workbench across the refreshed `EVIDENCE/rr roms` folder, now 177 entries, including the 16 new BIN images corresponding to the previously unsupported RAR/7z archive submissions; rebuild the corpus reference index and record comparison to prior batch. Use a temporary Actions runner and remove it after results are read back. No source/tool/calibration files may be changed except the temporary workflow and additive batch report.
@@ -230,3 +230,11 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Durable report:** `EVIDENCE/RR_ROMS_WORKBENCH_BATCH_2026-11-27.md` — blob `a990e913e869c7cc12d4d1e3b1814412e02d6cf6`; commit `46b714665b28a2683433fc33b2f191c5ff97b564`.
 **Temporary workflow cleanup:** `.github/workflows/rr-roms-workbench.yml` removed; absence verified by remote readback (404); deletion commit `b1d8266c3ea91b6f767d1370f96487c6a9ab6246`.
 **Lock released:** 2026-11-27 — execution successful, artifact downloaded and hashed, durable report read back, temporary workflow removed. No ROM, S19, BIN, ZIP, XML definition, A2L, calibration, workbook, catalogue, scope matrix, Findings, tool source, test or existing workflow was modified.
+
+
+**Integrator:** ChatGPT — refreshed RR ROM workbench batch after extracted BIN additions (2026-11-27)
+**Run:** GitHub Actions `46023911353` — SUCCESS; commit `61a21947f81732bbaa71b361018a36281aa98c7c`; Python 3.11.18. 150 unique ROM containers scanned successfully from 177 folder entries; 2 exact container duplicates skipped; 25 remaining non-ROM/unsupported entries recorded; zero scan failures. The 16 newly added BINs were all successfully scanned and were unique decoded images against the prior corpus and each other. Totals: 146 decoded ROM hash groups; 142 CPU/FID-identified; 36,944 lookup calls / 33,220 resolved; 26,444 aggregate table instances. Reference index exit 0: 150 ROMs + 7 XML inputs, 505 XML address keys, 3,790 exact payload hash/length keys, 138 code-region hash keys.
+**Artifact:** `rr-roms-workbench-refresh`, ID `15210278286`, 27,635,918 bytes, SHA-256 `951da219fb1a9e9aa6f26c4add239421a62ce5ed81af579bfcc3d1a58e015eed`; downloaded and hash-verified; retention through 2026-12-11.
+**Durable report:** `EVIDENCE/RR_ROMS_WORKBENCH_REFRESH_2026-11-27.md` — blob `9dccb05bcf2785c5537c0c3da65c0a05468b76d6`; commit `ed4aef50ccf8f380b2e78e99af66fd3399155219`.
+**Temporary workflow cleanup:** `.github/workflows/rr-roms-workbench-refresh.yml` deleted; cleanup commit `e254fea42494e37c5e7ded233c27603855224358`. Absence verified after deletion.
+**Lock released:** 2026-11-27 — refreshed batch complete, artifact downloaded and hash verified, report read back, temporary workflow removed. ROMs and existing tool/definition/workbook/catalogue/Findings files were not modified.
