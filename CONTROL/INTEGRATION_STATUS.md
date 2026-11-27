@@ -1,7 +1,7 @@
 # Repository Integration Status
 
 **Lock acquired:** 2026-11-27 — live `main` gate freshly verified UNLOCKED at current head; serialize WO65324 closeout report and coordinator register update.
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — WO65324 bounded closeout (2026-11-27)
 **Purpose:** WO65324 bounded closeout published and verified; only its coordinator-owned report/register lifecycle changed. Worker 1–3 FIFO unchanged. No canonical XML, Findings, source evidence, or worker-owned artifact changed.
