@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
@@ -186,3 +186,5 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Integrator:** ChatGPT — assign high-priority scanner integration audit to idle Worker 1 (2026-11-26)
 **Purpose:** Register WO70023 for a source-grounded, non-code specification of how existing per-call scanner evidence becomes per-address calibration catalogue records. Preserve Worker 2/3 FIFO and keep WO70021 canonical data-model authority.
 **Lock acquired:** 2026-11-26 — fresh gate/register read; Worker 1 current assignment idle; WO70020 closed; WO70023 report path absent.
+
+**Lock released:** 2026-11-26 — WO70023 report and Worker 1 queue/readback verified; Worker 2 and Worker 3 FIFO entries unchanged; no source code, tests or calibration/evidence artifacts modified.
