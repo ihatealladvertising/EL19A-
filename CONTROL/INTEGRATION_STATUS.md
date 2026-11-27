@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — user-requested read-only workbench batch over EVIDENCE/rr roms (2026-11-27)
+**Purpose:** Add a temporary GitHub Actions workflow to run the existing read-only Nissan SH705x workbench against supported ROM files in EVIDENCE/rr roms, inventory all folder entries, index the contained RomRaider XML definitions, capture hashes/logs/artifacts, then remove the temporary workflow and verify cleanup. No ROM, XML definition, A2L, calibration, workbook, catalogue, tool source, or existing test/workflow content is to be modified.
+**Lock acquired:** 2026-11-27 — prior state UNLOCKED; folder inventory and workbench CLI read-only preflight complete.
 
 **Integrator:** ChatGPT — user-requested three-donor V6/Juke/Tiida alignment validation WO70030 (2026-11-27)
 **Purpose:** Publish one bounded Worker 3 work order and append it to that lane's existing FIFO. No technical evidence, Findings, ROM/LST/A2L, calibration XML, workbook, catalogue, scripts or tool source are changed in this allocation batch.
