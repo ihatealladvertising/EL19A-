@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -150,3 +150,5 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Integrator:** ChatGPT — user-requested definition-completion work-order allocation (2026-11-26)
 **Purpose:** Publish WO70017–WO70020 and update only their own specifications plus the live FIFO/coordinator register. No technical evidence, Findings, XML, catalogue, scope matrix, workbook, ROM/LST/A2L, scripts or worker outputs are changed in this allocation.
 **Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; shared-main publication paused for this allocation batch.
+
+**Lock released:** 2026-11-26 — WO70017–WO70019 and the live register were read back from main; three lane FIFO heads verified; no protected calibration artifacts changed.
