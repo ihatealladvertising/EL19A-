@@ -495,7 +495,7 @@ jobs:
           assert v6_record["historical_candidate_count"] == len(legacy_addrs)
           assert v6_record["a2l_pairing_status"] == PAIRING_STATUS
           assert all(c["evidence_class"] == "donor" and not c["is_target_proof"] for c in v6_record["candidates"])
-          assert all(a.get("a2l_pairing_status") == PAIRING_STATUS for a in check.get("pairing_associations", []) if a.get("rom_id") == donor_rom_id)
+          assert any(a.get("status") == PAIRING_STATUS and a.get("rom_id") == donor_rom_id for a in check.get("pairing_associations", []))
 
           summary = {
               "schema": "v6-legacy-306-reconciliation-run-v1",
