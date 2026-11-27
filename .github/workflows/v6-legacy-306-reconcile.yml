@@ -274,8 +274,8 @@ jobs:
           )
           donor_summary = next(r for r in current_index["sources"]["donor_roms"] if r["rom_id"] == donor_rom_id)
           existing_v6_payload_sigs = set()
-          for payload_key, rows in current_index["lookups"]["payload_index"].items():
-              payload_sha = payload_key.split(":", 1)[0]
+          for payload_index_key, rows in current_index["lookups"]["payload_index"].items():
+              payload_sha = payload_index_key.split(":", 1)[0]
               for row in rows:
                   if row.get("rom_id") == donor_rom_id:
                       existing_v6_payload_sigs.add((
