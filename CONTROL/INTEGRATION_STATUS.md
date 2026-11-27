@@ -1,8 +1,8 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Current lock:** ChatGPT — project-wide artifact-first worker completion protocol correction (2026-11-26). Scope: update `CONTROL/WORKER_PROTOCOL.md` only; no work-order lifecycle, queue, worker assignment, technical evidence, Findings, calibration, or tool-source changes. Workers may continue technical work; shared-main publication is paused until protocol readback and gate release.
+**Released lock:** ChatGPT — project-wide artifact-first worker completion protocol correction (2026-11-26). `CONTROL/WORKER_PROTOCOL.md` updated and read back from remote `main`; no work-order lifecycle, queue, worker assignment, technical evidence, Findings, calibration, or tool-source changes.
 
 **Integrator:** ChatGPT — register WO70024 allocation and closeout-recovery QA (2026-11-26)
 **Purpose:** Add one read-only Worker 1 audit task for the locally committed WO70018 deliverables. WO70018 remains open until its report and TSV are safely published and read back. No local Git history reconciliation, WO70018 lifecycle change, calibration or tool-source changes are authorized in this batch.
@@ -197,3 +197,5 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock released:** 2026-11-26 — WO70024 specification and Worker 1 READY assignment read back from remote main. WO70018 remains open in Worker 2 FIFO pending safe publication of its local report and TSV; no Worker 2 lifecycle change was made.
+
+**Lock released:** 2026-11-26 — artifact-first reporting gate published and read back from remote `main`. `CONTROL/WORKER_PROTOCOL.md` blob `024414f88fad9a12b50842ffa75a121c8cef2ea8`; commit `9fc0e1d56e02e0de869f89c4940b2e6a1d3acdf7`. Shared-main publication gate returned to UNLOCKED. No work-order register or lane assignments changed.
