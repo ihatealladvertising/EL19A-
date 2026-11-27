@@ -1,0 +1,170 @@
+{
+  "inputs": {
+    "EL19A_VERSA": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
+    },
+    "CF48D": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "fceae3e61f6517b1eb287c4938984498bfa5164688c3985d98baeeaaf52b04f1"
+    },
+    "Tiida_3DD9A": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "28119daaca1a0641e739ed85d74eacc134988dace10bf00a09875196c9186d42"
+    },
+    "8W83B": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "b515a81f80bb32993b3ccf7376792f612fc19fec2421ac462a3eceb89ef23606"
+    },
+    "EL13A": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "50acb08f0e913a048d96846b0a87da633e787627b33dfea29110bd8b5d1af54a"
+    },
+    "V6": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "9d5efbd9010db790b858274b0d4f2a0d08bf47f30ee19cb93eed28d529e82039"
+    },
+    "Juke08": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "sha256": "295ec07c9e892a556aca0d674ccbeb579d54d64042bc649dbf1e1689922778b6"
+    }
+  },
+  "regional": [
+    {
+      "rom": "EL19A_VERSA",
+      "donor": "V6",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 1006,
+      "window_bytes": 6144,
+      "pct": 0.163737,
+      "best1k_matches": 167,
+      "best1k_pct": 0.163086,
+      "best1k_shift": 187
+    },
+    {
+      "rom": "EL19A_VERSA",
+      "donor": "Juke08",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 1150,
+      "window_bytes": 6144,
+      "pct": 0.187174,
+      "best1k_matches": 121,
+      "best1k_pct": 0.118164,
+      "best1k_shift": -599
+    },
+    {
+      "rom": "CF48D",
+      "donor": "V6",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 990,
+      "window_bytes": 6144,
+      "pct": 0.161133,
+      "best1k_matches": 182,
+      "best1k_pct": 0.177734,
+      "best1k_shift": 766
+    },
+    {
+      "rom": "CF48D",
+      "donor": "Juke08",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 663,
+      "window_bytes": 6144,
+      "pct": 0.10791,
+      "best1k_matches": 136,
+      "best1k_pct": 0.132812,
+      "best1k_shift": -45
+    },
+    {
+      "rom": "Tiida_3DD9A",
+      "donor": "V6",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 913,
+      "window_bytes": 6144,
+      "pct": 0.1486,
+      "best1k_matches": 123,
+      "best1k_pct": 0.120117,
+      "best1k_shift": -45
+    },
+    {
+      "rom": "Tiida_3DD9A",
+      "donor": "Juke08",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 5397,
+      "window_bytes": 6144,
+      "pct": 0.878418,
+      "best1k_matches": 881,
+      "best1k_pct": 0.860352,
+      "best1k_shift": 0
+    },
+    {
+      "rom": "8W83B",
+      "donor": "V6",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 1028,
+      "window_bytes": 6144,
+      "pct": 0.167318,
+      "best1k_matches": 165,
+      "best1k_pct": 0.161133,
+      "best1k_shift": 180
+    },
+    {
+      "rom": "8W83B",
+      "donor": "Juke08",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 1119,
+      "window_bytes": 6144,
+      "pct": 0.182129,
+      "best1k_matches": 122,
+      "best1k_pct": 0.119141,
+      "best1k_shift": -606
+    },
+    {
+      "rom": "EL13A",
+      "donor": "V6",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 998,
+      "window_bytes": 6144,
+      "pct": 0.162435,
+      "best1k_matches": 165,
+      "best1k_pct": 0.161133,
+      "best1k_shift": 187
+    },
+    {
+      "rom": "EL13A",
+      "donor": "Juke08",
+      "window": "0x8000-0x97FF",
+      "equal_bytes": 1152,
+      "window_bytes": 6144,
+      "pct": 0.1875,
+      "best1k_matches": 122,
+      "best1k_pct": 0.119141,
+      "best1k_shift": 316
+    }
+  ],
+  "a2l": {
+    "characteristic_counts": {
+      "V6": 4406,
+      "Juke": 7154
+    },
+    "common_symbols": 2491
+  },
+  "anchor": {
+    "juke_a2l_symbol": "mDSHCUT",
+    "juke_a2l_address": "0x849F",
+    "target_address": "0x8550",
+    "a2l_line": "VALUE 0x0000849F REC_UBYTE_C 0 COMP_0035 -50 205",
+    "target_8550_evidence": "WO65817: EL19A 0x8550 mDSHCUT generic (hysteresis-threshold gating dashpot path; no named endpoint)"
+  },
+  "alignment_reproduction": {
+    "status": "NOT REPRODUCED / BLOCKED",
+    "missing": [
+      "/home/claude/scratch/donors.pkl",
+      "align_all.pkl",
+      "best_align.pkl",
+      "three_donor.pkl",
+      "exact alignment parameters g,m,w",
+      "alignment source code/commands"
+    ],
+    "consequence": "V6/Juke/Tiida pairwise agreement (965/927/1454), vote distribution (894/664/300/5) and 48.8% Tiida byte equality cannot be recomputed without the mapping and its parameters; they remain reported inputs."
+  }
+}

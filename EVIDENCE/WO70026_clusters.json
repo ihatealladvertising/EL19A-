@@ -1,0 +1,1182 @@
+{
+  "reconciliation": {
+    "conserved_all_donors": 175,
+    "conserved_nonC11_excl_EL13A_8W83B": 146,
+    "conserved_excl_EL13A_8W83B_EE310": 142,
+    "missing_xml_total": 15,
+    "missing_xml_conserved_all": 15,
+    "missing_xml_conserved_outside_EL13A_8W83B": 12,
+    "qashqai_el19a_overlaps": 68,
+    "cf48d_el19a_overlaps": 30,
+    "cf48d_xml_tables": 194,
+    "clusters": {
+      "0x0DE6E": {
+        "addr": "0xde6e",
+        "present": true,
+        "target_geometry": "16x1",
+        "target_type": "uint8",
+        "target_sha": "98f28cfc9c16bec516d78bda18a2589c7e12bade9564e334acee395712085f46",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0xde6e",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0xde52",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0x9328",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xaaee",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xaaee",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xaaee",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xaaee",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0x9242",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0x9242",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0x9242",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0x97fa",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0xed3a",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x11569",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x11569",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "Tiida",
+            "addr": "0x11569",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM60B",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM61B",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM62B",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM63B",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM64A",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM65A",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM66A",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EM67A",
+            "addr": "0xaee6",
+            "geometry": "16x1",
+            "type": "uint8"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "EM60B",
+          "EM61B",
+          "EM62B",
+          "EM63B",
+          "EM64A",
+          "EM65A",
+          "EM66A",
+          "EM67A",
+          "Juke06",
+          "Juke08",
+          "Qashqai",
+          "Tiida"
+        ]
+      },
+      "0x0E2ED": {
+        "addr": "0xe2ed",
+        "present": true,
+        "target_geometry": "16x1",
+        "target_type": "uint8",
+        "target_sha": "2540c0fb42f36d6cde2a724fde4d5eaa535775a760a42b90ce5801f480d528af",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0xe2ed",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0xe2d1",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0x959d",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xad51",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xad51",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xad51",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xad51",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0x94df",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0x94df",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0x94df",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0x9a6f",
+            "geometry": "16x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0xf191",
+            "geometry": "16x1",
+            "type": "uint8"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "Qashqai"
+        ]
+      },
+      "0x10CC2": {
+        "addr": "0x10cc2",
+        "present": true,
+        "target_geometry": "16x1",
+        "target_type": "uint16",
+        "target_sha": "98ee09bf98ce887b3639ae1a308baa28bcf5548cb73357408bfd5d537cab66db",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL58B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "EL58B",
+          "EL59B",
+          "Juke06",
+          "Juke08"
+        ]
+      },
+      "0x12A4E": {
+        "addr": "0x12a4e",
+        "present": true,
+        "target_geometry": "16x1",
+        "target_type": "uint16",
+        "target_sha": "98ee09bf98ce887b3639ae1a308baa28bcf5548cb73357408bfd5d537cab66db",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL58B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "EL58B",
+          "EL59B",
+          "Juke06",
+          "Juke08"
+        ]
+      },
+      "0x12D18": {
+        "addr": "0x12d18",
+        "present": true,
+        "target_geometry": "16x1",
+        "target_type": "uint16",
+        "target_sha": "98ee09bf98ce887b3639ae1a308baa28bcf5548cb73357408bfd5d537cab66db",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL58B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xbe6a",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x13dda",
+            "geometry": "16x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "EL58B",
+          "EL59B",
+          "Juke06",
+          "Juke08"
+        ]
+      },
+      "0x0F536": {
+        "addr": "0xf536",
+        "present": true,
+        "target_geometry": "8x1",
+        "target_type": "uint8",
+        "target_sha": "ffe11d6d9aa05e24d64a4c4c54000ef950330f606096a71eebf0f7095ffc63b4",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0xf536",
+            "geometry": "8x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0xf50e",
+            "geometry": "8x1",
+            "type": "uint8"
+          },
+          {
+            "donor": "CF48D",
+            "addr": "0xc374",
+            "geometry": "8x1",
+            "type": "uint8"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "CF48D",
+          "EL13A"
+        ]
+      },
+      "0x1100A": {
+        "addr": "0x1100a",
+        "present": true,
+        "target_geometry": "32x1",
+        "target_type": "uint16",
+        "target_sha": "52a1842db29a8c540df754c3a793c3a714ba343c762c95dac1aa0118c8c1595e",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0x1100a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0x10fea",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0xa972",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0xaed0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0x1293a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Tiida",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "CF48D",
+            "addr": "0xd216",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM60B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM61B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM62B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM63B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM64A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM65A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM66A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM67A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "CF48D",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "EM60B",
+          "EM61B",
+          "EM62B",
+          "EM63B",
+          "EM64A",
+          "EM65A",
+          "EM66A",
+          "EM67A",
+          "Juke06",
+          "Juke08",
+          "Qashqai",
+          "Tiida"
+        ]
+      },
+      "0x1104A": {
+        "addr": "0x1104a",
+        "present": true,
+        "target_geometry": "32x1",
+        "target_type": "uint16",
+        "target_sha": "0d27489a9b3e7c3a1f809778d2b1ac914751dbbe2005e9d09a2a7dc818e15563",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0x1104a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0x1102a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0xa9b2",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0xaf10",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0x1297a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Tiida",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "CF48D",
+            "addr": "0xd256",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM60B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM61B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM62B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM63B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM64A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM65A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM66A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM67A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "CF48D",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "EM60B",
+          "EM61B",
+          "EM62B",
+          "EM63B",
+          "EM64A",
+          "EM65A",
+          "EM66A",
+          "EM67A",
+          "Juke06",
+          "Juke08",
+          "Qashqai",
+          "Tiida"
+        ]
+      },
+      "0x12C7E": {
+        "addr": "0x12c7e",
+        "present": true,
+        "target_geometry": "32x1",
+        "target_type": "uint16",
+        "target_sha": "0d27489a9b3e7c3a1f809778d2b1ac914751dbbe2005e9d09a2a7dc818e15563",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0x1104a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0x1102a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0xa9b2",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xc08a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0xabd4",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0xaf10",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0x1297a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Tiida",
+            "addr": "0x15370",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "CF48D",
+            "addr": "0xd256",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM60B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM61B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM62B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM63B",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM64A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM65A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM66A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM67A",
+            "addr": "0xc630",
+            "geometry": "32x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "CF48D",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "EM60B",
+          "EM61B",
+          "EM62B",
+          "EM63B",
+          "EM64A",
+          "EM65A",
+          "EM66A",
+          "EM67A",
+          "Juke06",
+          "Juke08",
+          "Qashqai",
+          "Tiida"
+        ]
+      },
+      "0x12CBE": {
+        "addr": "0x12cbe",
+        "present": true,
+        "target_geometry": "32x1",
+        "target_type": "uint16",
+        "target_sha": "52a1842db29a8c540df754c3a793c3a714ba343c762c95dac1aa0118c8c1595e",
+        "nontrivial": true,
+        "matches": [
+          {
+            "donor": "EL13A",
+            "addr": "0x1100a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W83B",
+            "addr": "0x10fea",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EE310",
+            "addr": "0xa972",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL58B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W94B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "8W95B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EL59B",
+            "addr": "0xc04a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR20E",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BR50E",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1BT40A",
+            "addr": "0xab94",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "E1JD81D",
+            "addr": "0xaed0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Qashqai",
+            "addr": "0x1293a",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke06",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Juke08",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "Tiida",
+            "addr": "0x15330",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "CF48D",
+            "addr": "0xd216",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM60B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM61B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM62B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM63B",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM64A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM65A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM66A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          },
+          {
+            "donor": "EM67A",
+            "addr": "0xc5f0",
+            "geometry": "32x1",
+            "type": "uint16"
+          }
+        ],
+        "donor_families": [
+          "8W83B",
+          "8W94B",
+          "8W95B",
+          "CF48D",
+          "E1BR20E",
+          "E1BR50E",
+          "E1BT40A",
+          "E1JD81D",
+          "EE310",
+          "EL13A",
+          "EL58B",
+          "EL59B",
+          "EM60B",
+          "EM61B",
+          "EM62B",
+          "EM63B",
+          "EM64A",
+          "EM65A",
+          "EM66A",
+          "EM67A",
+          "Juke06",
+          "Juke08",
+          "Qashqai",
+          "Tiida"
+        ]
+      },
+      "0x0CE98": {
+        "addr": "0xce98",
+        "present": false
+      },
+      "0x16454": {
+        "addr": "0x16454",
+        "present": false
+      }
+    },
+    "missing_xml_addresses": [
+      "0xdab6",
+      "0xde6e",
+      "0xe2ed",
+      "0xe434",
+      "0xe590",
+      "0xe8b0",
+      "0xeb78",
+      "0xf536",
+      "0x10266",
+      "0x102fc",
+      "0x1064c",
+      "0x10cc2",
+      "0x10ffa",
+      "0x12a4e",
+      "0x12d18"
+    ]
+  }
+}

@@ -1,0 +1,870 @@
+{
+  "consult_matrix": {
+    "EM60B": {
+      "path": "EVIDENCE\\23710EM60B.dat",
+      "container_sha256": "3e4c50acd9f9a3ab7aa99abdd5b5316726f458b88eab7f83d4d836dabf8002ee",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "024523b6394c9af429e5ea8a2267febbff42682c5dbfc8c9273cbea7c4331606",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD401",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85540,
+          "stored_sum": 3535543394,
+          "calc_sum": 3535543394,
+          "stored_xor": 3232239330,
+          "calc_xor": 3232239330
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 34559,
+          "calc": 34559
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 15499,
+          "calc": 15499
+        }
+      }
+    },
+    "EM61B": {
+      "path": "EVIDENCE\\23710EM61B.dat",
+      "container_sha256": "949abdfe2c4a2cacd13e7ebae67f97c6f5cd75bc0f9056558cfabbe50c870089",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "1b31cb0911cd6205f3d8cd585a39a45c5ddcff2438fbd87925074b573aaae8a7",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD401",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85540,
+          "stored_sum": 3535543394,
+          "calc_sum": 3535543394,
+          "stored_xor": 3232239330,
+          "calc_xor": 3232239330
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 31370,
+          "calc": 31370
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 15499,
+          "calc": 15499
+        }
+      }
+    },
+    "EM62B": {
+      "path": "EVIDENCE\\23710EM62B.dat",
+      "container_sha256": "9f5e0c7a28eaf52f1ad6e9e301db22023c044315fccf4db77eac37c60b92ab8f",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "e74923ee929e9153d5d393622e428fde7e23df540349fdb83ea81315dd61cce7",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD401",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85540,
+          "stored_sum": 3535543394,
+          "calc_sum": 3535543394,
+          "stored_xor": 3232239330,
+          "calc_xor": 3232239330
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 44478,
+          "calc": 44478
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 15499,
+          "calc": 15499
+        }
+      }
+    },
+    "EM63B": {
+      "path": "EVIDENCE\\23710EM63B.dat",
+      "container_sha256": "358a650d6f11a86b369045a74e009289656386f4e26b3f840096de983dac4252",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "271645c5925a25c848fd97dc1cc4ab069c65a473c5bfc1a50cd7e420a9101adc",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD401",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85540,
+          "stored_sum": 3535543394,
+          "calc_sum": 3535543394,
+          "stored_xor": 3232239330,
+          "calc_xor": 3232239330
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 15069,
+          "calc": 15069
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 15499,
+          "calc": 15499
+        }
+      }
+    },
+    "EM64A": {
+      "path": "EVIDENCE\\23710EM64A.dat",
+      "container_sha256": "42d2274e2ae1ed698e6581a3f2d015a58782cde4f468feb964afba4a30ddf29d",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "c156759f88175ee783c274dfe7a4595e60d705c71072c44ee3c594d2aff91cf5",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD402",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85544,
+          "stored_sum": 3536103643,
+          "calc_sum": 3536103643,
+          "stored_xor": 3234877613,
+          "calc_xor": 3234877613
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 56779,
+          "calc": 56779
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 58465,
+          "calc": 58465
+        }
+      }
+    },
+    "EM65A": {
+      "path": "EVIDENCE\\23710EM65A.dat",
+      "container_sha256": "c7c9a9c7d0e730f3abeb646d4cd280b621cd9bb0e3978afa0d02a6e59483bd55",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "886674c047c87385f13a029e3be1e89f56a77bb0c68096b0bcabab5f1d6148c4",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD402",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85544,
+          "stored_sum": 3536103643,
+          "calc_sum": 3536103643,
+          "stored_xor": 3234877613,
+          "calc_xor": 3234877613
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 45690,
+          "calc": 45690
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 58465,
+          "calc": 58465
+        }
+      }
+    },
+    "EM66A": {
+      "path": "EVIDENCE\\23710EM66A.dat",
+      "container_sha256": "de96f3cbd85ecced2bddde0bc6b8d53222f503f5777999323e55d9da5dec123b",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "d85422cb5f70ab9cfaad22fe3a196de7e9cf2a01567a1bec1aa849403d6e4ebd",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD402",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85544,
+          "stored_sum": 3536103643,
+          "calc_sum": 3536103643,
+          "stored_xor": 3234877613,
+          "calc_xor": 3234877613
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 36650,
+          "calc": 36650
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 58465,
+          "calc": 58465
+        }
+      }
+    },
+    "EM67A": {
+      "path": "EVIDENCE\\23710EM67A.dat",
+      "container_sha256": "a6cf8bf0021199feefde078e1db40c6070b7ee84b4593067900c09fec0e95aa5",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060431434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "36e9797776312816d9d8dd32436908b135119861b482edeb28b6046552051c5f",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "1CMC7QPD402",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 78332,
+          "end": 85544,
+          "stored_sum": 3536103643,
+          "calc_sum": 3536103643,
+          "stored_xor": 3234877613,
+          "calc_xor": 3234877613
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 34471,
+          "calc": 34471
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 58465,
+          "calc": 58465
+        }
+      }
+    },
+    "237108W94B": {
+      "path": "EVIDENCE\\237108W94B.dat",
+      "container_sha256": "906e7465d949d8480eaf19d2dafdf6a4d5e756abcb5572e3585fb9c0eb62ff9e",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060434434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "5783e52caf76fb89739034338efa9a75b9f6ce2ddaf820fe747ab1195e25de88",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "4CMC7NPDF2",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 77640,
+          "end": 84320,
+          "stored_sum": 3987273384,
+          "calc_sum": 3987273384,
+          "stored_xor": 2085069218,
+          "calc_xor": 2085069218
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 49518,
+          "calc": 49518
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 50215,
+          "calc": 50215
+        }
+      }
+    },
+    "237108W95B": {
+      "path": "EVIDENCE\\237108W95B.dat",
+      "container_sha256": "70407f6a03364ab41a59fdc087e0c72033ffe5aafc39afb7a5c2182330fdd778",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060434434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "8f88386e81f41e4a12de09747251e481d36c2198cd1864e7e7d0e1d07c2cf181",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "4CMC7NPDF2",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 77640,
+          "end": 84320,
+          "stored_sum": 3987273384,
+          "calc_sum": 3987273384,
+          "stored_xor": 2085069218,
+          "calc_xor": 2085069218
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 22656,
+          "calc": 22656
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 50215,
+          "calc": 50215
+        }
+      }
+    },
+    "23710EL58B": {
+      "path": "EVIDENCE\\23710EL58B.dat",
+      "container_sha256": "bf23834b2e4425cb94bbb3bb2bf69fecd11e4eda10412906d85cd7eb2cc71e77",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060434434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "a5e24a1ce40450d27b1e1caa3849719f1e8ea158faeda2920c21b9c9e113e579",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "4CMC7NPDF2",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 77640,
+          "end": 84320,
+          "stored_sum": 3987273384,
+          "calc_sum": 3987273384,
+          "stored_xor": 2085069218,
+          "calc_xor": 2085069218
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 36802,
+          "calc": 36802
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 50215,
+          "calc": 50215
+        }
+      }
+    },
+    "23710EL59B": {
+      "path": "EVIDENCE\\23710EL59B.dat",
+      "container_sha256": "bc03d969b9c8e3eacee0d00119883a08c4a029e84d6ae2f0b1cda54785d903dc",
+      "container_size": 540947,
+      "container_magic": "a1150030303030303041060434434d43",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "b14ed83bd327153b2e282de211f581f837c4350b4e8b8fa27a5ac5561a1af64a",
+      "processor": "SH705519N",
+      "loader": null,
+      "fid": "4CMC7NPDF2",
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": {
+          "status": "OK",
+          "sumt": 66564,
+          "xort": 66568,
+          "start": 77640,
+          "end": 84320,
+          "stored_sum": 3987273384,
+          "calc_sum": 3987273384,
+          "stored_xor": 2085069218,
+          "calc_xor": 2085069218
+        },
+        "cal16": {
+          "status": "OK",
+          "addr": 33280,
+          "end": 65536,
+          "stored": 59929,
+          "calc": 59929
+        },
+        "main16": {
+          "status": "OK",
+          "addr": 65536,
+          "stored": 50215,
+          "calc": 50215
+        }
+      }
+    }
+  },
+  "triage": {
+    "D9_BR60B": {
+      "path": "EVIDENCE\\D9_BR60B.dat",
+      "container_sha256": "322e257627bf58f8497829b0a7eb0d1e1246062a332640744ef21be4c1d0b00b",
+      "container_size": 540349,
+      "container_magic": "a1190042523630420241060400020000",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='BR60BAVJ', 3832 checksum-verified frames 0x8000..0x7FC00) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "D9_BR61B": {
+      "path": "EVIDENCE\\D9_BR61B.dat",
+      "container_sha256": "f0fcdf7c6956bd53a88560f426c3e88b9ca6ed8e308b71a715aa4f37e2b3bb54",
+      "container_size": 540349,
+      "container_magic": "a1190042523631420241060400020000",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='BR61BAWJ', 3832 checksum-verified frames 0x8000..0x7FC00) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "D9_JD08B": {
+      "path": "EVIDENCE\\D9_JD08B.dat",
+      "container_sha256": "db822e4a5d9b3d17946c778a9a1e90e3d2bd5fd9c801746eee1bd9e009d12016",
+      "container_size": 540349,
+      "container_magic": "a119004a443038420241060400020000",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='JD08BAVJ', 3832 checksum-verified frames 0x8000..0x7FC00) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "D9_JD09C": {
+      "path": "EVIDENCE\\D9_JD09C.dat",
+      "container_sha256": "280f185afffaa789663fb18e4ac4e9b9a01711cbcf3c7a81916163782e017e58",
+      "container_size": 540349,
+      "container_magic": "a119004a443039430241060400020000",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='JD09CAVG', 3832 checksum-verified frames 0x8000..0x7FC00) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "310364EM1C": {
+      "path": "EVIDENCE\\310364EM1C.dat",
+      "container_sha256": "772d97b5211c3f11d332b4256e5c34eb8a35c58b6832b0531fd4fe04c3c383bd",
+      "container_size": 1397629,
+      "container_magic": "a1190034454d31433141060400050003",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='4EM1C1Aa\\\\', 9912 checksum-verified frames 0xA000..0x140000) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "310364EP1B": {
+      "path": "EVIDENCE\\310364EP1B.dat",
+      "container_sha256": "177be5e04a9a1a40f20ffd64a4b287ea5476719a7e1b312358153c903f5d6944",
+      "container_size": 1397629,
+      "container_magic": "a1190034455031423141060400050003",
+      "decoded": false,
+      "error": "ValueError(\"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='4EP1B1Aa\\\\', 9912 checksum-verified frames 0xA000..0x140000) uses a distinct TCM cipher and is not an SH705x ECU binary.\")"
+    },
+    "e1bc11b": {
+      "path": "EVIDENCE\\e1bc11b.dat",
+      "container_sha256": "f6437760258978d4ba690d3f613b91aef96b597b17063c6ed3c4673958c19d0c",
+      "container_size": 485548,
+      "container_magic": "861000314243313141ef861000314243",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "832de4721cd87cbd0820efb9b9b8d5c3cd754a95c0739eb840c6d43eabb011e7",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "e1bc12b": {
+      "path": "EVIDENCE\\e1bc12b.dat",
+      "container_sha256": "6a228c258df5442578a38235098fc2a8d1984afef2f062b284e071fb1174fb51",
+      "container_size": 645526,
+      "container_magic": "861000314243313241f0861000314243",
+      "decoded": true,
+      "decoded_size": 524288,
+      "decoded_sha256": "df1efd1eaa044dff804875e9c7a3c15e0ae21a7deba3b8f784005a8f620f73bb",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "237103ZM1E": {
+      "path": "EVIDENCE\\237103ZM1E.dat",
+      "container_sha256": "7075b78c31469f6db2cdb642966d88cfcb9d2f6257d8b7e1b6c48fd58c30da0f",
+      "container_size": 2236861,
+      "container_magic": "a11500335a4d3145a041060400000000",
+      "decoded": true,
+      "decoded_size": 2097152,
+      "decoded_sha256": "288e7b6accc51595898255606908985fe328b63aaa589da338ceeea427511575",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "237103ZM2E": {
+      "path": "EVIDENCE\\237103ZM2E.dat",
+      "container_sha256": "5740b87694f1075482869c38177a65b0c0a8b50ae85de103704967c919f58f8a",
+      "container_size": 2236861,
+      "container_magic": "a11500335a4d3245a041060400000000",
+      "decoded": true,
+      "decoded_size": 2097152,
+      "decoded_sha256": "9987bc557cfd70ebbaf8622a643ad8a034fad2abac88fed0fb4e96654243b811",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "237103ZM3A": {
+      "path": "EVIDENCE\\237103ZM3A.dat",
+      "container_sha256": "9d1e431b6927b72985f973bb99787e3c07b0d83d7cd96ca78351d6eaf207af10",
+      "container_size": 2236861,
+      "container_magic": "a11500335a4d3341a041060400000000",
+      "decoded": true,
+      "decoded_size": 2097152,
+      "decoded_sha256": "bb385896ce5b3b6d4a3f440a224e0c45490242a257da8feb1687b192520497b5",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "237103ZM4A": {
+      "path": "EVIDENCE\\237103ZM4A.dat",
+      "container_sha256": "e6924e4d070c8f5584442ff643ff3645d98bf5fd4420eb30d2a79875b78ec32a",
+      "container_size": 2236861,
+      "container_magic": "a11500335a4d3441a041060400000000",
+      "decoded": true,
+      "decoded_size": 2097152,
+      "decoded_sha256": "ff05a3ca218479119ce3058b85d22ffa0624a1eed9d760a8738740009c1e2229",
+      "processor": null,
+      "loader": null,
+      "fid": null,
+      "checksums": {
+        "ck_std": null,
+        "ck_alt2": null,
+        "cal16": null,
+        "main16": null
+      }
+    },
+    "8201032726": {
+      "path": "EVIDENCE\\8201032726.dat",
+      "container_sha256": "5d793f55ec52601103d1e4bdaaa73e5fffa3ebab71aa70af2a8ba32574a8f514",
+      "container_size": 223798,
+      "container_magic": "a1150082010327264434424582005926",
+      "decoded": false,
+      "error": "ValueError(\"Unencrypted KWP2000 partial calibration .dat (header=''&D4BEY&1aF', 3733 verified frames covering 0x840000..0x87C9E7) is not a full SH705x ECU image.\")"
+    },
+    "EM43A.OsirisROM": {
+      "path": "EVIDENCE\\EM43A.OsirisROM",
+      "container_sha256": "651ef3357032807c484b23fdbaab47a868cfc23462b5794093b0c457b5a0b7d5",
+      "container_size": 1049801,
+      "container_magic": "5570526576204f736972697320524f4d",
+      "decoded": false,
+      "error": "ValueError('UpRev Osiris encrypted container (EM43A.OsirisROM): UpRev Osiris ROM File Ver 1.0000; sections=[ROMData(1048576B), Keys(12B), CELData2(1045B)]. ROMData is encrypted and cannot be scanned directly without decryption.')"
+    },
+    "EM43A Back To Stock.OsirisROM": {
+      "path": "EVIDENCE\\EM43A Back To Stock.OsirisROM",
+      "container_sha256": "08edbbe5a00939e50db745380c0dba86a58bc0ba8dc9c626efa78f7dc0efc4a9",
+      "container_size": 1048838,
+      "container_magic": "5570526576204f736972697320524f4d",
+      "decoded": false,
+      "error": "ValueError('UpRev Osiris encrypted container (EM43A Back To Stock.OsirisROM): UpRev Osiris ROM File Ver 1.0000; sections=[ROMData(1048576B), Keys(12B), Verify(8B), TuneDesc(19B), TuneVer(7B)]. ROMData is encrypted and cannot be scanned directly without decryption.')"
+    },
+    "Renault 3.5 V6 SH7058 4.09.ols.zip": {
+      "path": "EVIDENCE\\Renault 3.5 V6 SH7058 4.09.ols.zip",
+      "container_sha256": "feae41bb62b223f5fb80655d3b90668d227cf4a354bd7688f654c58b36d51c2f",
+      "container_size": 1188253,
+      "container_magic": "504b0304140000000800f75eb54c8a3c",
+      "decoded": false,
+      "error": "ValueError(\"WinOLS project container (Renault 3.5 V6 SH7058 4.09.ols) ('WinOLS File', 15,123,005 B) is not a flat ECU binary; export a flat .bin/.hex/.s19 image first.\")"
+    },
+    "url.bin": {
+      "path": "EVIDENCE\\url.bin",
+      "container_sha256": "38e74d7f1a17b6ac86c35383eef62a93303be661296545760a4a2f3db8f3e44e",
+      "container_size": 685214,
+      "container_magic": "89504e470d0a1a0a0000000d49484452",
+      "decoded": false,
+      "error": "ValueError('File (url.bin) is a PNG image (814x611, 685,214 B), not an ECU ROM.')"
+    }
+  },
+  "sentra_pair": {
+    "container_sha_a": "de15eb55dad0e55b41e9638499c609a95b44bcb8e3ced8c89703c113fc8e0117",
+    "container_sha_b": "9e3f79cdfd3fb8e59fb64962f3303545bf6fd9d06650e4952138f739c2af0d2c",
+    "fingerprint_a": {
+      "loader": "LOADER10",
+      "loader_addr": 3392,
+      "fid": "5X61BECCNA",
+      "fid_addr": 12556,
+      "fid_cpu": "SH705513N",
+      "ramf_ptrs": 14,
+      "bootblock_ff": false,
+      "ivt_unique": 16
+    },
+    "fingerprint_b": {
+      "loader": "LOADER10",
+      "loader_addr": 3392,
+      "fid": "5X61BECCNA",
+      "fid_addr": 12556,
+      "fid_cpu": "SH705513N",
+      "ramf_ptrs": 14,
+      "bootblock_ff": false,
+      "ivt_unique": 16
+    },
+    "checksums_a": {
+      "ck_std": {
+        "status": "OK",
+        "sumt": 25864,
+        "xort": 25856,
+        "sum": 4218246495,
+        "xor": 102494537
+      },
+      "ck_alt2": null,
+      "cal16": null,
+      "main16": null
+    },
+    "checksums_b": {
+      "ck_std": {
+        "status": "OK",
+        "sumt": 25864,
+        "xort": 25856,
+        "sum": 940397919,
+        "xor": 1119613257
+      },
+      "ck_alt2": null,
+      "cal16": null,
+      "main16": null
+    },
+    "tables_identical": 211,
+    "tables_differing": 0,
+    "differing_table_addrs": [],
+    "non_table_diff_count": 6,
+    "non_table_diffs": [
+      [
+        23288,
+        44,
+        104
+      ],
+      [
+        23385,
+        10,
+        170
+      ],
+      [
+        25856,
+        6,
+        66
+      ],
+      [
+        25857,
+        27,
+        187
+      ],
+      [
+        25864,
+        251,
+        56
+      ],
+      [
+        25865,
+        109,
+        13
+      ]
+    ]
+  },
+  "r4r42_vs_em62": {
+    "container_sha": "7338052a942048e8ae522a8701d202219f7bfc28176d4bb779fadd703487926f",
+    "fingerprint": {
+      "loader": "LOADER80",
+      "loader_addr": 19908,
+      "fid": "1CMC7QPD401",
+      "fid_addr": 66572,
+      "fid_cpu": "SH705519N",
+      "ramf_ptrs": 16,
+      "bootblock_ff": false,
+      "ivt_unique": 4
+    },
+    "checksums": {
+      "ck_std": null,
+      "ck_alt2": {
+        "status": "BAD",
+        "sumt": 66564,
+        "xort": 66568,
+        "start": 78332,
+        "end": 85540,
+        "stored_sum": 1799353578,
+        "calc_sum": 3535543394,
+        "stored_xor": 2815699354,
+        "calc_xor": 3232239330
+      },
+      "cal16": {
+        "status": "OK",
+        "addr": 33280,
+        "end": 65536,
+        "stored": 44478,
+        "calc": 44478
+      },
+      "main16": {
+        "status": "BAD",
+        "addr": 65536,
+        "stored": 15499,
+        "calc": 44922
+      }
+    },
+    "em62_checksums": {
+      "ck_std": null,
+      "ck_alt2": {
+        "status": "OK",
+        "sumt": 66564,
+        "xort": 66568,
+        "start": 78332,
+        "end": 85540,
+        "stored_sum": 3535543394,
+        "calc_sum": 3535543394,
+        "stored_xor": 3232239330,
+        "calc_xor": 3232239330
+      },
+      "cal16": {
+        "status": "OK",
+        "addr": 33280,
+        "end": 65536,
+        "stored": 44478,
+        "calc": 44478
+      },
+      "main16": {
+        "status": "OK",
+        "addr": 65536,
+        "stored": 15499,
+        "calc": 15499
+      }
+    },
+    "tables_identical_to_em62": 274,
+    "tables_total_em62": 274,
+    "byte_diff_count": 8,
+    "byte_diffs": [
+      [
+        66564,
+        210,
+        107
+      ],
+      [
+        66565,
+        188,
+        63
+      ],
+      [
+        66566,
+        28,
+        244
+      ],
+      [
+        66567,
+        98,
+        234
+      ],
+      [
+        66568,
+        192,
+        167
+      ],
+      [
+        66569,
+        168,
+        212
+      ],
+      [
+        66570,
+        14,
+        41
+      ],
+      [
+        66571,
+        226,
+        154
+      ]
+    ],
+    "window_0x10404": {
+      "em62": "d2bc1c62c0a80ee2",
+      "r4r42": "6b3ff4eaa7d4299a"
+    }
+  }
+}
