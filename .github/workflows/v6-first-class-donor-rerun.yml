@@ -50,6 +50,7 @@ jobs:
           from pathlib import Path
 
           ROOT = Path(".")
+          sys.path.insert(0, str((ROOT / "tools").resolve()))
           OUT = Path("workbench-output")
           SCANS = OUT / "scans"
           LOGS = OUT / "logs"
