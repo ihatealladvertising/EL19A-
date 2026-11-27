@@ -1,0 +1,50 @@
+{
+  "state": "COMPLETE",
+  "root": "E:\\Nissan Consult\\ReproProgramming",
+  "output": "E:\\Nissan Consult\\ReproProgramming\\_SH705xWorkbench_Run_2026-11-27",
+  "python": "3.12.10",
+  "py7zr": "1.1.4",
+  "workbench_commit": "13acc0b58826c2b693ef495a0b3c61259daec760",
+  "source_files": 16584,
+  "inventory_classes": {
+    "ANCILLARY_OR_UNSUPPORTED": 3442,
+    "DIRECT_WORKBENCH_INPUT": 11744,
+    "ZIP_PACKAGE": 1318,
+    "7Z_PACKAGE": 80
+  },
+  "unique_scan_inputs": 13698,
+  "candidate_reference_rows": 14666,
+  "scan_statuses": {
+    "SCANNED": 11216,
+    "LOAD_REJECTED": 2482
+  },
+  "archives": 1399,
+  "archive_statuses": {
+    "READ_OK": 1395,
+    "ARCHIVE_READ_FAILED": 4
+  },
+  "detailed_scans": 431,
+  "elapsed_seconds": 2501.4,
+  "outputs": {
+    "file_inventory.tsv": {
+      "bytes": 1689047,
+      "sha256": "c76428f4710930f768c5c2cd4efadb83d458f18816d39992347b2e4a16e9efc6"
+    },
+    "archive_inventory.tsv": {
+      "bytes": 48440,
+      "sha256": "c9ea5b2c5a553de7432027aa4ddfa5696047bacd4c0000a972fc1c78b53eec50"
+    },
+    "candidate_tasks.json": {
+      "bytes": 5745554,
+      "sha256": "da74b3d083a88821fcde3fc85345a7f3fa1318a44062c765e13e3bde719b280b"
+    },
+    "scan_results.tsv": {
+      "bytes": 4078974,
+      "sha256": "761cb7662d939c695ab94929b456d4459a9cb8201ae02a12692f051207179f98"
+    },
+    "scan_details.jsonl.gz": {
+      "bytes": 3138825,
+      "sha256": "1211c98e5e9afefb470a78e268da0c644017016df79a5af3e0c672afa43ce977"
+    }
+  }
+}
