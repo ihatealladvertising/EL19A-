@@ -1,10 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — permanent structural-inclusion threshold update and WO70031 allocation (2026-11-27)
-**Purpose:** Publish the user-approved permanent relaxation of full EL19A reader-mechanics/downstream-consumer tracing as a prerequisite for raw/provisional table inclusion; align WORKER_PROTOCOL, project direction and active WO65324; create a bounded Worker 1 reconciliation using the already-published EL19A/V6 151-ROM exports. No ROM, A2L, calibration XML, workbook, catalogue, scope matrix, scanner/tool source or existing Findings content is to be changed in this policy/allocation batch.
-**Lock acquired:** 2026-11-27 — latest main gate verified UNLOCKED; active register, WO65324 and absence of WO70031 checked.
+**Integrator:** ChatGPT — Juke 9APCTDEM06 A2L scalar and explicit-axis raw readback (2026-11-27)
+**Purpose:** Publish a donor-only Juke scalar/axis payload readback derived from the pinned A2L metadata TSV and checksum-validated 9APCTDEM06 S19 image, plus a coordinator checkpoint in WO65324. Reconcile only already-supported target cross-reference leads; no target ROM, calibration XML, A2L, workbook, scope matrix, catalogue, Findings, scanner source or worker queue edits.
+**Lock acquired:** 2026-11-27 — fresh `main` gate readback showed UNLOCKED; only additive donor-data/report publication is planned.
 
 **Lock released:** 2026-11-27 — permanent structural-only RAW/PROVISIONAL threshold update published, read back and adopted by the active definition-completion WO. Created and registered Worker 1 WO70031 against the preserved EL19A 291-address / 377-call exports and 151-ROM donor bundle; no global scan was rerun and no protected calibration/evidence/tool files were changed.
 
