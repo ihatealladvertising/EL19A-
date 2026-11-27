@@ -1,0 +1,14 @@
+{
+  "errors": [],
+  "schema": "sh705x-xml-validation-v1",
+  "summary": {
+    "declared_scaling_count": 4,
+    "overlap_warning_count": 0,
+    "provisional_donor_lead_count": 26,
+    "table_count": 114,
+    "target_verified_count": 0,
+    "unknown_raw_only_count": 88
+  },
+  "valid": true,
+  "warnings": []
+}

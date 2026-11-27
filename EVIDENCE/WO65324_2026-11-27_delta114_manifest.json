@@ -1,0 +1,50 @@
+{
+  "schema": "wo65324-delta-preview-manifest-v1",
+  "date": "2026-11-27",
+  "purpose": "Strict separate review preview for the 114 target-backed RAW/PROVISIONAL candidates absent from Release 1 XML; not a canonical XML replacement.",
+  "inputs": {
+    "target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "candidate_delta_tsv_sha256": "dbbfd78219327b31ca320795d04de259a99774979d6a48d2e94c871ea521c396",
+    "structural_matrix_git_blob": "48466f4f1573f1eb227fe8d14e2665b502c24eed",
+    "derived_catalogue_sha256": "981cf5dcaeb85abb6d0937388004b1b19706f61624d48c2a0d1da7beffe92ee1"
+  },
+  "selection": "Derived from fresh 291-address catalogue; retained exactly the 114 candidate addresses in the candidate-delta TSV and retained 146 source axis records for linked-axis resolution. No source catalogue was modified.",
+  "validation": {
+    "valid": true,
+    "table_count": 114,
+    "errors": [],
+    "warnings": [],
+    "overlap_warning_count": 0,
+    "provisional_donor_lead_count": 26,
+    "unknown_raw_only_count": 88,
+    "all_root_names_generic_RAW": true
+  },
+  "files": [
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_delta114_preview_provenance.json.gz",
+      "size_bytes": 3236,
+      "sha256": "6c83d0759a574f603249d66d43a2eac7587326fe5bb6432533ebcdec652ad114"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_delta114_preview_unresolved.json.gz",
+      "size_bytes": 184333,
+      "sha256": "ec843943daf47f0a8a5a6f5fdf16dcaae624f011358fb4ecdddd0383666ad837"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_delta114_preview_validation.json",
+      "size_bytes": 308,
+      "sha256": "61929f7ccc372bad1a770f801897760ca5b8e45e11526bc73c3866ed0f24f713"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_delta114_preview_xml.xml",
+      "size_bytes": 62620,
+      "sha256": "30fe20c7d18e4444823d8960d4257ac532b1b9282cad9c2a73af599296d539cb"
+    }
+  ],
+  "semantic_boundary": [
+    "Generic raw names and scaling retained.",
+    "Donor labels, units, conversions and physical query domains were not promoted.",
+    "XML preview does not encode/hash target payload; matrix target evidence remains authoritative for extents and payloads.",
+    "No vehicle validation or safety implication."
+  ]
+}
