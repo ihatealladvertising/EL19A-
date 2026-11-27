@@ -1,0 +1,683 @@
+```python
+import zipfile
+
+with zipfile.ZipFile("el19a.zip", "r") as z:
+    base = "EL19A--main/EL19A--main/tools/"
+    for fname in [
+        "nissan_sh705x_workbench.md",
+        "a2l_structural_matcher.md",
+        "a2l_structural_matcher.py",
+    ]:
+        p = base + fname
+        print("=" * 80)
+        print("FILE:", p)
+        print("=" * 80)
+        data = z.read(p).decode("utf-8", errors="replace")
+        print(data[:4500])
+        if len(data) > 4500:
+            print(f"... [truncated {len(data)-4500} chars] ...")
+
+
+```
+
+```text
+================================================================================
+FILE: EL19A--main/EL19A--main/tools/nissan_sh705x_workbench.md
+================================================================================
+# `tools/nissan_sh705x_workbench.py`
+
+Unified, read-only CLI combining the cross-generation Nissan SH7055/SH7058 ROM scanner, EL19A metadata/XML/catalog/scope-matrix audit, variant-isolation diffing, and structural function/payload/A2L lead matching into one tool.
+
+It imports helper discovery and call extraction directly from `tools/sh7058_cross_rom_scanner.py` (leaving `sh7058_cross_rom_scanner.py` unmodified).
+
+---
+
+## Subcommands
+
+### 1. `scan` — Single-ROM Fingerprint & Lookup Inventory
+Loads raw `.bin`, `.zip` (`.bin`/`.s19`/`.hex`/`.dat` inside), Motorola `.s19`, Intel `.hex`, or Nissan Consult `.dat` (validating KWP `0x8015 0x3482` frame checksums and inverting the 2-round 16-bit Feistel cipher into a 512 KiB `0xFF`-bootblock-padded SH7055 image), prints MCU/FID/reset fingerprints, discovers SH-2 lookup helpers across layout generations (pre-cal `mov.w < 0x10000`, SH7055 mid-ROM `~0x15xxx`, SH7058 post-cal `>= 0x20000`), resolves table calls, and detects dual-used axes and reciprocal inverse table pairs.
+
+```bash
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/VERSA f501.bin" --tsv /tmp/el19a_scan.tsv --json /tmp/el19a_scan.json
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip"
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/unknown_EM62B_SH7055.bin.zip"
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/237108W94B.dat"
+python3 tools/nissan_sh705x_workbench.py scan "EVIDENCE/sentra revhang/sentra_8U92A.bin"
+
+```
+
+Verified `scan` results:
+
+* `EVIDENCE/VERSA f501.bin` (`SH705822N`, `8CMCKRN5`): `34` helpers, `379` call sites (`364` resolved → `293` unique tables; `14` dual-used as axes, `14` reciprocal-pair endpoints).
+* `Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip` (`SH705828N`, `1TRKH1HN`): `37` helpers, `604` call sites (`595` resolved → `483` unique tables).
+* `unknown_EM62B_SH7055.bin.zip` (`SH705519N`, `1CMC7QPD`): `34` helpers, `339` call sites (`335` resolved → `275` unique tables).
+* `237108W94B.dat` / `237108W95B.dat` / `23710EL58B.dat` / `23710EL59B.dat` (`SH705519N`, `4CMC7NPD`): `36` helpers, `319` call sites (`313` resolved → `254` unique tables).
+* `sentra_8U92A.bin` (`SH705513N`, pre-cal): `32` helpers, `270` call sites (`256` resolved → `212` unique tables).
+
+---
+
+### 2. `audit` — Unified EL19A Cross-Check & Enriched TSV Export
+
+Cross-references EL19A caller-backed tables against:
+
+* `CALIBRATIONS/EL19A_release1_conservative.xml` (`254` definitions)
+* `CALIBRATIONS/discovered_tables_catalog.csv` (`179` rows)
+* `CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv` (`254` rows)
+* Sibling MR18DE ROMs (`EL13A` CVT, `8W83B` AT, `EE310` pre-cal MT) for payload conservation vs. variant changes
+* Structural function/payload/A2L matches against `64810223F121200000.hex` + `64811000p2_m.a2l` (`SH705822N`) and `9APCTDEM06.s19` + `RFCC_2XHK19BDF1.a2l` (`SH705828N`), including `COMPU_METHOD` engineering units/scaling and referenced `MEASUREMENT` RAM cells.
+
+```bash
+python3 tools/nissan_sh705x_workbench.py audit --tsv /tmp/el19a_audit.tsv
+
+```
+
+Verified `audit` summary on `VERSA f501.bin`:
+
+* `293` caller-backed tables (`178` in Release 1 XML, `115` missing from XML/catalog/scope matrix; `76` XML-only entries).
+* Flags the `1` helper-vs-XML geometry mismatch (`0x0FEE0`: XML `1x32` vs `sub_22E98` `2D_IMPL uint16 64x1` spanning `0x0FEE0-0x0FF5F`).
+* Lists all `14` linked axis / reciprocal pairs (including `0x0DE6E` ↔ `0x0E2ED` and `0x0CD56` ↔ `0x0FEC0`).
+* Exports a `294`-line enriched TSV (`293` table rows + header) with variant flags and dual-A2L lead columns.
+
+---
+
+### 3. `inspect` — Targeted Table / Function / Literal Drill-Down
+
+Inspects any hex address in the target ROM:
+
+* **Table address** (e.g. `0x0FEE0`, `0x0D856`): helper geometry, byte span, axis addresses, XML status, decoded ROM values, caller function(s), and top V6/Juke A2L matches with units/scales and RAM names.
+* **Caller function address** (e.g. `0x6B168`): every table call inside the `4F22` prologue window plus top ranked V6 and Juke structural function matches.
+* **RAM / scalar literal** (e.g. `0xFFFF85DA`): 32-bit literal pool occurrences, same-address A2L `MEASUREMENT` hint (if any), and nearest enclosing matched lookup function(s).
+
+```bash
+python3 tools/nissan_sh705x_workbench.py inspect 0x0FEE0
+python3 tools/nissan_sh705x_workbench.py inspect 0x6B168
+python3 tools/nissan_sh705x_workbench.py inspect 0x0D856
+python3 tools/nissan_sh705x_workben
+... [truncated 2394 chars] ...
+================================================================================
+FILE: EL19A--main/EL19A--main/tools/a2l_structural_matcher.md
+================================================================================
+# Structural Function & A2L RAM/Table Matcher (`tools/a2l_structural_matcher.py`)
+
+Pure Python 3 (standard library only) structural matcher linking **EL19A** (`EVIDENCE/VERSA f501.bin`) caller subroutines to the two compiled **ROM + A2L** pairs in `EVIDENCE/`:
+
+- **V6 (`SH705822N`):** `EVIDENCE/side project/64810223F121200000.hex` + `EVIDENCE/side project/64811000p2_m.a2l`
+  - `36` auto-discovered lookup helpers, `306` unique tables (**298 / 306** exact A2L `CHARACTERISTIC`/`AXIS_PTS` hits), **`12,917`** addressed `MEASUREMENT` RAM symbols.
+- **Juke MR16DDT (`SH705828N`):** `EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/9APCTDEM06.s19` + `RFCC_2XHK19BDF1.a2l`
+  - `37` auto-discovered lookup helpers, `585` unique tables (**575 / 585** exact A2L `CHARACTERISTIC`/`AXIS_PTS` hits), **`9,100`** addressed `MEASUREMENT` RAM symbols.
+
+> **Evidence Policy:** Every match produced by this script is a **high-precision structural hypothesis / lead only** (not target-side semantic proof on EL19A). A2L names, units, and scalings must not be promoted into EL19A definitions without target-side reader/query/consumer verification.
+
+## Usage
+
+Run from repository root:
+
+```bash
+python3 tools/a2l_structural_matcher.py
+
+```
+
+## How It Works
+
+1. Parses both `.hex`/`.s19` flat images and Shift-JIS A2L files (`CHARACTERISTIC`, `AXIS_PTS`, `MEASUREMENT`).
+2. Runs `discover_helpers` + `extract_calls` (from `tools/sh7058_cross_rom_scanner.py`) on `EL19A`, `V6_HEX`, and `Juke_S19`.
+3. Segments caller functions at `sts.l pr,@-r15` (`0x4F22`) prologues (`217` caller functions in EL19A, `223` in V6, `403` in Juke) and extracts per-function structural fingerprints:
+* ordered lookup-helper signature sequence `(kind, dim1, dim2, elem_type)`
+* non-trivial table/axis payloads (`>2` distinct bytes)
+* ROM scalar pool constants (`< 0x20000`), immediate constants, function length, and referenced `0xFFFFxxxx` RAM cells (mapped to A2L `MEASUREMENT` names in V6/Juke).
+
+
+4. Scores EL19A functions against V6 and Juke functions matching the same helper-signature bag, highlighting:
+* **Dual V6 + Juke Consensus Functions** (`45` functions where *both* `SH705822N` V6 and `SH705828N` Juke independently land on the same A2L symbol root), and
+* **Single-Source / Rare Structural Leads** (`25` additional functions containing tables absent from Release 1 XML).
+
+
+
+## Key Verified Structural Leads (Live Run Summary)
+
+* **Overall coverage:** `103 / 217` EL19A caller functions receive high-specificity structural matches (`45` with dual V6+Juke consensus, `58` non-trivial caller-backed table payload matches).
+* **Selected uncatalogued / high-value leads to target for EL19A verification:**
+* **`0x0FEE0` (`fn 0x369D0`, `64×1 uint16`):** Unique `2D_IMPL 64×1 uint16` match in V6 (`0x3F48C` → **`mQTBL`**, RAM `vAFLE`/`vAVTPD`) and in Juke (`0x13984` → **`mQTBL`**, RAM `vUSB`/`vQA4`; plus `mTTFKK`). *Note: previously missed by `WO65133` because `0x0FEE0` was truncated to `32×1`.*
+* **`0x0D856` (`fn 0x6B168`, `8×8 uint16`):** 1:1 dual consensus across V6 (`0x7EDB4`) + Juke (`0x886E8`) on `[mTTQH0ST, mMTTE, mTEHOSMAP]` → points `0x0D856` to **`mTEHOSMAP`** (with `0x1100A=mTTQH0ST`, `0x0CD56=mMTTE`).
+* **`0x0C2D6` (`fn 0x6FBFE`, `8×8 uint16`):** 1:1 dual consensus across V6 (`0x824A2`) + Juke (`0x8E710`) on `[mTMAXPTQ, mMTTE, mMPAMBFAC]` → points `0x0C2D6` to **`mMPAMBFAC`** (with `0x10954=mTMAXPTQ`, `0x0CD56=mMTTE`).
+* **`0x0F3EE` (`fn 0x40F1A`, `16×1 uint8`):** Dual consensus across V6 (`0x48D16`) + Juke (`0x4BB8E`) on `[mTISCPAMB, mTISCTA, mTTWISC]` → points `0x0F3EE` to **`mTTWISC`** (target idle speed vs coolant temp lead).
+* **`0x0DE6E` ↔ `0x0E2ED` (`fn 0x5B1F6`, `16×1 uint8` inverse pair):** Juke `fn 0x765B2` matches `[mPIADVAT, mADVPIAT]` with exact payload match on `0x0DE6E` (`mADVPIAT`), corroborated by V6 `mPIADVAT`.
+* **`0x0E5C0` / `0x0A3C2` / `0x0A092` (`fn 0x6F190`):** 1:1 V6 match (`0x81C6A`) on `[mTDAPOREF, mMKDSPWR, mMDSFACSL]` (dashpot / `wvAPOFSR` group).
+* **`0x0BB56` (`fn 0x703AA`) & `0x11744` (`fn 0x704D2`):** Both `16×16 uint16` maps paired with `8×1 uint16` curves matching Juke `0x8EF24` (`[mMDRTQS_S, mTEBRTH_S]`) and `0x8EE1A` (`[mMDRTQSP, mTENBRTH]`).
+* **`0x0B212` / `0x0B012` / `0x0B112` / `0x0ECEE` / `0x1037C` / `0x0E64C` (`fn 0x77616`):** 6-call 1:1 V6 match (`0x8D4DA`, `18` shared scalar constants) on `[mTMSATH, mTMSATA, mTMSATB, mTMFPC1, mTCREM, mTDLMFD]`.
+* **`0x0AFF2` (`fn 0x5B33A`, `4×4 uint8`) & `0x0E5E8` (`8×1 uint8`):**
+... [truncated 74 chars] ...
+================================================================================
+FILE: EL19A--main/EL19A--main/tools/a2l_structural_matcher.py
+================================================================================
+#!/usr/bin/env python3
+"""
+Structural Function, Helper-Signature & A2L RAM/Table Matcher for Nissan SH7058 ROMs.
+
+
+
+Compares EL19A caller subroutines (`VERSA f501.bin`) against two A2L-backed ROM pairs
+already in EVIDENCE/:
+
+* V6 `64810223F121200000.hex` + `64811000p2_m.a2l` (SH705822N — same core generation as EL19A)
+* Juke `9APCTDEM06.s19` + `RFCC_2XHK19BDF1.a2l` (SH705828N)
+
+IMPORTANT EVIDENCE POLICY:
+A2L matches (table CHARACTERISTICs/AXIS_PTS and RAM MEASUREMENTs) are *structural leads*
+only, never target-side proof. Every lead still requires EL19A reader/consumer verification.
+"""
+import argparse
+import bisect
+import hashlib
+import re
+import struct
+from collections import Counter, defaultdict
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+
+from sh7058_cross_rom_scanner import discover_helpers, extract_calls, load_xml_tables
+
+def load_s19(path: Path) -> bytes:
+buf = bytearray([0xFF] * 0x100000)
+for line in path.read_text(errors="ignore").splitlines():
+if len(line) >= 4 and line[0] == "S" and line[1] in ("1", "2", "3"):
+alen = {"1": 4, "2": 6, "3": 8}[line[1]]
+cnt = int(line[2:4], 16)
+addr = int(line[4 : 4 + alen], 16)
+data = bytes.fromhex(line[4 + alen : 2 + cnt * 2])
+if addr + len(data) <= len(buf):
+buf[addr : addr + len(data)] = data
+return bytes(buf)
+
+def load_hex(path: Path) -> bytes:
+buf = bytearray([0xFF] * 0x100000)
+upper = 0
+for line in path.read_text(errors="ignore").splitlines():
+if not line.startswith(":"):
+continue
+cnt = int(line[1:3], 16)
+addr = int(line[3:7], 16)
+rt = int(line[7:9], 16)
+data = bytes.fromhex(line[9 : 9 + 2 * cnt])
+if rt == 0 and upper + addr + len(data) <= len(buf):
+buf[upper + addr : upper + addr + len(data)] = data
+elif rt == 4:
+upper = int.from_bytes(data, "big") << 16
+elif rt == 2:
+upper = int.from_bytes(data, "big") << 4
+return bytes(buf)
+
+def parse_a2l(path: Path) -> Tuple[Dict[int, Tuple[str, str, str]], Dict[int, Tuple[str, str]]]:
+txt = path.read_bytes().decode("cp932", errors="replace")
+syms: Dict[int, Tuple[str, str, str]] = {}
+for kind in ("CHARACTERISTIC", "AXIS_PTS"):
+for blk in txt.split(f"/begin {kind} ")[1:]:
+end = blk.find(f"/end {kind}")
+body = (blk[:end] if end != -1 else blk).lstrip()
+hm = re.match(r"(\S+)\s+"([^"]*)"", body)
+am = re.search(r"\b0x([0-9A-Fa-f]+)\b", body)
+if hm and am:
+syms[int(am.group(1), 16)] = (hm.group(1), hm.group(2), kind)
+meas: Dict[int, Tuple[str, str]] = {}
+for blk in txt.split("/begin MEASUREMENT ")[1:]:
+end = blk.find("/end MEASUREMENT")
+body = (blk[:end] if end != -1 else blk).lstrip()
+hm = re.match(r"(\S+)\s+"([^"]*)"", body)
+am = re.search(r"ECU_ADDRESS\s+0x([0-9A-Fa-f]+)", body)
+if hm and am:
+meas[int(am.group(1), 16)] = (hm.group(1), hm.group(2))
+return syms, meas
+
+def norm_sym(name: str) -> str:
+"""Normalize minor variant suffixes (e.g. mTQH0ST_S vs mTTQH0ST) for consensus comparison."""
+s = re.sub(r"(_S|_2|#\d+)$", "", name or "")
+if s.startswith("mTT"):
+s = "mT" + s[3:]
+return s
+
+def build_func_profiles(rom: bytes, calls: List[dict], syms=None, meas=None) -> Dict[int, dict]:
+prologues = [pc for pc in range(0x20000, len(rom) - 2, 2) if struct.unpack_from(">H", rom, pc)[0] == 0x4F22]
+by_fn = defaultdict(list)
+for c in calls:
+idx = bisect.bisect_right(prologues, c["call_pc"]) - 1
+fn_start = prologues[idx] if idx >= 0 and (c["call_pc"] - prologues[idx]) < 0x1000 else (c["call_pc"] & ~0xFF)
+by_fn[fn_start].append(c)
+
+```
+profiles = {}
+for fn_start, cs in by_fn.items():
+    cs_sorted = sorted(cs, key=lambda x: x["call_pc"])
+    idx = bisect.bisect_right(prologues, fn_start)
+    fn_end = min(fn_start + 0xB00, prologues[idx] if idx < len(prologues) else len(rom))
+    tbl_set = {c["table"] for c in cs_sorted if c["table"]} | {c["axis1"] for c in cs_sorted if c["axis1"]} | {c["axis2"] for c in cs_sorted if c["axis2"]}
+
+    ram_refs: List[int] = []
+    cal_vals = set()
+    imms = set()
+    sub_calls = 0
+    for pc in range(fn_start, fn_end, 2):
+        w = struct.unpack_from(">H", rom, pc)[0]
+        top = w >> 12
+
+```
+
+... [truncated 10282 chars] ...
+
+```
+
+
+
+```python?code_reference&code_event_index=2
+import zipfile
+
+with zipfile.ZipFile("el19a.zip", "r") as z:
+    base = "EL19A--main/EL19A--main/tools/"
+    a2l_code = z.read(base + "a2l_structural_matcher.py").decode("utf-8", errors="replace")
+    print("--- a2l_structural_matcher.py tail ---")
+    print(a2l_code[4000:])
+    wb_code = z.read(base + "nissan_sh705x_workbench.py").decode("utf-8", errors="replace")
+    print("--- nissan_sh705x_workbench.py A2L/audit/inspect snippets ---")
+    for line_no, line in enumerate(wb_code.splitlines(), 1):
+        if any(k in line.lower() for k in ["a2l", "compu", "measurement", "characteristic", "axis_pts", "parse_a2l"]):
+            print(f"{line_no}: {line}")
+
+
+```
+
+```text
+--- a2l_structural_matcher.py tail ---
+rologues, fn_start)
+        fn_end = min(fn_start + 0xB00, prologues[idx] if idx < len(prologues) else len(rom))
+        tbl_set = {c["table"] for c in cs_sorted if c["table"]} | {c["axis1"] for c in cs_sorted if c["axis1"]} | {c["axis2"] for c in cs_sorted if c["axis2"]}
+
+        ram_refs: List[int] = []
+        cal_vals = set()
+        imms = set()
+        sub_calls = 0
+        for pc in range(fn_start, fn_end, 2):
+            w = struct.unpack_from(">H", rom, pc)[0]
+            top = w >> 12
+            if top == 0xD:
+                ea = (pc & ~3) + 4 + (w & 0xFF) * 4
+                if ea + 4 <= len(rom):
+                    v = struct.unpack_from(">I", rom, ea)[0]
+                    if 0xFFFF0000 <= v <= 0xFFFFFFFF:
+                        ram_refs.append(v)
+                    elif 0x04000 <= v < 0x20000 and v not in tbl_set:
+                        cal_vals.add(struct.unpack_from(">H", rom, v)[0])
+            elif top in (0xE, 0xC):
+                imms.add((top, w & 0xFF))
+            elif top == 0xB or (w & 0xF0FF) == 0x400B:
+                sub_calls += 1
+
+        sig = tuple((c["kind"], c["dim1"], c["dim2"], c["elem_type"]) for c in cs_sorted)
+        payloads = []
+        for c in cs_sorted:
+            t = c["table"]
+            if t is not None:
+                sz = c["dim1"] * c["dim2"] * (2 if "16" in c["elem_type"] else 1)
+                b = rom[t : t + sz]
+                payloads.append(b if len(set(b)) > 2 else None)
+            else:
+                payloads.append(None)
+
+        tbl_entries = []
+        for c in cs_sorted:
+            t = c["table"]
+            sym = syms[t][0] if (syms and t in syms) else None
+            ax1_sym = syms[c["axis1"]][0] if (syms and c["axis1"] in syms) else None
+            ax2_sym = syms[c["axis2"]][0] if (syms and c["axis2"] in syms) else None
+            tbl_entries.append({
+                "table": t,
+                "sym": sym,
+                "ax1_sym": ax1_sym,
+                "ax2_sym": ax2_sym,
+                "sig": (c["kind"], c["dim1"], c["dim2"], c["elem_type"]),
+            })
+
+        profiles[fn_start] = {
+            "start": fn_start,
+            "len": fn_end - fn_start,
+            "calls": cs_sorted,
+            "sig": sig,
+            "sig_bag": tuple(sorted(sig)),
+            "payloads": payloads,
+            "cal_vals": cal_vals,
+            "imms": imms,
+            "sub_calls": sub_calls,
+            "ram_names": [meas[r][0] for r in dict.fromkeys(ram_refs) if meas and r in meas],
+            "tbl_entries": tbl_entries,
+        }
+    return profiles
+
+
+def score_pair(el_pr: dict, cand: dict) -> Tuple[int, dict]:
+    exact_order = el_pr["sig"] == cand["sig"]
+    n_pay = 0
+    for eb, cb in zip(el_pr["payloads"], cand["payloads"]):
+        if eb is not None and eb == cb:
+            n_pay += 1
+    if not n_pay:
+        el_set = {b for b in el_pr["payloads"] if b is not None}
+        c_set = {b for b in cand["payloads"] if b is not None}
+        n_pay = len(el_set & c_set)
+    cal_ov = len(el_pr["cal_vals"] & cand["cal_vals"])
+    imm_ov = len(el_pr["imms"] & cand["imms"])
+    len_diff = abs(el_pr["len"] - cand["len"])
+    score = (20 * n_pay) + (5 if exact_order else 0) + (3 * cal_ov) + imm_ov - (len_diff // 128)
+    return score, {"n_pay": n_pay, "exact_order": exact_order, "cal_ov": cal_ov, "imm_ov": imm_ov, "len_diff": len_diff}
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Structural function & A2L RAM/table matcher for EL19A")
+    ap.add_argument("--el19a", default="EVIDENCE/VERSA f501.bin")
+    ap.add_argument("--xml", default="CALIBRATIONS/EL19A_release1_conservative.xml")
+    ap.add_argument("--v6-hex", default="EVIDENCE/side project/64810223F121200000.hex")
+    ap.add_argument("--v6-a2l", default="EVIDENCE/side project/64811000p2_m.a2l")
+    ap.add_argument("--juke-s19", default="EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/9APCTDEM06.s19")
+    ap.add_argument("--juke-a2l", default="EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/RFCC_2XHK19BDF1.a2l")
+    args = ap.parse_args()
+
+    el = Path(args.el19a).read_bytes()
+    v6 = load_hex(Path(args.v6_hex))
+    jk = load_s19(Path(args.juke_s19))
+    xml_tables = load_xml_tables(Path(args.xml))
+
+    v6_syms, v6_meas = parse_a2l(Path(args.v6_a2l))
+    jk_syms, jk_meas = parse_a2l(Path(args.juke_a2l))
+
+    el_c = extract_calls(el, discover_helpers(el))
+    v6_c = extract_calls(v6, discover_helpers(v6))
+    jk_c = extract_calls(jk, discover_helpers(jk))
+
+    el_p = build_func_profiles(el, el_c)
+    v6_p = build_func_profiles(v6, v6_c, v6_syms, v6_meas)
+    jk_p = build_func_profiles(jk, jk_c, jk_syms, jk_meas)
+
+    v6_by_bag = defaultdict(list)
+    for pr in v6_p.values():
+        v6_by_bag[pr["sig_bag"]].append(pr)
+    jk_by_bag = defaultdict(list)
+    for pr in jk_p.values():
+        jk_by_bag[pr["sig_bag"]].append(pr)
+
+    # Also build per-table non-trivial payload A2L index for 1-call / fallback cross-reference
+    v6_pay = defaultdict(list)
+    jk_pay = defaultdict(list)
+    for pr in v6_p.values():
+        for c, te in zip(pr["calls"], pr["tbl_entries"]):
+            if c["table"]:
+                sz = c["dim1"] * c["dim2"] * (2 if "16" in c["elem_type"] else 1)
+                b = v6[c["table"] : c["table"] + sz]
+                if len(set(b)) > 2 and te["sym"]:
+                    v6_pay[b].append((te["sym"], pr["start"]))
+    for pr in jk_p.values():
+        for c, te in zip(pr["calls"], pr["tbl_entries"]):
+            if c["table"]:
+                sz = c["dim1"] * c["dim2"] * (2 if "16" in c["elem_type"] else 1)
+                b = jk[c["table"] : c["table"] + sz]
+                if len(set(b)) > 2 and te["sym"]:
+                    jk_pay[b].append((te["sym"], pr["start"]))
+
+    print(f"=== Structural A2L Matcher Summary ===")
+    print(f"EL19A: {len(el_p)} caller functions | V6 (SH705822N): {len(v6_p)} functions, {len(v6_syms)} syms, {len(v6_meas)} RAM | Juke (SH705828N): {len(jk_p)} functions, {len(jk_syms)} syms, {len(jk_meas)} RAM")
+
+    high_conf_fn = []
+    for fn, pr in sorted(el_p.items()):
+        bag = pr["sig_bag"]
+        vm = sorted([(score_pair(pr, x)[0], score_pair(pr, x)[1], x) for x in v6_by_bag.get(bag, [])], key=lambda t: -t[0])
+        jm = sorted([(score_pair(pr, x)[0], score_pair(pr, x)[1], x) for x in jk_by_bag.get(bag, [])], key=lambda t: -t[0])
+
+        # Strong structural match criteria:
+        #   - unique or low-multiplicity bag (len(vm) <= 3 or len(jm) <= 3) with >=2 calls, OR
+        #   - unique 1-call rare signature (<=3 hits in V6/Juke), OR
+        #   - at least one non-trivial payload match inside matching bag
+        is_multi = len(bag) >= 2
+        rare_v = 0 < len(vm) <= 3
+        rare_j = 0 < len(jm) <= 3
+        has_pay = (vm and vm[0][1]["n_pay"] > 0) or (jm and jm[0][1]["n_pay"] > 0)
+        if (is_multi and (rare_v or rare_j)) or (not is_multi and ((len(vm) == 1) or (0 < len(jm) <= 2))) or has_pay:
+            high_conf_fn.append((fn, pr, vm, jm))
+
+    print(f"\nHigh-specificity structural function matches: {len(high_conf_fn)} / {len(el_p)} EL19A functions\n")
+
+    dual_consensus = []
+    uncat_leads = []
+    for fn, pr, vm, jm in high_conf_fn:
+        v_top = vm[0] if vm else None
+        j_top = jm[0] if jm else None
+        # Check if V6 and Juke agree on table symbol roots (positional or multiset)
+        consensus = False
+        if v_top and j_top:
+            v_roots = {norm_sym(e["sym"]) for e in v_top[2]["tbl_entries"] if e["sym"]}
+            j_roots = {norm_sym(e["sym"]) for e in j_top[2]["tbl_entries"] if e["sym"]}
+            if v_roots & j_roots:
+                consensus = True
+        el_tbls = [f"0x{c['table']:05X}{'*' if c['table'] not in xml_tables else ''}" if c["table"] else "None" for c in pr["calls"]]
+        has_uncat = any(c["table"] and c["table"] not in xml_tables for c in pr["calls"])
+        if consensus:
+            dual_consensus.append((fn, pr, v_top, j_top, el_tbls))
+        if has_uncat:
+            uncat_leads.append((fn, pr, v_top, j_top, el_tbls, consensus))
+
+    print(f"--- Dual V6 (SH705822N) + Juke (SH705828N) Symbol-Root Consensus Functions: {len(dual_consensus)} ---")
+    for fn, pr, v_top, j_top, el_tbls in dual_consensus:
+        v_syms_str = [f"{e['sym'] or '?'}" for e in v_top[2]["tbl_entries"]]
+        j_syms_str = [f"{e['sym'] or '?'}" for e in j_top[2]["tbl_entries"]]
+        rams = (v_top[2]["ram_names"] + [r for r in j_top[2]["ram_names"] if r not in v_top[2]["ram_names"]])[:6]
+        print(f"  EL19A fn 0x{fn:05X} tbls={el_tbls} (*=not in R1 XML)")
+        print(f"    sig={pr['sig']}")
+        print(f"    V6   fn 0x{v_top[2]['start']:05X} (score={v_top[0]}, pay={v_top[1]['n_pay']}, cal_ov={v_top[1]['cal_ov']}): {v_syms_str}")
+        print(f"    Juke fn 0x{j_top[2]['start']:05X} (score={j_top[0]}, pay={j_top[1]['n_pay']}, cal_ov={j_top[1]['cal_ov']}): {j_syms_str}")
+        if rams:
+            print(f"    RAM leads: {rams}")
+
+    print(f"\n--- Single-Source / Rare Structural Leads for Functions Containing Uncatalogued EL19A Tables (*): {len([x for x in uncat_leads if not x[5]])} ---")
+    for fn, pr, v_top, j_top, el_tbls, cons in uncat_leads:
+        if cons:
+            continue
+        print(f"  EL19A fn 0x{fn:05X} tbls={el_tbls} sig={pr['sig']}")
+        if v_top:
+            print(f"    V6   0x{v_top[2]['start']:05X} (n={len(v6_by_bag.get(pr['sig_bag'], []))}, pay={v_top[1]['n_pay']}, cal_ov={v_top[1]['cal_ov']}): {[e['sym'] or '?' for e in v_top[2]['tbl_entries']]} ram={v_top[2]['ram_names'][:5]}")
+        if j_top:
+            print(f"    Juke 0x{j_top[2]['start']:05X} (n={len(jk_by_bag.get(pr['sig_bag'], []))}, pay={j_top[1]['n_pay']}, cal_ov={j_top[1]['cal_ov']}): {[e['sym'] or '?' for e in j_top[2]['tbl_entries']]} ram={j_top[2]['ram_names'][:5]}")
+
+    # Summary of table-level payload + helper matches not covered above
+    seen_tbl = set()
+    pay_rows = []
+    for c in el_c:
+        t = c["table"]
+        if t is None or t in seen_tbl:
+            continue
+        seen_tbl.add(t)
+        sz = c["dim1"] * c["dim2"] * (2 if "16" in c["elem_type"] else 1)
+        b = el[t : t + sz]
+        if len(set(b)) <= 2:
+            continue
+        vh = sorted({s for s, _ in v6_pay.get(b, [])})
+        jh = sorted({s for s, _ in jk_pay.get(b, [])})
+        if vh or jh:
+            pay_rows.append((t, t not in xml_tables, f"{c['kind']} {c['dim1']}x{c['dim2']} {c['elem_type']}", vh, jh))
+    print(f"\n--- Non-trivial EL19A caller-backed tables with exact V6/Juke payload+helper match: {len(pay_rows)} (uncatalogued={sum(1 for r in pay_rows if r[1])}) ---")
+    for t, uncat, desc, vh, jh in pay_rows:
+        if uncat:
+            print(f"  0x{t:05X}* ({desc}): V6={vh[:3]} Juke={jh[:3]}")
+
+
+if __name__ == "__main__":
+    main()
+
+--- nissan_sh705x_workbench.py A2L/audit/inspect snippets ---
+12:   5. Structural function-signature + A2L (CHARACTERISTIC / AXIS_PTS / COMPU_METHOD / MEASUREMENT) lead matching
+13:      against `64810223F121200000.hex` (SH705822N) + `64811000p2_m.a2l` and `9APCTDEM06.s19` + `RFCC_2XHK19BDF1.a2l`.
+16:   Cross-ROM and A2L outputs are comparative *leads* only, never target-side proof on EL19A.
+39: # Unified ROM & A2L / Repository Metadata Loaders
+191: def parse_a2l_rich(path: Path) -> dict:
+193:     compu: Dict[str, dict] = {}
+194:     for blk in txt.split("/begin COMPU_METHOD ")[1:]:
+195:         end = blk.find("/end COMPU_METHOD")
+209:         compu[name] = {"desc": desc, "unit": unit, "scale": scale_note}
+212:     for kind in ("CHARACTERISTIC", "AXIS_PTS"):
+223:             cm_info = compu.get(cm.group(1), {}) if cm else {}
+233:     for blk in txt.split("/begin MEASUREMENT ")[1:]:
+234:         end = blk.find("/end MEASUREMENT")
+241:         cm_info = compu.get(cm.group(1), {}) if cm else {}
+247:     return {"syms": syms, "meas": meas, "compu": compu}
+350: def build_func_profiles(rom: bytes, calls: List[dict], a2l: Optional[dict] = None) -> Dict[int, dict]:
+361:     syms = a2l["syms"] if a2l else {}
+362:     meas = a2l["meas"] if a2l else {}
+444: def build_a2l_table_leads(el_rom: bytes, el_calls: List[dict], v6_hex: Path, v6_a2l_p: Path, jk_s19: Path, jk_a2l_p: Path) -> dict:
+445:     """Compute per-EL19A-function and per-EL19A-table structural A2L leads."""
+446:     if not (v6_hex.exists() and v6_a2l_p.exists() and jk_s19.exists() and jk_a2l_p.exists()):
+451:     v6_a2l = parse_a2l_rich(v6_a2l_p)
+452:     jk_a2l = parse_a2l_rich(jk_a2l_p)
+458:     v6_p = build_func_profiles(v6, v6_c, v6_a2l)
+459:     jk_p = build_func_profiles(jk, jk_c, jk_a2l)
+540:         "v6_a2l": v6_a2l,
+541:         "jk_a2l": jk_a2l,
+638:     a2l_leads = build_a2l_table_leads(
+640:         Path(args.v6_hex), Path(args.v6_a2l),
+641:         Path(args.juke_s19), Path(args.juke_a2l),
+670:     # Missing high-value 3D or A2L-supported objects
+671:     print("\nMissing-from-XML 3D tables & dual-consensus A2L leads:")
+674:         leads = a2l_leads["by_table"].get(a, [])
+676:         v_p = sorted({x["sym"] for x in a2l_leads.get("v6_pay", {}).get(t["payload"], [])})
+677:         j_p = sorted({x["sym"] for x in a2l_leads.get("jk_pay", {}).get(t["payload"], [])})
+693:             print(f"  0x{a:05X} ({t['kind']} {t['elem_type']} {t['dim1']}x{t['dim2']} @ {[f'0x{x:05X}' for x in t['call_pcs'][:2]]}) {var_flags} -> {lead_txt or 'no A2L lead'}")
+703:                 "shared_as_axis_of", "reciprocal_with", "a2l_consensus", "a2l_v6_lead", "a2l_juke_lead", "a2l_ram_leads",
+707:                 leads = a2l_leads["by_table"].get(a, [])
+709:                 v_pay = sorted({x["sym"] for x in a2l_leads.get("v6_pay", {}).get(t["payload"], [])})
+710:                 j_pay = sorted({x["sym"] for x in a2l_leads.get("jk_pay", {}).get(t["payload"], [])})
+745:     a2l_leads = build_a2l_table_leads(
+747:         Path(args.v6_hex), Path(args.v6_a2l),
+748:         Path(args.juke_s19), Path(args.juke_a2l),
+769:         for fn, info in sorted(a2l_leads.get("by_func", {}).items()):
+781:     by_fn = a2l_leads.get("by_func", {})
+804:     v6_meas = a2l_leads.get("v6_a2l", {}).get("meas", {})
+805:     jk_meas = a2l_leads.get("jk_a2l", {}).get("meas", {})
+809:         print(f"Direct same-address A2L MEASUREMENT (unverified lead): V6={v_m} | Juke={j_m}")
+1005:         p_sub.add_argument("--v6-a2l", default="EVIDENCE/side project/64811000p2_m.a2l")
+1007:         p_sub.add_argument("--juke-a2l", default="EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/RFCC_2XHK19BDF1.a2l")
+
+
+```
+
+Expanding the workbench with the **complete symbol tables** from both A2L files (`64811000p2_m.a2l` for V6 / `SH705822N` and `RFCC_2XHK19BDF1.a2l` for Juke / `SH705828N`) turns A2L data from a flat address-to-name lookup into a **relational calibration graph** for candidate ranking and hypothesis generation. Under the `EL19A` evidence standard, every A2L-derived link remains a *lead/hypothesis* until verified against target-ROM code, queries, and consumers on `VERSA f501.bin`.
+
+### Theoretical Gaps in the Current A2L Integration
+
+Right now, `parse_a2l_rich` in `nissan_sh705x_workbench.py` and `parse_a2l` in `a2l_structural_matcher.py` extract basic entries from `CHARACTERISTIC`, `AXIS_PTS`, `MEASUREMENT`, and `COMPU_METHOD` blocks using lightweight string splits and regular expressions. Incorporating the full A2L symbol tables addresses four structural limitations:
+
+* **Missing Map-to-Axis & Layout Graph:** `CHARACTERISTIC` blocks often reference `AXIS_DESCR` (`AXIS_PTS_REF`, `CURVE_AXIS_REF`, input quantity `MEASUREMENT`, breakpoints, and conversion) and `RECORD_LAYOUT` definitions rather than embedding every detail in one flat line. Modeling those edges lets the workbench connect a 2D/3D map lead to its candidate axis tables and RAM signals together.
+
+
+* **Incomplete Conversion & Math Semantics:** Parsing full `COMPU_METHOD`, `COMPU_TAB`, `COMPU_VTAB`, and formula/rational coefficients gives richer context for candidate evaluation (e.g., whether a donor symbol is a raw counter, bitfield/state enum, temperature, or ratio), while keeping units/formulas tagged strictly as *donor metadata* rather than target-ROM truth.
+
+
+* **Unused Subsystem & Strategy Grouping:** Full A2L parsing of `FUNCTION` and `GROUP` blocks (plus `SUB_FUNCTION` / `DEF_CHARACTERISTIC` / `IN_MEASUREMENT` / `OUT_MEASUREMENT`) clusters related symbols into functional neighborhoods. That helps score multi-table subroutines (such as dual V6/Juke consensus functions) as coherent subsystem leads rather than isolated name hits.
+
+
+* **Full-Symbol Coverage & Provenance:** Parsing all symbols in both A2L files—not only those directly hitting a scanned ROM address—lets you inspect unmapped or relocated symbols, attach A2L file hashes/versions to run manifests, and explicitly mark unresolved links instead of dropping them silently.
+
+
+
+---
+
+### Phased Plan to Expand the Workbench
+
+#### Phase 1: Build a Structured A2L Symbol Graph Parser (Read-Only)
+
+* Replace ad-hoc block slicing with a deterministic ASAP2 parser module (for example `tools/a2l_symbol_table.py`) that indexes all `MEASUREMENT`, `CHARACTERISTIC`, `AXIS_PTS`, `COMPU_METHOD`, `COMPU_TAB` / `COMPU_VTAB`, `RECORD_LAYOUT`, and `FUNCTION` / `GROUP` records for both A2L files.
+
+
+* Preserve normalized keys (`ECU_ADDRESS`, symbol name, unit, conversion ref, axis refs, functional group) and record explicit `None` / unresolved status when an A2L block omits a field or uses an unsupported keyword.
+
+
+* *Verification:* Parse both `64811000p2_m.a2l` and `RFCC_2XHK19BDF1.a2l` with zero crashes, emitting deterministic symbol counts, duplicate-address warnings (if any), and A2L SHA-256 hashes.
+
+
+
+#### Phase 2: Enrich Function & Table Lead Scoring (`a2l_structural_matcher` & `audit`)
+
+* Link each donor ROM lookup call to its `CHARACTERISTIC` / `AXIS_PTS`, attached `AXIS_DESCR` axes, conversion descriptor, functional group, and referenced `0xFFFFxxxx` `MEASUREMENT` symbols.
+
+
+* Score `EL19A` caller functions and tables by combining helper/dimension/payload structural similarity with **subsystem/axis co-occurrence** across V6 and Juke, while keeping structural geometry distinct from A2L naming.
+
+
+* *Verification:* Re-run structural matching and verify that existing high-value leads (such as `0x0FEE0`, `0x0D856`, `0x0C2D6`, `0x0F3EE`, `0x0DE6E` ↔ `0x0E2ED`, and `0x0AFF2` / `0x0E5E8`) retain clear provenance and non-empty candidate metadata where A2L links exist.
+
+
+
+#### Phase 3: Add `inspect` & Per-Call Export Support with Strict Evidence Tags
+
+* Extend `inspect` so querying a table, function, or `0xFFFFxxxx` RAM literal shows donor symbol candidates alongside axis/group neighbors and donor conversion notes—explicitly labeled as *donor hypothesis (unverified on EL19A)*.
+
+
+* Feed A2L candidate columns into per-call/audit exports without overwriting target-ROM structural facts (`address`, `width`, `extent`, `geometry`, target query/axis, and verified consumers).
+
+
+* *Verification:* Test `inspect` on table, function, and RAM addresses and confirm every A2L field carries an explicit donor source tag and never promotes to a verified target claim on its own.
+
+
+
+---
+
+### Guardrails to Keep Built In
+
+* **Separate Donor A2L Leads from Target Proof:** Never let an A2L symbol name, unit, or axis role substitute for `EL19A` target-side reader/query/consumer evidence, and never assume A2L-to-ROM pairing beyond what the repository proves.
+
+
+* **Keep `WO70006` & Release 1.1 Gates Clean:** Treat A2L enrichment as a lead-ranking and inspection upgrade—not a substitute for per-call target provenance or Release 1.1 structural reconciliation.
+
+
+
+
+
+Adding a dedicated ASAP2/A2L symbol table module (such as `tools/a2l_symbol_table.py`) lets the Nissan SH705x workbench represent full calibration and telemetry relationships—characteristics, axis descriptors, record layouts, conversions, measurements, and functional groups—as structured records while keeping all donor A2L metadata explicitly tagged as **unverified donor leads** on `EL19A` (`VERSA f501.bin`).
+
+### 1. Key A2L Sections to Parse
+
+To move beyond flat symbol/address lookups in `64811000p2_m.a2l` (`SH705822N` V6) and `RFCC_2XHK19BDF1.a2l` (`SH705828N` Juke), the parser should walk `/begin <KEYWORD> ... /end <KEYWORD>` blocks cleanly while retaining raw/unresolved attributes when syntax varies:
+
+* **`CHARACTERISTIC` & `AXIS_PTS`:** Symbol name, long identifier/description, characteristic type (`CURVE`, `MAP`, `VALUE`, `ASCII`, `VAL_BLK`, etc.), ROM address (`ECU_ADDRESS`), `RECORD_LAYOUT` reference, `CONVERSION` (`COMPU_METHOD`) reference, and nested `AXIS_DESCR` blocks (axis attribute/type, input `MEASUREMENT` quantity, `AXIS_PTS_REF`, `CURVE_AXIS_REF`, `FIX_AXIS_PAR` / `FIX_AXIS_PAR_DIST`, breakpoint count, and conversion).
+* **`MEASUREMENT`:** Symbol name, description, data type (`UBYTE`, `SBYTE`, `UWORD`, `SWORD`, `ULONG`, `SLONG`, `FLOAT32_IEEE`, etc.), conversion reference, `ECU_ADDRESS` (typically `0xFFFFxxxx` RAM cells or ROM/constant addresses), `BIT_MASK` / `READ_WRITE` / `ECU_ADDRESS_EXTENSION` if present, and limits/resolution metadata.
+* **`COMPU_METHOD`, `COMPU_TAB`, & `COMPU_VTAB`:** Conversion type (`IDENTICAL`, `LINEAR`, `RAT_FUNC`, `TAB_INTP`, `TAB_NOINTP`, `TAB_VERB`, `FORM`), physical unit string, `COEFFS` / `COEFFS_LINEAR` / `FORMULA` / `FORMAT` strings, and discrete table/enum mappings so you can distinguish raw counts, scaled physical quantities, and state/bitfield enums.
+* **`RECORD_LAYOUT`:** Element layout and axis/data ordering rules (`FNC_VALUES`, `AXIS_PTS_X`, `AXIS_PTS_Y`, `NO_AXIS_PTS_X`, `NO_AXIS_PTS_Y`, index ordering, and byte/word widths) so table extents and dimensions have an explicit donor layout reference alongside target-ROM reader geometry.
+* **`FUNCTION` & `GROUP`:** Strategy/subsystem blocks (`SUB_FUNCTION`, `DEF_CHARACTERISTIC`, `REF_CHARACTERISTIC`, `IN_MEASUREMENT`, `OUT_MEASUREMENT`, `SUB_GROUP`, `ROOT`) to group co-occurring maps and RAM signals into functional neighborhoods during candidate ranking.
+
+
+
+### 2. Core Data Structures
+
+Keep the module pure Python 3 standard library with immutable/typed dataclasses and explicit provenance fields (`None` or `"unresolved"` rather than guessed values):
+
+* **`A2LFileProvenance`:** `path`, `sha256`, `byte_size`, `encoding` (`cp932`), `a2ml_version` / `asap2_version` if present, and `parse_warnings` / `skipped_blocks`.
+* **`AxisDescriptor`:** `axis_type` (`STD_AXIS`, `COM_AXIS`, `FIX_AXIS`, `CURVE_AXIS`, `RES_AXIS`), `input_quantity` (measurement name), `axis_pts_ref` (symbol name), `curve_axis_ref` (symbol name), `conversion_name`, `max_axis_points`, and `fix_params` (e.g., offset/step/count when `FIX_AXIS` is used).
+* **`CompuSpec`:** `name`, `conv_type`, `unit`, `format_str`, `coeffs` (tuple of floats), `formula_str`, and `value_table` (`dict` or mapping entries for `COMPU_TAB` / `COMPU_VTAB`).
+* **`CharacteristicRecord`:** `name`, `description`, `char_type`, `address` (`int | None`), `deposit_layout` (`str | None`), `conversion_name` (`str | None`), `axes` (`list[AxisDescriptor]`), and `extra_refs` (`dict` for dependent/comparison characteristics if present).
+* **`AxisPtsRecord`:** `name`, `description`, `address` (`int | None`), `deposit_layout` (`str | None`), `input_quantity` (`str | None`), `conversion_name` (`str | None`), and `max_axis_points` (`int | None`).
+* **`MeasurementRecord`:** `name`, `description`, `datatype` (`str | None`), `conversion_name` (`str | None`), `address` (`int | None`), `bit_mask` (`int | None`), and `flags` (`dict`).
+* **`SubsystemGroup`:** `kind` (`"FUNCTION"` or `"GROUP"`), `name`, `description`, `characteristics` (`list[str]`), `measurements` (`list[str]`), and `children` (`list[str]`).
+* **`A2LSymbolTable`:** `provenance` (`A2LFileProvenance`), `characteristics_by_name`, `characteristics_by_addr`, `axis_pts_by_name`, `axis_pts_by_addr`, `measurements_by_name`, `measurements_by_addr`, `compu_methods`, `record_layouts`, `subsystems`, and helper reverse-index methods (`axes_for_characteristic`, `subsystems_for_symbol`, `measurements_for_characteristic`).
+
+### 3. Integration Points with the Workbench
+
+Integrate `A2LSymbolTable` cleanly into existing tools without altering target-ROM structure or promoting donor labels into verified `EL19A` facts:
+
+* **`tools/a2l_structural_matcher.py`:** Replace `parse_a2l` with `A2LSymbolTable` for both V6 and Juke. Enrich function and table profiles with linked axis symbols, `COMPU_METHOD` units/types, and `FUNCTION`/`GROUP` subsystem overlap so multi-map routines (such as `0x0FEE0`, `0x0D856`, `0x0C2D6`, `0x0F3EE`, `0x0DE6E` ↔ `0x0E2ED`, and `0x0AFF2` / `0x0E5E8`) surface coherent axis and subsystem neighbors while still scoring structural helper/dimension/payload agreement first.
+
+
+* **`tools/nissan_sh705x_workbench.py` (`audit` & `inspect`):**
+* In `audit`, include donor A2L symbol/axis/subsystem/unit columns as clearly labeled *lead/hypothesis* fields alongside target-ROM caller geometry, XML/catalog/scope status, and variant flags.
+
+
+* In `inspect`, when given a table, caller function, or `0xFFFFxxxx` RAM address, display matching V6/Juke `MEASUREMENT` / `CHARACTERISTIC` / `AXIS_PTS` entries, referenced axes, donor conversion units, and subsystem group names—explicitly tagged as donor leads rather than target proof.
+
+
+
+
+* **Per-Call Provenance & Manifests (`WO70006` readiness):** Record the A2L file paths and SHA-256 hashes in the run provenance manifest, and keep donor A2L candidate fields separate from target-ROM call PC, helper, geometry, query register, and verified consumer fields (leaving unverified target fields explicitly unresolved).
+
+
+* **Unit & Fixture Tests (`tools/`):** Add deterministic parser tests using small synthetic A2L snippets covering `CHARACTERISTIC` with `AXIS_DESCR` (`COM_AXIS` and `FIX_AXIS`), `AXIS_PTS`, `MEASUREMENT` (`0xFFFFxxxx` RAM + bitmasks), `COMPU_METHOD` / `COMPU_VTAB`, and `FUNCTION`/`GROUP` edges.
