@@ -236,22 +236,24 @@ jobs:
                   status = "HISTORICAL_ONLY_NOT_REEMITTED_BY_STRICT_CURRENT_SCANNER"
               else:
                   status = "STRICT_CURRENT_ONLY_NOT_IN_HISTORICAL_306"
-              geom_rows = []
-              seen = set()
+              variant_registry = {}
               for version, candidate in (("strict_current", cc), ("historical_306", lc)):
                   if not candidate:
                       continue
                   for gv in candidate.get("geometry_variants", []):
-                      sig = (version,) + tuple(gv.get(k) for k in (
+                      sig = tuple(gv.get(k) for k in (
                           "helper_kind", "element_type", "dim1", "dim2", "byte_length", "payload_sha256"
                       ))
-                      if sig in seen:
-                          continue
-                      seen.add(sig)
-                      g = dict(gv)
-                      g["discovery_version"] = version
-                      g["candidate_status"] = status
-                      geom_rows.append(g)
+                      if sig not in variant_registry:
+                          g = dict(gv)
+                          g["discovery_versions"] = []
+                          g["candidate_status"] = status
+                          variant_registry[sig] = g
+                      variant_registry[sig]["discovery_versions"].append(version)
+              geom_rows = []
+              for sig, g in sorted(variant_registry.items(), key=lambda item: str(item[0])):
+                  g["discovery_versions"] = sorted(set(g["discovery_versions"]))
+                  geom_rows.append(g)
               base = dict(lc or cc)
               base["candidate_status"] = status
               base["evidence_class"] = "donor"
@@ -272,12 +274,13 @@ jobs:
           )
           donor_summary = next(r for r in current_index["sources"]["donor_roms"] if r["rom_id"] == donor_rom_id)
           existing_v6_payload_sigs = set()
-          for rows in current_index["lookups"]["payload_index"].values():
+          for payload_key, rows in current_index["lookups"]["payload_index"].items():
+              payload_sha = payload_key.split(":", 1)[0]
               for row in rows:
                   if row.get("rom_id") == donor_rom_id:
                       existing_v6_payload_sigs.add((
                           row.get("address"), row.get("helper_kind"), row.get("element_type"),
-                          row.get("dim1"), row.get("dim2"), row.get("byte_length"), row.get("payload_sha256"),
+                          row.get("dim1"), row.get("dim2"), row.get("byte_length"), payload_sha,
                       ))
           added_legacy_payload_variants = []
           for c in legacy_cat.get("candidates", []):
@@ -363,7 +366,7 @@ jobs:
                   item = {
                       "address": c["base"], "address_hex": c["base_hex"],
                       "candidate_status": c["candidate_status"],
-                      "discovery_provenance": c["discovery_provenance"],
+                      "discovery_provenance": gv.get("discovery_versions", []),
                       "helper_kinds": c.get("helper_kinds", []),
                       "variant": gv,
                   }
@@ -384,7 +387,7 @@ jobs:
                           "payload_sha256": pk[0], "byte_length": pk[1],
                           "same_geometry": geom_key(eg) == geom_key(d["variant"]),
                           "v6_candidate_status": d["candidate_status"],
-                          "v6_discovery_provenance": d["discovery_provenance"],
+                          "v6_discovery_provenance": d["variant"].get("discovery_versions", []),
                           "el19a_geometry": eg, "v6_geometry": d["variant"],
                       })
                   gk = geom_key(eg)
@@ -409,7 +412,7 @@ jobs:
                               "changed_bytes": sum(x["changed_bytes"] for x in ranges),
                               "difference_ranges": ranges,
                               "v6_candidate_status": d["candidate_status"],
-                              "v6_discovery_provenance": d["discovery_provenance"],
+                              "v6_discovery_provenance": d["variant"].get("discovery_versions", []),
                           })
           exact_pairs.sort(key=lambda x: (x["el19a_address"], x["v6_address"], x["payload_sha256"]))
           geometry_diff_pairs.sort(key=lambda x: (x["el19a_address"], x["v6_address"]))
