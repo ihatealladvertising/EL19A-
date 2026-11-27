@@ -5,6 +5,17 @@
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
+## QUICK START — worker entry point
+
+This block is a navigation aid, not a second queue. The lane table and ordered READY backlog in this file remain the sole assignment authority.
+
+1. Find your slot (Worker 1, 2 or 3) in the live lane table immediately below. Work only the tasks owned by that slot.
+2. Start with the earliest READY work order in your lane's FIFO. The ordered READY backlog below the lane table confirms sequence; do not skip, reorder or run two investigations concurrently within the lane.
+3. Open that `CONTROL/WO<ID>.md` report and read only the dependencies it names. The WO's objective, authorized paths and stop conditions govern the task.
+4. Follow `CONTROL/WORKER_PROTOCOL.md`, including artifact-first closeout, Findings disposition, no-repeat boundaries and the integration gate.
+5. Worker 2 executes its FIFO only; it does not create, prioritize or reassign work. Workers 1 and 3 may create bounded, fully specified execution WOs directly for Worker 2 under the protocol.
+6. A LOCKED integration gate pauses shared publication, not independent technical work. Prepare the required local pending package and continue according to the protocol.
+
 ## Autonomous worker-lane protocol (effective 2026-11-22)
 
 The controlling execution rules are in [CONTROL/WORKER_PROTOCOL.md](WORKER_PROTOCOL.md). The three lanes operate independently; no ChatGPT/coordinator assignment, first-pick gate, runtime approval or cross-worker wait is required.
