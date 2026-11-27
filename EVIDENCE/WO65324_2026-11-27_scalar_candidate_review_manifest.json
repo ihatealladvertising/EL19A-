@@ -1,0 +1,54 @@
+{
+  "schema": "wo65324-scalar-candidate-review-v1",
+  "date": "2026-11-27",
+  "inputs": {
+    "target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "fresh_catalogue_sha256": "426e8a583791e4ed029b8a4a658bf89ceebaf7d8d0ddfdb58b4326378e65e59a",
+    "structural_matrix_git_blob": "48466f4f1573f1eb227fe8d14e2665b502c24eed",
+    "Release1_xml_sha256": "56728e0023251e77786eac1916df5c4ca526d90851690fe195b55cb86f410acb",
+    "WO65090_scope": "0x7800-0x9B00 excluded from new candidate set"
+  },
+  "method": "Filter fresh scalar candidates to bounded one/two-byte spans outside the completed WO65090 address window. Independently hash target ROM bytes; compare spans against all 291 WO70031 target-candidate extents and other selected scalar spans; cross-check exact storageaddress in current Release 1, full definition, tiered XML and Findings markdown.",
+  "counts": {
+    "fresh_scalar_candidates_total": 2739,
+    "fresh_unique_scalar_candidates_total": 2739,
+    "typed_in_bounds_outside_WO65090_window": 74,
+    "independent_ROM_hash_matches": 74,
+    "overlap_with_WO70031_table_extents": 0,
+    "pairwise_scalar_span_overlaps": 0,
+    "RAW_PROVISIONAL_candidates_for_review": 72,
+    "addresses_already_present_in_definition_sources": 2,
+    "types": {
+      "uint16": 39,
+      "uint8": 35
+    },
+    "adjacency_groups": 56,
+    "multi_address_adjacency_groups": 7
+  },
+  "existing_definition_addresses": [
+    {
+      "address": "0x0EDD8",
+      "release1": "[P] Operating Limit Clamp Curve 2 [S] (EDD8)",
+      "full": "Operating Limit Clamp Curve 2 [S] (EDD8)",
+      "findings": ""
+    },
+    {
+      "address": "0x1170A",
+      "release1": "",
+      "full": "Query axis (0x1170A; untyped axis)",
+      "findings": "FINDINGS/records/FND-000017.md"
+    }
+  ],
+  "candidate_decision": [
+    "72 rows meet target-byte type/width/count/extent/hash and no table/scalar extent overlap and are absent from the checked definition files; propose only as generic RAW/PROVISIONAL review candidates.",
+    "Two exact-address existing definitions are not proposed for duplicate additions: 0x0EDD8 Release 1 curve and 0x1170A full-definition query axis/FND-000017 reference.",
+    "Adjacent raw candidate rows are individually backed but adjacency clusters are review aids only; no composite parent structures are asserted.",
+    "This is a data-only review ledger, not an XML export: current exporter does not emit scalar_candidates into preview XML and work order does not authorize tool source changes.",
+    "No semantic interpretation, runtime function, unit, scaling conversion or calibration name is inferred."
+  ],
+  "output": {
+    "path": "EVIDENCE/WO65324_2026-11-27_scalar_candidate_review.tsv",
+    "data_rows": 74,
+    "sha256": "e613bfddf24543bf5ea425eae82280f087a51674716e17565fcfbf2d74c74ed2"
+  }
+}
