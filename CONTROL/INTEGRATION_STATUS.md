@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — first-class V6 donor rescan, index merge and EL19A comparison (2026-11-27)
 **Purpose:** Reuse and SHA-verify the prior 150-ROM reference-index artifact; rescan only `EVIDENCE/side project/64810223F121200000.hex` and EL19A with the current workbench; export full call/helper/table JSON and TSV plus lossless per-address catalogues and manifests; reconcile the V6 306-table historical baseline; add V6 ROM payload and candidate A2L symbol associations to the reference index with explicit `PROVISIONAL_UNVERIFIED` pairing status; rerun exact-payload and same-geometry-difference comparisons. Temporary Actions workflow only. No tool source/tests, ROM, S19, HEX, A2L, XML definition, workbook, calibration catalogue, scope matrix, Findings or worker queue edits.
@@ -242,3 +242,8 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Durable report:** `EVIDENCE/RR_ROMS_WORKBENCH_REFRESH_2026-11-27.md` — blob `9dccb05bcf2785c5537c0c3da65c0a05468b76d6`; commit `ed4aef50ccf8f380b2e78e99af66fd3399155219`.
 **Temporary workflow cleanup:** `.github/workflows/rr-roms-workbench-refresh.yml` deleted; cleanup commit `e254fea42494e37c5e7ded233c27603855224358`. Absence verified after deletion.
 **Lock released:** 2026-11-27 — refreshed batch complete, artifact downloaded and hash verified, report read back, temporary workflow removed. ROMs and existing tool/definition/workbook/catalogue/Findings files were not modified.
+
+
+**Lock released:** 2026-11-27 — V6 is now a first-class donor in the SH705x cross-ROM evidence set. The prior historical 306-candidate result was reproduced with its historical scanner revision; the current strict scanner emitted 302 candidates, all contained in the historical set, with four historical-only candidates retained and labelled. The expanded 151-ROM reference index and full current/historical per-call and per-address exports, reconciliation, EL19A exact-payload/same-geometry comparison and provisional cross-reference are committed under `EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/`. A2L pairing remains `PROVISIONAL_UNVERIFIED` pending independent pairing evidence under WO65212. `tools/nissan_sh705x_workbench.md` and the WO70019 V6 classification correction addendum were published and read back. All temporary V6 Actions workflows were removed and the remote tree was verified clear. No ROM, HEX, S19, A2L, XML calibration definition, workbook, calibration catalogue, scope matrix, Findings or worker queue was modified.
+**V6 evidence bundle:** 20 files; merged raw index SHA-256 `3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82`.
+**Documentation commits:** workbench `74ee6b76b6a06f9af16b970a5ea522e9609264b0`; WO70019 `c4bd1b85293a15afeba3a64b8bfeb4e149f8695d`.
