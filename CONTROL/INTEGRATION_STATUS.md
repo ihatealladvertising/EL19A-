@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — first-class V6 donor rescan, index merge and EL19A comparison (2026-11-27)
+**Purpose:** Reuse and SHA-verify the prior 150-ROM reference-index artifact; rescan only `EVIDENCE/side project/64810223F121200000.hex` and EL19A with the current workbench; export full call/helper/table JSON and TSV plus lossless per-address catalogues and manifests; reconcile the V6 306-table historical baseline; add V6 ROM payload and candidate A2L symbol associations to the reference index with explicit `PROVISIONAL_UNVERIFIED` pairing status; rerun exact-payload and same-geometry-difference comparisons. Temporary Actions workflow only. No tool source/tests, ROM, S19, HEX, A2L, XML definition, workbook, calibration catalogue, scope matrix, Findings or worker queue edits.
+**Lock acquired:** 2026-11-27 — latest `main` gate verified UNLOCKED; V6 first-class donor execution and artifact publication.
 
 **Integrator:** ChatGPT — rerun RR ROM workbench batch after user added extracted BIN images (2026-11-27)
 **Purpose:** Re-run the existing read-only workbench across the refreshed `EVIDENCE/rr roms` folder, now 177 entries, including the 16 new BIN images corresponding to the previously unsupported RAR/7z archive submissions; rebuild the corpus reference index and record comparison to prior batch. Use a temporary Actions runner and remove it after results are read back. No source/tool/calibration files may be changed except the temporary workflow and additive batch report.
