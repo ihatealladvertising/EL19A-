@@ -100,6 +100,6 @@ No new workbench scan was executed for this synthesis. The generator only normal
 - `NISSAN_BASE_FID_FAMILY_PROFILE_2026-11-27.tsv` — 39 rows; 2,277 bytes; SHA-256 `01629bff5822551259bfb85455f1ee78137b909e168426d5875f5a3b84f589f6`.
 - `NISSAN_BASE_ADDITIONAL_DONOR_COVERAGE_2026-11-27.tsv` — 24 rows; 5,967 bytes; SHA-256 `b7de76481a41f232600cddf2ae88d45cc8db5bf2e215173c811f4df016b848e6`.
 - `NISSAN_C12W_JUKE_TWIN_PAYLOADS_2026-11-27.tsv` — 581 rows; 216,688 bytes; SHA-256 `cad40723c1e5a7f469e7d80d83b0020f0608b4a9882ce0717aa2bdc710af61d2`.
-- `NISSAN_BASE_TABLE_SET_summary.json` — 10,528 bytes; SHA-256 `bd97ea89afe752f05af118e2a86cac206012c9766ad3e87a97fca242129446c2`.
-- `build_nissan_base_table_set.py` — 15,877 bytes; SHA-256 `5580a76f32151e5ad80092d1606c53e5aa289fa76eba9ab6aec435a94426b600`.
+- `NISSAN_BASE_TABLE_SET_summary.json` — 9,856 bytes; SHA-256 `9b7e925a077f9d14718c5dde40f44dcf6bde2925bb639007930657f15c18f0e8`.
+- `build_nissan_base_table_set.py` — 15,727 bytes; SHA-256 `68b80f0b58dab97bb237aad8cc00a7d85a1d56fb506d2da30c137249415fbc00`.
 - `NISSAN_BASE_TABLE_SET_manifest.json` records pinned source and uncompressed output hashes; the package manifest records compressed repository artifacts.

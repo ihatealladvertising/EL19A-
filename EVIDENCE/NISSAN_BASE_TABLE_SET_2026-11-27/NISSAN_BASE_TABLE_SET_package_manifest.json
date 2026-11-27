@@ -6,12 +6,12 @@
   "scope": "434 independent detailed layouts plus separately recorded Juke S19 inherited code-twin; partial 24-family donor aggregates kept separate",
   "files": {
     "build_nissan_base_table_set.py": {
-      "bytes": 15877,
-      "sha256": "5580a76f32151e5ad80092d1606c53e5aa289fa76eba9ab6aec435a94426b600"
+      "bytes": 15727,
+      "sha256": "68b80f0b58dab97bb237aad8cc00a7d85a1d56fb506d2da30c137249415fbc00"
     },
     "dat_detailed_431_manifest.json": {
-      "bytes": 1294,
-      "sha256": "fa94c433730f453b5dff7f2d2f4d9fe81864bddc7f3ab1042d65c8fadadc07d1"
+      "bytes": 1255,
+      "sha256": "98bef6988a4c560576d6d944f4bf50790de5f1c8fa143c72766cfdfcc887f94b"
     },
     "dat_detailed_431_results.tsv": {
       "bytes": 1614002,
@@ -55,16 +55,16 @@
       "data_rows": 129481
     },
     "NISSAN_BASE_TABLE_SET_2026-11-27.md": {
-      "bytes": 12722,
-      "sha256": "3bd3120101785787a1cd6d35a17682dfe3fd6419776610118bb8cc2d0fb1b0c2"
+      "bytes": 12616,
+      "sha256": "d481eaa73b66d4f0c6049712e7d383373bb65612a53789c7482c590094aa9104"
     },
     "NISSAN_BASE_TABLE_SET_manifest.json": {
-      "bytes": 5116,
-      "sha256": "7681c857433cf956d760a43667e2a50c48c6d193612c1787e9b08edfd3be10f3"
+      "bytes": 5008,
+      "sha256": "6c01fb79b08f49115dc3df90f89e3b994e0fc9fea0b2ba3e772f0f03d1f9192d"
     },
     "NISSAN_BASE_TABLE_SET_summary.json": {
-      "bytes": 10528,
-      "sha256": "bd97ea89afe752f05af118e2a86cac206012c9766ad3e87a97fca242129446c2"
+      "bytes": 9856,
+      "sha256": "9b7e925a077f9d14718c5dde40f44dcf6bde2925bb639007930657f15c18f0e8"
     },
     "NISSAN_C12W_JUKE_TWIN_PAYLOADS_2026-11-27.tsv.gz": {
       "bytes": 31713,
@@ -72,8 +72,8 @@
       "data_rows": 581
     },
     "run_manifest.json": {
-      "bytes": 1500,
-      "sha256": "14a413b9cd688f91636566b91e5e815ce38fd4a46c7320380874a9c68866fee9"
+      "bytes": 1451,
+      "sha256": "f7cc098b02f855186acc55994c0ec0c30ece97bbeaf11e09a9ea53a7149d3d0a"
     },
     "scan_details.jsonl.gz": {
       "bytes": 3138825,

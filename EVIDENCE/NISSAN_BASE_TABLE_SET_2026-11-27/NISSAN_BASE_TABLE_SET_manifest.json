@@ -91,17 +91,17 @@
       "data_rows": 581
     },
     "NISSAN_BASE_TABLE_SET_summary.json": {
-      "bytes": 10528,
-      "sha256": "bd97ea89afe752f05af118e2a86cac206012c9766ad3e87a97fca242129446c2"
+      "bytes": 9856,
+      "sha256": "9b7e925a077f9d14718c5dde40f44dcf6bde2925bb639007930657f15c18f0e8"
     },
     "build_nissan_base_table_set.py": {
-      "bytes": 15877,
-      "sha256": "5580a76f32151e5ad80092d1606c53e5aa289fa76eba9ab6aec435a94426b600"
+      "bytes": 15727,
+      "sha256": "68b80f0b58dab97bb237aad8cc00a7d85a1d56fb506d2da30c137249415fbc00"
     }
   },
   "deliverable_report": {
     "path": "NISSAN_BASE_TABLE_SET_2026-11-27.md",
-    "bytes": 12722,
-    "sha256": "3bd3120101785787a1cd6d35a17682dfe3fd6419776610118bb8cc2d0fb1b0c2"
+    "bytes": 12616,
+    "sha256": "d481eaa73b66d4f0c6049712e7d383373bb65612a53789c7482c590094aa9104"
   }
 }
