@@ -1,0 +1,75 @@
+{
+  "schema": "wo65324-preview-reconciliation-v1",
+  "date": "2026-11-27",
+  "inputs": {
+    "target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "preview_xml_sha256": "05d760790b5055c053197338ea88e4912a37a79342bad50123e7548cf5bcdbfd",
+    "structural_matrix_sha256": "08bd85b6161efb3fecaef9ec9a0e4fdaf4522977190ad5017d9b1e9750b5d594",
+    "findings_index_sha256": "60f251277bff678807d9cbe4f3524db400426125998aa68c06541fb7776b5e76",
+    "release1_xml_sha256": "56728e0023251e77786eac1916df5c4ca526d90851690fe195b55cb86f410acb"
+  },
+  "counts": {
+    "matrix_rows": 469,
+    "target_candidates": 291,
+    "preview_objects": 289,
+    "included_raw_provisional": 287,
+    "included_established_presentation_exception_rendered_raw": 2,
+    "matrix_holds_excluded": 2,
+    "source_only_not_target_confirmed": 178,
+    "included_type_matches": 289,
+    "included_element_count_matches": 289,
+    "target_candidates_with_findings_records": 41,
+    "unique_findings_and_reconciliation_ids_referenced": [
+      "FND-000001",
+      "FND-000002",
+      "FND-000003",
+      "FND-000005",
+      "FND-000006",
+      "FND-000007",
+      "FND-000008",
+      "FND-000009",
+      "FND-000012",
+      "FND-000014",
+      "FND-000016",
+      "FND-000017",
+      "FND-000018",
+      "FND-000019",
+      "FND-000021",
+      "FND-000024",
+      "FND-000025",
+      "FND-000026",
+      "REC-000001",
+      "REC-000002",
+      "REC-000003",
+      "REC-000005",
+      "REC-000006",
+      "REC-000007",
+      "REC-000008",
+      "REC-000009",
+      "REC-000016",
+      "REC-000019",
+      "REC-000021",
+      "REC-000022",
+      "REC-000023",
+      "REC-000024",
+      "REC-000026",
+      "REC-000027"
+    ]
+  },
+  "hold_addresses": [
+    "0xD8D6",
+    "0xDAB6"
+  ],
+  "decision_rules": [
+    "Preview inclusion follows WO70031 structural disposition.",
+    "WO70031 target structural evidence backs type, dimensions, extent and payload; preview XML is checked for address/storage/count consistency, not payload embedding.",
+    "The E678/E688 established-presentation exception is preserved as a source-side boundary; this preview renders both as generic raw UBYTE curves.",
+    "Donor pair counts are retained only as cross-reference context.",
+    "Definition-source-only rows remain coverage gaps, not disproven target objects."
+  ],
+  "output": {
+    "path": "EVIDENCE/WO65324_2026-11-27_preview_reconciliation.tsv",
+    "data_rows": 469,
+    "sha256": "da25b406313bea87fb3728f150fdac89f89c3961df285bf86d586a0b2be4dac1"
+  }
+}
