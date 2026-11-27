@@ -1,0 +1,146 @@
+{
+  "schema": "wo65324-a2l-scalar-alignment-reconciliation-v1",
+  "date": "2026-11-27",
+  "inputs": {
+    "alignment_tsv_sha256": "2dae6cc6134cef6694e09f6053ec9d409e7959f77fde61094c450d347b8808d6",
+    "aligned_xml_fragment_sha256": "eb53024ad867411d0f80e44c904c7da625198720d7067944e24ae45f9ff1969c",
+    "target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "fresh_scalar_catalogue_sha256": "426e8a583791e4ed029b8a4a658bf89ceebaf7d8d0ddfdb58b4326378e65e59a",
+    "WO65090_report_git_blob": "877a63a903b6a12db0bf4407099091749bdfb58a",
+    "WO70031_matrix_git_blob": "48466f4f1573f1eb227fe8d14e2665b502c24eed"
+  },
+  "summary": {
+    "alignment_rows": 2680,
+    "unique_EL19A_addresses": 2515,
+    "repeated_EL19A_addresses": 64,
+    "addresses_with_conflicting_size_or_value_rows": 0,
+    "tiers": {
+      "C": 1780,
+      "A": 833,
+      "B": 67
+    },
+    "declared_sizes": {
+      "1": 2019,
+      "2": 641,
+      "4": 20
+    },
+    "target_byte_value_match_rows": 2667,
+    "target_raw_value_differ_rows": 13,
+    "exact_scanner_type_width_match_rows": 1493,
+    "scanner_address_match_rows": 1535,
+    "rows_at_72_scalar_review_addresses": 0,
+    "rows_at_23_WO65090_crosswalk_addresses": 17,
+    "rows_at_fragment_XML_definition_addresses": 900,
+    "status_counts": {
+      "TARGET_RAW_VALUE_MATCH_ONLY_NO_EXACT_SCANNER_SPAN": 1174,
+      "TARGET_RAW_VALUE_AND_SCANNER_TYPE_WIDTH_MATCH": 1493,
+      "FOUR_BYTE_ALIGNMENT_VALUE_DIFFERS_FROM_RAW_U32; CONVERSION_OR_MAPPING_UNRESOLVED": 13
+    },
+    "four_byte_raw_differences": [
+      [
+        "mHOSCINT",
+        "0x98e8",
+        "1",
+        125829,
+        "C"
+      ],
+      [
+        "mHOSCINT2",
+        "0x98ec",
+        "1",
+        83886,
+        "C"
+      ],
+      [
+        "mHSOSQH",
+        "0x98f8",
+        "3",
+        205520,
+        "C"
+      ],
+      [
+        "mHSOSQL",
+        "0x98fc",
+        "3",
+        205520,
+        "C"
+      ],
+      [
+        "mIGARN1",
+        "0x9900",
+        "2559",
+        167772137,
+        "C"
+      ],
+      [
+        "mIGARN2",
+        "0x9904",
+        "0",
+        6144,
+        "C"
+      ],
+      [
+        "mLSOSQL",
+        "0x9920",
+        "577",
+        37865239,
+        "C"
+      ],
+      [
+        "mRNIFMIN",
+        "0x9952",
+        "0",
+        17,
+        "C"
+      ],
+      [
+        "mCCEPMTHR",
+        "0x9994",
+        "255",
+        16777215,
+        "C"
+      ],
+      [
+        "mPTYCHK",
+        "0x99ad",
+        "256",
+        16777221,
+        "C"
+      ],
+      [
+        "mROIZS2",
+        "0x99b1",
+        "62945",
+        4125163524,
+        "C"
+      ],
+      [
+        "mSUMCHK",
+        "0x99b5",
+        "5713",
+        374416640,
+        "C"
+      ],
+      [
+        "mTPDEFO",
+        "0x99b9",
+        "62",
+        4096000,
+        "C"
+      ]
+    ]
+  },
+  "key_reconciliation": [
+    "All size-1 and size-2 alignment rows must be independently checked against target ROM bytes; they are classified by exact scalar-scan type/width where available.",
+    "Any donor symbol, description, tier, conversion or function group remains hypothesis metadata; no donor semantics are promoted.",
+    "The 72 target-backed scalar review addresses are outside the alignment file range and have no exact address overlap.",
+    "The current exporter does not emit scalar candidates as preview objects; this crosswalk does not create XML.",
+    "Four-byte `el19a_value` differs from raw unsigned big-endian target bytes in the listed Tier-C rows; without a target-supported float/scale mapping those values are unresolved and not treated as contradiction to target bytes or as calibration truth.",
+    "Repeated target addresses are retained as many-to-one symbol cross-references; no alias or same-function claim is inferred."
+  ],
+  "output": {
+    "path": "EVIDENCE/WO65324_2026-11-27_A2L_scalar_alignment_reconciliation.tsv",
+    "data_rows": 2680,
+    "sha256": "cf4abc87db5cd9998dbf3eaed904c8f1ace065443d591801ba9741028f38ff22"
+  }
+}
