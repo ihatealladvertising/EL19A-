@@ -1,0 +1,84 @@
+{
+  "fixtures": [
+    {
+      "file": "EVIDENCE/E1BR20E.dat",
+      "source_hashes": {
+        "md5": "97a476f6eb757afb480f2d26a6c277b1",
+        "sha256": "c70ff595bb0215ae9ffeb86ccc300dff6ab7764d7f55c3a9f86da669fe8b60ab"
+      },
+      "fid": "9CMCVAPD31",
+      "processor": "SH705520N",
+      "loader": "LOADER40",
+      "table_count": 265,
+      "checksum": {
+        "algorithm": "ck_std",
+        "status": "OK",
+        "sumt": 27884,
+        "xort": 27876,
+        "sum": 3033141716,
+        "xor": 3435381692
+      },
+      "decoder_version": "nissan_sh705x_workbench (Consult %6)"
+    },
+    {
+      "file": "EVIDENCE/E1BR50E.dat",
+      "source_hashes": {
+        "md5": "197596976ade3807234e80d8427e4fb3",
+        "sha256": "cb1d239007a9ce58860437a5e4bf6aadcdb24200a26a87c03453e3973aa8234a"
+      },
+      "fid": "9CMCVAPD31",
+      "processor": "SH705520N",
+      "loader": "LOADER40",
+      "table_count": 265,
+      "checksum": {
+        "algorithm": "ck_std",
+        "status": "OK",
+        "sumt": 27884,
+        "xort": 27876,
+        "sum": 1197904396,
+        "xor": 2020083312
+      },
+      "decoder_version": "nissan_sh705x_workbench (Consult %6)"
+    },
+    {
+      "file": "EVIDENCE/E1BT40A.dat",
+      "source_hashes": {
+        "md5": "f1189e353168455be11c3a636efd6052",
+        "sha256": "9385f2342549a43328fca78a5c848630e75ad54a15df075f983956755babcdbe"
+      },
+      "fid": "9CMCVAPD31",
+      "processor": "SH705520N",
+      "loader": "LOADER40",
+      "table_count": 265,
+      "checksum": {
+        "algorithm": "ck_std",
+        "status": "OK",
+        "sumt": 27884,
+        "xort": 27876,
+        "sum": 2334393229,
+        "xor": 853011395
+      },
+      "decoder_version": "nissan_sh705x_workbench (Consult %6)"
+    },
+    {
+      "file": "EVIDENCE/E1JD81D.dat",
+      "source_hashes": {
+        "md5": "92d0c4e2a2b406120ab2d18d114e0633",
+        "sha256": "0f590d12086a1885f06072c58da7bc3e87a5bb5ff8fbb690661f42d82c8b5b11"
+      },
+      "fid": "4CMCB1PDM1",
+      "processor": "SH705520N",
+      "loader": "LOADER40",
+      "table_count": 253,
+      "checksum": {
+        "algorithm": "ck_std",
+        "status": "OK",
+        "sumt": 29420,
+        "xort": 29412,
+        "sum": 2613517003,
+        "xor": 2611119591
+      },
+      "decoder_version": "nissan_sh705x_workbench (Consult %6)"
+    }
+  ]
+}

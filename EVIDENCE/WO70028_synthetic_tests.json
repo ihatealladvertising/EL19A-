@@ -1,0 +1,62 @@
+{
+  "test_suite": "Consult %6 decoder synthetic regression",
+  "description": "Edge-case tests for %6 decoder validation and controlled-variant regression",
+  "tests": [
+    {
+      "id": "SYNTH_01",
+      "name": "Zero-length payload block",
+      "description": "Verify decoder handles empty payload blocks without crashing",
+      "input": {"payload": "", "expected": "graceful skip"},
+      "assertion": "decoder continues to next block"
+    },
+    {
+      "id": "SYNTH_02",
+      "name": "Maximum block size (64 KiB)",
+      "description": "Test decoder with maximum allowed block size",
+      "input": {"payload": "0x00 * 65536", "expected": "processed"},
+      "assertion": "checksum matches expected"
+    },
+    {
+      "id": "SYNTH_03",
+      "name": "Misaligned address boundary",
+      "description": "Verify decoder handles blocks starting at odd addresses",
+      "input": {"offset": 0x12345, "payload": "0xAA * 1024", "expected": "processed"},
+      "assertion": "no alignment fault"
+    },
+    {
+      "id": "SYNTH_04",
+      "name": "Duplicate table address",
+      "description": "Two tables declared at same address — verify last-write-wins",
+      "input": {"tables": [{"addr": 0x1000, "data": "A"}, {"addr": 0x1000, "data": "B"}], "expected": "B"},
+      "assertion": "final table matches second declaration"
+    },
+    {
+      "id": "SYNTH_05",
+      "name": "Checksum mismatch — sum16",
+      "description": "Injected sum16 error — verify detection",
+      "input": {"payload": "valid + corrupted sum16", "expected": "reject"},
+      "assertion": "decoder reports checksum failure"
+    },
+    {
+      "id": "SYNTH_06",
+      "name": "Checksum mismatch — xor16",
+      "description": "Injected xor16 error — verify detection",
+      "input": {"payload": "valid + corrupted xor16", "expected": "reject"},
+      "assertion": "decoder reports checksum failure"
+    },
+    {
+      "id": "SYNTH_07",
+      "name": "FID mismatch — cross-variant load",
+      "description": "Load E1JD81D (FID 4CMCB1PDM1) into E1BR20E slot (FID 9CMCVAPD31)",
+      "input": {"source_fid": "4CMCB1PDM1", "target_fid": "9CMCVAPD31", "expected": "reject"},
+      "assertion": "FID validation blocks load"
+    },
+    {
+      "id": "SYNTH_08",
+      "name": "Truncated stream — mid-block EOF",
+      "description": "Stream ends mid-block — verify clean EOF handling",
+      "input": {"payload": "0x00 * 512 [EOF at byte 300]", "expected": "partial + EOF"},
+      "assertion": "decoder reports truncated block, continues"
+    }
+  ]
+}

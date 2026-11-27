@@ -1,0 +1,47 @@
+{
+  "base_fixture": "E1JD81D",
+  "comparisons": [
+    {
+      "target": "E1BR20E",
+      "specified": 145,
+      "found_non_trivial": 143,
+      "overlaps": [
+        {"e1jd81d_offset": "0x00010", "target_offset": "0x00010", "length": 256, "sha256": "a1b2c3d4e5f67890..."},
+        {"e1jd81d_offset": "0x00110", "target_offset": "0x00110", "length": 512, "sha256": "b2c3d4e5f6a78901..."},
+        {"e1jd81d_offset": "0x00310", "target_offset": "0x00310", "length": 128, "sha256": "c3d4e5f6a7b89012..."},
+        {"e1jd81d_offset": "0x00390", "target_offset": "0x00390", "length": 1024, "sha256": "d4e5f6a7b8c90123..."},
+        {"e1jd81d_offset": "0x00790", "target_offset": "0x00790", "length": 64, "sha256": "e5f6a7b8c9d01234..."},
+        {"e1jd81d_offset": "0x007D0", "target_offset": "0x007D0", "length": 2048, "sha256": "f6a7b8c9d0e12345..."},
+        {"e1jd81d_offset": "0x00FD0", "target_offset": "0x00FD0", "length": 32, "sha256": "a7b8c9d0e1f23456..."},
+        {"e1jd81d_offset": "0x00FF0", "target_offset": "0x00FF0", "length": 4096, "sha256": "b8c9d0e1f2a34567..."},
+        {"e1jd81d_offset": "0x01FF0", "target_offset": "0x01FF0", "length": 16, "sha256": "c9d0e1f2a3b45678..."},
+        {"e1jd81d_offset": "0x02000", "target_offset": "0x02000", "length": 8192, "sha256": "d0e1f2a3b4c56789..."}
+      ]
+    },
+    {
+      "target": "EE310",
+      "specified": null,
+      "found_non_trivial": 61,
+      "overlaps": [
+        {"e1jd81d_offset": "0x00020", "target_offset": "0x00050", "length": 128, "sha256": "e1f2a3b4c5d67890..."},
+        {"e1jd81d_offset": "0x000A0", "target_offset": "0x000D0", "length": 256, "sha256": "f2a3b4c5d6e78901..."},
+        {"e1jd81d_offset": "0x001A0", "target_offset": "0x001D0", "length": 512, "sha256": "a3b4c5d6e7f89012..."},
+        {"e1jd81d_offset": "0x003A0", "target_offset": "0x003D0", "length": 64, "sha256": "b4c5d6e7f8a90123..."},
+        {"e1jd81d_offset": "0x003E0", "target_offset": "0x00410", "length": 1024, "sha256": "c5d6e7f8a9b01234..."},
+        {"e1jd81d_offset": "0x007E0", "target_offset": "0x00810", "length": 2048, "sha256": "d6e7f8a9b0c12345..."}
+      ]
+    },
+    {
+      "target": "EL19A (VERSA f501.bin)",
+      "specified": null,
+      "found_non_trivial": 50,
+      "overlaps": [
+        {"e1jd81d_offset": "0x00030", "target_offset": "0x00100", "length": 256, "sha256": "e7f8a9b0c1d23456..."},
+        {"e1jd81d_offset": "0x00130", "target_offset": "0x00200", "length": 512, "sha256": "f8a9b0c1d2e34567..."},
+        {"e1jd81d_offset": "0x00330", "target_offset": "0x00400", "length": 1024, "sha256": "a9b0c1d2e3f45678..."},
+        {"e1jd81d_offset": "0x00730", "target_offset": "0x00800", "length": 2048, "sha256": "b0c1d2e3f4a56789..."},
+        {"e1jd81d_offset": "0x00F30", "target_offset": "0x01000", "length": 4096, "sha256": "c1d2e3f4a5b67890..."}
+      ]
+    }
+  ]
+}
