@@ -97,10 +97,11 @@ The first usable milestone is a supported SH7058 BIN producing a deterministic p
 
 ### Target facts and symbol hypotheses must remain separate
 
-- **Target facts** come from the scanned ROM and its reader/call evidence: address-space mapping, storage, geometry, extent, axes, call sites, query construction and consumers only to the level actually verified.
-- **Donor hypotheses** include A2L names/units/conversions, sibling-ROM payload or shape matches, variant differences and external symbol associations. Retain source IDs/hashes and match basis. They may rank candidates but cannot populate target-side names, units, axes or scaling as proven facts.
+- **Target structural facts** may be established from the target ROM bytes plus reproducible scanner/catalogue evidence: effective address and address-space mapping, element type/width/signedness, exact bounded extent, dimensions/geometry, byte order and payload identity. Full reader mechanics, query reconstruction, interpolation/clamp behavior and downstream consumer tracing are **not prerequisites** for a structurally supported raw/provisional entry.
+- **Reader/runtime enrichment** (exact caller, query source and transforms, search/interpolation/clamp mechanics, result staging and downstream consumer) is recorded when already available or when needed to resolve a structural conflict or establish a semantic claim. Do not trace every candidate merely to qualify it for raw/provisional inclusion.
+- **Donor hypotheses** include A2L names/units/conversions, sibling-ROM payload or shape matches, variant differences and external symbol associations. Retain source IDs/hashes and match basis. Exact-payload and same-geometry donor matches are corroborating confidence signals, not mandatory inclusion gates; they cannot populate target-side names, units, physical axes or scaling as proven facts.
 - Preserve duplicate declarations, competing geometries, unresolved references and unsupported metadata. Use null/unresolved states rather than guessed values.
-- A helper call or candidate base does not alone prove a complete table structure. A nearest-prologue caller candidate, bounded register window or payload match must retain its method limitations.
+- A helper call, candidate base or donor match does not alone prove a complete table structure. Verify the target-byte extent and geometry, preserve conflicts, and retain the limitations of nearest-prologue caller candidates or bounded register-window heuristics.
 
 ### EL19A RomRaider byproduct — downstream acceptance
 
@@ -108,11 +109,11 @@ For the first EL19A profile, the tool should generate a conservative definition 
 
 Each generated object must receive one release disposition:
 
-- **INCLUDE — ESTABLISHED:** address/extent, storage type, geometry, axes and displayed scaling are supported; any physical name and units are supported.
-- **INCLUDE — RAW/PROVISIONAL:** address/extent, storage type and geometry are supported, but function, units or conversion remain unresolved. Use a generic non-misleading name and raw scaling; any required sample-index axis must be clearly identified as an index, not a firmware query domain.
-- **EXCLUDE:** address/extent, storage type, geometry, required display axis or material reader interpretation is too uncertain or contradictory to present without misleading the user.
+- **INCLUDE — ESTABLISHED:** address/extent, storage type, geometry, usable axes and displayed scaling are supported; any physical name and units included in the definition are supported.
+- **INCLUDE — RAW/PROVISIONAL:** target address, element type/width, byte order, exact extent and dimensions/geometry are structurally supported, but function, physical axes/query domain, units, conversion or consumer remain unresolved. Use a generic non-misleading name, raw scaling and explicit sample-index axes where a physical axis is not established.
+- **EXCLUDE / HOLD:** address mapping, storage type/width, exact extent or dimensions/geometry cannot be established from target evidence, or material structural conflicts/overlaps prevent a non-misleading object. Missing reader mechanics, physical query semantics or downstream consumer evidence alone is not an exclusion reason.
 
-The generated EL19A definition must identify the exact ROM, load successfully in RomRaider, represent correct address/extent/type/byte order/dimensions/orientation, use only supported physical axes and conversions, label provisional objects, and include a build manifest tied to the source XML baseline, ROM hash, Findings index revision, included/excluded objects and unresolved issues. Validation is static/offline; no live-vehicle testing is part of acceptance.
+The generated EL19A definition must identify the exact ROM, load successfully in RomRaider, represent correct address/extent/type/byte order/dimensions and any structurally established orientation, use a supported physical axis/conversion only when established (otherwise an explicit index axis and raw scaling), label provisional objects, and include a build manifest tied to the source XML baseline, ROM hash, Findings index revision, included/excluded objects and unresolved issues. Validation is static/offline; no live-vehicle testing is part of acceptance.
 
 ### Efficient work-order rules
 
@@ -220,7 +221,7 @@ Rank semantic tests by expected information gain across competing hypotheses, no
 
 ## Evidence and technical standards
 
-- Record exact instruction PCs/listing anchors, effective addresses, widths, signedness, query and axis construction, search/interpolation/clamp behavior and branch conditions as applicable. Trace arithmetic and the first meaningful consumer when establishing a functional identity, resolving a material conflict, or validating a claimed runtime role—not as a universal prerequisite for a structurally correct raw/provisional XML entry.
+- Record exact instruction PCs/listing anchors, effective addresses, widths, signedness, query and axis construction, search/interpolation/clamp behavior and branch conditions when available or relevant. Trace arithmetic and the first meaningful consumer when establishing a functional identity, resolving a material structural conflict, or validating a claimed runtime role—not as a universal prerequisite for a structurally correct raw/provisional XML entry. This relaxed structural-inclusion threshold is permanent from 2026-11-27.
 - Separate verified facts, hypotheses and unknowns. A name resemblance, shape match, donor label or plausible units is not semantic proof.
 - A bounded negative is a valid result when the search method and coverage are stated.
 - Reuse named reports, indexes, reader mechanics and ROM/LST anchors. Do not repeat completed scans, helper censuses, inventories or broad searches.
