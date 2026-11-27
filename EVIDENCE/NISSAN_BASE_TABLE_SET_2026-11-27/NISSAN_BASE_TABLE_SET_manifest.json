@@ -1,0 +1,107 @@
+{
+  "generated_utc_date": "2026-11-27",
+  "scope": "independent detailed structural table layouts: 431 direct DAT + EL19A + V6 + C12W; Juke S19 recorded as an inherited code-twin, excluded from independent shape frequencies",
+  "counts": {
+    "direct_dat_roms": 431,
+    "independent_layout_images": 434,
+    "normalized_table_object_rows": 129481,
+    "axis_link_rows": 75110,
+    "unique_shapes": 48,
+    "primary_fid_families_with_detailed_dat": 39
+  },
+  "sources": {
+    "E:\\Nissan Consult\\ReproProgramming\\_SH705xWorkbench_Run_2026-11-27\\scan_details.jsonl.gz": {
+      "bytes": 3138825,
+      "sha256": "1211c98e5e9afefb470a78e268da0c644017016df79a5af3e0c672afa43ce977"
+    },
+    "E:\\Nissan Consult\\ReproProgramming\\_SH705xWorkbench_Run_2026-11-27\\dat_detailed_431_results.tsv": {
+      "bytes": 1614002,
+      "sha256": "03b102954ab8b4210d1fe23e217289586c27c9b607d28dc062fd7b52a0da4a31"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO65324_2026-11-27_scan_json.json.gz": {
+      "bytes": 7965,
+      "sha256": "e0c06e0e097cb119e8af4b3eeb3a2fc9b965cc93fe05fb2381af31da7890eca3"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\V6_FIRST_CLASS_DONOR_2026-11-27\\v6_current_strict_302_per_address.tsv.gz": {
+      "bytes": 32181,
+      "sha256": "5aeefabfcd3e00c4ca83007657b77ef16d1b55269fe89aeaf52ec6fc8c634de1"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70027_TABLE_MAP.tsv": {
+      "bytes": 74012,
+      "sha256": "c55f9b4b9b198802b22c26a26aac5e324f0e30615b9ac7b131c91f72f8e293cb"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70027_SUMMARY.json": {
+      "bytes": 6389,
+      "sha256": "5639f35dc6506e61f0e3b16e9cd1088a78562b4f83ddcdaa9ff558c2ef198d08"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70027_PAYLOAD_COMPARE.tsv": {
+      "bytes": 127125,
+      "sha256": "decfac0d1bf200f373d1a880f4c7153d5a8678cc25d142b4fc0a7d05591e6505"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70031_EL19A_STRUCTURAL_READINESS.tsv": {
+      "bytes": 869068,
+      "sha256": "08bd85b6161efb3fecaef9ec9a0e4fdaf4522977190ad5017d9b1e9750b5d594"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70026_summary.json": {
+      "bytes": 8872,
+      "sha256": "930968e26c5ee5bedd44034558e898159381f6c344a90e9db485af6a5f28d09c"
+    },
+    "C:\\Users\\Vivian\\Documents\\Codex\\2026-11-27\\co\\work\\EL19A-base-table-set\\EVIDENCE\\WO70026_donor_conservation.tsv": {
+      "bytes": 582643,
+      "sha256": "f002655ad56859d047c0d769c729677e3016abca78b879775182cce7a34995f4"
+    },
+    "E:\\Nissan Consult\\ReproProgramming\\_SH705xWorkbench_Run_2026-11-27\\table_layout_similarity_431_DAT_2026-11-27.md": {
+      "bytes": 6881,
+      "sha256": "fde4e6950aab34ba79a6c79ebf6527ecddab02171ce6866bf92b48cba6d60219"
+    },
+    "E:\\Nissan Consult\\ReproProgramming\\_SH705xWorkbench_Run_2026-11-27\\EL19A_table_layout_vs_431_DAT_2026-11-27.md": {
+      "bytes": 3919,
+      "sha256": "83ad2074f144671b1750c3143e4eaac29809d1b4a55da55e8d59d69d4cde0901"
+    }
+  },
+  "outputs": {
+    "NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv": {
+      "bytes": 42850266,
+      "sha256": "7645959c3a86a0fc34a4bb57f7b4fae3e9dbff9cd70f7fdde0ef7e1c49434716",
+      "data_rows": 129481
+    },
+    "NISSAN_BASE_AXIS_LINKS_2026-11-27.tsv": {
+      "bytes": 12676635,
+      "sha256": "791fa4393da6b99d8cf286868e8c5383a97c4d45e470dc885d53ffbba5b1f1e8",
+      "data_rows": 75110
+    },
+    "NISSAN_BASE_SHAPE_PROFILE_2026-11-27.tsv": {
+      "bytes": 2577,
+      "sha256": "13ac9294ecd7c89863ad0f778e80cd15ac3dcb31a6abfca4e8d504d4082db5ed",
+      "data_rows": 48
+    },
+    "NISSAN_BASE_FID_FAMILY_PROFILE_2026-11-27.tsv": {
+      "bytes": 2277,
+      "sha256": "01629bff5822551259bfb85455f1ee78137b909e168426d5875f5a3b84f589f6",
+      "data_rows": 39
+    },
+    "NISSAN_BASE_ADDITIONAL_DONOR_COVERAGE_2026-11-27.tsv": {
+      "bytes": 5967,
+      "sha256": "b7de76481a41f232600cddf2ae88d45cc8db5bf2e215173c811f4df016b848e6",
+      "data_rows": 24
+    },
+    "NISSAN_C12W_JUKE_TWIN_PAYLOADS_2026-11-27.tsv": {
+      "bytes": 216688,
+      "sha256": "cad40723c1e5a7f469e7d80d83b0020f0608b4a9882ce0717aa2bdc710af61d2",
+      "data_rows": 581
+    },
+    "NISSAN_BASE_TABLE_SET_summary.json": {
+      "bytes": 10528,
+      "sha256": "bd97ea89afe752f05af118e2a86cac206012c9766ad3e87a97fca242129446c2"
+    },
+    "build_nissan_base_table_set.py": {
+      "bytes": 15877,
+      "sha256": "5580a76f32151e5ad80092d1606c53e5aa289fa76eba9ab6aec435a94426b600"
+    }
+  },
+  "deliverable_report": {
+    "path": "NISSAN_BASE_TABLE_SET_2026-11-27.md",
+    "bytes": 12722,
+    "sha256": "3bd3120101785787a1cd6d35a17682dfe3fd6419776610118bb8cc2d0fb1b0c2"
+  }
+}

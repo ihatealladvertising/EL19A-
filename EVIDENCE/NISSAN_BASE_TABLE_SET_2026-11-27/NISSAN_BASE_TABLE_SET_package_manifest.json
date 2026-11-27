@@ -1,0 +1,87 @@
+{
+  "format": "Nissan SH705x base table set evidence bundle",
+  "date": "2026-11-27",
+  "source_repository": "ihatealladvertising/EL19A-",
+  "source_main_base_commit": "e071fbcf1fa34739c6f994d9f1c6a36d2d908916",
+  "scope": "434 independent detailed layouts plus separately recorded Juke S19 inherited code-twin; partial 24-family donor aggregates kept separate",
+  "files": {
+    "build_nissan_base_table_set.py": {
+      "bytes": 15877,
+      "sha256": "5580a76f32151e5ad80092d1606c53e5aa289fa76eba9ab6aec435a94426b600"
+    },
+    "dat_detailed_431_manifest.json": {
+      "bytes": 1294,
+      "sha256": "fa94c433730f453b5dff7f2d2f4d9fe81864bddc7f3ab1042d65c8fadadc07d1"
+    },
+    "dat_detailed_431_results.tsv": {
+      "bytes": 1614002,
+      "sha256": "03b102954ab8b4210d1fe23e217289586c27c9b607d28dc062fd7b52a0da4a31"
+    },
+    "dat_detailed_431_summary.md": {
+      "bytes": 11351,
+      "sha256": "b63740bb3751c24154668de49030552a5fa69dcf532ae0ff5316ef77249e7dfa"
+    },
+    "EL19A_table_layout_vs_431_DAT_2026-11-27.md": {
+      "bytes": 3919,
+      "sha256": "83ad2074f144671b1750c3143e4eaac29809d1b4a55da55e8d59d69d4cde0901"
+    },
+    "EL19A_table_layout_vs_431_DAT_2026-11-27.tsv": {
+      "bytes": 76171,
+      "sha256": "344d3abe37609ce26af24d45de2b410bdf5bca7a43ff0bc26cae6815cd9d56d7"
+    },
+    "NISSAN_BASE_ADDITIONAL_DONOR_COVERAGE_2026-11-27.tsv.gz": {
+      "bytes": 1667,
+      "sha256": "acae20962765969365511fc07e77472f62145f31c69b7ce41dfa4f8d10e75e27",
+      "data_rows": 24
+    },
+    "NISSAN_BASE_AXIS_LINKS_2026-11-27.tsv.gz": {
+      "bytes": 423476,
+      "sha256": "78b98eeefd26c7038d3cc3081507b39cca70c3ebc1908231e48b9b5fe913b5a5",
+      "data_rows": 75110
+    },
+    "NISSAN_BASE_FID_FAMILY_PROFILE_2026-11-27.tsv.gz": {
+      "bytes": 696,
+      "sha256": "cfe357a8df0c00c72a72a40923bd130b6303b258cd9ada55d5ed20061fd0ad2e",
+      "data_rows": 39
+    },
+    "NISSAN_BASE_SHAPE_PROFILE_2026-11-27.tsv.gz": {
+      "bytes": 676,
+      "sha256": "2432290a2c08ff70484d33e3b346d74c3cbc56f97f953645f14253a00b4fae6c",
+      "data_rows": 48
+    },
+    "NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz": {
+      "bytes": 2373909,
+      "sha256": "d7e6dfa03adbe656517648237a42080f3c87f3af083f91b4f47e8eecf3f044a0",
+      "data_rows": 129481
+    },
+    "NISSAN_BASE_TABLE_SET_2026-11-27.md": {
+      "bytes": 12722,
+      "sha256": "3bd3120101785787a1cd6d35a17682dfe3fd6419776610118bb8cc2d0fb1b0c2"
+    },
+    "NISSAN_BASE_TABLE_SET_manifest.json": {
+      "bytes": 5116,
+      "sha256": "7681c857433cf956d760a43667e2a50c48c6d193612c1787e9b08edfd3be10f3"
+    },
+    "NISSAN_BASE_TABLE_SET_summary.json": {
+      "bytes": 10528,
+      "sha256": "bd97ea89afe752f05af118e2a86cac206012c9766ad3e87a97fca242129446c2"
+    },
+    "NISSAN_C12W_JUKE_TWIN_PAYLOADS_2026-11-27.tsv.gz": {
+      "bytes": 31713,
+      "sha256": "4463ea21fe66813b67c9ce0b78eaaf2fa723f1a88ccdee2129a86dd5fc34f685",
+      "data_rows": 581
+    },
+    "run_manifest.json": {
+      "bytes": 1500,
+      "sha256": "14a413b9cd688f91636566b91e5e815ce38fd4a46c7320380874a9c68866fee9"
+    },
+    "scan_details.jsonl.gz": {
+      "bytes": 3138825,
+      "sha256": "1211c98e5e9afefb470a78e268da0c644017016df79a5af3e0c672afa43ce977"
+    },
+    "table_layout_similarity_431_DAT_2026-11-27.md": {
+      "bytes": 6881,
+      "sha256": "fde4e6950aab34ba79a6c79ebf6527ecddab02171ce6866bf92b48cba6d60219"
+    }
+  }
+}
