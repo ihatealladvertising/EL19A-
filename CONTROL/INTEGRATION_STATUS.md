@@ -1,10 +1,11 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70031 structural-readiness integration into WO65324 (2026-11-27)
 **Purpose:** Integrate the published WO70031 structural-readiness matrix into coordinator-owned WO65324 and update only the WO65324 coordinator summary row in CONTROL/active_work_orders.md. No worker FIFO, other WO, XML, scope matrix, catalogue, workbook, Findings, ROM/LST/A2L, tool source/test/workflow or protected evidence changes.
 **Lock acquired:** 2026-11-27 — freshly fetched main gate UNLOCKED; coordinator-only report/register integration.
+**Lock released:** 2026-11-27 — CONTROL/WO65324.md updated with the published WO70031 structural-readiness matrix integration and read back (commit 1957dccd9a0b8e79e571a04fb1ea72273f835975; blob 589ac31a38784b08f24ce4c608f62b64bd2cf86e); only the coordinator-owned WO65324 summary row in CONTROL/active_work_orders.md updated and read back (commit 276e12547b3343a1340d5443e207dd108f52f6e2; blob c68be8179153e27dc5c8a5eb4bdcfb96debb9cd6). Worker 1–3 assignments/FIFOs and all other WO lifecycle states unchanged; no XML, Findings, workbook, catalogue, scope matrix, ROM/LST/A2L or tool files changed.
 **Lock released:** 2026-11-27 — QUICK START block published and read back in `CONTROL/active_work_orders.md` (commit `ff380af99b1cc4df8ee06642e3559c94b9421182`; blob `adbe54812e2fd634b92c38f43cb69cbb0a56a1a8`) and worker startup prompts aligned/read back in `CONTROL/WORKER_PROTOCOL.md` (commit `d8bee2f071a806618171ba031e009331110b7089`; blob `9c10208d88a48b550af8ca2eb3d22b9cb8f3bcbf`). Worker 1–3 assignments, FIFO order, and all WO lifecycle states unchanged.
 
 # Repository Integration Status
