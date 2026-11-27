@@ -59,7 +59,7 @@ jobs:
           V6 = Path("EVIDENCE/side project/64810223F121200000.hex")
           A2L = Path("EVIDENCE/side project/64811000p2_m.a2l")
           EL = Path("EVIDENCE/VERSA f501.bin")
-          BASE_ZIP = Path("previous-artifact/rr-roms-workbench-refresh.zip")
+          BASE_INDEX_FILE = Path("previous-artifact/rr_roms_reference_index.json")
           BASE_INDEX_SHA256 = "2daba4660c89a1b2a09f51f322645d04463c20c7c2c7fee95acd0817e81f57cf"
           HISTORICAL = {
               "container_sha256": "8cf39f78efc67f6ae162386454c121fcc6be4771fd624150ca7c2b4102679c0a",
@@ -174,13 +174,9 @@ jobs:
               return ranges
 
           # 1. Reproduce the historic index identity before touching it.
-          if not BASE_ZIP.exists():
-              raise FileNotFoundError(f"previous corpus artifact missing: {BASE_ZIP}")
-          with zipfile.ZipFile(BASE_ZIP) as zf:
-              names = zf.namelist()
-              if "rr_roms_reference_index.json" not in names:
-                  raise RuntimeError("previous corpus artifact has no root rr_roms_reference_index.json")
-              base_raw = zf.read("rr_roms_reference_index.json")
+          if not BASE_INDEX_FILE.exists():
+              raise FileNotFoundError(f"downloaded prior index not found: {BASE_INDEX_FILE}")
+          base_raw = BASE_INDEX_FILE.read_bytes()
           if sha256_bytes(base_raw) != BASE_INDEX_SHA256:
               raise RuntimeError("prior reference-index SHA-256 does not match the published corpus report")
           base_index_path = OUT / "base_150_rom_reference_index.json"
