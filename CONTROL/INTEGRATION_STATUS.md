@@ -1,10 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO65324 A2L scalar-alignment reconciliation (2026-11-27)
-**Purpose:** Reconcile newly added A2L scalar-alignment evidence against the target ROM and workbench output, publish a review crosswalk, and update the coordinator report/register. No worker lane, canonical XML, Findings, source ROM/A2L, or tool source changes.
-**Lock acquired:** 2026-11-27 — latest main gate freshly verified UNLOCKED; serialize A2L scalar-alignment crosswalk and coordinator report/register update.
+**Integrator:** ChatGPT — WO70032 scalar alignment audit workbench integration (2026-11-27)
+**Purpose:** Publish and verify WO70032 scalar-alignment workbench code, documentation and audit outputs, then close the coordinator-owned WO and release the gate. No worker lane, canonical XML, Findings or source ROM/A2L changes.
+**Lock acquired:** 2026-11-27 — latest main gate freshly verified UNLOCKED; serialize WO70032 workbench code, docs, generated scalar-alignment audit, report and coordinator register update.
 **Lock released:** 2026-11-27 — new evidence reconciliation published and read back in commit `13f4fe49bdc9e96951a8ad86933ebd766868fa98`. Crosswalk SHA-256 `cf4abc87db5cd9998dbf3eaed904c8f1ace065443d591801ba9741028f38ff22`; manifest SHA-256 `4db516eca2df8fd80cc7b91083ca331c8bd1227b0384e01e6dc76cf96abd7daa`. The 1/2-byte aligned target values match; 13 four-byte Tier-C raw comparisons remain unresolved. No donor semantic promotion or canonical XML/Findings/tool-source/worker-lane change.
 **Lock released:** 2026-11-27 — typed scalar candidate review and coordinator report/register published and verified in commit `6b8512a9a3b0ebf88d641a983a816a938f68bd47`. TSV SHA-256 `e613bfddf24543bf5ea425eae82280f087a51674716e17565fcfbf2d74c74ed2`; manifest SHA-256 `ca7ab61a72a88488481354397646732bbf45ed183572fa4a70c861ef689057f9`. 72 review-only raw/provisional candidates; two existing XML addresses excluded. No XML/Findings/tool-source/worker lane changes.
 **Lock released:** 2026-11-27 — fresh scalar-candidate crosswalk against WO65090 and coordinator report/register published and read back at commit `8ad1de1c1f6b5bf9848481cb2c37a3e3cdb3c669`. Crosswalk SHA-256 `f214b57e6b6f74641007a45197d3445d33f36c1e9b5d878155e9d9f8fa5b028f`; manifest SHA-256 `afd3ec96d8960e5918d15631cdb7b9bc0248422be77c510aadd207ca9f75044c`. No repeated census or reader trace, no scalar promoted, and no canonical XML/Findings/worker/tool edits.
