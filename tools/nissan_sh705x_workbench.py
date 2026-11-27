@@ -18,6 +18,7 @@ Evidence boundary:
 import argparse
 import bisect
 import csv
+import gzip
 import hashlib
 import json
 import re
@@ -62,6 +63,7 @@ from romraider_xml_export import (  # noqa: E402
     resolve_candidate_evidence,
     write_preview_bundle,
 )
+from romraider_scalar_alignment import audit_scalar_alignment, write_audit_outputs  # noqa: E402
 
 EL19A_PINNED_SHA256 = "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
 
@@ -1478,6 +1480,31 @@ def cmd_export_xml(args):
     )
 
 
+def cmd_scalar_alignment_audit(args):
+    rom_bytes = load_any_rom(Path(args.rom))
+    catalogue_path = Path(args.catalogue) if args.catalogue else None
+    if catalogue_path and catalogue_path.suffix.lower() == ".gz":
+        with gzip.open(catalogue_path, "rt", encoding="utf-8") as stream:
+            catalogue = json.load(stream)
+    else:
+        catalogue = json.loads(catalogue_path.read_text(encoding="utf-8")) if catalogue_path else None
+    rows, summary = audit_scalar_alignment(
+        rom_bytes,
+        Path(args.alignment),
+        xml_fragment=Path(args.xml_fragment) if args.xml_fragment else None,
+        catalogue=catalogue,
+        catalogue_path=catalogue_path,
+    )
+    json_path, tsv_path = write_audit_outputs(rows, summary, Path(args.out_prefix))
+    print(
+        f"Audited {summary['row_count']} scalar-alignment rows; "
+        f"1/2-byte matches={summary['counts'].get('MATCH', 0)}, "
+        f"mismatches={summary['counts'].get('MISMATCH', 0)}, "
+        f"scanner exact-width matches={summary['counts'].get('scanner_exact_width_match', 0)}"
+    )
+    print(f"Wrote {json_path} and {tsv_path}")
+
+
 def main():
     ap = argparse.ArgumentParser(description="Nissan SH7055/SH7058 Reverse-Engineering Workbench")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -1552,6 +1579,17 @@ def main():
     p_exp.add_argument("--index-dir", help="Optional hash-validated prebuilt EL19A INDEX directory")
     p_exp.add_argument("--expected-el19a-sha256", default=EL19A_PINNED_SHA256)
     p_exp.set_defaults(func=cmd_export_xml)
+
+    p_scalar = sub.add_parser(
+        "scalar-alignment-audit",
+        help="Audit donor-aligned scalar TSV rows against target ROM bytes, scanner spans, and optional XML addresses",
+    )
+    p_scalar.add_argument("--rom", required=True, help="Target ROM path (.bin/.zip/.s19/.hex/.dat)")
+    p_scalar.add_argument("--alignment", required=True, help="Scalar-alignment TSV with EL19A address/value columns")
+    p_scalar.add_argument("--xml-fragment", help="Optional XML fragment; labels/scaling are retained as hypotheses")
+    p_scalar.add_argument("--catalogue", help="Optional scan catalogue JSON for exact-address/width cross-checks")
+    p_scalar.add_argument("--out-prefix", required=True, help="Output prefix for JSON and TSV audit files")
+    p_scalar.set_defaults(func=cmd_scalar_alignment_audit)
 
     args = ap.parse_args()
     args.func(args)

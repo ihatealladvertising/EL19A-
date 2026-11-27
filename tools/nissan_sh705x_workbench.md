@@ -97,6 +97,21 @@ Verified `diff` metrics:
 
 ---
 
+### 5. `scalar-alignment-audit` — Target Check for Donor-Aligned Scalars
+
+Audits scalar-alignment TSV rows against target ROM bytes, optionally joining the workbench scalar-candidate catalogue and an aligned XML fragment by exact EL19A address. It records raw bytes, unsigned big-endian values, bounds, scanner width matches (with candidate element types retained), and XML address hits for each input row. One- and two-byte values are compared directly; four-byte rows remain unresolved because donor conversions and target storage types are not inferred. Names, tiers, conversions, units, and XML scaling remain source hypotheses.
+
+```bash
+python3 tools/nissan_sh705x_workbench.py scalar-alignment-audit \
+  --rom "EVIDENCE/VERSA f501.bin" \
+  --alignment EVIDENCE/EL19A_scalar_alignment_v2.tsv \
+  --xml-fragment EVIDENCE/EL19A_scalars_A2L_aligned_v2_fragment.xml \
+  --catalogue /tmp/el19a_catalogue.json \
+  --out-prefix /tmp/el19a_scalar_alignment_audit
+```
+
+The command writes `<prefix>.json` with source and ROM hashes plus row-level joins, and `<prefix>.tsv` for review. It does not add declarations to XML or promote A2L metadata.
+
 ## Evidence Boundary
 
 - Helper geometry, ROM byte extents, checksums, and call sites in `VERSA f501.bin` are **target-ROM structural facts**.
