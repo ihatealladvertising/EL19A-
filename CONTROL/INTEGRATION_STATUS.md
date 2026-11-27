@@ -1,10 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — WO65324 scalar crosswalk publication (2026-11-27)
-**Purpose:** Publish the bounded fresh-scalar crosswalk to WO65090 and update its coordinator report/register entry. No worker lane, canonical XML, Findings, source evidence, or tool source changes.
-**Lock acquired:** 2026-11-27 — latest main gate freshly verified UNLOCKED; serialize scalar crosswalk and coordinator report/register update.
+**Integrator:** ChatGPT — WO65324 typed scalar candidate review (2026-11-27)
+**Purpose:** Publish the target-byte-verified typed scalar candidate review and update the coordinator report/register. No worker lane, canonical XML, Findings, source evidence, or tool source changes.
+**Lock acquired:** 2026-11-27 — latest main gate freshly verified UNLOCKED; serialize typed scalar candidate review and coordinator report/register update.
 **Lock released:** 2026-11-27 — fresh scalar-candidate crosswalk against WO65090 and coordinator report/register published and read back at commit `8ad1de1c1f6b5bf9848481cb2c37a3e3cdb3c669`. Crosswalk SHA-256 `f214b57e6b6f74641007a45197d3445d33f36c1e9b5d878155e9d9f8fa5b028f`; manifest SHA-256 `afd3ec96d8960e5918d15631cdb7b9bc0248422be77c510aadd207ca9f75044c`. No repeated census or reader trace, no scalar promoted, and no canonical XML/Findings/worker/tool edits.
 **Lock released:** 2026-11-27 — isolated 114-table strict preview bundle and coordinator report/register update published and verified at commit `61ed200b21799f97cece2347b1e7ebb8d462c260`. XML SHA-256 `30fe20c7d18e4444823d8960d4257ac532b1b9282cad9c2a73af599296d539cb`; manifest SHA-256 `d0f7f4d2be249c88a9ae551d7be91870e523d815d6b93245c9e1cd82bfbd205b`. Validation: 114 tables, zero errors/warnings/overlap warnings; all root names generic RAW. No canonical XML or Findings change.
 **Lock released:** 2026-11-27 — 114-row target-backed candidate delta, manifest and coordinator report/register update published/read back in commit `e3add5a42e763729368b94642f85e8d1b51d30c4`. Delta SHA-256 `dbbfd78219327b31ca320795d04de259a99774979d6a48d2e94c871ea521c396`; manifest SHA-256 `2fed60c68db0717a7e3124a402d49bb55618bd487eb9055800563dab725dd6f8`. It contains 111 target-primary candidates and three already tracked by non-XML sources. One absent-from-XML hold (`0x0DAB6`) is excluded. No canonical XML, Findings, worker lane, or tool source changed.
