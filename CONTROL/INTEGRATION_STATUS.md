@@ -1,10 +1,22 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — permanent structural-inclusion threshold update and WO70031 allocation (2026-11-27)
 **Purpose:** Publish the user-approved permanent relaxation of full EL19A reader-mechanics/downstream-consumer tracing as a prerequisite for raw/provisional table inclusion; align WORKER_PROTOCOL, project direction and active WO65324; create a bounded Worker 1 reconciliation using the already-published EL19A/V6 151-ROM exports. No ROM, A2L, calibration XML, workbook, catalogue, scope matrix, scanner/tool source or existing Findings content is to be changed in this policy/allocation batch.
 **Lock acquired:** 2026-11-27 — latest main gate verified UNLOCKED; active register, WO65324 and absence of WO70031 checked.
+
+**Lock released:** 2026-11-27 — permanent structural-only RAW/PROVISIONAL threshold update published, read back and adopted by the active definition-completion WO. Created and registered Worker 1 WO70031 against the preserved EL19A 291-address / 377-call exports and 151-ROM donor bundle; no global scan was rerun and no protected calibration/evidence/tool files were changed.
+
+**Published and verified:**
+- `CONTROL/WORKER_PROTOCOL.md` — commit `e63f01ea9512957d0114ce3fe49ab94e125bcbec`; blob `14d80a66f0f3eca4c42308023c265ee83c842a6e`.
+- `CONTROL/PROJECT_DIRECTION_2026-11-26.md` — commit `32a557c4c458dd1b784c7028a67c9c79bda7806d`; blob `ea5a45285a6041c1707adafb6d747c3f6a4130ce`.
+- `CONTROL/WO65324.md` — commit `33b5ef99ca88a5d0606bd7ede09d72ee4989896f`; blob `ccced4061f639b09244fb9021446b417c0d054e4`.
+- `CONTROL/WO70031.md` — commit `4895af1c7c02c40b5d555d49537d3b004ff6853a`; blob `dd96540863c16b56951d1d5a1ee08e592a2f8a42`.
+- `CONTROL/active_work_orders.md` — commit `d971bd7d50ee26ca756f52b950820a3d0f28ace1`; blob `621c95ff3dca14e35500c78a45cdcabbf9557914`.
+
+**Queue readback:** Worker 1 — WO70031 READY; Worker 2 — WO70018 → WO70022 → WO70028 unchanged; Worker 3 — WO70026 → WO70029 → WO70030 unchanged. Shared-main publication gate returned to UNLOCKED.
+
 
 **Integrator:** ChatGPT — first-class V6 donor rescan, index merge and EL19A comparison (2026-11-27)
 **Purpose:** Reuse and SHA-verify the prior 150-ROM reference-index artifact; rescan only `EVIDENCE/side project/64810223F121200000.hex` and EL19A with the current workbench; export full call/helper/table JSON and TSV plus lossless per-address catalogues and manifests; reconcile the V6 306-table historical baseline; add V6 ROM payload and candidate A2L symbol associations to the reference index with explicit `PROVISIONAL_UNVERIFIED` pairing status; rerun exact-payload and same-geometry-difference comparisons. Temporary Actions workflow only. No tool source/tests, ROM, S19, HEX, A2L, XML definition, workbook, calibration catalogue, scope matrix, Findings or worker queue edits.
