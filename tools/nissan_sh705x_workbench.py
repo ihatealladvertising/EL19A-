@@ -32,313 +32,43 @@ TOOLS_DIR = Path(__file__).resolve().parent
 if str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
 
-from sh7058_cross_rom_scanner import discover_helpers, extract_calls, load_xml_tables  # noqa: E402
+from sh705x_rom_loader import (  # noqa: E402
+    _check_nonflat_container,
+    _load_dat_percent6,
+    _rol16,
+    decrypt_consult_dat_word,
+    load_any_rom,
+    load_dat_bytes,
+    load_hex_bytes,
+    load_s19_bytes,
+    parse_nissan_metadata,
+)
+sys.modules.setdefault("nissan_sh705x_workbench", sys.modules[__name__])
+from sh7058_cross_rom_scanner import build_scan_export, discover_helpers, extract_calls, load_xml_tables  # noqa: E402
+from sh705x_discovery_v2 import (  # noqa: E402
+    atomic_write_json,
+    build_run_manifest,
+    compare_call_extractions,
+    discover_cal_scalars,
+    extract_calls_enhanced,
+    extract_implicit_grids,
+    to_per_address_catalogue,
+)
+from romraider_ref_index import (  # noqa: E402
+    build_reference_index,
+    match_target_against_index,
+)
+from romraider_xml_export import (  # noqa: E402
+    resolve_candidate_evidence,
+    write_preview_bundle,
+)
+
+EL19A_PINNED_SHA256 = "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
 
 
 # ---------------------------------------------------------------------------
-# Unified ROM & A2L / Repository Metadata Loaders
+# Nissan Checksums, Fingerprinting, & A2L / Repository Metadata Loaders
 # ---------------------------------------------------------------------------
-
-def load_s19_bytes(raw: bytes) -> bytes:
-    max_addr = 0x100000
-    recs = []
-    for line in raw.decode("ascii", errors="ignore").splitlines():
-        if len(line) >= 4 and line[0] == "S" and line[1] in ("1", "2", "3"):
-            alen = {"1": 4, "2": 6, "3": 8}[line[1]]
-            cnt = int(line[2:4], 16)
-            addr = int(line[4 : 4 + alen], 16)
-            data = bytes.fromhex(line[4 + alen : 2 + cnt * 2])
-            if addr + len(data) <= 0x200000:
-                max_addr = max(max_addr, addr + len(data))
-                recs.append((addr, data))
-    buf = bytearray([0xFF] * max_addr)
-    for addr, data in recs:
-        buf[addr : addr + len(data)] = data
-    return bytes(buf)
-
-
-def load_hex_bytes(raw: bytes) -> bytes:
-    buf = bytearray([0xFF] * 0x100000)
-    upper = 0
-    for line in raw.decode("ascii", errors="ignore").splitlines():
-        if not line.startswith(":"):
-            continue
-        cnt = int(line[1:3], 16)
-        addr = int(line[3:7], 16)
-        rt = int(line[7:9], 16)
-        data = bytes.fromhex(line[9 : 9 + 2 * cnt])
-        if rt == 0:
-            full = upper + addr
-            if full + len(data) <= len(buf):
-                buf[full : full + len(data)] = data
-        elif rt == 4:
-            upper = int.from_bytes(data, "big") << 16
-        elif rt == 2:
-            upper = int.from_bytes(data, "big") << 4
-    return bytes(buf)
-
-
-def _rol16(v: int, k: int) -> int:
-    return ((v << k) | (v >> (16 - k))) & 0xFFFF
-
-
-def decrypt_consult_dat_word(c: int) -> int:
-    """Invert Nissan Consult .dat 2-round 16-bit Feistel ECB cipher on one 32-bit BE word."""
-    ch, cl = (c >> 16) & 0xFFFF, c & 0xFFFF
-    a = (cl + 0xCA1B) & 0xFFFF
-    z = (a + _rol16(a, 1) + 0xFFFF) & 0xFFFF
-    r0 = ch ^ (z ^ _rol16(z, 4))
-    b = (r0 + 0x124D) & 0xFFFF
-    f1 = (b + _rol16(b, 2) + 0xFFFF) & 0xFFFF
-    l0 = cl ^ f1
-    return (l0 << 16) | r0
-
-
-
-
-
-def _check_nonflat_container(raw: bytes, label: str = "") -> None:
-    """Reject known non-flat/encrypted/non-ROM containers with actionable diagnostics."""
-    who = f" ({label})" if label else ""
-    if raw.startswith(b"UpRev Osiris ROM File Ver "):
-        ver = raw[:32].decode("ascii", errors="replace").strip()
-        sections = []
-        pos = 0x60
-        while pos + 20 < len(raw):
-            if raw[pos : pos + 10] == b"AITuneDesc":
-                tag, tlen = "AITuneDesc", 10
-            elif all(32 <= b < 127 for b in raw[pos : pos + 8]):
-                tag, tlen = raw[pos : pos + 8].decode("ascii").strip(), 8
-            else:
-                break
-            u0, u1, _u2 = struct.unpack_from("<III", raw, pos + tlen)
-            if u1 < tlen + 16 or pos + u1 > len(raw):
-                break
-            sections.append(f"{tag}({u0}B)")
-            pos += u1
-        sec_str = ", ".join(sections) if sections else "unknown layout"
-        raise ValueError(
-            f"UpRev Osiris encrypted container{who}: {ver}; sections=[{sec_str}]. "
-            "ROMData is encrypted and cannot be scanned directly without decryption."
-        )
-    if raw.startswith(b"WinOLS File") or raw[4:15] == b"WinOLS File":
-        raise ValueError(
-            f"WinOLS project container{who} ('WinOLS File', {len(raw):,} B) is not a flat ECU binary; "
-            "export a flat .bin/.hex/.s19 image first."
-        )
-    if raw.startswith(b"\x89PNG\r\n\x1a\n") and len(raw) >= 24:
-        w, h = struct.unpack_from(">II", raw, 16)
-        raise ValueError(f"File{who} is a PNG image ({w}x{h}, {len(raw):,} B), not an ECU ROM.")
-    if raw.startswith(b"%PDF-"):
-        raise ValueError(f"File{who} is a PDF document ({len(raw):,} B), not an ECU ROM.")
-    if raw.startswith(b"\xff\xd8\xff"):
-        raise ValueError(f"File{who} is a JPEG image ({len(raw):,} B), not an ECU ROM.")
-
-
-def _load_dat_percent6(raw: bytes, pos: int) -> bytes:
-    """Unpack & decrypt Nissan `%6` (0x25 0x36) 32-byte-block Consult .dat (e.g. E1BR20E.dat)."""
-    sbl_blocks = 0
-    rom_recs: List[Tuple[int, bytes]] = []
-    max_end = 0x80000
-    while pos + 7 <= len(raw) and raw[pos : pos + 2] == b"%6":
-        idx = int.from_bytes(raw[pos + 2 : pos + 5], "big")
-        plen = raw[pos + 5]
-        frame_len = 6 + plen + 1
-        if plen == 0 or pos + frame_len > len(raw):
-            raise ValueError(f"Truncated Consult .dat %6 frame at 0x{pos:X}")
-        blk = raw[pos : pos + frame_len]
-        if (sum(blk[:-1]) & 0xFF) != blk[-1]:
-            raise ValueError(f"Consult .dat %6 frame checksum mismatch at 0x{pos:X}")
-        if 0x800000 <= idx < 0x820000:
-            sbl_blocks += 1
-        elif 0x820000 <= idx:
-            if plen % 4 != 0:
-                raise ValueError(f"Unaligned %6 payload length {plen} at 0x{pos:X}")
-            enc = blk[6 : 6 + plen]
-            dec = bytearray(plen)
-            for off in range(0, plen, 4):
-                w = struct.unpack_from(">I", enc, off)[0]
-                struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
-            rom_off = (idx - 0x820000) * 32
-            rom_recs.append((rom_off, bytes(dec)))
-            if rom_off + plen > max_end:
-                max_end = 0x100000 if rom_off + plen <= 0x100000 else rom_off + plen
-        pos += frame_len
-    if not rom_recs:
-        raise ValueError(f"No ROM blocks (0x820000+) found in %6 Consult .dat (sbl_blocks={sbl_blocks})")
-    buf = bytearray([0xFF] * max_end)
-    for off, dec in rom_recs:
-        buf[off : off + len(dec)] = dec
-    return bytes(buf)
-
-
-def load_dat_bytes(raw: bytes) -> bytes:
-    """Unpack and decrypt a Nissan Consult .dat reprogramming container into a raw SH705x image."""
-    # Variant A: standard KWP 0x80 0x15 0xFC ... 0x34 0x82 frames
-    pos_ecu = raw.find(b"\x80\x15\xfc", 0, 0x200)
-    if pos_ecu != -1:
-        pos = pos_ecu
-        recs: List[Tuple[int, bytes]] = []
-        max_end = 0x80000
-        n_frames = 0
-        while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x15":
-            kwp_len = raw[pos + 3]
-            frame_len = 4 + kwp_len + 1
-            if pos + frame_len > len(raw):
-                raise ValueError(f"Truncated Consult .dat frame at 0x{pos:X}")
-            blk = raw[pos : pos + frame_len]
-            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
-                raise ValueError(f"Consult .dat frame checksum mismatch at 0x{pos:X}")
-            if blk[4:6] != b"\x34\x82":
-                raise ValueError(f"Unexpected Consult .dat frame command {blk[4:6].hex()} at 0x{pos:X}")
-            addr = int.from_bytes(blk[6:9], "big")
-            plen = blk[9]
-            if plen % 4 != 0 or 10 + plen > frame_len - 1:
-                raise ValueError(f"Invalid Consult .dat payload length {plen} at 0x{pos:X}")
-            enc = blk[10 : 10 + plen]
-            dec = bytearray(plen)
-            for off in range(0, plen, 4):
-                w = struct.unpack_from(">I", enc, off)[0]
-                struct.pack_into(">I", dec, off, decrypt_consult_dat_word(w))
-            recs.append((addr, bytes(dec)))
-            if addr + plen > max_end:
-                max_end = 0x100000 if addr + plen <= 0x100000 else addr + plen
-            pos += frame_len
-            n_frames += 1
-        if n_frames > 0:
-            buf = bytearray([0xFF] * max_end)
-            for addr, dec in recs:
-                buf[addr : addr + len(dec)] = dec
-            return bytes(buf)
-
-    # Variant B: `%6` (0x25 0x36) 32-byte block format (e.g. E1BR20E.dat)
-    pos_p6 = raw.find(b"%6", 0, 0x200)
-    if pos_p6 != -1:
-        return _load_dat_percent6(raw, pos_p6)
-
-    # Variant C: Nissan/Hitachi TCM Consult .dat (KWP target 0x19, e.g. 310364EM1C.dat)
-    pos_tcm = raw.find(b"\x80\x19\xfc", 0, 0x200)
-    if pos_tcm != -1:
-        pos = pos_tcm
-        n_tcm = 0
-        min_a, max_a = 1 << 30, 0
-        while pos + 11 <= len(raw) and raw[pos : pos + 2] == b"\x80\x19":
-            fl = 4 + raw[pos + 3] + 1
-            if pos + fl > len(raw):
-                break
-            blk = raw[pos : pos + fl]
-            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
-                raise ValueError(f"TCM Consult .dat frame checksum mismatch at 0x{pos:X}")
-            addr = int.from_bytes(blk[6:9], "big")
-            min_a = min(min_a, addr)
-            max_a = max(max_a, addr + blk[9])
-            pos += fl
-            n_tcm += 1
-        hdr_ascii = "".join(chr(b) if 32 <= b < 127 else "" for b in raw[:0x25])
-        raise ValueError(
-            f"Nissan/Hitachi TCM Consult .dat (KWP target 0x19, header='{hdr_ascii}', "
-            f"{n_tcm} checksum-verified frames 0x{min_a:X}..0x{max_a:X}) uses a distinct TCM cipher "
-            "and is not an SH705x ECU binary."
-        )
-
-    # Variant D: Unencrypted KWP2000 0xB8 0x15 0xF1 partial cal block (e.g. 8201032726.dat)
-    pos_kwp = raw.find(b"\xb8\x15\xf1", 0, 0x200)
-    if pos_kwp != -1:
-        pos = pos_kwp
-        n_kwp = 0
-        min_a, max_a = 1 << 30, 0
-        while pos + 4 <= len(raw) and raw[pos + 1 : pos + 3] == b"\x15\xf1":
-            dlen = raw[pos] & 0x3F
-            fl = 3 + dlen + 1
-            if pos + fl > len(raw):
-                break
-            blk = raw[pos : pos + fl]
-            if (sum(blk[:-1]) & 0xFF) != blk[-1]:
-                raise ValueError(f"KWP2000 .dat checksum mismatch at 0x{pos:X}")
-            addr = int.from_bytes(blk[5:8], "big")
-            min_a = min(min_a, addr)
-            max_a = max(max_a, addr + max(0, dlen - 5))
-            pos += fl
-            n_kwp += 1
-        hdr_ascii = "".join(chr(b) if 32 <= b < 127 else "" for b in raw[:0x25])
-        raise ValueError(
-            f"Unencrypted KWP2000 partial calibration .dat (header='{hdr_ascii}', "
-            f"{n_kwp} verified frames covering 0x{min_a:X}..0x{max_a:X}) is not a full SH705x ECU image."
-        )
-
-    raise ValueError("Unrecognized Consult .dat container format")
-
-
-def load_any_rom(path: Path) -> bytes:
-    suf = path.suffix.lower()
-    if suf == ".zip":
-        with zipfile.ZipFile(path) as zf:
-            members = [m for m in zf.infolist() if not m.is_dir()]
-            if not members:
-                raise ValueError(f"Empty zip archive: {path}")
-            pref = [m for m in members if m.filename.lower().endswith((".bin", ".s19", ".hex", ".dat"))]
-            target = max(pref or members, key=lambda m: m.file_size)
-            raw = zf.read(target.filename)
-            _check_nonflat_container(raw, target.filename)
-            inner_suf = Path(target.filename).suffix.lower()
-            if inner_suf == ".s19":
-                return load_s19_bytes(raw)
-            if inner_suf == ".hex":
-                return load_hex_bytes(raw)
-            if inner_suf == ".dat":
-                return load_dat_bytes(raw)
-            return raw
-    raw = path.read_bytes()
-    _check_nonflat_container(raw, path.name)
-    if suf == ".s19":
-        return load_s19_bytes(raw)
-    if suf == ".hex":
-        return load_hex_bytes(raw)
-    if suf == ".dat":
-        return load_dat_bytes(raw)
-    return raw
-
-
-def parse_nissan_metadata(rom: bytes) -> dict:
-    """
-    Parse nissutils-style BootLoader (`LOADERxx`), Application FID (`ROMID ... DATABASE ... SH705xxx`),
-    RAMF vector table count, and SH-2 IVT handler diversity.
-    """
-    dbs = []
-    for m in re.finditer(rb"([0-9A-Z]{6,12})\x00{2,16}DATABASE\x00+(?:[A-Z0-9]\x00+)?(SH70[0-9A-Z]{2,6})", rom):
-        tag, cpu = m.group(1).decode("ascii"), m.group(2).decode("ascii")
-        dbs.append({"addr": m.start(), "tag": tag, "cpu": cpu, "is_loader": tag.startswith("LOADER")})
-
-    loaders = [d for d in dbs if d["is_loader"]]
-    fids = [d for d in dbs if not d["is_loader"]]
-    app_fid = fids[-1] if fids else None
-
-    ramf_count = 0
-    if app_fid is not None and app_fid["addr"] + 0x94 <= len(rom):
-        fa = app_fid["addr"]
-        ramf_count = sum(
-            1
-            for off in range(fa + 0x3C, fa + 0x94, 4)
-            if 0xFFFF0000 <= struct.unpack_from(">I", rom, off)[0] <= 0xFFFFFFFF
-        )
-
-    bootblock_ff = len(rom) >= 0x8200 and rom[:0x8200] == b"\xff" * 0x8200
-    ivt_unique = 0
-    if not bootblock_ff and len(rom) >= 0x400:
-        vecs = struct.unpack_from(">256I", rom, 0)
-        reset_pc = vecs[0]
-        ivt_unique = len({v for v in vecs[2:] if v not in (0, 0xFFFFFFFF, reset_pc) and v < len(rom)})
-
-    return {
-        "loader": loaders[0]["tag"] if loaders else None,
-        "loader_addr": loaders[0]["addr"] if loaders else None,
-        "fid": app_fid["tag"] if app_fid else None,
-        "fid_addr": app_fid["addr"] if app_fid else None,
-        "fid_cpu": app_fid["cpu"] if app_fid else None,
-        "ramf_ptrs": ramf_count,
-        "bootblock_ff": bootblock_ff,
-        "ivt_unique": ivt_unique,
-    }
 
 
 def verify_checksums(rom: bytes, meta: Optional[dict] = None) -> dict:
@@ -854,6 +584,268 @@ def decode_rom_values(rom: bytes, addr: int, dim1: int, dim2: int, etype: str) -
     return list(struct.unpack_from(fmt, rom, addr))
 
 
+def _parse_hex_addr_flex(val: str) -> Optional[int]:
+    s = (val or "").strip()
+    if not s:
+        return None
+    if s.startswith(("0x", "0X")):
+        s = s[2:]
+    if not re.fullmatch(r"[0-9A-Fa-f]{1,8}", s):
+        return None
+    return int(s, 16)
+
+
+def load_hash_validated_el19a_context(
+    rom: bytes,
+    *,
+    expected_rom_sha256: str = EL19A_PINNED_SHA256,
+    index_dir: Optional[Path] = Path("INDEX"),
+) -> dict:
+    """
+    Hash-validated adapter for prebuilt EL19A `INDEX/*.tsv` datasets
+    (catalog consumers, GBR map, OBD Mode 01, Consult Mode 22, DTC writers, EL13A diff blocks).
+    Treats mismatched ROM hashes or absent directories/files as explicitly unavailable.
+    """
+    observed_sha = hashlib.sha256(rom).hexdigest()
+    if index_dir is None:
+        return {
+            "status": "unavailable",
+            "reason": "index_dir_not_configured",
+            "expected_rom_sha256": expected_rom_sha256,
+            "observed_rom_sha256": observed_sha,
+            "sources": {},
+        }
+    idx_path = Path(index_dir)
+    if observed_sha.lower() != expected_rom_sha256.lower():
+        return {
+            "status": "unavailable",
+            "reason": "rom_hash_mismatch",
+            "expected_rom_sha256": expected_rom_sha256,
+            "observed_rom_sha256": observed_sha,
+            "sources": {},
+        }
+    if not idx_path.exists():
+        return {
+            "status": "unavailable",
+            "reason": "index_dir_missing",
+            "expected_rom_sha256": expected_rom_sha256,
+            "observed_rom_sha256": observed_sha,
+            "sources": {},
+        }
+
+    def _read_tsv(fname: str) -> Tuple[Optional[dict], List[dict]]:
+        fp = idx_path / fname
+        if not fp.exists():
+            return {"status": "unavailable", "reason": "missing", "path": str(fp)}, []
+        raw_b = fp.read_bytes()
+        with fp.open("r", newline="", encoding="utf-8", errors="replace") as fh:
+            rows = list(csv.DictReader(fh, delimiter="\t"))
+        return {
+            "status": "available",
+            "path": str(fp),
+            "sha256": hashlib.sha256(raw_b).hexdigest(),
+            "row_count": len(rows),
+        }, rows
+
+    sources: Dict[str, dict] = {}
+    meta, cat_rows = _read_tsv("catalog_179_consumer_summary.tsv")
+    sources["catalog_179_consumer_summary"] = meta
+    catalog_by_addr: Dict[int, dict] = {}
+    for row in cat_rows:
+        addr = _parse_hex_addr_flex(row.get("address", ""))
+        if addr is not None:
+            catalog_by_addr[addr] = row
+
+    meta, gbr_rows = _read_tsv("function_gbr_map.tsv")
+    sources["function_gbr_map"] = meta
+    gbr_by_func: Dict[int, List[dict]] = defaultdict(list)
+    for row in gbr_rows:
+        fn = row.get("function", "")
+        if fn.startswith("sub_"):
+            fa = _parse_hex_addr_flex(fn[4:])
+            if fa is not None:
+                gbr_by_func[fa].append(row)
+
+    meta, obd_rows = _read_tsv("obd_mode01_pid_map.tsv")
+    sources["obd_mode01_pid_map"] = meta
+    meta, cid_rows = _read_tsv("consult_mode22_pid_map.tsv")
+    sources["consult_mode22_pid_map"] = meta
+    meta, dtc_rows = _read_tsv("dtc_198_and_writers.tsv")
+    sources["dtc_198_and_writers"] = meta
+    meta, diff_rows = _read_tsv("el19a_vs_el13a_diff_blocks.tsv")
+    sources["el19a_vs_el13a_diff_blocks"] = meta
+
+    ram_to_diag: Dict[str, List[str]] = defaultdict(list)
+    for r in obd_rows:
+        for col in ("kline_ram_sources", "can_ram_sources"):
+            txt = r.get(col) or ""
+            for m in re.finditer(r"FFFF[0-9A-Fa-f]{4}", txt):
+                ram_to_diag[m.group(0).upper()].append(f"OBD_0x{r.get('pid_hex', '').lstrip('0x') or '00'}:{r.get('sae_name', '')}")
+    for r in cid_rows:
+        for col in ("ptr1_addr", "ptr2_addr"):
+            v = (r.get(col) or "").strip().upper()
+            if v.startswith("FFFF"):
+                ram_to_diag[v].append(f"CID_{r.get('cid_hex', '')}:{r.get('mode01_cross_match', '')}")
+    for r in dtc_rows:
+        v = (r.get("target_ram") or "").strip().upper()
+        if v.startswith("FFFF"):
+            ram_to_diag[v].append(f"DTC_{r.get('pcode', '')}({r.get('access_kind', '')})")
+
+    avail_count = sum(1 for s in sources.values() if s["status"] == "available")
+    return {
+        "status": "available" if avail_count > 0 else "unavailable",
+        "reason": "ok" if avail_count > 0 else "no_index_files_found",
+        "expected_rom_sha256": expected_rom_sha256,
+        "observed_rom_sha256": observed_sha,
+        "sources": sources,
+        "catalog_by_addr": catalog_by_addr,
+        "gbr_by_func": dict(gbr_by_func),
+        "ram_to_diag": {k: list(dict.fromkeys(v)) for k, v in ram_to_diag.items()},
+        "diff_blocks_count": len(diff_rows),
+    }
+
+
+def reconcile_definition_sources(
+    *,
+    xml_paths: Optional[List[Path]] = None,
+    matrix_paths: Optional[List[Path]] = None,
+    catalog_path: Optional[Path] = None,
+    candidate_path: Optional[Path] = None,
+    scanner_tables: Optional[Dict[int, dict]] = None,
+) -> dict:
+    """
+    Source-by-source multi-definition & dual-scope-matrix reconciliation preserving every
+    source SHA-256 and surfacing disagreements without silently discarding any source.
+    """
+    source_manifest: List[dict] = []
+    by_addr: Dict[int, Dict[str, dict]] = defaultdict(dict)
+
+    for xp in (xml_paths or []):
+        p = Path(xp)
+        if not p.exists():
+            source_manifest.append({"source_id": p.name, "kind": "xml", "path": str(p), "status": "unavailable"})
+            continue
+        sha = hashlib.sha256(p.read_bytes()).hexdigest()
+        xtbls = load_xml_tables(p)
+        sid = f"xml:{p.name}"
+        source_manifest.append({"source_id": sid, "kind": "xml", "path": str(p), "sha256": sha, "status": "available", "count": len(xtbls)})
+        for addr, ent in xtbls.items():
+            by_addr[addr][sid] = {
+                "source_id": sid,
+                "name": ent.get("name"),
+                "geometry": f"{ent.get('sizex')}x{ent.get('sizey')}",
+                "storage_type": ent.get("storagetype"),
+                "scaling": ent.get("scaling"),
+                "disposition": "IN_XML",
+            }
+
+    for mp in (matrix_paths or []):
+        p = Path(mp)
+        if not p.exists():
+            source_manifest.append({"source_id": p.name, "kind": "scope_matrix", "path": str(p), "status": "unavailable"})
+            continue
+        sha = hashlib.sha256(p.read_bytes()).hexdigest()
+        sid = f"matrix:{p.name}"
+        row_cnt = 0
+        with p.open(newline="", encoding="utf-8", errors="replace") as fh:
+            for row in csv.DictReader(fh):
+                addr = _parse_hex_addr_flex(row.get("address") or row.get("Address") or "")
+                if addr is None:
+                    continue
+                row_cnt += 1
+                by_addr[addr][sid] = {
+                    "source_id": sid,
+                    "name": row.get("baseline_name") or row.get("name"),
+                    "geometry": row.get("geometry_orientation"),
+                    "storage_type": row.get("storage_type"),
+                    "scaling": row.get("current_scaling"),
+                    "disposition": row.get("release_disposition") or row.get("InScope") or "",
+                }
+        source_manifest.append({"source_id": sid, "kind": "scope_matrix", "path": str(p), "sha256": sha, "status": "available", "count": row_cnt})
+
+    for label, cp in (("catalog", catalog_path), ("candidate_register", candidate_path)):
+        if cp is None:
+            continue
+        p = Path(cp)
+        if not p.exists():
+            source_manifest.append({"source_id": label, "kind": "csv", "path": str(p), "status": "unavailable"})
+            continue
+        sha = hashlib.sha256(p.read_bytes()).hexdigest()
+        cnt = 0
+        with p.open(newline="", encoding="utf-8", errors="replace") as fh:
+            for row in csv.DictReader(fh):
+                addr = None
+                for k in ("Address", "address", "ROM Address", "storageaddress"):
+                    addr = _parse_hex_addr_flex(row.get(k) or "")
+                    if addr is not None:
+                        break
+                if addr is None:
+                    continue
+                cnt += 1
+                by_addr[addr][label] = {
+                    "source_id": label,
+                    "name": row.get("candidate_name") or row.get("Name") or row.get("name"),
+                    "geometry": row.get("dimensions"),
+                    "storage_type": row.get("storage"),
+                    "scaling": row.get("conversion"),
+                    "disposition": row.get("status") or "CATALOG_ROW",
+                }
+        source_manifest.append({"source_id": label, "kind": "csv", "path": str(p), "sha256": sha, "status": "available", "count": cnt})
+
+    if scanner_tables:
+        for addr, ent in scanner_tables.items():
+            by_addr[addr]["scanner"] = {
+                "source_id": "scanner",
+                "name": None,
+                "geometry": f"{ent['dim1']}x{ent['dim2']}",
+                "storage_type": ent["elem_type"],
+                "scaling": None,
+                "disposition": ent["kind"],
+            }
+
+    records: List[dict] = []
+    conflict_counts: Dict[str, int] = defaultdict(int)
+    for addr in sorted(by_addr):
+        src_map = by_addr[addr]
+        statuses: List[str] = []
+        xml_entries = [v for k, v in src_map.items() if k.startswith("xml:")]
+        mat_entries = [v for k, v in src_map.items() if k.startswith("matrix:")]
+        if len({e["name"] for e in xml_entries if e.get("name")}) > 1:
+            statuses.append("xml_name_conflict")
+        if len({e["scaling"] for e in xml_entries + mat_entries if e.get("scaling")}) > 1:
+            statuses.append("scaling_conflict")
+        if len({e["disposition"] for e in mat_entries if e.get("disposition")}) > 1:
+            statuses.append("disposition_conflict")
+        if "scanner" in src_map and xml_entries:
+            sc_g = src_map["scanner"]["geometry"]
+            for xe in xml_entries:
+                if xe.get("geometry") and xe["geometry"] != sc_g:
+                    try:
+                        x1, x2 = [int(p) for p in xe["geometry"].split("x")]
+                        s1, s2 = [int(p) for p in sc_g.split("x")]
+                        if x1 * x2 != s1 * s2:
+                            statuses.append("geometry_conflict")
+                            break
+                    except ValueError:
+                        pass
+        for st in statuses:
+            conflict_counts[st] += 1
+        records.append({
+            "address": addr,
+            "address_hex": f"0x{addr:05X}",
+            "conflicts": sorted(set(statuses)),
+            "sources": src_map,
+        })
+
+    return {
+        "schema": "sh705x-definition-reconciliation-v1",
+        "sources": source_manifest,
+        "address_count": len(records),
+        "conflict_counts": dict(sorted(conflict_counts.items())),
+        "records": records,
+    }
+
+
 # ---------------------------------------------------------------------------
 # Subcommands
 # ---------------------------------------------------------------------------
@@ -935,6 +927,38 @@ def cmd_scan(args):
         }
         out_j.write_text(json.dumps(payload, indent=2), encoding="utf-8")
         print(f"Wrote JSON summary -> {out_j}")
+
+    cat_out = getattr(args, "catalogue", None)
+    man_out = getattr(args, "manifest", None)
+    enh_win = getattr(args, "enhanced_window", 0) or 0
+    inc_scalars = bool(getattr(args, "include_scalars", False))
+    if cat_out or man_out:
+        scan_doc = build_scan_export(str(p), rom, helpers, calls)
+        cat = to_per_address_catalogue(scan_doc)
+        cat["implicit_grids"] = {f"0x{k:05X}": v for k, v in extract_implicit_grids(rom, helpers).items()}
+        if enh_win > 0:
+            enh_calls = extract_calls_enhanced(rom, helpers, window_bytes=enh_win)
+            cat["enhanced_call_comparison"] = compare_call_extractions(calls, enh_calls)
+        if inc_scalars:
+            cat["scalar_candidates"] = discover_cal_scalars(rom, helpers, calls=calls)
+        written_paths: List[Path] = []
+        if cat_out:
+            cat_p = Path(cat_out)
+            atomic_write_json(cat_p, cat)
+            written_paths.append(cat_p)
+            print(f"Wrote lossless catalogue ({len(cat['candidates'])} candidates) -> {cat_p}")
+        if man_out:
+            man_p = Path(man_out)
+            man = build_run_manifest(
+                Path(__file__),
+                input_path=p,
+                decoded_rom=rom,
+                command_args=sys.argv,
+                exit_status=0,
+                output_paths=written_paths,
+            )
+            atomic_write_json(man_p, man)
+            print(f"Wrote run manifest -> {man_p}")
 
 
 def cmd_audit(args):
@@ -1057,6 +1081,34 @@ def cmd_audit(args):
                 ])
         print(f"\nWrote enriched EL19A audit TSV -> {out_p}")
 
+    # Optional multi-definition reconciliation & hash-validated EL19A INDEX context
+    matrix_r1 = getattr(args, "matrix_r1", None)
+    extra_xmls = getattr(args, "extra_xml", None) or []
+    cand_csv = getattr(args, "candidate_csv", None)
+    idx_dir_arg = getattr(args, "index_dir", None)
+    rec_json_arg = getattr(args, "reconcile_json", None)
+    if matrix_r1 or extra_xmls or cand_csv or rec_json_arg or idx_dir_arg:
+        xml_list = [Path(args.xml)] + [Path(x) for x in extra_xmls]
+        mat_list = [Path(args.matrix)]
+        if matrix_r1 and Path(matrix_r1) not in mat_list:
+            mat_list.append(Path(matrix_r1))
+        rec = reconcile_definition_sources(
+            xml_paths=xml_list,
+            matrix_paths=mat_list,
+            catalog_path=Path(args.catalog),
+            candidate_path=Path(cand_csv) if cand_csv else None,
+            scanner_tables=tables,
+        )
+        print(f"\nMulti-source reconciliation: {rec['address_count']} addrs | conflicts={rec['conflict_counts']}")
+        if idx_dir_arg:
+            exp_sha = getattr(args, "expected_el19a_sha256", EL19A_PINNED_SHA256) or EL19A_PINNED_SHA256
+            el_ctx = load_hash_validated_el19a_context(el_rom, expected_rom_sha256=exp_sha, index_dir=Path(idx_dir_arg))
+            print(f"EL19A INDEX adapter: status={el_ctx['status']} ({el_ctx['reason']})")
+            rec["el19a_index_adapter"] = {k: v for k, v in el_ctx.items() if k not in ("catalog_by_addr", "gbr_by_func", "ram_to_diag")}
+        if rec_json_arg:
+            atomic_write_json(Path(rec_json_arg), rec)
+            print(f"Wrote reconciliation JSON -> {rec_json_arg}")
+
 
 def cmd_inspect(args):
     addr = int(args.target, 16)
@@ -1102,6 +1154,20 @@ def cmd_inspect(args):
                 if info["j_matches"]:
                     jt = info["j_matches"][0]
                     print(f"  Juke top 0x{jt[2]['start']:05X} (score={jt[0]}, pay={jt[1]['n_pay']}): {[(e['sym'], e['unit'], e['scale']) for e in jt[2]['tbl_entries']]} | RAM={jt[2]['ram_names'][:8]}")
+        idx_dir_arg = getattr(args, "index_dir", None)
+        if idx_dir_arg:
+            exp_sha = getattr(args, "expected_el19a_sha256", EL19A_PINNED_SHA256) or EL19A_PINNED_SHA256
+            el_ctx = load_hash_validated_el19a_context(rom, expected_rom_sha256=exp_sha, index_dir=Path(idx_dir_arg))
+            if el_ctx["status"] == "available":
+                cat_row = el_ctx["catalog_by_addr"].get(addr)
+                if cat_row:
+                    print(f"EL19A INDEX consumer: tier={cat_row.get('evidence_tier')} query={cat_row.get('traced_query_inputs')} dest={cat_row.get('catalog_dest_ram')}")
+                for fn in [fn for fn, info in sorted(a2l_leads.get("by_func", {}).items()) if any(c["table"] == addr for c in info["profile"]["calls"])]:
+                    gbrs = el_ctx["gbr_by_func"].get(fn, [])
+                    if gbrs:
+                        print(f"  GBR map sub_{fn:X}: {[(g.get('gbr_base'), g.get('space')) for g in gbrs[:4]]}")
+            else:
+                print(f"EL19A INDEX adapter: unavailable ({el_ctx['reason']})")
         return
 
     # Function inspect
@@ -1134,6 +1200,13 @@ def cmd_inspect(args):
         v_m = v6_meas.get(addr)
         j_m = jk_meas.get(addr)
         print(f"Direct same-address A2L MEASUREMENT (unverified lead): V6={v_m} | Juke={j_m}")
+    idx_dir_arg = getattr(args, "index_dir", None)
+    if idx_dir_arg:
+        exp_sha = getattr(args, "expected_el19a_sha256", EL19A_PINNED_SHA256) or EL19A_PINNED_SHA256
+        el_ctx = load_hash_validated_el19a_context(rom, expected_rom_sha256=exp_sha, index_dir=Path(idx_dir_arg))
+        diag_hits = el_ctx.get("ram_to_diag", {}).get(f"{addr:08X}", [])
+        if diag_hits:
+            print(f"EL19A INDEX diagnostic links: {diag_hits}")
     fn_starts = sorted(by_fn)
     seen_fns = set()
     for h in hits[:30]:
@@ -1314,6 +1387,96 @@ def cmd_diff(args):
         addr_str = f"0x{s:05X}" if s == e else f"0x{s:05X}..0x{e:05X}"
         print(f"  {addr_str:16s} ({e - s + 1:3d}B): {val_txt}{note_str}")
 
+    json_out = getattr(args, "json_out", None)
+    if json_out:
+        atomic_write_json(Path(json_out), {
+            "rom_a": str(pa),
+            "rom_b": str(pb),
+            "same_addr_same_bytes": [f"0x{a:05X}" for a in same_addr_same_bytes],
+            "same_addr_diff_bytes": [f"0x{a:05X}" for a in same_addr_diff_bytes],
+            "relocated_exact_bytes": [{"from": f"0x{a:05X}", "to": [f"0x{x:05X}" for x in xs]} for a, xs in relocated_exact_bytes],
+            "unmatched_nontrivial": [f"0x{a:05X}" for a in nt_unmatched],
+            "raw_clusters": [{"start": f"0x{s:05X}", "end": f"0x{e:05X}", "bytes": e - s + 1} for s, e in clusters],
+        })
+        print(f"Wrote diff JSON -> {json_out}")
+
+
+def cmd_ref_index(args):
+    if args.action == "build":
+        tsv_list = [Path(p) for p in getattr(args, "tsv", []) if p]
+        idx = build_reference_index(
+            a2l_paths=[Path(p) for p in args.a2l],
+            xml_inputs=[Path(p) for p in args.xml],
+            rom_paths=[Path(p) for p in args.rom],
+            wo70017_tsv=tsv_list[0] if tsv_list else None,
+        )
+        atomic_write_json(Path(args.out), idx)
+        print(f"Wrote reference index -> {args.out}")
+    elif args.action == "query":
+        idx = json.loads(Path(args.index).read_text(encoding="utf-8"))
+        lookups = idx.get("lookups", {})
+        res: Dict[str, object] = {}
+        if args.addr:
+            addr_int = _parse_hex_addr_flex(args.addr)
+            norm = f"0x{addr_int:05X}" if addr_int is not None else args.addr
+            res["address_hex"] = norm
+            res["xml_hits"] = lookups.get("xml_by_addr", {}).get(norm, [])
+            res["a2l_hits"] = lookups.get("a2l_by_addr", {}).get(norm, [])
+        if args.ecuid:
+            res["ecuid"] = args.ecuid
+            res["xml_doc_ids"] = lookups.get("xml_by_ecuid", {}).get(args.ecuid, [])
+        print(json.dumps(res, indent=2, sort_keys=True))
+
+
+def cmd_export_xml(args):
+    rom_bytes = load_any_rom(Path(args.rom)) if args.rom else None
+    if args.catalogue:
+        catalogue = json.loads(Path(args.catalogue).read_text(encoding="utf-8"))
+    elif rom_bytes is not None:
+        helpers = discover_helpers(rom_bytes)
+        calls = extract_calls(rom_bytes, helpers)
+        scan_doc = build_scan_export(args.rom, rom_bytes, helpers, calls)
+        catalogue = to_per_address_catalogue(scan_doc)
+        catalogue["implicit_grids"] = {f"0x{k:05X}": v for k, v in extract_implicit_grids(rom_bytes, helpers).items()}
+        if args.enhanced_window > 0:
+            enh_calls = extract_calls_enhanced(rom_bytes, helpers, window_bytes=args.enhanced_window)
+            catalogue["enhanced_call_comparison"] = compare_call_extractions(calls, enh_calls)
+        if args.include_scalars:
+            catalogue["scalar_candidates"] = discover_cal_scalars(rom_bytes, helpers, calls=calls)
+    else:
+        raise ValueError("Supply --rom or --catalogue")
+
+    crossref = None
+    if args.ref_index:
+        ref_idx = json.loads(Path(args.ref_index).read_text(encoding="utf-8"))
+        crossref = match_target_against_index(catalogue, ref_idx, target_rom=rom_bytes)
+
+    el_ctx = None
+    if args.index_dir and rom_bytes is not None:
+        el_ctx = load_hash_validated_el19a_context(
+            rom_bytes,
+            expected_rom_sha256=args.expected_el19a_sha256,
+            index_dir=Path(args.index_dir),
+        )
+
+    resolution = resolve_candidate_evidence(catalogue, crossref)
+    result = write_preview_bundle(
+        Path(args.out_dir),
+        args.stem,
+        catalogue,
+        resolution,
+        rom_bytes=rom_bytes,
+        allow_provisional_donor_names=args.allow_provisional_donor_names,
+        skip_trivial=args.skip_trivial,
+        strict=not args.no_strict,
+    )
+    if el_ctx is not None:
+        print(f"EL19A INDEX adapter: status={el_ctx['status']} ({el_ctx['reason']})")
+    print(
+        f"Exported preview XML ({result['validation']['summary']['table_count']} tables, "
+        f"valid={result['validation']['valid']}) -> {result['xml_path']}"
+    )
+
 
 def main():
     ap = argparse.ArgumentParser(description="Nissan SH7055/SH7058 Reverse-Engineering Workbench")
@@ -1323,6 +1486,10 @@ def main():
     p_scan.add_argument("rom")
     p_scan.add_argument("--tsv", help="Optional output TSV path")
     p_scan.add_argument("--json", help="Optional output JSON path")
+    p_scan.add_argument("--catalogue", help="Optional Milestone 2 lossless per-address catalogue JSON path")
+    p_scan.add_argument("--manifest", help="Optional Milestone 2 run-manifest JSON path")
+    p_scan.add_argument("--enhanced-window", type=int, default=0, help="Opt-in enhanced call extraction window (bytes)")
+    p_scan.add_argument("--include-scalars", action="store_true", help="Include separate scalar calibration candidate discovery")
     p_scan.set_defaults(func=cmd_scan)
 
     for name in ("audit", "inspect"):
@@ -1330,9 +1497,15 @@ def main():
         if name == "audit":
             p_sub.add_argument("--el19a", default="EVIDENCE/VERSA f501.bin")
             p_sub.add_argument("--tsv", help="Optional enriched TSV export path")
+            p_sub.add_argument("--matrix-r1", help="Optional additional scope matrix CSV for dual-matrix reconciliation")
+            p_sub.add_argument("--extra-xml", nargs="*", default=[], help="Optional extra XML definitions to reconcile")
+            p_sub.add_argument("--candidate-csv", help="Optional candidate_register.csv path")
+            p_sub.add_argument("--reconcile-json", help="Optional atomic multi-source reconciliation JSON path")
         else:
             p_sub.add_argument("target", help="Hex address of table (0x0FEE0), function (0x6B168), or RAM (0xFFFF85DA)")
             p_sub.add_argument("--rom", default="EVIDENCE/VERSA f501.bin")
+        p_sub.add_argument("--index-dir", help="Optional hash-validated prebuilt EL19A INDEX directory")
+        p_sub.add_argument("--expected-el19a-sha256", default=EL19A_PINNED_SHA256)
         p_sub.add_argument("--xml", default="CALIBRATIONS/EL19A_release1_conservative.xml")
         p_sub.add_argument("--catalog", default="CALIBRATIONS/discovered_tables_catalog.csv")
         p_sub.add_argument("--matrix", default="CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv")
@@ -1350,7 +1523,35 @@ def main():
     p_diff.add_argument("rom_b")
     p_diff.add_argument("--xml", default="CALIBRATIONS/EL19A_release1_conservative.xml")
     p_diff.add_argument("--raw-limit", type=int, default=40, help="Max non-table raw diff clusters to display (0 = all)")
+    p_diff.add_argument("--json-out", help="Optional structured diff JSON output path")
     p_diff.set_defaults(func=cmd_diff)
+
+    p_ref = sub.add_parser("ref-index", help="Build or query standalone A2L/XML/ROM reference index")
+    p_ref.add_argument("action", choices=["build", "query"])
+    p_ref.add_argument("--out", help="Output reference index JSON path (build)")
+    p_ref.add_argument("--index", help="Input reference index JSON path (query)")
+    p_ref.add_argument("--a2l", nargs="*", default=[])
+    p_ref.add_argument("--tsv", nargs="*", default=[])
+    p_ref.add_argument("--xml", nargs="*", default=[])
+    p_ref.add_argument("--rom", nargs="*", default=[])
+    p_ref.add_argument("--addr", help="Target hex address to query")
+    p_ref.add_argument("--ecuid", help="Target ECU ID to query")
+    p_ref.set_defaults(func=cmd_ref_index)
+
+    p_exp = sub.add_parser("export-xml", help="Resolve evidence and export preview-first RomRaider XML bundle")
+    p_exp.add_argument("--rom", help="Target ROM path (.bin/.zip/.s19/.hex/.dat)")
+    p_exp.add_argument("--catalogue", help="Precomputed Milestone 2 per-address catalogue JSON")
+    p_exp.add_argument("--ref-index", help="Optional Milestone 3 reference index JSON")
+    p_exp.add_argument("--out-dir", required=True, help="Output directory (never CALIBRATIONS/)")
+    p_exp.add_argument("--stem", required=True, help="Output filename stem")
+    p_exp.add_argument("--enhanced-window", type=int, default=0)
+    p_exp.add_argument("--include-scalars", action="store_true")
+    p_exp.add_argument("--allow-provisional-donor-names", action="store_true")
+    p_exp.add_argument("--skip-trivial", action="store_true")
+    p_exp.add_argument("--no-strict", action="store_true")
+    p_exp.add_argument("--index-dir", help="Optional hash-validated prebuilt EL19A INDEX directory")
+    p_exp.add_argument("--expected-el19a-sha256", default=EL19A_PINNED_SHA256)
+    p_exp.set_defaults(func=cmd_export_xml)
 
     args = ap.parse_args()
     args.func(args)
