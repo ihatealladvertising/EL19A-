@@ -1,0 +1,171 @@
+{
+  "schema": "el19a_wo65324_initial_reconciliation_v1",
+  "work_order": "WO65324",
+  "generated_date": "2026-11-27",
+  "status": "READ_ONLY_RECONCILIATION_ONLY__NO_FRESH_WORKBENCH_EXECUTION",
+  "target": {
+    "path": "EVIDENCE/VERSA f501.bin",
+    "size_bytes": 1048576,
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "fid": "8CMCKRN5",
+    "engine": "MR18DE",
+    "cpu": "SH7058/SH705822N"
+  },
+  "baseline": {
+    "release1_xml": {
+      "path": "CALIBRATIONS/EL19A_release1_conservative.xml",
+      "git_blob": "4bab8bced09047c461520c6044415ca5357b0110"
+    },
+    "scope_matrix": {
+      "path": "CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv",
+      "git_blob": "52fe30fdd760d3a13885007fe9391dead425ec21"
+    },
+    "discovered_catalogue": {
+      "path": "CALIBRATIONS/discovered_tables_catalog.csv",
+      "git_blob": "e8ee9f257e4cd114624cfc26dd08caecccdd59f7"
+    },
+    "rollout_status": {
+      "path": "tools/ROLLOUT_STATUS.md",
+      "git_blob": "1643789a9b93f2e39214dd7cf2aa02836281e912"
+    }
+  },
+  "reconciled_inventory": {
+    "full_definition_object_records": 261,
+    "full_definition_distinct_addresses": 254,
+    "scope_matrix_rows": 261,
+    "scope_matrix_include": 254,
+    "scope_matrix_exclude": 7,
+    "release1_xml_objects": 254,
+    "release1_distinct_addresses": 254,
+    "release1_established": 2,
+    "release1_provisional": 252,
+    "catalogue_objects": 185,
+    "catalogue_reader_verified": 164,
+    "catalogue_query_traced": 20,
+    "catalogue_semantic_strong": 1,
+    "catalogue_objects_in_release1": 179,
+    "catalogue_objects_outside_release1": 6,
+    "catalogue_gap_addresses": [
+      "0x0D856",
+      "0x104BC",
+      "0x104AC",
+      "0x0C2D6",
+      "0x0FDF0",
+      "0x0FE00"
+    ],
+    "findings_backed_outside_release1": [
+      "0x0F02C",
+      "0x0DE6E",
+      "0x0E2ED"
+    ],
+    "caveat": "These are bounded cross-file reconciliation counts from WO70015, not a fresh workbench scan or proof of exhaustive ROM discovery."
+  },
+  "reused_calibration_evidence": {
+    "completed_scalar_sweep": "WO65090",
+    "high_value_scalar_cluster": {
+      "address_range": "0x829A-0x829F",
+      "facts": [
+        "six separate byte operands, not a UWORD array",
+        "0x829A=0x7F and 0x829B=0x0A participate in threshold logic",
+        "0x829C/0x829D are signed operands shifted left four bits to -80/+496",
+        "0x829E/0x829F are signed operands shifted left four bits to -80/+448",
+        "consumer dataflow reaches internal state FFFF1054+0x620; physical domain and semantic name unresolved"
+      ],
+      "status": "reuse_existing_evidence__do_not_repeat_global_sweep"
+    },
+    "direct_scalar_boundaries": [
+      "0x913A",
+      "0x913C",
+      "0x91C2",
+      "0x91C4",
+      "0x91C6",
+      "0x97B2"
+    ],
+    "maps_and_axes": {
+      "catalogue_2d_candidates": 24,
+      "geometry_extent_matches": 24,
+      "distinct_xml_only_3d_payload_addresses": 19,
+      "trustful_mirror_bank": "18-for-18 byte-identical mirror bank reported by WO65323",
+      "caveat": "Structural concordance and payload identity do not establish physical meaning."
+    },
+    "f3d6_f3de": {
+      "geometry": "8x1 UBYTE each",
+      "dedicated_rom_axes": [
+        "0xF3C6",
+        "0xF3CE"
+      ],
+      "query_lineage": "UWORD[FFFF8596] -> shifts/cap -> byte query staging (WO65181)",
+      "donor_names": [
+        "mTTVOULM",
+        "mTTVOULMS"
+      ],
+      "donor_name_and_display_scale": "hypotheses only; target physical units unproven"
+    },
+    "dashpot_scalars": {
+      "0x8550": "UBYTE threshold; hysteresis compare; gates internal dashpot-target path to FFFF1018; mDSHCUT partial donor-consistent context, physical identity unproven",
+      "0x848A": "UBYTE 0x43; paired QDSPT rate candidate; D/N label not proven",
+      "0x848B": "UBYTE 0x43; paired QDSPT rate candidate; D/N label not proven",
+      "0x924E": "UWORD 0x00FF binary enable factor in QDSPT path; mDDPAPO assignment rejected"
+    },
+    "known_definition_risks": [
+      "E678/E688 are timer-query QDSPT basic-value curves, not RPM-axis airflow maps",
+      "F3D6/F3DE must use ROM axes F3C6/F3CE, not hard-coded RPM axis",
+      "9B2E/9C2E/9DAE remain raw UBYTE counts and separate runtime-selected aliases",
+      "0x8550 is not proven specifically to be a Rev Hang gate",
+      "multiple 3D/curve entries use index-placeholder or unverified axes",
+      "fuel/air/torque physical identities remain unresolved"
+    ]
+  },
+  "source_reports": [
+    {
+      "path": "CONTROL/WO65090.md",
+      "git_blob": "877a63a903b6a12db0bf4407099091749bdfb58a",
+      "role": "completed scalar/limiter sweep; no-repeat boundary"
+    },
+    {
+      "path": "CONTROL/WO65181.md",
+      "git_blob": "9214703a4b7676b7f5f608ec833c6093d91a68c4",
+      "role": "F3D6/F3DE query lineage"
+    },
+    {
+      "path": "CONTROL/WO65305.md",
+      "git_blob": "5ea179f6e66cfd87b1edebc0cb3dff14511a24b8",
+      "role": "fuel/air candidate closure and unresolved identities"
+    },
+    {
+      "path": "CONTROL/WO65308.md",
+      "git_blob": "1f5961fad7d717f90445c7e493454997efc962ac",
+      "role": "scalar/dashpot donor-name boundary"
+    },
+    {
+      "path": "CONTROL/WO65323.md",
+      "git_blob": "4ac06c8b1b08ed6a3bc47079ca6118b62c636c3e",
+      "role": "whole-inventory geometry/mirror reconciliation"
+    },
+    {
+      "path": "CONTROL/WO65817.md",
+      "git_blob": "5678b4c2b390d37db8a79ec5abebb77a06e65392",
+      "role": "donor scalar name candidates vs target reader evidence"
+    },
+    {
+      "path": "CONTROL/WO70015.md",
+      "git_blob": "dd4eed332f9b0e978de3c3dbcfdeab53cc81167d",
+      "role": "current Release 1 cross-file inventory reconciliation"
+    }
+  ],
+  "execution": {
+    "workbench_commit": "bba8df331feee5197f82718994989a14de5e3a02",
+    "commands_run": [],
+    "commands_not_run": [
+      "workbench scan",
+      "workbench audit",
+      "workbench ref-index build/query",
+      "workbench inspect",
+      "workbench export-xml"
+    ],
+    "blocker": "This session has GitHub repository read/write access but no checked-out repository, pinned ROM/LST/donor files mounted in the execution container, no outbound GitHub DNS/network, and no Actions workflow-dispatch tool. Therefore no fresh tool outputs or preview bundle can be truthfully claimed.",
+    "next_action": "Mount the exact pinned target ROM, annotated LST, required donor inputs and repository checkout into one Python 3.11.2 execution environment; then execute Phases 1-4 in WO65324 and preserve exact command lines, output hashes and manifests."
+  },
+  "findings_disposition": "NOT_REQUIRED for this read-only reuse checkpoint; no new target-side trace or calibration interpretation was established."
+}
