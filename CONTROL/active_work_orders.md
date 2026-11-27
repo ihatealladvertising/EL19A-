@@ -1,7 +1,7 @@
 # EL19A — Operational Control and Work-Order Register
 
 **Operational authority:** This file is the sole current source of truth for work-order lifecycle, assignments, priorities, continuation, and handoff. Technical evidence belongs in individual `WO<ID>.md` records.
-**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-26
+**Repository:** `ihatealladvertising/EL19A-` · **Authority branch:** `main` · **Updated:** 2026-11-27
 **Update rule:** Re-read the latest authoritative register before each change. Make one minimal register update per commit and verify it by readback. Do not maintain a parallel operational notebook.
 **History:** The full pre-compaction register from this branch is preserved in [the 2026-11-20 archive snapshot](active_work_orders_archive_2026-11-20.md). It is historical only. Later base-branch updates are summarized below; their technical details are in the individual WO records.
 
@@ -62,6 +62,7 @@ This section records only explicit user-directed, one-off coordinator WOs. It do
 |---|---|---|---|
 | [WO70015](WO70015.md) | ChatGPT — coordinator/integrator | CLOSED — BOUNDED COMPLETE (2026-11-26) | Release 1 full baseline / scope / XML reconciled exactly; 254 included objects, 185 catalogue entries (179 in Release 1; six verified map/axis entries outside), plus FND-backed 0x0F02C and reciprocal 0x0DE6E/0x0E2ED deferred pair. ROM-wide census remains bounded by WO70006's raw-output gate. |
 | [WO70016](WO70016.md) | ChatGPT — coordinator/integrator | CLOSED — BOUNDED COMPLETE (2026-11-26) | Reconciled 0x0BB56, 0x11744, 0x0A092, 0x0ADF2 and 0x11944 against prior target readers and current Release 1 inventory: three raw/provisional add candidates (BB56, ADF2, 11944); 11744 constant 0x8000 and A092 zero-filled; no XML/catalogue edits. WO70006 remains blocked at the scanner raw-output gate. |
+| [WO65324](WO65324.md) | ChatGPT — coordinator/integrator (user-directed takeover; original Worker 2 READY allocation retained as history) | ACTIVE — INITIAL RECONCILIATION COMPLETE; WORKBENCH EXECUTION BLOCKED pending pinned runtime inputs | Expanded from scalar/1D inventory to end-to-end workbench-driven EL19A definition completion: scalar/1D, high-value 3D/32-point maps, XML reconciliation, strict preview export and workbench feedback. Fresh execution not yet performed; see checkpoint in report. |
 
 ## Current project assets and operational frontier
 
