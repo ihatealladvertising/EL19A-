@@ -1,6 +1,6 @@
 # SH705x ROM Tool — Architecture Charter and Development Plan
 
-**Status:** PLANNING BASELINE v0.1 — architecture tasks registered; implementation not yet authorized  
+**Status:** PLANNING BASELINE v0.2 — architecture tasks registered; workbench integration priorities added; implementation not yet authorized  
 **Date:** 2026-11-26  
 **Repository:** `ihatealladvertising/EL19A-` · branch `main`
 
@@ -123,3 +123,22 @@ These are parallel discovery/specification tasks. They do not require one anothe
 ## 9. Explicit non-authorizations for this planning phase
 
 This charter and WO70020–WO70022 authorize architecture and inventory work only. They do not authorize edits to existing Python tools, calibration XML, the workbook, catalogue, scope matrix, ROM/LST/A2L evidence, findings, or release artifacts. No dependency installation, environment modification, ROM modification, patching or flashing is authorized.
+
+
+## 10. Existing workbench reuse and integration priorities
+
+The existing workbench should be extended by connecting proven modules and generated datasets, not by recreating their analysis logic inside one increasingly large script. The user-approved five improvement areas and their source-level findings are recorded in [SH705X_WORKBENCH_INTEGRATION_PLAN.md](SH705X_WORKBENCH_INTEGRATION_PLAN.md).
+
+The integration sequence is:
+
+1. Establish dedicated synthetic workbench regression fixtures.
+2. Reuse `sh7058_cross_rom_scanner.py`'s existing `build_scan_export()` and `write_machine_exports()` from workbench `scan`/`audit`; complete the external run manifest and satisfy WO70006's attributable raw-output gate. Do not build a duplicate per-call exporter.
+3. Add optional, hash-validated adapters for `rom_access_indexer.py`, `build_static_indices.py`, and their existing GBR/consumer datasets.
+4. Reconcile all selected calibration XMLs, both scope-matrix variants, the discovered-table catalogue and candidate register as distinct sources, preserving conflicts and owner-directed display choices.
+5. Add diagnostic-rosetta and variant-difference providers as optional, provenance-labelled candidate context.
+
+The existing scanner exporter is useful but not a complete semantic trace: caller boundaries are heuristic candidates, register arguments come from a bounded linear window, and query provenance, full transforms, interpolation/clamp behavior, result registers and downstream consumers remain unresolved unless separately traced. These limits must survive export and user-interface presentation.
+
+The existing access indexer, static-index builder, diagnostic rosetta and EL19A/EL13A diff script are pinned to particular EL19A ROM/listing identities and assumptions. Reuse them as EL19A evidence providers first; do not treat them as generic SH705x backends until their profile boundaries, inputs and integrity checks are deliberately redesigned and regression-tested.
+
+WO70020–WO70022 remain unchanged and retain their FIFO positions. Their outputs should be reconciled before creating implementation WOs. This plan update does not authorize source-code, test, workflow, dependency, ROM, LST, A2L, calibration, workbook, Findings or release-artifact changes.
