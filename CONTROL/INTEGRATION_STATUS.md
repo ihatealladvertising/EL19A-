@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
@@ -156,3 +156,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; shared-main publication paused for this allocation batch.
 
 **Lock released:** 2026-11-26 — WO70017–WO70019 and the live register were read back from main; three lane FIFO heads verified; no protected calibration artifacts changed.
+
+
+**Lock released:** 2026-11-26 — SH705x ROM tool planning batch published and read back. Added `CONTROL/SH705X_ROM_TOOL_PLAN.md`, `CONTROL/WO70020.md`, `CONTROL/WO70021.md`, `CONTROL/WO70022.md`, and registered their FIFO positions in `CONTROL/active_work_orders.md`. Worker 1: WO70020; Worker 2: WO70018 → WO70022; Worker 3: WO70019 → WO70021. No source tools, tests, workflows, calibration XML, workbook, ROM/LST/A2L, catalogues or Findings were changed.
