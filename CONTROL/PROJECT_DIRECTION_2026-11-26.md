@@ -71,6 +71,22 @@ Prioritize a bounded chain with a real endpoint over another open-ended survey o
 
 The current workbench documentation reports 37 same-address payload differences between EL19A and EL13A and multiple relocated/non-trivial differences versus 8W83B. Treat those counts as tool-summary leads until per-table provenance is available. Candidate addresses reported outside the current WOs include `0x0AFF2`, `0x0E5E8`, `0x0E658`, `0x0ED8C`, `0x0EE48`, `0x10CC2`, `0x12A4E` and `0x12D18`. A difference is not automatically variant-specific or meaningful; verify helper geometry, payload and target-side use before prioritizing it.
 
+
+## Tooling integration clarification — 2026-11-26
+
+The current workbench and the separate cross-ROM scanner must be distinguished when assessing WO70006 and future tool work.
+
+- `tools/nissan_sh705x_workbench.py` remains aggregate-oriented at `cmd_scan()` and `cmd_audit()`: its TSVs summarize unique tables and aggregate call PCs. It does not yet expose the scanner's complete call-level records through the workbench interface.
+- `tools/sh7058_cross_rom_scanner.py` already implements `build_scan_export()` and `write_machine_exports()`, including per-call, per-table and per-helper JSON/TSV outputs plus source/tool metadata. This is reusable capability and should be wired into the workbench instead of duplicated.
+- The scanner export does not prove every call's semantics. Its caller-start field is a nearest-prologue candidate; register reconstruction is a bounded linear-window heuristic; query source, signedness, full transform, interpolation/clamp contract, result register and downstream consumer are not all established by that export.
+- The output package still needs a complete external run manifest with hashes of all generated artifacts, complete command/log details and exit status. Merely finding the exporter in source does not satisfy WO70006's required raw-output gate. **WO70006 remains BLOCKED** until its actual registered artifacts and reconciliation are produced and verified.
+- `rom_access_indexer.py` and `build_static_indices.py` can supply valuable RAM/ROM access, GBR and consumer context, but their current run paths verify a fixed EL19A ROM and listing. Use hash-validated cached indices or explicitly invoked EL19A providers; do not run full static analysis implicitly from every inspection command and do not present these tools as generic SH705x modules.
+- `extract_diagnostic_rosetta.py` and `analyze_el19a_el13a_diff.py` are useful diagnostic/variant evidence providers, but their fixed addresses, pinned source identities and assumptions make them EL19A-specific today. Their outputs should be optional, separately typed candidate context, not target calibration proof.
+- Reconcile `RELEASE1_SCOPE_MATRIX.csv`, `RELEASE1_SCOPE_MATRIX_R1.csv`, both current definition baselines, the tiered XML and `candidate_register.csv` as distinct sources. Conflicting scope dispositions, provisional working conversions and owner-selected presentation exceptions (including `Rpm_x25`) must remain visible rather than being silently overwritten.
+
+The detailed source-level integration requirements and recommended sequence are in [SH705X_WORKBENCH_INTEGRATION_PLAN.md](SH705X_WORKBENCH_INTEGRATION_PLAN.md). This clarification does not change the live queue, WO70006 status, calibration definitions or protected evidence.
+
+
 ## Working evidence standard
 
 Use a practical two-layer standard:
