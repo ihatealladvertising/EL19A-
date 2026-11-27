@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — register WO70024 allocation and closeout-recovery QA (2026-11-26)
+**Purpose:** Add one read-only Worker 1 audit task for the locally committed WO70018 deliverables. WO70018 remains open until its report and TSV are safely published and read back. No local Git history reconciliation, WO70018 lifecycle change, calibration or tool-source changes are authorized in this batch.
+**Lock acquired:** 2026-11-26 — prior state UNLOCKED; serialize new WO/report and register allocation.
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
