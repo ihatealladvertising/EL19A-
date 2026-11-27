@@ -137,7 +137,8 @@ jobs:
           hist = summary["legacy_scan"]
           strict = summary["current_scan"]
           aset = summary["candidate_set_reconciliation"]
-          cmp = summary["el19a_comparison"]
+          cmp = comparison
+          cmp_summary = summary["el19a_comparison"]
           readme = [
               "# V6 first-class donor — 2026-11-27",
               "",
@@ -159,7 +160,7 @@ jobs:
               f"- Exact payload matches: **{cmp['exact_payload_match_pair_count']} candidate pairs**, covering **{cmp['el19a_candidates_with_exact_v6_payload']} EL19A addresses** and **{cmp['unique_v6_candidates_with_exact_payload']} V6 addresses**.",
               f"- Same-geometry, different-payload comparisons: **{cmp['same_geometry_differing_payload_pair_count']} pairs**, covering **{cmp['el19a_candidates_with_same_geometry_differences']} EL19A addresses** and **{cmp['unique_v6_candidates_with_same_geometry_differences']} V6 addresses**.",
               "- Geometry is defined by element type, dimensions and byte length. Helper-kind differences remain metadata. Identical payload/geometry variants emitted by both scanner versions are counted once.",
-              f"- Canonical matcher: **{cmp['v6_crossref_target_candidate_count']} EL19A candidate addresses** with V6 donor cross-reference hits.",
+              f"- Canonical matcher: **{cmp_summary['v6_crossref_target_candidate_count']} EL19A candidate addresses** with V6 donor cross-reference hits.",
               "",
               "These are structural donor relationships only. They do not establish semantic identity, units, conversion, calibration correctness or an EL19A target-table definition.",
               "",
