@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70031 structural-readiness integration into WO65324 (2026-11-27)
 **Purpose:** Integrate the published WO70031 structural-readiness matrix into coordinator-owned WO65324 and update only the WO65324 coordinator summary row in CONTROL/active_work_orders.md. No worker FIFO, other WO, XML, scope matrix, catalogue, workbook, Findings, ROM/LST/A2L, tool source/test/workflow or protected evidence changes.
@@ -280,3 +280,5 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 **Integrator:** ChatGPT — WO65324 V6/Juke exact non-constant payload reconciliation and coordinator-register synchronization (2026-11-27)
 **Lock acquired:** 2026-11-27 — prior state UNLOCKED. This lock serializes the remaining coordinator-owned WO65324 report/register publication. Two preceding commits for the WO65324 evidence TSV/report were already published while the gate remained UNLOCKED; those commits changed only the new WO65324 evidence and report, not a worker lane, FIFO, Findings, XML, ROM/LST/A2L or tool source. No rollback or history rewrite will be attempted. Remaining register synchronization and gate release will be completed under this lock.
+
+**Lock released:** 2026-11-27 — WO65324 exact V6/Juke/EL19A payload cross-reference published/read back (`EVIDENCE/WO65324_V6_JUKE_EL19A_EXACT_NAMED_NONCONSTANT_MATCHES_2026-11-27.tsv`, 15 rows; blob `6322806fb203fb2491d3115fbf1f653aeb79b4bd`); coordinator report updated/read back (`CONTROL/WO65324.md`, blob `008b08c25663e5961133cc89cf65d82c5c01aab1`; commit `3d6f14562dd822eccaa36dfa3b1a2b1a2be5aaf0`); only the WO65324 coordinator row updated/read back in `CONTROL/active_work_orders.md` (blob `6fd96fec5f6156bec9e074f890eba0e61d65802b`; commit `cd72a8ef0e31f9eb561f94a3c4e02ee4353a122e`). Exact result: 15 strict non-constant target placements across 13 shared donor symbols. No new Findings, XML, tool, ROM/LST/A2L, workbook, catalogue or scope-matrix changes. Worker 1–3 FIFOs and all other WO lifecycle states unchanged. Fresh EL19A scan/preview remains blocked on the pinned executable workspace and required inputs. The earlier evidence/report commits made before this lock were confined to WO65324 and are retained without rewriting history.
