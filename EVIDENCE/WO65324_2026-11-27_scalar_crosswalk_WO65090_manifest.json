@@ -1,0 +1,44 @@
+{
+  "schema": "wo65324-scalar-crosswalk-v1",
+  "date": "2026-11-27",
+  "scope": "Crosswalk only; does not repeat WO65090 address/reference census or direct-reader traces.",
+  "inputs": {
+    "fresh_target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "fresh_raw_catalogue_sha256": "426e8a583791e4ed029b8a4a658bf89ceebaf7d8d0ddfdb58b4326378e65e59a",
+    "WO65090_report_git_blob": "877a63a903b6a12db0bf4407099091749bdfb58a",
+    "WO70031_matrix_git_blob": "48466f4f1573f1eb227fe8d14e2665b502c24eed"
+  },
+  "fresh_scan_totals": {
+    "unique_scalar_candidates": 2739,
+    "candidate_addresses_in_WO65090_range_0x7800_to_0x9B00": 2094,
+    "range_spans_in_bounds": 1965,
+    "range_unknown_element_width": 129
+  },
+  "crosswalk": {
+    "prior_addresses_reviewed": 23,
+    "fresh_scanner_emitted": 17,
+    "not_emitted_by_scanner": 6,
+    "not_emitted_addresses": [
+      "0x0829B",
+      "0x0829C",
+      "0x0829D",
+      "0x0870B",
+      "0x088E8",
+      "0x0913C"
+    ],
+    "fresh_output_span_in_bounds_for_emitted": 16
+  },
+  "interpretation": [
+    "The fresh whole-target scan reports 2,739 unique scalar candidate addresses, including 2,094 within WO65090 window; no whole-window census or reader trace was repeated.",
+    "This crosswalk includes the finite WO65090 scalar rows and cited WO65066 leads only.",
+    "Scanner omissions do not negate prior direct-reader or structural evidence.",
+    "MOV literal-load form is not itself scalar storage width; where discovery reports unknown width, no scalar extent is inferred.",
+    "The 0x829A-0x829F cluster is a mixed byte block. WO65090 remains authority for direct-use semantics; fresh scanner only emits some entries.",
+    "No Findings promotion, XML addition, or physical units/name inference is made."
+  ],
+  "output": {
+    "path": "EVIDENCE/WO65324_2026-11-27_scalar_crosswalk_WO65090.tsv",
+    "data_rows": 23,
+    "sha256": "f214b57e6b6f74641007a45197d3445d33f36c1e9b5d878155e9d9f8fa5b028f"
+  }
+}
