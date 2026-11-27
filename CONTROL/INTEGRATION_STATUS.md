@@ -1,8 +1,8 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
-**Active lock:** ChatGPT — preserve 2026-11-27 workbench census and register bounded follow-up WOs. Start: 2026-11-27. Scope: add one reported-results evidence intake and four bounded work-order specifications; update lane FIFOs only. No calibration semantics or XML changes; no tool source changes. Only the named integrator may publish until full readback and unlock.
+**Released lock:** ChatGPT — 2026-11-27 workbench census preservation and four-WO allocation. Evidence intake and WO70026–WO70029 published and remotely read back; active register updated and read back. No Findings IDs allocated because the intake is explicitly reported/unverified; calibration interpretation is deferred to WO70026. No ROM, XML, workbook, tool-source or existing Findings edits.
 
 **Integrator:** ChatGPT — register WO70024 allocation and closeout-recovery QA (2026-11-26)
 **Purpose:** Add one read-only Worker 1 audit task for the locally committed WO70018 deliverables. WO70018 remains open until its report and TSV are safely published and read back. No local Git history reconciliation, WO70018 lifecycle change, calibration or tool-source changes are authorized in this batch.
@@ -199,3 +199,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock released:** 2026-11-26 — WO70024 specification and Worker 1 READY assignment read back from remote main. WO70018 remains open in Worker 2 FIFO pending safe publication of its local report and TSV; no Worker 2 lifecycle change was made.
 
 **Lock released:** 2026-11-26 — artifact-first reporting gate published and read back from remote `main`. `CONTROL/WORKER_PROTOCOL.md` blob `024414f88fad9a12b50842ffa75a121c8cef2ea8`; commit `9fc0e1d56e02e0de869f89c4940b2e6a1d3acdf7`. Shared-main publication gate returned to UNLOCKED. No work-order register or lane assignments changed.
+
+
+**2026-11-27 batch readback:** Evidence intake EVIDENCE/WORKBENCH_CENSUS_2026-11-27.md (blob 9c20a7492626d2b24ed975891b1f74409d8d3c74); WO70026 (67c00714b0555a7840ade60b2ddbdfafbd2123bc); WO70027 (2f3260e37f984c823ea4a02cd7b7237b0b865f50); WO70028 (6ffe723f07beaf219f2fcef47d3f42aefa096a33); WO70029 (a0b7631e0f2e560b889fb48ddfa6488e0983759e); active register (35b93a9a78d09b931b5e2d5edfaabff419708aa7). All six paths read back from remote main. Queue depths: Worker 1 = 1; Worker 2 = 3; Worker 3 = 2. Findings index remains FND-000026 / REC-000027; no semantic promotion pending independent reproduction.
