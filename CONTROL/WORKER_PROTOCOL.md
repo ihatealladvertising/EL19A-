@@ -8,9 +8,11 @@
 
 Run exactly one session per slot:
 
-- Worker 1: "Use the QUICK START block in CONTROL/active_work_orders.md. Run your FIFO, one WO at a time. When you create a bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow the WO's evidence and closeout rules."
-- Worker 2: "Open CONTROL/active_work_orders.md, read QUICK START, and execute the first READY WO assigned to Worker 2. Read that WO and only its cited dependencies. Do not scan register history, create tasks or change priorities. After closeout, take the next READY WO. Stop when none remain."
-- Worker 3: "Use the QUICK START block in CONTROL/active_work_orders.md. Run your FIFO, one WO at a time. When you create a bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow the WO's evidence and closeout rules."
+- Worker 1: "Use the QUICK START block in CONTROL/active_work_orders.md. Execute Worker 1's earliest READY WO and continue its FIFO in order, one investigation at a time. When you create a complete bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow each WO's evidence, authorized-path and closeout rules."
+- Worker 2: "Use the QUICK START block in CONTROL/active_work_orders.md. Execute Worker 2's earliest READY WO and continue its FIFO in order, one investigation at a time. Read that WO and only its named dependencies. Do not create tasks, change priorities or reassign work. Stop cleanly when no READY item remains."
+- Worker 3: "Use the QUICK START block in CONTROL/active_work_orders.md. Execute Worker 3's earliest READY WO and continue its FIFO in order, one investigation at a time. When you create a complete bounded routine trace suitable for local execution, assign it directly to Worker 2. Follow each WO's evidence, authorized-path and closeout rules."
+
+The QUICK START block is only a startup guide. The lane ownership table and ordered READY FIFO in `CONTROL/active_work_orders.md` are the live assignment authority; do not duplicate or infer assignments from historical summaries.
 
 Never run two sessions under the same slot. All three slots may start immediately. No slot waits for another slot for assignment or technical execution. Workers must observe the temporary integration lock before publishing repository changes.
 
