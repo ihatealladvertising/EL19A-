@@ -1,10 +1,11 @@
 # Repository Integration Status
 
 **Lock acquired:** 2026-11-27 — live `main` gate freshly verified UNLOCKED at base `fb8a10d1ace9f00a8239d6dd11e67500731dc949`; serialize WO70034 base table set artifact publication and coordinator register update.
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — WO70034 Nissan SH705x base table set publication (2026-11-27)
-**Purpose:** Publish and verify the bounded cross-ROM structural table set, pinned scan source export and coordinator closeout; keep worker FIFOs and protected calibration artifacts unchanged.
+**Purpose:** WO70034 base table set, source scan export, final hash manifest, coordinator report and lifecycle entry published and read back; worker lanes, canonical XML, Findings and source ROM/A2L artifacts unchanged.
+**Lock released:** 2026-11-27 — WO70034 package and coordinator register published/read back. Evidence commit `2952437ab5a5f975c15f5a36f362f9d8c89d4916`; package hash/readback commit `ad26e3684301f85914d2ae6ac2b15ce8c02b1e5b`; coordinator register commit `7fa16082a3c4e9586535fa84574d0bd3f8fe4a99`. Data report blob `175f3cf8be7d3d7b7b0114ed0436cf02da65c4e8`; package manifest blob `62ab1dbde5c2be66b6071bdec88a1b5f04010a72`. All 18 package files match their manifest hashes after remote readback. Worker 1–3 FIFO unchanged.
 **Lock released:** 2026-11-27 — WO65324 closeout report and register entry published/read back; report commit `9cc24588483d1b8a6259a35a5bf5ead5b6fdd4ee` (blob `b4f0297f6008f5bd69c071a3a2d08b61ebb4c73b`), register commit `b988e4518bca4378d8fc2f0dd7635adced73813b` (blob `0ff1aa6d6432b485796d0a5ef0990b88850e1db4`). Worker queues unchanged.
 **Lock acquired:** 2026-11-27 — latest main gate freshly verified UNLOCKED; serialize WO70032 workbench code, docs, generated scalar-alignment audit, report and coordinator register update.
 **Lock released:** 2026-11-27 — WO70032 artifacts published and fetched/read back at commit ec096d0457a967fffa3fea5af29bb00397cc36dd; command/module/docs/JSON/TSV blobs 04dfbf0472dcb957bd8b31b340d42019d062fa90, dc7eb93fa9c2521730aca35c3562af68d899509a, b1a4dcc73d86449e987660e71530af8a93aa1c8e, f646dfdfee0565c9aef87439c4828eccd6492e93, a4570a0e5fcd909b261be595da5466cdab02c689. Coordinator report WO70032 509d4132934d40f9f34dfc6b2113189a42444148, WO65324 0662f9801b32615044daeffd14cf6619b795aac2, and active register 1c15ab80799af1003965cc1b2faf59d1965b4a4e are included in this release and verified after push. Worker 1-3 FIFOs unchanged; no canonical XML or Findings changes.
