@@ -1,0 +1,39 @@
+{
+  "artifact": "dat_detailed_431_summary.md",
+  "record_tsv": "dat_detailed_431_results.tsv",
+  "unique_direct_dat_payloads": 11668,
+  "scanned_direct_dat_payloads": 9186,
+  "rejected_direct_dat_payloads": 2482,
+  "detailed_positive_payloads": 431,
+  "record_tsv_data_rows": 431,
+  "workbench_commit": "13acc0b58826c2b693ef495a0b3c61259daec760",
+  "python": "3.12.10",
+  "inputs": {
+    "scan_results.tsv": {
+      "bytes": 4078974,
+      "sha256": "761cb7662d939c695ab94929b456d4459a9cb8201ae02a12692f051207179f98"
+    },
+    "scan_details.jsonl.gz": {
+      "bytes": 3138825,
+      "sha256": "1211c98e5e9afefb470a78e268da0c644017016df79a5af3e0c672afa43ce977"
+    },
+    "run_manifest.json": {
+      "bytes": 1500,
+      "sha256": "14a413b9cd688f91636566b91e5e815ce38fd4a46c7320380874a9c68866fee9"
+    }
+  },
+  "generator": {
+    "bytes": 16577,
+    "sha256": "2de496bbf27a4252653b74abc23c842da3127dc9423e274912896241c5c01f9f"
+  },
+  "outputs": {
+    "dat_detailed_431_summary.md": {
+      "bytes": 11351,
+      "sha256": "b63740bb3751c24154668de49030552a5fa69dcf532ae0ff5316ef77249e7dfa"
+    },
+    "dat_detailed_431_results.tsv": {
+      "bytes": 1614002,
+      "sha256": "03b102954ab8b4210d1fe23e217289586c27c9b607d28dc062fd7b52a0da4a31"
+    }
+  }
+}
