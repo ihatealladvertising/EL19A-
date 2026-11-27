@@ -1,0 +1,262 @@
+{
+  "a2l_pairing_status": "PROVISIONAL_UNVERIFIED",
+  "created_utc": "2026-11-27",
+  "expanded_index_raw_sha256": "3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82",
+  "files": [
+    {
+      "compressed_sha256": "0218a2b5414671ae206c7e442cf50d13e60db360d5b52a925155709b2531d17d",
+      "compressed_size_bytes": 3077846,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/reference_index_151rom_v6_306_plus_provisional_a2l.json.gz",
+      "role": "Complete merged cross-ROM reference index",
+      "source_path": "reconciled-output/sh705x_reference_index_151_roms_v6_306_candidates_plus_a2l.json",
+      "source_sha256": "3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82",
+      "source_size_bytes": 66008815
+    },
+    {
+      "compressed_sha256": "6aa0491fe34d66142fe2b67cccd24b91c4d22d7435cd37e53f30d2d1a64dcf1a",
+      "compressed_size_bytes": 250190,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_historical_306_per_address_catalogue.json.gz",
+      "role": "306-address catalogue with 413 call observations, 36 helpers and axes",
+      "source_path": "reconciled-output/v6_legacy_306.catalogue.json",
+      "source_sha256": "c947cf102ae6d79c5c59068720569fc13bfdd0257749cdd19584548f881837b7",
+      "source_size_bytes": 3571850
+    },
+    {
+      "compressed_sha256": "8e36c542d5e05a2ba3bcd92b7ed79ab55500e878f6c29cf7dace9a4c91c020b9",
+      "compressed_size_bytes": 235023,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_historical_413_per_call_export.json.gz",
+      "role": "Historical scanner complete per-call JSON",
+      "source_path": "reconciled-output/v6_legacy_306.per_call.json",
+      "source_sha256": "5d0633e0b46c19fc3ae521a896b8019f57fc8366867d2a911a5c0ebfc4db9de8",
+      "source_size_bytes": 3531672
+    },
+    {
+      "compressed_sha256": "4b7c2ef5f31b33a78542f1665a6157d06f4133ace7a6a6a30229b6d3cf2b1bb1",
+      "compressed_size_bytes": 30617,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_historical_306_per_address.tsv.gz",
+      "role": "Historical scanner per-address TSV",
+      "source_path": "reconciled-output/v6_legacy_306.per_address.tsv",
+      "source_sha256": "d7b99c6f8f93235385f783e1e14ec268219c312ae0d0e80b73f89429875a23f1",
+      "source_size_bytes": 285735
+    },
+    {
+      "compressed_sha256": "c31957ef607cc66c74020cc04f2904be9d39c2a883512da0a5b912ea2b588166",
+      "compressed_size_bytes": 4550,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_historical_vs_current_reconciliation.json.gz",
+      "role": "Exact call-PC and table-address reconciliation",
+      "source_path": "reconciled-output/v6_candidate_reconciliation.json",
+      "source_sha256": "19ad8fcaf5b332b57c2d651a9eb37c0c6f42cfdfcf84f3c5ac0fff8389ecfaa4",
+      "source_size_bytes": 38653
+    },
+    {
+      "compressed_sha256": "e6c093a0cd770f67da0fcbdfd63e998df630b710762d8bc5eec24abcb5381ffe",
+      "compressed_size_bytes": 639950,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_v6_exact_and_same_geometry_comparison.json.gz",
+      "role": "Deduplicated exact and same-geometry comparison matrix",
+      "source_path": "reconciled-output/el19a_v6_payload_comparison_306.json",
+      "source_sha256": "1b5618014418957cb6328a895c50dd68f5531e23c2f315ff591057684329177b",
+      "source_size_bytes": 13119713
+    },
+    {
+      "compressed_sha256": "2aa11af8f382cc9d9950a5c62d9c6b749fcd3da4cbe78fd2c8edf359d7252a49",
+      "compressed_size_bytes": 473439,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_v6_exact_and_same_geometry_comparison.tsv.gz",
+      "role": "Deduplicated comparison rows",
+      "source_path": "reconciled-output/el19a_v6_payload_comparison_306.tsv",
+      "source_sha256": "a871aa80622b00b5dde3f09ca42303cc3476e7b62b40f61f97aa5fdd3f291b0c",
+      "source_size_bytes": 7321456
+    },
+    {
+      "compressed_sha256": "344c1d738a0eaaa49fcf3c1a6b31c0f6a4cb2f161ef41a531d207a8f0cfc0dcd",
+      "compressed_size_bytes": 13954,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_v6_provisional_crossref.json.gz",
+      "role": "V6 donor leads at EL19A addresses",
+      "source_path": "reconciled-output/el19a_v6_provisional_crossref_306.json",
+      "source_sha256": "a1632bb02f54d95dda37b7530fcbd608ed67ac70b11ee24482818f3b8aeb1d46",
+      "source_size_bytes": 691847
+    },
+    {
+      "compressed_sha256": "c425d3609d614242bf59a88c2984df15a332af79aa3755ba248a8edb48a051a0",
+      "compressed_size_bytes": 251053,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_302_catalogue.json.gz",
+      "role": "Current strict scanner per-address catalogue",
+      "source_path": "current-output/scans/v6.catalogue.json",
+      "source_sha256": "9ee5b062dfb4a609fafa6a89fe4d387e400220a2d5dd70b20f44f6f25a08b77e",
+      "source_size_bytes": 3572923
+    },
+    {
+      "compressed_sha256": "353686e9628db06ea37c8eae50376a7a8db78cf9e6f919ec5ec60415ee071bc8",
+      "compressed_size_bytes": 237622,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_408_per_call_export.json.gz",
+      "role": "Current strict scanner per-call JSON",
+      "source_path": "current-output/v6.per_call.json",
+      "source_sha256": "bfb4c58abe9c6d4a4759375707d3262d06a671ab3c2e2700cfb6b1886ed40011",
+      "source_size_bytes": 3610828
+    },
+    {
+      "compressed_sha256": "5aeefabfcd3e00c4ca83007657b77ef16d1b55269fe89aeaf52ec6fc8c634de1",
+      "compressed_size_bytes": 32181,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_302_per_address.tsv.gz",
+      "role": "Current strict scanner per-address TSV",
+      "source_path": "current-output/v6.per_address.tsv",
+      "source_sha256": "5ffa2cfb7d823f092cfe1c83e1c8085311b76a14629a07a3415c978eea4b5221",
+      "source_size_bytes": 328812
+    },
+    {
+      "compressed_sha256": "50fb58cc43f7424eb95b1cb76d82c4400d85348cd010ebd4ce844da71e78cbbd",
+      "compressed_size_bytes": 172591,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_408_calls.tsv.gz",
+      "role": "Current strict scanner per-call TSV",
+      "source_path": "current-output/v6.per_call_tsv/64810223F121200000_9d5efbd9.calls.tsv",
+      "source_sha256": "4903d4edbf06e53eedd007e7dc5043a1a1c630908b5853c9e18496f804b48281",
+      "source_size_bytes": 1482111
+    },
+    {
+      "compressed_sha256": "815b97a567eec19b226214b341b325f71d6040bade6c28c73b9af24aae019323",
+      "compressed_size_bytes": 23401,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_302_tables.tsv.gz",
+      "role": "Current strict scanner per-table TSV",
+      "source_path": "current-output/v6.per_call_tsv/64810223F121200000_9d5efbd9.tables.tsv",
+      "source_sha256": "5079ae9bbec7b447d325a244830205481706122d377e39d60d621524b6eb63b1",
+      "source_size_bytes": 153567
+    },
+    {
+      "compressed_sha256": "cefc3f7ee63ad3d651b7fcc62af1b3c82b0ae53b6a0980448c3d51a613afd35e",
+      "compressed_size_bytes": 446,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/v6_current_strict_36_helpers.tsv.gz",
+      "role": "Current strict scanner helper TSV",
+      "source_path": "current-output/v6.per_call_tsv/64810223F121200000_9d5efbd9.helpers.tsv",
+      "source_sha256": "9b81ced0d47dd335fa61de62fe84270ec188ab3c9c20806707ee123975e5627d",
+      "source_size_bytes": 2106
+    },
+    {
+      "compressed_sha256": "6f5b36e93e847e0e70ee78195c0f6aaf4c3de6571b35459a153386cf5f1bec12",
+      "compressed_size_bytes": 222982,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_current_377_per_call_export.json.gz",
+      "role": "EL19A comparison target per-call export",
+      "source_path": "current-output/el19a.per_call.json",
+      "source_sha256": "8a0a4044fb685b81c420470141acb3275f68af917cd7466620e8744048bcb516",
+      "source_size_bytes": 3345031
+    },
+    {
+      "compressed_sha256": "e15340de59f140b06ac480153240994054922396e0dbf4c77cabe4771f359a75",
+      "compressed_size_bytes": 30341,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_current_291_per_address.tsv.gz",
+      "role": "EL19A comparison target per-address TSV",
+      "source_path": "current-output/el19a.per_address.tsv",
+      "source_sha256": "642b9663d4c845cedb677d676c29696fa0b7a22b6203595b21a212d514ccf910",
+      "source_size_bytes": 312327
+    },
+    {
+      "compressed_sha256": "443bdf8d9708bee8c74df674fac0bfed2b7c5d8ae8a09368cdc95d52370716c1",
+      "compressed_size_bytes": 237089,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_current_291_catalogue.json.gz",
+      "role": "EL19A comparison target catalogue",
+      "source_path": "current-output/scans/el19a.catalogue.json",
+      "source_sha256": "f0ff619203b8e28ebd2ded03a57b78ee12ae29454b988a0ffcf80c84e3a1eadf",
+      "source_size_bytes": 3317907
+    },
+    {
+      "compressed_sha256": "fd26595a9aeacefe42de28f817803d25950af36344b4e7677a01b2e9d1a200c4",
+      "compressed_size_bytes": 27634,
+      "path": "EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/el19a_v6_workbench_diff.json.gz",
+      "role": "Official current-workbench donor diff",
+      "source_path": "current-output/workbench_el19a_vs_v6_diff.json",
+      "source_sha256": "0fb94cb37805103b6434a0e8499e5eb930ec34e36a8c819fa14be277f963b5db",
+      "source_size_bytes": 303104
+    }
+  ],
+  "historical_vs_current": {
+    "a2l_pairing_status": "PROVISIONAL_UNVERIFIED",
+    "call_set_reconciliation": {
+      "current_only_call_count": 0,
+      "current_only_call_pcs": [],
+      "historical_only_call_count": 5,
+      "historical_only_call_pcs": [
+        "0x44946",
+        "0x45F04",
+        "0x4C93A",
+        "0x4EBBA",
+        "0x7D52C"
+      ]
+    },
+    "candidate_set_reconciliation": {
+      "historical_candidates": 306,
+      "historical_only_addresses": [
+        "0x0CE32",
+        "0x0DACE",
+        "0x0E57A",
+        "0x10528"
+      ],
+      "historical_only_count": 4,
+      "strict_current_candidates": 302,
+      "strict_current_only_addresses": [],
+      "strict_current_only_count": 0,
+      "union_candidates": 306
+    },
+    "current_scan": {
+      "call_count": 408,
+      "helper_count": 36,
+      "resolved_call_count": 386,
+      "source_sha256": "ec0ba0d40a7c4a444b94a123be8426584724453a394ed8e8097f3d123982532d",
+      "table_count": 302
+    },
+    "el19a_comparison": {
+      "el19a_addresses_with_exact_payload_match": 110,
+      "el19a_addresses_with_same_geometry_differences": 290,
+      "exact_payload_match_pairs": 832,
+      "same_geometry_differing_payload_pairs": 15290,
+      "v6_crossref_target_candidate_count": 124
+    },
+    "expanded_reference_index": {
+      "a2l_count": 1,
+      "a2l_pairing_status": "PROVISIONAL_UNVERIFIED",
+      "path": "reconciled-output/sh705x_reference_index_151_roms_v6_306_candidates_plus_a2l.json",
+      "payload_index_keys": 3915,
+      "rom_count": 151,
+      "sha256": "3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82",
+      "v6_candidate_count": 306,
+      "v6_historical_count": 306,
+      "v6_legacy_payload_variant_additions": 4,
+      "v6_strict_current_count": 302
+    },
+    "historical_scanner_commit": "1f302841b3ec5add5b3beb0644211b1375084c3d",
+    "legacy_scan": {
+      "call_count": 413,
+      "commit": "1f302841b3ec5add5b3beb0644211b1375084c3d",
+      "helper_count": 36,
+      "resolved_call_count": 391,
+      "source_sha256": "6facb1182ea922fb93c8b7c71d85352f7d6c707e33db3eb3f22c20055460a50e",
+      "table_count": 306
+    },
+    "output_paths": [
+      "reconciled-output/el19a_v6_payload_comparison_306.json",
+      "reconciled-output/el19a_v6_payload_comparison_306.tsv",
+      "reconciled-output/el19a_v6_provisional_crossref_306.json",
+      "reconciled-output/sh705x_reference_index_151_roms_v6_306_candidates_plus_a2l.json",
+      "reconciled-output/v6_candidate_reconciliation.json",
+      "reconciled-output/v6_legacy_306.catalogue.json",
+      "reconciled-output/v6_legacy_306.per_address.tsv",
+      "reconciled-output/v6_legacy_306.per_call.json",
+      "reconciled-output/v6_legacy_306.per_call_tsv/64810223F121200000_9d5efbd9.calls.tsv",
+      "reconciled-output/v6_legacy_306.per_call_tsv/64810223F121200000_9d5efbd9.helpers.tsv",
+      "reconciled-output/v6_legacy_306.per_call_tsv/64810223F121200000_9d5efbd9.tables.tsv"
+    ],
+    "schema": "v6-legacy-306-reconciliation-run-v1",
+    "status": "COMPLETE"
+  },
+  "schema": "v6-first-class-donor-evidence-bundle-v1",
+  "source_runs": {
+    "current_workbench_run_id": 46028977924,
+    "reconciliation_artifact_id": 15214012314,
+    "reconciliation_artifact_sha256": "5da5b77cdafe8cf450cf52cc1b9f4471ecdae81a56ee88fb35c0147d272ca591",
+    "reconciliation_run_id": 46030473101
+  },
+  "v6_identity": {
+    "container_sha256": "8cf39f78efc67f6ae162386454c121fcc6be4771fd624150ca7c2b4102679c0a",
+    "decoded_rom_sha256": "9d5efbd9010db790b858274b0d4f2a0d08bf47f30ee19cb93eed28d529e82039",
+    "fid": "7V4YHZEB2",
+    "path": "EVIDENCE/side project/64810223F121200000.hex",
+    "rom_id": "rom:64810223F121200000.hex#9d5efbd9010d"
+  }
+}
