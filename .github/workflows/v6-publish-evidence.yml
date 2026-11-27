@@ -236,7 +236,7 @@ jobs:
           rm -rf current-output reconciled-output
           git add EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27
           git commit -m "Add V6 first-class donor index and scan evidence"
-          git status --short
+          git stash push --include-untracked -m "Preserve unrelated pre-existing Actions workspace changes"
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase --abort >/dev/null 2>&1 || true
