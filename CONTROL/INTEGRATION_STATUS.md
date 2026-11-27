@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — WO70031 structural-readiness integration into WO65324 (2026-11-27)
 **Purpose:** Integrate the published WO70031 structural-readiness matrix into coordinator-owned WO65324 and update only the WO65324 coordinator summary row in CONTROL/active_work_orders.md. No worker FIFO, other WO, XML, scope matrix, catalogue, workbook, Findings, ROM/LST/A2L, tool source/test/workflow or protected evidence changes.
@@ -276,3 +276,7 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock released:** 2026-11-27 — V6 is now a first-class donor in the SH705x cross-ROM evidence set. The prior historical 306-candidate result was reproduced with its historical scanner revision; the current strict scanner emitted 302 candidates, all contained in the historical set, with four historical-only candidates retained and labelled. The expanded 151-ROM reference index and full current/historical per-call and per-address exports, reconciliation, EL19A exact-payload/same-geometry comparison and provisional cross-reference are committed under `EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/`. A2L pairing remains `PROVISIONAL_UNVERIFIED` pending independent pairing evidence under WO65212. `tools/nissan_sh705x_workbench.md` and the WO70019 V6 classification correction addendum were published and read back. All temporary V6 Actions workflows were removed and the remote tree was verified clear. No ROM, HEX, S19, A2L, XML calibration definition, workbook, calibration catalogue, scope matrix, Findings or worker queue was modified.
 **V6 evidence bundle:** 20 files; merged raw index SHA-256 `3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82`.
 **Documentation commits:** workbench `74ee6b76b6a06f9af16b970a5ea522e9609264b0`; WO70019 `c4bd1b85293a15afeba3a64b8bfeb4e149f8695d`.
+
+
+**Integrator:** ChatGPT — WO65324 V6/Juke exact non-constant payload reconciliation and coordinator-register synchronization (2026-11-27)
+**Lock acquired:** 2026-11-27 — prior state UNLOCKED. This lock serializes the remaining coordinator-owned WO65324 report/register publication. Two preceding commits for the WO65324 evidence TSV/report were already published while the gate remained UNLOCKED; those commits changed only the new WO65324 evidence and report, not a worker lane, FIFO, Findings, XML, ROM/LST/A2L or tool source. No rollback or history rewrite will be attempted. Remaining register synchronization and gate release will be completed under this lock.
