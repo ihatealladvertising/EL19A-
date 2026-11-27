@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -145,3 +145,8 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock acquired:** 2026-11-26 — follow-on donor screening; shared-main publication paused until temporary workflow removal and report readback.
 
 **Lock released:** 2026-11-26 — follow-on CONSULT donor screen completed; temporary workflow `.github/workflows/el19a-followon-donor-screen.yml` removed and absence verified (GitHub contents API returned 404). Successful diagnostic run `45913585933`; artifact `15160523766` (SHA-256 `97e76d6bb6a68d530065d57051ab7f1dee7e0cc74672a9ecfd6bb95fa5d82c3a`). Report `EVIDENCE/FOLLOWON_DAT_DONOR_SCREEN_2026-11-26.md` published and read back (blob `c81d17ae65532bfafd48ed062a308bc7d46c9c11`). D9 0x8019/0x3482 frame variant reconstructed four 512 KiB images with passing frame checksums and contiguous 0x8000–0x70000 coverage, but no SH705x helper/CPU fingerprint; E1BR/E1BT/E1JD and 310364 remain unresolved by current loader. No Findings, XML, catalogue, scope matrix, workbook, ROM/LST/A2L, tool source/tests or worker queue changes.
+
+
+**Integrator:** ChatGPT — user-requested definition-completion work-order allocation (2026-11-26)
+**Purpose:** Publish WO70017–WO70020 and update only their own specifications plus the live FIFO/coordinator register. No technical evidence, Findings, XML, catalogue, scope matrix, workbook, ROM/LST/A2L, scripts or worker outputs are changed in this allocation.
+**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; shared-main publication paused for this allocation batch.
