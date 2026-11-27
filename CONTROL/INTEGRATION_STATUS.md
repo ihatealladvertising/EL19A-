@@ -1,10 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
-**Integrator:** ChatGPT — Juke 9APCTDEM06 A2L scalar and explicit-axis raw readback (2026-11-27)
-**Purpose:** Published and verified the Juke `9APCTDEM06` A2L scalar and explicit-axis raw-value readback plus its coordinator analysis in WO65324. No calibration XML, target ROM/A2L, workbook, scope matrix, catalogue, Findings, tool source or worker queue was modified.
-**Lock acquired:** 2026-11-27 — fresh `main` gate readback showed UNLOCKED; only additive donor-data/report publication is planned.
+**Integrator:** ChatGPT — user-confirmed V6 A2L/HEX pair and full declaration payload readback (2026-11-27)
+**Purpose:** Treat `64810223F121200000.hex` as the user-confirmed paired ROM for `64811000p2_m.a2l`; validate all A2L-declared calibration object extents against the HEX image; publish raw V6 VALUE/CURVE/MAP/AXIS_PTS payloads and correct the existing pairing and WO65324 reports. No target EL19A ROM/XML, source A2L, workbook, scope matrix, catalogue, Findings or worker queue edits.
+**Lock acquired:** 2026-11-27 — fresh main gate UNLOCKED; user directly confirmed the V6 A2L/HEX pairing. Worker lanes rechecked unchanged.
 
 **Lock released:** 2026-11-27 — `EVIDENCE/JUKE_9APCTDEM06_A2L_SCALARS_AND_AXES_2026-11-27.tsv` (6,748 rows; blob `10a484c5dc946e22b81605bb29b94203cfdf7f8a`; commit `1defbfe75bb4273c5192acc83f4f0d53ff4898d2`) and `CONTROL/WO65324.md` (final blob `c3a88d478a791343916f42d3bc9e575a3287a9f5`; final correction commit `d3b52e2a8e1754d0af59c98bdb44f5bcb21c693c`) published and read back. Findings disposition NOT REQUIRED; no protected calibration or worker-lane files edited.
 
