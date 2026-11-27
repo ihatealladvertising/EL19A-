@@ -1,10 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
-**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; serialize plan/work-order/register publication.
+**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; serialize plan update for workbench integration priorities and source-level findings.
 
 **Integrator:** ChatGPT — user-requested workbench Consult decoder/diff checkpoint (2026-11-26)
 **Purpose:** Add auditable machine-readable per-call/per-table exports and regression coverage to the lookup scanner. No ROM, LST, XML, catalogue, scope matrix, workbook, Findings or worker-lane changes were made.
@@ -159,3 +159,8 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock released:** 2026-11-26 — SH705x ROM tool planning batch published and read back. Added `CONTROL/SH705X_ROM_TOOL_PLAN.md`, `CONTROL/WO70020.md`, `CONTROL/WO70021.md`, `CONTROL/WO70022.md`, and registered their FIFO positions in `CONTROL/active_work_orders.md`. Worker 1: WO70020; Worker 2: WO70018 → WO70022; Worker 3: WO70019 → WO70021. No source tools, tests, workflows, calibration XML, workbook, ROM/LST/A2L, catalogues or Findings were changed.
+
+
+**Integrator:** ChatGPT — user-requested SH705x workbench integration-plan update (2026-11-26)
+**Purpose:** Record existing scanner export capabilities, bounded static-index reuse, calibration-definition reconciliation, diagnostic/variant evidence adapters and regression-first integration order. No implementation/source-code, ROM, LST, A2L, XML, workbook, Findings or worker-queue changes are authorized.
+**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; serialize plan/document publication.
