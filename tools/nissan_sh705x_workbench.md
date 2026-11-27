@@ -32,7 +32,7 @@ Verified `scan` results across `EVIDENCE/`:
 - `EVIDENCE/Nissan Tiida_C12W_3DD9A_705828N.bin` (`LOADER80`, `0KHDCFDZ7`, `SH705828N`): `cal16` & `main16` OK; `37` helpers, `764` calls (`734` resolved → `585` tables).
 - `EVIDENCE/Nissan Juke 1.6-dig-T S19 (9APCTDEM06)/9APCTDEM06.s19` (`LOADER80`, `0KHDCFDZ7`, `SH705828N`): `main16@0x20000` OK, `cal16@0x08200` BAD (`0xC277` vs `0x5319`, sparse `0x1A000..0x1FFFF` unpopulated in engineering S19); `37` helpers, `764` calls (`734` resolved → `585` tables).
 - `EVIDENCE/Nissan_Qashqai_2006_2.0i_140_hp_Hitachi_BEDxxx_MECxxx_OBD_NR.zip` (`LOADER80`, `1TRKH1HN6`, `SH705828N`, `2 MiB`): `cal16` & `main16` OK; `37` helpers, `604` calls (`595` resolved → `483` tables).
-- `EVIDENCE/side project/64810223F121200000.hex` (`7V4YHZEB2`, `SH705822N`): `main16@0x20000` OK; `36` helpers, `413` calls (`391` resolved → `306` tables).
+- `EVIDENCE/side project/64810223F121200000.hex` (`7V4YHZEB2`, `SH705822N`): historical scanner baseline reproduced at `36` helpers, `413` calls (`391` resolved → `306` table bases); current strict scanner emits `36` helpers, `408` calls (`386` resolved → `302` table bases). The historical-only four candidate bases are retained separately; see the V6 donor record below.
 - `EVIDENCE/CF48D.bin` (`LOADER60`, `6ZV5UN11`, `SH705823N`): `ck_std` OK (`sumt@0x08C38`, `xort@0x08C30`); `34` helpers, `376` calls (`357` resolved → `279` tables).
 - `EVIDENCE/23710-EE310-07-C11-MR18DE-MT.bin` (`LOADER40`, `4CMC2LPDA`, `SH705520N`): `ck_std` OK (`sumt@0x072A0`, `xort@0x07298`); `37` helpers, `327` calls (`310` resolved → `249` tables).
 - `EVIDENCE/E1BR20E.dat` (`LOADER40`, `9CMCVAPD31`, `SH705520N`): `%6` decrypted cleanly (`ck_std` OK: `sumt@0x06CEC`, `xort@0x06CE4`); `36` helpers, `351` calls (`331` resolved → `267` tables).
@@ -101,3 +101,18 @@ Verified `diff` metrics:
 
 - Helper geometry, ROM byte extents, checksums, and call sites in `VERSA f501.bin` are **target-ROM structural facts**.
 - Any symbol names, engineering units, scaling formulas, and `MEASUREMENT` RAM names pulled from sibling ROMs (`EL13A`, `8W83B`, `EE310`) or the V6 (`64811000p2_m.a2l`) and Juke (`RFCC_2XHK19BDF1.a2l`) A2L pairs are **structural leads / hypotheses only** — never proof on EL19A until independently verified in EL19A target code (reader + consumer trace).
+
+
+## V6 first-class donor / cross-ROM preservation (2026-11-27)
+
+The Intel HEX at `EVIDENCE/side project/64810223F121200000.hex` is now indexed as a ROM donor, not an A2L input. The current strict workbench export and the historical 306-candidate scanner output are both preserved.
+
+- **Historical scanner** `1f302841b3ec5add5b3beb0644211b1375084c3d`: 36 helpers, 413 calls, 391 resolved calls, 306 table bases.
+- **Current strict scanner**: 36 helpers, 408 calls, 386 resolved calls, 302 table bases.
+- **Address reconciliation**: all 302 current bases are in the historical set; four historical-only bases remain explicitly labelled as such: `0x0CE32`, `0x0DACE`, `0x0E57A`, `0x10528`. Five historical call PCs are not re-emitted by the current scanner: `0x44946`, `0x45F04`, `0x4C93A`, `0x4EBBA`, `0x7D52C`.
+- **Expanded cross-ROM index**: 151 ROMs, 7 XML documents and one candidate A2L association; the V6 catalogue contains all 306 candidates, with 302 also emitted by the current strict scanner.
+- **EL19A comparison across the 306-candidate union**: 832 exact-payload candidate pairs (110 EL19A addresses / 102 V6 addresses); 15,290 same-geometry differing-payload pairs (290 EL19A addresses / 305 V6 addresses); 124 EL19A candidate addresses with V6 cross-reference hits. Geometry means element type, dimensions and byte length; identical variants emitted by both scanner revisions are deduplicated.
+- **A2L boundary**: `64811000p2_m.a2l` remains `PROVISIONAL_UNVERIFIED` against the V6 HEX, pending independent pairing evidence (WO65212). Its same-address symbols are association leads only, not proof or semantic truth for V6 or EL19A.
+- **Evidence bundle**: `EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/` contains the full merged compressed index, historical and current per-call exports, per-address catalogues, reconciliation, EL19A comparison matrices, provisional cross-reference, README and SHA-256 manifest.
+
+All V6 matches remain donor-side structural evidence. Do not transfer names, units, scaling or calibration semantics to EL19A without target-side reader and consumer evidence.

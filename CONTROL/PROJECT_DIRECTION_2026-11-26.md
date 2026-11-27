@@ -91,10 +91,12 @@ The detailed source-level integration requirements and recommended sequence are 
 
 Use a practical two-layer standard:
 
-1. **Definition-ready structural fact:** address, storage type/width, extent, geometry, axis/query representation, and reader mechanics sufficiently establish a non-misleading raw/provisional RomRaider object. Physical naming or engineering units may remain unresolved.
-2. **Semantic promotion:** a physical name, unit, conversion, strategy role or actuator consequence requires a target-side query and consumer path that supports that claim. Donor A2Ls, cross-ROM similarity, value shape and screenshots may guide discovery but do not substitute for target-side proof.
+1. **Definition-ready structural fact:** the target ROM supports the effective address/address-space mapping, element type/width/signedness, exact bounded byte extent, dimensions/geometry, byte order and payload. Those facts must be reproducible and free of unresolved material geometry conflicts. A scanner base, helper-call record or donor match alone is not sufficient without target-byte extent/geometry validation. **Full reader mechanics, query provenance and downstream consumer tracing are not required** for a raw/provisional RomRaider object. Where physical axes/query domains are not established, use clearly labelled sample-index axes and raw scaling; do not invent engineering units or physical orientation.
+2. **Semantic promotion:** a physical name, physical axis/query domain, unit, conversion, strategy role or actuator consequence requires target-side evidence appropriate to that claim—normally the relevant reader/query path and, for runtime function/actuator claims, a supporting consumer/endpoint path. Donor A2Ls, exact-payload or same-geometry cross-ROM matches, value shape and screenshots may strengthen or rank hypotheses but do not substitute for target-side proof.
 
-Do not let semantic uncertainty prevent a safe generic/raw definition when structural facts are adequate. Conversely, do not use a plausible name to conceal unresolved dimensions, axis or scaling. Preserve established user-directed presentation decisions as such, separately from firmware facts.
+Do not let semantic uncertainty prevent a safe generic/raw definition when structural facts are adequate. Conversely, do not use a plausible name, unit or conversion to conceal unresolved address, extent, type or geometry. Preserve established user-directed presentation decisions separately from firmware facts.
+
+**Permanent threshold decision — effective 2026-11-27:** reader mechanics and downstream consumer traces are semantic-enrichment evidence, not mandatory gates for including a structurally supported raw/provisional calibration object. This supersedes any earlier wording in this project-direction document that made those traces part of the minimum structural inclusion test.
 
 ## What this plan does not do
 

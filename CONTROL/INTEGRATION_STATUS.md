@@ -2,6 +2,39 @@
 
 **State:** UNLOCKED
 
+**Integrator:** ChatGPT — WO70031 structural-readiness integration into WO65324 (2026-11-27)
+**Purpose:** Integrate the published WO70031 structural-readiness matrix into coordinator-owned WO65324 and update only the WO65324 coordinator summary row in CONTROL/active_work_orders.md. No worker FIFO, other WO, XML, scope matrix, catalogue, workbook, Findings, ROM/LST/A2L, tool source/test/workflow or protected evidence changes.
+**Lock acquired:** 2026-11-27 — freshly fetched main gate UNLOCKED; coordinator-only report/register integration.
+**Lock released:** 2026-11-27 — CONTROL/WO65324.md updated with the published WO70031 structural-readiness matrix integration and read back (commit 1957dccd9a0b8e79e571a04fb1ea72273f835975; blob 589ac31a38784b08f24ce4c608f62b64bd2cf86e); only the coordinator-owned WO65324 summary row in CONTROL/active_work_orders.md updated and read back (commit 276e12547b3343a1340d5443e207dd108f52f6e2; blob c68be8179153e27dc5c8a5eb4bdcfb96debb9cd6). Worker 1–3 assignments/FIFOs and all other WO lifecycle states unchanged; no XML, Findings, workbook, catalogue, scope matrix, ROM/LST/A2L or tool files changed.
+**Lock released:** 2026-11-27 — QUICK START block published and read back in `CONTROL/active_work_orders.md` (commit `ff380af99b1cc4df8ee06642e3559c94b9421182`; blob `adbe54812e2fd634b92c38f43cb69cbb0a56a1a8`) and worker startup prompts aligned/read back in `CONTROL/WORKER_PROTOCOL.md` (commit `d8bee2f071a806618171ba031e009331110b7089`; blob `9c10208d88a48b550af8ca2eb3d22b9cb8f3bcbf`). Worker 1–3 assignments, FIFO order, and all WO lifecycle states unchanged.
+
+# Repository Integration Status
+
+**State:** UNLOCKED
+
+**Integrator:** ChatGPT — user-confirmed V6 A2L/HEX pair and full declaration payload readback (2026-11-27)
+**Purpose:** Published and verified the user-confirmed V6 A2L/HEX pairing, complete V6/Juke raw calibration payload extracts, shared-symbol byte comparison, and superseding project-control addenda. No target calibration or tool source was modified.
+**Lock acquired:** 2026-11-27 — fresh main gate UNLOCKED; user-confirmed V6 pairing; work limited to donor readback and project reconciliation.
+**Lock released:** 2026-11-27 — User-confirmed V6 A2L/HEX pair validated across all 4,614 A2L calibration declarations. Published and read back: V6 full raw payload TSV (4,614 rows; Git blob `b074f7c2b9023938f025d56cec29b4147c6febf8`; commit `018d2ae78b4dc5a9f1e438f1b6b5bc7629d5f246`); Juke full raw payload TSV (7,676 rows; Git blob `ccc441501b37ad112f188d8d0d0c6f75a6fe6c06`; commit `b57c7dc9a7da75cafa339e26200d4eee3c5d2ab8`); V6/Juke shared-symbol comparison (2,628 rows; Git blob `a0ddab3edc7d8adef5b23007e7bcf3fe2f47a443`; commit `0ca96d667a8acaf57b8aa424f33251cfac28f39b`). Corrected WO65212, WO70017, WO70006 and WO65324; register now reflects the superseded pairing caveat. Three-image exact mADVPIAT/EL19A 0x0DE6E axis match recorded. No EL19A calibration XML, target ROM, A2L, workbook, scope matrix, catalogue, Findings or worker FIFO changed. Worker 1 remains WO70031 READY; Worker 2/3 unchanged.
+
+**Lock released:** 2026-11-27 — `EVIDENCE/JUKE_9APCTDEM06_A2L_SCALARS_AND_AXES_2026-11-27.tsv` (6,748 rows; blob `10a484c5dc946e22b81605bb29b94203cfdf7f8a`; commit `1defbfe75bb4273c5192acc83f4f0d53ff4898d2`) and `CONTROL/WO65324.md` (final blob `c3a88d478a791343916f42d3bc9e575a3287a9f5`; final correction commit `d3b52e2a8e1754d0af59c98bdb44f5bcb21c693c`) published and read back. Findings disposition NOT REQUIRED; no protected calibration or worker-lane files edited.
+
+**Lock released:** 2026-11-27 — permanent structural-only RAW/PROVISIONAL threshold update published, read back and adopted by the active definition-completion WO. Created and registered Worker 1 WO70031 against the preserved EL19A 291-address / 377-call exports and 151-ROM donor bundle; no global scan was rerun and no protected calibration/evidence/tool files were changed.
+
+**Published and verified:**
+- `CONTROL/WORKER_PROTOCOL.md` — commit `e63f01ea9512957d0114ce3fe49ab94e125bcbec`; blob `14d80a66f0f3eca4c42308023c265ee83c842a6e`.
+- `CONTROL/PROJECT_DIRECTION_2026-11-26.md` — commit `32a557c4c458dd1b784c7028a67c9c79bda7806d`; blob `ea5a45285a6041c1707adafb6d747c3f6a4130ce`.
+- `CONTROL/WO65324.md` — commit `33b5ef99ca88a5d0606bd7ede09d72ee4989896f`; blob `ccced4061f639b09244fb9021446b417c0d054e4`.
+- `CONTROL/WO70031.md` — commit `4895af1c7c02c40b5d555d49537d3b004ff6853a`; blob `dd96540863c16b56951d1d5a1ee08e592a2f8a42`.
+- `CONTROL/active_work_orders.md` — commit `d971bd7d50ee26ca756f52b950820a3d0f28ace1`; blob `621c95ff3dca14e35500c78a45cdcabbf9557914`.
+
+**Queue readback:** Worker 1 — WO70031 READY; Worker 2 — WO70018 → WO70022 → WO70028 unchanged; Worker 3 — WO70026 → WO70029 → WO70030 unchanged. Shared-main publication gate returned to UNLOCKED.
+
+
+**Integrator:** ChatGPT — first-class V6 donor rescan, index merge and EL19A comparison (2026-11-27)
+**Purpose:** Reuse and SHA-verify the prior 150-ROM reference-index artifact; rescan only `EVIDENCE/side project/64810223F121200000.hex` and EL19A with the current workbench; export full call/helper/table JSON and TSV plus lossless per-address catalogues and manifests; reconcile the V6 306-table historical baseline; add V6 ROM payload and candidate A2L symbol associations to the reference index with explicit `PROVISIONAL_UNVERIFIED` pairing status; rerun exact-payload and same-geometry-difference comparisons. Temporary Actions workflow only. No tool source/tests, ROM, S19, HEX, A2L, XML definition, workbook, calibration catalogue, scope matrix, Findings or worker queue edits.
+**Lock acquired:** 2026-11-27 — latest `main` gate verified UNLOCKED; V6 first-class donor execution and artifact publication.
+
 **Integrator:** ChatGPT — rerun RR ROM workbench batch after user added extracted BIN images (2026-11-27)
 **Purpose:** Re-run the existing read-only workbench across the refreshed `EVIDENCE/rr roms` folder, now 177 entries, including the 16 new BIN images corresponding to the previously unsupported RAR/7z archive submissions; rebuild the corpus reference index and record comparison to prior batch. Use a temporary Actions runner and remove it after results are read back. No source/tool/calibration files may be changed except the temporary workflow and additive batch report.
 **Lock acquired:** 2026-11-27 — prior state UNLOCKED; live folder inventory refreshed.
@@ -238,3 +271,14 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Durable report:** `EVIDENCE/RR_ROMS_WORKBENCH_REFRESH_2026-11-27.md` — blob `9dccb05bcf2785c5537c0c3da65c0a05468b76d6`; commit `ed4aef50ccf8f380b2e78e99af66fd3399155219`.
 **Temporary workflow cleanup:** `.github/workflows/rr-roms-workbench-refresh.yml` deleted; cleanup commit `e254fea42494e37c5e7ded233c27603855224358`. Absence verified after deletion.
 **Lock released:** 2026-11-27 — refreshed batch complete, artifact downloaded and hash verified, report read back, temporary workflow removed. ROMs and existing tool/definition/workbook/catalogue/Findings files were not modified.
+
+
+**Lock released:** 2026-11-27 — V6 is now a first-class donor in the SH705x cross-ROM evidence set. The prior historical 306-candidate result was reproduced with its historical scanner revision; the current strict scanner emitted 302 candidates, all contained in the historical set, with four historical-only candidates retained and labelled. The expanded 151-ROM reference index and full current/historical per-call and per-address exports, reconciliation, EL19A exact-payload/same-geometry comparison and provisional cross-reference are committed under `EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/`. A2L pairing remains `PROVISIONAL_UNVERIFIED` pending independent pairing evidence under WO65212. `tools/nissan_sh705x_workbench.md` and the WO70019 V6 classification correction addendum were published and read back. All temporary V6 Actions workflows were removed and the remote tree was verified clear. No ROM, HEX, S19, A2L, XML calibration definition, workbook, calibration catalogue, scope matrix, Findings or worker queue was modified.
+**V6 evidence bundle:** 20 files; merged raw index SHA-256 `3285f01771d4626cf4fcce287919efc4278ba20faa175a812f3fdde53a096a82`.
+**Documentation commits:** workbench `74ee6b76b6a06f9af16b970a5ea522e9609264b0`; WO70019 `c4bd1b85293a15afeba3a64b8bfeb4e149f8695d`.
+
+
+**Integrator:** ChatGPT — WO65324 V6/Juke exact non-constant payload reconciliation and coordinator-register synchronization (2026-11-27)
+**Lock acquired:** 2026-11-27 — prior state UNLOCKED. This lock serializes the remaining coordinator-owned WO65324 report/register publication. Two preceding commits for the WO65324 evidence TSV/report were already published while the gate remained UNLOCKED; those commits changed only the new WO65324 evidence and report, not a worker lane, FIFO, Findings, XML, ROM/LST/A2L or tool source. No rollback or history rewrite will be attempted. Remaining register synchronization and gate release will be completed under this lock.
+
+**Lock released:** 2026-11-27 — WO65324 exact V6/Juke/EL19A payload cross-reference published/read back (`EVIDENCE/WO65324_V6_JUKE_EL19A_EXACT_NAMED_NONCONSTANT_MATCHES_2026-11-27.tsv`, 15 rows; blob `6322806fb203fb2491d3115fbf1f653aeb79b4bd`); coordinator report updated/read back (`CONTROL/WO65324.md`, blob `008b08c25663e5961133cc89cf65d82c5c01aab1`; commit `3d6f14562dd822eccaa36dfa3b1a2b1a2be5aaf0`); only the WO65324 coordinator row updated/read back in `CONTROL/active_work_orders.md` (blob `6fd96fec5f6156bec9e074f890eba0e61d65802b`; commit `cd72a8ef0e31f9eb561f94a3c4e02ee4353a122e`). Exact result: 15 strict non-constant target placements across 13 shared donor symbols. No new Findings, XML, tool, ROM/LST/A2L, workbook, catalogue or scope-matrix changes. Worker 1–3 FIFOs and all other WO lifecycle states unchanged. Fresh EL19A scan/preview remains blocked on the pinned executable workspace and required inputs. The earlier evidence/report commits made before this lock were confined to WO65324 and are retained without rewriting history.

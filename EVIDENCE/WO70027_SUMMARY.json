@@ -1,0 +1,225 @@
+{
+  "wo": "WO70027",
+  "date": "2026-11-27",
+  "repository_remote": "https://github.com/ihatealladvertising/EL19A-.git",
+  "git_head": "3a7a46e4fffe1535be579045297733c37fd780fe",
+  "tool_sha256": {
+    "tools/nissan_sh705x_workbench.py": "bc5c9dbb5dce4f22b2ff7984fecabfd57c19a0057eafc56e1dcdc6a7d254ba38",
+    "tools/sh705x_rom_loader.py": "e228470c4c3479244699cf3b32d64ea236d833ab15656aa205cad952d8e48214",
+    "tools/sh7058_cross_rom_scanner.py": "41101a43865f8691b2253243e177c17c10c034a5a3036ef8b634a57185f1ed07"
+  },
+  "inputs": {
+    "tiida_zip": {
+      "path": "EVIDENCE\\Nissan Tiida_C12W_3DD9A_705828N.zip",
+      "bytes": 643388,
+      "sha256": "a3bc5de62bced3624b5390f290669e3f77f1c734d4e4e9891cf31dbcf92da799"
+    },
+    "tiida_bin": {
+      "path": "EVIDENCE\\Nissan Tiida_C12W_3DD9A_705828N.bin",
+      "bytes": 1048576,
+      "sha256": "28119daaca1a0641e739ed85d74eacc134988dace10bf00a09875196c9186d42"
+    },
+    "juke_s19": {
+      "path": "EVIDENCE\\Nissan Juke 1.6-dig-T S19 (9APCTDEM06)\\9APCTDEM06.s19",
+      "bytes": 3006464,
+      "sha256": "a3bac2abaffd71fee628419903e9422116047d87663f41148c928668a6613352",
+      "stats": {
+        "records": {
+          "S1": 4096,
+          "S2": 61440
+        },
+        "record_checksum_ok": 65536,
+        "record_checksum_bad": 0,
+        "data_bytes": 1048576,
+        "distinct_addresses": 1048576,
+        "conflicting_assignments": 0,
+        "max_address_plus_one": 1048576
+      }
+    },
+    "a2l": {
+      "path": "EVIDENCE\\RFCC_2XHK19BDF1.a2l",
+      "bytes": 3762808,
+      "sha256": "0ad173da11676ef6504bfde507f4c172c45ca3adda1d466a6b13dd61ee5a5d9d"
+    }
+  },
+  "zip_members": [
+    {
+      "name": "Nissan Tiida_C12W_3DD9A_705828N.bin",
+      "bytes": 1048576,
+      "sha256": "28119daaca1a0641e739ed85d74eacc134988dace10bf00a09875196c9186d42"
+    }
+  ],
+  "decoded": {
+    "bin": {
+      "bytes": 1048576,
+      "sha256": "28119daaca1a0641e739ed85d74eacc134988dace10bf00a09875196c9186d42",
+      "fingerprint": {
+        "size": 1048576,
+        "active_end": 1048576,
+        "md5": "cbd4f1f6ff6cb0855ffa4b1a5bba67fa",
+        "sha256": "28119daaca1a0641e739ed85d74eacc134988dace10bf00a09875196c9186d42",
+        "reset_pc": 9328,
+        "reset_sp": 4294934524,
+        "cpu_tags": [
+          "SH705828N"
+        ],
+        "fid_tags": [
+          "0KHDCFDZ",
+          "13DD9A00",
+          "00013DD9",
+          "7IOOISWY",
+          "9CCAMOUY",
+          "222FFFFF"
+        ],
+        "nissan_meta": {
+          "loader": "LOADER80",
+          "loader_addr": 20028,
+          "fid": "0KHDCFDZ7",
+          "fid_addr": 139956,
+          "fid_cpu": "SH705828N",
+          "ramf_ptrs": 15,
+          "bootblock_ff": false,
+          "ivt_unique": 10
+        },
+        "checksums": {
+          "ck_std": null,
+          "ck_alt2": null,
+          "cal16": {
+            "status": "OK",
+            "addr": 33280,
+            "end": 131072,
+            "stored": 44172,
+            "calc": 44172
+          },
+          "main16": {
+            "status": "OK",
+            "addr": 131072,
+            "stored": 1083,
+            "calc": 1083
+          }
+        }
+      }
+    },
+    "s19": {
+      "bytes": 1048576,
+      "sha256": "4bcde3a7cab646917509beea312aa15eedfb23a59e1e5c43526eae9b0fa3fba0",
+      "fingerprint": {
+        "size": 1048576,
+        "active_end": 1048576,
+        "md5": "b8969a04fd4f5244487f56ccbf91f53e",
+        "sha256": "4bcde3a7cab646917509beea312aa15eedfb23a59e1e5c43526eae9b0fa3fba0",
+        "reset_pc": 9328,
+        "reset_sp": 4294934524,
+        "cpu_tags": [
+          "SH705828N"
+        ],
+        "fid_tags": [
+          "0KHDCFDZ",
+          "7IOOISWY",
+          "9CCAMOUY"
+        ],
+        "nissan_meta": {
+          "loader": "LOADER80",
+          "loader_addr": 20028,
+          "fid": "0KHDCFDZ7",
+          "fid_addr": 139956,
+          "fid_cpu": "SH705828N",
+          "ramf_ptrs": 15,
+          "bootblock_ff": false,
+          "ivt_unique": 10
+        },
+        "checksums": {
+          "ck_std": null,
+          "ck_alt2": null,
+          "cal16": {
+            "status": "BAD",
+            "addr": 33280,
+            "end": 131072,
+            "stored": 49783,
+            "calc": 21273
+          },
+          "main16": {
+            "status": "OK",
+            "addr": 131072,
+            "stored": 1083,
+            "calc": 1083
+          }
+        }
+      }
+    },
+    "full_equal": false
+  },
+  "region_comparison": {
+    "boot_0x00000_0x081FF": {
+      "bytes": 33280,
+      "differing": 0
+    },
+    "cal_0x08200_0x1FFFF": {
+      "bytes": 98304,
+      "differing": 7170
+    },
+    "s19_gap_0x1A000_0x1FFFF": {
+      "bytes": 24576,
+      "differing": 0,
+      "bin_unique_byte_count": 1,
+      "s19_unique_byte_count": 1,
+      "bin_bytes": [
+        255
+      ],
+      "s19_bytes": [
+        255
+      ]
+    },
+    "code_0x20000_0xFFFFF": {
+      "bytes": 917504,
+      "differing": 0
+    }
+  },
+  "scan": {
+    "helpers": 37,
+    "calls": 753,
+    "resolved_calls": 726,
+    "tables": 581,
+    "caller_axis_addresses": 354,
+    "caller_axis_addresses_in_a2l": 351,
+    "caller_axis_addresses_unmatched": [
+      "0x11579",
+      "0x11581",
+      "0x13814"
+    ]
+  },
+  "a2l_alignment": {
+    "a2l_symbols_total": 6130,
+    "a2l_declarations_parsed": 6130,
+    "tables_matched": 581,
+    "geometry_matched": 578,
+    "axis_ref_matched": 363,
+    "axis_addresses_with_extent": 351,
+    "axis_kind_breakdown": {
+      "AXIS_PTS": 343,
+      "CHARACTERISTIC": 8
+    },
+    "axis_count_source_breakdown": {
+      "AXIS_PTS declaration": 343,
+      "caller table dimension (A2L AXIS_PTS_REF unresolved)": 8
+    },
+    "axis_rows_with_unresolved_extent": 0
+  },
+  "payload": {
+    "tables": 581,
+    "identical": 463,
+    "differing": 118,
+    "differing_bytes_inside_table_extents": 4198,
+    "whole_rom_differing_bytes": 7170,
+    "whole_rom_differing_byte_runs": 2204,
+    "differing_bytes_outside_table_extents": 2972,
+    "min_diff": "0x8200",
+    "max_diff": "0x1677B"
+  },
+  "artifacts": [
+    "WO70027_TABLE_MAP.tsv",
+    "WO70027_AXIS_MAP.tsv",
+    "WO70027_PAYLOAD_COMPARE.tsv",
+    "WO70027_DIFF_RANGES.tsv"
+  ]
+}
