@@ -1,0 +1,99 @@
+{
+  "schema": "wo65324-execution-manifest-v1",
+  "date": "2026-11-27",
+  "repository_commit": "5a0d759bdd3cd198698715ca6b0f051c33c2dc4f",
+  "runtime": "Python 3.12.14 (project minimum 3.10+; historical golden run used 3.11.2)",
+  "target_rom": "EVIDENCE/VERSA f501.bin",
+  "target_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+  "runs": {
+    "scan": {
+      "status": "completed",
+      "helpers": 34,
+      "call_sites": 377,
+      "tables": 291,
+      "scalar_candidates": 2739,
+      "enhanced_window": 128,
+      "include_scalars": true
+    },
+    "audit": {
+      "status": "completed",
+      "audit_tsv_data_rows": 291,
+      "observed_summary": "291 caller-backed tables; 254 XML tables; 185 catalogue rows; 176 caller-backed/XML overlaps; 115 caller-backed absent XML; 78 XML-only; zero helper-vs-Release1 geometry disagreements."
+    },
+    "reference_index_queries": {
+      "status": "completed",
+      "queries": 8,
+      "address_keyed_hits": 0,
+      "note": "No address-keyed donor hits for queried EL19A addresses."
+    },
+    "strict_preview": {
+      "status": "completed",
+      "valid": true,
+      "table_count": 289,
+      "errors": 0,
+      "warnings": 0,
+      "matrix_holds_excluded": [
+        "0x0D8D6",
+        "0x0DAB6"
+      ],
+      "hold_basis": "WO70031 structural matrix HOLD_STRUCTURAL_CONFLICT; 32-byte nested extent overlap. Preview-only derived catalogue marked both geometry_conflict=true."
+    }
+  },
+  "artifact_files": [
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_audit_tsv.tsv",
+      "size_bytes": 38060,
+      "sha256": "70086cd454654c171b360ab90f4a4e776e68b6976a849c016f1cad88b8b642e2"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_catalogue_matrix_holds.json.gz",
+      "size_bytes": 422056,
+      "sha256": "6edf8449a897745b7296da0e1b784495f725868e4000b526cb5d57d8a76feb63"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_catalogue_raw.json.gz",
+      "size_bytes": 421448,
+      "sha256": "9b923d56357712d6454506707a32ffe9d628e825d17f8ceaa7843886fb9705cb"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_preview_provenance.json.gz",
+      "size_bytes": 6347,
+      "sha256": "0e0da43d34f2e567a8fb3e603d0ba49aefc9f2133d51901e142ea361318a224d"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_preview_unresolved.json.gz",
+      "size_bytes": 184693,
+      "sha256": "f8ea5bd48e1880fde4c9aceaede92e23d276129daaddd9881811414edd1bb7b5"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_preview_validation.json.gz",
+      "size_bytes": 244,
+      "sha256": "ff7f858dc86d5b4ba4a7a17eb8f8785c7f827f09b38940d082ddb8d62a6b0aef"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_preview_xml.xml",
+      "size_bytes": 154902,
+      "sha256": "05d760790b5055c053197338ea88e4912a37a79342bad50123e7548cf5bcdbfd"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_reconciliation_json.json.gz",
+      "size_bytes": 54195,
+      "sha256": "98aa5d68f550f13c2719c1208bc2140be10006fd226d50ee441618e588dce71a"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_ref_queries_json.json.gz",
+      "size_bytes": 474,
+      "sha256": "d521850f3950edd1ec6b3a4e2f4409f29ba8fc78d3ffa9dc57da4730022fe94a"
+    },
+    {
+      "path": "EVIDENCE/WO65324_2026-11-27_scan_json.json.gz",
+      "size_bytes": 7965,
+      "sha256": "e0c06e0e097cb119e8af4b3eeb3a2fc9b965cc93fe05fb2381af31da7890eca3"
+    }
+  ],
+  "limitations": [
+    "Runtime was 3.12.14, not historical 3.11.2; project readiness audit recommends 3.10+ and run completed.",
+    "Preview is a candidate, not canonical XML or vehicle validation.",
+    "No new Findings interpretation; disposition NOT REQUIRED."
+  ]
+}
