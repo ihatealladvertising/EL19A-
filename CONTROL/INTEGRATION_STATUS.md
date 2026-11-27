@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
@@ -164,3 +164,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Integrator:** ChatGPT — user-requested SH705x workbench integration-plan update (2026-11-26)
 **Purpose:** Record existing scanner export capabilities, bounded static-index reuse, calibration-definition reconciliation, diagnostic/variant evidence adapters and regression-first integration order. No implementation/source-code, ROM, LST, A2L, XML, workbook, Findings or worker-queue changes are authorized.
 **Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; serialize plan/document publication.
+
+
+**Lock released:** 2026-11-26 — Workbench integration-plan update published and read back. Updated `CONTROL/SH705X_ROM_TOOL_PLAN.md` to v0.2; added `CONTROL/SH705X_WORKBENCH_INTEGRATION_PLAN.md`; clarified `CONTROL/PROJECT_DIRECTION_2026-11-26.md` with the existing scanner-export capability and WO70006 boundary. Verified the new plan records scanner export reuse, static-index adapter constraints, definition-source conflicts, diagnostic/variant provider boundaries and regression-first sequence. Live work-order register and all worker FIFO assignments were unchanged. No source code, tests, workflow, ROM/LST/A2L, XML, workbook, Findings or catalogue artifacts were modified.
