@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — user-requested read-only workbench batch over EVIDENCE/rr roms (2026-11-27)
 **Purpose:** Add a temporary GitHub Actions workflow to run the existing read-only Nissan SH705x workbench against supported ROM files in EVIDENCE/rr roms, inventory all folder entries, index the contained RomRaider XML definitions, capture hashes/logs/artifacts, then remove the temporary workflow and verify cleanup. No ROM, XML definition, A2L, calibration, workbook, catalogue, tool source, or existing test/workflow content is to be modified.
@@ -216,3 +216,13 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **2026-11-27 batch readback:** Evidence intake EVIDENCE/WORKBENCH_CENSUS_2026-11-27.md (blob 9c20a7492626d2b24ed975891b1f74409d8d3c74); WO70026 (67c00714b0555a7840ade60b2ddbdfafbd2123bc); WO70027 (2f3260e37f984c823ea4a02cd7b7237b0b865f50); WO70028 (6ffe723f07beaf219f2fcef47d3f42aefa096a33); WO70029 (a0b7631e0f2e560b889fb48ddfa6488e0983759e); active register (35b93a9a78d09b931b5e2d5edfaabff419708aa7). All six paths read back from remote main. Queue depths: Worker 1 = 1; Worker 2 = 3; Worker 3 = 2. Findings index remains FND-000026 / REC-000027; no semantic promotion pending independent reproduction.
+
+
+**Integrator:** ChatGPT — RR ROMs read-only workbench batch (2026-11-27)
+**Purpose:** Scan the 161 entries in `EVIDENCE/rr roms`, inventory unsupported/duplicate inputs, and build a combined ROM/RomRaider XML reference index using the existing workbench. The temporary workflow was used only for execution and was removed after the run.
+**Lock acquired:** 2026-11-27 — prior state UNLOCKED; no ROM, XML definition, A2L, calibration, workbook, catalogue, Findings or tool-source writes authorized.
+**Run:** GitHub Actions `46022573374` — SUCCESS; commit `0590f0cf9cb4222474456db111c9fe2665f59a32`; Python 3.11.18. 134 unique ROM containers scanned successfully; 2 exact duplicate containers skipped; 25 unsupported-extension entries recorded; zero scan failures. 130 distinct decoded ROM SHA-256 groups; 126 CPU/FID-identified ROMs; 32,757 call sites / 29,540 resolved; 23,480 aggregate table instances. Reference index: 134 ROM records + 7 XML sources, 505 XML address keys, 3,425 exact payload hash/length keys, 123 code-region hash keys; exit code 0.
+**Artifact:** `rr-roms-workbench-batch`, ID `15208363827`, size 24,496,815 bytes, SHA-256 `74eb21c751fdd55463ce4bde70d02e745c07f686c343f1cc2a391280a12e7544`; artifact retention through 2026-12-11.
+**Durable report:** `EVIDENCE/RR_ROMS_WORKBENCH_BATCH_2026-11-27.md` — blob `a990e913e869c7cc12d4d1e3b1814412e02d6cf6`; commit `46b714665b28a2683433fc33b2f191c5ff97b564`.
+**Temporary workflow cleanup:** `.github/workflows/rr-roms-workbench.yml` removed; absence verified by remote readback (404); deletion commit `b1d8266c3ea91b6f767d1370f96487c6a9ab6246`.
+**Lock released:** 2026-11-27 — execution successful, artifact downloaded and hashed, durable report read back, temporary workflow removed. No ROM, S19, BIN, ZIP, XML definition, A2L, calibration, workbook, catalogue, scope matrix, Findings, tool source, test or existing workflow was modified.
