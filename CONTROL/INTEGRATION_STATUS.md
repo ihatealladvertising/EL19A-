@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — rerun RR ROM workbench batch after user added extracted BIN images (2026-11-27)
+**Purpose:** Re-run the existing read-only workbench across the refreshed `EVIDENCE/rr roms` folder, now 177 entries, including the 16 new BIN images corresponding to the previously unsupported RAR/7z archive submissions; rebuild the corpus reference index and record comparison to prior batch. Use a temporary Actions runner and remove it after results are read back. No source/tool/calibration files may be changed except the temporary workflow and additive batch report.
+**Lock acquired:** 2026-11-27 — prior state UNLOCKED; live folder inventory refreshed.
 
 **Integrator:** ChatGPT — user-requested read-only workbench batch over EVIDENCE/rr roms (2026-11-27)
 **Purpose:** Add a temporary GitHub Actions workflow to run the existing read-only Nissan SH705x workbench against supported ROM files in EVIDENCE/rr roms, inventory all folder entries, index the contained RomRaider XML definitions, capture hashes/logs/artifacts, then remove the temporary workflow and verify cleanup. No ROM, XML definition, A2L, calibration, workbook, catalogue, tool source, or existing test/workflow content is to be modified.
