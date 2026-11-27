@@ -1,0 +1,558 @@
+name: Temporary V6 legacy 306-address reconciliation validated
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/v6-legacy-306-reconcile-validated.yml"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout current workbench and evidence inputs
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          sparse-checkout: |
+            tools
+            EVIDENCE/side project
+            EVIDENCE/VERSA f501.bin
+          sparse-checkout-cone-mode: false
+
+      - name: Checkout historical per-call scanner revision
+        uses: actions/checkout@v4
+        with:
+          ref: 1f302841b3ec5add5b3beb0644211b1375084c3d
+          path: historical-scanner
+          sparse-checkout: tools/sh7058_cross_rom_scanner.py
+          sparse-checkout-cone-mode: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Download successful current workbench evidence bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: v6-first-class-donor
+          run-id: 46028977924
+          github-token: ${{ github.token }}
+          path: current-output
+
+      - name: Reconcile historical 306 candidates and rebuild expanded index
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/reconcile_v6_306.py <<'PY'
+          import csv, hashlib, importlib.util, json, sys
+          from collections import defaultdict
+          from pathlib import Path
+
+          ROOT = Path(".")
+          sys.path.insert(0, str((ROOT / "tools").resolve()))
+          OUT = Path("reconciled-output")
+          OUT.mkdir(parents=True, exist_ok=True)
+          V6 = Path("EVIDENCE/side project/64810223F121200000.hex")
+          EL = Path("EVIDENCE/VERSA f501.bin")
+          CURRENT = Path("current-output")
+          LEGACY_SCANNER_PATH = Path("historical-scanner/tools/sh7058_cross_rom_scanner.py")
+          LEGACY_COMMIT = "1f302841b3ec5add5b3beb0644211b1375084c3d"
+          PAIRING_STATUS = "PROVISIONAL_UNVERIFIED"
+          PAIRING_BASIS = "Candidate file association only; independent V6 HEX-to-A2L pairing remains unverified under WO65212."
+
+          def sha256_bytes(b):
+              return hashlib.sha256(b).hexdigest()
+
+          def sha256_file(p):
+              h = hashlib.sha256()
+              with Path(p).open("rb") as f:
+                  for block in iter(lambda: f.read(1024 * 1024), b""):
+                      h.update(block)
+              return h.hexdigest()
+
+          def write_json(path, obj):
+              Path(path).write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+          def geom_key(v):
+              return (v.get("element_type"), v.get("dim1"), v.get("dim2"), v.get("byte_length"))
+
+          def payload_key(v):
+              return (v.get("payload_sha256"), v.get("byte_length"))
+
+          def signature(address, v):
+              return (
+                  address, v.get("helper_kind"), v.get("element_type"), v.get("dim1"),
+                  v.get("dim2"), v.get("byte_length"), v.get("payload_sha256"),
+              )
+
+          def diff_ranges(a, b):
+              changed = [i for i, (x, y) in enumerate(zip(a, b)) if x != y]
+              if not changed:
+                  return []
+              out = []
+              start = prev = changed[0]
+              for x in changed[1:]:
+                  if x != prev + 1:
+                      out.append({"start_offset": start, "end_offset_inclusive": prev, "changed_bytes": prev - start + 1})
+                      start = x
+                  prev = x
+              out.append({"start_offset": start, "end_offset_inclusive": prev, "changed_bytes": prev - start + 1})
+              return out
+
+          # Load the exact current workbench outputs produced from the same pinned ROM bytes.
+          v6_current = json.loads((CURRENT / "scans/v6.catalogue.json").read_text(encoding="utf-8"))
+          el_cat = json.loads((CURRENT / "scans/el19a.catalogue.json").read_text(encoding="utf-8"))
+          current_index = json.loads((CURRENT / "sh705x_reference_index_151_roms_plus_v6_a2l.json").read_text(encoding="utf-8"))
+          current_scan_doc = json.loads((CURRENT / "v6.per_call.json").read_text(encoding="utf-8"))["scans"][0]
+          if sha256_file(V6) != current_scan_doc["input"]["container_sha256"]:
+              raise RuntimeError("Pinned V6 container differs from the successful current-workbench run")
+
+          import nissan_sh705x_workbench as wb
+          from sh705x_discovery_v2 import to_per_address_catalogue
+          from romraider_ref_index import match_target_against_index
+
+          # Execute the historical scanner revision against the same *decoded* V6 bytes.
+          spec = importlib.util.spec_from_file_location("legacy_scanner", LEGACY_SCANNER_PATH)
+          legacy = importlib.util.module_from_spec(spec)
+          sys.modules["legacy_scanner"] = legacy
+          spec.loader.exec_module(legacy)
+          v6_rom = wb.load_any_rom(V6)
+          el_rom = wb.load_any_rom(EL)
+          legacy_helpers = legacy.discover_helpers(v6_rom)
+          legacy_calls = legacy.extract_calls(v6_rom, legacy_helpers)
+          legacy_scan = legacy.build_scan_export(str(V6), v6_rom, legacy_helpers, legacy_calls)
+          legacy_cat = to_per_address_catalogue(legacy_scan)
+          legacy_cat["manifest"]["historical_scanner_commit"] = LEGACY_COMMIT
+          legacy_cat["manifest"]["evidence_role"] = "donor_to_EL19A"
+          for c in legacy_cat.get("candidates", []):
+              c["evidence_class"] = "donor"
+              c["is_target_proof"] = False
+              c["discovery_method"] = "historical_scanner_revision"
+              c["historical_scanner_commit"] = LEGACY_COMMIT
+
+          legacy.write_machine_exports(
+              OUT / "v6_legacy_306.per_call.json",
+              OUT / "v6_legacy_306.per_call_tsv",
+              [legacy_scan],
+          )
+          write_json(OUT / "v6_legacy_306.catalogue.json", legacy_cat)
+
+          # Preserve address-indexed candidate rows as TSV as well as lossless JSON.
+          def write_candidates_tsv(path, candidates):
+              with Path(path).open("w", encoding="utf-8", newline="") as f:
+                  w = csv.writer(f, delimiter="\t", lineterminator="\n")
+                  w.writerow([
+                      "base_hex", "candidate_status", "call_pcs", "helper_addresses", "helper_kinds",
+                      "geometry_variants", "axis1_variants", "axis2_variants", "axis_links", "spans",
+                      "resolution_statuses", "discovery_method",
+                  ])
+                  for c in candidates:
+                      w.writerow([
+                          c.get("base_hex"), c.get("candidate_status", ""),
+                          json.dumps(c.get("call_pcs", []), sort_keys=True),
+                          json.dumps(c.get("helper_addresses", []), sort_keys=True),
+                          json.dumps(c.get("helper_kinds", []), sort_keys=True),
+                          json.dumps(c.get("geometry_variants", []), sort_keys=True),
+                          json.dumps(c.get("axis1_variants", []), sort_keys=True),
+                          json.dumps(c.get("axis2_variants", []), sort_keys=True),
+                          json.dumps(c.get("axis_links", []), sort_keys=True),
+                          json.dumps(c.get("spans", []), sort_keys=True),
+                          json.dumps(c.get("resolution_statuses", []), sort_keys=True),
+                          c.get("discovery_method", ""),
+                      ])
+
+          write_candidates_tsv(OUT / "v6_legacy_306.per_address.tsv", legacy_cat["candidates"])
+
+          # Compare exact call-PC and table-base sets between the historical scanner and strict current scanner.
+          legacy_calls_by_pc = {c["call_pc"]: c for c in legacy_scan.get("calls", [])}
+          current_calls_by_pc = {c["call_pc"]: c for c in current_scan_doc.get("calls", [])}
+          legacy_call_pcs = set(legacy_calls_by_pc)
+          current_call_pcs = set(current_calls_by_pc)
+          legacy_by_addr = {c["base"]: c for c in legacy_cat.get("candidates", [])}
+          current_by_addr = {c["base"]: c for c in v6_current.get("candidates", [])}
+          legacy_addrs = set(legacy_by_addr)
+          current_addrs = set(current_by_addr)
+          legacy_only_calls = [legacy_calls_by_pc[x] for x in sorted(legacy_call_pcs - current_call_pcs)]
+          current_only_calls = [current_calls_by_pc[x] for x in sorted(current_call_pcs - legacy_call_pcs)]
+          legacy_only_addrs = sorted(legacy_addrs - current_addrs)
+          current_only_addrs = sorted(current_addrs - legacy_addrs)
+          common_addrs = sorted(legacy_addrs & current_addrs)
+          reconcile = {
+              "schema": "v6-legacy-current-candidate-reconciliation-v1",
+              "rom_container_sha256": sha256_file(V6),
+              "decoded_rom_sha256": sha256_bytes(v6_rom),
+              "historical_scanner": {
+                  "commit": LEGACY_COMMIT,
+                  "source_sha256": legacy_scan["tool"]["source_sha256"],
+                  "helper_count": len(legacy_helpers),
+                  "call_count": len(legacy_scan["calls"]),
+                  "resolved_call_count": sum(1 for c in legacy_scan["calls"] if c.get("table") is not None),
+                  "table_count": len(legacy_cat.get("candidates", [])),
+              },
+              "strict_current_scanner": {
+                  "source_sha256": current_scan_doc["tool"]["source_sha256"],
+                  "helper_count": len(current_scan_doc["helpers"]),
+                  "call_count": len(current_scan_doc["calls"]),
+                  "resolved_call_count": current_scan_doc["summary"]["resolved_call_count"],
+                  "table_count": len(v6_current.get("candidates", [])),
+              },
+              "call_set_reconciliation": {
+                  "historical_only_call_count": len(legacy_only_calls),
+                  "current_only_call_count": len(current_only_calls),
+                  "historical_only_calls": legacy_only_calls,
+                  "current_only_calls": current_only_calls,
+              },
+              "table_set_reconciliation": {
+                  "historical_candidate_count": len(legacy_addrs),
+                  "strict_current_candidate_count": len(current_addrs),
+                  "common_address_count": len(common_addrs),
+                  "historical_only_address_count": len(legacy_only_addrs),
+                  "strict_current_only_address_count": len(current_only_addrs),
+                  "historical_only_addresses": [f"0x{x:05X}" for x in legacy_only_addrs],
+                  "strict_current_only_addresses": [f"0x{x:05X}" for x in current_only_addrs],
+              },
+              "interpretation": "Historical 306-address set is preserved separately; current strict 302-address set remains separately visible. Legacy-only candidates are provisional donor leads and are not promoted to current strict resolution.",
+          }
+          write_json(OUT / "v6_candidate_reconciliation.json", reconcile)
+
+          # Combine both geometries per address without losing which scanner revision supplied them.
+          current_by_hex = {c["base_hex"]: c for c in v6_current.get("candidates", [])}
+          legacy_by_hex = {c["base_hex"]: c for c in legacy_cat.get("candidates", [])}
+          all_hex = sorted(set(current_by_hex) | set(legacy_by_hex), key=lambda x: int(x, 16))
+          combined_candidates = []
+          for addr_hex in all_hex:
+              cc = current_by_hex.get(addr_hex)
+              lc = legacy_by_hex.get(addr_hex)
+              if cc and lc:
+                  status = "CURRENT_AND_HISTORICAL"
+              elif lc:
+                  status = "HISTORICAL_ONLY_NOT_REEMITTED_BY_STRICT_CURRENT_SCANNER"
+              else:
+                  status = "STRICT_CURRENT_ONLY_NOT_IN_HISTORICAL_306"
+              variant_registry = {}
+              for version, candidate in (("strict_current", cc), ("historical_306", lc)):
+                  if not candidate:
+                      continue
+                  for gv in candidate.get("geometry_variants", []):
+                      sig = tuple(gv.get(k) for k in (
+                          "helper_kind", "element_type", "dim1", "dim2", "byte_length", "payload_sha256"
+                      ))
+                      if sig not in variant_registry:
+                          g = dict(gv)
+                          g["discovery_versions"] = []
+                          g["candidate_status"] = status
+                          variant_registry[sig] = g
+                      variant_registry[sig]["discovery_versions"].append(version)
+              geom_rows = []
+              for sig, g in sorted(variant_registry.items(), key=lambda item: str(item[0])):
+                  g["discovery_versions"] = sorted(set(g["discovery_versions"]))
+                  geom_rows.append(g)
+              base = dict(lc or cc)
+              base["candidate_status"] = status
+              base["evidence_class"] = "donor"
+              base["is_target_proof"] = False
+              base["strict_current_present"] = bool(cc)
+              base["historical_306_present"] = bool(lc)
+              base["strict_current_geometry_variants"] = (cc or {}).get("geometry_variants", [])
+              base["historical_306_geometry_variants"] = (lc or {}).get("geometry_variants", [])
+              base["geometry_variants"] = geom_rows
+              base["discovery_provenance"] = (["strict_current"] if cc else []) + (["historical_306"] if lc else [])
+              base["a2l_pairing_status"] = PAIRING_STATUS
+              combined_candidates.append(base)
+
+          # Extend the ROM payload lookup with any historical geometry/payload variant not already indexed.
+          donor_rom_id = next(
+              r["rom_id"] for r in current_index["sources"]["donor_roms"]
+              if r.get("path", "").endswith("64810223F121200000.hex")
+          )
+          donor_summary = next(r for r in current_index["sources"]["donor_roms"] if r["rom_id"] == donor_rom_id)
+          existing_v6_payload_sigs = set()
+          for payload_index_key, rows in current_index["lookups"]["payload_index"].items():
+              payload_sha = payload_index_key.split(":", 1)[0]
+              for row in rows:
+                  if row.get("rom_id") == donor_rom_id:
+                      existing_v6_payload_sigs.add((
+                          row.get("address"), row.get("helper_kind"), row.get("element_type"),
+                          row.get("dim1"), row.get("dim2"), row.get("byte_length"), payload_sha,
+                      ))
+          added_legacy_payload_variants = []
+          for c in legacy_cat.get("candidates", []):
+              for gv in c.get("geometry_variants", []):
+                  sig = signature(c["base"], gv)
+                  if sig in existing_v6_payload_sigs:
+                      continue
+                  if not gv.get("payload_sha256") or not gv.get("byte_length"):
+                      continue
+                  calls_at = [
+                      x for x in legacy_scan.get("calls", [])
+                      if x.get("table") == c["base"]
+                      and x.get("kind") == gv.get("helper_kind")
+                      and x.get("elem_type") == gv.get("element_type")
+                      and x.get("dim1") == gv.get("dim1")
+                      and x.get("dim2") == gv.get("dim2")
+                  ]
+                  helper_addr = calls_at[0]["helper"] if calls_at else (c.get("helper_addresses") or [None])[0]
+                  entry = {
+                      "rom_id": donor_rom_id,
+                      "source_path": str(V6),
+                      "decoded_rom_sha256": sha256_bytes(v6_rom),
+                      "address": c["base"],
+                      "address_hex": c["base_hex"],
+                      "helper": helper_addr,
+                      "helper_kind": gv.get("helper_kind"),
+                      "element_type": gv.get("element_type"),
+                      "dim1": gv.get("dim1"),
+                      "dim2": gv.get("dim2"),
+                      "byte_length": gv.get("byte_length"),
+                      "payload_sha256": gv.get("payload_sha256"),
+                      "distinct_byte_values": gv.get("distinct_byte_values"),
+                      "discovery_version": "historical_scanner@" + LEGACY_COMMIT,
+                      "candidate_status": "LEGACY_HISTORICAL_DONOR_CANDIDATE",
+                      "evidence_class": "donor",
+                      "is_target_proof": False,
+                      "a2l_pairing_status": PAIRING_STATUS,
+                  }
+                  k = f'{entry["payload_sha256"]}:{entry["byte_length"]}'
+                  current_index["lookups"]["payload_index"].setdefault(k, []).append(entry)
+                  existing_v6_payload_sigs.add(sig)
+                  added_legacy_payload_variants.append(entry)
+          for rows in current_index["lookups"]["payload_index"].values():
+              rows.sort(key=lambda x: (x.get("source_path", ""), x.get("address", -1), x.get("discovery_version", "")))
+
+          current_index.setdefault("rom_candidate_catalogues", [])
+          current_index["rom_candidate_catalogues"] = [
+              x for x in current_index["rom_candidate_catalogues"]
+              if x.get("rom_id") != donor_rom_id
+          ]
+          current_index["rom_candidate_catalogues"].append({
+              "rom_id": donor_rom_id,
+              "source_path": str(V6),
+              "container_sha256": sha256_file(V6),
+              "decoded_rom_sha256": sha256_bytes(v6_rom),
+              "processor_profile": "SH7058",
+              "evidence_role": "donor_to_EL19A",
+              "candidate_count": len(combined_candidates),
+              "strict_current_candidate_count": len(current_addrs),
+              "historical_candidate_count": len(legacy_addrs),
+              "historical_scanner_commit": LEGACY_COMMIT,
+              "a2l_pairing_status": PAIRING_STATUS,
+              "a2l_pairing_basis": PAIRING_BASIS,
+              "candidates": combined_candidates,
+          })
+          donor_summary.update({
+              "table_count": len(combined_candidates),
+              "strict_current_table_count": len(current_addrs),
+              "historical_306_table_count": len(legacy_addrs),
+              "legacy_only_candidate_count": len(legacy_only_addrs),
+              "strict_current_only_candidate_count": len(current_only_addrs),
+              "candidate_reconciliation_status": "HISTORICAL_306_SET_PRESERVED_WITH_STRICT_CURRENT_CROSSWALK",
+              "historical_scanner_commit": LEGACY_COMMIT,
+              "a2l_pairing_status": PAIRING_STATUS,
+          })
+          current_index["v6_candidate_reconciliation"] = reconcile
+
+          # Rerun target donor comparison with the union candidate catalogue (306 historical candidates + any strict-only addresses).
+          v6_by_payload = defaultdict(list)
+          v6_by_geometry = defaultdict(list)
+          for c in combined_candidates:
+              for gv in c.get("geometry_variants", []):
+                  item = {
+                      "address": c["base"], "address_hex": c["base_hex"],
+                      "candidate_status": c["candidate_status"],
+                      "discovery_provenance": gv.get("discovery_versions", []),
+                      "helper_kinds": c.get("helper_kinds", []),
+                      "variant": gv,
+                  }
+                  pk = payload_key(gv)
+                  if pk[0] and pk[1]:
+                      v6_by_payload[pk].append(item)
+                  gk = geom_key(gv)
+                  if all(x is not None for x in gk):
+                      v6_by_geometry[gk].append(item)
+
+          exact_pairs, geometry_diff_pairs = [], []
+          for ec in el_cat.get("candidates", []):
+              for eg in ec.get("geometry_variants", []):
+                  pk = payload_key(eg)
+                  for d in v6_by_payload.get(pk, []) if pk[0] and pk[1] else []:
+                      exact_pairs.append({
+                          "el19a_address": ec["base_hex"], "v6_address": d["address_hex"],
+                          "payload_sha256": pk[0], "byte_length": pk[1],
+                          "same_geometry": geom_key(eg) == geom_key(d["variant"]),
+                          "v6_candidate_status": d["candidate_status"],
+                          "v6_discovery_provenance": d["variant"].get("discovery_versions", []),
+                          "el19a_geometry": eg, "v6_geometry": d["variant"],
+                      })
+                  gk = geom_key(eg)
+                  if all(x is not None for x in gk):
+                      for d in v6_by_geometry.get(gk, []):
+                          dv = d["variant"]
+                          if payload_key(eg) == payload_key(dv):
+                              continue
+                          n = eg["byte_length"]
+                          ea = ec["base"]
+                          da = d["address"]
+                          eb = el_rom[ea:ea+n]
+                          db = v6_rom[da:da+n]
+                          if len(eb) != n or len(db) != n:
+                              continue
+                          ranges = diff_ranges(eb, db)
+                          geometry_diff_pairs.append({
+                              "el19a_address": ec["base_hex"], "v6_address": d["address_hex"],
+                              "geometry": {"element_type": gk[0], "dim1": gk[1], "dim2": gk[2], "byte_length": gk[3]},
+                              "el19a_payload_sha256": eg.get("payload_sha256"),
+                              "v6_payload_sha256": dv.get("payload_sha256"),
+                              "changed_bytes": sum(x["changed_bytes"] for x in ranges),
+                              "difference_ranges": ranges,
+                              "v6_candidate_status": d["candidate_status"],
+                              "v6_discovery_provenance": d["variant"].get("discovery_versions", []),
+                          })
+          exact_pairs.sort(key=lambda x: (x["el19a_address"], x["v6_address"], x["payload_sha256"]))
+          geometry_diff_pairs.sort(key=lambda x: (x["el19a_address"], x["v6_address"]))
+          payload_comparison = {
+              "schema": "el19a-v6-donor-comparison-v2",
+              "target_rom": {
+                  "path": str(EL), "decoded_rom_sha256": el_cat["manifest"]["input"]["decoded_rom_sha256"],
+                  "candidate_count": len(el_cat.get("candidates", [])),
+              },
+              "v6_donor": {
+                  "path": str(V6), "rom_id": donor_rom_id, "decoded_rom_sha256": sha256_bytes(v6_rom),
+                  "historical_candidate_count": len(legacy_addrs),
+                  "strict_current_candidate_count": len(current_addrs),
+                  "union_candidate_count": len(combined_candidates),
+                  "a2l_pairing_status": PAIRING_STATUS,
+              },
+              "exact_payload_match_pair_count": len(exact_pairs),
+              "el19a_candidates_with_exact_v6_payload": len({x["el19a_address"] for x in exact_pairs}),
+              "unique_v6_candidates_with_exact_payload": len({x["v6_address"] for x in exact_pairs}),
+              "exact_payload_pairs": exact_pairs,
+              "same_geometry_differing_payload_pair_count": len(geometry_diff_pairs),
+              "el19a_candidates_with_same_geometry_differences": len({x["el19a_address"] for x in geometry_diff_pairs}),
+              "unique_v6_candidates_with_same_geometry_differences": len({x["v6_address"] for x in geometry_diff_pairs}),
+              "same_geometry_differing_payload_pairs": geometry_diff_pairs,
+              "geometry_definition": "same element_type, dim1, dim2 and byte_length; helper-kind differences are retained as metadata",
+              "evidence_boundary": "All V6 payload and A2L associations are donor-side structural leads only; no EL19A semantic or calibration identity is proven.",
+          }
+          write_json(OUT / "el19a_v6_payload_comparison_306.json", payload_comparison)
+
+          with (OUT / "el19a_v6_payload_comparison_306.tsv").open("w", encoding="utf-8", newline="") as f:
+              w = csv.writer(f, delimiter="\t", lineterminator="\n")
+              w.writerow(["comparison_class", "el19a_address", "v6_address", "byte_length", "geometry", "el19a_payload_sha256", "v6_payload_sha256", "changed_bytes", "difference_ranges", "same_geometry", "v6_candidate_status", "v6_discovery_provenance"])
+              for x in exact_pairs:
+                  w.writerow(["exact_payload", x["el19a_address"], x["v6_address"], x["byte_length"], json.dumps(x["el19a_geometry"], sort_keys=True), x["payload_sha256"], x["payload_sha256"], 0, "[]", x["same_geometry"], x["v6_candidate_status"], json.dumps(x["v6_discovery_provenance"])])
+              for x in geometry_diff_pairs:
+                  w.writerow(["same_geometry_different_payload", x["el19a_address"], x["v6_address"], x["geometry"]["byte_length"], json.dumps(x["geometry"], sort_keys=True), x["el19a_payload_sha256"], x["v6_payload_sha256"], x["changed_bytes"], json.dumps(x["difference_ranges"], sort_keys=True), True, x["v6_candidate_status"], json.dumps(x["v6_discovery_provenance"])])
+
+          # Rerun canonical matcher against the enlarged index and export V6-only provisional hits.
+          from romraider_ref_index import match_target_against_index
+          cross = match_target_against_index(el_cat, current_index, target_rom=el_rom)
+          v6_hits = {}
+          for addr, item in cross.get("candidates", {}).items():
+              payload_hits = [h for h in item.get("payload_hits", []) if h.get("rom_id") == donor_rom_id]
+              for h in payload_hits:
+                  if h.get("discovery_version"):
+                      h["candidate_status"] = h.get("candidate_status", "LEGACY_HISTORICAL_DONOR_CANDIDATE")
+                  h["a2l_pairing_status"] = PAIRING_STATUS
+                  h["is_target_proof"] = False
+              a2l_hits = []
+              for h in item.get("a2l_same_address_hits", []):
+                  h = dict(h)
+                  h["a2l_pairing_status"] = PAIRING_STATUS
+                  h["a2l_pairing_basis"] = PAIRING_BASIS
+                  h["is_target_proof"] = False
+                  a2l_hits.append(h)
+              if payload_hits or a2l_hits:
+                  v6_hits[addr] = {
+                      "candidate_id": item["candidate_id"], "address": item["address"], "address_hex": addr,
+                      "v6_payload_hits": payload_hits,
+                      "v6_a2l_same_address_associations": a2l_hits,
+                      "a2l_pairing_status": PAIRING_STATUS,
+                      "evidence_class": "donor", "is_target_proof": False,
+                  }
+          cross_out = {
+              "schema": "el19a-v6-provisional-donor-crossref-v2",
+              "target_rom_sha256": cross.get("target_rom_sha256"),
+              "target_fid": cross.get("target_fid"),
+              "v6_rom_id": donor_rom_id,
+              "a2l_pairing_status": PAIRING_STATUS,
+              "a2l_pairing_basis": PAIRING_BASIS,
+              "matching_el19a_candidate_count": len(v6_hits),
+              "candidates": v6_hits,
+              "evidence_boundary": "Payload matches and A2L same-address associations are provisional donor evidence only.",
+          }
+          write_json(OUT / "el19a_v6_provisional_crossref_306.json", cross_out)
+
+          # Update the expanded index with exact candidate counts and verify pairing status everywhere.
+          index_path = OUT / "sh705x_reference_index_151_roms_v6_306_candidates_plus_a2l.json"
+          write_json(index_path, current_index)
+          check = json.loads(index_path.read_text(encoding="utf-8"))
+          v6_record = next(x for x in check["rom_candidate_catalogues"] if x["rom_id"] == donor_rom_id)
+          assert v6_record["candidate_count"] == len(combined_candidates)
+          assert v6_record["historical_candidate_count"] == len(legacy_addrs)
+          assert v6_record["a2l_pairing_status"] == PAIRING_STATUS
+          assert all(c["evidence_class"] == "donor" and not c["is_target_proof"] for c in v6_record["candidates"])
+          assert any(a.get("status") == PAIRING_STATUS and a.get("rom_id") == donor_rom_id for a in check.get("pairing_associations", []))
+
+          summary = {
+              "schema": "v6-legacy-306-reconciliation-run-v1",
+              "status": "COMPLETE",
+              "legacy_scan": reconcile["historical_scanner"],
+              "current_scan": reconcile["strict_current_scanner"],
+              "call_set_reconciliation": {
+                  "historical_only_call_count": len(legacy_only_calls),
+                  "current_only_call_count": len(current_only_calls),
+                  "historical_only_call_pcs": [f"0x{x:05X}" for x in sorted(legacy_call_pcs-current_call_pcs)],
+                  "current_only_call_pcs": [f"0x{x:05X}" for x in sorted(current_call_pcs-legacy_call_pcs)],
+              },
+              "candidate_set_reconciliation": {
+                  "historical_candidates": len(legacy_addrs),
+                  "strict_current_candidates": len(current_addrs),
+                  "union_candidates": len(combined_candidates),
+                  "historical_only_count": len(legacy_only_addrs),
+                  "strict_current_only_count": len(current_only_addrs),
+                  "historical_only_addresses": [f"0x{x:05X}" for x in legacy_only_addrs],
+                  "strict_current_only_addresses": [f"0x{x:05X}" for x in current_only_addrs],
+              },
+              "expanded_reference_index": {
+                  "path": str(index_path),
+                  "sha256": sha256_file(index_path),
+                  "rom_count": len(check["sources"]["donor_roms"]),
+                  "a2l_count": len(check["sources"]["a2l_files"]),
+                  "v6_candidate_count": v6_record["candidate_count"],
+                  "v6_strict_current_count": v6_record["strict_current_candidate_count"],
+                  "v6_historical_count": v6_record["historical_candidate_count"],
+                  "v6_legacy_payload_variant_additions": len(added_legacy_payload_variants),
+                  "a2l_pairing_status": PAIRING_STATUS,
+                  "payload_index_keys": len(check["lookups"]["payload_index"]),
+              },
+              "el19a_comparison": {
+                  "exact_payload_match_pairs": len(exact_pairs),
+                  "el19a_addresses_with_exact_payload_match": len({x["el19a_address"] for x in exact_pairs}),
+                  "same_geometry_differing_payload_pairs": len(geometry_diff_pairs),
+                  "el19a_addresses_with_same_geometry_differences": len({x["el19a_address"] for x in geometry_diff_pairs}),
+                  "v6_crossref_target_candidate_count": len(v6_hits),
+              },
+              "historical_scanner_commit": LEGACY_COMMIT,
+              "a2l_pairing_status": PAIRING_STATUS,
+              "output_paths": sorted(str(p) for p in OUT.rglob("*") if p.is_file()),
+          }
+          write_json(OUT / "summary.json", summary)
+          print(json.dumps(summary, indent=2, sort_keys=True))
+          PY
+          python /tmp/reconcile_v6_306.py
+
+      - name: Upload reconciled V6 donor index and comparison
+        uses: actions/upload-artifact@v4
+        with:
+          name: v6-first-class-donor-reconciled
+          path: reconciled-output/
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 14
