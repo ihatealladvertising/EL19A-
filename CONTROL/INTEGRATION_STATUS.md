@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** LOCKED
+**State:** UNLOCKED
 
 **Integrator:** ChatGPT — register WO70024 allocation and closeout-recovery QA (2026-11-26)
 **Purpose:** Add one read-only Worker 1 audit task for the locally committed WO70018 deliverables. WO70018 remains open until its report and TSV are safely published and read back. No local Git history reconciliation, WO70018 lifecycle change, calibration or tool-source changes are authorized in this batch.
@@ -192,3 +192,6 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 **Lock acquired:** 2026-11-26 — fresh gate/register read; Worker 1 current assignment idle; WO70020 closed; WO70023 report path absent.
 
 **Lock released:** 2026-11-26 — WO70023 report and Worker 1 queue/readback verified; Worker 2 and Worker 3 FIFO entries unchanged; no source code, tests or calibration/evidence artifacts modified.
+
+
+**Lock released:** 2026-11-26 — WO70024 specification and Worker 1 READY assignment read back from remote main. WO70018 remains open in Worker 2 FIFO pending safe publication of its local report and TSV; no Worker 2 lifecycle change was made.
