@@ -1,6 +1,8 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Current lock:** ChatGPT — project-wide artifact-first worker completion protocol correction (2026-11-26). Scope: update `CONTROL/WORKER_PROTOCOL.md` only; no work-order lifecycle, queue, worker assignment, technical evidence, Findings, calibration, or tool-source changes. Workers may continue technical work; shared-main publication is paused until protocol readback and gate release.
 
 **Integrator:** ChatGPT — register WO70024 allocation and closeout-recovery QA (2026-11-26)
 **Purpose:** Add one read-only Worker 1 audit task for the locally committed WO70018 deliverables. WO70018 remains open until its report and TSV are safely published and read back. No local Git history reconciliation, WO70018 lifecycle change, calibration or tool-source changes are authorized in this batch.
