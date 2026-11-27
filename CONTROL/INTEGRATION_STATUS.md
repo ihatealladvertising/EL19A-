@@ -1,6 +1,6 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — user-requested SH705x ROM tool plan and WO70020–WO70022 registration
 **Purpose:** Publish the modular ROM-tool charter and three bounded architecture work orders. No implementation, ROM, LST, calibration XML, workbook, Findings or existing worker artifacts are authorized in this batch.
@@ -167,3 +167,8 @@ No work-order lifecycle, lane ownership/FIFO, Findings, XML, scope matrix, calib
 
 
 **Lock released:** 2026-11-26 — Workbench integration-plan update published and read back. Updated `CONTROL/SH705X_ROM_TOOL_PLAN.md` to v0.2; added `CONTROL/SH705X_WORKBENCH_INTEGRATION_PLAN.md`; clarified `CONTROL/PROJECT_DIRECTION_2026-11-26.md` with the existing scanner-export capability and WO70006 boundary. Verified the new plan records scanner export reuse, static-index adapter constraints, definition-source conflicts, diagnostic/variant provider boundaries and regression-first sequence. Live work-order register and all worker FIFO assignments were unchanged. No source code, tests, workflow, ROM/LST/A2L, XML, workbook, Findings or catalogue artifacts were modified.
+
+
+**Integrator:** ChatGPT — user-directed SH705x tool-first programme approval (2026-11-26)
+**Purpose:** Update the SH705x charter, workbench integration plan and project direction to make the read-only modular ROM toolkit the primary deliverable and EL19A RomRaider definition completion its first generated validation output. Preserve all current worker assignments and queue order.
+**Lock acquired:** 2026-11-26 — verified prior state UNLOCKED; user explicitly authorized moving from planning to implementation planning and bounded read-only tool creation after architecture reconciliation.
