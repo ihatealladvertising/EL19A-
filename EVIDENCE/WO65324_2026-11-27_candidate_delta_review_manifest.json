@@ -1,0 +1,35 @@
+{
+  "schema": "wo65324-candidate-delta-review-v1",
+  "date": "2026-11-27",
+  "scope": "Read-only proposed XML candidate set derived from the live WO70031 structural matrix and the reconciled strict preview; not an XML edit or canonical replacement.",
+  "inputs": {
+    "target_rom_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "structural_matrix_sha256": "08bd85b6161efb3fecaef9ec9a0e4fdaf4522977190ad5017d9b1e9750b5d594",
+    "preview_xml_sha256": "05d760790b5055c053197338ea88e4912a37a79342bad50123e7548cf5bcdbfd",
+    "preview_reconciliation_sha256": "da25b406313bea87fb3728f150fdac89f89c3961df285bf86d586a0b2be4dac1",
+    "release1_xml_sha256": "56728e0023251e77786eac1916df5c4ca526d90851690fe195b55cb86f410acb"
+  },
+  "summary": {
+    "r1_xml_absent_structurally_ready_candidates": 114,
+    "target_primary_absent_from_xml_scope_catalogue_and_candidate_register": 111,
+    "target_backed_candidates_already_represented_in_nonxml_sources": 3,
+    "additional_matrix_hold_omitted_from_delta": 1,
+    "hold_addresses": [
+      "0xDAB6"
+    ],
+    "items_proposed_for_review_only": 114
+  },
+  "rules": [
+    "Every row is target-backed in the WO70031 matrix and passed the current preview storage-type and element-count reconciliation.",
+    "Target-primary rows use generic RAW/PROVISIONAL labels, raw scaling, and sample-index axes where applicable; unresolved physical meaning is not inferred.",
+    "Rows already in scope/catalogue/register are marked as already tracked, not as newly discovered.",
+    "WO70031 HOLD rows are excluded from the delta; no source-only definition rows are added.",
+    "Donor pair counts remain cross-reference context only.",
+    "No canonical XML modification is authorized by this ledger."
+  ],
+  "output": {
+    "path": "EVIDENCE/WO65324_2026-11-27_candidate_delta_review.tsv",
+    "data_rows": 114,
+    "sha256": "dbbfd78219327b31ca320795d04de259a99774979d6a48d2e94c871ea521c396"
+  }
+}
