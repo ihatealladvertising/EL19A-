@@ -233,8 +233,17 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf current-output reconciled-output
           git add EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27
           git commit -m "Add V6 first-class donor index and scan evidence"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          git status --short
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git rebase --abort >/dev/null 2>&1 || true
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+          done
+          echo "Could not publish evidence after three fast-forward retries" >&2
+          exit 1
