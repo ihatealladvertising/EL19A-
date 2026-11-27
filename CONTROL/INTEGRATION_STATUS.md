@@ -1,6 +1,10 @@
 # Repository Integration Status
 
-**State:** UNLOCKED
+**State:** LOCKED
+
+**Integrator:** ChatGPT — permanent structural-inclusion threshold update and WO70031 allocation (2026-11-27)
+**Purpose:** Publish the user-approved permanent relaxation of full EL19A reader-mechanics/downstream-consumer tracing as a prerequisite for raw/provisional table inclusion; align WORKER_PROTOCOL, project direction and active WO65324; create a bounded Worker 1 reconciliation using the already-published EL19A/V6 151-ROM exports. No ROM, A2L, calibration XML, workbook, catalogue, scope matrix, scanner/tool source or existing Findings content is to be changed in this policy/allocation batch.
+**Lock acquired:** 2026-11-27 — latest main gate verified UNLOCKED; active register, WO65324 and absence of WO70031 checked.
 
 **Integrator:** ChatGPT — first-class V6 donor rescan, index merge and EL19A comparison (2026-11-27)
 **Purpose:** Reuse and SHA-verify the prior 150-ROM reference-index artifact; rescan only `EVIDENCE/side project/64810223F121200000.hex` and EL19A with the current workbench; export full call/helper/table JSON and TSV plus lossless per-address catalogues and manifests; reconcile the V6 306-table historical baseline; add V6 ROM payload and candidate A2L symbol associations to the reference index with explicit `PROVISIONAL_UNVERIFIED` pairing status; rerun exact-payload and same-geometry-difference comparisons. Temporary Actions workflow only. No tool source/tests, ROM, S19, HEX, A2L, XML definition, workbook, calibration catalogue, scope matrix, Findings or worker queue edits.
