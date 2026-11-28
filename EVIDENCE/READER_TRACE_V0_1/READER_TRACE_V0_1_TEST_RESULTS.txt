@@ -1,48 +1,47 @@
-Reader Trace v0.1 and existing-indexer integration regression
+Reader Trace v0.1 geometry and existing-indexer integration regression
+
+Golden graph fixtures:
+  - EL19A 0x0F10E: 16-point UBYTE vector; 23 nodes / 24 edges / 5 unresolved boundaries.
+  - EL19A 0x10F8A: 32-point UWORD value curve with explicit axis 0x0F712; 15 nodes / 16 edges / 3 unresolved boundaries.
+  - EL19A 0x0AFF2: 4x4 UBYTE map with explicit axes 0x0E5CC and 0x0E5C8; 21 nodes / 22 edges / 5 unresolved boundaries.
 
 Targeted Reader Trace tests:
-  - test_reader_trace_graph.py: 16 graph-contract tests
-  - test_reader_trace_indexer_adapter.py: 14 adapter tests
-  - test_reader_trace_static_flow.py: 4 existing static-flow tests
-  Total targeted Reader Trace tests: 34
+  - test_reader_trace_graph.py: 20 graph-contract and geometry-fixture tests.
+  - test_reader_trace_indexer_adapter.py: 14 adapter tests.
+  - test_reader_trace_static_flow.py: 4 existing static-flow tests.
+  Total targeted Reader Trace tests: 38.
 
-Full regression command:
-  python3 -m unittest -v
-    tools/test_sh7058_cross_rom_scanner.py
-    tools/test_nissan_sh705x_workbench.py
-    tools/test_sh705x_discovery_v2.py
-    tools/test_romraider_ref_index.py
-    tools/test_romraider_xml_export.py
-    tools/test_nissan_rom_family_index.py
-    tools/test_reader_trace_graph.py
-    tools/test_reader_trace_indexer_adapter.py
-    tools/test_reader_trace_static_flow.py
-    tools/test_rom_access_indexer.py
-
-GitHub Actions run:
-  46108247051
-  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108247051
-
-Result:
-  101 tests passed; 2 optional production-regression checks skipped.
+Full regression:
+  GitHub Actions run: 46108553256
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108553256
+  Result: 105 tests passed; 2 optional production-regression checks skipped.
   Compile step passed.
-  Synthetic test step passed.
+  Synthetic regression step passed.
 
-Adapter-specific coverage:
+Adapter coverage:
   - Native 11-field rom_access_indexer valid_hits tuples and named mappings
   - Byte-concordant ROM read edges
   - Derived query-register provenance
-  - Taint-proven result store vs heuristic near-call store
-  - Downstream RAM read site without unsupported value-causality
-  - Multi-reader aggregate summaries do not fan out query/result attribution
+  - Taint-proven result stores distinguished from heuristic near-call stores
+  - Downstream RAM read sites represented without unsupported value-causality
+  - Aggregate multi-reader summaries do not fan out query/result attribution
   - Positive PC-concordance counters and explicit evidence references
   - Deterministic/idempotent graph enrichment
 
-Static-flow test coverage:
-  - Query load and delay-slot argument copy
+Static-flow coverage:
+  - Query RAM load and delay-slot argument copy
   - UBYTE query extension/transform
-  - Helper call clobber with preserved high register destination
-  - Tainted lookup return to RAM store and separate downstream RAM reader
+  - Helper-call clobber behavior with preserved high-register destination
+  - Tainted lookup return to RAM store and separately indexed downstream RAM reader
+
+Geometry coverage:
+  - 1D UBYTE lookup and implicit-grid endpoint-warning preservation
+  - 32-point explicit UWORD axis/value pair with query, helper, result and consumer boundary
+  - 4x4 UBYTE map with distinct axis1/axis2 payloads and one unsigned byte query used for both searches
+  - All graph edges retain report/direct/derived/heuristic/unresolved basis explicitly
+
+Evidence boundary:
+  The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. The 224/240 endpoint wording conflict for 0x0F10E remains unresolved. Physical meanings and donor semantics remain unpromoted.
 
 Limit:
-  The tests validate the graph contract, evidence grading, adapter integration and documented behavior of the existing SH-2 static trackers. They do not constitute a generalized instruction-level semantic reader tracer, a whole-ROM CFG, or proof of physical calibration meaning. The 0x0F10E fixture remains report-sourced until Worker 1 independently audits the exact target listing and resolves (or preserves) the endpoint/provenance discrepancies.
+  The implementation is a graph contract plus an adapter to existing SH-2 static indexes. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
