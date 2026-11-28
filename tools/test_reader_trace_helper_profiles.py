@@ -121,6 +121,21 @@ class HelperProfileTests(unittest.TestCase):
         with self.assertRaises(HelperProfileError):
             attach_helper_profile(graph)
 
+    def test_pinned_listing_sha_must_match_cited_listing_evidence(self):
+        graph = load_graph("EL19A_F501_0AFF2_2AXIS.reader_trace.json")
+        listing = next(ev for ev in graph["evidence"] if ev["evidence_id"] == "ev:lst-stage16")
+        listing["source_hash"] = "0" * 64
+        with self.assertRaises(HelperProfileError):
+            attach_helper_profile(graph)
+
+    def test_pinned_listing_evidence_must_use_sha256(self):
+        graph = load_graph("EL19A_F501_0AFF2_2AXIS.reader_trace.json")
+        listing = next(ev for ev in graph["evidence"] if ev["evidence_id"] == "ev:lst-stage16")
+        listing["hash_algorithm"] = "git_blob_sha1"
+        listing["source_hash"] = "a" * 40
+        with self.assertRaises(HelperProfileError):
+            attach_helper_profile(graph)
+
     def test_profile_inventory_has_only_exact_pinned_keys(self):
         keys = list_profile_keys()
         self.assertEqual(len(keys), 4)
