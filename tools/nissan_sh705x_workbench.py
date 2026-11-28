@@ -1430,6 +1430,33 @@ def cmd_ref_index(args):
         print(json.dumps(res, indent=2, sort_keys=True))
 
 
+
+def cmd_rom_index(args):
+    """Build/query the relational Nissan master-ROM and structural-family index."""
+    from nissan_rom_family_index import main as rom_index_main
+    argv = [args.action]
+    if args.action == "build":
+        for flag, value in (
+            ("--rom-id-crosswalk", args.rom_id_crosswalk),
+            ("--vehicle-catalog", args.vehicle_catalog),
+            ("--ecu-fid-catalog", args.ecu_fid_catalog),
+            ("--scan-inventory", args.scan_inventory),
+            ("--catalogue-dir", args.catalogue_dir),
+            ("--dat-scan-index", args.dat_scan_index),
+            ("--base-table-objects", args.base_table_objects),
+            ("--reference-index", args.reference_index),
+            ("--out-dir", args.out_dir),
+        ):
+            if value:
+                argv.extend((flag, value))
+    else:
+        for flag, value in (("--index", args.index), ("--rom-code", args.rom_code),
+                            ("--fid", args.fid), ("--sha256", args.sha256)):
+            if value:
+                argv.extend((flag, value))
+    return rom_index_main(argv)
+
+
 def cmd_export_xml(args):
     rom_bytes = load_any_rom(Path(args.rom)) if args.rom else None
     if args.catalogue:
@@ -1564,6 +1591,26 @@ def main():
     p_ref.add_argument("--addr", help="Target hex address to query")
     p_ref.add_argument("--ecuid", help="Target ECU ID to query")
     p_ref.set_defaults(func=cmd_ref_index)
+
+    p_rom_index = sub.add_parser(
+        "rom-index",
+        help="Build or query the relational Nissan master-ROM, binary-identity and structural-family index",
+    )
+    p_rom_index.add_argument("action", choices=["build", "query"])
+    p_rom_index.add_argument("--rom-id-crosswalk", default="EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv")
+    p_rom_index.add_argument("--vehicle-catalog", default="EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv")
+    p_rom_index.add_argument("--ecu-fid-catalog", default="EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv")
+    p_rom_index.add_argument("--scan-inventory")
+    p_rom_index.add_argument("--catalogue-dir")
+    p_rom_index.add_argument("--dat-scan-index", default="EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv")
+    p_rom_index.add_argument("--base-table-objects", default="EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz")
+    p_rom_index.add_argument("--reference-index")
+    p_rom_index.add_argument("--out-dir", default="EVIDENCE/NISSAN_ROM_FAMILY_INDEX")
+    p_rom_index.add_argument("--index")
+    p_rom_index.add_argument("--rom-code")
+    p_rom_index.add_argument("--fid")
+    p_rom_index.add_argument("--sha256")
+    p_rom_index.set_defaults(func=cmd_rom_index)
 
     p_exp = sub.add_parser("export-xml", help="Resolve evidence and export preview-first RomRaider XML bundle")
     p_exp.add_argument("--rom", help="Target ROM path (.bin/.zip/.s19/.hex/.dat)")
