@@ -131,3 +131,23 @@ The Intel HEX at `EVIDENCE/side project/64810223F121200000.hex` is now indexed a
 - **Evidence bundle**: `EVIDENCE/V6_FIRST_CLASS_DONOR_2026-11-27/` contains the full merged compressed index, historical and current per-call exports, per-address catalogues, reconciliation, EL19A comparison matrices, provisional cross-reference, README and SHA-256 manifest.
 
 All V6 matches remain donor-side structural evidence. Do not transfer names, units, scaling or calibration semantics to EL19A without target-side reader and consumer evidence.
+
+
+## Nissan master-ROM and structural-family index
+
+The workbench exposes a relational ROM-reference index. It keeps four identities separate: UpRev catalogue ROM code, Nissan binary FID/ECUID, decoded-image SHA-256, and an inferred structural-family candidate.
+
+Build an index from existing scanner outputs:
+
+```powershell
+python tools/nissan_sh705x_workbench.py rom-index build --rom-id-crosswalk EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv --vehicle-catalog EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv --ecu-fid-catalog EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv --scan-inventory EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/scan_inventory.tsv --catalogue-dir EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/scans --dat-scan-index EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv --base-table-objects EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz --reference-index EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/rr_roms_reference_index.json --out-dir EVIDENCE/NISSAN_ROM_FAMILY_INDEX
+```
+
+Query a ROM code, binary FID or decoded image hash:
+
+```powershell
+python tools/nissan_sh705x_workbench.py rom-index query --index EVIDENCE/NISSAN_ROM_FAMILY_INDEX/nissan_rom_family_index.json --rom-code CD008
+python tools/nissan_sh705x_workbench.py rom-index query --index EVIDENCE/NISSAN_ROM_FAMILY_INDEX/nissan_rom_family_index.json --fid 2XHK19BDF1
+```
+
+For a fresh corpus scan followed by index generation, use `python tools/run_nissan_rom_family_index.py`. That orchestration uses the current workbench scan path, rebuilds the existing ROM/RomRaider reference index, and joins the current folder scan with the 431-DAT detailed scan index and 434-layout base-table set. See `tools/nissan_rom_family_index.md` for output schemas and relationship/evidence policy.
