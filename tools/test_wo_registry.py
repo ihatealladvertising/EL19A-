@@ -223,6 +223,39 @@ class TestWoRegistry(unittest.TestCase):
             self.assertEqual(once, twice)
             self.assertIn("## Legacy Section\nKeep me.", twice)
 
+    def test_migration_cutoff_grandfathers_only_existing_unstructured_work_orders(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            cdir = pathlib.Path(tmp) / "CONTROL"
+            cdir.mkdir()
+            pins = wr.load_pins(write_sample_pins(cdir))
+            pins["legacy_cutoff_id"] = 70038
+
+            historical = cdir / "WO70038.md"
+            historical.write_text(
+                "# WO70038 — Historical report\\n\\n"
+                "**Status:** CLOSED\\n**Priority:** P1\\n**Owner:** legacy-owner\\n",
+                encoding="utf-8",
+            )
+            new_unstructured = cdir / "WO70039.md"
+            new_unstructured.write_text(
+                "# WO70039 — New report missing metadata\\n\\n"
+                "**Status:** CLOSED\\n**Priority:** P1\\n**Owner:** new-owner\\n",
+                encoding="utf-8",
+            )
+
+            errs = wr.validate_repo(cdir, pins)
+            self.assertFalse(any("WO70038.md" in e for e in errs), msg="Existing baseline WO should remain legacy")
+            self.assertTrue(
+                any("WO70039.md: missing required" in e for e in errs),
+                msg=f"New unstructured WO must fail strict validation: {errs}",
+            )
+
+            forced = wr.validate_repo(cdir, pins, changed_files=["WO70038.md"])
+            self.assertTrue(
+                any("WO70038.md: missing required" in e for e in forced),
+                msg="Editing a grandfathered legacy WO must force v4 metadata validation",
+            )
+
     def test_real_repository_wos_parse_and_validate_cleanly(self) -> None:
         real_control = wr.DEFAULT_CONTROL_DIR
         real_pins = wr.load_pins(wr.DEFAULT_PINS_PATH)
