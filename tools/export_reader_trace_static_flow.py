@@ -142,7 +142,8 @@ def run_export(
                 f"expected exactly one Stage-16 CODE record at 0x{REQUIRED_CALL_PC:X}; found {len(call_rows)}"
             )
         call_pc, call_bytes, assembly, comment, function, label = call_rows[0]
-        if call_bytes != REQUIRED_CALL_BYTES or assembly.strip() != "jsr @r2":
+        normalized_assembly = " ".join(assembly.split())
+        if call_bytes != REQUIRED_CALL_BYTES or normalized_assembly != "jsr @r2":
             raise ProductionExportError(
                 f"call-site instruction mismatch at 0x{call_pc:X}: {call_bytes.hex()} {assembly!r}"
             )
