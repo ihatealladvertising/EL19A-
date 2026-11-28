@@ -90,6 +90,8 @@ def main(argv=None) -> int:
     ap.add_argument('--ecu-fid-catalog', default='EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv')
     ap.add_argument('--dat-scan-index', default='EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv')
     ap.add_argument('--base-table-objects', default='EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz')
+    ap.add_argument('--mass-scan-results', default='EVIDENCE/mass dat scan/scan_results.tsv')
+    ap.add_argument('--mass-file-inventory', default='EVIDENCE/mass dat scan/file_inventory.tsv')
     ap.add_argument('--reference-index', default=None)
     args = ap.parse_args(argv)
     out = Path(args.out_dir)
@@ -102,7 +104,7 @@ def main(argv=None) -> int:
         xml_inputs = sorted((str(p) for p in Path(args.scan_dir).rglob('*.xml')))
         reference_index = str(out / 'workbench' / 'rr_roms_reference_index.json')
         wb.cmd_ref_index(argparse.Namespace(action='build', out=reference_index, a2l=[], tsv=[], xml=xml_inputs, rom=[str(p) for p in unique_roms]))
-    ns = argparse.Namespace(rom_id_crosswalk=args.rom_id_crosswalk, vehicle_catalog=args.vehicle_catalog, ecu_fid_catalog=args.ecu_fid_catalog, scan_inventory=str(inventory), catalogue_dir=str(out / 'workbench' / 'scans'), dat_scan_index=args.dat_scan_index, base_table_objects=args.base_table_objects, reference_index=reference_index, out_dir=str(out))
+    ns = argparse.Namespace(rom_id_crosswalk=args.rom_id_crosswalk, vehicle_catalog=args.vehicle_catalog, ecu_fid_catalog=args.ecu_fid_catalog, scan_inventory=str(inventory), catalogue_dir=str(out / 'workbench' / 'scans'), dat_scan_index=args.dat_scan_index, base_table_objects=args.base_table_objects, mass_scan_results=args.mass_scan_results, mass_file_inventory=args.mass_file_inventory, reference_index=reference_index, out_dir=str(out))
     summary = family.build_index(ns)
     scan_counts = {}
     with inventory.open('r', encoding='utf-8', newline='') as stream:
@@ -110,7 +112,7 @@ def main(argv=None) -> int:
             scan_counts[row['status']] = scan_counts.get(row['status'], 0) + 1
     tool_paths = {'workbench': Path(wb.__file__), 'family_index': Path(family.__file__), 'scanner': Path(wb.__file__).with_name('sh7058_cross_rom_scanner.py'), 'loader': Path(wb.__file__).with_name('sh705x_rom_loader.py'), 'romraider_ref_index': Path(wb.__file__).with_name('romraider_ref_index.py'), 'runner': Path(__file__)}
     tool_hashes = {name: {'path': str(path), 'sha256': sha256_file(path), 'bytes': path.stat().st_size} for name, path in tool_paths.items() if path.exists()}
-    input_paths = [Path(args.rom_id_crosswalk), Path(args.vehicle_catalog), Path(args.ecu_fid_catalog), Path(args.dat_scan_index), Path(args.base_table_objects)]
+    input_paths = [Path(args.rom_id_crosswalk), Path(args.vehicle_catalog), Path(args.ecu_fid_catalog), Path(args.dat_scan_index), Path(args.base_table_objects), Path(args.mass_scan_results), Path(args.mass_file_inventory)]
     if reference_index:
         input_paths.append(Path(reference_index))
     input_hashes = {str(path): {'sha256': sha256_file(path), 'bytes': path.stat().st_size} for path in input_paths if path.exists()}
