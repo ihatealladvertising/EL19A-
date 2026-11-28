@@ -2,7 +2,7 @@ Reader Trace v0.1 geometry and existing-indexer integration regression
 
 Golden graph fixtures:
   - EL19A 0x0F10E: 16-point UBYTE vector; 23 nodes / 24 edges / 5 unresolved boundaries.
-  - EL19A 0x10F8A: 32-point UWORD value curve with explicit axis 0x0F712; 15 nodes / 16 edges / 3 unresolved boundaries.
+  - EL19A 0x10F8A: 32-point UWORD value curve with explicit axis 0x0F712; 17 nodes / 16 edges / 3 unresolved boundaries.
   - EL19A 0x0AFF2: 4x4 UBYTE map with explicit axes 0x0E5CC and 0x0E5C8; 21 nodes / 22 edges / 5 unresolved boundaries.
 
 Targeted Reader Trace tests:
@@ -35,13 +35,14 @@ Static-flow coverage:
   - Tainted lookup return to RAM store and separately indexed downstream RAM reader
 
 Geometry coverage:
-  - 1D UBYTE lookup and implicit-grid endpoint-warning preservation
-  - 32-point explicit UWORD axis/value pair with query, helper, result and consumer boundary
-  - 4x4 UBYTE map with distinct axis1/axis2 payloads and one unsigned byte query used for both searches
-  - All graph edges retain report/direct/derived/heuristic/unresolved basis explicitly
+  - 1D UBYTE implicit-uniform lookup; q >= 0xF0 terminal path retained with the 224/240 wording conflict unresolved.
+  - 32-point explicit UWORD axis/value curve, query construction, helper chain, result staging and conditional post-call normalization.
+  - 4x4 UBYTE map with distinct, strictly increasing 4-point axis vectors and one unsigned UBYTE query used for both axis searches.
+  - 0x0AFF2 instruction/result path distinguishes R0-to-R2 delay-slot transfer, first multiplication consumer, UWORD product sink FFFF115A and separate inline element staging FFFF14E4.
+  - All graph edges retain evidence basis explicitly; report-derived edges are not represented as fresh instruction observations.
 
 Evidence boundary:
-  The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. The 224/240 endpoint wording conflict for 0x0F10E remains unresolved. Physical meanings and donor semantics remain unpromoted.
+  The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. Physical meanings and donor semantics remain unpromoted.
 
 Limit:
   The implementation is a graph contract plus an adapter to existing SH-2 static indexes. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
