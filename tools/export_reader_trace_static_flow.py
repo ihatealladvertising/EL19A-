@@ -61,7 +61,7 @@ def _hash_file(path: pathlib.Path, algorithm: str) -> str:
 
 
 def _git_blob_sha1(payload: bytes) -> str:
-    header = f"blob {len(payload)}\\0".encode("ascii")
+    header = b"blob " + str(len(payload)).encode("ascii") + bytes([0])
     return hashlib.sha1(header + payload).hexdigest()
 
 
