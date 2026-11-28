@@ -58,6 +58,25 @@ def _split_semicolon(value: Any) -> List[str]:
     return [part.strip() for part in value.split(";") if part.strip() and part.strip() != "-"]
 
 
+_INDEXER_HIT_FIELDS = (
+    "target", "space", "pc", "function", "access", "width",
+    "form", "base", "base_resolved", "mask", "note",
+)
+
+
+def _normalize_hit_row(row: Any) -> Dict[str, Any]:
+    """Accept either a named row or the exact 11-field tuple returned by run_indexer."""
+    if isinstance(row, Mapping):
+        return dict(row)
+    if isinstance(row, Sequence) and not isinstance(row, (str, bytes, bytearray)):
+        if len(row) != len(_INDEXER_HIT_FIELDS):
+            raise AdapterError(
+                f"indexer hit tuple must have {len(_INDEXER_HIT_FIELDS)} fields, got {len(row)}"
+            )
+        return dict(zip(_INDEXER_HIT_FIELDS, row))
+    raise AdapterError("each hit row must be a mapping or an 11-field run_indexer tuple")
+
+
 def _target_node_id(graph: Mapping[str, Any], target_ea: int) -> str:
     for node in graph.get("nodes", []):
         address = node.get("address")
@@ -72,7 +91,7 @@ def _target_node_id(graph: Mapping[str, Any], target_ea: int) -> str:
 
 def merge_indexed_reader_evidence(
     graph: Mapping[str, Any],
-    hit_rows: Sequence[Mapping[str, Any]],
+    hit_rows: Sequence[Any],
     catalogue_summary: Mapping[str, Any],
     *,
     indexer_evidence_ref: str,
@@ -93,8 +112,8 @@ def merge_indexed_reader_evidence(
     if (
         not isinstance(concordance_matched, int)
         or not isinstance(concordance_checked, int)
-        or concordance_checked < 0
-        or concordance_matched < 0
+        or concordance_checked <= 0
+        or concordance_matched <= 0
         or concordance_matched > concordance_checked
     ):
         raise AdapterError("invalid concordance counters")
@@ -120,9 +139,8 @@ def merge_indexed_reader_evidence(
         raise AdapterError("analysis_extensions must be a list when present")
 
     matched_hits = []
-    for row in hit_rows:
-        if not isinstance(row, Mapping):
-            raise AdapterError("each hit row must be a mapping")
+    for raw_row in hit_rows:
+        row = _normalize_hit_row(raw_row)
         try:
             row_ea = _parse_hex(str(row.get("target", "")), "hit.target")
         except AdapterError:
@@ -210,7 +228,8 @@ def merge_indexed_reader_evidence(
             "relation": f"query_value_loaded_into_R{reg}", "basis": "derived", "confidence": "medium",
             "evidence_refs": [static_index_evidence_ref],
         })
-        for site_id in reader_node_ids:
+        if len(reader_node_ids) == 1:
+            site_id = reader_node_ids[0]
             _edge(out, {
                 "edge_id": f"indexer-query-arg-{target_ea:08X}-{site_id}-r{reg}-{ram[4:]}",
                 "from_node": reg_id, "to_node": site_id,
@@ -246,14 +265,22 @@ def merge_indexed_reader_evidence(
             "evidence_refs": [static_index_evidence_ref],
             "properties": {"operation": "write", "destination": ea, "taint_class": kind},
         })
-        _edge(out, {
-            "edge_id": f"indexer-result-write-{target_ea:08X}-{pc:08X}",
-            "from_node": reader_node_ids[0], "to_node": ram_id,
-            "relation": "tainted_lookup_result_written_to_RAM" if kind == "taint" else "near_call_RAM_write_candidate",
-            "basis": "derived" if kind == "taint" else "heuristic",
-            "confidence": "medium" if kind == "taint" else "low",
-            "evidence_refs": [static_index_evidence_ref],
-        })
+        if len(reader_node_ids) == 1:
+            _edge(out, {
+                "edge_id": f"indexer-result-write-{target_ea:08X}-{pc:08X}",
+                "from_node": reader_node_ids[0], "to_node": ram_id,
+                "relation": "tainted_lookup_result_written_to_RAM" if kind == "taint" else "near_call_RAM_write_candidate",
+                "basis": "derived" if kind == "taint" else "heuristic",
+                "confidence": "medium" if kind == "taint" else "low",
+                "evidence_refs": [static_index_evidence_ref],
+            })
+        else:
+            _boundary(out, {
+                "boundary_id": f"aggregate-result-attribution-{target_ea:08X}-{pc:08X}",
+                "at_node": site_id,
+                "reason": "The per-address summary aggregates multiple reader call sites, so this destination cannot be attributed to one specific call from the available row.",
+                "required_evidence": "Per-call lookup-result provenance linking a specific helper call to this RAM write.",
+            })
         _edge(out, {
             "edge_id": f"indexer-store-site-{target_ea:08X}-{pc:08X}",
             "from_node": site_id, "to_node": ram_id,
