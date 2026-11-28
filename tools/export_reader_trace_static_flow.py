@@ -65,7 +65,7 @@ def _git_blob_sha1(payload: bytes) -> str:
     return hashlib.sha1(header + payload).hexdigest()
 
 
-def _target_catalogue_rows(catalogue_path: pathlib.Path) -> List[Dict[str, str]]:
+def _target_catalogue_rows(catalogue_path: pathlib.Path) -> tuple[List[Dict[str, str]], bool]:
     rows: List[Dict[str, str]] = []
     with catalogue_path.open("r", newline="", encoding="utf-8") as stream:
         for row in csv.DictReader(stream):
@@ -78,9 +78,13 @@ def _target_catalogue_rows(catalogue_path: pathlib.Path) -> List[Dict[str, str]]
                 continue
             if value == TARGET_EA:
                 rows.append(row)
-    if not rows:
-        raise ProductionExportError(f"catalogue contains no address row for 0x{TARGET_EA:X}")
-    return rows
+    if rows:
+        return rows, True
+
+    # The golden graph/WO identifies this target, but the current broad
+    # discovery catalogue does not contain it. Seed only the address required
+    # by full_rom_analysis; do not fabricate geometry or semantic metadata.
+    return [{"address": f"0x{TARGET_EA:X}"}], False
 
 
 def _write_json(path: pathlib.Path, document: Dict[str, Any]) -> str:
@@ -148,7 +152,7 @@ def run_export(
                 f"call-site instruction mismatch at 0x{call_pc:X}: {call_bytes.hex()} {assembly!r}"
             )
 
-        catalogue_rows = _target_catalogue_rows(catalogue_path)
+        catalogue_rows, catalogue_target_row_present = _target_catalogue_rows(catalogue_path)
         _, _, _, cat_calls = build_static_indices.full_rom_analysis(
             code_lines, rom, catalogue_rows, set()
         )
@@ -212,6 +216,12 @@ def run_export(
             "git_blob_sha1_expected": catalogue_blob_sha1,
             "sha256": catalogue_sha256,
             "target_rows_used": len(catalogue_rows),
+            "target_catalogue_row_present": catalogue_target_row_present,
+            "tracker_seed": (
+                "existing_catalogue_row"
+                if catalogue_target_row_present
+                else "explicit_address_only_seed_from_WO70043; no geometry or semantic metadata fabricated"
+            ),
         },
         "static_tracker": {
             "module": "tools/build_static_indices.py",
