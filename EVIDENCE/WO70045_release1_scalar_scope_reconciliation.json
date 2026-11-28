@@ -1,0 +1,50 @@
+{
+  "work_order": "WO70045",
+  "generated_utc": "2026-11-28",
+  "sources": {
+    "scope_matrix": {
+      "path": "CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv",
+      "git_blob_sha": "52fe30fdd760d3a13885007fe9391dead425ec21"
+    },
+    "alignment_tsv": {
+      "path": "EVIDENCE/EL19A_scalar_alignment_v2.tsv",
+      "git_blob_sha": "41c65a926ef05f36052e0b4bfe87cbf1962e0fd3"
+    },
+    "release1_xml": {
+      "path": "CALIBRATIONS/EL19A_release1_conservative.xml",
+      "git_blob_sha": "4bab8bced09047c461520c6044415ca5357b0110"
+    }
+  },
+  "counts": {
+    "scope_rows": 261,
+    "unique_scope_addresses": 254,
+    "alignment_rows": 2680,
+    "unique_alignment_addresses": 2515,
+    "xml_storageaddress_objects": 399,
+    "scope_rows_by_alignment_tier": {
+      "NO_ALIGNMENT_ROW": 249,
+      "TIER_C": 5,
+      "TIER_A": 7
+    },
+    "intersections": 12,
+    "intersection_tiers": {
+      "TIER_C": 5,
+      "TIER_A": 7
+    },
+    "actual_xml_present_rows": 261,
+    "include_rows": 254,
+    "include_rows_missing_xml": 0,
+    "xml_rows_not_included": 7
+  },
+  "supplemental": [],
+  "specific_dispositions": {
+    "0x0924E": "WO65324 says binary enable factor; not established as mDDPAPO. Matrix row not in scalar alignment TSV; inspect actual XML entry separately in supplemental output.",
+    "0x08550": "Generic UBYTE hysteresis threshold; coolant identity unresolved. Donor mDSHCUT name/scaling must not be treated as target fact.",
+    "0x0848A/0x0848B": "WO66032 owns the correction and Findings migration; this audit records their alignment tier only and does not re-decide object identity/D-N semantics."
+  },
+  "limitations": [
+    "Scanner-width and XML-fragment row-level matches were not recomputed because WO70032's pinned 2680-row audit output is available, but its JSON/TSV files were not fetched into this execution; global counts retained from WO70032 report.",
+    "The XML parser inventories every table tag with storageaddress; exact count/uniqueness should be checked against WO70015's 254-object baseline.",
+    "Donor symbol and conversion fields are alignment hypotheses, not target-side calibration semantics."
+  ]
+}
