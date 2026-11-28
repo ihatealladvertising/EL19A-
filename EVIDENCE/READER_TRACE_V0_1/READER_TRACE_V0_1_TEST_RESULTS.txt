@@ -1,30 +1,48 @@
-Reader Trace v0.1 synthetic regression
+Reader Trace v0.1 and existing-indexer integration regression
 
-Commands:
-  python -m unittest -v test_reader_trace_graph.py test_reader_trace_indexer_adapter.py
+Targeted Reader Trace tests:
+  - test_reader_trace_graph.py: 16 graph-contract tests
+  - test_reader_trace_indexer_adapter.py: 14 adapter tests
+  - test_reader_trace_static_flow.py: 4 existing static-flow tests
+  Total targeted Reader Trace tests: 34
 
-Environment:
-  Local Python 3.13; standard library only.
+Full regression command:
+  python3 -m unittest -v
+    tools/test_sh7058_cross_rom_scanner.py
+    tools/test_nissan_sh705x_workbench.py
+    tools/test_sh705x_discovery_v2.py
+    tools/test_romraider_ref_index.py
+    tools/test_romraider_xml_export.py
+    tools/test_nissan_rom_family_index.py
+    tools/test_reader_trace_graph.py
+    tools/test_reader_trace_indexer_adapter.py
+    tools/test_reader_trace_static_flow.py
+    tools/test_rom_access_indexer.py
+
+GitHub Actions run:
+  46108247051
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108247051
 
 Result:
-  27 tests passed (16 graph-contract tests + 11 existing-indexer adapter tests).
+  101 tests passed; 2 optional production-regression checks skipped.
+  Compile step passed.
+  Synthetic test step passed.
 
-Coverage:
-  - Golden fixture structure and graph topology
-  - Node/edge references and asserted-edge evidence
-  - Unique node/evidence identifiers
-  - Explicit source hash algorithms and digest lengths
-  - Object extent arithmetic and payload hash
-  - Required call and semantic-disposition fields
-  - Reported-vs-direct evidence-basis separation
-  - Unresolved boundaries and physical-identity stop
-  - Implicit-grid endpoint conflict warning
-  - Deterministic serialization and atomic writer
-  - Existing byte-concordant indexer hits mapped to direct ROM-read edges
-  - Existing static-index query provenance mapped as derived evidence
-  - Taint-proven result destinations distinguished from heuristic near-call writes
-  - Downstream RAM read sites represented without unsupported value-causality claims
-  - Deterministic, idempotent graph enrichment
+Adapter-specific coverage:
+  - Native 11-field rom_access_indexer valid_hits tuples and named mappings
+  - Byte-concordant ROM read edges
+  - Derived query-register provenance
+  - Taint-proven result store vs heuristic near-call store
+  - Downstream RAM read site without unsupported value-causality
+  - Multi-reader aggregate summaries do not fan out query/result attribution
+  - Positive PC-concordance counters and explicit evidence references
+  - Deterministic/idempotent graph enrichment
+
+Static-flow test coverage:
+  - Query load and delay-slot argument copy
+  - UBYTE query extension/transform
+  - Helper call clobber with preserved high register destination
+  - Tainted lookup return to RAM store and separate downstream RAM reader
 
 Limit:
-  Tests validate graph structure, provenance references and adapter grading. They do not decode or execute SH-2 instructions or establish the physical meaning of any calibration object.
+  The tests validate the graph contract, evidence grading, adapter integration and documented behavior of the existing SH-2 static trackers. They do not constitute a generalized instruction-level semantic reader tracer, a whole-ROM CFG, or proof of physical calibration meaning. The 0x0F10E fixture remains report-sourced until Worker 1 independently audits the exact target listing and resolves (or preserves) the endpoint/provenance discrepancies.
