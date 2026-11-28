@@ -44,6 +44,12 @@ Every new work order (`WO65164+` and all `WO70000+` / `WO80000+` / `WO90000+` fi
 - **Target-Scope Locking:** List every ROM address (`0x0E904`), ROM range (`0x8000-0x80FF`), RAM cell (`FFFF84FE`), or non-hex subsystem key (`tooling:wo_registry`) actively modified or traced. CI normalizes hex tokens (`0xE904` == `0x0E904`) and blocks merging two concurrently `CLAIMED` WOs with overlapping scopes unless linked via `depends_on`.
 - **24-Hour Soft Lease:** `CLAIMED` records older than `lease_hours` (default `24`) without an updated timestamp are flagged `STALE` in `CONTROL/WO_LIVE_INDEX.md` and `CONTROL/active_work_orders.md`.
 
+
+
+### Existing unstructured records — migration baseline
+
+The main-branch migration baseline recorded on 2026-11-28 sets `legacy_cutoff_id` to **70038** in `CONTROL/registry_pins.json`. Unstructured work-order files that already existed through WO70038 remain readable as historical legacy records; they are not retroactively assigned guessed owner, scope, status or timestamp metadata. This does not exempt new work orders or any work-order file changed in a pull request: PR validation forces changed files through the v4 schema, and unstructured IDs above the cutoff fail main validation. The `--strict-all` option remains available for a whole-corpus migration audit. The cutoff must not be advanced to suppress new validation errors; it may move only as part of an explicit historical migration.
+
 ## 3. Session Workflows
 
 - **AI Studio (no-`.git`) sessions:**
