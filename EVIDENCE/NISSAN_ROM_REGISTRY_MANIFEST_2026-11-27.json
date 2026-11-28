@@ -1,0 +1,76 @@
+{
+  "schema": "nissan-rom-registry-mass-dat-reconciliation-v1",
+  "date": "2026-11-27",
+  "sources": [
+    {
+      "path": "EVIDENCE/master rom table/uprev ecus.txt",
+      "git_blob_sha": "ef91ee0a01aa699aeef0957d4e7f08b70628832d",
+      "role": "Vehicle/master-ROM catalogue plus separate ECU/FID inventory"
+    },
+    {
+      "path": "EVIDENCE/mass dat scan/dat_detailed_431_results.tsv",
+      "git_blob_sha": "25a2f73d847d3310c7354bb541edb332a96f7fb9",
+      "sha256_from_mass_scan_manifest": "03b102954ab8b4210d1fe23e217289586c27c9b607d28dc062fd7b52a0da4a31",
+      "role": "431 detailed positive direct-DAT records"
+    },
+    {
+      "path": "EVIDENCE/mass dat scan/run_manifest.json",
+      "git_blob_sha": "006c054db670c60405f690ee26e16095b9d8f996",
+      "role": "Mass batch run totals and artifact hashes"
+    }
+  ],
+  "counts": {
+    "vehicle_master_rows": 2161,
+    "expanded_rom_id_rows": 3691,
+    "unique_rom_ids": 3691,
+    "ecu_fid_rows": 43,
+    "detailed_dat_rows": 431,
+    "primary_fid_families": 39
+  },
+  "validations": {
+    "duplicate_expanded_rom_ids": 0,
+    "master_id_missing_from_updated_list": 0,
+    "exact_fid_inventory_families": 1,
+    "prefix_candidate_families": 2,
+    "unmatched_primary_fid_families": 36
+  },
+  "denominator_note": "431 detailed DAT + EL19A + V6 = 433; adding C12W = 434 independent layout images. Juke S19 is code-twin inheritance, not an independent layout.",
+  "outputs": [
+    {
+      "path": "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv",
+      "commit": "e75d521a83ac750d4a4f2948642553c9e24a0bd2",
+      "blob": "519153776a7eb23233ccc88c1bcc823b88bc4310",
+      "chars": 424306
+    },
+    {
+      "path": "EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv",
+      "commit": "647b10b5d00b04dc57c6aa08e584a05f5c5c32cf",
+      "blob": "98e697db830b9b4e3529a84b792a7d80f36a441d",
+      "chars": 802808
+    },
+    {
+      "path": "EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv",
+      "commit": "d3249f3b878bee5b65f787f9202198da29b93e6b",
+      "blob": "9eb3ae2096df39fd482681f67cb10d5505ced86d",
+      "chars": 7894
+    },
+    {
+      "path": "EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv",
+      "commit": "8910e77adfbaa19d809ec3ec75908c54b38237bf",
+      "blob": "199d2dfc9837dce29b214ac69ab47025ca9b8766",
+      "chars": 261847
+    },
+    {
+      "path": "EVIDENCE/NISSAN_DAT_FID_VEHICLE_RECONCILIATION_2026-11-27.tsv",
+      "commit": "9a9295a4a09ef2b504b6d0907bae63686df30bcb",
+      "blob": "753afe3f0696d081fe42ccfda2169cfd8eb84052",
+      "chars": 5687
+    },
+    {
+      "path": "EVIDENCE/NISSAN_ROM_REGISTRY_SUMMARY_2026-11-27.md",
+      "commit": "d87e37e3b520e419f0fb1badd0f0048e0fdf83de",
+      "blob": "50db0c1154dee85cf9747041dd8ab0efaec76b94",
+      "chars": 6258
+    }
+  ]
+}
