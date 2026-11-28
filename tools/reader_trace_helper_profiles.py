@@ -197,6 +197,26 @@ def attach_helper_profile(graph: Mapping[str, Any]) -> Dict[str, Any]:
             + ", ".join(missing)
         )
 
+    # A pinned listing hash is an integrity constraint, not a descriptive note.
+    # At least one cited evidence record must identify that exact SHA-256 and
+    # explicitly classify itself as the target disassembly listing.
+    expected_listing_sha = profile.get("source_listing_sha256")
+    if expected_listing_sha is not None:
+        matching_listing = [
+            ev for ev in out.get("evidence", [])
+            if isinstance(ev, Mapping)
+            and ev.get("evidence_id") in profile["source_evidence_refs"]
+            and ev.get("hash_algorithm") == "sha256"
+            and isinstance(ev.get("source_hash"), str)
+            and ev["source_hash"].lower() == expected_listing_sha.lower()
+            and ev.get("evidence_class") == "target_disassembly_listing"
+        ]
+        if not matching_listing:
+            raise HelperProfileError(
+                "profile's pinned source_listing_sha256 is not backed by a matching "
+                "cited target_disassembly_listing evidence record"
+            )
+
     helper_ea = _parse_helper_ea(call.get("helper_ea"))
     candidates = [
         node for node in out.get("nodes", [])
