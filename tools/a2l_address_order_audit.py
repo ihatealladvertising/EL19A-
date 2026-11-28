@@ -125,7 +125,7 @@ def analyze(label,path,seed,reps):
         sub["0x%05X-0x%05X"%(lo,lo+BLOCK-1)]=z
     pref=prefix(names)
     case=stats([x.casefold() for x in names])
-    natural=stats([tuple(int(t) if t.isdigit() else t.casefold() for t in re.split(r"(\d+)",x)) for x in names])
+    natural=stats([tuple((1,int(t)) if t.isdigit() else (0,t.casefold()) for t in re.split(r"(\d+)",x)) for x in names])
     stripped=stats([x[len(pref):] for x in names])
     def variant(pick):
         rr=sorted((pick(g) for g in groups.values()),key=lambda r:(r["addr"],r["name"],r["line"]))
