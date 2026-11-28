@@ -4,7 +4,9 @@
 
 
 **Lock acquired:** 2026-11-27 — live `main` gate freshly verified UNLOCKED at base `fb8a10d1ace9f00a8239d6dd11e67500731dc949`; serialize WO70034 base table set artifact publication and coordinator register update.
-**State:** LOCKED
+**State:** UNLOCKED
+
+**Lock released:** 2026-11-27 — WO70035 Nissan ROM vehicle/master-ROM tables and mass-DAT FID reconciliation published/read back. Report commit `23c73319ae29347c96c2e00f8436defedcd89883` (blob `3134dd9e9b453f277a9f0b9f3a762027fa4dfc50`); register commit `73328c1afc3796788a201e8e6247ccc4ca83dbe0` (blob `e0955cf830957372cda105f769ee1c8c6be8658f`). Seven table/summary/manifest artifacts read back; exact record counts are recorded in WO70035. Worker 1–3 lanes/FIFOs unchanged; no ROM/A2L/XML/Findings/workbench source change.
 
 **Integrator:** ChatGPT — WO70034 Nissan SH705x base table set publication (2026-11-27)
 **Purpose:** WO70034 base table set, source scan export, final hash manifest, coordinator report and lifecycle entry published and read back; worker lanes, canonical XML, Findings and source ROM/A2L artifacts unchanged.
