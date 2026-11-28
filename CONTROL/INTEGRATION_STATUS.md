@@ -1,7 +1,12 @@
+**Integrator:** ChatGPT — WO70039 final closeout and work-order registry migration-baseline correction (2026-11-28)
+**Purpose:** Publish the verified WO70039 closeout and restore the v4 registry automation without altering the generated register directly. Grandfather the existing unstructured historical backlog through WO70038; all newly changed/added WO files remain strictly validated. The closeout package includes the report, metadata, bounded validator/pin/protocol regression and generated-register readback. No calibration, ROM, worker FIFO, Findings or workbook changes.
+**Lock acquired:** 2026-11-28 — latest main `7fd97ed64a149fe3e92e104b20148a503c5f2677` and gate UNLOCKED were verified immediately before acquisition.
+**State:** LOCKED
+
 **Integrator:** ChatGPT — WO70039 full mass-scan index coverage correction (2026-11-28)
 **Purpose:** Extend the index to ingest the complete 14,666-row historical scan-results ledger (including 12,176 SCANNED source rows and 2,490 LOAD_REJECTED rows) and the 16,584-row original file inventory, rather than relying only on the 431 detailed-positive subset. Preserve source references and deduplicate decoded images by SHA-256. Synchronize runner, schema, tests, docs and workflow, then release to rerun the full build.
 **Lock acquired:** 2026-11-28 — gate verified UNLOCKED at base commit `4d1c4f43d14055e25db051f3225270823d4b7267`; serialization for WO70039 coverage correction.
-**State:** UNLOCKED
+**State:** LOCKED
 **Lock released (2026-11-28):** WO70039 full historical scan/inventory implementation merged at fad9822fc258d9a7957ca7ad678749d827df3319. The latest-state gate guard and full-ledger regression test are in place; scanner/workbench suite passed 43/43 on PR #47. Released specifically for the fresh full-corpus build and manifest readback. The repository-wide WO registry PR validator still reports pre-existing strict-v4 metadata omissions in legacy work orders; WO70039 itself has the required v4 metadata. Worker FIFOs, calibration XML, Findings, ROM images and workbooks remain outside this integration scope.
 **Publication-control incident (2026-11-28):** Actions run 46096837710 published index commit 7de6bbfc2bd3ec1558eabbb3ccdf5ce509d95277 while this latest state was LOCKED. The workflow guard used grep across the entire append-only file and matched the older historical UNLOCKED state below this entry. The generated data is retained; this was a gate-check defect, not an index-build failure. WO70039 is correcting the guard to inspect only the first/current State line and is extending the build to the full 14,666-row scan ledger and 16,584-row file inventory. The gate remains LOCKED until the correction is merged and verified, then a fresh build is explicitly released.
 
