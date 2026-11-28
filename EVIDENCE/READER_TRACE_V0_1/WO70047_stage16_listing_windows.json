@@ -1,0 +1,4379 @@
+{
+  "listing_record_count": 306688,
+  "schema": "reader-trace-pinned-listing-windows-v0.1",
+  "source": {
+    "archive_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip",
+    "archive_sha256": "8f88f711a585afd56d0541f56c4bc6bb0a4c57a0d58016258fde5c2f1916cc42",
+    "member_bytes": "27045080",
+    "member_name": "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+    "member_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
+  },
+  "windows": {
+    "call_sites": {
+      "0x5B3C0": {
+        "call_instruction": {
+          "assembly": "jsr     @r2",
+          "bytes_hex": "42 0B",
+          "comment": "sub_22B44",
+          "function": "sub_5B336",
+          "label": "loc_5B3A0",
+          "pc": 373696,
+          "source_line": 172043
+        },
+        "context_end": 373712,
+        "context_start": 373680,
+        "instructions": [
+          {
+            "assembly": "mov.b   @(r0,r5), r6",
+            "bytes_hex": "06 5C",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373680,
+            "source_line": 172035
+          },
+          {
+            "assembly": "mov.w   word_5B3DE, r0",
+            "bytes_hex": "90 14",
+            "comment": "h'490",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373682,
+            "source_line": 172036
+          },
+          {
+            "assembly": "mov.l   off_5B458, r5",
+            "bytes_hex": "D5 28",
+            "comment": "h'E5CC",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373684,
+            "source_line": 172037
+          },
+          {
+            "assembly": "mov.b   r6, @(r0,r13)",
+            "bytes_hex": "0D 64",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373686,
+            "source_line": 172038
+          },
+          {
+            "assembly": "mov     r6, r0",
+            "bytes_hex": "60 63",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373688,
+            "source_line": 172039
+          },
+          {
+            "assembly": "mov.b   r0, @(h'18+var_15,r15)",
+            "bytes_hex": "80 F3",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373690,
+            "source_line": 172040
+          },
+          {
+            "assembly": "mov.b   @((dword_8598+h'C - h'84C9),gbr), r0",
+            "bytes_hex": "C4 DB",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373692,
+            "source_line": 172041
+          },
+          {
+            "assembly": "mov.l   off_5B45C, r6",
+            "bytes_hex": "D6 27",
+            "comment": "h'E5C8",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373694,
+            "source_line": 172042
+          },
+          {
+            "assembly": "jsr     @r2",
+            "bytes_hex": "42 0B",
+            "comment": "sub_22B44",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373696,
+            "source_line": 172043
+          },
+          {
+            "assembly": "extu.b  r0, r7",
+            "bytes_hex": "67 0C",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373698,
+            "source_line": 172044
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373700,
+            "source_line": 172045
+          },
+          {
+            "assembly": "mov.w   word_5B3DA, r0",
+            "bytes_hex": "90 08",
+            "comment": "h'908",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373702,
+            "source_line": 172046
+          },
+          {
+            "assembly": "mov.b   @(r0,r12), r6",
+            "bytes_hex": "06 CC",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373704,
+            "source_line": 172047
+          },
+          {
+            "assembly": "extu.b  r6, r5",
+            "bytes_hex": "65 6C",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373706,
+            "source_line": 172048
+          },
+          {
+            "assembly": "bra     loc_5B58C",
+            "bytes_hex": "A0 DE",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373708,
+            "source_line": 172049
+          },
+          {
+            "assembly": "mulu    r2, r5",
+            "bytes_hex": "25 2E",
+            "comment": "",
+            "function": "sub_5B336",
+            "label": "loc_5B3A0",
+            "pc": 373710,
+            "source_line": 172050
+          }
+        ]
+      },
+      "0x648D8": {
+        "call_instruction": {
+          "assembly": "jsr     @r2",
+          "bytes_hex": "42 0B",
+          "comment": "sub_22FAC",
+          "function": "sub_648A6",
+          "label": "loc_648CE",
+          "pc": 411864,
+          "source_line": 196820
+        },
+        "context_end": 411880,
+        "context_start": 411848,
+        "instructions": [
+          {
+            "assembly": "cmp/hi  r2, r6",
+            "bytes_hex": "36 26",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648BC",
+            "pc": 411848,
+            "source_line": 196810
+          },
+          {
+            "assembly": "bf      loc_648CE",
+            "bytes_hex": "8B 00",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648BC",
+            "pc": 411850,
+            "source_line": 196811
+          },
+          {
+            "assembly": "mov     r2, r6",
+            "bytes_hex": "66 23",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648BC",
+            "pc": 411852,
+            "source_line": 196812
+          },
+          {
+            "assembly": "mov.l   off_649A0, r4",
+            "bytes_hex": "D4 34",
+            "comment": "h'10F8A",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411854,
+            "source_line": 196815
+          },
+          {
+            "assembly": "mov     r6, r0",
+            "bytes_hex": "60 63",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411856,
+            "source_line": 196816
+          },
+          {
+            "assembly": "mov.l   off_649A4, r5",
+            "bytes_hex": "D5 34",
+            "comment": "h'F712",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411858,
+            "source_line": 196817
+          },
+          {
+            "assembly": "extu.w  r6, r6",
+            "bytes_hex": "66 6D",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411860,
+            "source_line": 196818
+          },
+          {
+            "assembly": "mov.l   off_649A8, r2",
+            "bytes_hex": "D2 34",
+            "comment": "h'22FAC",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411862,
+            "source_line": 196819
+          },
+          {
+            "assembly": "jsr     @r2",
+            "bytes_hex": "42 0B",
+            "comment": "sub_22FAC",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411864,
+            "source_line": 196820
+          },
+          {
+            "assembly": "mov.w   r0, @(h'8E,gbr)",
+            "bytes_hex": "C1 47",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411866,
+            "source_line": 196821
+          },
+          {
+            "assembly": "mov.l   off_649AC, r2",
+            "bytes_hex": "D2 33",
+            "comment": "h'91B4",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411868,
+            "source_line": 196822
+          },
+          {
+            "assembly": "mov     r0, r6",
+            "bytes_hex": "66 03",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411870,
+            "source_line": 196823
+          },
+          {
+            "assembly": "mov.l   off_64978, r7",
+            "bytes_hex": "D7 25",
+            "comment": "h'FFFF1054",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411872,
+            "source_line": 196824
+          },
+          {
+            "assembly": "mov.w   @r2, r5",
+            "bytes_hex": "65 21",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411874,
+            "source_line": 196825
+          },
+          {
+            "assembly": "mov.w   word_6496E, r0",
+            "bytes_hex": "90 43",
+            "comment": "h'6B8",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411876,
+            "source_line": 196826
+          },
+          {
+            "assembly": "extu.w  r5, r5",
+            "bytes_hex": "65 5D",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411878,
+            "source_line": 196827
+          },
+          {
+            "assembly": "tst     r5, r5",
+            "bytes_hex": "25 58",
+            "comment": "",
+            "function": "sub_648A6",
+            "label": "loc_648CE",
+            "pc": 411880,
+            "source_line": 196828
+          }
+        ]
+      },
+      "0x85B2E": {
+        "call_instruction": {
+          "assembly": "jsr     @r2",
+          "bytes_hex": "42 0B",
+          "comment": "sub_22E10",
+          "function": "sub_85AF4",
+          "label": "loc_85B18",
+          "pc": 547630,
+          "source_line": 283515
+        },
+        "context_end": 547646,
+        "context_start": 547614,
+        "instructions": [
+          {
+            "assembly": "bt      loc_85B7C",
+            "bytes_hex": "89 2D",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547614,
+            "source_line": 283506
+          },
+          {
+            "assembly": "mov.l   off_85D2C, r6",
+            "bytes_hex": "D6 82",
+            "comment": "h'FFFF3615",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547616,
+            "source_line": 283507
+          },
+          {
+            "assembly": "mov.b   @r6, r0",
+            "bytes_hex": "60 60",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547618,
+            "source_line": 283508
+          },
+          {
+            "assembly": "tst     #h'80, r0",
+            "bytes_hex": "C8 80",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547620,
+            "source_line": 283509
+          },
+          {
+            "assembly": "bf      loc_85B42",
+            "bytes_hex": "8B 0C",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547622,
+            "source_line": 283510
+          },
+          {
+            "assembly": "mov.b   @((dword_84B4+4 - h'84B4),gbr), r0",
+            "bytes_hex": "C4 04",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547624,
+            "source_line": 283511
+          },
+          {
+            "assembly": "mov.l   off_85D30, r4",
+            "bytes_hex": "D4 81",
+            "comment": "h'F10E",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547626,
+            "source_line": 283512
+          },
+          {
+            "assembly": "mov.l   off_85D34, r2",
+            "bytes_hex": "D2 81",
+            "comment": "h'22E10",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547628,
+            "source_line": 283513
+          },
+          {
+            "assembly": "jsr     @r2",
+            "bytes_hex": "42 0B",
+            "comment": "sub_22E10",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547630,
+            "source_line": 283515
+          },
+          {
+            "assembly": "extu.b  r0, r5",
+            "bytes_hex": "65 0C",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547632,
+            "source_line": 283516
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547634,
+            "source_line": 283517
+          },
+          {
+            "assembly": "mov.l   off_85D38, r6",
+            "bytes_hex": "D6 80",
+            "comment": "h'FFFF2150",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547636,
+            "source_line": 283518
+          },
+          {
+            "assembly": "mov.w   word_85B66, r0",
+            "bytes_hex": "90 16",
+            "comment": "h'8A6",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547638,
+            "source_line": 283519
+          },
+          {
+            "assembly": "mov.l   off_85D3C, r4",
+            "bytes_hex": "D4 80",
+            "comment": "h'FFFF371E",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547640,
+            "source_line": 283520
+          },
+          {
+            "assembly": "mov.b   r2, @(r0,r6)",
+            "bytes_hex": "06 24",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547642,
+            "source_line": 283521
+          },
+          {
+            "assembly": "mov     #unk_FFFFFF90, r0",
+            "bytes_hex": "E0 90",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547644,
+            "source_line": 283522
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_85AF4",
+            "label": "loc_85B18",
+            "pc": 547646,
+            "source_line": 283523
+          }
+        ]
+      }
+    },
+    "helper_entry_points": {
+      "loc_23508": {
+        "entry_pc": 144648,
+        "instructions": [
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23508",
+            "pc": 144648,
+            "source_line": 27494
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23508",
+            "pc": 144650,
+            "source_line": 27495
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2350C",
+            "pc": 144652,
+            "source_line": 27498
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2350C",
+            "pc": 144654,
+            "source_line": 27499
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144656,
+            "source_line": 27502
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144658,
+            "source_line": 27503
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144660,
+            "source_line": 27504
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144662,
+            "source_line": 27505
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144664,
+            "source_line": 27506
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144666,
+            "source_line": 27507
+          },
+          {
+            "assembly": "swap.w  r3, r3",
+            "bytes_hex": "63 39",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144668,
+            "source_line": 27508
+          },
+          {
+            "assembly": "shlr8   r0",
+            "bytes_hex": "40 19",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144670,
+            "source_line": 27509
+          },
+          {
+            "assembly": "tst     r0, r0",
+            "bytes_hex": "20 08",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144672,
+            "source_line": 27510
+          },
+          {
+            "assembly": "bt      loc_23532",
+            "bytes_hex": "89 06",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144674,
+            "source_line": 27511
+          },
+          {
+            "assembly": "shll    r5",
+            "bytes_hex": "45 00",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144676,
+            "source_line": 27512
+          },
+          {
+            "assembly": "add     r5, r4",
+            "bytes_hex": "34 5C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144678,
+            "source_line": 27513
+          },
+          {
+            "assembly": "mov.w   @r4, r1",
+            "bytes_hex": "61 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144680,
+            "source_line": 27514
+          },
+          {
+            "assembly": "mov.w   @(2,r4), r0",
+            "bytes_hex": "85 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144682,
+            "source_line": 27515
+          },
+          {
+            "assembly": "extu.w  r0, r2",
+            "bytes_hex": "62 0D",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144684,
+            "source_line": 27516
+          },
+          {
+            "assembly": "bra     loc_2353C",
+            "bytes_hex": "A0 05",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144686,
+            "source_line": 27517
+          },
+          {
+            "assembly": "extu.w  r1, r0",
+            "bytes_hex": "60 1D",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144688,
+            "source_line": 27518
+          },
+          {
+            "assembly": "add     r5, r4",
+            "bytes_hex": "34 5C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144690,
+            "source_line": 27521
+          },
+          {
+            "assembly": "mov.b   @r4, r1",
+            "bytes_hex": "61 40",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144692,
+            "source_line": 27522
+          },
+          {
+            "assembly": "mov.b   @(1,r4), r0",
+            "bytes_hex": "84 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144694,
+            "source_line": 27523
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144696,
+            "source_line": 27524
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144698,
+            "source_line": 27525
+          },
+          {
+            "assembly": "mov.l   off_23544, r6",
+            "bytes_hex": "D6 01",
+            "comment": "h'231C8",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144700,
+            "source_line": 27528
+          },
+          {
+            "assembly": "jmp     @r6",
+            "bytes_hex": "46 2B",
+            "comment": "sub_231C8",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144702,
+            "source_line": 27529
+          },
+          {
+            "assembly": "nop",
+            "bytes_hex": "00 09",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144704,
+            "source_line": 27530
+          }
+        ],
+        "window_end": 144712
+      },
+      "loc_2350C": {
+        "entry_pc": 144652,
+        "instructions": [
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2350C",
+            "pc": 144652,
+            "source_line": 27498
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2350C",
+            "pc": 144654,
+            "source_line": 27499
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144656,
+            "source_line": 27502
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144658,
+            "source_line": 27503
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144660,
+            "source_line": 27504
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144662,
+            "source_line": 27505
+          },
+          {
+            "assembly": "shlr    r5",
+            "bytes_hex": "45 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144664,
+            "source_line": 27506
+          },
+          {
+            "assembly": "rotcr   r3",
+            "bytes_hex": "43 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144666,
+            "source_line": 27507
+          },
+          {
+            "assembly": "swap.w  r3, r3",
+            "bytes_hex": "63 39",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144668,
+            "source_line": 27508
+          },
+          {
+            "assembly": "shlr8   r0",
+            "bytes_hex": "40 19",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144670,
+            "source_line": 27509
+          },
+          {
+            "assembly": "tst     r0, r0",
+            "bytes_hex": "20 08",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144672,
+            "source_line": 27510
+          },
+          {
+            "assembly": "bt      loc_23532",
+            "bytes_hex": "89 06",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144674,
+            "source_line": 27511
+          },
+          {
+            "assembly": "shll    r5",
+            "bytes_hex": "45 00",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144676,
+            "source_line": 27512
+          },
+          {
+            "assembly": "add     r5, r4",
+            "bytes_hex": "34 5C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144678,
+            "source_line": 27513
+          },
+          {
+            "assembly": "mov.w   @r4, r1",
+            "bytes_hex": "61 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144680,
+            "source_line": 27514
+          },
+          {
+            "assembly": "mov.w   @(2,r4), r0",
+            "bytes_hex": "85 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144682,
+            "source_line": 27515
+          },
+          {
+            "assembly": "extu.w  r0, r2",
+            "bytes_hex": "62 0D",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144684,
+            "source_line": 27516
+          },
+          {
+            "assembly": "bra     loc_2353C",
+            "bytes_hex": "A0 05",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144686,
+            "source_line": 27517
+          },
+          {
+            "assembly": "extu.w  r1, r0",
+            "bytes_hex": "60 1D",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23510",
+            "pc": 144688,
+            "source_line": 27518
+          },
+          {
+            "assembly": "add     r5, r4",
+            "bytes_hex": "34 5C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144690,
+            "source_line": 27521
+          },
+          {
+            "assembly": "mov.b   @r4, r1",
+            "bytes_hex": "61 40",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144692,
+            "source_line": 27522
+          },
+          {
+            "assembly": "mov.b   @(1,r4), r0",
+            "bytes_hex": "84 41",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144694,
+            "source_line": 27523
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144696,
+            "source_line": 27524
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_23532",
+            "pc": 144698,
+            "source_line": 27525
+          },
+          {
+            "assembly": "mov.l   off_23544, r6",
+            "bytes_hex": "D6 01",
+            "comment": "h'231C8",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144700,
+            "source_line": 27528
+          },
+          {
+            "assembly": "jmp     @r6",
+            "bytes_hex": "46 2B",
+            "comment": "sub_231C8",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144702,
+            "source_line": 27529
+          },
+          {
+            "assembly": "nop",
+            "bytes_hex": "00 09",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "loc_2353C",
+            "pc": 144704,
+            "source_line": 27530
+          },
+          {
+            "assembly": "shlr    r4",
+            "bytes_hex": "44 01",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "off_23544",
+            "pc": 144712,
+            "source_line": 27535
+          },
+          {
+            "assembly": "rotcr   r5",
+            "bytes_hex": "45 25",
+            "comment": "",
+            "function": "sub_23494",
+            "label": "off_23544",
+            "pc": 144714,
+            "source_line": 27536
+          }
+        ],
+        "window_end": 144716
+      }
+    },
+    "helper_functions": {
+      "sub_22B44": {
+        "end_pc": 142194,
+        "instruction_count": 24,
+        "instructions": [
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142148,
+            "source_line": 25950
+          },
+          {
+            "assembly": "mov.l   r4, @-r15",
+            "bytes_hex": "2F 46",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142150,
+            "source_line": 25951
+          },
+          {
+            "assembly": "extu.b  r7, r7",
+            "bytes_hex": "67 7C",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142152,
+            "source_line": 25952
+          },
+          {
+            "assembly": "mov     r5, r0",
+            "bytes_hex": "60 53",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142154,
+            "source_line": 25953
+          },
+          {
+            "assembly": "mov     r7, r5",
+            "bytes_hex": "65 73",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142156,
+            "source_line": 25954
+          },
+          {
+            "assembly": "mov.l   off_22B78, r7",
+            "bytes_hex": "D7 0A",
+            "comment": "h'233CC",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142158,
+            "source_line": 25955
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_233CC",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142160,
+            "source_line": 25956
+          },
+          {
+            "assembly": "mov     #3, r4",
+            "bytes_hex": "E4 03",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142162,
+            "source_line": 25957
+          },
+          {
+            "assembly": "mov.l   r4, @-r15",
+            "bytes_hex": "2F 46",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142164,
+            "source_line": 25958
+          },
+          {
+            "assembly": "mov.l   r5, @-r15",
+            "bytes_hex": "2F 56",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142166,
+            "source_line": 25959
+          },
+          {
+            "assembly": "mov     r6, r0",
+            "bytes_hex": "60 63",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142168,
+            "source_line": 25960
+          },
+          {
+            "assembly": "mov.l   @(h'10+arg_0,r15), r5",
+            "bytes_hex": "55 F4",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142170,
+            "source_line": 25961
+          },
+          {
+            "assembly": "extu.b  r5, r5",
+            "bytes_hex": "65 5C",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142172,
+            "source_line": 25962
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142174,
+            "source_line": 25963
+          },
+          {
+            "assembly": "mov     #3, r4",
+            "bytes_hex": "E4 03",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142176,
+            "source_line": 25964
+          },
+          {
+            "assembly": "mov.l   @r15+, r1",
+            "bytes_hex": "61 F6",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142178,
+            "source_line": 25965
+          },
+          {
+            "assembly": "mov.l   @r15+, r0",
+            "bytes_hex": "60 F6",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142180,
+            "source_line": 25966
+          },
+          {
+            "assembly": "mov     r4, r2",
+            "bytes_hex": "62 43",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142182,
+            "source_line": 25967
+          },
+          {
+            "assembly": "mov     r5, r3",
+            "bytes_hex": "63 53",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142184,
+            "source_line": 25968
+          },
+          {
+            "assembly": "mov.l   @r15+, r4",
+            "bytes_hex": "64 F6",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142186,
+            "source_line": 25969
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142188,
+            "source_line": 25970
+          },
+          {
+            "assembly": "mov.l   off_22B74, r7",
+            "bytes_hex": "D7 01",
+            "comment": "h'231F8",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142190,
+            "source_line": 25971
+          },
+          {
+            "assembly": "jmp     @r7",
+            "bytes_hex": "47 2B",
+            "comment": "loc_231F8",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142192,
+            "source_line": 25972
+          },
+          {
+            "assembly": "mov     #4, r5",
+            "bytes_hex": "E5 04",
+            "comment": "",
+            "function": "sub_22B44",
+            "label": "sub_22B44",
+            "pc": 142194,
+            "source_line": 25973
+          }
+        ],
+        "start_pc": 142148
+      },
+      "sub_22DF8": {
+        "end_pc": 142856,
+        "instruction_count": 9,
+        "instructions": [
+          {
+            "assembly": "mov.w   word_22E0A, r0",
+            "bytes_hex": "90 07",
+            "comment": "h'E0",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142840,
+            "source_line": 26360
+          },
+          {
+            "assembly": "extu.b  r5, r5",
+            "bytes_hex": "65 5C",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142842,
+            "source_line": 26361
+          },
+          {
+            "assembly": "cmp/hs  r0, r5",
+            "bytes_hex": "35 02",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142844,
+            "source_line": 26362
+          },
+          {
+            "assembly": "bt      locret_22E06",
+            "bytes_hex": "89 02",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142846,
+            "source_line": 26363
+          },
+          {
+            "assembly": "mov.l   off_22E0C, r6",
+            "bytes_hex": "D6 02",
+            "comment": "h'23508",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142848,
+            "source_line": 26364
+          },
+          {
+            "assembly": "jmp     @r6",
+            "bytes_hex": "46 2B",
+            "comment": "loc_23508",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142850,
+            "source_line": 26365
+          },
+          {
+            "assembly": "mov     #IVECT1, r3",
+            "bytes_hex": "E3 00",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "sub_22DF8",
+            "pc": 142852,
+            "source_line": 26366
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "locret_22E06",
+            "pc": 142854,
+            "source_line": 26369
+          },
+          {
+            "assembly": "mov.b   @(7,r4), r0",
+            "bytes_hex": "84 47",
+            "comment": "",
+            "function": "sub_22DF8",
+            "label": "locret_22E06",
+            "pc": 142856,
+            "source_line": 26370
+          }
+        ],
+        "start_pc": 142840
+      },
+      "sub_22E10": {
+        "end_pc": 142880,
+        "instruction_count": 9,
+        "instructions": [
+          {
+            "assembly": "mov.w   word_22E22, r0",
+            "bytes_hex": "90 07",
+            "comment": "h'F0",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142864,
+            "source_line": 26379
+          },
+          {
+            "assembly": "extu.b  r5, r5",
+            "bytes_hex": "65 5C",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142866,
+            "source_line": 26380
+          },
+          {
+            "assembly": "cmp/hs  r0, r5",
+            "bytes_hex": "35 02",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142868,
+            "source_line": 26381
+          },
+          {
+            "assembly": "bt      locret_22E1E",
+            "bytes_hex": "89 02",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142870,
+            "source_line": 26382
+          },
+          {
+            "assembly": "mov.l   off_22E24, r6",
+            "bytes_hex": "D6 02",
+            "comment": "h'2350C",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142872,
+            "source_line": 26383
+          },
+          {
+            "assembly": "jmp     @r6",
+            "bytes_hex": "46 2B",
+            "comment": "loc_2350C",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142874,
+            "source_line": 26384
+          },
+          {
+            "assembly": "mov     #IVECT1, r3",
+            "bytes_hex": "E3 00",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "sub_22E10",
+            "pc": 142876,
+            "source_line": 26385
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "locret_22E1E",
+            "pc": 142878,
+            "source_line": 26388
+          },
+          {
+            "assembly": "mov.b   @(h'F,r4), r0",
+            "bytes_hex": "84 4F",
+            "comment": "",
+            "function": "sub_22E10",
+            "label": "locret_22E1E",
+            "pc": 142880,
+            "source_line": 26389
+          }
+        ],
+        "start_pc": 142864
+      },
+      "sub_22FAC": {
+        "end_pc": 143308,
+        "instruction_count": 17,
+        "instructions": [
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143276,
+            "source_line": 26651
+          },
+          {
+            "assembly": "mov.l   r4, @-r15",
+            "bytes_hex": "2F 46",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143278,
+            "source_line": 26652
+          },
+          {
+            "assembly": "mov     r5, r0",
+            "bytes_hex": "60 53",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143280,
+            "source_line": 26653
+          },
+          {
+            "assembly": "extu.w  r6, r5",
+            "bytes_hex": "65 6D",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143282,
+            "source_line": 26654
+          },
+          {
+            "assembly": "mov.l   off_22FD4, r7",
+            "bytes_hex": "D7 07",
+            "comment": "h'2340C",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143284,
+            "source_line": 26655
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_2340C",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143286,
+            "source_line": 26656
+          },
+          {
+            "assembly": "mov     #h'3E, r4",
+            "bytes_hex": "E4 3E",
+            "comment": "'>'",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143288,
+            "source_line": 26657
+          },
+          {
+            "assembly": "mov.l   @r15+, r6",
+            "bytes_hex": "66 F6",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143290,
+            "source_line": 26658
+          },
+          {
+            "assembly": "add     r4, r6",
+            "bytes_hex": "36 4C",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143292,
+            "source_line": 26659
+          },
+          {
+            "assembly": "mov.w   @(2,r6), r0",
+            "bytes_hex": "85 61",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143294,
+            "source_line": 26660
+          },
+          {
+            "assembly": "extu.w  r0, r2",
+            "bytes_hex": "62 0D",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143296,
+            "source_line": 26661
+          },
+          {
+            "assembly": "mov     r5, r3",
+            "bytes_hex": "63 53",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143298,
+            "source_line": 26662
+          },
+          {
+            "assembly": "mov.w   @r6, r1",
+            "bytes_hex": "61 61",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143300,
+            "source_line": 26663
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143302,
+            "source_line": 26664
+          },
+          {
+            "assembly": "mov.l   off_22FD0, r6",
+            "bytes_hex": "D6 01",
+            "comment": "h'231C8",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143304,
+            "source_line": 26665
+          },
+          {
+            "assembly": "jmp     @r6",
+            "bytes_hex": "46 2B",
+            "comment": "sub_231C8",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143306,
+            "source_line": 26666
+          },
+          {
+            "assembly": "extu.w  r1, r0",
+            "bytes_hex": "60 1D",
+            "comment": "",
+            "function": "sub_22FAC",
+            "label": "sub_22FAC",
+            "pc": 143308,
+            "source_line": 26667
+          }
+        ],
+        "start_pc": 143276
+      },
+      "sub_231C8": {
+        "end_pc": 144320,
+        "instruction_count": 243,
+        "instructions": [
+          {
+            "assembly": "cmp/hs  r0, r2",
+            "bytes_hex": "32 02",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143816,
+            "source_line": 26984
+          },
+          {
+            "assembly": "bt      loc_231E4",
+            "bytes_hex": "89 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143818,
+            "source_line": 26985
+          },
+          {
+            "assembly": "mov.l   r0, @-r15",
+            "bytes_hex": "2F 06",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143820,
+            "source_line": 26986
+          },
+          {
+            "assembly": "sub     r2, r0",
+            "bytes_hex": "30 28",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143822,
+            "source_line": 26987
+          },
+          {
+            "assembly": "sts     macl, r1",
+            "bytes_hex": "01 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143824,
+            "source_line": 26988
+          },
+          {
+            "assembly": "mul.l   r3, r0",
+            "bytes_hex": "00 37",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143826,
+            "source_line": 26989
+          },
+          {
+            "assembly": "sts     macl, r0",
+            "bytes_hex": "00 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143828,
+            "source_line": 26990
+          },
+          {
+            "assembly": "lds     r1, macl",
+            "bytes_hex": "41 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143830,
+            "source_line": 26991
+          },
+          {
+            "assembly": "swap.w  r0, r0",
+            "bytes_hex": "60 09",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143832,
+            "source_line": 26992
+          },
+          {
+            "assembly": "mov.l   @r15+, r2",
+            "bytes_hex": "62 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143834,
+            "source_line": 26993
+          },
+          {
+            "assembly": "extu.w  r0, r0",
+            "bytes_hex": "60 0D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143836,
+            "source_line": 26994
+          },
+          {
+            "assembly": "sub     r0, r2",
+            "bytes_hex": "32 08",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143838,
+            "source_line": 26995
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143840,
+            "source_line": 26996
+          },
+          {
+            "assembly": "mov     r2, r0",
+            "bytes_hex": "60 23",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "sub_231C8",
+            "pc": 143842,
+            "source_line": 26997
+          },
+          {
+            "assembly": "sub     r0, r2",
+            "bytes_hex": "32 08",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143844,
+            "source_line": 27000
+          },
+          {
+            "assembly": "sts     macl, r1",
+            "bytes_hex": "01 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143846,
+            "source_line": 27001
+          },
+          {
+            "assembly": "mul.l   r3, r2",
+            "bytes_hex": "02 37",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143848,
+            "source_line": 27002
+          },
+          {
+            "assembly": "sts     macl, r2",
+            "bytes_hex": "02 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143850,
+            "source_line": 27003
+          },
+          {
+            "assembly": "lds     r1, macl",
+            "bytes_hex": "41 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143852,
+            "source_line": 27004
+          },
+          {
+            "assembly": "swap.w  r2, r2",
+            "bytes_hex": "62 29",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143854,
+            "source_line": 27005
+          },
+          {
+            "assembly": "extu.w  r2, r2",
+            "bytes_hex": "62 2D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143856,
+            "source_line": 27006
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143858,
+            "source_line": 27007
+          },
+          {
+            "assembly": "add     r2, r0",
+            "bytes_hex": "30 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231E4",
+            "pc": 143860,
+            "source_line": 27008
+          },
+          {
+            "assembly": "mov.l   r8, @-r15",
+            "bytes_hex": "2F 86",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143864,
+            "source_line": 27012
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143866,
+            "source_line": 27013
+          },
+          {
+            "assembly": "sts     macl, r7",
+            "bytes_hex": "07 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143868,
+            "source_line": 27014
+          },
+          {
+            "assembly": "mulu    r5, r0",
+            "bytes_hex": "20 5E",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143870,
+            "source_line": 27015
+          },
+          {
+            "assembly": "add     r2, r4",
+            "bytes_hex": "34 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143872,
+            "source_line": 27016
+          },
+          {
+            "assembly": "sts     macl, r0",
+            "bytes_hex": "00 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143874,
+            "source_line": 27017
+          },
+          {
+            "assembly": "lds     r7, macl",
+            "bytes_hex": "47 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143876,
+            "source_line": 27018
+          },
+          {
+            "assembly": "add     r0, r4",
+            "bytes_hex": "34 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143878,
+            "source_line": 27019
+          },
+          {
+            "assembly": "add     r4, r5",
+            "bytes_hex": "35 4C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143880,
+            "source_line": 27020
+          },
+          {
+            "assembly": "mov     r1, r8",
+            "bytes_hex": "68 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143882,
+            "source_line": 27021
+          },
+          {
+            "assembly": "mov.l   off_23250, r7",
+            "bytes_hex": "D7 10",
+            "comment": "h'231C8",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143884,
+            "source_line": 27022
+          },
+          {
+            "assembly": "tst     r3, r3",
+            "bytes_hex": "23 38",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143886,
+            "source_line": 27023
+          },
+          {
+            "assembly": "bt      loc_23238",
+            "bytes_hex": "89 12",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143888,
+            "source_line": 27024
+          },
+          {
+            "assembly": "mov.b   @r4, r1",
+            "bytes_hex": "61 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143890,
+            "source_line": 27025
+          },
+          {
+            "assembly": "mov.b   @(1,r4), r0",
+            "bytes_hex": "84 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143892,
+            "source_line": 27026
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143894,
+            "source_line": 27027
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143896,
+            "source_line": 27028
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143898,
+            "source_line": 27029
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143900,
+            "source_line": 27030
+          },
+          {
+            "assembly": "bt      loc_23248",
+            "bytes_hex": "89 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143902,
+            "source_line": 27031
+          },
+          {
+            "assembly": "mov.l   r0, @-r15",
+            "bytes_hex": "2F 06",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143904,
+            "source_line": 27032
+          },
+          {
+            "assembly": "mov.b   @r5, r1",
+            "bytes_hex": "61 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143906,
+            "source_line": 27033
+          },
+          {
+            "assembly": "mov.b   @(1,r5), r0",
+            "bytes_hex": "84 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143908,
+            "source_line": 27034
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143910,
+            "source_line": 27035
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143912,
+            "source_line": 27036
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143914,
+            "source_line": 27037
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143916,
+            "source_line": 27038
+          },
+          {
+            "assembly": "mov.l   @r15+, r0",
+            "bytes_hex": "60 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143918,
+            "source_line": 27039
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143920,
+            "source_line": 27040
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143922,
+            "source_line": 27041
+          },
+          {
+            "assembly": "bra     loc_23248",
+            "bytes_hex": "A0 08",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143924,
+            "source_line": 27042
+          },
+          {
+            "assembly": "nop",
+            "bytes_hex": "00 09",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_231F8",
+            "pc": 143926,
+            "source_line": 27043
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143928,
+            "source_line": 27046
+          },
+          {
+            "assembly": "bt/s    loc_23248",
+            "bytes_hex": "8D 05",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143930,
+            "source_line": 27047
+          },
+          {
+            "assembly": "mov.b   @r4, r0",
+            "bytes_hex": "60 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143932,
+            "source_line": 27048
+          },
+          {
+            "assembly": "mov.b   @r5, r2",
+            "bytes_hex": "62 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143934,
+            "source_line": 27049
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143936,
+            "source_line": 27050
+          },
+          {
+            "assembly": "extu.b  r2, r2",
+            "bytes_hex": "62 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143938,
+            "source_line": 27051
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143940,
+            "source_line": 27052
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23238",
+            "pc": 143942,
+            "source_line": 27053
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23248",
+            "pc": 143944,
+            "source_line": 27056
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23248",
+            "pc": 143946,
+            "source_line": 27057
+          },
+          {
+            "assembly": "mov.l   @r15+, r8",
+            "bytes_hex": "68 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23248",
+            "pc": 143948,
+            "source_line": 27058
+          },
+          {
+            "assembly": "mov.l   r8, @-r15",
+            "bytes_hex": "2F 86",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143956,
+            "source_line": 27066
+          },
+          {
+            "assembly": "mov.l   r9, @-r15",
+            "bytes_hex": "2F 96",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143958,
+            "source_line": 27067
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143960,
+            "source_line": 27068
+          },
+          {
+            "assembly": "sts     macl, r7",
+            "bytes_hex": "07 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143962,
+            "source_line": 27069
+          },
+          {
+            "assembly": "mulu    r5, r0",
+            "bytes_hex": "20 5E",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143964,
+            "source_line": 27070
+          },
+          {
+            "assembly": "add     r2, r4",
+            "bytes_hex": "34 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143966,
+            "source_line": 27071
+          },
+          {
+            "assembly": "sts     macl, r0",
+            "bytes_hex": "00 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143968,
+            "source_line": 27072
+          },
+          {
+            "assembly": "lds     r7, macl",
+            "bytes_hex": "47 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143970,
+            "source_line": 27073
+          },
+          {
+            "assembly": "add     r0, r4",
+            "bytes_hex": "34 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143972,
+            "source_line": 27074
+          },
+          {
+            "assembly": "add     r4, r5",
+            "bytes_hex": "35 4C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143974,
+            "source_line": 27075
+          },
+          {
+            "assembly": "mov     r1, r8",
+            "bytes_hex": "68 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143976,
+            "source_line": 27076
+          },
+          {
+            "assembly": "mov     #h'7F, r9",
+            "bytes_hex": "E9 7F",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143978,
+            "source_line": 27077
+          },
+          {
+            "assembly": "mov.l   off_232C8, r7",
+            "bytes_hex": "D7 16",
+            "comment": "h'231C8",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143980,
+            "source_line": 27078
+          },
+          {
+            "assembly": "tst     r3, r3",
+            "bytes_hex": "23 38",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143982,
+            "source_line": 27079
+          },
+          {
+            "assembly": "bt      loc_232A0",
+            "bytes_hex": "89 16",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143984,
+            "source_line": 27080
+          },
+          {
+            "assembly": "mov.b   @r4, r1",
+            "bytes_hex": "61 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143986,
+            "source_line": 27081
+          },
+          {
+            "assembly": "mov.b   @(1,r4), r0",
+            "bytes_hex": "84 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143988,
+            "source_line": 27082
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143990,
+            "source_line": 27083
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143992,
+            "source_line": 27084
+          },
+          {
+            "assembly": "and     r9, r2",
+            "bytes_hex": "22 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143994,
+            "source_line": 27085
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143996,
+            "source_line": 27086
+          },
+          {
+            "assembly": "and     r9, r0",
+            "bytes_hex": "20 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 143998,
+            "source_line": 27087
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144000,
+            "source_line": 27088
+          },
+          {
+            "assembly": "bt      loc_232B4",
+            "bytes_hex": "89 17",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144002,
+            "source_line": 27089
+          },
+          {
+            "assembly": "mov.l   r0, @-r15",
+            "bytes_hex": "2F 06",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144004,
+            "source_line": 27090
+          },
+          {
+            "assembly": "mov.b   @r5, r1",
+            "bytes_hex": "61 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144006,
+            "source_line": 27091
+          },
+          {
+            "assembly": "mov.b   @(1,r5), r0",
+            "bytes_hex": "84 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144008,
+            "source_line": 27092
+          },
+          {
+            "assembly": "extu.b  r0, r2",
+            "bytes_hex": "62 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144010,
+            "source_line": 27093
+          },
+          {
+            "assembly": "extu.b  r1, r0",
+            "bytes_hex": "60 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144012,
+            "source_line": 27094
+          },
+          {
+            "assembly": "and     r9, r2",
+            "bytes_hex": "22 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144014,
+            "source_line": 27095
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144016,
+            "source_line": 27096
+          },
+          {
+            "assembly": "and     r9, r0",
+            "bytes_hex": "20 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144018,
+            "source_line": 27097
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144020,
+            "source_line": 27098
+          },
+          {
+            "assembly": "mov.l   @r15+, r0",
+            "bytes_hex": "60 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144022,
+            "source_line": 27099
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144024,
+            "source_line": 27100
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144026,
+            "source_line": 27101
+          },
+          {
+            "assembly": "bra     loc_232B4",
+            "bytes_hex": "A0 0A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144028,
+            "source_line": 27102
+          },
+          {
+            "assembly": "nop",
+            "bytes_hex": "00 09",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23254",
+            "pc": 144030,
+            "source_line": 27103
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144032,
+            "source_line": 27106
+          },
+          {
+            "assembly": "bt/s    loc_232C0",
+            "bytes_hex": "8D 0D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144034,
+            "source_line": 27107
+          },
+          {
+            "assembly": "mov.b   @r4, r0",
+            "bytes_hex": "60 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144036,
+            "source_line": 27108
+          },
+          {
+            "assembly": "mov.b   @r5, r2",
+            "bytes_hex": "62 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144038,
+            "source_line": 27109
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144040,
+            "source_line": 27110
+          },
+          {
+            "assembly": "and     r9, r0",
+            "bytes_hex": "20 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144042,
+            "source_line": 27111
+          },
+          {
+            "assembly": "extu.b  r2, r2",
+            "bytes_hex": "62 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144044,
+            "source_line": 27112
+          },
+          {
+            "assembly": "and     r9, r2",
+            "bytes_hex": "22 99",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144046,
+            "source_line": 27113
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144048,
+            "source_line": 27114
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232A0",
+            "pc": 144050,
+            "source_line": 27115
+          },
+          {
+            "assembly": "mov.w   word_232CC, r1",
+            "bytes_hex": "91 0A",
+            "comment": "h'80",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144052,
+            "source_line": 27118
+          },
+          {
+            "assembly": "mov.b   @r4, r2",
+            "bytes_hex": "62 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144054,
+            "source_line": 27119
+          },
+          {
+            "assembly": "extu.b  r2, r2",
+            "bytes_hex": "62 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144056,
+            "source_line": 27120
+          },
+          {
+            "assembly": "tst     r1, r2",
+            "bytes_hex": "22 18",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144058,
+            "source_line": 27121
+          },
+          {
+            "assembly": "bt      loc_232C0",
+            "bytes_hex": "89 00",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144060,
+            "source_line": 27122
+          },
+          {
+            "assembly": "or      r1, r0",
+            "bytes_hex": "20 1B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232B4",
+            "pc": 144062,
+            "source_line": 27123
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232C0",
+            "pc": 144064,
+            "source_line": 27126
+          },
+          {
+            "assembly": "mov.l   @r15+, r9",
+            "bytes_hex": "69 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232C0",
+            "pc": 144066,
+            "source_line": 27127
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232C0",
+            "pc": 144068,
+            "source_line": 27128
+          },
+          {
+            "assembly": "mov.l   @r15+, r8",
+            "bytes_hex": "68 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232C0",
+            "pc": 144070,
+            "source_line": 27129
+          },
+          {
+            "assembly": "mov.l   r8, @-r15",
+            "bytes_hex": "2F 86",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144080,
+            "source_line": 27139
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144082,
+            "source_line": 27140
+          },
+          {
+            "assembly": "sts     macl, r7",
+            "bytes_hex": "07 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144084,
+            "source_line": 27141
+          },
+          {
+            "assembly": "mulu    r5, r0",
+            "bytes_hex": "20 5E",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144086,
+            "source_line": 27142
+          },
+          {
+            "assembly": "add     r2, r4",
+            "bytes_hex": "34 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144088,
+            "source_line": 27143
+          },
+          {
+            "assembly": "sts     macl, r0",
+            "bytes_hex": "00 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144090,
+            "source_line": 27144
+          },
+          {
+            "assembly": "lds     r7, macl",
+            "bytes_hex": "47 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144092,
+            "source_line": 27145
+          },
+          {
+            "assembly": "shll    r5",
+            "bytes_hex": "45 00",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144094,
+            "source_line": 27146
+          },
+          {
+            "assembly": "add     r0, r4",
+            "bytes_hex": "34 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144096,
+            "source_line": 27147
+          },
+          {
+            "assembly": "add     r4, r5",
+            "bytes_hex": "35 4C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144098,
+            "source_line": 27148
+          },
+          {
+            "assembly": "mov     r1, r8",
+            "bytes_hex": "68 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144100,
+            "source_line": 27149
+          },
+          {
+            "assembly": "mov.l   off_23328, r7",
+            "bytes_hex": "D7 10",
+            "comment": "h'231C8",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144102,
+            "source_line": 27150
+          },
+          {
+            "assembly": "tst     r3, r3",
+            "bytes_hex": "23 38",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144104,
+            "source_line": 27151
+          },
+          {
+            "assembly": "bt      loc_23312",
+            "bytes_hex": "89 12",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144106,
+            "source_line": 27152
+          },
+          {
+            "assembly": "mov.w   @r4, r1",
+            "bytes_hex": "61 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144108,
+            "source_line": 27153
+          },
+          {
+            "assembly": "mov.w   @(2,r4), r0",
+            "bytes_hex": "85 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144110,
+            "source_line": 27154
+          },
+          {
+            "assembly": "extu.w  r0, r2",
+            "bytes_hex": "62 0D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144112,
+            "source_line": 27155
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144114,
+            "source_line": 27156
+          },
+          {
+            "assembly": "extu.w  r1, r0",
+            "bytes_hex": "60 1D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144116,
+            "source_line": 27157
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144118,
+            "source_line": 27158
+          },
+          {
+            "assembly": "bt      loc_23322",
+            "bytes_hex": "89 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144120,
+            "source_line": 27159
+          },
+          {
+            "assembly": "mov.l   r0, @-r15",
+            "bytes_hex": "2F 06",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144122,
+            "source_line": 27160
+          },
+          {
+            "assembly": "mov.w   @r5, r1",
+            "bytes_hex": "61 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144124,
+            "source_line": 27161
+          },
+          {
+            "assembly": "mov.w   @(2,r5), r0",
+            "bytes_hex": "85 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144126,
+            "source_line": 27162
+          },
+          {
+            "assembly": "extu.w  r0, r2",
+            "bytes_hex": "62 0D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144128,
+            "source_line": 27163
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144130,
+            "source_line": 27164
+          },
+          {
+            "assembly": "extu.w  r1, r0",
+            "bytes_hex": "60 1D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144132,
+            "source_line": 27165
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144134,
+            "source_line": 27166
+          },
+          {
+            "assembly": "mov.l   @r15+, r0",
+            "bytes_hex": "60 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144136,
+            "source_line": 27167
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144138,
+            "source_line": 27168
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144140,
+            "source_line": 27169
+          },
+          {
+            "assembly": "bra     loc_23322",
+            "bytes_hex": "A0 08",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144142,
+            "source_line": 27170
+          },
+          {
+            "assembly": "nop",
+            "bytes_hex": "00 09",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_232D0",
+            "pc": 144144,
+            "source_line": 27171
+          },
+          {
+            "assembly": "tst     r8, r8",
+            "bytes_hex": "28 88",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144146,
+            "source_line": 27174
+          },
+          {
+            "assembly": "bt/s    loc_23322",
+            "bytes_hex": "8D 05",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144148,
+            "source_line": 27175
+          },
+          {
+            "assembly": "mov.w   @r4, r0",
+            "bytes_hex": "60 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144150,
+            "source_line": 27176
+          },
+          {
+            "assembly": "mov.w   @r5, r2",
+            "bytes_hex": "62 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144152,
+            "source_line": 27177
+          },
+          {
+            "assembly": "extu.w  r0, r0",
+            "bytes_hex": "60 0D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144154,
+            "source_line": 27178
+          },
+          {
+            "assembly": "extu.w  r2, r2",
+            "bytes_hex": "62 2D",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144156,
+            "source_line": 27179
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144158,
+            "source_line": 27180
+          },
+          {
+            "assembly": "mov     r8, r3",
+            "bytes_hex": "63 83",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23312",
+            "pc": 144160,
+            "source_line": 27181
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23322",
+            "pc": 144162,
+            "source_line": 27184
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23322",
+            "pc": 144164,
+            "source_line": 27185
+          },
+          {
+            "assembly": "mov.l   @r15+, r8",
+            "bytes_hex": "68 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23322",
+            "pc": 144166,
+            "source_line": 27186
+          },
+          {
+            "assembly": "mov.l   r8, @-r15",
+            "bytes_hex": "2F 86",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144172,
+            "source_line": 27193
+          },
+          {
+            "assembly": "mov.l   r9, @-r15",
+            "bytes_hex": "2F 96",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144174,
+            "source_line": 27194
+          },
+          {
+            "assembly": "mov.l   r10, @-r15",
+            "bytes_hex": "2F A6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144176,
+            "source_line": 27195
+          },
+          {
+            "assembly": "mov.l   r11, @-r15",
+            "bytes_hex": "2F B6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144178,
+            "source_line": 27196
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144180,
+            "source_line": 27197
+          },
+          {
+            "assembly": "mov     r0, r8",
+            "bytes_hex": "68 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144182,
+            "source_line": 27198
+          },
+          {
+            "assembly": "mov     r2, r9",
+            "bytes_hex": "69 23",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144184,
+            "source_line": 27199
+          },
+          {
+            "assembly": "mov     r5, r10",
+            "bytes_hex": "6A 53",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144186,
+            "source_line": 27200
+          },
+          {
+            "assembly": "add     #-1, r10",
+            "bytes_hex": "7A FF",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144188,
+            "source_line": 27201
+          },
+          {
+            "assembly": "sts     macl, r7",
+            "bytes_hex": "07 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144190,
+            "source_line": 27202
+          },
+          {
+            "assembly": "mulu    r5, r0",
+            "bytes_hex": "20 5E",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144192,
+            "source_line": 27203
+          },
+          {
+            "assembly": "add     r2, r4",
+            "bytes_hex": "34 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144194,
+            "source_line": 27204
+          },
+          {
+            "assembly": "sts     macl, r0",
+            "bytes_hex": "00 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144196,
+            "source_line": 27205
+          },
+          {
+            "assembly": "lds     r7, macl",
+            "bytes_hex": "47 1A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144198,
+            "source_line": 27206
+          },
+          {
+            "assembly": "add     r0, r4",
+            "bytes_hex": "34 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144200,
+            "source_line": 27207
+          },
+          {
+            "assembly": "add     r4, r5",
+            "bytes_hex": "35 4C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144202,
+            "source_line": 27208
+          },
+          {
+            "assembly": "mov.l   off_233C4, r7",
+            "bytes_hex": "D7 1D",
+            "comment": "h'231C8",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144204,
+            "source_line": 27209
+          },
+          {
+            "assembly": "mov.w   word_233C8, r6",
+            "bytes_hex": "96 3B",
+            "comment": "h'80",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144206,
+            "source_line": 27210
+          },
+          {
+            "assembly": "mov     r1, r11",
+            "bytes_hex": "6B 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144208,
+            "source_line": 27211
+          },
+          {
+            "assembly": "cmp/hs  r10, r9",
+            "bytes_hex": "39 A2",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144210,
+            "source_line": 27212
+          },
+          {
+            "assembly": "bt      loc_23394",
+            "bytes_hex": "89 1E",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144212,
+            "source_line": 27213
+          },
+          {
+            "assembly": "mov.b   @r4, r1",
+            "bytes_hex": "61 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144214,
+            "source_line": 27214
+          },
+          {
+            "assembly": "mov.b   @(1,r4), r0",
+            "bytes_hex": "84 41",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144216,
+            "source_line": 27215
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144218,
+            "source_line": 27216
+          },
+          {
+            "assembly": "cmp/hs  r6, r0",
+            "bytes_hex": "30 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144220,
+            "source_line": 27217
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 29",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144222,
+            "source_line": 27218
+          },
+          {
+            "assembly": "extu.b  r1, r1",
+            "bytes_hex": "61 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144224,
+            "source_line": 27219
+          },
+          {
+            "assembly": "cmp/hs  r6, r1",
+            "bytes_hex": "31 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144226,
+            "source_line": 27220
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 26",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144228,
+            "source_line": 27221
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144230,
+            "source_line": 27222
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144232,
+            "source_line": 27223
+          },
+          {
+            "assembly": "mov     r1, r0",
+            "bytes_hex": "60 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144234,
+            "source_line": 27224
+          },
+          {
+            "assembly": "cmp/hs  r10, r8",
+            "bytes_hex": "38 A2",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144236,
+            "source_line": 27225
+          },
+          {
+            "assembly": "bt      loc_233B6",
+            "bytes_hex": "89 22",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144238,
+            "source_line": 27226
+          },
+          {
+            "assembly": "mov     r0, r4",
+            "bytes_hex": "64 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144240,
+            "source_line": 27227
+          },
+          {
+            "assembly": "mov.b   @r5, r1",
+            "bytes_hex": "61 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144242,
+            "source_line": 27228
+          },
+          {
+            "assembly": "mov.b   @(1,r5), r0",
+            "bytes_hex": "84 51",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144244,
+            "source_line": 27229
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144246,
+            "source_line": 27230
+          },
+          {
+            "assembly": "cmp/hs  r6, r0",
+            "bytes_hex": "30 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144248,
+            "source_line": 27231
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 1B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144250,
+            "source_line": 27232
+          },
+          {
+            "assembly": "extu.b  r1, r1",
+            "bytes_hex": "61 1C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144252,
+            "source_line": 27233
+          },
+          {
+            "assembly": "cmp/hs  r6, r1",
+            "bytes_hex": "31 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144254,
+            "source_line": 27234
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 18",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144256,
+            "source_line": 27235
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144258,
+            "source_line": 27236
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144260,
+            "source_line": 27237
+          },
+          {
+            "assembly": "mov     r1, r0",
+            "bytes_hex": "60 13",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144262,
+            "source_line": 27238
+          },
+          {
+            "assembly": "mov     r0, r2",
+            "bytes_hex": "62 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144264,
+            "source_line": 27239
+          },
+          {
+            "assembly": "mov     r4, r0",
+            "bytes_hex": "60 43",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144266,
+            "source_line": 27240
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144268,
+            "source_line": 27241
+          },
+          {
+            "assembly": "mov     r11, r3",
+            "bytes_hex": "63 B3",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144270,
+            "source_line": 27242
+          },
+          {
+            "assembly": "bra     loc_233B6",
+            "bytes_hex": "A0 11",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144272,
+            "source_line": 27243
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_2332C",
+            "pc": 144274,
+            "source_line": 27244
+          },
+          {
+            "assembly": "cmp/hs  r10, r8",
+            "bytes_hex": "38 A2",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144276,
+            "source_line": 27247
+          },
+          {
+            "assembly": "bt/s    loc_233AE",
+            "bytes_hex": "8D 0A",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144278,
+            "source_line": 27248
+          },
+          {
+            "assembly": "mov.b   @r4, r0",
+            "bytes_hex": "60 40",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144280,
+            "source_line": 27249
+          },
+          {
+            "assembly": "mov.b   @r5, r2",
+            "bytes_hex": "62 50",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144282,
+            "source_line": 27250
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144284,
+            "source_line": 27251
+          },
+          {
+            "assembly": "cmp/hs  r6, r0",
+            "bytes_hex": "30 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144286,
+            "source_line": 27252
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 08",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144288,
+            "source_line": 27253
+          },
+          {
+            "assembly": "extu.b  r2, r2",
+            "bytes_hex": "62 2C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144290,
+            "source_line": 27254
+          },
+          {
+            "assembly": "cmp/hs  r6, r2",
+            "bytes_hex": "32 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144292,
+            "source_line": 27255
+          },
+          {
+            "assembly": "bt      loc_233B4",
+            "bytes_hex": "89 05",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144294,
+            "source_line": 27256
+          },
+          {
+            "assembly": "jsr     @r7",
+            "bytes_hex": "47 0B",
+            "comment": "sub_231C8",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144296,
+            "source_line": 27257
+          },
+          {
+            "assembly": "mov     r11, r3",
+            "bytes_hex": "63 B3",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144298,
+            "source_line": 27258
+          },
+          {
+            "assembly": "bra     loc_233B6",
+            "bytes_hex": "A0 03",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_23394",
+            "pc": 144300,
+            "source_line": 27259
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233AE",
+            "pc": 144302,
+            "source_line": 27262
+          },
+          {
+            "assembly": "cmp/hs  r6, r0",
+            "bytes_hex": "30 62",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233AE",
+            "pc": 144304,
+            "source_line": 27263
+          },
+          {
+            "assembly": "bf      loc_233B6",
+            "bytes_hex": "8B 00",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233AE",
+            "pc": 144306,
+            "source_line": 27264
+          },
+          {
+            "assembly": "mov     r6, r0",
+            "bytes_hex": "60 63",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B4",
+            "pc": 144308,
+            "source_line": 27267
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144310,
+            "source_line": 27270
+          },
+          {
+            "assembly": "mov.l   @r15+, r11",
+            "bytes_hex": "6B F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144312,
+            "source_line": 27271
+          },
+          {
+            "assembly": "mov.l   @r15+, r10",
+            "bytes_hex": "6A F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144314,
+            "source_line": 27272
+          },
+          {
+            "assembly": "mov.l   @r15+, r9",
+            "bytes_hex": "69 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144316,
+            "source_line": 27273
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144318,
+            "source_line": 27274
+          },
+          {
+            "assembly": "mov.l   @r15+, r8",
+            "bytes_hex": "68 F6",
+            "comment": "",
+            "function": "sub_231C8",
+            "label": "loc_233B6",
+            "pc": 144320,
+            "source_line": 27275
+          }
+        ],
+        "start_pc": 143816
+      },
+      "sub_233CC": {
+        "end_pc": 144390,
+        "instruction_count": 30,
+        "instructions": [
+          {
+            "assembly": "mov     r4, r3",
+            "bytes_hex": "63 43",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "sub_233CC",
+            "pc": 144332,
+            "source_line": 27288
+          },
+          {
+            "assembly": "mov.b   @(r0,r4), r1",
+            "bytes_hex": "01 4C",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144334,
+            "source_line": 27291
+          },
+          {
+            "assembly": "extu.b  r1, r1",
+            "bytes_hex": "61 1C",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144336,
+            "source_line": 27292
+          },
+          {
+            "assembly": "cmp/eq  r1, r5",
+            "bytes_hex": "35 10",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144338,
+            "source_line": 27293
+          },
+          {
+            "assembly": "bt      locret_23404",
+            "bytes_hex": "89 16",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144340,
+            "source_line": 27294
+          },
+          {
+            "assembly": "cmp/hi  r1, r5",
+            "bytes_hex": "35 16",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144342,
+            "source_line": 27295
+          },
+          {
+            "assembly": "bf      loc_233FC",
+            "bytes_hex": "8B 10",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144344,
+            "source_line": 27296
+          },
+          {
+            "assembly": "cmp/eq  r4, r3",
+            "bytes_hex": "33 40",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144346,
+            "source_line": 27297
+          },
+          {
+            "assembly": "bt      locret_23404",
+            "bytes_hex": "89 12",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144348,
+            "source_line": 27298
+          },
+          {
+            "assembly": "sub     r1, r5",
+            "bytes_hex": "35 18",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144350,
+            "source_line": 27299
+          },
+          {
+            "assembly": "shll16  r5",
+            "bytes_hex": "45 28",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144352,
+            "source_line": 27300
+          },
+          {
+            "assembly": "add     r4, r0",
+            "bytes_hex": "30 4C",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144354,
+            "source_line": 27301
+          },
+          {
+            "assembly": "mov.b   @r0, r1",
+            "bytes_hex": "61 00",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144356,
+            "source_line": 27302
+          },
+          {
+            "assembly": "mov.b   @(1,r0), r0",
+            "bytes_hex": "84 01",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144358,
+            "source_line": 27303
+          },
+          {
+            "assembly": "extu.b  r1, r1",
+            "bytes_hex": "61 1C",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144360,
+            "source_line": 27304
+          },
+          {
+            "assembly": "extu.b  r0, r0",
+            "bytes_hex": "60 0C",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144362,
+            "source_line": 27305
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144364,
+            "source_line": 27306
+          },
+          {
+            "assembly": "mov.l   off_23408, r2",
+            "bytes_hex": "D2 06",
+            "comment": "h'23700",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144366,
+            "source_line": 27307
+          },
+          {
+            "assembly": "sub     r1, r0",
+            "bytes_hex": "30 18",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144368,
+            "source_line": 27308
+          },
+          {
+            "assembly": "jsr     @r2",
+            "bytes_hex": "42 0B",
+            "comment": "sub_23700",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144370,
+            "source_line": 27309
+          },
+          {
+            "assembly": "mov     r5, r1",
+            "bytes_hex": "61 53",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144372,
+            "source_line": 27310
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144374,
+            "source_line": 27311
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144376,
+            "source_line": 27312
+          },
+          {
+            "assembly": "mov     r0, r5",
+            "bytes_hex": "65 03",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233CE",
+            "pc": 144378,
+            "source_line": 27313
+          },
+          {
+            "assembly": "add     #-1, r4",
+            "bytes_hex": "74 FF",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233FC",
+            "pc": 144380,
+            "source_line": 27316
+          },
+          {
+            "assembly": "cmp/pz  r4",
+            "bytes_hex": "44 11",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233FC",
+            "pc": 144382,
+            "source_line": 27317
+          },
+          {
+            "assembly": "bt      loc_233CE",
+            "bytes_hex": "89 E5",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233FC",
+            "pc": 144384,
+            "source_line": 27318
+          },
+          {
+            "assembly": "mov     #IVECT1, r4",
+            "bytes_hex": "E4 00",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "loc_233FC",
+            "pc": 144386,
+            "source_line": 27319
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "locret_23404",
+            "pc": 144388,
+            "source_line": 27322
+          },
+          {
+            "assembly": "mov     #IVECT1, r5",
+            "bytes_hex": "E5 00",
+            "comment": "",
+            "function": "sub_233CC",
+            "label": "locret_23404",
+            "pc": 144390,
+            "source_line": 27323
+          }
+        ],
+        "start_pc": 144332
+      },
+      "sub_2340C": {
+        "end_pc": 144454,
+        "instruction_count": 30,
+        "instructions": [
+          {
+            "assembly": "mov     r4, r3",
+            "bytes_hex": "63 43",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "sub_2340C",
+            "pc": 144396,
+            "source_line": 27329
+          },
+          {
+            "assembly": "mov.w   @(r0,r4), r1",
+            "bytes_hex": "01 4D",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144398,
+            "source_line": 27332
+          },
+          {
+            "assembly": "extu.w  r1, r1",
+            "bytes_hex": "61 1D",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144400,
+            "source_line": 27333
+          },
+          {
+            "assembly": "cmp/eq  r1, r5",
+            "bytes_hex": "35 10",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144402,
+            "source_line": 27334
+          },
+          {
+            "assembly": "bt      locret_23444",
+            "bytes_hex": "89 16",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144404,
+            "source_line": 27335
+          },
+          {
+            "assembly": "cmp/hi  r1, r5",
+            "bytes_hex": "35 16",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144406,
+            "source_line": 27336
+          },
+          {
+            "assembly": "bf      loc_2343C",
+            "bytes_hex": "8B 10",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144408,
+            "source_line": 27337
+          },
+          {
+            "assembly": "cmp/eq  r4, r3",
+            "bytes_hex": "33 40",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144410,
+            "source_line": 27338
+          },
+          {
+            "assembly": "bt      locret_23444",
+            "bytes_hex": "89 12",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144412,
+            "source_line": 27339
+          },
+          {
+            "assembly": "sub     r1, r5",
+            "bytes_hex": "35 18",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144414,
+            "source_line": 27340
+          },
+          {
+            "assembly": "shll16  r5",
+            "bytes_hex": "45 28",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144416,
+            "source_line": 27341
+          },
+          {
+            "assembly": "add     r4, r0",
+            "bytes_hex": "30 4C",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144418,
+            "source_line": 27342
+          },
+          {
+            "assembly": "mov.w   @r0, r1",
+            "bytes_hex": "61 01",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144420,
+            "source_line": 27343
+          },
+          {
+            "assembly": "mov.w   @(2,r0), r0",
+            "bytes_hex": "85 01",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144422,
+            "source_line": 27344
+          },
+          {
+            "assembly": "extu.w  r1, r1",
+            "bytes_hex": "61 1D",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144424,
+            "source_line": 27345
+          },
+          {
+            "assembly": "extu.w  r0, r0",
+            "bytes_hex": "60 0D",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144426,
+            "source_line": 27346
+          },
+          {
+            "assembly": "sts.l   pr, @-r15",
+            "bytes_hex": "4F 22",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144428,
+            "source_line": 27347
+          },
+          {
+            "assembly": "mov.l   off_23448, r2",
+            "bytes_hex": "D2 06",
+            "comment": "h'23700",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144430,
+            "source_line": 27348
+          },
+          {
+            "assembly": "sub     r1, r0",
+            "bytes_hex": "30 18",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144432,
+            "source_line": 27349
+          },
+          {
+            "assembly": "jsr     @r2",
+            "bytes_hex": "42 0B",
+            "comment": "sub_23700",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144434,
+            "source_line": 27350
+          },
+          {
+            "assembly": "mov     r5, r1",
+            "bytes_hex": "61 53",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144436,
+            "source_line": 27351
+          },
+          {
+            "assembly": "lds.l   @r15+, pr",
+            "bytes_hex": "4F 26",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144438,
+            "source_line": 27352
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144440,
+            "source_line": 27353
+          },
+          {
+            "assembly": "mov     r0, r5",
+            "bytes_hex": "65 03",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2340E",
+            "pc": 144442,
+            "source_line": 27354
+          },
+          {
+            "assembly": "add     #-2, r4",
+            "bytes_hex": "74 FE",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2343C",
+            "pc": 144444,
+            "source_line": 27357
+          },
+          {
+            "assembly": "cmp/pz  r4",
+            "bytes_hex": "44 11",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2343C",
+            "pc": 144446,
+            "source_line": 27358
+          },
+          {
+            "assembly": "bt      loc_2340E",
+            "bytes_hex": "89 E5",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2343C",
+            "pc": 144448,
+            "source_line": 27359
+          },
+          {
+            "assembly": "mov     #IVECT1, r4",
+            "bytes_hex": "E4 00",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "loc_2343C",
+            "pc": 144450,
+            "source_line": 27360
+          },
+          {
+            "assembly": "rts",
+            "bytes_hex": "00 0B",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "locret_23444",
+            "pc": 144452,
+            "source_line": 27363
+          },
+          {
+            "assembly": "mov     #IVECT1, r5",
+            "bytes_hex": "E5 00",
+            "comment": "",
+            "function": "sub_2340C",
+            "label": "locret_23444",
+            "pc": 144454,
+            "source_line": 27364
+          }
+        ],
+        "start_pc": 144396
+      }
+    },
+    "selection_policy": {
+      "call_context_bytes": 16,
+      "call_sites": [
+        "0x85B2E",
+        "0x648D8",
+        "0x5B3C0"
+      ],
+      "entry_point_window_bytes": 64,
+      "helper_entry_points": {
+        "loc_23508": "0x23508",
+        "loc_2350C": "0x2350C"
+      },
+      "helper_functions": [
+        "sub_22E10",
+        "sub_22FAC",
+        "sub_22B44",
+        "sub_22DF8",
+        "sub_233CC",
+        "sub_2340C",
+        "sub_231C8"
+      ],
+      "instruction_decoder_used": false,
+      "source_line_grammar": "rom_access_indexer.py CODE record regex"
+    }
+  }
+}
