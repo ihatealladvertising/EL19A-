@@ -19,11 +19,14 @@ permissions:
 jobs:
   export-0f10e:
     runs-on: ubuntu-latest
+    concurrency:
+      group: wo-register-main
+      cancel-in-progress: false
     steps:
-      - name: Check out exact triggering main commit
+      - name: Check out latest main after acquiring serialized publication slot
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: main
           fetch-depth: 0
 
       - name: Set up Python
@@ -70,7 +73,7 @@ jobs:
           git fetch origin main
           checkout_sha="$(git rev-parse HEAD)"
           remote_sha="$(git rev-parse origin/main)"
-          if [ "$checkout_sha" != "${{ github.sha }}" ] || [ "$remote_sha" != "${{ github.sha }}" ]; then
+          if [ "$checkout_sha" != "$remote_sha" ]; then
             echo "main advanced during production export; refusing stale publication."
             exit 1
           fi
