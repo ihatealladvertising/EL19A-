@@ -1,0 +1,79 @@
+{
+  "analysis_boundary": {
+    "existing_static_tracker_reused": true,
+    "independent_redecode_claimed": false,
+    "instruction_decoder_implemented_here": false,
+    "query_transform_and_consumer_semantics_promoted": false
+  },
+  "catalogue": {
+    "bytes": 38180,
+    "git_blob_sha1_expected": "e8ee9f257e4cd114624cfc26dd08caecccdd59f7",
+    "path": "CALIBRATIONS/discovered_tables_catalog.csv",
+    "sha256": "022042cf53d014a1dc71cf08632fa46d2161ac37574ede2f5f63f497a8327c70",
+    "target_catalogue_row_present": false,
+    "target_rows_used": 1,
+    "tracker_seed": "explicit_address_only_seed_from_WO70043; no geometry or semantic metadata fabricated"
+  },
+  "listing": {
+    "archive_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip",
+    "archive_sha256": "8f88f711a585afd56d0541f56c4bc6bb0a4c57a0d58016258fde5c2f1916cc42",
+    "member_bytes": "27045080",
+    "member_name": "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+    "member_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
+  },
+  "output": {
+    "manifest_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json",
+    "per_call_json_bytes": 1045,
+    "per_call_json_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json",
+    "per_call_json_sha256": "d50e2cc991f326fb987ac720d15953bbd85692826ac1225c3134d261f37ca463"
+  },
+  "required_call_pc": "0x85B2E",
+  "required_helper": "sub_22E10",
+  "required_query_origin": "r5<-FFFF84B8",
+  "rom": {
+    "bytes": 1048576,
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "path": "EVIDENCE/VERSA f501.bin",
+    "sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
+  },
+  "schema": "reader-trace-static-flow-production-manifest-v0.1",
+  "static_tracker": {
+    "functions": [
+      "parse_listing",
+      "full_rom_analysis"
+    ],
+    "matching_call_count": 1,
+    "module": "tools/build_static_indices.py",
+    "parsed_code_line_count": 306688,
+    "selected_call": {
+      "assembly": "jsr     @r2",
+      "dests": [
+        {
+          "instruction": "mov.b   r2, @(r0,r6)",
+          "is_tainted": true,
+          "ram_ea": "0xFFFF29F6",
+          "width": "b",
+          "write_pc": "0x85B3A"
+        },
+        {
+          "instruction": "mov.b   r2, @(r0,r4)",
+          "is_tainted": true,
+          "ram_ea": "0xFFFF37AE",
+          "width": "b",
+          "write_pc": "0x85B40"
+        }
+      ],
+      "function": "sub_85AF4",
+      "helper": "sub_22E10",
+      "instruction_bytes": "42 0B",
+      "label": "loc_85B18",
+      "q_inputs": [
+        "r5<-FFFF84B8"
+      ],
+      "reader_pc": "0x85B2E"
+    },
+    "target_per_call_row_count": 1
+  },
+  "status": "PASS",
+  "target_ea": "0x0000F10E"
+}

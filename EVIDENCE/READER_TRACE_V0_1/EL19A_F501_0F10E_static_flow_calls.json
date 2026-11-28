@@ -1,0 +1,34 @@
+{
+  "artifact_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+  "calls": [
+    {
+      "dests": [
+        {
+          "instruction": "mov.b   r2, @(r0,r6)",
+          "is_tainted": true,
+          "ram_ea": 4294912502,
+          "width": "b",
+          "write_pc": 547642
+        },
+        {
+          "instruction": "mov.b   r2, @(r0,r4)",
+          "is_tainted": true,
+          "ram_ea": 4294916014,
+          "width": "b",
+          "write_pc": 547648
+        }
+      ],
+      "function": "sub_85AF4",
+      "helper_ea": 142864,
+      "helper_symbol": "sub_22E10",
+      "q_inputs": [
+        "r5<-FFFF84B8"
+      ],
+      "reader_pc": 547630,
+      "target_ea": 61710
+    }
+  ],
+  "schema": "sh705x-static-reader-calls-v0.1",
+  "source_listing_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip#EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+  "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
+}
