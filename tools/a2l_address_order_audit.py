@@ -3,9 +3,9 @@
 import argparse, bisect, collections, csv, hashlib, json, random, re, statistics
 from pathlib import Path
 
-CHAR = re.compile(r"/begin\\s+CHARACTERISTIC\\s+(\\S+)([\\s\\S]*?)/end\\s+CHARACTERISTIC", re.I)
-DECL = re.compile(r"(?m)^\\s*(VALUE|CURVE|MAP|CUBOID|CUBE_4|CUBE_5)\\s+(0x[0-9A-Fa-f]+)\\s+(\\S+)")
-NAME = re.compile(r"[A-Za-z_][A-Za-z0-9_]*\\Z")
+CHAR = re.compile(r"/begin\s+CHARACTERISTIC\s+(\S+)([\s\S]*?)/end\s+CHARACTERISTIC", re.I)
+DECL = re.compile(r"(?m)^\s*(VALUE|CURVE|MAP|CUBOID|CUBE_4|CUBE_5)\s+(0x[0-9A-Fa-f]+)\s+(\S+)")
+NAME = re.compile(r"[A-Za-z_][A-Za-z0-9_]*\Z")
 START, END, BLOCK = 0x8000, 0x97FF, 0x400
 
 def sha256(path):
@@ -16,7 +16,7 @@ def sha256(path):
 
 def parse_a2l(path):
     raw=Path(path).read_bytes().decode("latin-1")
-    starts=[0]+[i+1 for i,c in enumerate(raw) if c=="\\n"]
+    starts=[0]+[i+1 for i,c in enumerate(raw) if c=="\n"]
     rows=[]; kinds=collections.Counter()
     for m in CHAR.finditer(raw):
         d=DECL.search(m.group(2))
@@ -125,7 +125,7 @@ def analyze(label,path,seed,reps):
         sub["0x%05X-0x%05X"%(lo,lo+BLOCK-1)]=z
     pref=prefix(names)
     case=stats([x.casefold() for x in names])
-    natural=stats([tuple(int(t) if t.isdigit() else t.casefold() for t in re.split(r"(\\d+)",x)) for x in names])
+    natural=stats([tuple(int(t) if t.isdigit() else t.casefold() for t in re.split(r"(\d+)",x)) for x in names])
     stripped=stats([x[len(pref):] for x in names])
     def variant(pick):
         rr=sorted((pick(g) for g in groups.values()),key=lambda r:(r["addr"],r["name"],r["line"]))
@@ -193,7 +193,7 @@ def write_outputs(v6,juke,out_tsv,out_json,expected_v6=None,expected_juke=None,s
       "duplicate_group_size","primary_representative","sorted_index","previous_symbol","next_symbol",
       "adjacent_nondecreasing_from_previous","ascending_run_id","ascending_run_length"]
     with open(out_tsv,"w",encoding="utf-8",newline="") as f:
-        w=csv.DictWriter(f,fieldnames=fields,delimiter="\\t",lineterminator="\\n");w.writeheader();w.writerows(ar+br)
+        w=csv.DictWriter(f,fieldnames=fields,delimiter="\t",lineterminator="\n");w.writeheader();w.writerows(ar+br)
     result={"method_version":"1.0","region":{"start":"0x8000","end_inclusive":"0x97FF","subregion_size_bytes":BLOCK},
       "primary_population":"CHARACTERISTIC records with record type VALUE; earliest declaration per unique ROM address; aliases retained separately",
       "sort":"numeric ROM address ascending; deterministic name and source-line tie-breaks",
@@ -201,7 +201,7 @@ def write_outputs(v6,juke,out_tsv,out_json,expected_v6=None,expected_juke=None,s
       "null":"10,000 seeded global permutations and within-1KiB-block shuffles per donor; add-one empirical p-values",
       "donors":{"V6":a,"Juke":b},
       "output_tsv":{"path":str(out_tsv),"sha256":sha256(out_tsv),"row_count":len(ar)+len(br)}}
-    with open(out_json,"w",encoding="utf-8",newline="\\n") as f:json.dump(result,f,indent=2,sort_keys=True,ensure_ascii=False);f.write("\\n")
+    with open(out_json,"w",encoding="utf-8",newline="\n") as f:json.dump(result,f,indent=2,sort_keys=True,ensure_ascii=False);f.write("\n")
     return result
 
 def main():
