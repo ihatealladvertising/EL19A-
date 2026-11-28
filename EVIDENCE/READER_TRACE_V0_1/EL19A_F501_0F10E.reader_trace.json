@@ -51,6 +51,7 @@
       "confidence": "high",
       "evidence_refs": [
         "ev:rom-f501",
+        "ev:rom-f501-payload-direct",
         "ev:wo70013",
         "ev:fnd-000026"
       ]
@@ -735,6 +736,16 @@
       "evidence_class": "canonical_finding_record",
       "extraction_method": "Cross-check against current finding record",
       "status": "current"
+    },
+    {
+      "evidence_id": "ev:rom-f501-payload-direct",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "anchor": "WO70040 independent byte read of file offsets 0x0F10E-0x0F11D and 16-byte payload SHA-256 recomputation",
+      "evidence_class": "target_rom_identity_and_payload",
+      "extraction_method": "Direct read of the committed 1048576-byte flat ROM image; MD5, image SHA-256 and payload SHA-256 recomputed with Python hashlib",
+      "status": "direct_observation_verified"
     }
   ],
   "lookup_contract": {
