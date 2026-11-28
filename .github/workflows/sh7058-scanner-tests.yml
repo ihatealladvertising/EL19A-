@@ -26,6 +26,8 @@ on:
       - "tools/build_static_indices.py"
       - "tools/test_rom_access_indexer.py"
       - "tools/test_reader_trace_static_flow.py"
+      - "tools/reader_trace_helper_profiles.py"
+      - "tools/test_reader_trace_helper_profiles.py"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -54,6 +56,8 @@ on:
       - "tools/build_static_indices.py"
       - "tools/test_rom_access_indexer.py"
       - "tools/test_reader_trace_static_flow.py"
+      - "tools/reader_trace_helper_profiles.py"
+      - "tools/test_reader_trace_helper_profiles.py"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -96,6 +100,8 @@ jobs:
           tools/build_static_indices.py
           tools/test_rom_access_indexer.py
           tools/test_reader_trace_static_flow.py
+          tools/reader_trace_helper_profiles.py
+          tools/test_reader_trace_helper_profiles.py
       - name: Run synthetic regression tests (no real ROMs)
         run: >
           python3 -m unittest -v
@@ -108,4 +114,5 @@ jobs:
           tools/test_reader_trace_graph.py
           tools/test_reader_trace_indexer_adapter.py
           tools/test_reader_trace_static_flow.py
+          tools/test_reader_trace_helper_profiles.py
           tools/test_rom_access_indexer.py
