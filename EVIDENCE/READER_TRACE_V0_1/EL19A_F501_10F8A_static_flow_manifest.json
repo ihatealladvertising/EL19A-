@@ -1,0 +1,83 @@
+{
+  "analysis_boundary": {
+    "existing_static_tracker_reused": true,
+    "independent_redecode_claimed": false,
+    "instruction_decoder_implemented_here": false,
+    "query_transform_and_consumer_semantics_promoted": false
+  },
+  "catalogue": {
+    "bytes": 38180,
+    "git_blob_sha1_expected": "e8ee9f257e4cd114624cfc26dd08caecccdd59f7",
+    "path": "CALIBRATIONS/discovered_tables_catalog.csv",
+    "sha256": "022042cf53d014a1dc71cf08632fa46d2161ac37574ede2f5f63f497a8327c70",
+    "target_catalogue_row_present": true,
+    "target_rows_used": 1,
+    "tracker_seed": "existing_catalogue_row"
+  },
+  "graph_validation": {
+    "base_fixture_preserved": true,
+    "call_site_validation_recorded": true,
+    "resolved_boundary_ids": [
+      "listing-provenance-10f8a"
+    ],
+    "static_flow_evidence_ref": "ev:static-flow-production-10F8A",
+    "warning_count": 0,
+    "warnings": []
+  },
+  "listing": {
+    "archive_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip",
+    "archive_sha256": "8f88f711a585afd56d0541f56c4bc6bb0a4c57a0d58016258fde5c2f1916cc42",
+    "member_bytes": "27045080",
+    "member_name": "EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+    "member_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
+  },
+  "output": {
+    "manifest_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_manifest.json",
+    "per_call_json_bytes": 2242,
+    "per_call_json_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_calls.json",
+    "per_call_json_sha256": "10ec51a93ba5ab6892cf4373cf5e0c42959e34e32da62a48e528b9a16630e76c",
+    "production_enriched_graph_bytes": 24575,
+    "production_enriched_graph_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A.reader_trace.production_enriched.json",
+    "production_enriched_graph_sha256": "605dcbd34b127bc9c1c23384f77f9b9a717cf0420d0ae556083d7f0384fc3e6f"
+  },
+  "required_call_pc": "0x648D8",
+  "required_helper": "sub_22FAC",
+  "required_query_origin": null,
+  "rom": {
+    "bytes": 1048576,
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "path": "EVIDENCE/VERSA f501.bin",
+    "sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
+  },
+  "schema": "reader-trace-static-flow-production-manifest-v0.1",
+  "static_tracker": {
+    "functions": [
+      "parse_listing",
+      "full_rom_analysis"
+    ],
+    "matching_call_count": 1,
+    "module": "tools/build_static_indices.py",
+    "parsed_code_line_count": 306688,
+    "selected_call": {
+      "assembly": "jsr     @r2",
+      "dests": [
+        {
+          "instruction": "mov.w   r6, @(r0,r7)",
+          "is_tainted": true,
+          "ram_ea": "0xFFFF170C",
+          "width": "w",
+          "write_pc": "0x648EC"
+        }
+      ],
+      "function": "sub_648A6",
+      "helper": "sub_22FAC",
+      "instruction_bytes": "42 0B",
+      "label": "loc_648CE",
+      "q_inputs": [],
+      "reader_pc": "0x648D8"
+    },
+    "target_per_call_row_count": 5
+  },
+  "status": "PASS",
+  "target_ea": "0x00010F8A"
+}

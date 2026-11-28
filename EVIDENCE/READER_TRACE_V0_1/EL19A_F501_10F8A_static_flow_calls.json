@@ -1,0 +1,84 @@
+{
+  "artifact_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+  "call_site_validation": {
+    "assembly": "jsr @r2",
+    "instruction_bytes": "42 0B",
+    "listing_rom_byte_concordant": true,
+    "reader_pc": 411864,
+    "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+    "target_ea": 69514,
+    "validator": "build_static_indices.parse_listing"
+  },
+  "calls": [
+    {
+      "dests": [
+        {
+          "instruction": "mov.w   r6, @(r0,r7)",
+          "is_tainted": true,
+          "ram_ea": 4294907660,
+          "width": "w",
+          "write_pc": 411884
+        }
+      ],
+      "function": "sub_648A6",
+      "helper_ea": 143276,
+      "helper_symbol": "sub_22FAC",
+      "q_inputs": [],
+      "reader_pc": 411864,
+      "target_ea": 69514
+    },
+    {
+      "dests": [],
+      "function": "sub_65730",
+      "helper_ea": 143276,
+      "helper_symbol": "sub_22FAC",
+      "q_inputs": [
+        "r6<-FFFF1630"
+      ],
+      "reader_pc": 415550,
+      "target_ea": 69514
+    },
+    {
+      "dests": [
+        {
+          "instruction": "mov.w   r5, @r11",
+          "is_tainted": true,
+          "ram_ea": 4294910288,
+          "width": "w",
+          "write_pc": 415620
+        }
+      ],
+      "function": "sub_65730",
+      "helper_ea": 143276,
+      "helper_symbol": "sub_22FAC",
+      "q_inputs": [
+        "r6<-FFFF10CC"
+      ],
+      "reader_pc": 415604,
+      "target_ea": 69514
+    },
+    {
+      "dests": [],
+      "function": "sub_65730",
+      "helper_ea": 143276,
+      "helper_symbol": "sub_22FAC",
+      "q_inputs": [],
+      "reader_pc": 415692,
+      "target_ea": 69514
+    },
+    {
+      "dests": [],
+      "function": "sub_66CDC",
+      "helper_ea": 143276,
+      "helper_symbol": "sub_22FAC",
+      "q_inputs": [
+        "r6<-FFFF14C8"
+      ],
+      "reader_pc": 422014,
+      "target_ea": 69514
+    }
+  ],
+  "schema": "sh705x-static-reader-calls-v0.1",
+  "source_listing_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip#EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+  "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
+}

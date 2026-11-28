@@ -432,7 +432,7 @@
       "status": "direct_observation_verified"
     },
     {
-      "anchor": "Production full_rom_analysis cat_calls row for target 0x0F10E, call PC 0x85B2E and helper sub_22E10",
+      "anchor": "Production full_rom_analysis cat_calls row for target 0xF10E, call PC 0x85B2E and helper sub_22E10",
       "evidence_class": "per_call_static_reader_flow",
       "evidence_id": "ev:static-flow-production-0F10E",
       "extraction_method": "Production build_static_indices.full_rom_analysis() after pinned Stage-16 member extraction and parse_listing() ROM-byte concordance",

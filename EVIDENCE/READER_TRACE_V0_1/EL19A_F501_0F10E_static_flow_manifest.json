@@ -34,9 +34,9 @@
     "per_call_json_bytes": 1045,
     "per_call_json_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json",
     "per_call_json_sha256": "d50e2cc991f326fb987ac720d15953bbd85692826ac1225c3134d261f37ca463",
-    "production_enriched_graph_bytes": 31505,
+    "production_enriched_graph_bytes": 31504,
     "production_enriched_graph_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json",
-    "production_enriched_graph_sha256": "ba2d59170bd80cfe90b5fa7ea630d56b6c584959e72f9f117cb71a6ecfdd7d92"
+    "production_enriched_graph_sha256": "a3421e6f65d06f0fcca32dcce0b54a6875574355761f8e9b598433a3a2532806"
   },
   "required_call_pc": "0x85B2E",
   "required_helper": "sub_22E10",
