@@ -274,12 +274,8 @@ class StaticFlowAdapterTests(unittest.TestCase):
 
         document["call_site_validation"]["reader_pc"] = 0x648D8
         document["call_site_validation"]["listing_rom_byte_concordant"] = False
-        graph = load_graph("EL19A_F501_10F8A_32PT_UWORD.reader_trace.json")
-        add_document_evidence(graph, document)
         with self.assertRaises(StaticFlowAdapterError):
-            merge_per_call_static_flow(
-                graph, document, static_flow_evidence_ref="ev:static-flow-calls"
-            )
+            static_flow_document_sha256(document)
 
     def test_graph_and_document_are_not_mutated(self):
         graph = load_graph()
