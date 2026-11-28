@@ -658,5 +658,23 @@ class Milestone5IntegrationTests(unittest.TestCase):
             self.assertEqual(out["xml_hits"][0]["name"], "SynthTbl")
 
 
+class RomIndexCliRegistrationTests(unittest.TestCase):
+    def test_rom_index_build_and_query_commands_are_registered(self):
+        wb_path = Path(__file__).resolve().parent / "nissan_sh705x_workbench.py"
+        proc = subprocess.run(
+            [sys.executable, str(wb_path), "--help"],
+            capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertIn("rom-index", proc.stdout)
+        sub = subprocess.run(
+            [sys.executable, str(wb_path), "rom-index", "--help"],
+            capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(sub.returncode, 0, sub.stderr)
+        self.assertIn("build", sub.stdout)
+        self.assertIn("query", sub.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()
