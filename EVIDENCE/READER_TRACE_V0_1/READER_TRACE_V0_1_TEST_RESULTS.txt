@@ -9,14 +9,14 @@ Reader Trace-specific tests:
   - test_reader_trace_graph.py: 20 graph-contract and golden-geometry tests.
   - test_reader_trace_indexer_adapter.py: 14 adapter tests.
   - test_reader_trace_static_flow.py: 4 existing static-flow tests.
-  - test_reader_trace_helper_profiles.py: 11 exact-image helper-profile tests.
+  - test_reader_trace_helper_profiles.py: 13 exact-image helper-profile tests.
   - test_reader_trace_pipeline.py: 7 composed pipeline tests.
-  Total Reader Trace-specific tests: 56.
+  Total Reader Trace-specific tests: 58.
 
 Full regression:
-  GitHub Actions run: 46108953385
-  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108953385
-  Result: 123 tests passed; 2 optional production-regression checks skipped.
+  GitHub Actions run: 46109067554
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46109067554
+  Result: 125 tests passed; 2 optional production-regression checks skipped.
   Compile step passed.
   Synthetic regression step passed.
 
@@ -46,6 +46,7 @@ Exact-image helper-profile coverage:
   - Exact processor family + decoded ROM SHA-256 + helper EA matching
   - Unknown EA, other ROM SHA and other CPU profile do not match
   - Evidence references required before profile attachment
+  - Pinned helper listings require a matching cited target_disassembly_listing SHA-256 using the explicit sha256 algorithm
   - Non-mutating graph enrichment; core graph contract remains valid after profile attachment
   - Profile mechanics remain basis=reported_observation; no implicit promotion to direct instruction facts
 
