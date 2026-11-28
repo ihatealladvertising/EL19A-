@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — scalar work-order allocation release (2026-11-28)
+**Purpose:** WO70045 and WO70046 were published and read back; the auto-generated live index/dashboard now lists both as READY in coordinator FIFO order. No calibration, Findings, XML, ROM, A2L, workbook or tool-source artifact was changed.
+**Lock released:** 2026-11-28 — both WO reports and generated register read back from remote main.
+**State:** UNLOCKED
+
 **Integrator:** ChatGPT — register two bounded scalar evidence work orders (2026-11-28)
 **Purpose:** Publish WO70045 Release 1 scalar-alignment/scope reconciliation and WO70046 donor address-order correlation reproduction. No technical findings or protected calibration artifacts are changed in this allocation batch.
 **Lock acquired:** 2026-11-28 — latest main gate read back as UNLOCKED; serialize work-order registration.
