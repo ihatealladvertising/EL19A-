@@ -1,18 +1,21 @@
 {
   "work_order": "WO70045",
-  "generated_utc": "2026-11-28",
   "sources": {
     "scope_matrix": {
       "path": "CALIBRATIONS/RELEASE1_SCOPE_MATRIX_R1.csv",
-      "git_blob_sha": "52fe30fdd760d3a13885007fe9391dead425ec21"
+      "blob_sha": "52fe30fdd760d3a13885007fe9391dead425ec21"
     },
     "alignment_tsv": {
       "path": "EVIDENCE/EL19A_scalar_alignment_v2.tsv",
-      "git_blob_sha": "41c65a926ef05f36052e0b4bfe87cbf1962e0fd3"
+      "blob_sha": "41c65a926ef05f36052e0b4bfe87cbf1962e0fd3"
+    },
+    "alignment_audit_tsv": {
+      "path": "EVIDENCE/EL19A_scalar_alignment_audit_2026-11-27.tsv",
+      "blob_sha": "a4570a0e5fcd909b261be595da5466cdab02c689"
     },
     "release1_xml": {
       "path": "CALIBRATIONS/EL19A_release1_conservative.xml",
-      "git_blob_sha": "4bab8bced09047c461520c6044415ca5357b0110"
+      "blob_sha": "4bab8bced09047c461520c6044415ca5357b0110"
     }
   },
   "counts": {
@@ -20,31 +23,60 @@
     "unique_scope_addresses": 254,
     "alignment_rows": 2680,
     "unique_alignment_addresses": 2515,
-    "xml_storageaddress_objects": 399,
-    "scope_rows_by_alignment_tier": {
-      "NO_ALIGNMENT_ROW": 249,
-      "TIER_C": 5,
-      "TIER_A": 7
-    },
-    "intersections": 12,
+    "audit_rows": 2680,
+    "xml_calibration_object_rows": 254,
+    "xml_unique_addresses": 254,
+    "alignment_intersections": 12,
     "intersection_tiers": {
-      "TIER_C": 5,
-      "TIER_A": 7
+      "A": 7,
+      "B": 0,
+      "C": 5
     },
-    "actual_xml_present_rows": 261,
+    "scope_alignment_tier_rows": {
+      "NO_ALIGNMENT_ROW": 249,
+      "TIER_A": 7,
+      "TIER_B": 0,
+      "TIER_C": 5,
+      "DUPLICATE_CONFLICT": 0
+    },
     "include_rows": 254,
+    "include_rows_present_in_xml": 254,
     "include_rows_missing_xml": 0,
-    "xml_rows_not_included": 7
+    "xml_rows_with_exclude_disposition": 7,
+    "raw_comparison": {
+      "MATCH": 2660,
+      "UNRESOLVED": 0,
+      "MISMATCH": 0
+    },
+    "scanner_exact_width_alignment_rows": 1493,
+    "xml_fragment_hit_alignment_rows": 900
   },
-  "supplemental": [],
   "specific_dispositions": {
-    "0x0924E": "WO65324 says binary enable factor; not established as mDDPAPO. Matrix row not in scalar alignment TSV; inspect actual XML entry separately in supplemental output.",
-    "0x08550": "Generic UBYTE hysteresis threshold; coolant identity unresolved. Donor mDSHCUT name/scaling must not be treated as target fact.",
-    "0x0848A/0x0848B": "WO66032 owns the correction and Findings migration; this audit records their alignment tier only and does not re-decide object identity/D-N semantics."
+    "0x0924E": {
+      "alignment_tier": "NO_ALIGNMENT_ROW",
+      "matrix": "INCLUDE — PROVISIONAL",
+      "xml": "present; [P] QDSPT APO Compensation Change Rate [S] mDDPAPO (924E); uint16 BE 1D scalar; Percent_UWORD_100_256",
+      "target_correction": "WO65324 identifies 0x924E as a binary enable factor, not established as mDDPAPO. Current Release 1 name and percent conversion conflict with target-side disposition.",
+      "recommendation": "Flag for explicit correction decision; no XML or matrix edit authorized here."
+    },
+    "0x08550": {
+      "alignment_tier": "TIER_A",
+      "matrix": "INCLUDE — PROVISIONAL",
+      "xml": "present; [P] Coolant Temp Min for Rev Hang; uint8 1D scalar; Temp_Coolant_Min",
+      "target_correction": "WO65324 establishes generic UBYTE hysteresis threshold on internal dashpot-target path; coolant identity unresolved.",
+      "recommendation": "Do not promote mDSHCUT identity/coolant conversion."
+    },
+    "0x0848A/0x0848B": {
+      "alignment_tier": "TIER_C/TIER_C",
+      "matrix": "INCLUDE — PROVISIONAL",
+      "xml": "present",
+      "target_correction": "WO66032 owns current Findings migration and interpretation correction; this audit does not decide D/N semantics."
+    }
   },
   "limitations": [
-    "Scanner-width and XML-fragment row-level matches were not recomputed because WO70032's pinned 2680-row audit output is available, but its JSON/TSV files were not fetched into this execution; global counts retained from WO70032 report.",
-    "The XML parser inventories every table tag with storageaddress; exact count/uniqueness should be checked against WO70015's 254-object baseline.",
-    "Donor symbol and conversion fields are alignment hypotheses, not target-side calibration semantics."
+    "Tier joins preserve repeated alignment rows; per-row audit counts are retained as joined lists, not collapsed.",
+    "Scanner exact-width and XML-fragment hits are sourced from the row-level WO70032 audit TSV; they do not imply semantic validity or Release 1 XML inclusion.",
+    "Actual Release 1 XML inclusion is determined from top-level 1D/2D/3D table entries with storageaddress; child axis tables are excluded.",
+    "No calibration XML, scope matrix, Findings, workbook or tool source was modified."
   ]
 }
