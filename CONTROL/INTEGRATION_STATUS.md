@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — WO70044 production-backed per-call trace for EL19A 0x10F8A (2026-11-28)
+**Purpose:** Serialize the target-specific production static-flow exporter/workflow extension and its evidence/report publication. Scope is the 0x10F8A graph call at 0x648D8 / sub_22FAC only; preserve the golden graph and existing 0x0F10E production outputs. No calibration XML, ROM, A2L, workbook, catalogue, or physical-semantic promotion is authorized.
+**Lock acquired:** 2026-11-28T05:19:12.386Z — latest main verified; prior gate state UNLOCKED; no active scope locks or CLAIMED work orders.
+**State:** LOCKED
+
 **Integrator:** ChatGPT — WO70039 final closeout and work-order registry migration-baseline correction (2026-11-28)
 **Purpose:** Publish the verified WO70039 closeout and restore the v4 registry automation without altering the generated register directly. Grandfather the existing unstructured historical backlog through WO70038; all newly changed/added WO files remain strictly validated. The closeout package includes the report, metadata, bounded validator/pin/protocol regression and generated-register readback. No calibration, ROM, worker FIFO, Findings or workbook changes.
 **Lock acquired:** 2026-11-28 — latest main `7fd97ed64a149fe3e92e104b20148a503c5f2677` and gate UNLOCKED were verified immediately before acquisition.
