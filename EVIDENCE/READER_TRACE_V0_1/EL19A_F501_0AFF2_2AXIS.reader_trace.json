@@ -360,6 +360,102 @@
         "ev:wo70033",
         "ev:fnd-000028"
       ]
+    },
+    {
+      "node_id": "reg-r2-map-result",
+      "kind": "register",
+      "label": "R2 unsigned map result after delay-slot zero extension",
+      "address": null,
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ],
+      "properties": {
+        "register": "R2",
+        "value_type": "uint8",
+        "source": "R0",
+        "zero_extended_at": "0x5B3C2"
+      }
+    },
+    {
+      "node_id": "code-5b3c2",
+      "kind": "code_site",
+      "label": "0x5B3C2 delay-slot zero-extends R0 to R2",
+      "address": {
+        "space": "rom_ea",
+        "value": 373698
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ],
+      "properties": {
+        "mnemonic": "extu.b r0,r2",
+        "delay_slot_of": "0x5B3C0"
+      }
+    },
+    {
+      "node_id": "code-5b3b2",
+      "kind": "code_site",
+      "label": "0x5B3B2 stages a separate inline table element",
+      "address": {
+        "space": "rom_ea",
+        "value": 373682
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ],
+      "properties": {
+        "operation": "inline element staging",
+        "destination": "FFFF14E4",
+        "separate_from_lookup_map": "0x0AFF2"
+      }
+    },
+    {
+      "node_id": "code-5b58c",
+      "kind": "code_site",
+      "label": "0x5B58C captures 16-bit product from MACL",
+      "address": {
+        "space": "rom_ea",
+        "value": 374156
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ],
+      "properties": {
+        "mnemonic": "sts macl,r2",
+        "source": "MACL"
+      }
+    },
+    {
+      "node_id": "code-5b590",
+      "kind": "code_site",
+      "label": "0x5B590 stores product to U16[FFFF115A]",
+      "address": {
+        "space": "rom_ea",
+        "value": 374160
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ],
+      "properties": {
+        "mnemonic": "mov.w r2,@(r0,r13)",
+        "destination": "FFFF115A",
+        "base": "FFFF1054",
+        "offset": "0x106"
+      }
     }
   ],
   "edges": [
@@ -530,18 +626,6 @@
       ]
     },
     {
-      "edge_id": "m15",
-      "from_node": "reg-r0-result",
-      "to_node": "consumer-5b3ce",
-      "relation": "lookup_result_used_as_multiplicand",
-      "basis": "reported_observation",
-      "confidence": "high",
-      "evidence_refs": [
-        "ev:wo70033",
-        "ev:fnd-000028"
-      ]
-    },
-    {
       "edge_id": "m16",
       "from_node": "ram-ffff2a58",
       "to_node": "consumer-5b3ce",
@@ -554,10 +638,71 @@
       ]
     },
     {
-      "edge_id": "m17",
+      "edge_id": "m15a",
+      "from_node": "reg-r0-result",
+      "to_node": "code-5b3c2",
+      "relation": "lookup_return_zero_extended_to_R2",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ]
+    },
+    {
+      "edge_id": "m15b",
+      "from_node": "code-5b3c2",
+      "to_node": "reg-r2-map-result",
+      "relation": "R0_copied_unsigned_into_R2",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m15c",
+      "from_node": "reg-r2-map-result",
+      "to_node": "consumer-5b3ce",
+      "relation": "lookup_result_used_as_first_multiplicand",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m17a",
       "from_node": "consumer-5b3ce",
+      "to_node": "code-5b58c",
+      "relation": "product_accumulated_in_MACL_then_captured",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m17b",
+      "from_node": "code-5b58c",
+      "to_node": "code-5b590",
+      "relation": "moves_MACL_product_for_store",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m17c",
+      "from_node": "code-5b590",
       "to_node": "ram-ffff115a",
-      "relation": "product_published_to_UWORD_sink",
+      "relation": "stores_UWORD_product_to_FFFF115A",
       "basis": "reported_observation",
       "confidence": "high",
       "evidence_refs": [
@@ -567,14 +712,15 @@
     },
     {
       "edge_id": "m18",
-      "from_node": "code-5b3c0",
+      "from_node": "code-5b3b2",
       "to_node": "ram-ffff14e4",
-      "relation": "separate_inline_element_staging_not_map_result",
+      "relation": "stages_separate_inline_table_element",
       "basis": "reported_observation",
       "confidence": "high",
       "evidence_refs": [
         "ev:wo70033",
-        "ev:fnd-000028"
+        "ev:fnd-000028",
+        "ev:lst-stage16"
       ]
     }
   ],
