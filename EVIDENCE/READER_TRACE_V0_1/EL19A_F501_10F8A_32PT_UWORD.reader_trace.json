@@ -1,0 +1,614 @@
+{
+  "schema_version": "sh705x-reader-trace-graph-v0.1",
+  "data_model_version": "sh705x-datamodel-v1.0.0",
+  "trace_id": "trace:EL19A:f501:0x10F8A:call-0x648D8:v0.1",
+  "artifact": {
+    "artifact_id": "rom:VERSA_f501.bin#bfe037e8e6c389e2",
+    "source_path": "EVIDENCE/VERSA f501.bin",
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "decoded_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "processor_family": "SH7058",
+    "processor_model": "SH705822N",
+    "ecu_profile": "EL19A / MR18DE"
+  },
+  "target_object": {
+    "object_ref": "candidate:EL19A:f501:0x10F8A",
+    "address_space": "rom_ea",
+    "ea": 69514,
+    "byte_extent": 64,
+    "dimensions": [
+      32,
+      1
+    ],
+    "storage_type": "uint16",
+    "payload_sha256": "55319d90b8e00136a477ced1c9d40b5d9a46ca983c941f38178cea4761dfed1b"
+  },
+  "call_ref": {
+    "call_id": "call:rom:f501:0x648D8",
+    "call_pc": 411864,
+    "call_form": "indirect_jsr",
+    "helper_ea": 143276
+  },
+  "nodes": [
+    {
+      "node_id": "curve-10f8a",
+      "kind": "rom_object",
+      "label": "EL19A 32-point UWORD BE value curve 0x10F8A",
+      "address": {
+        "space": "rom_ea",
+        "value": 69514
+      },
+      "properties": {
+        "byte_extent": 64,
+        "dimensions": [
+          32,
+          1
+        ],
+        "storage_type": "uint16",
+        "payload_sha256": "55319d90b8e00136a477ced1c9d40b5d9a46ca983c941f38178cea4761dfed1b",
+        "strictly_increasing": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "axis-0f712",
+      "kind": "rom_object",
+      "label": "EL19A 32-point UWORD BE axis 0x0F712",
+      "address": {
+        "space": "rom_ea",
+        "value": 63250
+      },
+      "properties": {
+        "byte_extent": 64,
+        "dimensions": [
+          32,
+          1
+        ],
+        "storage_type": "uint16",
+        "payload_sha256": "d53d16bd0e469fac74fec47a01600f6cae5d44d522f8761626a250a513d62b2f",
+        "strictly_increasing": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "call-648d8",
+      "kind": "code_site",
+      "label": "sub_648A6 lookup call at 0x648D8",
+      "address": {
+        "space": "rom_ea",
+        "value": 411864
+      },
+      "properties": {
+        "call_id": "call:rom:f501:0x648D8",
+        "call_form": "indirect_jsr",
+        "argument_registers": {
+          "values": "R4",
+          "axis": "R5",
+          "query": "R6"
+        }
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "helper-22fac",
+      "kind": "lookup_helper",
+      "label": "sub_22FAC 32-point UWORD axis lookup/interpolation",
+      "address": {
+        "space": "rom_ea",
+        "value": 143276
+      },
+      "properties": {
+        "axis_search": "sub_2340C",
+        "fraction": "sub_23700",
+        "endpoint_interpolation": "sub_231C8",
+        "value_type": "uint16"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "branch-87c8",
+      "kind": "branch_condition",
+      "label": "ROM 0x87C8.bit7 selects forward query state",
+      "address": {
+        "space": "rom_ea",
+        "value": 34760
+      },
+      "properties": {
+        "bit": 7,
+        "selects": [
+          "FFFF1064",
+          "FFFF1066"
+        ]
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "ram-ffff1064",
+      "kind": "ram_cell",
+      "label": "UWORD prior lookup-state operand FFFF1064",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF1064"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "branch_selected_query_operand",
+        "producer_confidence": "partial"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "node_id": "ram-ffff1066",
+      "kind": "ram_cell",
+      "label": "UWORD branch-selected query operand FFFF1066",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF1066"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "branch_selected_query_operand",
+        "producer_confidence": "bounded_writer_result"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "node_id": "ram-ffff10a0",
+      "kind": "ram_cell",
+      "label": "UWORD additive query operand FFFF10A0",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF10A0"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "query_addend",
+        "producer": "unresolved"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "node_id": "reg-r4-curve",
+      "kind": "register",
+      "label": "R4 value-vector pointer",
+      "address": {
+        "space": null,
+        "value": null
+      },
+      "properties": {
+        "register": "R4",
+        "value": "0x10F8A",
+        "role": "lookup_values_pointer"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014"
+      ]
+    },
+    {
+      "node_id": "reg-r5-axis",
+      "kind": "register",
+      "label": "R5 axis pointer",
+      "address": {
+        "space": null,
+        "value": null
+      },
+      "properties": {
+        "register": "R5",
+        "value": "0x0F712",
+        "role": "lookup_axis_pointer"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014"
+      ]
+    },
+    {
+      "node_id": "reg-r6-query",
+      "kind": "register",
+      "label": "R6 constructed unsigned UWORD query",
+      "address": {
+        "space": null,
+        "value": null
+      },
+      "properties": {
+        "register": "R6",
+        "storage": "uint16",
+        "signed": false,
+        "construction": "selected UWORD[FFFF1064/FFFF1066] + UWORD[FFFF10A0], capped at 0xFFFF"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "ram-ffff10e2",
+      "kind": "ram_cell",
+      "label": "UWORD lookup result staging FFFF10E2",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF10E2"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "raw_lookup_result",
+        "store_timing": "JSR delay slot"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "consumer-648a6",
+      "kind": "consumer",
+      "label": "Same-routine result staging and normalization in sub_648A6",
+      "address": null,
+      "properties": {
+        "raw_result": "FFFF10E2",
+        "branch_selectors": [
+          "ROM 0x91B4",
+          "FFFF8CCC.bit7"
+        ],
+        "paths": [
+          "U16[FFFF170C]",
+          "sub_21AC0 -> U8[FFFF170A]"
+        ],
+        "physical_meaning": "unresolved"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "ram-ffff170c",
+      "kind": "ram_cell",
+      "label": "UWORD downstream staging FFFF170C",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF170C"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "conditional_staging_path"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "ram-ffff170a",
+      "kind": "ram_cell",
+      "label": "UBYTE normalized/clamped result FFFF170A",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF170A"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "conditional_normalized_staging_path"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e01",
+      "from_node": "curve-10f8a",
+      "to_node": "call-648d8",
+      "relation": "supplies_R4_value_vector",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e02",
+      "from_node": "axis-0f712",
+      "to_node": "call-648d8",
+      "relation": "supplies_R5_explicit_UWORD_axis",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e03",
+      "from_node": "branch-87c8",
+      "to_node": "call-648d8",
+      "relation": "selects_forward_query_operand",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e04",
+      "from_node": "ram-ffff1064",
+      "to_node": "reg-r6-query",
+      "relation": "selected_query_operand_candidate",
+      "basis": "derived",
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "edge_id": "e05",
+      "from_node": "ram-ffff1066",
+      "to_node": "reg-r6-query",
+      "relation": "selected_query_operand_candidate",
+      "basis": "derived",
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "edge_id": "e06",
+      "from_node": "ram-ffff10a0",
+      "to_node": "reg-r6-query",
+      "relation": "added_to_selected_query_operand_and_capped",
+      "basis": "derived",
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014",
+        "ev:rec-000016"
+      ]
+    },
+    {
+      "edge_id": "e07",
+      "from_node": "call-648d8",
+      "to_node": "helper-22fac",
+      "relation": "invokes_lookup_helper_with_R4_R5_R6",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e08",
+      "from_node": "helper-22fac",
+      "to_node": "curve-10f8a",
+      "relation": "reads_32_point_UWORD_values",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014"
+      ]
+    },
+    {
+      "edge_id": "e09",
+      "from_node": "helper-22fac",
+      "to_node": "axis-0f712",
+      "relation": "searches_explicit_32_word_axis",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e10",
+      "from_node": "helper-22fac",
+      "to_node": "ram-ffff10e2",
+      "relation": "returns_UWORD_result_stored_in_JSR_delay_slot",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e11",
+      "from_node": "ram-ffff10e2",
+      "to_node": "consumer-648a6",
+      "relation": "same_routine_conditional_staging_and_normalization",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e12",
+      "from_node": "consumer-648a6",
+      "to_node": "ram-ffff170c",
+      "relation": "conditional_UWORD_staging_path",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014"
+      ]
+    },
+    {
+      "edge_id": "e13",
+      "from_node": "consumer-648a6",
+      "to_node": "ram-ffff170a",
+      "relation": "conditional_sub_21AC0_normalization_path",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev:rom-f501",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "anchor": "EL19A target image identity for 32-point UWORD transfer pair",
+      "evidence_class": "target_rom_identity",
+      "extraction_method": "ROM identity pinned in WO70014",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:wo70014",
+      "source_path": "CONTROL/WO70014.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "322ab166075363f91e2cce80e7fedb6718e3aa96",
+      "anchor": "Sections 2-4: exact geometry, payload hashes, call 0x648D8, query construction, helper chain and first consumer staging",
+      "evidence_class": "closed_target_reader_trace_report",
+      "extraction_method": "Structured extraction from WO70014; no independent Stage-16 LST re-decode in this graph",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:fnd-000014",
+      "source_path": "FINDINGS/records/FND-000014.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "e2c3893534b57fd963d3f1dbd0f103ea8b68fea8",
+      "anchor": "32-point UWORD pair, sub_22FAC contract, forward and reverse call roles, operand provenance limits",
+      "evidence_class": "canonical_finding_record",
+      "extraction_method": "Cross-reference to current target-side finding",
+      "status": "current"
+    },
+    {
+      "evidence_id": "ev:rec-000016",
+      "source_path": "FINDINGS/reconciliations/REC-000016.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "a0ad6e4baee6cae45930d352fcdef7eeb19e559e",
+      "anchor": "Qualified split disposition for FFFF1064, FFFF1066 and FFFF10A0 operands",
+      "evidence_class": "reconciliation_record",
+      "extraction_method": "Cross-reference to current reconciliation",
+      "status": "current"
+    }
+  ],
+  "lookup_contract": {
+    "query_source_node": "ram-ffff1064",
+    "helper_node": "helper-22fac",
+    "query_type": {
+      "storage": "uint16",
+      "signed": false,
+      "register": "R6",
+      "construction": "ROM 0x87C8.bit7 selects U16[FFFF1064] or U16[FFFF1066]; add U16[FFFF10A0]; cap at 0xFFFF"
+    },
+    "axis_model": {
+      "kind": "explicit_axis",
+      "storage": "uint16",
+      "point_count": 32,
+      "axis_node": "axis-0f712",
+      "axis_ea": 63250,
+      "strictly_increasing": true
+    },
+    "interpolation": {
+      "method": "UWORD axis search + fixed-point fraction + endpoint interpolation",
+      "axis_search": "sub_2340C",
+      "fraction": "sub_23700",
+      "interpolation_helper": "sub_231C8"
+    },
+    "low_range_behavior": "32-point UWORD lookup against explicit axis 0x0F712; details transcribed from WO70014 and FND-000014.",
+    "upper_boundary": {
+      "behavior": "exact out-of-range endpoint policy not specified in the cited closeout; preserve unresolved"
+    },
+    "evidence_refs": [
+      "ev:wo70014",
+      "ev:fnd-000014"
+    ]
+  },
+  "unresolved_boundaries": [
+    {
+      "boundary_id": "listing-provenance-10f8a",
+      "at_node": "call-648d8",
+      "reason": "WO70014 and FND-000014 do not record the exact Stage-16 LST SHA-256 in their source metadata; this graph is report-sourced, not an independent instruction re-decode.",
+      "required_evidence": "Exact Stage-16 listing path/hash explicitly linked to the 0x648D8 instructions and bounded re-read."
+    },
+    {
+      "boundary_id": "forward-query-operand-identity",
+      "at_node": "reg-r6-query",
+      "reason": "FFFF1064 is only partially traced to a prior lookup; FFFF1066 is a computed state operand and FFFF10A0 writer/source remains unresolved.",
+      "required_evidence": "Producer/consumer provenance for both selected branch operands and the additive UWORD operand."
+    },
+    {
+      "boundary_id": "physical-input-output-domain",
+      "at_node": "curve-10f8a",
+      "reason": "The pair's software identity as a bidirectional UWORD transfer is supported, but MAF/airflow/load/RPM and physical units/endpoints are not established.",
+      "required_evidence": "Target-side source-to-sink evidence linking query operands and normalized outputs to a named physical signal or controller function."
+    }
+  ],
+  "coverage": {
+    "status": "source_reported_through_same_routine_consumer",
+    "start": "0x648D8 sub_648A6 call and query lineage recorded by WO70014",
+    "stop": "U16[FFFF10E2] immediate same-routine staging/normalization to FFFF170C or FFFF170A; physical endpoint unresolved",
+    "source_listing_sha256": null,
+    "independent_redecode_performed": false
+  },
+  "semantic_disposition": {
+    "provisional_name": "32-point UWORD bidirectional transfer pair",
+    "donor_hypothesis": "EE310 exact payload twin at 0x0A912; byte identity only",
+    "physical_identity": "unresolved",
+    "promotion": "not_supported",
+    "evidence_grade": "Reader-Verified as recorded in WO70014/FND-000014 with partial query provenance"
+  }
+}
