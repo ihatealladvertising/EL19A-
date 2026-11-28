@@ -84,6 +84,43 @@ class ReaderTraceIndexerAdapterTests(unittest.TestCase):
         self.assertEqual(edge["relation"], "byte_concordant_ROM_read_at_PC")
         self.assertEqual(edge["evidence_refs"], ["ev:indexer"])
 
+    def test_raw_run_indexer_hit_tuple_is_accepted(self):
+        row = hit_rows()[0]
+        raw_tuple = (
+            row["target"], row["space"], row["pc"], row["function"],
+            row["access"], row["width"], row["form"], row["base"],
+            row["base_resolved"], row["mask"], row["note"],
+        )
+        result = self.merge(hits=[raw_tuple])
+        self.assertTrue(any(
+            edge["edge_id"] == "indexer-table-read-00085B2E"
+            for edge in result["edges"]
+        ))
+
+    def test_aggregate_summary_does_not_fanout_to_multiple_reader_calls(self):
+        hits = hit_rows() + [dict(hit_rows()[0], pc="0x86000", function="sub_86000")]
+        result = self.merge(hits=hits)
+        self.assertFalse(any(
+            edge["edge_id"].startswith("indexer-query-arg-")
+            for edge in result["edges"]
+        ))
+        self.assertFalse(any(
+            edge["edge_id"] == "indexer-result-write-0000F10E-00085B34"
+            for edge in result["edges"]
+        ))
+        self.assertTrue(any(
+            boundary["boundary_id"] == "aggregate-result-attribution-0000F10E-000085B34"
+            for boundary in result["unresolved_boundaries"]
+        ))
+
+    def test_zero_concordance_is_rejected(self):
+        with self.assertRaises(AdapterError):
+            merge_indexed_reader_evidence(
+                base_graph(), hit_rows(), summary_row(),
+                indexer_evidence_ref="ev:indexer", static_index_evidence_ref="ev:static-index",
+                concordance_matched=0, concordance_checked=0,
+            )
+
     def test_query_source_flow_is_derived_not_direct(self):
         result = self.merge()
         edge = next(e for e in result["edges"] if e["edge_id"].startswith("indexer-query-arg-"))
