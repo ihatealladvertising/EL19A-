@@ -151,3 +151,5 @@ python tools/nissan_sh705x_workbench.py rom-index query --index EVIDENCE/NISSAN_
 ```
 
 For a fresh corpus scan followed by index generation, use `python tools/run_nissan_rom_family_index.py`. That orchestration uses the current workbench scan path, rebuilds the existing ROM/RomRaider reference index, and joins the current folder scan with the 431-DAT detailed scan index and 434-layout base-table set. See `tools/nissan_rom_family_index.md` for output schemas and relationship/evidence policy.
+
+The identifier join also follows an exact primary-FID → ECU/FID inventory record → ECUID → ROM-code crosswalk when available. The binary FID and UpRev ROM code are retained as separate identifiers with separate link provenance; the bridge does not make the two namespaces equivalent.
