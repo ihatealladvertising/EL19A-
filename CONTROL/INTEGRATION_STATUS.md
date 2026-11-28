@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — WO70046 address-order audit closeout (2026-11-28)
+**Purpose:** Publish verified V6/Juke A2L ordering statistics, summary manifest, code/test sources, and a bounded TSV-publication blocker. Do not modify A2Ls, ROMs, XML, Findings, workbook, scanner or CI workflows.
+**Lock acquired:** 2026-11-28 — latest main gate read back as UNLOCKED.
+**State:** LOCKED
+
 **Integrator:** ChatGPT — scalar work-order allocation release (2026-11-28)
 **Purpose:** WO70045 and WO70046 were published and read back; the auto-generated live index/dashboard now lists both as READY in coordinator FIFO order. No calibration, Findings, XML, ROM, A2L, workbook or tool-source artifact was changed.
 **Lock released:** 2026-11-28 — both WO reports and generated register read back from remote main.
