@@ -178,5 +178,79 @@ class NissanRomFamilyIndexTests(unittest.TestCase):
             images = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_image_index.tsv')
             self.assertEqual(images[0]['observed_rom_codes'], 'CD100')
 
+
+    def test_full_historical_mass_scan_and_original_file_inventory_join(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cross = root / 'cross.tsv'
+            write_tsv(cross,
+                      ['ROM_ID_Normalized', 'ROM_ID_AsListed', 'IsMasterROM', 'MasterROM_ID', 'Model', 'Make', 'VehicleYear', 'EngineCode', 'Transmission', 'SourceLine'],
+                      [['CD100', 'CD100', 'YES', 'CD100', '350Z', 'Nissan', '2003', 'VQ35DE', 'AT', '2']])
+            dat = root / 'detailed.tsv'
+            write_tsv(dat,
+                      ['PayloadSHA256', 'SourceFile', 'ROMSizeBytes', 'CPU', 'PrimaryNissanMetadataFID', 'HelperCount', 'CallSiteAssociations', 'UniqueCallPCs', 'TableCount', 'NontrivialTableCount'],
+                      [['a' * 64, 'a.dat', '256', 'SH7058', 'FID00001', '2', '4', '4', '3', '2']])
+            mass = root / 'mass_scan.tsv'
+            mass_fields = ['input_key', 'codec', 'input_sha256', 'source', 'source_count', 'status', 'decoded_rom_sha256', 'rom_size_bytes', 'cpu_tags', 'fid_tags', 'loader', 'helpers', 'helper_kinds', 'call_sites', 'resolved_calls', 'unique_tables', 'error']
+            write_tsv(mass, mass_fields, [
+                ['dat:' + 'b' * 64, 'dat', 'b' * 64, 'a.dat', '1', 'SCANNED', 'a' * 64, '256', '["SH7058"]', '[]', 'LDR', '2', '{}', '4', '4', '3', ''],
+                ['dat:' + 'b' * 64, 'dat', 'b' * 64, 'b.dat', '1', 'SCANNED', 'a' * 64, '256', '["SH7058"]', '[]', 'LDR', '3', '{}', '5', '5', '4', ''],
+                ['dat:' + 'c' * 64, 'dat', 'c' * 64, 'c.dat', '1', 'LOAD_REJECTED', '', '0', '[]', '[]', '', '0', '{}', '0', '0', '0', 'unrecognized container'],
+                ['raw:' + 'd' * 64, 'raw', 'd' * 64, 'archive_member.bin', '1', 'SCANNED', 'e' * 64, '512', '["SH7058"]', '[]', '', '0', '{}', '0', '0', '0', '']
+            ])
+            inventory = root / 'file_inventory.tsv'
+            write_tsv(inventory,
+                      ['relative', 'extension', 'size_bytes', 'sha256', 'classification'],
+                      [
+                          ['a.dat', '.dat', '256', 'b' * 64, 'DIRECT_WORKBENCH_INPUT'],
+                          ['b.dat', '.dat', '256', 'b' * 64, 'DIRECT_WORKBENCH_INPUT'],
+                          ['c.dat', '.dat', '0', 'c' * 64, 'DIRECT_WORKBENCH_INPUT'],
+                          ['archive.zip', '.zip', '1024', 'f' * 64, 'ZIP_PACKAGE'],
+                          ['notes.txt', '.txt', '12', '', 'ANCILLARY_OR_UNSUPPORTED']
+                      ])
+            args = Namespace(
+                rom_id_crosswalk=str(cross), vehicle_catalog=None, ecu_fid_catalog=None,
+                scan_inventory=None, catalogue_dir=None, dat_scan_index=str(dat),
+                base_table_objects=None, reference_index=None,
+                mass_scan_results=str(mass), mass_file_inventory=str(inventory),
+                out_dir=str(root / 'out'))
+            summary = idx.build_index(args)
+            self.assertEqual(summary['historical_mass_scan_result_rows'], 4)
+            self.assertEqual(summary['historical_mass_scan_scanned_rows'], 3)
+            self.assertEqual(summary['historical_mass_scan_load_rejected_rows'], 1)
+            self.assertEqual(summary['historical_mass_scan_unique_input_hashes'], 3)
+            self.assertEqual(summary['historical_mass_scan_unique_decoded_images'], 2)
+            self.assertEqual(summary['historical_mass_scan_exact_file_sha_match_result_rows'], 3)
+            self.assertEqual(summary['historical_mass_scan_unmatched_file_sha_result_rows'], 1)
+            self.assertEqual(summary['original_file_inventory_rows'], 5)
+            self.assertEqual(summary['mass_scan_exact_sha256_link_groups'], 2)
+            self.assertEqual(summary['mass_scan_exact_sha256_pair_relations'], 5)
+            self.assertEqual(summary['mass_scan_inventory_only_sha256_rows'], 1)
+            mass_out = idx.read_tsv(Path(args.out_dir) / 'nissan_historical_mass_scan_results.tsv')
+            self.assertEqual(len(mass_out), 4)
+            self.assertEqual(sum(1 for row in mass_out if row['detailed_positive_431_match'] == 'YES'), 2)
+            self.assertTrue(all(row['image_id'] for row in mass_out if row['status'] == 'SCANNED'))
+            self.assertEqual(next(row for row in mass_out if row['status'] == 'LOAD_REJECTED')['image_id'], '')
+            inventory_out = idx.read_tsv(Path(args.out_dir) / 'nissan_original_file_inventory.tsv')
+            self.assertEqual(len(inventory_out), 5)
+            links = idx.read_tsv(Path(args.out_dir) / 'nissan_mass_scan_input_hash_links.tsv')
+            b_link = next(row for row in links if row['input_sha256'] == 'b' * 64)
+            self.assertEqual(b_link['join_status'], 'EXACT_SHA256_MATCH')
+            self.assertEqual(b_link['scan_result_row_count'], '2')
+            self.assertEqual(b_link['file_inventory_row_count'], '2')
+            self.assertEqual(b_link['sha256_pair_count'], '4')
+            d_link = next(row for row in links if row['input_sha256'] == 'd' * 64)
+            self.assertEqual(d_link['join_status'], 'MASS_SCAN_ONLY')
+            f_link = next(row for row in links if row['input_sha256'] == 'f' * 64)
+            self.assertEqual(f_link['join_status'], 'INVENTORY_ONLY')
+            scan_sources = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_scan_sources.tsv')
+            self.assertEqual(sum(1 for row in scan_sources if row['dataset'] == 'historical_mass_scan'), 4)
+            images = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_image_index.tsv')
+            a_image = next(row for row in images if row['decoded_rom_sha256'] == 'a' * 64)
+            self.assertEqual(a_image['cpu_tags'], 'SH7058')
+            self.assertIn('a.dat', a_image['source_paths'])
+            self.assertIn('b.dat', a_image['source_paths'])
+
+
 if __name__ == '__main__':
     unittest.main()
