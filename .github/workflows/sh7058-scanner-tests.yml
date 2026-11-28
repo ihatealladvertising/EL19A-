@@ -30,6 +30,9 @@ on:
       - "tools/test_reader_trace_helper_profiles.py"
       - "tools/reader_trace_pipeline.py"
       - "tools/test_reader_trace_pipeline.py"
+      - "tools/reader_trace_listing_source.py"
+      - "tools/test_reader_trace_listing_source.py"
+      - "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -62,6 +65,9 @@ on:
       - "tools/test_reader_trace_helper_profiles.py"
       - "tools/reader_trace_pipeline.py"
       - "tools/test_reader_trace_pipeline.py"
+      - "tools/reader_trace_listing_source.py"
+      - "tools/test_reader_trace_listing_source.py"
+      - "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -108,6 +114,19 @@ jobs:
           tools/test_reader_trace_helper_profiles.py
           tools/reader_trace_pipeline.py
           tools/test_reader_trace_pipeline.py
+          tools/reader_trace_listing_source.py
+          tools/test_reader_trace_listing_source.py
+      - name: Verify pinned Stage-16 listing and extract helper windows
+        run: >
+          python3 tools/reader_trace_listing_source.py
+          --archive EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip
+          --out "$RUNNER_TEMP/reader-trace-pinned-listing-windows.json"
+      - name: Upload pinned helper and caller windows
+        uses: actions/upload-artifact@v4
+        with:
+          name: reader-trace-pinned-stage16-windows
+          path: ${{ runner.temp }}/reader-trace-pinned-listing-windows.json
+          retention-days: 30
       - name: Run synthetic regression tests (no real ROMs)
         run: >
           python3 -m unittest -v
@@ -122,4 +141,5 @@ jobs:
           tools/test_reader_trace_static_flow.py
           tools/test_reader_trace_helper_profiles.py
           tools/test_reader_trace_pipeline.py
+          tools/test_reader_trace_listing_source.py
           tools/test_rom_access_indexer.py
