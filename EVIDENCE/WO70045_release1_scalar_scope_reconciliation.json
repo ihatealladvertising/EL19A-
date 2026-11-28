@@ -42,27 +42,27 @@
     "include_rows": 254,
     "include_rows_present_in_xml": 254,
     "include_rows_missing_xml": 0,
-    "xml_rows_with_exclude_disposition": 7,
-    "raw_comparison": {
+    "excluded_overlay_rows": 7,
+    "alignment_raw_comparison": {
       "MATCH": 2660,
-      "UNRESOLVED": 0,
+      "UNRESOLVED_SIZE4_TYPE_CONVERSION": 20,
       "MISMATCH": 0
     },
-    "scanner_exact_width_alignment_rows": 1493,
-    "xml_fragment_hit_alignment_rows": 900
+    "scanner_exact_width_rows": 1493,
+    "xml_fragment_hit_rows": 900
   },
   "specific_dispositions": {
     "0x0924E": {
       "alignment_tier": "NO_ALIGNMENT_ROW",
       "matrix": "INCLUDE — PROVISIONAL",
-      "xml": "present; [P] QDSPT APO Compensation Change Rate [S] mDDPAPO (924E); uint16 BE 1D scalar; Percent_UWORD_100_256",
+      "xml": "present; [P] QDSPT APO Compensation Change Rate [S] mDDPAPO (924E); uint16 BE, 1D scalar; Percent_UWORD_100_256",
       "target_correction": "WO65324 identifies 0x924E as a binary enable factor, not established as mDDPAPO. Current Release 1 name and percent conversion conflict with target-side disposition.",
       "recommendation": "Flag for explicit correction decision; no XML or matrix edit authorized here."
     },
     "0x08550": {
       "alignment_tier": "TIER_A",
       "matrix": "INCLUDE — PROVISIONAL",
-      "xml": "present; [P] Coolant Temp Min for Rev Hang; uint8 1D scalar; Temp_Coolant_Min",
+      "xml": "present; [P] Coolant Temp Min for Rev Hang; uint8, 1D scalar; Temp_Coolant_Min",
       "target_correction": "WO65324 establishes generic UBYTE hysteresis threshold on internal dashpot-target path; coolant identity unresolved.",
       "recommendation": "Do not promote mDSHCUT identity/coolant conversion."
     },
@@ -74,9 +74,9 @@
     }
   },
   "limitations": [
-    "Tier joins preserve repeated alignment rows; per-row audit counts are retained as joined lists, not collapsed.",
-    "Scanner exact-width and XML-fragment hits are sourced from the row-level WO70032 audit TSV; they do not imply semantic validity or Release 1 XML inclusion.",
-    "Actual Release 1 XML inclusion is determined from top-level 1D/2D/3D table entries with storageaddress; child axis tables are excluded.",
+    "Repeated alignment rows are retained as lists, not collapsed.",
+    "Scanner exact-width and XML-fragment hit counts are sourced from WO70032 row-level audit TSV; neither implies semantic validity or Release 1 inclusion.",
+    "Excluded overlay rows may share addresses with included objects; they are correctly marked not included, with address-collision object names separately preserved.",
     "No calibration XML, scope matrix, Findings, workbook or tool source was modified."
   ]
 }
