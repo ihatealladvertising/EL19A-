@@ -109,7 +109,7 @@ class ReaderTraceIndexerAdapterTests(unittest.TestCase):
             for edge in result["edges"]
         ))
         self.assertTrue(any(
-            boundary["boundary_id"] == "aggregate-result-attribution-0000F10E-000085B34"
+            boundary["boundary_id"] == "aggregate-result-attribution-0000F10E-00085B34"
             for boundary in result["unresolved_boundaries"]
         ))
 
