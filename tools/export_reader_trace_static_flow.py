@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export one hash-pinned production per-call static-flow document for EL19A 0x0F10E.
+"""Export hash-pinned production per-call static-flow documents for selected EL19A targets.
 
 This orchestrates existing read-only components:
   - reader_trace_listing_source.extract_verified_member
@@ -39,11 +39,11 @@ EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_ROM_SHA256 = "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
 EXPECTED_CATALOG_GIT_BLOB = "e8ee9f257e4cd114624cfc26dd08caecccdd59f7"
 
-TARGET_EA = 0x0F10E
-REQUIRED_CALL_PC = 0x85B2E
-REQUIRED_HELPER = "sub_22E10"
-REQUIRED_QUERY_ORIGIN = "r5<-FFFF84B8"
-REQUIRED_CALL_BYTES = bytes.fromhex("42 0B")
+DEFAULT_TARGET_EA = 0x0F10E
+DEFAULT_REQUIRED_CALL_PC = 0x85B2E
+DEFAULT_REQUIRED_HELPER = "sub_22E10"
+DEFAULT_REQUIRED_QUERY_ORIGIN = "r5<-FFFF84B8"
+DEFAULT_EXPECTED_CALL_BYTES = bytes.fromhex("42 0B")
 
 
 class ProductionExportError(RuntimeError):
@@ -67,7 +67,7 @@ def _git_blob_sha1(payload: bytes) -> str:
     return hashlib.sha1(header + payload).hexdigest()
 
 
-def _target_catalogue_rows(catalogue_path: pathlib.Path) -> tuple[List[Dict[str, str]], bool]:
+def _target_catalogue_rows(catalogue_path: pathlib.Path, target_ea: int) -> tuple[List[Dict[str, str]], bool]:
     rows: List[Dict[str, str]] = []
     with catalogue_path.open("r", newline="", encoding="utf-8") as stream:
         for row in csv.DictReader(stream):
@@ -78,7 +78,7 @@ def _target_catalogue_rows(catalogue_path: pathlib.Path) -> tuple[List[Dict[str,
                 value = int(address, 16)
             except ValueError:
                 continue
-            if value == TARGET_EA:
+            if value == target_ea:
                 rows.append(row)
     if rows:
         return rows, True
@@ -86,7 +86,7 @@ def _target_catalogue_rows(catalogue_path: pathlib.Path) -> tuple[List[Dict[str,
     # The golden graph/WO identifies this target, but the current broad
     # discovery catalogue does not contain it. Seed only the address required
     # by full_rom_analysis; do not fabricate geometry or semantic metadata.
-    return [{"address": f"0x{TARGET_EA:X}"}], False
+    return [{"address": f"0x{target_ea:X}"}], False
 
 
 def _write_json(path: pathlib.Path, document: Dict[str, Any]) -> str:
@@ -102,6 +102,15 @@ def run_export(
     archive_path: pathlib.Path,
     catalogue_path: pathlib.Path,
     output_dir: pathlib.Path,
+    target_ea: int = DEFAULT_TARGET_EA,
+    required_call_pc: int = DEFAULT_REQUIRED_CALL_PC,
+    required_helper: str = DEFAULT_REQUIRED_HELPER,
+    required_query_origin: str | None = DEFAULT_REQUIRED_QUERY_ORIGIN,
+    expected_call_bytes: bytes | None = DEFAULT_EXPECTED_CALL_BYTES,
+    base_graph_name: str | None = None,
+    output_prefix: str | None = None,
+    work_order_id: str = "WO70043",
+    record_call_site_validation: bool = False,
 ) -> Dict[str, Any]:
     if not rom_path.is_file():
         raise ProductionExportError(f"ROM file not found: {rom_path}")
@@ -141,49 +150,54 @@ def run_export(
         call_rows = [
             (pc, hb, instr, comment, func, label)
             for pc, hb, instr, comment, func, label in code_lines
-            if pc == REQUIRED_CALL_PC
+            if pc == required_call_pc
         ]
         if len(call_rows) != 1:
             raise ProductionExportError(
-                f"expected exactly one Stage-16 CODE record at 0x{REQUIRED_CALL_PC:X}; found {len(call_rows)}"
+                f"expected exactly one Stage-16 CODE record at 0x{required_call_pc:X}; found {len(call_rows)}"
             )
         call_pc, call_bytes, assembly, comment, function, label = call_rows[0]
         normalized_assembly = " ".join(assembly.split())
-        if call_bytes != REQUIRED_CALL_BYTES or normalized_assembly != "jsr @r2":
+        if len(call_bytes) != 2 or not normalized_assembly.lower().startswith("jsr @"):
             raise ProductionExportError(
-                f"call-site instruction mismatch at 0x{call_pc:X}: {call_bytes.hex()} {assembly!r}"
+                f"expected one 16-bit indirect JSR at 0x{call_pc:X}: {call_bytes.hex()} {assembly!r}"
+            )
+        if expected_call_bytes is not None and call_bytes != expected_call_bytes:
+            raise ProductionExportError(
+                f"call-site byte mismatch at 0x{call_pc:X}: expected {expected_call_bytes.hex()}, "
+                f"got {call_bytes.hex()} ({assembly!r})"
             )
 
-        catalogue_rows, catalogue_target_row_present = _target_catalogue_rows(catalogue_path)
+        catalogue_rows, catalogue_target_row_present = _target_catalogue_rows(catalogue_path, target_ea)
         _, _, _, cat_calls = build_static_indices.full_rom_analysis(
             code_lines, rom, catalogue_rows, set()
         )
-        target_calls = cat_calls.get(TARGET_EA, [])
+        target_calls = cat_calls.get(target_ea, [])
         if not target_calls:
-            raise ProductionExportError(f"static tracker found no per-call rows for 0x{TARGET_EA:X}")
+            raise ProductionExportError(f"static tracker found no per-call rows for 0x{target_ea:X}")
 
         selected = [
             row for row in target_calls
-            if row.get("reader_pc") == REQUIRED_CALL_PC
+            if row.get("reader_pc") == required_call_pc
         ]
         if len(selected) != 1:
             raise ProductionExportError(
-                f"expected exactly one tracker row for target 0x{TARGET_EA:X} at "
-                f"0x{REQUIRED_CALL_PC:X}; found {len(selected)}"
+                f"expected exactly one tracker row for target 0x{target_ea:X} at "
+                f"0x{required_call_pc:X}; found {len(selected)}"
             )
         call_record = selected[0]
-        if call_record.get("helper") != REQUIRED_HELPER:
+        if call_record.get("helper") != required_helper:
             raise ProductionExportError(
-                f"helper mismatch at 0x{REQUIRED_CALL_PC:X}: {call_record.get('helper')!r}"
+                f"helper mismatch at 0x{required_call_pc:X}: {call_record.get('helper')!r}"
             )
         q_inputs = call_record.get("q_inputs", [])
-        if REQUIRED_QUERY_ORIGIN not in q_inputs:
+        if required_query_origin is not None and required_query_origin not in q_inputs:
             raise ProductionExportError(
-                f"required query origin {REQUIRED_QUERY_ORIGIN!r} missing; observed {q_inputs!r}"
+                f"required query origin {required_query_origin!r} missing; observed {q_inputs!r}"
             )
 
         document = build_static_flow_call_document(
-            {TARGET_EA: target_calls},
+            {target_ea: target_calls},
             artifact_sha256=rom_sha256,
             source_listing_sha256=listing_source["member_sha256"],
             source_listing_path=(
@@ -191,19 +205,31 @@ def run_export(
             ),
         )
 
+    if record_call_site_validation:
+        document["call_site_validation"] = {
+            "target_ea": target_ea,
+            "reader_pc": call_pc,
+            "instruction_bytes": call_bytes.hex(" ").upper(),
+            "assembly": normalized_assembly,
+            "source_listing_sha256": listing_source["member_sha256"],
+            "listing_rom_byte_concordant": True,
+            "validator": "build_static_indices.parse_listing",
+        }
+
     output_dir.mkdir(parents=True, exist_ok=True)
-    json_path = output_dir / "EL19A_F501_0F10E_static_flow_calls.json"
-    manifest_path = output_dir / "EL19A_F501_0F10E_static_flow_manifest.json"
+    prefix = output_prefix or f"EL19A_F501_{target_ea:05X}"
+    json_path = output_dir / f"{prefix}_static_flow_calls.json"
+    manifest_path = output_dir / f"{prefix}_static_flow_manifest.json"
     document_sha256 = write_static_flow_call_document(json_path, document)
     if document_sha256 != static_flow_document_sha256(document):
         raise ProductionExportError("written per-call document SHA-256 does not match canonical document hash")
 
-    base_graph_path = output_dir / "EL19A_F501_0F10E.reader_trace.json"
-    enriched_graph_path = output_dir / "EL19A_F501_0F10E.reader_trace.production_enriched.json"
+    base_graph_path = output_dir / (base_graph_name or f"{prefix}.reader_trace.json")
+    enriched_graph_path = output_dir / f"{prefix}.reader_trace.production_enriched.json"
     if not base_graph_path.is_file():
         raise ProductionExportError(f"golden graph fixture not found: {base_graph_path}")
     base_graph = json.loads(base_graph_path.read_text(encoding="utf-8"))
-    static_flow_evidence_ref = "ev:static-flow-production-0F10E"
+    static_flow_evidence_ref = f"ev:static-flow-production-{target_ea:05X}"
     if any(
         row.get("evidence_id") == static_flow_evidence_ref
         for row in base_graph.get("evidence", [])
@@ -215,7 +241,7 @@ def run_export(
         "source_path": json_path.as_posix(),
         "hash_algorithm": "sha256",
         "source_hash": document_sha256,
-        "anchor": "Production full_rom_analysis cat_calls row for target 0x0F10E, call PC 0x85B2E and helper sub_22E10",
+        "anchor": f"Production full_rom_analysis cat_calls row for target 0x{target_ea:X}, call PC 0x{required_call_pc:X} and helper {required_helper}",
         "evidence_class": "per_call_static_reader_flow",
         "extraction_method": (
             "Production build_static_indices.full_rom_analysis() after pinned Stage-16 "
@@ -229,15 +255,20 @@ def run_export(
         static_flow_evidence_ref=static_flow_evidence_ref,
     )
     graph_warnings = validate_trace_graph(enriched_graph)
+    resolved_boundary_ids = [
+        row["boundary_id"] for row in enriched_graph.get("resolved_boundaries", [])
+    ]
+    if record_call_site_validation and target_ea == 0x10F8A and "listing-provenance-10f8a" not in resolved_boundary_ids:
+        raise ProductionExportError("10F8A production call-site validation did not resolve listing-provenance-10f8a")
     graph_sha256 = write_trace_graph(enriched_graph_path, enriched_graph)
 
     manifest: Dict[str, Any] = {
         "schema": "reader-trace-static-flow-production-manifest-v0.1",
         "status": "PASS",
-        "target_ea": f"0x{TARGET_EA:08X}",
-        "required_call_pc": f"0x{REQUIRED_CALL_PC:X}",
-        "required_helper": REQUIRED_HELPER,
-        "required_query_origin": REQUIRED_QUERY_ORIGIN,
+        "target_ea": f"0x{target_ea:08X}",
+        "required_call_pc": f"0x{required_call_pc:X}",
+        "required_helper": required_helper,
+        "required_query_origin": required_query_origin,
         "rom": {
             "path": rom_path.as_posix(),
             "bytes": len(rom),
@@ -255,7 +286,7 @@ def run_export(
             "tracker_seed": (
                 "existing_catalogue_row"
                 if catalogue_target_row_present
-                else "explicit_address_only_seed_from_WO70043; no geometry or semantic metadata fabricated"
+                else f"explicit_address_only_seed_from_{work_order_id}; no geometry or semantic metadata fabricated"
             ),
         },
         "static_tracker": {
@@ -298,6 +329,8 @@ def run_export(
             "warnings": graph_warnings,
             "base_fixture_preserved": True,
             "static_flow_evidence_ref": static_flow_evidence_ref,
+            "resolved_boundary_ids": resolved_boundary_ids,
+            "call_site_validation_recorded": record_call_site_validation,
         },
         "analysis_boundary": {
             "instruction_decoder_implemented_here": False,
@@ -341,16 +374,36 @@ def main(argv: List[str] | None = None) -> int:
         type=pathlib.Path,
         default=pathlib.Path("EVIDENCE/READER_TRACE_V0_1"),
     )
+    parser.add_argument("--target-ea", type=lambda value: int(value, 0), default=DEFAULT_TARGET_EA)
+    parser.add_argument("--required-call-pc", type=lambda value: int(value, 0), default=DEFAULT_REQUIRED_CALL_PC)
+    parser.add_argument("--required-helper", default=DEFAULT_REQUIRED_HELPER)
+    parser.add_argument("--required-query-origin", default=DEFAULT_REQUIRED_QUERY_ORIGIN)
+    parser.add_argument("--no-required-query-origin", action="store_true")
+    parser.add_argument("--expected-call-bytes", default="42 0B")
+    parser.add_argument("--no-fixed-call-bytes", action="store_true")
+    parser.add_argument("--base-graph", dest="base_graph_name")
+    parser.add_argument("--output-prefix")
+    parser.add_argument("--work-order", default="WO70043")
+    parser.add_argument("--record-call-site-validation", action="store_true")
     args = parser.parse_args(argv)
     result = run_export(
         rom_path=args.rom,
         archive_path=args.listing_archive,
         catalogue_path=args.catalogue,
         output_dir=args.output_dir,
+        target_ea=args.target_ea,
+        required_call_pc=args.required_call_pc,
+        required_helper=args.required_helper,
+        required_query_origin=None if args.no_required_query_origin else args.required_query_origin,
+        expected_call_bytes=None if args.no_fixed_call_bytes else bytes.fromhex(args.expected_call_bytes),
+        base_graph_name=args.base_graph_name,
+        output_prefix=args.output_prefix,
+        work_order_id=args.work_order,
+        record_call_site_validation=args.record_call_site_validation,
     )
     print(json.dumps({
         "status": "PASS",
-        "target_ea": f"0x{TARGET_EA:08X}",
+        "target_ea": f"0x{args.target_ea:08X}",
         "selected_call": result["selected_call"],
         "target_per_call_row_count": result["target_per_call_row_count"],
         "per_call_json_sha256": result["per_call_json_sha256"],

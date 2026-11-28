@@ -34,8 +34,8 @@ LISTING_PATH = (
 )
 
 
-def load_graph():
-    return json.loads(FIXTURE.read_text(encoding="utf-8"))
+def load_graph(name="EL19A_F501_0F10E.reader_trace.json"):
+    return json.loads((FIXTURE.parent / name).read_text(encoding="utf-8"))
 
 
 def raw_calls(*, first_tainted=True, second_call=True, first_helper="sub_22E10"):
@@ -76,7 +76,10 @@ def add_document_evidence(graph, document, *, evidence_ref="ev:static-flow-calls
         "source_path": "EVIDENCE/READER_TRACE_V0_1/synthetic_static_flow_calls.json",
         "hash_algorithm": "sha256",
         "source_hash": digest or actual,
-        "anchor": "Exact per-call raw cat_calls record for target 0x0F10E and reader PC 0x85B2E",
+        "anchor": (
+            "Exact per-call raw cat_calls record for target 0x%X and reader PC 0x%X"
+            % (document["calls"][0]["target_ea"], document["calls"][0]["reader_pc"])
+        ),
         "evidence_class": "per_call_static_reader_flow",
         "extraction_method": "Synthetic test document built from full_rom_analysis cat_calls shape",
         "status": "synthetic_test_input",
@@ -196,6 +199,87 @@ class StaticFlowAdapterTests(unittest.TestCase):
         )
         self.assertEqual(listing["source_hash"], LISTING_SHA)
         self.assertEqual(listing["evidence_class"], "target_disassembly_listing")
+
+    def test_production_callsite_validation_resolves_only_10f8a_listing_provenance(self):
+        graph = load_graph("EL19A_F501_10F8A_32PT_UWORD.reader_trace.json")
+        document = build_static_flow_call_document(
+            {0x10F8A: [{
+                "reader_pc": 0x648D8,
+                "func": "sub_648A6",
+                "helper": "sub_22FAC",
+                "q_inputs": ["r6<-FFFF1064"],
+                "dests": [(0xFFFF10E2, "w", 0x648DA, "mov.w r0,@(h'8e,gbr)", True)],
+            }]},
+            artifact_sha256=ROM_SHA,
+            source_listing_sha256=LISTING_SHA,
+            source_listing_path=LISTING_PATH,
+        )
+        document["call_site_validation"] = {
+            "target_ea": 0x10F8A,
+            "reader_pc": 0x648D8,
+            "instruction_bytes": "42 0B",
+            "assembly": "jsr @r2",
+            "source_listing_sha256": LISTING_SHA,
+            "listing_rom_byte_concordant": True,
+            "validator": "build_static_indices.parse_listing",
+        }
+        add_document_evidence(graph, document)
+        result = merge_per_call_static_flow(
+            graph, document, static_flow_evidence_ref="ev:static-flow-calls"
+        )
+        unresolved = {row["boundary_id"] for row in result["unresolved_boundaries"]}
+        self.assertNotIn("listing-provenance-10f8a", unresolved)
+        self.assertIn("forward-query-operand-identity", unresolved)
+        self.assertIn("physical-input-output-domain", unresolved)
+        resolved = next(
+            row for row in result["resolved_boundaries"]
+            if row["boundary_id"] == "listing-provenance-10f8a"
+        )
+        self.assertEqual(resolved["source_listing_sha256"], LISTING_SHA)
+        self.assertFalse(resolved["independent_redecode_performed"])
+        extension = next(
+            row for row in result["analysis_extensions"]
+            if row.get("extension_id") == "per-call-static-flow-00010F8A-000648D8"
+        )
+        self.assertEqual(extension["resolved_boundary_ids"], ["listing-provenance-10f8a"])
+
+    def test_callsite_validation_rejects_wrong_call_pc_or_unconcordant_listing(self):
+        document = build_static_flow_call_document(
+            {0x10F8A: [{
+                "reader_pc": 0x648D8,
+                "func": "sub_648A6",
+                "helper": "sub_22FAC",
+                "q_inputs": [],
+                "dests": [],
+            }]},
+            artifact_sha256=ROM_SHA,
+            source_listing_sha256=LISTING_SHA,
+            source_listing_path=LISTING_PATH,
+        )
+        document["call_site_validation"] = {
+            "target_ea": 0x10F8A,
+            "reader_pc": 0x648D9,
+            "instruction_bytes": "42 0B",
+            "assembly": "jsr @r2",
+            "source_listing_sha256": LISTING_SHA,
+            "listing_rom_byte_concordant": True,
+            "validator": "build_static_indices.parse_listing",
+        }
+        graph = load_graph("EL19A_F501_10F8A_32PT_UWORD.reader_trace.json")
+        add_document_evidence(graph, document)
+        with self.assertRaises(StaticFlowAdapterError):
+            merge_per_call_static_flow(
+                graph, document, static_flow_evidence_ref="ev:static-flow-calls"
+            )
+
+        document["call_site_validation"]["reader_pc"] = 0x648D8
+        document["call_site_validation"]["listing_rom_byte_concordant"] = False
+        graph = load_graph("EL19A_F501_10F8A_32PT_UWORD.reader_trace.json")
+        add_document_evidence(graph, document)
+        with self.assertRaises(StaticFlowAdapterError):
+            merge_per_call_static_flow(
+                graph, document, static_flow_evidence_ref="ev:static-flow-calls"
+            )
 
     def test_graph_and_document_are_not_mutated(self):
         graph = load_graph()

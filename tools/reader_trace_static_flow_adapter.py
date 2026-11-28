@@ -196,6 +196,27 @@ def validate_static_flow_call_document(document: Mapping[str, Any]) -> None:
         for j, dest in enumerate(call["dests"]):
             _normalise_destination(dest, f"document.calls[{i}].dests[{j}]")
 
+    call_validation = document.get("call_site_validation")
+    if call_validation is not None:
+        if not isinstance(call_validation, Mapping):
+            raise StaticFlowAdapterError("document.call_site_validation must be a mapping")
+        if not isinstance(call_validation.get("instruction_bytes"), str):
+            raise StaticFlowAdapterError("call_site_validation.instruction_bytes must be hex text")
+        try:
+            instruction_bytes = bytes.fromhex(call_validation["instruction_bytes"])
+        except ValueError as exc:
+            raise StaticFlowAdapterError("call_site_validation.instruction_bytes is invalid hex") from exc
+        assembly = str(call_validation.get("assembly", "")).strip().lower()
+        if len(instruction_bytes) != 2 or not assembly.startswith("jsr @"):
+            raise StaticFlowAdapterError("call_site_validation must identify one 16-bit indirect JSR")
+        if call_validation.get("listing_rom_byte_concordant") is not True:
+            raise StaticFlowAdapterError("call_site_validation lacks positive listing/ROM byte concordance")
+        if call_validation.get("validator") != "build_static_indices.parse_listing":
+            raise StaticFlowAdapterError("call_site_validation must name the existing parse_listing validator")
+        _require_sha256(call_validation.get("source_listing_sha256"), "call_site_validation.source_listing_sha256")
+        if str(call_validation["source_listing_sha256"]).lower() != str(document["source_listing_sha256"]).lower():
+            raise StaticFlowAdapterError("call_site_validation listing hash conflicts with document")
+
 
 def canonical_static_flow_json(document: Mapping[str, Any]) -> str:
     validate_static_flow_call_document(document)
@@ -352,6 +373,13 @@ def merge_per_call_static_flow(
             f"per-call helper {selected.get('helper_symbol')!r} does not match graph helper EA 0x{helper_ea:X}"
         )
 
+    call_validation = document.get("call_site_validation")
+    if call_validation is not None:
+        validation_target = _parse_ea(call_validation.get("target_ea"), "call_site_validation.target_ea")
+        validation_pc = _parse_ea(call_validation.get("reader_pc"), "call_site_validation.reader_pc")
+        if validation_target != target_ea or validation_pc != call_pc:
+            raise StaticFlowAdapterError("call_site_validation target/call PC does not match graph.call_ref")
+
     out = copy.deepcopy(dict(graph))
     source_listing_ref = "ev:static-flow-stage16-listing"
     listing_evidence = {
@@ -377,6 +405,54 @@ def merge_per_call_static_flow(
     out["coverage"]["independent_redecode_performed"] = bool(
         out["coverage"].get("independent_redecode_performed", False)
     )
+
+    resolved_boundary_ids = []
+    if (
+        call_validation is not None
+        and target_ea == 0x10F8A
+        and call_pc == 0x648D8
+    ):
+        prior_resolved = [
+            row for row in out.get("resolved_boundaries", [])
+            if row.get("boundary_id") == "listing-provenance-10f8a"
+        ]
+        for row in prior_resolved:
+            if (
+                str(row.get("source_listing_sha256", "")).lower() != listing_sha
+                or row.get("static_flow_evidence_ref") != static_flow_evidence_ref
+            ):
+                raise StaticFlowAdapterError("conflicting prior resolution for listing-provenance-10f8a")
+            resolved_boundary_ids.append("listing-provenance-10f8a")
+        retained_boundaries = []
+        for boundary in out.get("unresolved_boundaries", []):
+            if boundary.get("boundary_id") == "listing-provenance-10f8a":
+                node = next(
+                    (item for item in out.get("nodes", []) if item.get("node_id") == boundary.get("at_node")),
+                    None,
+                )
+                address = node.get("address") if isinstance(node, Mapping) else None
+                value = address.get("value") if isinstance(address, Mapping) else None
+                try:
+                    node_pc = int(value, 0) if isinstance(value, str) else int(value)
+                except (TypeError, ValueError):
+                    node_pc = None
+                if node_pc == call_pc:
+                    resolved_boundary_ids.append(boundary["boundary_id"])
+                    out.setdefault("resolved_boundaries", []).append({
+                        "boundary_id": boundary["boundary_id"],
+                        "at_node": boundary["at_node"],
+                        "resolution": (
+                            "Pinned Stage-16 archive/member identity, parsed the exact listing CODE row "
+                            "with ROM-byte concordance, and verified the graph's exact indirect-JSR call PC."
+                        ),
+                        "source_listing_sha256": listing_sha,
+                        "static_flow_evidence_ref": static_flow_evidence_ref,
+                        "evidence_refs": [static_flow_evidence_ref, source_listing_ref],
+                        "independent_redecode_performed": False,
+                    })
+                    continue
+            retained_boundaries.append(boundary)
+        out["unresolved_boundaries"] = retained_boundaries
 
     call_node = _call_node_id(out, call_pc, helper_ea)
     if not any(node.get("node_id") == call_node for node in out["nodes"]):
@@ -579,6 +655,8 @@ def merge_per_call_static_flow(
         "instruction_decode_performed": False,
         "semantics_promoted": False,
     }
+    if resolved_boundary_ids:
+        extension["resolved_boundary_ids"] = resolved_boundary_ids
     extensions = out.setdefault("analysis_extensions", [])
     old = [item for item in extensions if item.get("extension_id") == extension_id]
     if old and old[0] != extension:

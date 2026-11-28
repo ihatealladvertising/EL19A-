@@ -22,6 +22,7 @@
 | `evidence[]` | Exact source identity, explicit hash algorithm, hash, anchor and extraction method |
 | `lookup_contract` | Query input, axis model, interpolation and endpoint behavior |
 | `unresolved_boundaries[]` | Stop point, reason and required evidence/discriminator |
+| `resolved_boundaries[]` (optional) | Previously unresolved evidence boundary satisfied by a later pinned production extraction |
 | `coverage` | Start/stop boundaries, listing hash and independent re-decode status |
 | `semantic_disposition` | Physical-identity and promotion boundary |
 
@@ -113,3 +114,10 @@ No name-only, nearby-address, cross-ROM or cross-CPU fallback is allowed. Curren
 ## Golden-case caveat: EL19A 0x0F10E
 
 WO70013 describes the 16-point implicit grid as `0,16,...,224`, but 16 points at step 16 from zero give 240 at index 15. The reported `q >= 0xF0` terminal return is consistent with index 15 being 240. This graph records the discrepancy as unresolved. It also records `source_listing_sha256: null` and `independent_redecode_performed: false` because the closed report does not preserve the exact Stage-16 listing hash. Neither gap is silently filled.
+
+
+### Production call-site provenance resolution
+
+A per-call static-flow document may carry an optional `call_site_validation` record. It is valid only when it identifies the same target EA and reader PC as the selected graph call, a two-byte indirect-JSR instruction, the exact source listing SHA-256, and a positive assertion that the existing `build_static_indices.parse_listing()` parser accepted the listing CODE row under ROM-byte concordance. This is a bounded source-row check, not an independent SH-2 instruction decode.
+
+When that record is present, the adapter may move a matching prior listing-provenance boundary for the exact graph call into `resolved_boundaries[]`. It must retain the listing hash, static-flow evidence reference, exact call-PC relationship and explicit `independent_redecode_performed: false`. Other query-identity, downstream-consumer and physical-meaning boundaries remain unchanged.

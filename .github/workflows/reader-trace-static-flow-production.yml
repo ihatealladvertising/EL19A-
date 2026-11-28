@@ -1,4 +1,4 @@
-name: Reader Trace Production Static-Flow Export
+name: Reader Trace Production Static-Flow Export (0F10E + 10F8A)
 
 on:
   push:
@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 jobs:
-  export-0f10e:
+  export-reader-traces:
     runs-on: ubuntu-latest
     concurrency:
       group: wo-register-main
@@ -50,6 +50,23 @@ jobs:
           --catalogue "CALIBRATIONS/discovered_tables_catalog.csv"
           --output-dir "EVIDENCE/READER_TRACE_V0_1"
 
+      - name: Run hash-pinned 10F8A 32-point UWORD per-call export
+        run: >
+          python3 tools/export_reader_trace_static_flow.py
+          --rom "EVIDENCE/VERSA f501.bin"
+          --listing-archive "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip"
+          --catalogue "CALIBRATIONS/discovered_tables_catalog.csv"
+          --output-dir "EVIDENCE/READER_TRACE_V0_1"
+          --target-ea 0x10F8A
+          --required-call-pc 0x648D8
+          --required-helper sub_22FAC
+          --no-required-query-origin
+          --no-fixed-call-bytes
+          --base-graph EL19A_F501_10F8A_32PT_UWORD.reader_trace.json
+          --output-prefix EL19A_F501_10F8A
+          --work-order WO70044
+          --record-call-site-validation
+
       - name: Retain production output artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -59,6 +76,9 @@ jobs:
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_calls.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_manifest.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A.reader_trace.production_enriched.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -81,7 +101,10 @@ jobs:
           git add -- \
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json \
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json \
-            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_calls.json \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A_static_flow_manifest.json \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_10F8A.reader_trace.production_enriched.json
 
           if git diff --cached --quiet; then
             echo "Production static-flow outputs are unchanged; no publication commit needed."
@@ -90,5 +113,5 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Add hash-pinned EL19A 0F10E production static flow [skip ci]"
+          git commit -m "Add production static-flow evidence for EL19A 0F10E and 10F8A [skip ci]"
           git push origin HEAD:main
