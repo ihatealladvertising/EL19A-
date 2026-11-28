@@ -45,6 +45,18 @@ Asserted edges require one or more evidence references. A Git blob SHA-1 is not 
 
 Query source/type/signedness/register, axis model, interval/interpolation, endpoint behavior, result registers/RAM destinations and consumers are separate graph elements. The first meaningful software consumer is not a demonstrated physical actuator or output endpoint. A graph may stop at that consumer while physical function and units remain unresolved. Donor labels, A2L declarations and screenshot names do not substitute for target-side evidence.
 
+## Existing-indexer bridge
+
+`tools/reader_trace_indexer_adapter.py` is a thin adapter over existing structured outputs. It consumes validated `valid_hits` rows from `rom_access_indexer.run_indexer` and one per-address `write_catalog_summary` row from `build_static_indices.py`. It does not decode SH-2 instructions or reimplement register, delay-slot, branch or call handling.
+
+The adapter preserves evidence grade by relationship:
+- A byte-concordant ROM read in the indexer's validated hit output becomes a `direct_observation` edge to its code site.
+- Query-register provenance and taint-classified destination flow from the static index become `derived` edges.
+- A fallback `near` store remains `heuristic`, with an explicit unresolved boundary.
+- A downstream RAM read is represented as a read-site observation only. It does not assert that the lookup result caused the read or that the consumer has a physical calibration meaning.
+
+The input evidence references must already exist in the graph and identify the source output hashes and run/listing manifest. The adapter is idempotent by deterministic node/edge IDs. It should be used only after the existing index runs have passed their own ROM/listing concordance and provenance gates.
+
 ## Golden-case caveat: EL19A 0x0F10E
 
 WO70013 describes the 16-point implicit grid as `0,16,...,224`, but 16 points at step 16 from zero give 240 at index 15. The reported `q >= 0xF0` terminal return is consistent with index 15 being 240. This graph records the discrepancy as unresolved. It also records `source_listing_sha256: null` and `independent_redecode_performed: false` because the closed report does not preserve the exact Stage-16 listing hash. Neither gap is silently filled.
