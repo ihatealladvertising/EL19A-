@@ -29,9 +29,11 @@ from reader_trace_listing_source import (
 )
 from reader_trace_static_flow_adapter import (
     build_static_flow_call_document,
+    merge_per_call_static_flow,
     static_flow_document_sha256,
     write_static_flow_call_document,
 )
+from reader_trace_graph import validate_trace_graph, write_trace_graph
 
 EXPECTED_ROM_MD5 = "46991697c502052752a2cabcb84c9e27"
 EXPECTED_ROM_SHA256 = "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a"
@@ -196,6 +198,39 @@ def run_export(
     if document_sha256 != static_flow_document_sha256(document):
         raise ProductionExportError("written per-call document SHA-256 does not match canonical document hash")
 
+    base_graph_path = output_dir / "EL19A_F501_0F10E.reader_trace.json"
+    enriched_graph_path = output_dir / "EL19A_F501_0F10E.reader_trace.production_enriched.json"
+    if not base_graph_path.is_file():
+        raise ProductionExportError(f"golden graph fixture not found: {base_graph_path}")
+    base_graph = json.loads(base_graph_path.read_text(encoding="utf-8"))
+    static_flow_evidence_ref = "ev:static-flow-production-0F10E"
+    if any(
+        row.get("evidence_id") == static_flow_evidence_ref
+        for row in base_graph.get("evidence", [])
+        if isinstance(row, dict)
+    ):
+        raise ProductionExportError("golden graph unexpectedly already contains production per-call evidence")
+    base_graph.setdefault("evidence", []).append({
+        "evidence_id": static_flow_evidence_ref,
+        "source_path": json_path.as_posix(),
+        "hash_algorithm": "sha256",
+        "source_hash": document_sha256,
+        "anchor": "Production full_rom_analysis cat_calls row for target 0x0F10E, call PC 0x85B2E and helper sub_22E10",
+        "evidence_class": "per_call_static_reader_flow",
+        "extraction_method": (
+            "Production build_static_indices.full_rom_analysis() after pinned Stage-16 "
+            "member extraction and parse_listing() ROM-byte concordance"
+        ),
+        "status": "production_byte_concordant_tracker_output",
+    })
+    enriched_graph = merge_per_call_static_flow(
+        base_graph,
+        document,
+        static_flow_evidence_ref=static_flow_evidence_ref,
+    )
+    graph_warnings = validate_trace_graph(enriched_graph)
+    graph_sha256 = write_trace_graph(enriched_graph_path, enriched_graph)
+
     manifest: Dict[str, Any] = {
         "schema": "reader-trace-static-flow-production-manifest-v0.1",
         "status": "PASS",
@@ -254,6 +289,15 @@ def run_export(
             "per_call_json_bytes": json_path.stat().st_size,
             "per_call_json_sha256": document_sha256,
             "manifest_path": manifest_path.as_posix(),
+            "production_enriched_graph_path": enriched_graph_path.as_posix(),
+            "production_enriched_graph_bytes": enriched_graph_path.stat().st_size,
+            "production_enriched_graph_sha256": graph_sha256,
+        },
+        "graph_validation": {
+            "warning_count": len(graph_warnings),
+            "warnings": graph_warnings,
+            "base_fixture_preserved": True,
+            "static_flow_evidence_ref": static_flow_evidence_ref,
         },
         "analysis_boundary": {
             "instruction_decoder_implemented_here": False,
@@ -271,6 +315,9 @@ def run_export(
         "manifest_path": manifest_path,
         "per_call_json_sha256": document_sha256,
         "manifest_file_sha256": manifest_sha256,
+        "production_enriched_graph_path": enriched_graph_path,
+        "production_enriched_graph_sha256": graph_sha256,
+        "graph_warnings": graph_warnings,
         "target_per_call_row_count": len(target_calls),
         "selected_call": manifest["static_tracker"]["selected_call"],
     }
@@ -310,6 +357,9 @@ def main(argv: List[str] | None = None) -> int:
         "manifest_file_sha256": result["manifest_file_sha256"],
         "per_call_json_path": result["per_call_json_path"].as_posix(),
         "manifest_path": result["manifest_path"].as_posix(),
+        "production_enriched_graph_path": result["production_enriched_graph_path"].as_posix(),
+        "production_enriched_graph_sha256": result["production_enriched_graph_sha256"],
+        "graph_warnings": result["graph_warnings"],
     }, sort_keys=True))
     return 0
 

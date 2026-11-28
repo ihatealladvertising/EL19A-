@@ -52,6 +52,12 @@ def _helper_ea(symbol: Any) -> int | None:
     return int(match.group("ea"), 16) if match else None
 
 
+def _store_source_register(instruction: str) -> str | None:
+    """Return the explicit register operand of a parsed MOV store, if recognized."""
+    match = re.search(r"\bmov\.[bwl]\s+(r\d+)\s*,\s*@", instruction, re.IGNORECASE)
+    return match.group(1).lower() if match else None
+
+
 def _normalise_destination(raw: Any, where: str) -> Dict[str, Any]:
     if isinstance(raw, Mapping):
         get = lambda key: raw.get(key)
@@ -448,6 +454,7 @@ def merge_per_call_static_flow(
         width = destination["width"]
         pc = int(destination["write_pc"])
         tainted = bool(destination["is_tainted"])
+        source_register = _store_source_register(destination["instruction"]) if tainted else None
         store_node = f"static-flow-store-{pc:08X}-{ea:08X}"
         ram_node = f"static-flow-dest-ram-{ea:08X}"
         _append_node(out, {
@@ -462,6 +469,7 @@ def merge_per_call_static_flow(
                 "instruction": destination["instruction"],
                 "width": width,
                 "taint_class": "taint" if tainted else "near",
+                "source_register": source_register.upper() if source_register else None,
             },
         })
         _append_node(out, {
@@ -474,34 +482,63 @@ def merge_per_call_static_flow(
             "properties": {"role": "per_call_lookup_result_destination", "width": width},
         })
         if tainted:
-            result_node = f"static-flow-r0-result-{target_ea:08X}-{call_pc:08X}"
-            _append_node(out, {
-                "node_id": result_node,
-                "kind": "register",
-                "label": f"R0 result from exact lookup call 0x{call_pc:X}",
-                "address": None,
-                "confidence": "medium",
-                "evidence_refs": [static_flow_evidence_ref],
-                "properties": {"register": "R0", "target_ea": f"0x{target_ea:08X}", "call_pc": f"0x{call_pc:X}"},
-            })
-            _append_edge(out, {
-                "edge_id": f"static-flow-return-r0-{target_ea:08X}-{call_pc:08X}",
-                "from_node": call_node,
-                "to_node": result_node,
-                "relation": "lookup_result_taint_in_R0_from_exact_call",
-                "basis": "derived",
-                "confidence": "medium",
-                "evidence_refs": [static_flow_evidence_ref],
-            })
-            _append_edge(out, {
-                "edge_id": f"static-flow-tainted-store-{target_ea:08X}-{call_pc:08X}-{pc:08X}-{index}",
-                "from_node": result_node,
-                "to_node": store_node,
-                "relation": "tainted_lookup_result_written_at_store_PC",
-                "basis": "derived",
-                "confidence": "medium",
-                "evidence_refs": [static_flow_evidence_ref, source_listing_ref],
-            })
+            if source_register is None:
+                _append_boundary(out, {
+                    "boundary_id": f"static-flow-tainted-source-unparsed-{target_ea:08X}-{call_pc:08X}-{pc:08X}-{index}",
+                    "at_node": store_node,
+                    "reason": (
+                        "The existing static tracker marks this store value as lookup-tainted, "
+                        "but the instruction text does not expose a recognized MOV source register."
+                    ),
+                    "required_evidence": (
+                        "A byte-concordant store instruction and exact source-register operand; "
+                        "do not substitute R0 or another assumed return register."
+                    ),
+                })
+            else:
+                source_node = (
+                    f"static-flow-store-source-{source_register}-"
+                    f"{target_ea:08X}-{call_pc:08X}"
+                )
+                _append_node(out, {
+                    "node_id": source_node,
+                    "kind": "register",
+                    "label": f"{source_register.upper()} tainted store source for exact lookup call 0x{call_pc:X}",
+                    "address": None,
+                    "confidence": "medium",
+                    "evidence_refs": [static_flow_evidence_ref, source_listing_ref],
+                    "properties": {
+                        "register": source_register.upper(),
+                        "target_ea": f"0x{target_ea:08X}",
+                        "call_pc": f"0x{call_pc:X}",
+                        "taint_proven_by_static_tracker": True,
+                        "intermediate_copy_transform_path_reconstructed": False,
+                    },
+                })
+                _append_edge(out, {
+                    "edge_id": f"static-flow-result-taint-{source_register}-{target_ea:08X}-{call_pc:08X}",
+                    "from_node": call_node,
+                    "to_node": source_node,
+                    "relation": (
+                        f"lookup_result_taint_reaches_{source_register.upper()}_"
+                        "store_source_per_static_tracker"
+                    ),
+                    "basis": "derived",
+                    "confidence": "medium",
+                    "evidence_refs": [static_flow_evidence_ref],
+                })
+                _append_edge(out, {
+                    "edge_id": (
+                        f"static-flow-tainted-store-{source_register}-"
+                        f"{target_ea:08X}-{call_pc:08X}-{pc:08X}-{index}"
+                    ),
+                    "from_node": source_node,
+                    "to_node": store_node,
+                    "relation": "tainted_store_source_register_used_by_store_instruction",
+                    "basis": "derived",
+                    "confidence": "medium",
+                    "evidence_refs": [static_flow_evidence_ref, source_listing_ref],
+                })
         else:
             _append_edge(out, {
                 "edge_id": f"static-flow-near-store-{target_ea:08X}-{call_pc:08X}-{pc:08X}-{index}",

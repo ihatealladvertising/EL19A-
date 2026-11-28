@@ -125,7 +125,7 @@ class StaticFlowAdapterTests(unittest.TestCase):
             for node in result["nodes"] if node["kind"] == "register"
         ))
 
-    def test_taint_proven_stores_link_r0_only_to_selected_call(self):
+    def test_taint_proven_stores_use_their_explicit_r0_source_operand(self):
         result = self.merge()
         store_edge_ids = {
             edge["edge_id"] for edge in result["edges"]
@@ -133,11 +133,42 @@ class StaticFlowAdapterTests(unittest.TestCase):
         }
         self.assertEqual(len(store_edge_ids), 2)
         self.assertTrue(all("00085B2E" in edge_id for edge_id in store_edge_ids))
+        self.assertTrue(all("r0" in edge_id for edge_id in store_edge_ids))
         self.assertTrue(any(
-            edge["edge_id"] == "static-flow-return-r0-0000F10E-00085B2E"
+            edge["edge_id"] == "static-flow-result-taint-r0-0000F10E-00085B2E"
             and edge["basis"] == "derived"
             for edge in result["edges"]
         ))
+
+    def test_tainted_store_uses_r2_when_that_is_the_observed_instruction_source(self):
+        document = make_document(second_call=False)
+        for dest in document["calls"][0]["dests"]:
+            dest["instruction"] = "mov.b   r2, @(r0,r6)"
+        graph = load_graph()
+        add_document_evidence(graph, document)
+        result = merge_per_call_static_flow(
+            graph, document, static_flow_evidence_ref="ev:static-flow-calls"
+        )
+        r2_nodes = [
+            node for node in result["nodes"]
+            if node.get("properties", {}).get("register") == "R2"
+            and node.get("properties", {}).get("taint_proven_by_static_tracker")
+        ]
+        self.assertEqual(len(r2_nodes), 1)
+        self.assertFalse(any(
+            node.get("node_id", "").startswith("static-flow-r0-result-")
+            for node in result["nodes"]
+        ))
+        self.assertTrue(any(
+            edge["edge_id"] == "static-flow-result-taint-r2-0000F10E-00085B2E"
+            and edge["basis"] == "derived"
+            for edge in result["edges"]
+        ))
+        store_edges = [
+            edge for edge in result["edges"]
+            if edge["edge_id"].startswith("static-flow-tainted-store-r2-")
+        ]
+        self.assertEqual(len(store_edges), 2)
 
     def test_near_call_store_is_heuristic_and_never_linked_from_r0(self):
         result = self.merge(document=make_document(first_tainted=False, second_call=False))

@@ -55,6 +55,7 @@ jobs:
           path: |
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -76,7 +77,8 @@ jobs:
 
           git add -- \
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json \
-            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json
 
           if git diff --cached --quiet; then
             echo "Production static-flow outputs are unchanged; no publication commit needed."

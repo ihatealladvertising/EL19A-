@@ -87,13 +87,14 @@ only the row matching all three graph identities: target EA, call PC and helper
 EA (the helper EA is accepted only from an exact `sub_<hex>` helper symbol).
 It never attaches a second call's query inputs or result stores.
 
-Query RAM-to-register origins and taint-proven R0 stores are represented as
-`derived`. A static tracker's `near` destination remains `heuristic` and gets
-an unresolved boundary; it is never connected to the lookup result. The source
-listing hash is recorded in graph coverage while
-`independent_redecode_performed` remains false: this adapter does not decode
-instructions. It also does not infer query transforms, downstream value
-causality, physical function or units.
+Query RAM-to-register origins and taint-proven stores are represented as
+`derived`. For each tainted store, the adapter parses the actual source-register
+operand from the byte-concordant store instruction (for example, R2); it does
+not assume the lookup result is still in R0. The tracker proves that the
+reported store value is tainted by the exact lookup call, but intermediate
+copy/transform instructions are not reconstructed by this adapter. A static
+tracker's `near` destination remains `heuristic` and gets an unresolved
+boundary; it is never connected to a lookup result.
 
 When the composed pipeline receives a per-call document, it suppresses the
 aggregate per-address query and destination fields before invoking the existing
