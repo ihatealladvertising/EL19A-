@@ -20,6 +20,8 @@ on:
       - "tools/test_nissan_rom_family_index.py"
       - "tools/reader_trace_graph.py"
       - "tools/test_reader_trace_graph.py"
+      - "tools/reader_trace_indexer_adapter.py"
+      - "tools/test_reader_trace_indexer_adapter.py"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -42,6 +44,8 @@ on:
       - "tools/test_nissan_rom_family_index.py"
       - "tools/reader_trace_graph.py"
       - "tools/test_reader_trace_graph.py"
+      - "tools/reader_trace_indexer_adapter.py"
+      - "tools/test_reader_trace_indexer_adapter.py"
       - "EVIDENCE/READER_TRACE_V0_1/**"
       - "CONTROL/SH705X_READER_TRACE_GRAPH_SCHEMA.md"
       - ".github/workflows/sh7058-scanner-tests.yml"
@@ -78,6 +82,9 @@ jobs:
           tools/test_nissan_rom_family_index.py
           tools/reader_trace_graph.py
           tools/test_reader_trace_graph.py
+          tools/test_reader_trace_indexer_adapter.py
+          tools/reader_trace_indexer_adapter.py
+          tools/test_reader_trace_indexer_adapter.py
       - name: Run synthetic regression tests (no real ROMs)
         run: >
           python3 -m unittest -v
