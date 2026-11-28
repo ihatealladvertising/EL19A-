@@ -32,6 +32,74 @@ def load_fixture():
 
 
 class ReaderTraceGraphTests(unittest.TestCase):
+    def test_32_point_uword_golden_case_is_structurally_valid(self):
+        fixture = (
+            Path(__file__).resolve().parents[1]
+            / "EVIDENCE" / "READER_TRACE_V0_1"
+            / "EL19A_F501_10F8A_32PT_UWORD.reader_trace.json"
+        )
+        graph = json.loads(fixture.read_text(encoding="utf-8"))
+        warnings = validate_trace_graph(graph)
+        self.assertEqual(graph["target_object"]["dimensions"], [32, 1])
+        self.assertEqual(graph["target_object"]["storage_type"], "uint16")
+        self.assertEqual(graph["target_object"]["byte_extent"], 64)
+        self.assertEqual(graph["call_ref"]["call_pc"], 0x648D8)
+        self.assertEqual(graph["lookup_contract"]["axis_model"]["axis_ea"], 0x0F712)
+        self.assertFalse(graph["coverage"]["independent_redecode_performed"])
+        self.assertIsNone(graph["coverage"]["source_listing_sha256"])
+        self.assertEqual(graph["semantic_disposition"]["physical_identity"], "unresolved")
+        self.assertEqual(warnings, [])
+
+    def test_32_point_uword_query_and_consumer_boundaries_are_explicit(self):
+        fixture = (
+            Path(__file__).resolve().parents[1]
+            / "EVIDENCE" / "READER_TRACE_V0_1"
+            / "EL19A_F501_10F8A_32PT_UWORD.reader_trace.json"
+        )
+        graph = json.loads(fixture.read_text(encoding="utf-8"))
+        node_ids = {node["node_id"] for node in graph["nodes"]}
+        self.assertIn("branch-87c8", node_ids)
+        self.assertIn("ram-ffff1064", node_ids)
+        self.assertIn("ram-ffff1066", node_ids)
+        self.assertIn("ram-ffff10a0", node_ids)
+        self.assertIn("ram-ffff10e2", node_ids)
+        self.assertIn("ram-ffff170c", node_ids)
+        self.assertIn("ram-ffff170a", node_ids)
+        self.assertTrue(any(b["boundary_id"] == "forward-query-operand-identity" for b in graph["unresolved_boundaries"]))
+
+    def test_two_axis_map_golden_case_is_structurally_valid(self):
+        fixture = (
+            Path(__file__).resolve().parents[1]
+            / "EVIDENCE" / "READER_TRACE_V0_1"
+            / "EL19A_F501_0AFF2_2AXIS.reader_trace.json"
+        )
+        graph = json.loads(fixture.read_text(encoding="utf-8"))
+        warnings = validate_trace_graph(graph)
+        self.assertEqual(graph["target_object"]["dimensions"], [4, 4])
+        self.assertEqual(graph["target_object"]["storage_type"], "uint8")
+        self.assertEqual(graph["target_object"]["byte_extent"], 16)
+        self.assertEqual(graph["call_ref"]["call_pc"], 0x5B3C0)
+        self.assertEqual(graph["coverage"]["source_listing_sha256"], "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549")
+        self.assertFalse(graph["coverage"]["independent_redecode_performed"])
+        self.assertEqual(len(graph["lookup_contract"]["axis_model"]["axes"]), 2)
+        self.assertEqual(warnings, [])
+
+    def test_two_axis_map_preserves_axis_roles_and_same_query(self):
+        fixture = (
+            Path(__file__).resolve().parents[1]
+            / "EVIDENCE" / "READER_TRACE_V0_1"
+            / "EL19A_F501_0AFF2_2AXIS.reader_trace.json"
+        )
+        graph = json.loads(fixture.read_text(encoding="utf-8"))
+        axes = graph["lookup_contract"]["axis_model"]["axes"]
+        self.assertEqual([(a["role"], a["ea"], a["values"]) for a in axes], [
+            ("axis1", 0x0E5CC, [14, 40, 96, 136]),
+            ("axis2", 0x0E5C8, [0, 1, 2, 3]),
+        ])
+        self.assertTrue(graph["lookup_contract"]["query_type"]["same_query_used_for_both_axes"])
+        self.assertTrue(any(b["boundary_id"] == "map-physical-meaning" for b in graph["unresolved_boundaries"]))
+
+
     def test_golden_trace_fixture_is_structurally_valid(self):
         graph = load_fixture()
         warnings = validate_trace_graph(graph)
