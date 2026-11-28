@@ -1,4 +1,9 @@
-# Repository Integration Status
+**Integrator:** ChatGPT — WO70039 Nissan master-ROM and structural-family index implementation (2026-11-28)
+**Purpose:** Publish the relational master ROM-code/image/FID/structure index, deterministic scan/index runner, workbench command, tests, documentation, and automated rebuild workflow; validate the generated corpus index and read it back. No calibration XML, Findings, ROM binaries or worker queues are in scope.
+**Lock acquired:** 2026-11-28 — gate verified UNLOCKED at base commit `20b0f3642577d62912506d5d1cd8a72b0b5ff8f1`; publication serialized for WO70039.
+**State:** LOCKED
+
+
 
 **Integrator:** ChatGPT — WO70038 focused ROM registry review workbook and screenshot audit (2026-11-28)
 **Purpose:** Publish the bounded workbook/screenshot audit closeout and coordinator register update. Original evidence TSVs, XML, ROM/A2L, calibration/Findings, workbench source, and worker lanes remain unchanged.
