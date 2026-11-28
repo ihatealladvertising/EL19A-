@@ -55,6 +55,30 @@ def parse_int(value: Any) -> Optional[int]:
         except ValueError:
             return None
 
+def parse_string_list(value: Any) -> List[str]:
+    """Parse JSON string/list fields, including a JSON string nested inside a CSV field."""
+    if value is None or value == '':
+        return []
+    current = value
+    for _ in range(2):
+        if not isinstance(current, str):
+            break
+        try:
+            parsed = json.loads(current)
+        except (TypeError, ValueError):
+            break
+        if isinstance(parsed, list):
+            return [str(item).strip() for item in parsed if str(item).strip()]
+        if isinstance(parsed, str):
+            current = parsed
+            continue
+        return []
+    if isinstance(current, (tuple, set)):
+        return [str(item).strip() for item in current if str(item).strip()]
+    if isinstance(current, str):
+        return [item.strip() for item in re.split('[;,]', current) if item.strip()]
+    return []
+
 def image_key(sha: str, fallback: str='') -> str:
     return 'ROMIMG:' + (sha[:16].lower() if sha else hashlib.sha256(fallback.encode()).hexdigest()[:16])
 
@@ -141,6 +165,13 @@ def build_index(args: argparse.Namespace) -> dict:
     ecu_fid_rows = read_tsv(Path(args.ecu_fid_catalog)) if getattr(args, 'ecu_fid_catalog', None) else []
     scan_rows = read_tsv(Path(args.scan_inventory)) if getattr(args, 'scan_inventory', None) else []
     dat_rows = read_tsv(Path(args.dat_scan_index)) if getattr(args, 'dat_scan_index', None) else []
+    mass_scan_rows = read_tsv(Path(args.mass_scan_results)) if getattr(args, 'mass_scan_results', None) else []
+    original_inventory_rows = read_tsv(Path(args.mass_file_inventory)) if getattr(args, 'mass_file_inventory', None) else []
+    inventory_by_sha: Dict[str, List[dict]] = collections.defaultdict(list)
+    for inventory_row in original_inventory_rows:
+        inventory_sha = (inventory_row.get('sha256') or '').strip().lower()
+        if inventory_sha:
+            inventory_by_sha[inventory_sha].append(inventory_row)
     code_by_norm: Dict[str, dict] = {}
     for row in crosswalk_rows:
         code = norm_code(row.get('ROM_ID_Normalized', row.get('ROM_ID_AsListed', '')))
@@ -209,6 +240,76 @@ def build_index(args: argparse.Namespace) -> dict:
         image['nontrivial_table_count'] = max(image['nontrivial_table_count'] or 0, parse_int(row.get('NontrivialTableCount')) or 0)
         image['checksum_summary'].update((f'{k}={v}' for k, v in row.items() if k.startswith('Checksum_') and v))
         scan_sources.append({'dataset': 'direct_dat_431', 'source_path': source_path, 'filename': source_path, 'scan_status': 'DETAILED_POSITIVE', 'decoded_rom_sha256': sha, 'container_sha256': row.get('PayloadKey', ''), 'image_id': key, 'error': ''})
+    detailed_dat_sha = {(row.get('PayloadSHA256') or '').strip().lower() for row in dat_rows if row.get('PayloadSHA256')}
+    mass_rows_by_input_sha: Dict[str, List[dict]] = collections.defaultdict(list)
+    for row in mass_scan_rows:
+        input_sha = (row.get('input_sha256') or '').strip().lower()
+        if input_sha:
+            mass_rows_by_input_sha[input_sha].append(row)
+        status = (row.get('status') or '').upper()
+        decoded_sha = (row.get('decoded_rom_sha256') or '').strip().lower()
+        source_path = row.get('source', '')
+        inventory_matches = inventory_by_sha.get(input_sha, [])
+        image_id = ''
+        if status == 'SCANNED' and decoded_sha:
+            image = add_image(decoded_sha, source_path)
+            image_id = image['image_id']
+            image['rom_size_bytes'] = row.get('rom_size_bytes', image['rom_size_bytes']) or image['rom_size_bytes']
+            image['cpu_tags'].update(parse_string_list(row.get('cpu_tags', '')))
+            image['loader_values'].add(row.get('loader', '').strip()) if row.get('loader', '').strip() else None
+            image['source_paths'].add(source_path) if source_path else None
+            image['source_paths'].update((item.get('relative', '') for item in inventory_matches if item.get('relative')))
+            image['scan_datasets'].add('historical_mass_scan')
+            image['helper_count'] = max(image['helper_count'] or 0, parse_int(row.get('helpers')) or 0)
+            image['call_count'] = max(image['call_count'] or 0, parse_int(row.get('call_sites')) or 0)
+            image['resolved_calls'] = max(image['resolved_calls'] or 0, parse_int(row.get('resolved_calls')) or 0)
+            image['table_count'] = max(image['table_count'] or 0, parse_int(row.get('unique_tables')) or 0)
+        scan_sources.append({
+            'dataset': 'historical_mass_scan',
+            'source_path': source_path,
+            'filename': Path(source_path).name if source_path else '',
+            'scan_status': status or 'UNKNOWN',
+            'decoded_rom_sha256': decoded_sha,
+            'container_sha256': input_sha,
+            'image_id': image_id,
+            'error': row.get('error', ''),
+            'input_key': row.get('input_key', ''),
+            'codec': row.get('codec', ''),
+            'source_count': row.get('source_count', ''),
+            'file_inventory_match_count': len(inventory_matches),
+            'file_inventory_paths': ';'.join(sorted({item.get('relative', '') for item in inventory_matches if item.get('relative')})),
+            'file_inventory_classifications': ';'.join(sorted({item.get('classification', '') for item in inventory_matches if item.get('classification')})),
+            'rom_size_bytes': row.get('rom_size_bytes', ''),
+            'cpu_tags': row.get('cpu_tags', ''),
+            'fid_tags': row.get('fid_tags', ''),
+            'loader': row.get('loader', ''),
+            'helpers': row.get('helpers', ''),
+            'helper_kinds': row.get('helper_kinds', ''),
+            'call_sites': row.get('call_sites', ''),
+            'resolved_calls': row.get('resolved_calls', ''),
+            'unique_tables': row.get('unique_tables', ''),
+            'detailed_positive_431_match': 'YES' if decoded_sha and decoded_sha in detailed_dat_sha else 'NO'
+        })
+    mass_hash_link_rows = []
+    for input_sha in sorted(set(mass_rows_by_input_sha) | set(inventory_by_sha)):
+        scan_matches = mass_rows_by_input_sha.get(input_sha, [])
+        inventory_matches = inventory_by_sha.get(input_sha, [])
+        decoded_hashes = sorted({(row.get('decoded_rom_sha256') or '').lower() for row in scan_matches if row.get('decoded_rom_sha256')})
+        mass_hash_link_rows.append({
+            'input_sha256': input_sha,
+            'join_status': 'EXACT_SHA256_MATCH' if scan_matches and inventory_matches else ('MASS_SCAN_ONLY' if scan_matches else 'INVENTORY_ONLY'),
+            'scan_result_row_count': len(scan_matches),
+            'scan_input_keys': ';'.join(sorted({row.get('input_key', '') for row in scan_matches if row.get('input_key')})),
+            'scan_codecs': ';'.join(sorted({row.get('codec', '') for row in scan_matches if row.get('codec')})),
+            'scan_statuses': ';'.join(sorted({row.get('status', '') for row in scan_matches if row.get('status')})),
+            'scan_source_references': ';'.join(sorted({row.get('source', '') for row in scan_matches if row.get('source')})),
+            'decoded_rom_sha256s': ';'.join(decoded_hashes),
+            'image_ids': ';'.join(sorted({image_key(sha) for sha in decoded_hashes})),
+            'file_inventory_row_count': len(inventory_matches),
+            'file_inventory_paths': ';'.join(sorted({row.get('relative', '') for row in inventory_matches if row.get('relative')})),
+            'file_inventory_classifications': ';'.join(sorted({row.get('classification', '') for row in inventory_matches if row.get('classification')})),
+            'sha256_pair_count': len(scan_matches) * len(inventory_matches)
+        })
     base_rows_by_image: Dict[str, List[dict]] = collections.defaultdict(list)
     base_count = 0
     if getattr(args, 'base_table_objects', None):
@@ -478,7 +579,7 @@ def build_index(args: argparse.Namespace) -> dict:
         generation_rows.append([basis, make, model, year, engine, trans, len(values['images']), len(values['full']), len(values['summary']), values['observations'], min(vals) if vals else '', round(statistics.median(vals), 2) if vals else '', max(vals) if vals else ''])
     ident_fields = ['image_id', 'identifier_namespace', 'identifier', 'normalized_identifier', 'link_basis', 'link_status', 'match_confidence', 'master_rom_id', 'is_master_rom', 'model', 'make', 'vehicle_year', 'engine_code', 'transmission', 'source_line', 'source_paths']
     ident_rows = [[r.get(k, '') for k in ident_fields] for r in identifiers]
-    scan_fields = ['dataset', 'source_path', 'filename', 'scan_status', 'decoded_rom_sha256', 'container_sha256', 'image_id', 'error']
+    scan_fields = ['dataset', 'source_path', 'filename', 'scan_status', 'decoded_rom_sha256', 'container_sha256', 'image_id', 'error', 'input_key', 'codec', 'source_count', 'file_inventory_match_count', 'file_inventory_paths', 'file_inventory_classifications', 'rom_size_bytes', 'cpu_tags', 'fid_tags', 'loader', 'helpers', 'helper_kinds', 'call_sites', 'resolved_calls', 'unique_tables', 'detailed_positive_431_match']
     scan_out_rows = [[r.get(k, '') for k in scan_fields] for r in scan_sources]
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -487,20 +588,50 @@ def build_index(args: argparse.Namespace) -> dict:
     write_tsv(out / 'nissan_master_rom_groups.tsv', group_fields, ([g.get(k, '') for k in group_fields] for g in master_group_rows))
     write_tsv(out / 'nissan_rom_image_index.tsv', ['image_id', 'decoded_rom_sha256', 'rom_size_bytes', 'cpu_tags', 'nissan_fid_values', 'loader_values', 'scan_datasets', 'source_count', 'source_paths', 'exact_catalogue_code_links', 'exact_fid_inventory_links', 'observed_rom_codes', 'master_rom_groups', 'master_status_values', 'catalogue_vehicle_years', 'profile_basis', 'structural_observation_count', 'unique_geometry_signatures', 'helper_count', 'call_count', 'resolved_calls', 'table_count', 'nontrivial_table_count', 'candidate_component_id'], image_rows)
     write_tsv(out / 'nissan_rom_scan_sources.tsv', scan_fields, scan_out_rows)
+    mass_result_fields = list(mass_scan_rows[0].keys()) if mass_scan_rows else ['input_key', 'codec', 'input_sha256', 'source', 'source_count', 'status', 'decoded_rom_sha256', 'rom_size_bytes', 'cpu_tags', 'fid_tags', 'loader', 'helpers', 'helper_kinds', 'call_sites', 'resolved_calls', 'unique_tables', 'error']
+    mass_result_fields += ['image_id', 'detailed_positive_431_match', 'file_inventory_match_count', 'file_inventory_paths', 'file_inventory_classifications']
+    mass_result_out = []
+    for row in mass_scan_rows:
+        input_sha = (row.get('input_sha256') or '').strip().lower()
+        decoded_sha = (row.get('decoded_rom_sha256') or '').strip().lower()
+        matches = inventory_by_sha.get(input_sha, [])
+        values = dict(row)
+        values.update({
+            'image_id': image_key(decoded_sha, row.get('source', '')) if row.get('status') == 'SCANNED' and decoded_sha else '',
+            'detailed_positive_431_match': 'YES' if decoded_sha and decoded_sha in detailed_dat_sha else 'NO',
+            'file_inventory_match_count': len(matches),
+            'file_inventory_paths': ';'.join(sorted({item.get('relative', '') for item in matches if item.get('relative')})),
+            'file_inventory_classifications': ';'.join(sorted({item.get('classification', '') for item in matches if item.get('classification')}))
+        })
+        mass_result_out.append([values.get(key, '') for key in mass_result_fields])
+    write_tsv(out / 'nissan_historical_mass_scan_results.tsv', mass_result_fields, mass_result_out)
+    inventory_fields = list(original_inventory_rows[0].keys()) if original_inventory_rows else ['relative', 'extension', 'size_bytes', 'sha256', 'classification']
+    write_tsv(out / 'nissan_original_file_inventory.tsv', inventory_fields, ([row.get(key, '') for key in inventory_fields] for row in original_inventory_rows))
+    mass_link_fields = ['input_sha256', 'join_status', 'scan_result_row_count', 'scan_input_keys', 'scan_codecs', 'scan_statuses', 'scan_source_references', 'decoded_rom_sha256s', 'image_ids', 'file_inventory_row_count', 'file_inventory_paths', 'file_inventory_classifications', 'sha256_pair_count']
+    write_tsv(out / 'nissan_mass_scan_input_hash_links.tsv', mass_link_fields, ([row.get(key, '') for key in mass_link_fields] for row in mass_hash_link_rows))
     write_tsv(out / 'nissan_rom_identifier_links.tsv', ident_fields, ident_rows)
     write_tsv(out / 'nissan_rom_structural_profiles.tsv', ['image_id', 'decoded_rom_sha256', 'profile_basis', 'rom_size_bytes', 'cpu_tags', 'nissan_fid_values', 'structural_observation_count', 'unique_geometry_signatures', 'strict_signature_count', 'payload_hash_count', 'table_kind_counts_json', 'helper_count', 'call_count', 'resolved_calls', 'table_count', 'nontrivial_table_count', 'candidate_component_id', 'scan_datasets', 'source_paths'], profile_rows)
     write_tsv(out / 'nissan_rom_generation_summary.tsv', ['metadata_basis', 'make', 'model', 'vehicle_year', 'engine_code', 'transmission', 'unique_images', 'full_geometry_images', 'summary_only_images', 'structural_observations', 'min_scanned_table_count', 'median_scanned_table_count', 'max_scanned_table_count'], generation_rows)
     rel_fields = list(relationships[0].keys()) if relationships else ['image_a', 'image_b', 'relationship_types', 'relationship_score', 'strict_layout_jaccard', 'geometry_multiset_jaccard', 'rare_geometry_weighted_jaccard', 'rare_geometry_weighted_common', 'strict_common_observations', 'geometry_common_observations', 'shared_payload_hashes', 'shared_payloads_same_address', 'shared_code_region_hashes', 'common_code_hashes', 'rom_size_a', 'rom_size_b', 'cpu_a', 'cpu_b', 'fid_a', 'fid_b', 'models_a', 'models_b', 'years_a', 'years_b', 'engines_a', 'engines_b', 'transmissions_a', 'transmissions_b', 'evidence_boundary']
     write_tsv(out / 'nissan_rom_family_relationships.tsv', rel_fields, ([r.get(k, '') for k in rel_fields] for r in relationships))
     write_tsv(out / 'nissan_rom_candidate_components.tsv', ['candidate_component_id', 'image_count', 'image_ids', 'status'], ([r[k] for k in ('candidate_component_id', 'image_count', 'image_ids', 'status')] for r in components))
-    source_paths = [getattr(args, 'rom_id_crosswalk', None), getattr(args, 'vehicle_catalog', None), getattr(args, 'ecu_fid_catalog', None), getattr(args, 'scan_inventory', None), getattr(args, 'dat_scan_index', None), getattr(args, 'base_table_objects', None), getattr(args, 'reference_index', None)]
+    source_paths = [getattr(args, 'rom_id_crosswalk', None), getattr(args, 'vehicle_catalog', None), getattr(args, 'ecu_fid_catalog', None), getattr(args, 'scan_inventory', None), getattr(args, 'dat_scan_index', None), getattr(args, 'base_table_objects', None), getattr(args, 'reference_index', None), getattr(args, 'mass_scan_results', None), getattr(args, 'mass_file_inventory', None)]
     inputs = {}
     for p in source_paths:
         if p:
             pp = Path(p)
             if pp.exists():
                 inputs[str(pp)] = {'sha256': sha256_file(pp), 'bytes': pp.stat().st_size}
-    summary = {'schema': SCHEMA, 'profile_schema': PROFILE_SCHEMA, 'master_rom_code_rows': len(crosswalk_rows), 'master_rom_groups': len(master_group_rows), 'master_rom_ids': len(code_by_norm), 'master_flagged_rows': sum((r.get('IsMasterROM', '') == 'YES' for r in crosswalk_rows)), 'vehicle_catalog_rows': len(vehicle_rows), 'ecu_fid_inventory_rows': len(ecu_fid_rows), 'scan_inventory_rows': len(scan_rows), 'direct_dat_detailed_rows': len(dat_rows), 'unique_decoded_images': len(images), 'source_scan_records': len(scan_sources), 'image_profile_full_geometry': sum((p['profile_basis'] == 'FULL_GEOMETRY' for p in profiles.values())), 'image_profile_summary_only': sum((p['profile_basis'] == 'SUMMARY_ONLY' for p in profiles.values())), 'base_table_object_rows': base_count, 'scanner_catalogue_files': catalogue_files, 'identifier_links': len(identifiers), 'exact_ecuid_to_catalogue_code_links': sum((r.get('link_status') == 'EXACT_CATALOGUE_CODE_VIA_ECUID' for r in identifiers)), 'family_relationship_edges': len(relationships), 'candidate_components': len(components), 'component_images': sum((len(r['image_ids'].split(';')) for r in components)), 'relationship_policy': 'exact code-region hashes and strict address+geometry overlap can form candidate components; address-ignored shape similarity, payload reuse, same-FID and master-ROM-group links remain separate leads and never imply semantic identity', 'inputs': inputs}
+    mass_status_counts = collections.Counter((row.get('status') or 'UNKNOWN').upper() for row in mass_scan_rows)
+    inventory_class_counts = collections.Counter((row.get('classification') or 'UNKNOWN') for row in original_inventory_rows)
+    mass_scanned_rows = [row for row in mass_scan_rows if (row.get('status') or '').upper() == 'SCANNED']
+    mass_decoded_hashes = {(row.get('decoded_rom_sha256') or '').strip().lower() for row in mass_scanned_rows if row.get('decoded_rom_sha256')}
+    matched_mass_rows = [row for row in mass_scan_rows if (row.get('input_sha256') or '').strip().lower() in inventory_by_sha]
+    mass_scan_hash_groups = len(mass_rows_by_input_sha)
+    inventory_sha_rows = [row for row in original_inventory_rows if (row.get('sha256') or '').strip()]
+    exact_hash_groups = sum((1 for sha in mass_rows_by_input_sha if sha in inventory_by_sha))
+    exact_hash_pair_count = sum((len(mass_rows_by_input_sha[sha]) * len(inventory_by_sha[sha]) for sha in mass_rows_by_input_sha if sha in inventory_by_sha))
+    summary = {'schema': SCHEMA, 'profile_schema': PROFILE_SCHEMA, 'master_rom_code_rows': len(crosswalk_rows), 'master_rom_groups': len(master_group_rows), 'master_rom_ids': len(code_by_norm), 'master_flagged_rows': sum((r.get('IsMasterROM', '') == 'YES' for r in crosswalk_rows)), 'vehicle_catalog_rows': len(vehicle_rows), 'ecu_fid_inventory_rows': len(ecu_fid_rows), 'scan_inventory_rows': len(scan_rows), 'direct_dat_detailed_rows': len(dat_rows), 'historical_mass_scan_result_rows': len(mass_scan_rows), 'historical_mass_scan_unique_input_hashes': mass_scan_hash_groups, 'historical_mass_scan_status_counts': dict(sorted(mass_status_counts.items())), 'historical_mass_scan_scanned_rows': mass_status_counts.get('SCANNED', 0), 'historical_mass_scan_load_rejected_rows': mass_status_counts.get('LOAD_REJECTED', 0), 'historical_mass_scan_unique_decoded_images': len(mass_decoded_hashes), 'historical_mass_scan_exact_file_sha_match_result_rows': len(matched_mass_rows), 'historical_mass_scan_unmatched_file_sha_result_rows': len(mass_scan_rows) - len(matched_mass_rows), 'original_file_inventory_rows': len(original_inventory_rows), 'original_file_inventory_class_counts': dict(sorted(inventory_class_counts.items())), 'original_file_inventory_rows_with_sha256': len(inventory_sha_rows), 'original_file_inventory_rows_without_sha256': len(original_inventory_rows) - len(inventory_sha_rows), 'mass_scan_exact_sha256_link_groups': exact_hash_groups, 'mass_scan_exact_sha256_pair_relations': exact_hash_pair_count, 'mass_scan_inventory_only_sha256_rows': sum((1 for row in inventory_sha_rows if (row.get('sha256') or '').lower() not in mass_rows_by_input_sha)), 'unique_decoded_images': len(images), 'source_scan_records': len(scan_sources), 'image_profile_full_geometry': sum((p['profile_basis'] == 'FULL_GEOMETRY' for p in profiles.values())), 'image_profile_summary_only': sum((p['profile_basis'] == 'SUMMARY_ONLY' for p in profiles.values())), 'base_table_object_rows': base_count, 'scanner_catalogue_files': catalogue_files, 'identifier_links': len(identifiers), 'exact_ecuid_to_catalogue_code_links': sum((r.get('link_status') == 'EXACT_CATALOGUE_CODE_VIA_ECUID' for r in identifiers)), 'family_relationship_edges': len(relationships), 'candidate_components': len(components), 'component_images': sum((len(r['image_ids'].split(';')) for r in components)), 'relationship_policy': 'exact code-region hashes and strict address+geometry overlap can form candidate components; address-ignored shape similarity, payload reuse, same-FID and master-ROM-group links remain separate leads and never imply semantic identity', 'inputs': inputs}
     image_fields = ['image_id', 'decoded_rom_sha256', 'rom_size_bytes', 'cpu_tags', 'nissan_fid_values', 'loader_values', 'scan_datasets', 'source_count', 'source_paths', 'exact_catalogue_code_links', 'exact_fid_inventory_links', 'observed_rom_codes', 'master_rom_groups', 'master_status_values', 'catalogue_vehicle_years', 'profile_basis', 'structural_observation_count', 'unique_geometry_signatures', 'helper_count', 'call_count', 'resolved_calls', 'table_count', 'nontrivial_table_count', 'candidate_component_id']
     profile_fields = ['image_id', 'decoded_rom_sha256', 'profile_basis', 'rom_size_bytes', 'cpu_tags', 'nissan_fid_values', 'structural_observation_count', 'unique_geometry_signatures', 'strict_signature_count', 'payload_hash_count', 'table_kind_counts_json', 'helper_count', 'call_count', 'resolved_calls', 'table_count', 'nontrivial_table_count', 'candidate_component_id', 'scan_datasets', 'source_paths']
     index_json = {'schema': SCHEMA, 'summary': summary, 'master_rom_codes': crosswalk_rows, 'master_rom_groups': master_group_rows, 'generation_summary': [dict(zip(['metadata_basis', 'make', 'model', 'vehicle_year', 'engine_code', 'transmission', 'unique_images', 'full_geometry_images', 'summary_only_images', 'structural_observations', 'min_scanned_table_count', 'median_scanned_table_count', 'max_scanned_table_count'], row)) for row in generation_rows], 'images': [dict(zip(image_fields, row)) for row in image_rows], 'identifiers': [dict(zip(ident_fields, row)) for row in ident_rows], 'scan_sources': [dict(zip(scan_fields, row)) for row in scan_out_rows], 'structural_profiles': [dict(zip(profile_fields, row)) for row in profile_rows], 'relationships': relationships, 'candidate_components': components}
