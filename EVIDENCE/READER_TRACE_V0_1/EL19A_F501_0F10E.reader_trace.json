@@ -1,0 +1,824 @@
+{
+  "schema_version": "sh705x-reader-trace-graph-v0.1",
+  "data_model_version": "sh705x-datamodel-v1.0.0",
+  "trace_id": "trace:EL19A:f501:0x0F10E:call-0x85B2E:v0.1",
+  "artifact": {
+    "artifact_id": "rom:VERSA_f501.bin#bfe037e8e6c389e2",
+    "source_path": "EVIDENCE/VERSA f501.bin",
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "decoded_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "processor_family": "SH7058",
+    "processor_model": "SH705822N",
+    "ecu_profile": "EL19A / MR18DE"
+  },
+  "target_object": {
+    "object_ref": "candidate:EL19A:f501:0x0F10E",
+    "address_space": "rom_ea",
+    "ea": 61710,
+    "byte_extent": 16,
+    "dimensions": [
+      16,
+      1
+    ],
+    "storage_type": "uint8",
+    "payload_hex": "FA FA 96 4B 3C 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D",
+    "payload_sha256": "366fa16acec8b8645e5fa4c3462601f7060e369b2a0bc7cc030f74b113003605"
+  },
+  "call_ref": {
+    "call_id": "call:rom:VERSA_f501.bin#0x85B2E",
+    "call_pc": 547630,
+    "call_form": "indirect_jsr",
+    "helper_ea": 142864
+  },
+  "nodes": [
+    {
+      "node_id": "rom-table-0f10e",
+      "kind": "rom_object",
+      "label": "EL19A ROM object 0x0F10E",
+      "address": {
+        "space": "rom_ea",
+        "value": 61710
+      },
+      "properties": {
+        "byte_extent": 16,
+        "dimensions": [
+          16,
+          1
+        ],
+        "storage_type": "uint8",
+        "payload_sha256": "366fa16acec8b8645e5fa4c3462601f7060e369b2a0bc7cc030f74b113003605"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "node_id": "literal-pool-85d30",
+      "kind": "rom_literal_pool",
+      "label": "off_85D30 contains pointer 0x0000F10E",
+      "address": {
+        "space": "rom_ea",
+        "value": 548144
+      },
+      "properties": {
+        "bytes_hex": "00 00 F1 0E",
+        "decoded_pointer": 61710
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b2a",
+      "kind": "code_site",
+      "label": "0x85B2A loads table pointer into R4",
+      "address": {
+        "space": "rom_ea",
+        "value": 547626
+      },
+      "properties": {
+        "mnemonic": "mov.l off_85D30,r4",
+        "register_out": "R4"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b28",
+      "kind": "code_site",
+      "label": "0x85B28 reads query source",
+      "address": {
+        "space": "rom_ea",
+        "value": 547624
+      },
+      "properties": {
+        "register_out": "R0",
+        "source": "UBYTE[FFFF84B8]"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b30",
+      "kind": "code_site",
+      "label": "0x85B30 delay slot zero-extends query into R5",
+      "address": {
+        "space": "rom_ea",
+        "value": 547632
+      },
+      "properties": {
+        "delay_slot_of": "0x85B2E",
+        "mnemonic": "extu.b r0,r5",
+        "query_register": "R5"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b2e",
+      "kind": "code_site",
+      "label": "0x85B2E invokes lookup helper",
+      "address": {
+        "space": "rom_ea",
+        "value": 547630
+      },
+      "properties": {
+        "mnemonic": "jsr @r2",
+        "argument_registers": {
+          "table": "R4",
+          "query": "R5"
+        },
+        "call_id": "call:rom:VERSA_f501.bin#0x85B2E"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "helper-22e10",
+      "kind": "lookup_helper",
+      "label": "sub_22E10",
+      "address": {
+        "space": "rom_ea",
+        "value": 142864
+      },
+      "properties": {
+        "lookup_kind": "implicit_uniform_1d",
+        "interpolation_helper": "sub_231C8"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "node_id": "ram-ffff84b8",
+      "kind": "ram_cell",
+      "label": "UBYTE query source FFFF84B8",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF84B8"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "value_role": "lookup_query",
+        "semantic_label": "Existing NTC_AN27_rescaled(ECT) label; no table physical role inferred"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "node_id": "reg-r0-result",
+      "kind": "register",
+      "label": "R0 helper return value",
+      "address": null,
+      "properties": {
+        "register": "R0",
+        "value_type": "uint8"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffff29f6",
+      "kind": "ram_cell",
+      "label": "UBYTE result staging FFFF29F6",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF29F6"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "result_staging"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffff37ae",
+      "kind": "ram_cell",
+      "label": "UBYTE result staging FFFF37AE",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF37AE"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "result_staging"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b4a",
+      "kind": "consumer",
+      "label": "First meaningful consumer: zero/nonzero qualification",
+      "address": {
+        "space": "rom_ea",
+        "value": 547658
+      },
+      "properties": {
+        "function": "sub_85AF4",
+        "read_source": "UBYTE[FFFF37AE]",
+        "branch_condition": "zero/nonzero"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "node_id": "code-85b6e",
+      "kind": "code_site",
+      "label": "Alternate branch reads FFFF29F6 and copies to FFFF37AE",
+      "address": {
+        "space": "rom_ea",
+        "value": 547694
+      },
+      "properties": {
+        "source": "UBYTE[FFFF29F6]",
+        "destination": "UBYTE[FFFF37AE]"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffff3614-bit7",
+      "kind": "branch_condition",
+      "label": "Precondition FFFF3614.bit7 must be clear",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF3614"
+      },
+      "properties": {
+        "bit": 7,
+        "required_value": 0,
+        "role": "lookup_gate"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffff3615-bit7",
+      "kind": "branch_condition",
+      "label": "Precondition FFFF3615.bit7 must be set",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF3615"
+      },
+      "properties": {
+        "bit": 7,
+        "required_value": 1,
+        "role": "lookup_gate"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffff99f0-bit6",
+      "kind": "branch_condition",
+      "label": "Post-call selector FFFF99F0.bit6",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF99F0"
+      },
+      "properties": {
+        "bit": 6,
+        "meaning": "unresolved",
+        "role": "result_staging_selector"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "ram-ffffa6fc",
+      "kind": "ram_cell",
+      "label": "UBYTE state flag FFFFA6FC",
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFFA6FC"
+      },
+      "properties": {
+        "width_bits": 8,
+        "semantic_meaning": "unresolved",
+        "write_condition": "zero lookup result",
+        "written_value": 1
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "reg-r4-table",
+      "kind": "register",
+      "label": "R4 table pointer argument",
+      "address": null,
+      "properties": {
+        "register": "R4",
+        "value": "0x0F10E"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "reg-r5-query",
+      "kind": "register",
+      "label": "R5 unsigned query argument",
+      "address": null,
+      "properties": {
+        "register": "R5",
+        "source": "UBYTE[FFFF84B8]"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b32",
+      "kind": "code_site",
+      "label": "0x85B32 copies lookup return R0 to R2",
+      "address": {
+        "space": "rom_ea",
+        "value": 547634
+      },
+      "properties": {
+        "mnemonic": "mov r0,r2",
+        "register_in": "R0",
+        "register_out": "R2"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "reg-r2-result",
+      "kind": "register",
+      "label": "R2 result value before RAM stores",
+      "address": null,
+      "properties": {
+        "register": "R2",
+        "value_type": "uint8"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b34",
+      "kind": "code_site",
+      "label": "0x85B34 store to FFFF29F6",
+      "address": {
+        "space": "rom_ea",
+        "value": 547636
+      },
+      "properties": {
+        "destination": "UBYTE[FFFF29F6]"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "node_id": "code-85b38",
+      "kind": "code_site",
+      "label": "0x85B38 copy to FFFF37AE",
+      "address": {
+        "space": "rom_ea",
+        "value": 547640
+      },
+      "properties": {
+        "destination": "UBYTE[FFFF37AE]"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "e01",
+      "from_node": "literal-pool-85d30",
+      "to_node": "rom-table-0f10e",
+      "relation": "contains_pointer_to",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "edge_id": "e02",
+      "from_node": "code-85b2a",
+      "to_node": "code-85b2e",
+      "relation": "precedes_lookup_call",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e03",
+      "from_node": "ram-ffff84b8",
+      "to_node": "code-85b28",
+      "relation": "read_as_query_source",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "edge_id": "e04",
+      "from_node": "code-85b28",
+      "to_node": "code-85b30",
+      "relation": "query_zero_extended_to_R5",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e05",
+      "from_node": "code-85b2e",
+      "to_node": "helper-22e10",
+      "relation": "calls",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "edge_id": "e06",
+      "from_node": "helper-22e10",
+      "to_node": "rom-table-0f10e",
+      "relation": "reads_lookup_payload",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e07",
+      "from_node": "helper-22e10",
+      "to_node": "reg-r0-result",
+      "relation": "returns_lookup_result_in_R0",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e08",
+      "from_node": "ram-ffff37ae",
+      "to_node": "code-85b4a",
+      "relation": "read_by_first_consumer_zero_nonzero_test",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ]
+    },
+    {
+      "edge_id": "e09",
+      "from_node": "ram-ffff29f6",
+      "to_node": "code-85b6e",
+      "relation": "read_in_alternate_staging_branch",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e10",
+      "from_node": "code-85b6e",
+      "to_node": "ram-ffff37ae",
+      "relation": "copies_to_alternate_result_cell",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e11",
+      "from_node": "ram-ffff3614-bit7",
+      "to_node": "code-85b2e",
+      "relation": "lookup_precondition_bit7_clear",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e12",
+      "from_node": "ram-ffff3615-bit7",
+      "to_node": "code-85b2e",
+      "relation": "lookup_precondition_bit7_set",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e13",
+      "from_node": "ram-ffff99f0-bit6",
+      "to_node": "code-85b4a",
+      "relation": "selects_post_lookup_staging_branch",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e14",
+      "from_node": "code-85b4a",
+      "to_node": "ram-ffffa6fc",
+      "relation": "sets_state_flag_when_result_zero",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e15",
+      "from_node": "code-85b2a",
+      "to_node": "reg-r4-table",
+      "relation": "loads_table_pointer_into_R4",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e16",
+      "from_node": "reg-r4-table",
+      "to_node": "code-85b2e",
+      "relation": "supplies_table_pointer_argument",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e17",
+      "from_node": "code-85b30",
+      "to_node": "reg-r5-query",
+      "relation": "zero_extends_query_into_R5",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e18",
+      "from_node": "reg-r5-query",
+      "to_node": "code-85b2e",
+      "relation": "supplies_unsigned_query_argument",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e19",
+      "from_node": "reg-r0-result",
+      "to_node": "code-85b32",
+      "relation": "copied_after_helper_return",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e20",
+      "from_node": "code-85b32",
+      "to_node": "reg-r2-result",
+      "relation": "copies_R0_to_R2",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e21",
+      "from_node": "reg-r2-result",
+      "to_node": "code-85b34",
+      "relation": "value_used_for_first_result_store",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e22",
+      "from_node": "code-85b34",
+      "to_node": "ram-ffff29f6",
+      "relation": "stores_to",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e23",
+      "from_node": "reg-r2-result",
+      "to_node": "code-85b38",
+      "relation": "value_used_for_second_result_copy",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    },
+    {
+      "edge_id": "e24",
+      "from_node": "code-85b38",
+      "to_node": "ram-ffff37ae",
+      "relation": "copies_to",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev:rom-f501",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "anchor": "Target ROM identity and payload at 0x0F10E-0x0F11D as recorded in WO70013",
+      "evidence_class": "target_rom_identity_and_payload",
+      "extraction_method": "Target ROM identity and payload hash from the closed target-side trace report",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:wo70013",
+      "source_path": "CONTROL/WO70013.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "aaf49a7082a4279ffe46bee37e112a022036071e",
+      "anchor": "Sections 2-4: pointer, call, query, helper, result stores, first consumer; exact Stage-16 listing SHA-256 not stated",
+      "evidence_class": "closed_target_reader_trace_report",
+      "extraction_method": "Structured extraction from the closed WO report; not an independent re-decode of the listing",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:fnd-000026",
+      "source_path": "FINDINGS/records/FND-000026.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "6447a9360f62ac182b871636e6c043b252b009d3",
+      "anchor": "Exact object, target reader/query, first consumer and unresolved semantic boundary",
+      "evidence_class": "canonical_finding_record",
+      "extraction_method": "Cross-check against current finding record",
+      "status": "current"
+    }
+  ],
+  "lookup_contract": {
+    "query_source_node": "ram-ffff84b8",
+    "helper_node": "helper-22e10",
+    "query_type": {
+      "storage": "uint8",
+      "signed": false,
+      "register": "R5",
+      "source_pc": "0x85B28",
+      "zero_extend_pc": "0x85B30"
+    },
+    "axis_model": {
+      "kind": "implicit_uniform",
+      "axis_storage": "not_stored_in_ROM",
+      "start": 0,
+      "step": 16,
+      "point_count": 16,
+      "reported_grid_notation": "0,16,...,224 (WO70013 wording)",
+      "reported_last_coordinate": 224,
+      "derived_index_15_coordinate": 240,
+      "reconciliation_status": "wording_conflict_requires_source_recheck"
+    },
+    "interpolation": {
+      "method": "linear_between_adjacent_points",
+      "interval_index_derived_from_query": true,
+      "helper": "sub_231C8"
+    },
+    "low_range_behavior": "For q < 0xF0, helper derives interval index/fraction and interpolates adjacent UBYTE entries.",
+    "upper_boundary": {
+      "operator": ">=",
+      "query_value": 240,
+      "behavior": "return_last_element",
+      "element_index": 15
+    },
+    "evidence_refs": [
+      "ev:wo70013",
+      "ev:fnd-000026"
+    ]
+  },
+  "unresolved_boundaries": [
+    {
+      "boundary_id": "listing-provenance",
+      "at_node": "code-85b2e",
+      "reason": "WO70013 cites the Stage-16 listing but does not record its exact SHA-256; this graph is not an independent listing re-decode.",
+      "required_evidence": "Exact Stage-16 LST path and SHA-256 plus bounded re-read of call/helper/consumer instruction ranges."
+    },
+    {
+      "boundary_id": "beyond-first-consumer",
+      "at_node": "code-85b4a",
+      "reason": "The bounded path reaches internal zero/nonzero qualification, not a named actuator, injector, fuel-quantity or physical output endpoint.",
+      "required_evidence": "Separately bounded target-side producer/consumer path to a demonstrated physical command or proven software output."
+    },
+    {
+      "boundary_id": "physical-function-and-units",
+      "at_node": "rom-table-0f10e",
+      "reason": "The provisional cranking-fuel label and donor mTSTNGTM hypothesis are not established by target-side reader and first-consumer evidence.",
+      "required_evidence": "Target-side semantic evidence linking query, downstream calculation and named output with compatible units/branches."
+    },
+    {
+      "boundary_id": "precondition-bit-meaning",
+      "at_node": "ram-ffff3614-bit7",
+      "reason": "FFFF3614.bit7 and FFFF3615.bit7 are traced as gating conditions, but their semantic names/roles are unproven.",
+      "required_evidence": "Producer and consumer provenance for both RAM bits."
+    },
+    {
+      "boundary_id": "grid-endpoint-wording",
+      "at_node": "helper-22e10",
+      "reason": "The report notation 0,16,...,224 conflicts with index-15 arithmetic at 240; preserve until exact helper instructions are re-read.",
+      "required_evidence": "Re-read sub_22E10/loc_2350C in the exact Stage-16 listing and verify query-to-index/fraction mapping and terminal coordinate."
+    }
+  ],
+  "coverage": {
+    "status": "source_reported_complete_through_first_consumer",
+    "start": "0x85B2A-0x85B30: pointer load, query load and delay-slot setup",
+    "stop": "First consumer at 0x85B4A-0x85B52; alternate staging branch at 0x85B6E-0x85B7A",
+    "independent_redecode_performed": false,
+    "source_listing_sha256": null
+  },
+  "semantic_disposition": {
+    "provisional_name": "Cranking Fuel Value vs Coolant",
+    "donor_hypothesis": "mTSTNGTM",
+    "physical_identity": "unresolved",
+    "promotion": "not_supported",
+    "evidence_grade": "Reader-Verified as recorded in FND-000026"
+  }
+}
