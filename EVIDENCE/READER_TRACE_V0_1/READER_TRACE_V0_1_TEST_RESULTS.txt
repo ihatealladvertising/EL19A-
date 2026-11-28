@@ -1,20 +1,21 @@
-Reader Trace v0.1 geometry and existing-indexer integration regression
+Reader Trace v0.1 geometry, adapter and helper-profile regression
 
 Golden graph fixtures:
   - EL19A 0x0F10E: 16-point UBYTE vector; 23 nodes / 24 edges / 5 unresolved boundaries.
   - EL19A 0x10F8A: 32-point UWORD value curve with explicit axis 0x0F712; 17 nodes / 16 edges / 3 unresolved boundaries.
   - EL19A 0x0AFF2: 4x4 UBYTE map with explicit axes 0x0E5CC and 0x0E5C8; 21 nodes / 22 edges / 5 unresolved boundaries.
 
-Targeted Reader Trace tests:
-  - test_reader_trace_graph.py: 20 graph-contract and geometry-fixture tests.
+Reader Trace-specific tests:
+  - test_reader_trace_graph.py: 20 graph-contract and golden-geometry tests.
   - test_reader_trace_indexer_adapter.py: 14 adapter tests.
   - test_reader_trace_static_flow.py: 4 existing static-flow tests.
-  Total targeted Reader Trace tests: 38.
+  - test_reader_trace_helper_profiles.py: 11 exact-image helper-profile tests.
+  Total Reader Trace-specific tests: 49.
 
 Full regression:
-  GitHub Actions run: 46108553256
-  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108553256
-  Result: 105 tests passed; 2 optional production-regression checks skipped.
+  GitHub Actions run: 46108856894
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46108856894
+  Result: 116 tests passed; 2 optional production-regression checks skipped.
   Compile step passed.
   Synthetic regression step passed.
 
@@ -34,8 +35,16 @@ Static-flow coverage:
   - Helper-call clobber behavior with preserved high-register destination
   - Tainted lookup return to RAM store and separately indexed downstream RAM reader
 
+Exact-image helper-profile coverage:
+  - Four pinned helper contracts: sub_22E10, sub_22FAC, sub_22B44 and sub_22DF8
+  - Exact processor family + decoded ROM SHA-256 + helper EA matching
+  - Unknown EA, other ROM SHA and other CPU profile do not match
+  - Evidence references required before profile attachment
+  - Non-mutating graph enrichment; core graph contract remains valid after profile attachment
+  - Profile mechanics remain basis=reported_observation; no implicit promotion to direct instruction facts
+
 Geometry coverage:
-  - 1D UBYTE implicit-uniform lookup; q >= 0xF0 terminal path retained with the 224/240 wording conflict unresolved.
+  - 1D UBYTE implicit-uniform lookup; q >= 0xF0 terminal path retained with 224/240 wording conflict unresolved.
   - 32-point explicit UWORD axis/value curve, query construction, helper chain, result staging and conditional post-call normalization.
   - 4x4 UBYTE map with distinct, strictly increasing 4-point axis vectors and one unsigned UBYTE query used for both axis searches.
   - 0x0AFF2 instruction/result path distinguishes R0-to-R2 delay-slot transfer, first multiplication consumer, UWORD product sink FFFF115A and separate inline element staging FFFF14E4.
@@ -45,4 +54,4 @@ Evidence boundary:
   The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. Physical meanings and donor semantics remain unpromoted.
 
 Limit:
-  The implementation is a graph contract plus an adapter to existing SH-2 static indexes. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
+  The implementation now has a graph contract, adapters for the existing SH-2 indexes, and exact-image helper-profile attachment. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
