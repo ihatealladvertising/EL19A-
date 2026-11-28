@@ -1,0 +1,40 @@
+PrimaryFID	DetailedDATRecords	ExactFIDInventoryMatchCount	ExactMatches	PrefixCandidateCount	PrefixCandidates	Disposition	EvidenceSource
+9CMCVAPD31	40	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+I9CMCHVPD6	38	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCHXPD7	35	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCS62D8	32	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7QPD4	32	0		1	EM62B:Tiida:HR16DE:1CMC7QPD401:line2411	PREFIX_ONLY_CANDIDATE	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+Z3CMCJSPD4	32	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+4CMCB1PDM1	32	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2XH5EJ7G2	22	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSSKDD	19	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2XH5ET6G3	14	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2XH5EUXG4	12	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+H1CMC7Q4003	10	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7QPD44	9	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC6GPDA	9	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCA1PDB	9	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7Q4001	8	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+9CMCHLE2	8	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7QPD401	8	1	EM62B:Tiida:HR16DE:1CMC7QPD401:line2411	0		EXACT_FID_MATCH	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSFEDA	7	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSKHDB	5	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSBND9	4	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCFPPD6	4	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+D2JCSFEDA1	4	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+4CMC7NPDF2	4	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7QPD402	4	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+15CMCGZDH4	3	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCUVPD8	3	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+3CMC13PD7	3	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+6JCS7JD1	3	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSXKDF	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCBUPD5	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCSZEDG	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2XH5E6HG5	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMCXSPD9	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+2JCS3GDH	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+3CMCJSPD401	2	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+5CMCE3E61	2	0		2	EC80A:Note/Tiida?:HR16DE:5CMCE3E6:line2377 | EC82A:Note/Tiida?:HR16DE:5CMCE3E6:line2386	PREFIX_ONLY_CANDIDATE	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+1CMC7QPD45	1	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
+6JCSF9D2	1	0		0		NO_MATCH_IN_ECU_FID_LIST	EVIDENCE/mass dat scan/dat_detailed_431_results.tsv + EVIDENCE/master rom table/uprev ecus.txt
