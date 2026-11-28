@@ -68,7 +68,7 @@ _PROFILES = {
             "query_type": {"storage": "uint16", "signed": False},
             "point_count": 32,
             "axis_storage": "uint16",
-            "search": {"kind": "explicit_axis_search", "helper": "sub_2340C"},
+            "axis_search": {"kind": "explicit_axis_search", "helper": "sub_2340C"},
             "fraction": {"helper": "sub_23700"},
             "interpolation": {"method": "UWORD value interpolation", "helper": "sub_231C8"},
             "return_register": "R0",
