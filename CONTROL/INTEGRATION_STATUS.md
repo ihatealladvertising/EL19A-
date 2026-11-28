@@ -1,4 +1,9 @@
-**Integrator:** ChatGPT — WO70039 Nissan master-ROM and structural-family index implementation (2026-11-28)
+**Integrator:** ChatGPT — WO70039 full mass-scan index coverage correction (2026-11-28)
+**Purpose:** Extend the index to ingest the complete 14,666-row historical scan-results ledger (including 12,176 SCANNED source rows and 2,490 LOAD_REJECTED rows) and the 16,584-row original file inventory, rather than relying only on the 431 detailed-positive subset. Preserve source references and deduplicate decoded images by SHA-256. Synchronize runner, schema, tests, docs and workflow, then release to rerun the full build.
+**Lock acquired:** 2026-11-28 — gate verified UNLOCKED at base commit `4d1c4f43d14055e25db051f3225270823d4b7267`; serialization for WO70039 coverage correction.
+**State:** LOCKED
+
+039 Nissan master-ROM and structural-family index implementation (2026-11-28)
 **Purpose:** The implementation is published and verified; release gate to trigger the fresh 177-entry ROM-folder scan, rebuild the ROM/RomRaider reference index, join the 3,691-code catalogue + 43-row ECU/FID inventory + 431-DAT detailed index + 434-layout base set, publish machine-readable family-index outputs, and read back results. Worker lanes, calibration XML, Findings, ROM binaries and existing workbooks remain unchanged.
 **Lock acquired:** 2026-11-28 — gate verified UNLOCKED at base commit `20b0f3642577d62912506d5d1cd8a72b0b5ff8f1`; publication serialized for WO70039.
 **Implementation published:** builder commit `1d3907cee56101cb53f77f4d13a86139a5cb46fa`; runner commit `aeb6b8ffa700e35c75c60307d1596216eb9c553b`; eight-test suite commit `b33b8b031a23520d7f960e4fef8fe705e880b109`; workbench command commit `ca5a8f1a00d28ac52ef799548211cbfeba5b6daf`; CI/test/docs commits `58822c43cb1621920da2b2ee5bcff3698e4a3fbc`, `52e8835ac119a4090cb8786d46ee6544ed60bea6`, `4be82d542b1a11de3975da6c399b453e5e5cf8ed`; report/register commits `978ea4d9fd8289eade786245d81678f413ae64e0` and `08ad54885f03bbc6f5b96767d95b5c1b523b12fc`.
