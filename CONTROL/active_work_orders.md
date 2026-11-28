@@ -27,20 +27,11 @@
 
 ## Active Claims & Lease Health
 
-| WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
-|---|---|---|---|---|---|---|
-| [WO70042](WO70042.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T04:52:40Z` | OK (0.0h / 24h) | `tooling:reader_trace_static_flow_adapter`, `tools:reader_trace_pipeline`, `tools:test_reader_trace_static_flow_adapter`, `tools:test_reader_trace_pipeline`, `control:reader_trace_graph_schema`, `evidence:reader_trace_static_flow` |
+_No active CLAIMED work orders._
 
 ## Target Scope Lock Table
 
-| Canonical Scope Lock | Held By | Owner | Lane |
-|---|---|---|---|
-| `control:reader_trace_graph_schema` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `evidence:reader_trace_static_flow` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tooling:reader_trace_static_flow_adapter` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tools:reader_trace_pipeline` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tools:test_reader_trace_pipeline` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tools:test_reader_trace_static_flow_adapter` | [WO70042](WO70042.md) | `aistudio-readertrace-integrator` | `aistudio` |
+_No active hex/key scope locks held._
 
 ## Structured Queue & Dependency Unblocking
 
@@ -52,6 +43,7 @@
 
 | WO | Lane | Priority | Owner | Closed/Claimed Timestamp | Title |
 |---|---|---|---|---|---|
+| [WO70042](WO70042.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T04:52:40Z` | Per-call static-flow adapter for Reader Trace v0.1 |
 | [WO70040](WO70040.md) | `aistudio` | P1 | `aistudio-readertrace-worker1` | `2026-11-28T04:47:27Z` | Reconstruct and evidence-audit the 0x0F10E reader-trace graph |
 | [WO70039](WO70039.md) | `aistudio` | P1 | `aistudio-el19a-coordinator` | `2026-11-28T02:32:38Z` | Nissan master-ROM and structural-family index |
 | [WO70002](WO70002.md) | `aistudio` | P1 | `aistudio-el13a-diff` | `2026-11-24T03:34:07Z` | EL19A vs EL13A Same-FID Calibration Diff and Unmapped Target Discovery |
