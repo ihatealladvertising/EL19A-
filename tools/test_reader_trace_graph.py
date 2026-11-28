@@ -2,6 +2,8 @@
 """Synthetic tests for the additive SH705x reader-trace graph contract."""
 from __future__ import annotations
 
+from pathlib import Path
+
 import copy
 import json
 import pathlib
