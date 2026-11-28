@@ -50,7 +50,7 @@ jobs:
         run: |
           ALLOW_PINS=""
           PR_LABELS="$(gh api "repos/${REPOSITORY}/issues/${PR_NUMBER}/labels" --jq '.[].name')"
-          if printf '%s\\n' "$PR_LABELS" | grep -Fxq 'coordinator-pins'; then
+          if printf '%s\n' "$PR_LABELS" | grep -Fxq 'coordinator-pins'; then
             ALLOW_PINS="--allow-pins-edit"
           fi
           python3 tools/wo_registry.py validate \
