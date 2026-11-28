@@ -1,13 +1,13 @@
 Reader Trace v0.1 synthetic regression
 
-Command:
-  python -m unittest -v test_reader_trace_graph.py
+Commands:
+  python -m unittest -v test_reader_trace_graph.py test_reader_trace_indexer_adapter.py
 
 Environment:
   Local Python 3.13; standard library only.
 
 Result:
-  16 tests passed.
+  27 tests passed (16 graph-contract tests + 11 existing-indexer adapter tests).
 
 Coverage:
   - Golden fixture structure and graph topology
@@ -20,6 +20,11 @@ Coverage:
   - Unresolved boundaries and physical-identity stop
   - Implicit-grid endpoint conflict warning
   - Deterministic serialization and atomic writer
+  - Existing byte-concordant indexer hits mapped to direct ROM-read edges
+  - Existing static-index query provenance mapped as derived evidence
+  - Taint-proven result destinations distinguished from heuristic near-call writes
+  - Downstream RAM read sites represented without unsupported value-causality claims
+  - Deterministic, idempotent graph enrichment
 
 Limit:
-  These tests validate graph structure, provenance references and deterministic serialization. They do not decode or execute SH-2 instructions and do not validate the technical truth of the cited trace.
+  Tests validate graph structure, provenance references and adapter grading. They do not decode or execute SH-2 instructions or establish the physical meaning of any calibration object.
