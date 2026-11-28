@@ -14,24 +14,33 @@
 - **Current Workbook:** `WORKBOOK/EL19A_Master_Reverse_Engineering_Workbook_V58_WO65114_ThinReferenceCloseout_2026-11-21.xlsx` (149 sheets)
 - **XML Baseline:** `public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml` + `EL19A_ignition_decoded_fragment_33ea8e67.xml`
 - **Catalog Staging:** `CALIBRATIONS/discovered_tables_catalog.csv`
-- **Parsed Records:** `802` total (`7` structured v4, `795` legacy)
+- **Parsed Records:** `803` total (`8` structured v4, `795` legacy)
 
 ## Lane Allocation (Zero-Collision Prefixes)
 
 | Lane | ID Range | Highest Used | Next Free | Session Assignment |
 |---|---|---|---|---|
 | `git-1` | `WO65200`–`WO69999` | `WO66051` | `WO66052` | Primary Git IDE / coordinator worker lane |
-| `aistudio` | `WO70000`–`WO79999` | `WO70043` | `WO70044` | Stateless AI Studio container lane (no local .git; disjoint files only) |
+| `aistudio` | `WO70000`–`WO79999` | `WO70044` | `WO70045` | Stateless AI Studio container lane (no local .git; disjoint files only) |
 | `git-2` | `WO80000`–`WO89999` | — | `WO80000` | Secondary Git IDE / parallel external worker lane |
 | `reserve` | `WO90000`–`WO99999` | — | `WO90000` | Reserved synthesis / coordinator batch lane |
 
 ## Active Claims & Lease Health
 
-_No active CLAIMED work orders._
+| WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
+|---|---|---|---|---|---|---|
+| [WO70044](WO70044.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:30:00Z` | OK (0.0h / 24h) | `0x00010F8A-0x00010FC9`, `0x000648D8`, `reader-trace-production-static-flow-export`, `tools:reader_trace_static_flow_adapter`, `workflow:reader_trace_static_flow_production`, `evidence:reader_trace_10f8a_static_flow` |
 
 ## Target Scope Lock Table
 
-_No active hex/key scope locks held._
+| Canonical Scope Lock | Held By | Owner | Lane |
+|---|---|---|---|
+| `0x00010F8A-0x00010FC9` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+| `0x000648D8` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+| `evidence:reader_trace_10f8a_static_flow` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+| `reader-trace-production-static-flow-export` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+| `tools:reader_trace_static_flow_adapter` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+| `workflow:reader_trace_static_flow_production` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
 
 ## Structured Queue & Dependency Unblocking
 
