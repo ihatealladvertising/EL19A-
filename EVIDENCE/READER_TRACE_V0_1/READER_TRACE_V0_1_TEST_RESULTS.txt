@@ -91,3 +91,34 @@ Findings disposition:
 
 Limit:
   The implementation now has a graph contract, byte-concordant indexer adapter, exact per-call static-flow adapter/exporter, production-enriched graph, exact-image helper-profile attachment and composed pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
+
+
+WO70044 — EL19A 0x10F8A production-backed per-call static flow (2026-11-28)
+
+Production Actions run 46112588137 PASSED:
+https://github.com/ihatealladvertising/EL19A-/actions/runs/46112588137
+The run compiled the target-selectable exporter, passed both the existing 0x0F10E run and the 0x10F8A target run, passed the integration-gate/main-head publication check, and uploaded the final six-file artifact.
+
+Regression Actions run 46112237955 PASSED:
+https://github.com/ihatealladvertising/EL19A-/actions/runs/46112237955
+155 tests run, 153 passed, 2 optional cases skipped, zero failures. Both new 10F8A provenance-resolution tests passed.
+
+10F8A production result:
+- Target: 0x10F8A, 32x1 UWORD BE; catalogue row present; axis reference 0x0F712.
+- Pinned ROM, Stage-16 archive and member hashes matched; 306,688 listing CODE rows passed byte-concordance.
+- Five raw cat_calls records preserved; exactly one graph call selected at 0x648D8 / sub_22FAC.
+- Selected call query origins: none reported (q_inputs=[]); not inferred from other calls.
+- Selected result: one taint-proven UWORD store to FFFF170C at 0x648EC, instruction mov.w r6, @(r0,r7), source operand R6.
+- Graph: 20 nodes / 19 edges; zero validation warnings.
+- Resolved boundary: listing-provenance-10f8a only.
+- Preserved unresolved: forward-query-operand-identity; physical-input-output-domain.
+- Independent instruction re-decode: not performed. No physical semantics, donor, units, scale or XML promotion.
+
+Final target output SHA-256:
+- Per-call JSON: 10ec51a93ba5ab6892cf4373cf5e0c42959e34e32da62a48e528b9a16630e76c
+- Manifest: 2ddf7e93da9b413c9fc2f256cfc8be28097a78f393e75cd3d3beab3e90aa97f7
+- Production-enriched graph: 605dcbd34b127bc9c1c23384f77f9b9a717cf0420d0ae556083d7f0384fc3e6f
+
+All six production artifact Git blob IDs matched the files read back from remote main. The parallel 0x0F10E per-call JSON and production-enriched graph are byte-identical to the previously closed WO70043 outputs. The original 0x10F8A golden graph blob remained unchanged.
+
+Findings disposition: NOT REQUIRED. No FND/REC change. No ROM, listing, catalogue, XML, A2L, workbook or golden fixture modified.
