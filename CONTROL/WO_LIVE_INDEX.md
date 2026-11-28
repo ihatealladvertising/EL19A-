@@ -19,20 +19,11 @@
 
 ## Active Claims & Lease Health
 
-| WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
-|---|---|---|---|---|---|---|
-| [WO70044](WO70044.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:30:00Z` | OK (0.1h / 24h) | `0x00010F8A-0x00010FC9`, `0x000648D8`, `reader-trace-production-static-flow-export`, `tools:reader_trace_static_flow_adapter`, `workflow:reader_trace_static_flow_production`, `evidence:reader_trace_10f8a_static_flow` |
+_No active CLAIMED work orders._
 
 ## Target Scope Lock Table
 
-| Canonical Scope Lock | Held By | Owner | Lane |
-|---|---|---|---|
-| `0x00010F8A-0x00010FC9` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `0x000648D8` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `evidence:reader_trace_10f8a_static_flow` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `reader-trace-production-static-flow-export` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tools:reader_trace_static_flow_adapter` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `workflow:reader_trace_static_flow_production` | [WO70044](WO70044.md) | `aistudio-readertrace-integrator` | `aistudio` |
+_No active hex/key scope locks held._
 
 ## Structured Queue & Dependency Unblocking
 
@@ -42,6 +33,7 @@ _No queued v4 RESERVED/BLOCKED work orders._
 
 | WO | Lane | Priority | Owner | Closed/Claimed Timestamp | Title |
 |---|---|---|---|---|---|
+| [WO70044](WO70044.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:30:00Z` | Apply production-backed per-call static flow to EL19A 0x10F8A |
 | [WO70043](WO70043.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:02:00Z` | Produce exact EL19A 0x0F10E per-call static-flow evidence |
 | [WO70042](WO70042.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T04:52:40Z` | Per-call static-flow adapter for Reader Trace v0.1 |
 | [WO70041](WO70041.md) | `aistudio` | P3 | `aistudio-readertrace-worker2-audit` | `2026-11-28T05:22:08Z` | Advisory audit of SH-2 reader-analysis reuse and test coverage |
