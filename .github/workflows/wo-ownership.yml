@@ -42,9 +42,11 @@ jobs:
           echo "changed=$FILES" >> "$GITHUB_OUTPUT"
 
       - name: Validate WO ownership, lanes, scope locks, and protected registers
+        env:
+          PR_LABEL_NAMES_JSON: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
           ALLOW_PINS=""
-          if echo "${{ toJson(github.event.pull_request.labels.*.name) }}" | grep -q '"coordinator-pins"'; then
+          if python3 -c 'import json, os, sys; sys.exit(0 if "coordinator-pins" in json.loads(os.environ.get("PR_LABEL_NAMES_JSON", "[]")) else 1)'; then
             ALLOW_PINS="--allow-pins-edit"
           fi
           python3 tools/wo_registry.py validate \
