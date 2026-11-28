@@ -49,3 +49,17 @@ WO70028 CLOSED — BOUNDED COMPLETE (2026-11-27; NOT REQUIRED — four Consult %
 ## Notes
 - No ROM/checksum repair, XML, workbook, catalogue, A2L, source-script, workflow, Findings or other lane's report/lifecycle edit was made.
 - Synthetic %6 tests remain delivered as specification only; the repository test path was not authorized by WO70028.
+
+## Pending 2026-11-28 (PREPARED under the WO70044 LOCKED gate)
+
+### WO70041 — Advisory audit of SH-2 reader-analysis reuse and test coverage
+**Package state:** PUBLISHED — prepared under the WO70044 lock and published on its release in the single consolidated commit whose parent is `14a857e991ecd6d02137fb85b1419cb45b21d79a`; remote readback of report, TSV, register and gate followed immediately after the push
+**Gate observed:** `LOCKED` (first `**State:**` line of `CONTROL/INTEGRATION_STATUS.md` at `origin/main` = `e3652de`, integrator lock for WO70044 acquired 2026-11-28T05:19:12.386Z), so nothing was staged or pushed while locked; the lock was released and the first `**State:**` line re-read as `UNLOCKED` at `62bf498` and re-checked immediately before the push.
+**Disposition:** NOT REQUIRED (code-architecture and test-coverage audit; no FND/REC draft needed)
+**Report:** `CONTROL/WO70041.md` — 361 lines, status line `CLOSED — BOUNDED COMPLETE (2026-11-28)`; local readback before publication.
+**Output:** `EVIDENCE/READER_TRACE_V0_1/WO70041_reuse_map.tsv` — 30 lines (header + 29 anchored rows), 8 columns (`area`, `capability`, `anchor_file`, `anchor_symbol`, `anchor_lines`, `status`, `reuse_verdict`, `limitation`), LF line endings, no CR.
+**Inputs:** only the seven files named by the WO, pinned by blob SHA-256 at `origin/main` (`rom_access_indexer.py` 56a31c21…, `build_static_indices.py` f609dcef…, `test_rom_access_indexer.py` 48b2a634…, `reader_trace_graph.py` 6b4bb19a…, `test_reader_trace_graph.py` 0feba136…, `SH705X_WORKBENCH_INTEGRATION_PLAN.md` 1b77e150…, `SH705X_DATA_MODEL_SPEC.md` f5a81567…).
+**Register change required at publication:** in the Worker 2 lane row replace `[WO70041](WO70041.md) — READY (P3; advisory/non-blocking)` with `—` plus the WO70041 CLOSED summary; change the ordered backlog row `| Worker 2 | WO70041 (advisory/non-blocking) | 1 |` to `| Worker 2 | — | 0 |`; append one `**WO70041 closeout (2026-11-28):**` paragraph naming the publishing commit's parent.
+**Prepared register text:** `/tmp/wo70041/reg_out.md`, generated from the register at `origin/main` with the three exact substitutions asserted (lane row, backlog row, closeout paragraph). Regenerate against the then-current `main` tip if it advances before release.
+**Other required changes:** none. No FND/REC, no index row, no inventory pointer, no Findings change.
+**Read-back required after release:** `CONTROL/WO70041.md`, `EVIDENCE/READER_TRACE_V0_1/WO70041_reuse_map.tsv` and the Worker 2 lane row in `CONTROL/active_work_orders.md`, plus confirmation that the gate is still `UNLOCKED`.

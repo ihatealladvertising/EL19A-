@@ -1,0 +1,30 @@
+area	capability	anchor_file	anchor_symbol	anchor_lines	status	reuse_verdict	limitation
+address_normalisation	strict ROM/RAM target grammar; ranges/wildcards rejected with line number	tools/rom_access_indexer.py	parse_targets	23-91	implemented	reuse as-is via adapter	ROM text `0x%X` not zero-padded; no file-offset space
+address_normalisation	canonical text FFFFxxxx / 0xNNNNN	tools/build_static_indices.py	fmt_addr	59-62	implemented	adopt as the single shared normaliser	diverges from parse_targets on ROM width
+address_normalisation	space classification ROM/RAM/MMIO/OTHER and RAM window	tools/build_static_indices.py	full_rom_analysis	276-285,352,403	implemented	reuse only behind an explicit profile	D800/D7FF literals are EL19A profile facts
+address_normalisation	extent = storage width * dimensions enforced	tools/reader_trace_graph.py	validate_trace_graph	97-113	implemented	reuse as the graph object identity gate	integer widths only (1/2/4 bytes)
+pointer_promotion	pool pointer promoted to the dereference PC; load PC kept in note	tools/rom_access_indexer.py	promote_pool_pointer_to_dereference	128-153	implemented	reuse as-is	per basic block only
+pointer_promotion	mov.w pool value sign-extended and not treated as ROM pointer	tools/rom_access_indexer.py	run_indexer	463-483	implemented	reuse; keep the negative control	movca.l/mova/computed pointers unmodelled
+pointer_promotion	mov.l pool address formula ((pc+4)&~3)+disp*4	tools/rom_access_indexer.py	run_indexer	485-502	implemented	reuse as-is	same
+pointer_promotion	sub_22E10 R4 UBYTE table argument promotion	tools/rom_access_indexer.py	promote_sub22e10_r4_argument	156-172	implemented	reuse as the only verified helper contract	keyed on listing comment text
+register_tracking	all-16-GPR invalidation at a flow boundary	tools/rom_access_indexer.py	invalidate_general_registers	104-109	implemented	reuse as-is	all-or-nothing, no liveness
+register_tracking	label-boundary merge of exactly-agreeing branch states	tools/rom_access_indexer.py	run_indexer	260-306	implemented	reuse with documented heuristic status	label-driven; R8-R14 retention heuristic
+register_tracking	delay-slot / transfer classification set	tools/rom_access_indexer.py	run_indexer	657-681	implemented	reuse the classification, not the slot handling	one slot, state applied after slot
+register_tracking	GBR source register bit-field decode	tools/rom_access_indexer.py	ldc_gbr_source_register	112-116	implemented	reuse as-is	GBR only
+gbr_ram_access	@(r0,Rm), @(disp,Rn), @Rn b/w/l load+store decode	tools/rom_access_indexer.py	run_indexer	312-392	implemented	reuse as-is	32-bit EA mask only
+gbr_ram_access	GBR-relative b/w/l access and tst/and/xor/or.b @(r0,gbr) mask	tools/rom_access_indexer.py	run_indexer	394-422	implemented	reuse as-is	requires resolved GBR base
+gbr_ram_access	RAM reader/writer maps over 0xFFFF0000-0xFFFFD7FF	tools/build_static_indices.py	full_rom_analysis	352-356	implemented	reuse for downstream-reader counts	second independent decoder
+result_provenance	PC/ROM byte concordance gate on every emitted row	tools/rom_access_indexer.py	pc_bytes_match / run_indexer	119-125,746-782	implemented	mandatory condition for direct_observation	proves instruction identity, not dataflow
+result_provenance	run identity header (ROM/listing/targets hashes, version, limits)	tools/rom_access_indexer.py	run_indexer	790-801	implemented	reuse; drop or parameterise the run date	# Run date: breaks byte determinism
+result_provenance	pinned ROM MD5 / listing SHA-256 gates	tools/rom_access_indexer.py; tools/build_static_indices.py	module constants / run_indexer / main	16-18,177-187,28-29,663-668	implemented	treat as the profile gate; refuse other profiles	module-level, not parameterised
+result_provenance	listing/ROM concordance failure aborts the build	tools/build_static_indices.py	parse_listing	65-97	implemented	reuse	early break at first FFFF line truncates coverage
+result_provenance	catalogue-driven inline read and R4 helper-call detection	tools/build_static_indices.py	full_rom_analysis	368-391	implemented	reuse as enrichment	catalogue-address dependent
+result_provenance	result taint (table_addr, call_pc) to destination store	tools/build_static_indices.py	full_rom_analysis	358-366,400-519	partial	taint rows reuse; near rows heuristic only	TTL window 22/28/32; near = first RAM write
+result_provenance	deterministic canonical JSON, digest and atomic write	tools/reader_trace_graph.py	canonical_json / trace_sha256 / write_trace_graph	248-276	implemented	reuse directly, no wrapper	text digest, no schema migration hook
+result_provenance	graph contract validation incl. evidence and boundary rules	tools/reader_trace_graph.py	validate_trace_graph	48-245	implemented	reuse directly as the engine output contract	relation text free; listing hash never compared
+gap	path-sensitive control flow / loop fixpoint	tools/rom_access_indexer.py	run_indexer	252-745	absent	do not claim CFG coverage	single linear pass
+gap	call clobber summaries beyond sub_22E10	tools/rom_access_indexer.py	run_indexer	695-744	absent	emit unknown state, never guess	full invalidation on any other call
+gap	query transform / interpolation / clamp reconstruction	tools/rom_access_indexer.py; tools/build_static_indices.py	run_indexer / full_rom_analysis	460-467 (second tool)	absent	declare as unresolved_boundary	no grid step, count or clamp model
+gap	sh705x-datamodel-v1.0.0 envelope conformance	tools/rom_access_indexer.py	run_indexer	442,452,790-801	absent	adapter must emit envelope records	positional tuples and TSV only
+gap	profile/CLI injection of ROM and listing identity	tools/rom_access_indexer.py; tools/build_static_indices.py	constants	16-18,28-29	absent	blocked without a separately authorised refactor	EL19A-only; /tmp paths hard-coded
+gap	loops, FPU, movca.l/movt/mova, trapa, div0/div1, rot*, shld/shad, tas	tools/rom_access_indexer.py	run_indexer	252-655	absent	out of scope for reuse	not decoded; group F fully invalidates
