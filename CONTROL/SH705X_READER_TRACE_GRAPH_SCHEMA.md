@@ -61,6 +61,16 @@ The adapter preserves evidence grade by relationship:
 
 The input evidence references must already exist in the graph and identify the source output hashes and run/listing manifest. The adapter is idempotent by deterministic node/edge IDs. It should be used only after the existing index runs have passed their own ROM/listing concordance and provenance gates.
 
+## Composed enrichment entry point
+
+`tools/reader_trace_pipeline.py` exposes `enrich_reader_trace(...)` as the single composition point for the current v0.1 pipeline. It:
+
+1. Merges validated byte-concordant ROM read rows and the existing per-address static query/destination summary via `reader_trace_indexer_adapter`.
+2. Attaches an exact helper contract only when CPU family, decoded ROM SHA-256 and helper EA match a pinned profile.
+3. Revalidates the enriched graph and returns warnings plus explicit flags for profile attachment, instruction decoding and semantic promotion.
+
+The function does not decode SH-2 instructions, does not invent a profile for an unknown helper, does not fan out aggregate multi-reader query/result paths and always reports that it performed no instruction decode and no semantic promotion. Callers can pass the returned graph to `write_trace_graph` after inspecting its warnings and provenance.
+
 ## Exact-image helper contracts
 
 `tools/reader_trace_helper_profiles.py` holds a deliberately small, report-sourced helper registry. A profile is keyed by the exact tuple:
