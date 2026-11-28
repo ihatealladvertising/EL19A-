@@ -49,6 +49,10 @@ Query source/type/signedness/register, axis model, interval/interpolation, endpo
 
 `tools/reader_trace_indexer_adapter.py` is a thin adapter over existing structured outputs. It consumes validated `valid_hits` rows from `rom_access_indexer.run_indexer` and one per-address `write_catalog_summary` row from `build_static_indices.py`. It does not decode SH-2 instructions or reimplement register, delay-slot, branch or call handling.
 
+The adapter accepts the exact 11-field tuple rows returned by `rom_access_indexer.run_indexer` as well as explicitly named mappings; it does not require callers to reconstruct a second schema. It also requires positive, internally consistent PC-concordance counters.
+
+When a per-address static summary includes multiple reader call sites, it does not fan out the aggregate query inputs or destination writes across every call. It records the reader sites separately and leaves the aggregate query/result attribution unresolved until per-call evidence exists.
+
 The adapter preserves evidence grade by relationship:
 - A byte-concordant ROM read in the indexer's validated hit output becomes a `direct_observation` edge to its code site.
 - Query-register provenance and taint-classified destination flow from the static index become `derived` edges.
