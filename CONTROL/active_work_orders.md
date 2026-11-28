@@ -29,7 +29,7 @@
 
 | WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
 |---|---|---|---|---|---|---|
-| [WO70043](WO70043.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:02:00Z` | OK (0.0h / 24h) | `rom:f501:0x0f10e`, `rom:f501:call_0x85b2e`, `tooling:reader_trace_production_static_flow_export`, `tools:export_reader_trace_static_flow`, `workflow:reader_trace_static_flow_production`, `evidence:reader_trace_0f10e_static_flow` |
+| [WO70043](WO70043.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:02:00Z` | OK (0.1h / 24h) | `rom:f501:0x0f10e`, `rom:f501:call_0x85b2e`, `tooling:reader_trace_production_static_flow_export`, `tools:export_reader_trace_static_flow`, `workflow:reader_trace_static_flow_production`, `evidence:reader_trace_0f10e_static_flow` |
 
 ## Target Scope Lock Table
 
