@@ -343,6 +343,41 @@
         "ev:wo70014",
         "ev:fnd-000014"
       ]
+    },
+    {
+      "node_id": "branch-91b4",
+      "kind": "branch_condition",
+      "label": "ROM 0x91B4 controls immediate result-staging branch",
+      "address": {
+        "space": "rom_ea",
+        "value": 37300
+      },
+      "properties": {
+        "role": "post_lookup_result_path_selector"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "node_id": "ram-ffff8ccc-bit7",
+      "kind": "branch_condition",
+      "label": "FFFF8CCC.bit7 controls result normalization branch",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF8CCC"
+      },
+      "properties": {
+        "bit": 7,
+        "role": "post_lookup_result_path_selector"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
     }
   ],
   "edges": [
@@ -501,6 +536,42 @@
       "evidence_refs": [
         "ev:wo70014"
       ]
+    },
+    {
+      "edge_id": "e14",
+      "from_node": "branch-87c8",
+      "to_node": "reg-r6-query",
+      "relation": "selects_UWORD_query_state_before_additive_operand",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e15",
+      "from_node": "branch-91b4",
+      "to_node": "consumer-648a6",
+      "relation": "controls_result_staging_branch",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
+    },
+    {
+      "edge_id": "e16",
+      "from_node": "ram-ffff8ccc-bit7",
+      "to_node": "consumer-648a6",
+      "relation": "controls_sub_21AC0_normalization_path",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70014",
+        "ev:fnd-000014"
+      ]
     }
   ],
   "evidence": [
@@ -546,7 +617,7 @@
     }
   ],
   "lookup_contract": {
-    "query_source_node": "ram-ffff1064",
+    "query_source_node": "reg-r6-query",
     "helper_node": "helper-22fac",
     "query_type": {
       "storage": "uint16",
