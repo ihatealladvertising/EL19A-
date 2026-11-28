@@ -169,9 +169,12 @@ class StaticFlowAdapterTests(unittest.TestCase):
     def test_graph_and_document_are_not_mutated(self):
         graph = load_graph()
         document = make_document()
+        add_document_evidence(graph, document)
         before_graph = copy.deepcopy(graph)
         before_document = copy.deepcopy(document)
-        self.merge(graph=graph, document=document)
+        merge_per_call_static_flow(
+            graph, document, static_flow_evidence_ref="ev:static-flow-calls"
+        )
         self.assertEqual(graph, before_graph)
         self.assertEqual(document, before_document)
 

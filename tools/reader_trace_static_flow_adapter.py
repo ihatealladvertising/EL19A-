@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Mapping, Sequence, Tuple
 
 SCHEMA = "sh705x-static-reader-calls-v0.1"
-_QUERY_RE = re.compile(r"^r(?P<reg>\\d+)\\s*<-\\s*(?P<ea>FFFF[0-9A-Fa-f]{4})$")
+_QUERY_RE = re.compile(r"^r(?P<reg>\d+)\s*<-\s*(?P<ea>FFFF[0-9A-Fa-f]{4})$")
 _HELPER_RE = re.compile(r"^sub_(?P<ea>[0-9A-Fa-f]{4,8})$")
 _HEX_RE = re.compile(r"^(?:0x)?([0-9A-Fa-f]{1,8})$")
 _WIDTHS = {"b", "w", "l"}
@@ -249,7 +249,7 @@ def _append_boundary(out: Dict[str, Any], boundary: Dict[str, Any]) -> None:
     out["unresolved_boundaries"].append(boundary)
 
 
-def _call_node_id(graph: Mapping[str, Any], call_pc: int) -> str:
+def _call_node_id(graph: Mapping[str, Any], call_pc: int, helper_ea: int) -> str:
     matches = [
         node["node_id"] for node in graph.get("nodes", [])
         if node.get("kind") == "code_site"
@@ -257,9 +257,33 @@ def _call_node_id(graph: Mapping[str, Any], call_pc: int) -> str:
         and node["address"].get("space") == "rom_ea"
         and node["address"].get("value") == call_pc
     ]
-    if len(matches) > 1:
-        raise StaticFlowAdapterError(f"graph has multiple code-site nodes for call PC 0x{call_pc:X}")
-    return matches[0] if matches else f"static-flow-call-{call_pc:08X}"
+    if len(matches) <= 1:
+        return matches[0] if matches else f"static-flow-call-{call_pc:08X}"
+
+    # The existing graph can contain both its original call node and a
+    # separate byte-concordant indexer read-site node at the same PC. Prefer
+    # the node already connected to the exact helper through a "calls" edge.
+    helper_ids = {
+        node.get("node_id") for node in graph.get("nodes", [])
+        if node.get("kind") == "lookup_helper"
+        and isinstance(node.get("address"), Mapping)
+        and node["address"].get("value") == helper_ea
+    }
+    linked = [
+        edge.get("from_node") for edge in graph.get("edges", [])
+        if edge.get("relation") == "calls"
+        and edge.get("to_node") in helper_ids
+        and edge.get("from_node") in matches
+    ]
+    if len(set(linked)) == 1:
+        return linked[0]
+
+    canonical = f"code-{call_pc:05x}".lower()
+    if canonical in matches:
+        return canonical
+    raise StaticFlowAdapterError(
+        f"graph has multiple code-site nodes for call PC 0x{call_pc:X} and no unique helper-call edge"
+    )
 
 
 def merge_per_call_static_flow(
@@ -348,7 +372,7 @@ def merge_per_call_static_flow(
         out["coverage"].get("independent_redecode_performed", False)
     )
 
-    call_node = _call_node_id(out, call_pc)
+    call_node = _call_node_id(out, call_pc, helper_ea)
     if not any(node.get("node_id") == call_node for node in out["nodes"]):
         _append_node(out, {
             "node_id": call_node,
