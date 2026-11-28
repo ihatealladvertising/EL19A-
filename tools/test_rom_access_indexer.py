@@ -434,7 +434,7 @@ class ResolverMechanicsTests(unittest.TestCase):
                 suffix = f" ; {comment}" if comment else ""
                 listing_lines.append(f"{pc:08X} {opcode:04X} CODE {assembly}{suffix}")
             rom[0x000C:0x0010] = bytes.fromhex("FFFF1DB4")
-            listing_text = "\\n".join(listing_lines) + "\\n"
+            listing_text = "\n".join(listing_lines) + "\n"
             rom_path = os.path.join(tmp, "fixture.bin")
             listing_path = os.path.join(tmp, "fixture.lst")
             targets_path = os.path.join(tmp, "targets.txt")
@@ -445,7 +445,7 @@ class ResolverMechanicsTests(unittest.TestCase):
             with open(listing_path, "w", encoding="utf-8") as f:
                 f.write(listing_text)
             with open(targets_path, "w", encoding="utf-8") as f:
-                f.write("FFFF1DB4\\n")
+                f.write("FFFF1DB4\n")
             old_md5 = resolver.EXPECTED_ROM_MD5
             old_listing_sha = resolver.EXPECTED_LISTING_SHA256
             resolver.EXPECTED_ROM_MD5 = hashlib.md5(rom).hexdigest()
