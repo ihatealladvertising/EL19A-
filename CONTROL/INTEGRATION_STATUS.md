@@ -1,13 +1,10 @@
 # Repository Integration Status
 
-**Lock acquired:** 2026-11-27 — live main gate freshly verified UNLOCKED; serialize WO70035 ROM vehicle catalogue + mass-DAT scan crosswalk tables, report, and coordinator register update.
-
-
-**Integrator:** ChatGPT — WO70038 ROM registry workbook and screenshot audit (2026-11-28)
-**Purpose:** Build and verify an eight-sheet Excel workbook from the five WO70035 normalized TSVs; visually inspect the 14 catalogue screenshots and record supplemental comments with explicit source limitations. No calibration interpretation, XML, ROM/A2L, tool source or worker-lane change.
-
-**Lock acquired:** 2026-11-27 — live `main` gate freshly verified UNLOCKED at base `fb8a10d1ace9f00a8239d6dd11e67500731dc949`; serialize WO70034 base table set artifact publication and coordinator register update.
-**State:** LOCKED
+**Integrator:** ChatGPT — WO70038 focused ROM registry review workbook and screenshot audit (2026-11-28)
+**Purpose:** Publish the bounded workbook/screenshot audit closeout and coordinator register update. Original evidence TSVs, XML, ROM/A2L, calibration/Findings, workbench source, and worker lanes remain unchanged.
+**Lock acquired:** 2026-11-28 — integration gate was UNLOCKED at base commit `64503b7854c4e8deb6e7f83e096537716385d818`; lock acquisition commit `8270a8137899f61543f524b07d5659dbe712b998` (blob `e1fead4652bfc0b17415e5658412eb0842015c3e`).
+**State:** UNLOCKED
+**Lock released:** 2026-11-28 — WO70038 closeout complete. Report commit `338093924432db87dd9eb2e9a725c1d75900011b` (blob `6b6eb1c8140c4c7ddf72f58e0713a805c92c3998`); register commit `a310d1b15a445204dde91522e1643bed1cc4b24c` (blob `726a06e9dc45e068b9ba93518ab43299ccbf7982`). Focused workbook SHA-256 `04716a82c780765faf96663ded89ec93eab5f18aa3a939577ed53d262f1cfb06`, 23,606 bytes; delivered to user as a downloadable artifact. Worker 1–3 FIFO unchanged.
 
 **Lock released:** 2026-11-27 — WO70035 Nissan ROM vehicle/master-ROM tables and mass-DAT FID reconciliation published/read back. Report commit `23c73319ae29347c96c2e00f8436defedcd89883` (blob `3134dd9e9b453f277a9f0b9f3a762027fa4dfc50`); register commit `73328c1afc3796788a201e8e6247ccc4ca83dbe0` (blob `e0955cf830957372cda105f769ee1c8c6be8658f`). Seven table/summary/manifest artifacts read back; exact record counts are recorded in WO70035. Worker 1–3 lanes/FIFOs unchanged; no ROM/A2L/XML/Findings/workbench source change.
 
