@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — WO70044 closeout integration (2026-11-28)
+**Purpose:** Publish verified production per-call evidence closeout for EL19A F501 target 0x10F8A. Final production run 46112588137 passed and all six output artifacts were byte-for-byte matched against remote main Git blob IDs. Scanner regression run 46112237955 passed 155 tests with 2 optional skips. Worker 2 WO70041 advisory closed independently while this transaction was prepared; its files are outside this batch and preserved. No other active CLAIMED WOs or scope locks were present immediately before this closeout lock.
+**Lock acquired:** 2026-11-28T05:34:26.676Z — latest main 7defc15c2340f13e2a36eaa950ed00fcaf1bef94; prior gate state **State:** UNLOCKED.
+**State:** LOCKED
+
 **Integrator:** ChatGPT — WO70044 production output publication release (2026-11-28)
 **Purpose:** Release the publication gate for the production Actions rerun of the validated 10F8A per-call workflow. The locked preflight run 46112147883 completed both 0F10E and 10F8A exports and retained artifacts but correctly refused publication under LOCKED. Follow-up regression run 46112237955 passed 155 tests (2 optional skips), including both new 10F8A provenance-resolution tests. WO70044 is the only active CLAIMED task; no other active claims or scope locks were present at release.
 **Lock released:** 2026-11-28T05:29:22.566Z — release solely to permit the production workflow to publish its hash-pinned outputs; WO70044 remains CLAIMED until report/output/register readback and closeout. The workflow serializes on `wo-register-main` and refuses publication if main advances.
