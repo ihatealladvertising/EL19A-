@@ -24,7 +24,9 @@ DEFAULT_MEMBER = (
 EXPECTED_ARCHIVE_SHA256 = "8f88f711a585afd56d0541f56c4bc6bb0a4c57a0d58016258fde5c2f1916cc42"
 EXPECTED_MEMBER_SHA256 = "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549"
 
-HELPER_FUNCTIONS = ("sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8", "sub_233CC", "sub_2340C", "sub_23508", "sub_231C8")
+HELPER_FUNCTIONS = ("sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8", "sub_233CC", "sub_2340C", "sub_231C8")
+HELPER_ENTRY_POINTS = {"loc_23508": 0x23508, "loc_2350C": 0x2350C}
+ENTRY_POINT_WINDOW_BYTES = 0x40
 CALL_SITES = (0x85B2E, 0x648D8, 0x5B3C0)
 
 _CODE_RE = re.compile(
@@ -148,6 +150,22 @@ def extract_helper_and_call_windows(
             "instructions": list(selected),
         }
 
+    entry_windows: Dict[str, object] = {}
+    for label, entry_pc in HELPER_ENTRY_POINTS.items():
+        found = by_pc.get(entry_pc)
+        if found is None:
+            raise ListingSourceError(f"helper entry PC 0x{entry_pc:X} ({label}) not found in listing")
+        selected = [
+            record for record in records
+            if entry_pc <= int(record["pc"]) < entry_pc + ENTRY_POINT_WINDOW_BYTES
+        ]
+        selected.sort(key=lambda record: int(record["pc"]))
+        entry_windows[label] = {
+            "entry_pc": entry_pc,
+            "window_end": entry_pc + ENTRY_POINT_WINDOW_BYTES,
+            "instructions": list(selected),
+        }
+
     caller_windows: Dict[str, object] = {}
     for call_pc in call_sites:
         found = by_pc.get(call_pc)
@@ -169,9 +187,12 @@ def extract_helper_and_call_windows(
 
     return {
         "helper_functions": helper_windows,
+        "helper_entry_points": entry_windows,
         "call_sites": caller_windows,
         "selection_policy": {
             "helper_functions": list(helper_functions),
+            "helper_entry_points": {label: f"0x{pc:X}" for label, pc in HELPER_ENTRY_POINTS.items()},
+            "entry_point_window_bytes": ENTRY_POINT_WINDOW_BYTES,
             "call_sites": [f"0x{pc:X}" for pc in call_sites],
             "call_context_bytes": call_context_bytes,
             "instruction_decoder_used": False,
@@ -214,6 +235,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         "helper_instruction_counts": {
             name: data["instruction_count"]
             for name, data in report["windows"]["helper_functions"].items()
+        },
+        "helper_entry_point_instruction_counts": {
+            name: len(data["instructions"])
+            for name, data in report["windows"]["helper_entry_points"].items()
         },
         "call_sites": list(report["windows"]["call_sites"]),
         "output": args.out.as_posix(),
