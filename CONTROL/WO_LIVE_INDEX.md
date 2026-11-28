@@ -19,20 +19,11 @@
 
 ## Active Claims & Lease Health
 
-| WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
-|---|---|---|---|---|---|---|
-| [WO70043](WO70043.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:02:00Z` | OK (0.1h / 24h) | `rom:f501:0x0f10e`, `rom:f501:call_0x85b2e`, `tooling:reader_trace_production_static_flow_export`, `tools:export_reader_trace_static_flow`, `workflow:reader_trace_static_flow_production`, `evidence:reader_trace_0f10e_static_flow` |
+_No active CLAIMED work orders._
 
 ## Target Scope Lock Table
 
-| Canonical Scope Lock | Held By | Owner | Lane |
-|---|---|---|---|
-| `evidence:reader_trace_0f10e_static_flow` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `rom:f501:0x0f10e` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `rom:f501:call_0x85b2e` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tooling:reader_trace_production_static_flow_export` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `tools:export_reader_trace_static_flow` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
-| `workflow:reader_trace_static_flow_production` | [WO70043](WO70043.md) | `aistudio-readertrace-integrator` | `aistudio` |
+_No active hex/key scope locks held._
 
 ## Structured Queue & Dependency Unblocking
 
@@ -44,6 +35,7 @@
 
 | WO | Lane | Priority | Owner | Closed/Claimed Timestamp | Title |
 |---|---|---|---|---|---|
+| [WO70043](WO70043.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T05:02:00Z` | Produce exact EL19A 0x0F10E per-call static-flow evidence |
 | [WO70042](WO70042.md) | `aistudio` | P1 | `aistudio-readertrace-integrator` | `2026-11-28T04:52:40Z` | Per-call static-flow adapter for Reader Trace v0.1 |
 | [WO70040](WO70040.md) | `aistudio` | P1 | `aistudio-readertrace-worker1` | `2026-11-28T04:47:27Z` | Reconstruct and evidence-audit the 0x0F10E reader-trace graph |
 | [WO70039](WO70039.md) | `aistudio` | P1 | `aistudio-el19a-coordinator` | `2026-11-28T02:32:38Z` | Nissan master-ROM and structural-family index |
