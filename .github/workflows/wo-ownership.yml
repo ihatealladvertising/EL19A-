@@ -18,6 +18,7 @@ on:
 permissions:
   contents: write
   pull-requests: read
+  issues: read
 
 jobs:
   validate-pr:
@@ -42,9 +43,14 @@ jobs:
           echo "changed=$FILES" >> "$GITHUB_OUTPUT"
 
       - name: Validate WO ownership, lanes, scope locks, and protected registers
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           ALLOW_PINS=""
-          if echo "${{ toJson(github.event.pull_request.labels.*.name) }}" | grep -q '"coordinator-pins"'; then
+          PR_LABELS="$(gh api "repos/${REPOSITORY}/issues/${PR_NUMBER}/labels" --jq '.[].name')"
+          if printf '%s\\n' "$PR_LABELS" | grep -Fxq 'coordinator-pins'; then
             ALLOW_PINS="--allow-pins-edit"
           fi
           python3 tools/wo_registry.py validate \
