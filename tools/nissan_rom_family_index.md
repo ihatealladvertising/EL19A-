@@ -68,6 +68,7 @@ A high structural match can indicate a likely code/layout lineage, but it does n
 - SUMMARY_ONLY means scan metadata exists but no per-image geometry rows were exported. It is not proof that the ROM has no calibration objects.
 - EXACT_CATALOGUE_CODE_MATCH is an exact whole-token match of a catalogue ROM code in a source filename. It does not infer a code from a partial substring.
 - EXACT_IN_ECU_FID_INVENTORY is an exact FID/ECUID match to the separate ECU/FID inventory.
+- EXACT_CATALOGUE_CODE_VIA_ECUID is an explicit two-step cross-reference: the scanned primary FID exactly matches an ECU/FID inventory record, and that record's ECUID exactly matches one catalogue ROM-code row. The FID and catalogue-code links remain separate records; this is not a direct equivalence between their identifier namespaces.
 - PREFIX_CANDIDATE is a low-confidence lead only. Prefix matching never changes the binary FID or assigns an exact ECU identity.
 - CANDIDATE_FAMILY labels are reproducible review clusters, not official firmware family designations.
 
