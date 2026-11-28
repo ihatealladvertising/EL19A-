@@ -241,7 +241,7 @@ def run_export(
         "source_path": json_path.as_posix(),
         "hash_algorithm": "sha256",
         "source_hash": document_sha256,
-        "anchor": f"Production full_rom_analysis cat_calls row for target 0x{target_ea:X}, call PC 0x{required_call_pc:X} and helper {required_helper}",
+        "anchor": f"Production full_rom_analysis cat_calls row for target 0x{target_ea:05X}, call PC 0x{required_call_pc:X} and helper {required_helper}",
         "evidence_class": "per_call_static_reader_flow",
         "extraction_method": (
             "Production build_static_indices.full_rom_analysis() after pinned Stage-16 "
