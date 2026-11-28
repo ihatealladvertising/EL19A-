@@ -9,6 +9,7 @@ import unittest
 from pathlib import Path
 from argparse import Namespace
 import nissan_rom_family_index as idx
+import run_nissan_rom_family_index as runner
 
 def write_tsv(path, fields, rows):
     with path.open('w', encoding='utf-8', newline='') as f:
@@ -250,6 +251,31 @@ class NissanRomFamilyIndexTests(unittest.TestCase):
             self.assertEqual(a_image['cpu_tags'], 'SH7058')
             self.assertIn('a.dat', a_image['source_paths'])
             self.assertIn('b.dat', a_image['source_paths'])
+
+
+
+    def test_runner_refreshes_manifest_after_final_run_summary_write(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            manifest_path = root / 'nissan_rom_family_index_manifest.json'
+            summary_path = root / 'run_summary.json'
+            table_path = root / 'nissan_mass_scan_input_hash_links.tsv'
+            summary_path.write_text('stale summary\n', encoding='utf-8')
+            table_path.write_text('input_sha256\tjoin_status\nabc\tMASS_SCAN_ONLY\n', encoding='utf-8')
+            manifest_path.write_text(json.dumps({
+                'schema': 'nissan-rom-family-index-manifest-test',
+                'outputs': {
+                    'run_summary.json': {'bytes': 1, 'sha256': 'stale'}
+                }
+            }), encoding='utf-8')
+            summary_path.write_text('{"final": true}\n', encoding='utf-8')
+            runner.refresh_output_manifest(root)
+            manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+            self.assertEqual(set(manifest['outputs']), {'run_summary.json', 'nissan_mass_scan_input_hash_links.tsv'})
+            self.assertEqual(manifest['outputs']['run_summary.json']['bytes'], summary_path.stat().st_size)
+            self.assertEqual(manifest['outputs']['run_summary.json']['sha256'], runner.sha256_file(summary_path))
+            self.assertEqual(manifest['outputs']['nissan_mass_scan_input_hash_links.tsv']['bytes'], table_path.stat().st_size)
+            self.assertEqual(manifest['outputs']['nissan_mass_scan_input_hash_links.tsv']['sha256'], runner.sha256_file(table_path))
 
 
 if __name__ == '__main__':
