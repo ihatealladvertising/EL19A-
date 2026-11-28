@@ -15,6 +15,9 @@ on:
       - "tools/test_romraider_ref_index.py"
       - "tools/romraider_xml_export.py"
       - "tools/test_romraider_xml_export.py"
+      - "tools/nissan_rom_family_index.py"
+      - "tools/run_nissan_rom_family_index.py"
+      - "tools/test_nissan_rom_family_index.py"
       - ".github/workflows/sh7058-scanner-tests.yml"
   pull_request:
     branches: [main]
@@ -30,6 +33,9 @@ on:
       - "tools/test_romraider_ref_index.py"
       - "tools/romraider_xml_export.py"
       - "tools/test_romraider_xml_export.py"
+      - "tools/nissan_rom_family_index.py"
+      - "tools/run_nissan_rom_family_index.py"
+      - "tools/test_nissan_rom_family_index.py"
       - ".github/workflows/sh7058-scanner-tests.yml"
 
 permissions:
@@ -59,6 +65,9 @@ jobs:
           tools/test_romraider_ref_index.py
           tools/romraider_xml_export.py
           tools/test_romraider_xml_export.py
+          tools/nissan_rom_family_index.py
+          tools/run_nissan_rom_family_index.py
+          tools/test_nissan_rom_family_index.py
       - name: Run synthetic regression tests (no real ROMs)
         run: >
           python3 -m unittest -v
@@ -67,3 +76,4 @@ jobs:
           tools/test_sh705x_discovery_v2.py
           tools/test_romraider_ref_index.py
           tools/test_romraider_xml_export.py
+          tools/test_nissan_rom_family_index.py
