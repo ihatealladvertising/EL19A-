@@ -27,20 +27,11 @@
 
 ## Active Claims & Lease Health
 
-| WO | Lane | Priority | Owner | Claimed At | Lease Health | Target Scope |
-|---|---|---|---|---|---|---|
-| [WO70039](WO70039.md) | `aistudio` | P1 | `aistudio-el19a-coordinator` | `2026-11-28T02:32:38Z` | OK (1.6h / 24h) | `tooling:wo70039-full-mass-scan-index`, `tooling:wo_registry_migration_baseline`, `control:wo70039`, `control:integration-status`, `control:registry_pins`, `control:protocol-v4` |
+_No active CLAIMED work orders._
 
 ## Target Scope Lock Table
 
-| Canonical Scope Lock | Held By | Owner | Lane |
-|---|---|---|---|
-| `control:integration-status` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
-| `control:protocol-v4` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
-| `control:registry_pins` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
-| `control:wo70039` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
-| `tooling:wo70039-full-mass-scan-index` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
-| `tooling:wo_registry_migration_baseline` | [WO70039](WO70039.md) | `aistudio-el19a-coordinator` | `aistudio` |
+_No active hex/key scope locks held._
 
 ## Structured Queue & Dependency Unblocking
 
@@ -50,6 +41,7 @@ _No queued v4 RESERVED/BLOCKED work orders._
 
 | WO | Lane | Priority | Owner | Closed/Claimed Timestamp | Title |
 |---|---|---|---|---|---|
+| [WO70039](WO70039.md) | `aistudio` | P1 | `aistudio-el19a-coordinator` | `2026-11-28T02:32:38Z` | Nissan master-ROM and structural-family index |
 | [WO70002](WO70002.md) | `aistudio` | P1 | `aistudio-el13a-diff` | `2026-11-24T03:34:07Z` | EL19A vs EL13A Same-FID Calibration Diff and Unmapped Target Discovery |
 | [WO70001](WO70001.md) | `aistudio` | P1 | `aistudio-governance-v4` | `2026-11-22T03:43:00Z` | Decentralized Work-Order Ownership, Partitioned Lanes, and CI Register Rebuilder |
 <!-- WO_AUTO_DASHBOARD_END -->
