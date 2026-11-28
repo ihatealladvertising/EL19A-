@@ -1,0 +1,130 @@
+{
+  "arguments": [
+    "tools/run_nissan_rom_family_index.py",
+    "--scan-dir",
+    "EVIDENCE/rr roms",
+    "--out-dir",
+    "EVIDENCE/NISSAN_ROM_FAMILY_INDEX"
+  ],
+  "index_summary": {
+    "base_table_object_rows": 129481,
+    "candidate_components": 49,
+    "component_images": 485,
+    "direct_dat_detailed_rows": 431,
+    "ecu_fid_inventory_rows": 43,
+    "exact_ecuid_to_catalogue_code_links": 17,
+    "family_relationship_edges": 62653,
+    "identifier_links": 165,
+    "image_profile_full_geometry": 541,
+    "image_profile_summary_only": 39,
+    "inputs": {
+      "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz": {
+        "bytes": 2373909,
+        "sha256": "d7e6dfa03adbe656517648237a42080f3c87f3af083f91b4f47e8eecf3f044a0"
+      },
+      "EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv": {
+        "bytes": 261847,
+        "sha256": "6bdf09ff5fe12c77f2ae0c007a57dd83bf9551dcae56cfdd3152860e581fbdb2"
+      },
+      "EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv": {
+        "bytes": 7894,
+        "sha256": "eaa5ff414069f511580e5b2caa28a5c07c59a04e72ecd6b00e81c8d5f3f4c09d"
+      },
+      "EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/rr_roms_reference_index.json": {
+        "bytes": 15102470,
+        "sha256": "e9dc3973c1429a3a20b94fb5d23e7d6c6bc42e2cde4005ce7a946a7a7a736a66"
+      },
+      "EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/scan_inventory.tsv": {
+        "bytes": 51850,
+        "sha256": "08d3ca085d08fe38b244eeb97d09896972fcf85195a2e5cce773284160ea9059"
+      },
+      "EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv": {
+        "bytes": 802808,
+        "sha256": "ee28958456e3c2fab80afe422eed5a63e825f66cf905951b151e430f66b4e24d"
+      },
+      "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv": {
+        "bytes": 424306,
+        "sha256": "6cd8bb07ccec966d843fca42f8c730792369dd7a65e5ae95f606ead93ce36ffd"
+      }
+    },
+    "master_flagged_rows": 2161,
+    "master_rom_code_rows": 3691,
+    "master_rom_groups": 2161,
+    "master_rom_ids": 3691,
+    "profile_schema": "nissan-rom-structural-profile-v1",
+    "relationship_policy": "exact code-region hashes and strict address+geometry overlap can form candidate components; address-ignored shape similarity, payload reuse, same-FID and master-ROM-group links remain separate leads and never imply semantic identity",
+    "scan_inventory_rows": 177,
+    "scanner_catalogue_files": 146,
+    "schema": "nissan-rom-family-index-v1",
+    "source_scan_records": 608,
+    "unique_decoded_images": 580,
+    "vehicle_catalog_rows": 2161
+  },
+  "input_hashes": {
+    "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz": {
+      "bytes": 2373909,
+      "sha256": "d7e6dfa03adbe656517648237a42080f3c87f3af083f91b4f47e8eecf3f044a0"
+    },
+    "EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv": {
+      "bytes": 261847,
+      "sha256": "6bdf09ff5fe12c77f2ae0c007a57dd83bf9551dcae56cfdd3152860e581fbdb2"
+    },
+    "EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv": {
+      "bytes": 7894,
+      "sha256": "eaa5ff414069f511580e5b2caa28a5c07c59a04e72ecd6b00e81c8d5f3f4c09d"
+    },
+    "EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/rr_roms_reference_index.json": {
+      "bytes": 15102470,
+      "sha256": "e9dc3973c1429a3a20b94fb5d23e7d6c6bc42e2cde4005ce7a946a7a7a736a66"
+    },
+    "EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv": {
+      "bytes": 802808,
+      "sha256": "ee28958456e3c2fab80afe422eed5a63e825f66cf905951b151e430f66b4e24d"
+    },
+    "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv": {
+      "bytes": 424306,
+      "sha256": "6cd8bb07ccec966d843fca42f8c730792369dd7a65e5ae95f606ead93ce36ffd"
+    }
+  },
+  "python_version": "3.11.18",
+  "scan_counts": {
+    "DECODED_IMAGE_DUPLICATE": 4,
+    "EXACT_CONTAINER_DUPLICATE": 2,
+    "SCAN_OK": 146,
+    "SKIPPED_UNSUPPORTED": 25
+  },
+  "scan_directory": "EVIDENCE/rr roms",
+  "schema": "nissan-rom-family-index-run-v1",
+  "tool_sources": {
+    "family_index": {
+      "bytes": 48250,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/nissan_rom_family_index.py",
+      "sha256": "c2747f26f9e73f2fe1ebd92ec54face47e18a3cba0727a97969012a62f59ad3e"
+    },
+    "loader": {
+      "bytes": 12832,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/sh705x_rom_loader.py",
+      "sha256": "34d343f0aef64590a6b36930d008c659e1a1b901b7be254fd3b4fcde29147098"
+    },
+    "romraider_ref_index": {
+      "bytes": 41419,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/romraider_ref_index.py",
+      "sha256": "206f99ff2ea8f3c9e961353a0cd94059d22be9b62d9ea4a0ac97547de2f12f1e"
+    },
+    "runner": {
+      "bytes": 9755,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/run_nissan_rom_family_index.py",
+      "sha256": "4ca4df70ebce529cc34c7d7eded9170dc90087a26bbc0fa268d3a1ae4c386567"
+    },
+    "scanner": {
+      "bytes": 48717,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/sh7058_cross_rom_scanner.py",
+      "sha256": "ec0ba0d40a7c4a444b94a123be8426584724453a394ed8e8097f3d123982532d"
+    },
+    "workbench": {
+      "bytes": 76923,
+      "path": "/home/runner/work/EL19A-/EL19A-/tools/nissan_sh705x_workbench.py",
+      "sha256": "b9558468d3ed964f096d969df00647d569a4bdf23cba979b42381115714c2e73"
+    }
+  }
+}
