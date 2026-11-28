@@ -1,0 +1,89 @@
+name: Reader Trace Production Static-Flow Export
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/export_reader_trace_static_flow.py"
+      - "tools/build_static_indices.py"
+      - "tools/reader_trace_listing_source.py"
+      - "tools/reader_trace_static_flow_adapter.py"
+      - "EVIDENCE/VERSA f501.bin"
+      - "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip"
+      - "CALIBRATIONS/discovered_tables_catalog.csv"
+      - ".github/workflows/reader-trace-static-flow-production.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  export-0f10e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out exact triggering main commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile production exporter and existing analysis dependencies
+        run: >
+          python3 -m py_compile
+          tools/export_reader_trace_static_flow.py
+          tools/build_static_indices.py
+          tools/reader_trace_listing_source.py
+          tools/reader_trace_static_flow_adapter.py
+
+      - name: Run hash-pinned single-target production export
+        run: >
+          python3 tools/export_reader_trace_static_flow.py
+          --rom "EVIDENCE/VERSA f501.bin"
+          --listing-archive "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip"
+          --catalogue "CALIBRATIONS/discovered_tables_catalog.csv"
+          --output-dir "EVIDENCE/READER_TRACE_V0_1"
+
+      - name: Retain production output artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: el19a-0f10e-production-static-flow
+          path: |
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Publish only after gate and main-head checks
+        run: |
+          latest_gate_state="$(awk '/^\*\*State:\*\*/ { print; exit }' CONTROL/INTEGRATION_STATUS.md)"
+          if [ "$latest_gate_state" != "**State:** UNLOCKED" ]; then
+            echo "Integration gate is not UNLOCKED; refusing evidence publication."
+            exit 1
+          fi
+
+          git fetch origin main
+          checkout_sha="$(git rev-parse HEAD)"
+          remote_sha="$(git rev-parse origin/main)"
+          if [ "$checkout_sha" != "${{ github.sha }}" ] || [ "$remote_sha" != "${{ github.sha }}" ]; then
+            echo "main advanced during production export; refusing stale publication."
+            exit 1
+          fi
+
+          git add -- \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json \
+            EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
+
+          if git diff --cached --quiet; then
+            echo "Production static-flow outputs are unchanged; no publication commit needed."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add hash-pinned EL19A 0F10E production static flow [skip ci]"
+          git push origin HEAD:main
