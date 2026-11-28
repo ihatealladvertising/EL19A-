@@ -1,7 +1,10 @@
 # Repository Integration Status
 
+**Lock acquired:** 2026-11-27 — live main gate freshly verified UNLOCKED; serialize WO70035 ROM vehicle catalogue + mass-DAT scan crosswalk tables, report, and coordinator register update.
+
+
 **Lock acquired:** 2026-11-27 — live `main` gate freshly verified UNLOCKED at base `fb8a10d1ace9f00a8239d6dd11e67500731dc949`; serialize WO70034 base table set artifact publication and coordinator register update.
-**State:** UNLOCKED
+**State:** LOCKED
 
 **Integrator:** ChatGPT — WO70034 Nissan SH705x base table set publication (2026-11-27)
 **Purpose:** WO70034 base table set, source scan export, final hash manifest, coordinator report and lifecycle entry published and read back; worker lanes, canonical XML, Findings and source ROM/A2L artifacts unchanged.
