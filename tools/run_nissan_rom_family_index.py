@@ -24,6 +24,19 @@ def sha256_file(path: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
+def refresh_output_manifest(out_dir: Path) -> None:
+    """Refresh output sizes and hashes after the runner writes run_summary.json."""
+    manifest_path = out_dir / 'nissan_rom_family_index_manifest.json'
+    if not manifest_path.is_file():
+        raise FileNotFoundError(f'family index manifest missing: {manifest_path}')
+    manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    manifest['outputs'] = {
+        path.name: {'bytes': path.stat().st_size, 'sha256': sha256_file(path)}
+        for path in sorted(out_dir.iterdir())
+        if path.is_file() and path.name != manifest_path.name
+    }
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+
 def scan_directory(scan_dir: Path, out_dir: Path) -> Path:
     scan_out = out_dir / 'scans'
     scan_out.mkdir(parents=True, exist_ok=True)
@@ -118,6 +131,7 @@ def main(argv=None) -> int:
     input_hashes = {str(path): {'sha256': sha256_file(path), 'bytes': path.stat().st_size} for path in input_paths if path.exists()}
     report = {'schema': 'nissan-rom-family-index-run-v1', 'python_version': platform.python_version(), 'arguments': list(sys.argv), 'scan_directory': str(Path(args.scan_dir)), 'scan_counts': scan_counts, 'tool_sources': tool_hashes, 'input_hashes': input_hashes, 'index_summary': summary}
     (out / 'run_summary.json').write_text(json.dumps(report, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+    refresh_output_manifest(out)
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0
 if __name__ == '__main__':
