@@ -677,6 +677,8 @@ def main(argv: Optional[Sequence[str]]=None) -> int:
     build.add_argument('--catalogue-dir')
     build.add_argument('--dat-scan-index')
     build.add_argument('--base-table-objects')
+    build.add_argument('--mass-scan-results', default='EVIDENCE/mass dat scan/scan_results.tsv')
+    build.add_argument('--mass-file-inventory', default='EVIDENCE/mass dat scan/file_inventory.tsv')
     build.add_argument('--reference-index')
     build.add_argument('--out-dir', required=True)
     build.set_defaults(func=cmd_build)
