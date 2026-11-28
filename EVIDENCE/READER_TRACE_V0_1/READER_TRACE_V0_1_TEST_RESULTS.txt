@@ -1,75 +1,52 @@
-Reader Trace v0.1 geometry, adapter, helper-profile and pipeline regression
+Reader Trace v0.1 — geometry, exact-image helper profiles, indexer bridges and per-call static flow
 
 Golden graph fixtures:
   - EL19A 0x0F10E: 16-point UBYTE vector; 23 nodes / 24 edges / 5 unresolved boundaries.
   - EL19A 0x10F8A: 32-point UWORD value curve with explicit axis 0x0F712; 17 nodes / 16 edges / 3 unresolved boundaries.
   - EL19A 0x0AFF2: 4x4 UBYTE map with explicit axes 0x0E5CC and 0x0E5C8; 21 nodes / 22 edges / 5 unresolved boundaries.
 
-Reader Trace-specific tests:
+Reader Trace-specific test counts:
   - test_reader_trace_graph.py: 20 graph-contract and golden-geometry tests.
   - test_reader_trace_indexer_adapter.py: 14 adapter tests.
-  - test_reader_trace_static_flow.py: 4 existing static-flow tests.
+  - test_reader_trace_static_flow.py: 4 tests for existing full_rom_analysis static flow.
   - test_reader_trace_helper_profiles.py: 13 exact-image helper-profile tests.
-  - test_reader_trace_pipeline.py: 7 composed pipeline tests.
-  Total Reader Trace-specific tests: 58.
+  - test_reader_trace_pipeline.py: 8 composed-pipeline tests.
+  - test_reader_trace_listing_source.py: 8 pinned listing-source tests.
+  - test_reader_trace_static_flow_adapter.py: 18 new exact per-call static-flow adapter tests.
+  Total Reader Trace-specific tests: 85.
 
-Full regression:
-  GitHub Actions run: 46109067554
-  https://github.com/ihatealladvertising/EL19A-/actions/runs/46109067554
-  Result: 125 tests passed; 2 optional production-regression checks skipped.
+Latest full regression:
+  GitHub Actions run: 46109906384
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46109906384
+  Implementation commit: b5595906829ec1828f6a793b5ab4b499e17ff744
+  Result: 152 tests run; 150 passed, 2 optional production checks skipped, zero failures.
   Compile step passed.
+  Pinned Stage-16 archive/member verification and bounded helper/caller-window extraction passed.
   Synthetic regression step passed.
 
-Composed pipeline:
-  `tools/reader_trace_pipeline.py` provides `enrich_reader_trace(...)`.
-  It composes the existing byte-concordant indexer bridge, exact-image helper-profile attachment and core graph validator. It reports whether a profile matched and explicitly reports `instruction_decode_performed=false` and `semantics_promoted=false`.
-  Unknown helper EAs remain unprofiled. Aggregated multi-reader summaries do not fan out query/result attribution.
+Per-call static-flow adapter:
+  - tools/reader_trace_static_flow_adapter.py serializes raw build_static_indices.full_rom_analysis().cat_calls into deterministic JSON, preserving each table EA, reader PC, function/helper, query-origin tokens and destination stores.
+  - Export pins the decoded ROM SHA-256, exact Stage-16 listing-member SHA-256 and listing path. The emitted JSON is itself SHA-256-pinned by the graph evidence record.
+  - Graph enrichment selects only the exact target EA + call PC + helper EA. A table with multiple readers does not cause query/result data to be spread across calls.
+  - Query RAM origins and taint-proven R0 stores are represented as derived edges. Near-call stores remain heuristic and create unresolved boundaries; they are not linked as lookup-result value flow.
+  - Pipeline suppresses per-address aggregate query/result fields when exact per-call input is supplied. Calls without per-call input remain backward-compatible.
+  - Listing identity can populate graph coverage, but independent_redecode_performed remains false. No opcode decode or semantic promotion is claimed.
 
-Adapter coverage:
-  - Native 11-field rom_access_indexer valid_hits tuples and named mappings
-  - Byte-concordant ROM read edges
-  - Derived query-register provenance
-  - Taint-proven result stores distinguished from heuristic near-call stores
-  - Downstream RAM read sites represented without unsupported value-causality
-  - Aggregate multi-reader summaries do not fan out query/result attribution
-  - Positive PC-concordance counters and explicit evidence references
-  - Deterministic/idempotent graph enrichment
+Existing composed pipeline:
+  tools/reader_trace_pipeline.py combines byte-concordant ROM read rows, conservative per-address summary evidence, optional exact per-call static flow, exact-image helper profile attachment and graph validation.
+  Unknown helper EAs remain unprofiled. Aggregate downstream RAM reads remain read-site observations only; they do not prove value causality.
 
-Static-flow coverage:
-  - Query RAM load and delay-slot argument copy
-  - UBYTE query extension/transform
-  - Helper-call clobber behavior with preserved high-register destination
-  - Tainted lookup return to RAM store and separately indexed downstream RAM reader
-
-Exact-image helper-profile coverage:
-  - Four pinned helper contracts: sub_22E10, sub_22FAC, sub_22B44 and sub_22DF8
-  - Exact processor family + decoded ROM SHA-256 + helper EA matching
-  - Unknown EA, other ROM SHA and other CPU profile do not match
-  - Evidence references required before profile attachment
-  - Pinned helper listings require a matching cited target_disassembly_listing SHA-256 using the explicit sha256 algorithm
-  - Non-mutating graph enrichment; core graph contract remains valid after profile attachment
-  - Profile mechanics remain basis=reported_observation; no implicit promotion to direct instruction facts
-
-Geometry coverage:
-  - 1D UBYTE implicit-uniform lookup; q >= 0xF0 terminal path retained with 224/240 wording conflict unresolved.
+Geometry:
+  - 1D UBYTE implicit-uniform lookup; q >= 0xF0 terminal path retained with the 224/240 wording conflict unresolved.
   - 32-point explicit UWORD axis/value curve, query construction, helper chain, result staging and conditional post-call normalization.
   - 4x4 UBYTE map with distinct, strictly increasing 4-point axis vectors and one unsigned UBYTE query used for both axis searches.
-  - 0x0AFF2 instruction/result path distinguishes R0-to-R2 delay-slot transfer, first multiplication consumer, UWORD product sink FFFF115A and separate inline element staging FFFF14E4.
+  - 0x0AFF2 path distinguishes R0-to-R2 delay-slot transfer, first multiplication consumer, UWORD product sink FFFF115A and separate inline element staging FFFF14E4.
   - All graph edges retain evidence basis explicitly; report-derived edges are not represented as fresh instruction observations.
 
-Evidence boundary:
-  The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. Physical meanings and donor semantics remain unpromoted.
-
-
-Per-call static-flow adapter:
-  - New module: `tools/reader_trace_static_flow_adapter.py`.
-  - Exports raw `full_rom_analysis().cat_calls` rows as deterministic JSON with target EA, reader PC, function, helper, query origins, all destinations, decoded ROM SHA-256 and exact source-listing SHA-256/path.
-  - Requires a graph evidence record whose SHA-256 matches the exact JSON bytes.
-  - Attaches only the exact (target EA, reader PC, helper EA) record selected by the graph call; multiple calls for the same table remain isolated.
-  - Query origin paths and R0-tainted stores remain `derived`; near-call stores remain `heuristic` with an unresolved boundary.
-  - The pipeline withholds aggregate query/result summaries when a per-call document is supplied. Existing pipeline calls remain backward-compatible.
-  - Listing identity can be attached to graph coverage, but `independent_redecode_performed` remains false; no opcode decode or semantic promotion occurs.
-  - Production static-flow export was not run as part of this synthetic implementation stage; no new target calibration interpretation or Findings record was promoted.
+Evidence and production boundary:
+  The 0x0F10E and 0x10F8A cases remain extracted from prior closed reports, not independent instruction re-decodes. The 0x0AFF2 graph cites the exact Stage-16 listing SHA recorded by WO70033, but its graph remains structured report extraction.
+  The new per-call adapter was tested against synthetic full_rom_analysis-shaped records; no production per-call static-flow document was generated or attached to a target graph in this implementation stage.
+  The new source-listing identity contract carries the pinned listing hash but does not itself decode instructions. Physical meanings, donor semantics, query-transform details and downstream value causality remain unpromoted.
 
 Limit:
-  The implementation has a graph contract, adapters for the existing SH-2 static indexes, exact-image helper-profile attachment and a single-entry enrichment pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
+  The implementation now has a graph contract, byte-concordant indexer adapter, exact per-call static-flow adapter/exporter, exact-image helper-profile attachment and composed pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
