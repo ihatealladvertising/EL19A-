@@ -34,7 +34,7 @@ class NissanRomFamilyIndexTests(unittest.TestCase):
             for address, payload in [('0x1000', 'a' * 64), ('0x1100', 'b' * 64)]:
                 rows.append(['DAT:' + 'a' * 16, 'FULL_SCAN_DIRECT_DAT', 'CD100.bin', 'FID00001', 'SH7058', '100', 'a' * 64, address, '0x1010', '0x1010', '16', '3D_AXIS', 'uint8', '1', 'unsigned_as_detected', 'byte', '4', '4', 'uint8', 'uint8', '', '', '', '', '1', payload, ''])
             write_tsv_tmp = root / 'obj.tmp.tsv'
-            write_tsv(write_tsv_tmp, ['image_id', 'evidence_tier', 'source', 'fid', 'cpu', 'rom_size_bytes', 'rom_sha256', 'table_address', 'table_end_inclusive', 'table_end_exclusive', 'byte_extent', 'table_kind', 'element_type', 'element_width_bytes', 'signedness_from_type', 'byte_order', 'dim1', 'dim2', 'axis1_storage_type', 'axis2_storage_type', 'axis1_addresses', 'axis2_addresses', 'call_pcs', 'helper_addresses', 'nontrivial', 'payload_sha256', 'resolution_or_caveat'], rows)
+            write_tsv(write_tsv_tmp, ['image_id', 'evidence_tier', 'source_file', 'primary_fid', 'cpu', 'rom_size_bytes', 'rom_sha256', 'address', 'end_inclusive', 'end_exclusive', 'extent_bytes', 'table_kind', 'element_type', 'element_width_bytes', 'signedness_from_type', 'byte_order', 'dim1', 'dim2', 'axis1_storage_type', 'axis2_storage_type', 'axis1_addresses', 'axis2_addresses', 'call_pcs', 'helper_addresses', 'nontrivial', 'payload_sha256', 'resolution_or_caveat'], rows)
             with gzip.open(base, 'wt', encoding='utf-8', newline='') as out:
                 out.write(write_tsv_tmp.read_text(encoding='utf-8'))
             args = Namespace(rom_id_crosswalk=str(cross), vehicle_catalog=None, ecu_fid_catalog=str(fid), scan_inventory=str(inv), catalogue_dir=None, dat_scan_index=None, base_table_objects=str(base), reference_index=None, out_dir=str(root / 'out'))
@@ -46,10 +46,11 @@ class NissanRomFamilyIndexTests(unittest.TestCase):
             self.assertEqual(len(images), 1)
             code_rows = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_identifier_links.tsv')
             master = [r for r in code_rows if r['identifier_namespace'] == 'UPREV_ROM_CODE']
-            self.assertEqual(len(master), 1)
-            self.assertEqual(master[0]['identifier'], 'CD100')
-            self.assertEqual(master[0]['master_rom_id'], 'CD102')
-            self.assertEqual(master[0]['is_master_rom'], 'NO')
+            self.assertEqual(len(master), 2)
+            self.assertEqual({r['identifier'] for r in master}, {'CD100'})
+            self.assertEqual({r['link_status'] for r in master}, {'EXACT_CATALOGUE_CODE_MATCH', 'EXACT_CATALOGUE_CODE_VIA_ECUID'})
+            self.assertTrue(all(r['master_rom_id'] == 'CD102' for r in master))
+            self.assertTrue(all(r['is_master_rom'] == 'NO' for r in master))
             fid_links = [r for r in code_rows if r['identifier_namespace'] == 'NISSAN_FID']
             self.assertEqual(len(fid_links), 1)
             self.assertEqual(fid_links[0]['link_status'], 'EXACT_IN_ECU_FID_INVENTORY')
@@ -154,6 +155,28 @@ class NissanRomFamilyIndexTests(unittest.TestCase):
             self.assertEqual(len(components), 1)
             self.assertEqual(components[0]['image_count'], '2')
             self.assertEqual(summary['candidate_components'], 1)
+
+    def test_fid_inventory_ecuid_bridges_scan_without_filename_rom_code(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cross = root / 'cross.tsv'
+            fields = ['ROM_ID_Normalized', 'ROM_ID_AsListed', 'IsMasterROM', 'MasterROM_ID', 'Model', 'Make', 'VehicleYear', 'EngineCode', 'Transmission', 'SourceLine']
+            write_tsv(cross, fields, [['CD100', 'CD100', 'YES', 'CD100', '350Z', 'Nissan', '2003', 'VQ35DE', 'AT', '2']])
+            inv = root / 'scan.tsv'
+            scan_fields = ['path', 'filename', 'bytes', 'container_sha256', 'decoded_rom_sha256', 'decoded_size', 'cpu', 'fid', 'loader', 'helper_count', 'call_sites', 'resolved_calls', 'unique_tables', 'status', 'catalogue_path', 'error']
+            write_tsv(inv, scan_fields, [['folder/unknown-stock.bin', 'unknown-stock.bin', '100', 'c1', 'a' * 64, '100', 'SH7058', 'FID00001', 'LOADER80', '1', '4', '4', '2', 'SCAN_OK', '', '']])
+            fid = root / 'fid.tsv'
+            write_tsv(fid, ['SourceLine', 'Model', 'YearText', 'EngineText', 'ECUID', 'FID', 'SourcePath', 'SourceURL'], [['1', '350Z', '03', 'VQ35DE', 'CD100', 'FID00001', 'src', 'url']])
+            args = Namespace(rom_id_crosswalk=str(cross), vehicle_catalog=None, ecu_fid_catalog=str(fid), scan_inventory=str(inv), catalogue_dir=None, dat_scan_index=None, base_table_objects=None, reference_index=None, out_dir=str(root / 'out'))
+            idx.build_index(args)
+            links = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_identifier_links.tsv')
+            code = [r for r in links if r['identifier_namespace'] == 'UPREV_ROM_CODE']
+            self.assertEqual(len(code), 1)
+            self.assertEqual(code[0]['identifier'], 'CD100')
+            self.assertEqual(code[0]['link_status'], 'EXACT_CATALOGUE_CODE_VIA_ECUID')
+            self.assertEqual(code[0]['link_basis'], 'exact_ecuid_to_catalogue_code_via_fid_inventory')
+            images = idx.read_tsv(Path(args.out_dir) / 'nissan_rom_image_index.tsv')
+            self.assertEqual(images[0]['observed_rom_codes'], 'CD100')
 
 if __name__ == '__main__':
     unittest.main()
