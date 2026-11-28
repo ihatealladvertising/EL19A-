@@ -1,5 +1,13 @@
 {
   "outputs": {
+    "nissan_historical_mass_scan_results.tsv": {
+      "bytes": 4901039,
+      "sha256": "63b100726e6d4f410f7c46a1a41a9f752b90c33cb07a5c0653c1a41b9fed96b8"
+    },
+    "nissan_mass_scan_input_hash_links.tsv": {
+      "bytes": 4231935,
+      "sha256": "d4b8f44867028b2bc42a72724ad8428b2abf2a3853882640a3c8902805248340"
+    },
     "nissan_master_rom_code_index.tsv": {
       "bytes": 802808,
       "sha256": "ee28958456e3c2fab80afe422eed5a63e825f66cf905951b151e430f66b4e24d"
@@ -8,37 +16,45 @@
       "bytes": 402245,
       "sha256": "f18287fbb3ddaebfc305ddc1eeeb7a6aea2d7f652337235b1297473257b291ca"
     },
+    "nissan_original_file_inventory.tsv": {
+      "bytes": 1689047,
+      "sha256": "c76428f4710930f768c5c2cd4efadb83d458f18816d39992347b2e4a16e9efc6"
+    },
     "nissan_rom_candidate_components.tsv": {
       "bytes": 15918,
       "sha256": "55538e2f4e946c796473d4821e28c1a90c728fc812f74e9a9dcfb38dfbe825f5"
     },
     "nissan_rom_family_index.json": {
-      "bytes": 71201639,
-      "sha256": "4993f81cb380a82d8c582d7d69eaa9ab2c64e228b866ac726b8a0b4627f58403"
+      "bytes": 103472954,
+      "sha256": "9753f2a9bd9b718d3e3d5b30f942345334787abd477aaa90102a84381edc355e"
     },
     "nissan_rom_family_relationships.tsv": {
       "bytes": 16189117,
       "sha256": "f1adc9f37eee845abaa3f98b7be181fc3529e777ca929aa0a26303f96e89be28"
     },
     "nissan_rom_generation_summary.tsv": {
-      "bytes": 4036,
-      "sha256": "8f8667f3a61c759e655d265df3bc89c1d6b6406810a68c6a7041290e5cd1ace3"
+      "bytes": 4210,
+      "sha256": "c70f14da6bcc7bc0e10dfc270078a62a1944b0173072f5015cd9518d85721b10"
     },
     "nissan_rom_identifier_links.tsv": {
-      "bytes": 33656,
-      "sha256": "dd13340d8d33dff0514aba09cf682b656a7f1e8c26bc65dad5ebe6dca707790d"
+      "bytes": 34184,
+      "sha256": "7ad600d516d3da5a6c74c79ad2a0c3f8e689edaed9521e0e8dab0dcc45645fb2"
     },
     "nissan_rom_image_index.tsv": {
-      "bytes": 163407,
-      "sha256": "9f6a1c54a5808909aff252db52ab228be6330babb45ea6b0488f67a034b13456"
+      "bytes": 2085330,
+      "sha256": "f3dcb7ff6414786860e593f7f2f17446b5e6c0493f9e43c1333487d0d2c57301"
     },
     "nissan_rom_scan_sources.tsv": {
-      "bytes": 139063,
-      "sha256": "55bcef2f3e03666e2d250320a894a4cc7eb882f58f787d79365a9d4bda20e6b4"
+      "bytes": 5605860,
+      "sha256": "8b7fdc824ce2c75aaa19c1018df4471736038b36919850fec88a340ae3cc90fa"
     },
     "nissan_rom_structural_profiles.tsv": {
-      "bytes": 196920,
-      "sha256": "bf41672752588c1af6e94443b54f27b336993ccbdd6f462dbcb9827c9b7b4412"
+      "bytes": 2075332,
+      "sha256": "721fd4932dac72107aa52af50e8a4150b09961004c01372394530b5340cc317b"
+    },
+    "run_summary.json": {
+      "bytes": 5246,
+      "sha256": "c990291f18f93caa5cf7c0f0a87175cdf4c6d1e63e2c70ddc67d12a17057daa4"
     }
   },
   "schema": "nissan-rom-family-index-v1-manifest",
@@ -50,9 +66,22 @@
     "ecu_fid_inventory_rows": 43,
     "exact_ecuid_to_catalogue_code_links": 17,
     "family_relationship_edges": 62653,
-    "identifier_links": 165,
+    "historical_mass_scan_detailed_positive_match_rows": 431,
+    "historical_mass_scan_exact_file_sha_match_result_rows": 11744,
+    "historical_mass_scan_load_rejected_rows": 2490,
+    "historical_mass_scan_result_rows": 14666,
+    "historical_mass_scan_scanned_rows": 12176,
+    "historical_mass_scan_status_counts": {
+      "LOAD_REJECTED": 2490,
+      "SCANNED": 12176
+    },
+    "historical_mass_scan_unique_decoded_images": 11145,
+    "historical_mass_scan_unique_input_hashes": 13698,
+    "historical_mass_scan_unmatched_file_sha_result_rows": 2922,
+    "historical_mass_scan_unmatched_input_sha256_groups": 2026,
+    "identifier_links": 168,
     "image_profile_full_geometry": 541,
-    "image_profile_summary_only": 39,
+    "image_profile_summary_only": 10753,
     "inputs": {
       "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz": {
         "bytes": 2373909,
@@ -81,19 +110,39 @@
       "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv": {
         "bytes": 424306,
         "sha256": "6cd8bb07ccec966d843fca42f8c730792369dd7a65e5ae95f606ead93ce36ffd"
+      },
+      "EVIDENCE/mass dat scan/file_inventory.tsv": {
+        "bytes": 1689047,
+        "sha256": "c76428f4710930f768c5c2cd4efadb83d458f18816d39992347b2e4a16e9efc6"
+      },
+      "EVIDENCE/mass dat scan/scan_results.tsv": {
+        "bytes": 4078974,
+        "sha256": "761cb7662d939c695ab94929b456d4459a9cb8201ae02a12692f051207179f98"
       }
     },
+    "mass_scan_exact_sha256_link_groups": 11672,
+    "mass_scan_exact_sha256_pair_relations": 11890,
+    "mass_scan_inventory_only_sha256_rows": 1398,
     "master_flagged_rows": 2161,
     "master_rom_code_rows": 3691,
     "master_rom_groups": 2161,
     "master_rom_ids": 3691,
+    "original_file_inventory_class_counts": {
+      "7Z_PACKAGE": 80,
+      "ANCILLARY_OR_UNSUPPORTED": 3442,
+      "DIRECT_WORKBENCH_INPUT": 11744,
+      "ZIP_PACKAGE": 1318
+    },
+    "original_file_inventory_rows": 16584,
+    "original_file_inventory_rows_with_sha256": 13142,
+    "original_file_inventory_rows_without_sha256": 3442,
     "profile_schema": "nissan-rom-structural-profile-v1",
     "relationship_policy": "exact code-region hashes and strict address+geometry overlap can form candidate components; address-ignored shape similarity, payload reuse, same-FID and master-ROM-group links remain separate leads and never imply semantic identity",
     "scan_inventory_rows": 177,
     "scanner_catalogue_files": 146,
     "schema": "nissan-rom-family-index-v1",
-    "source_scan_records": 608,
-    "unique_decoded_images": 580,
+    "source_scan_records": 15274,
+    "unique_decoded_images": 11294,
     "vehicle_catalog_rows": 2161
   }
 }

@@ -14,9 +14,22 @@
     "ecu_fid_inventory_rows": 43,
     "exact_ecuid_to_catalogue_code_links": 17,
     "family_relationship_edges": 62653,
-    "identifier_links": 165,
+    "historical_mass_scan_detailed_positive_match_rows": 431,
+    "historical_mass_scan_exact_file_sha_match_result_rows": 11744,
+    "historical_mass_scan_load_rejected_rows": 2490,
+    "historical_mass_scan_result_rows": 14666,
+    "historical_mass_scan_scanned_rows": 12176,
+    "historical_mass_scan_status_counts": {
+      "LOAD_REJECTED": 2490,
+      "SCANNED": 12176
+    },
+    "historical_mass_scan_unique_decoded_images": 11145,
+    "historical_mass_scan_unique_input_hashes": 13698,
+    "historical_mass_scan_unmatched_file_sha_result_rows": 2922,
+    "historical_mass_scan_unmatched_input_sha256_groups": 2026,
+    "identifier_links": 168,
     "image_profile_full_geometry": 541,
-    "image_profile_summary_only": 39,
+    "image_profile_summary_only": 10753,
     "inputs": {
       "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz": {
         "bytes": 2373909,
@@ -45,19 +58,39 @@
       "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv": {
         "bytes": 424306,
         "sha256": "6cd8bb07ccec966d843fca42f8c730792369dd7a65e5ae95f606ead93ce36ffd"
+      },
+      "EVIDENCE/mass dat scan/file_inventory.tsv": {
+        "bytes": 1689047,
+        "sha256": "c76428f4710930f768c5c2cd4efadb83d458f18816d39992347b2e4a16e9efc6"
+      },
+      "EVIDENCE/mass dat scan/scan_results.tsv": {
+        "bytes": 4078974,
+        "sha256": "761cb7662d939c695ab94929b456d4459a9cb8201ae02a12692f051207179f98"
       }
     },
+    "mass_scan_exact_sha256_link_groups": 11672,
+    "mass_scan_exact_sha256_pair_relations": 11890,
+    "mass_scan_inventory_only_sha256_rows": 1398,
     "master_flagged_rows": 2161,
     "master_rom_code_rows": 3691,
     "master_rom_groups": 2161,
     "master_rom_ids": 3691,
+    "original_file_inventory_class_counts": {
+      "7Z_PACKAGE": 80,
+      "ANCILLARY_OR_UNSUPPORTED": 3442,
+      "DIRECT_WORKBENCH_INPUT": 11744,
+      "ZIP_PACKAGE": 1318
+    },
+    "original_file_inventory_rows": 16584,
+    "original_file_inventory_rows_with_sha256": 13142,
+    "original_file_inventory_rows_without_sha256": 3442,
     "profile_schema": "nissan-rom-structural-profile-v1",
     "relationship_policy": "exact code-region hashes and strict address+geometry overlap can form candidate components; address-ignored shape similarity, payload reuse, same-FID and master-ROM-group links remain separate leads and never imply semantic identity",
     "scan_inventory_rows": 177,
     "scanner_catalogue_files": 146,
     "schema": "nissan-rom-family-index-v1",
-    "source_scan_records": 608,
-    "unique_decoded_images": 580,
+    "source_scan_records": 15274,
+    "unique_decoded_images": 11294,
     "vehicle_catalog_rows": 2161
   },
   "input_hashes": {
@@ -84,6 +117,14 @@
     "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv": {
       "bytes": 424306,
       "sha256": "6cd8bb07ccec966d843fca42f8c730792369dd7a65e5ae95f606ead93ce36ffd"
+    },
+    "EVIDENCE/mass dat scan/file_inventory.tsv": {
+      "bytes": 1689047,
+      "sha256": "c76428f4710930f768c5c2cd4efadb83d458f18816d39992347b2e4a16e9efc6"
+    },
+    "EVIDENCE/mass dat scan/scan_results.tsv": {
+      "bytes": 4078974,
+      "sha256": "761cb7662d939c695ab94929b456d4459a9cb8201ae02a12692f051207179f98"
     }
   },
   "python_version": "3.11.18",
@@ -97,9 +138,9 @@
   "schema": "nissan-rom-family-index-run-v1",
   "tool_sources": {
     "family_index": {
-      "bytes": 48250,
+      "bytes": 60164,
       "path": "/home/runner/work/EL19A-/EL19A-/tools/nissan_rom_family_index.py",
-      "sha256": "c2747f26f9e73f2fe1ebd92ec54face47e18a3cba0727a97969012a62f59ad3e"
+      "sha256": "0aed555cac0f10060eb48517c1c417835beb71b237eb2fa4ba6d31a203ecabe7"
     },
     "loader": {
       "bytes": 12832,
@@ -112,9 +153,9 @@
       "sha256": "206f99ff2ea8f3c9e961353a0cd94059d22be9b62d9ea4a0ac97547de2f12f1e"
     },
     "runner": {
-      "bytes": 9755,
+      "bytes": 10097,
       "path": "/home/runner/work/EL19A-/EL19A-/tools/run_nissan_rom_family_index.py",
-      "sha256": "4ca4df70ebce529cc34c7d7eded9170dc90087a26bbc0fa268d3a1ae4c386567"
+      "sha256": "7d760bcc574dfb11bf9e58a931199e259fc3424fc12b00de3cac86a0fb21421a"
     },
     "scanner": {
       "bytes": 48717,
