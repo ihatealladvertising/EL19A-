@@ -53,8 +53,8 @@
       "sha256": "721fd4932dac72107aa52af50e8a4150b09961004c01372394530b5340cc317b"
     },
     "run_summary.json": {
-      "bytes": 5246,
-      "sha256": "c990291f18f93caa5cf7c0f0a87175cdf4c6d1e63e2c70ddc67d12a17057daa4"
+      "bytes": 7036,
+      "sha256": "326b2e1d5e8184e473e2cc49f8a6d2d4d8b83ac9b92f66c9da27a345ea91c0ff"
     }
   },
   "schema": "nissan-rom-family-index-v1-manifest",
