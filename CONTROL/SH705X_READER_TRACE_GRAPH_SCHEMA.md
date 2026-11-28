@@ -71,6 +71,36 @@ The input evidence references must already exist in the graph and identify the s
 
 The function does not decode SH-2 instructions, does not invent a profile for an unknown helper, does not fan out aggregate multi-reader query/result paths and always reports that it performed no instruction decode and no semantic promotion. Callers can pass the returned graph to `write_trace_graph` after inspecting its warnings and provenance.
 
+## Per-call static-flow bridge
+
+`tools/reader_trace_static_flow_adapter.py` is an additive adapter over the raw
+`cat_calls` mapping returned by `build_static_indices.full_rom_analysis()`.
+`build_static_flow_call_document()` normalizes and preserves each call row,
+including every query-origin token and destination store, then
+`write_static_flow_call_document()` emits deterministic JSON and returns the
+exact file SHA-256 for the graph evidence record.
+
+The document pins both the decoded ROM SHA-256 and the source listing-member
+SHA-256/path. Before graph enrichment, the caller must add an evidence record
+whose SHA-256 exactly matches the serialized JSON. The adapter then selects
+only the row matching all three graph identities: target EA, call PC and helper
+EA (the helper EA is accepted only from an exact `sub_<hex>` helper symbol).
+It never attaches a second call's query inputs or result stores.
+
+Query RAM-to-register origins and taint-proven R0 stores are represented as
+`derived`. A static tracker's `near` destination remains `heuristic` and gets
+an unresolved boundary; it is never connected to the lookup result. The source
+listing hash is recorded in graph coverage while
+`independent_redecode_performed` remains false: this adapter does not decode
+instructions. It also does not infer query transforms, downstream value
+causality, physical function or units.
+
+When the composed pipeline receives a per-call document, it suppresses the
+aggregate per-address query and destination fields before invoking the existing
+summary adapter. This preserves the per-address adapter's conservative
+multi-reader behavior while using exact per-call records for the selected
+call. Existing calls without a per-call document remain backward-compatible.
+
 ## Exact-image helper contracts
 
 `tools/reader_trace_helper_profiles.py` holds a deliberately small, report-sourced helper registry. A profile is keyed by the exact tuple:

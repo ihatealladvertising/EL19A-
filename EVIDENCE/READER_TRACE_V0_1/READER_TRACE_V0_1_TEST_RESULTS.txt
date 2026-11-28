@@ -60,5 +60,16 @@ Geometry coverage:
 Evidence boundary:
   The 0x0F10E and 0x10F8A cases are represented from existing closed reports; their source listing identity is not independently re-decoded in this implementation. The 0x0AFF2 case cites the exact Stage-16 extracted listing hash recorded by WO70033, but this graph is still a structured extraction from the report, not a fresh instruction re-decode. Physical meanings and donor semantics remain unpromoted.
 
+
+Per-call static-flow adapter:
+  - New module: `tools/reader_trace_static_flow_adapter.py`.
+  - Exports raw `full_rom_analysis().cat_calls` rows as deterministic JSON with target EA, reader PC, function, helper, query origins, all destinations, decoded ROM SHA-256 and exact source-listing SHA-256/path.
+  - Requires a graph evidence record whose SHA-256 matches the exact JSON bytes.
+  - Attaches only the exact (target EA, reader PC, helper EA) record selected by the graph call; multiple calls for the same table remain isolated.
+  - Query origin paths and R0-tainted stores remain `derived`; near-call stores remain `heuristic` with an unresolved boundary.
+  - The pipeline withholds aggregate query/result summaries when a per-call document is supplied. Existing pipeline calls remain backward-compatible.
+  - Listing identity can be attached to graph coverage, but `independent_redecode_performed` remains false; no opcode decode or semantic promotion occurs.
+  - Production static-flow export was not run as part of this synthetic implementation stage; no new target calibration interpretation or Findings record was promoted.
+
 Limit:
   The implementation has a graph contract, adapters for the existing SH-2 static indexes, exact-image helper-profile attachment and a single-entry enrichment pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
