@@ -1,0 +1,731 @@
+{
+  "schema_version": "sh705x-reader-trace-graph-v0.1",
+  "data_model_version": "sh705x-datamodel-v1.0.0",
+  "trace_id": "trace:EL19A:f501:0x0AFF2:call-0x5B3C0:2axis-v0.1",
+  "artifact": {
+    "artifact_id": "rom:VERSA_f501.bin#bfe037e8e6c389e2",
+    "source_path": "EVIDENCE/VERSA f501.bin",
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "decoded_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "processor_family": "SH7058",
+    "processor_model": "SH705822N",
+    "ecu_profile": "EL19A / MR18DE"
+  },
+  "target_object": {
+    "object_ref": "candidate:EL19A:f501:0x0AFF2",
+    "address_space": "rom_ea",
+    "ea": 45042,
+    "byte_extent": 16,
+    "dimensions": [
+      4,
+      4
+    ],
+    "storage_type": "uint8",
+    "payload_hex": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+    "payload_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+  },
+  "call_ref": {
+    "call_id": "call:rom:f501:0x5B3C0",
+    "call_pc": 373696,
+    "call_form": "indirect_jsr",
+    "helper_ea": 142148
+  },
+  "nodes": [
+    {
+      "node_id": "map-0aff2",
+      "kind": "rom_object",
+      "label": "EL19A 4x4 UBYTE map 0x0AFF2",
+      "address": {
+        "space": "rom_ea",
+        "value": 45042
+      },
+      "properties": {
+        "byte_extent": 16,
+        "dimensions": [
+          4,
+          4
+        ],
+        "storage_type": "uint8",
+        "payload_hex": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+        "payload_sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "all_values_zero": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "axis-0e5cc",
+      "kind": "rom_object",
+      "label": "Axis 1: 4-point UBYTE axis 0x0E5CC",
+      "address": {
+        "space": "rom_ea",
+        "value": 58828
+      },
+      "properties": {
+        "byte_extent": 4,
+        "dimensions": [
+          4,
+          1
+        ],
+        "storage_type": "uint8",
+        "payload_hex": "0E 28 60 88",
+        "payload_sha256": "d0f65de078d85992d11c0feb9ff573c1720c29c76fddc0bf29986e3ae74ee775",
+        "decoded_values": [
+          14,
+          40,
+          96,
+          136
+        ],
+        "strictly_increasing": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "axis-0e5c8",
+      "kind": "rom_object",
+      "label": "Axis 2: 4-point UBYTE axis 0x0E5C8",
+      "address": {
+        "space": "rom_ea",
+        "value": 58824
+      },
+      "properties": {
+        "byte_extent": 4,
+        "dimensions": [
+          4,
+          1
+        ],
+        "storage_type": "uint8",
+        "payload_hex": "00 01 02 03",
+        "payload_sha256": "054edec1d0211f624fed0cbca9d4f9400b0e491c43742af2c5b0abebf0c990d8",
+        "decoded_values": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "strictly_increasing": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "code-5b3c0",
+      "kind": "code_site",
+      "label": "sub_5B33A lookup call at 0x5B3C0",
+      "address": {
+        "space": "rom_ea",
+        "value": 373696
+      },
+      "properties": {
+        "call_id": "call:rom:f501:0x5B3C0",
+        "mnemonic": "jsr @r2",
+        "argument_registers": {
+          "table": "R4",
+          "axis1": "R5",
+          "axis2": "R6",
+          "query": "R7"
+        }
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ]
+    },
+    {
+      "node_id": "helper-22b44",
+      "kind": "lookup_helper",
+      "label": "sub_22B44 two-axis UBYTE map helper",
+      "address": {
+        "space": "rom_ea",
+        "value": 142148
+      },
+      "properties": {
+        "axis_search": "sub_233CC",
+        "axis_search_count": 2,
+        "cell_offset": "4*row_index + column_index",
+        "corner_interpolator": "sub_231C8"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "helper-231f8",
+      "kind": "lookup_helper",
+      "label": "loc_231F8 row/column index and cell-address construction",
+      "address": {
+        "space": "rom_ea",
+        "value": 143864
+      },
+      "properties": {
+        "offset_expression": "4*row_index + column_index",
+        "geometry": "4x4"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "ram-ffff85a4",
+      "kind": "ram_cell",
+      "label": "Unsigned UBYTE query source FFFF85A4",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF85A4"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "common_query_for_both_axes",
+        "gbr_base": "FFFF84C9",
+        "offset": 219
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "reg-r4-map",
+      "kind": "register",
+      "label": "R4 map pointer argument",
+      "address": null,
+      "properties": {
+        "register": "R4",
+        "value": "0x0AFF2",
+        "role": "map_values_pointer"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "node_id": "reg-r5-axis1",
+      "kind": "register",
+      "label": "R5 axis 1 pointer argument",
+      "address": null,
+      "properties": {
+        "register": "R5",
+        "value": "0x0E5CC",
+        "role": "axis1_pointer"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "node_id": "reg-r6-axis2",
+      "kind": "register",
+      "label": "R6 axis 2 pointer argument",
+      "address": null,
+      "properties": {
+        "register": "R6",
+        "value": "0x0E5C8",
+        "role": "axis2_pointer"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "node_id": "reg-r7-query",
+      "kind": "register",
+      "label": "R7 unsigned UBYTE query after delay-slot extension",
+      "address": null,
+      "properties": {
+        "register": "R7",
+        "source": "FFFF85A4",
+        "signed": false,
+        "storage": "uint8",
+        "zero_extend_pc": "0x5B3C2"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "node_id": "reg-r0-result",
+      "kind": "register",
+      "label": "R0 lookup return value",
+      "address": null,
+      "properties": {
+        "register": "R0",
+        "value_type": "uint8",
+        "all_queries_return_zero": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "ram-ffff2a58",
+      "kind": "ram_cell",
+      "label": "UBYTE multiplier input FFFF2150+0x908 = FFFF2A58",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF2A58"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "post_lookup_product_operand",
+        "physical_meaning": "unresolved"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "consumer-5b3ce",
+      "kind": "consumer",
+      "label": "First meaningful consumer: multiply map result by UBYTE[FFFF2A58]",
+      "address": {
+        "space": "rom_ea",
+        "value": 373710
+      },
+      "properties": {
+        "mnemonic": "mulu r2,r5",
+        "result_register": "MACL/R2",
+        "map_result_register": "R2",
+        "physical_meaning": "unresolved"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "ram-ffff115a",
+      "kind": "ram_cell",
+      "label": "UWORD product sink FFFF115A",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF115A"
+      },
+      "properties": {
+        "width_bits": 16,
+        "signed": false,
+        "role": "first_product_sink",
+        "written_from": "MACL at 0x5B58C then stored 0x5B590"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "node_id": "ram-ffff14e4",
+      "kind": "ram_cell",
+      "label": "UBYTE inline element staging FFFF14E4",
+      "address": {
+        "space": "ram_ea",
+        "value": "FFFF14E4"
+      },
+      "properties": {
+        "width_bits": 8,
+        "signed": false,
+        "role": "separate_inline_table_staging",
+        "not_the_map_lookup_result": true
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "m01",
+      "from_node": "map-0aff2",
+      "to_node": "code-5b3c0",
+      "relation": "supplies_R4_map_pointer",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m02",
+      "from_node": "axis-0e5cc",
+      "to_node": "code-5b3c0",
+      "relation": "supplies_R5_axis1_pointer",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m03",
+      "from_node": "axis-0e5c8",
+      "to_node": "code-5b3c0",
+      "relation": "supplies_R6_axis2_pointer",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m04",
+      "from_node": "ram-ffff85a4",
+      "to_node": "reg-r7-query",
+      "relation": "loaded_and_unsigned_extended_in_delay_slot",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028",
+        "ev:lst-stage16"
+      ]
+    },
+    {
+      "edge_id": "m05",
+      "from_node": "reg-r4-map",
+      "to_node": "code-5b3c0",
+      "relation": "map_argument_R4",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "edge_id": "m06",
+      "from_node": "reg-r5-axis1",
+      "to_node": "code-5b3c0",
+      "relation": "axis1_argument_R5",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "edge_id": "m07",
+      "from_node": "reg-r6-axis2",
+      "to_node": "code-5b3c0",
+      "relation": "axis2_argument_R6",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "edge_id": "m08",
+      "from_node": "reg-r7-query",
+      "to_node": "code-5b3c0",
+      "relation": "query_argument_R7",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033"
+      ]
+    },
+    {
+      "edge_id": "m09",
+      "from_node": "code-5b3c0",
+      "to_node": "helper-22b44",
+      "relation": "calls_sub_22B44",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m10",
+      "from_node": "helper-22b44",
+      "to_node": "axis-0e5cc",
+      "relation": "searches_axis1_with_same_unsigned_query",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m11",
+      "from_node": "helper-22b44",
+      "to_node": "axis-0e5c8",
+      "relation": "searches_axis2_with_same_unsigned_query",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m12",
+      "from_node": "helper-22b44",
+      "to_node": "helper-231f8",
+      "relation": "passes_two_axis_indices_to_cell_lookup",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m13",
+      "from_node": "helper-231f8",
+      "to_node": "map-0aff2",
+      "relation": "selects_4x4_cell_using_4_times_row_plus_column",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m14",
+      "from_node": "map-0aff2",
+      "to_node": "reg-r0-result",
+      "relation": "all_zero_payload_yields_zero_for_all_queries",
+      "basis": "derived",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m15",
+      "from_node": "reg-r0-result",
+      "to_node": "consumer-5b3ce",
+      "relation": "lookup_result_used_as_multiplicand",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m16",
+      "from_node": "ram-ffff2a58",
+      "to_node": "consumer-5b3ce",
+      "relation": "second_UBYTE_multiplicand",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m17",
+      "from_node": "consumer-5b3ce",
+      "to_node": "ram-ffff115a",
+      "relation": "product_published_to_UWORD_sink",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    },
+    {
+      "edge_id": "m18",
+      "from_node": "code-5b3c0",
+      "to_node": "ram-ffff14e4",
+      "relation": "separate_inline_element_staging_not_map_result",
+      "basis": "reported_observation",
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70033",
+        "ev:fnd-000028"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "ev:rom-f501",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "anchor": "Target ROM image identity for 0x0AFF2 and its reader/axis payloads",
+      "evidence_class": "target_rom_identity",
+      "extraction_method": "Target ROM SHA pinned in WO70033",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:wo70033",
+      "source_path": "CONTROL/WO70033.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "98b841062c79f37651701a5770e94f227dc7ece6",
+      "anchor": "Pinned-input section and observations 1, 4, 5, 7, 8: pinned Stage-16 LST and the 0x0AFF2 map reader/query/axes/first-consumer path",
+      "evidence_class": "closed_target_reader_trace_report",
+      "extraction_method": "Structured extraction from WO70033; report says quoted instructions were re-read from the pinned listing",
+      "status": "reported_verified"
+    },
+    {
+      "evidence_id": "ev:fnd-000028",
+      "source_path": "FINDINGS/records/FND-000028.md",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "6f7f0cc28a79c6b4f4ec45291bd88f535ddf423b",
+      "anchor": "4x4 UBYTE map, two target axes, UBYTE query, helper path, first product sink and semantic boundary",
+      "evidence_class": "canonical_finding_record",
+      "extraction_method": "Cross-reference to current target-side finding",
+      "status": "current"
+    },
+    {
+      "evidence_id": "ev:lst-stage16",
+      "source_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip#EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+      "hash_algorithm": "sha256",
+      "source_hash": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+      "anchor": "Exact extracted Stage-16 listing SHA-256 and size as pinned by WO70033",
+      "evidence_class": "target_disassembly_listing",
+      "extraction_method": "Listing identity copied from WO70033 pinned-input manifest; no re-decode performed while constructing this graph",
+      "status": "pinned_source_identity"
+    }
+  ],
+  "lookup_contract": {
+    "query_source_node": "ram-ffff85a4",
+    "helper_node": "helper-22b44",
+    "query_type": {
+      "storage": "uint8",
+      "signed": false,
+      "register": "R7",
+      "source_ram": "FFFF85A4",
+      "source_load_pc": "0x5B3BC",
+      "zero_extend_pc": "0x5B3C2",
+      "same_query_used_for_both_axes": true
+    },
+    "axis_model": {
+      "kind": "two_explicit_axes",
+      "axis_count": 2,
+      "axes": [
+        {
+          "role": "axis1",
+          "node_id": "axis-0e5cc",
+          "ea": 58828,
+          "storage": "uint8",
+          "point_count": 4,
+          "values": [
+            14,
+            40,
+            96,
+            136
+          ],
+          "strictly_increasing": true
+        },
+        {
+          "role": "axis2",
+          "node_id": "axis-0e5c8",
+          "ea": 58824,
+          "storage": "uint8",
+          "point_count": 4,
+          "values": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "strictly_increasing": true
+        }
+      ]
+    },
+    "interpolation": {
+      "method": "two axis searches followed by 4x4 cell selection and corner interpolation",
+      "axis_search": "sub_233CC (twice)",
+      "cell_address": "4*row_index + column_index",
+      "corner_interpolator": "sub_231C8"
+    },
+    "low_range_behavior": "Same unsigned UBYTE query is passed to both axis searches; the resulting indices form a 4x4 cell offset.",
+    "upper_boundary": {
+      "behavior": "sub_233CC endpoint behavior is not enumerated in this report; preserve unresolved"
+    },
+    "evidence_refs": [
+      "ev:wo70033",
+      "ev:fnd-000028",
+      "ev:lst-stage16"
+    ]
+  },
+  "unresolved_boundaries": [
+    {
+      "boundary_id": "map-physical-meaning",
+      "at_node": "map-0aff2",
+      "reason": "The target map is all zero and target query/axes/first sink are known, but physical function and units remain unresolved. Donor mTDATDDS is geometry/metadata lead only.",
+      "required_evidence": "Target-side source and consumer path that establishes physical signal, unit and calibration role; donor name cannot promote semantics."
+    },
+    {
+      "boundary_id": "map-query-producer",
+      "at_node": "ram-ffff85a4",
+      "reason": "The byte query source is identified, but its upstream physical producer is not re-established in this bounded graph.",
+      "required_evidence": "Separate target-side producer trace for UBYTE[FFFF85A4] if physical meaning is required."
+    },
+    {
+      "boundary_id": "map-sink-semantics",
+      "at_node": "ram-ffff115a",
+      "reason": "The first product sink U16[FFFF115A] is identified, but its consumer/physical output role is unresolved.",
+      "required_evidence": "Bounded downstream consumer trace for FFFF115A with branch context."
+    },
+    {
+      "boundary_id": "multiplier-input-meaning",
+      "at_node": "ram-ffff2a58",
+      "reason": "U8[FFFF2A58] is the multiplier operand, but its producer and physical meaning are not established in this work order.",
+      "required_evidence": "Producer provenance and bounded semantic trace for UBYTE[FFFF2A58]."
+    },
+    {
+      "boundary_id": "separate-inline-element",
+      "at_node": "ram-ffff14e4",
+      "reason": "The 3-D caller also stages an inline table element at FFFF14E4; that payload is distinct from the helper-read map 0x0AFF2 and is outside this graph's target object.",
+      "required_evidence": "A separately identified object/pointer and per-element consumer trace if that inline data is later investigated."
+    }
+  ],
+  "coverage": {
+    "status": "source_reported_reader_and_first_product_sink",
+    "start": "Pinned Stage-16 instructions 0x5B33A-0x5B3D0, sub_22B44 at 0x22B44 and loc_231F8 at 0x231F8",
+    "stop": "First product sink U16[FFFF115A] at 0x5B590; physical and sink semantics unresolved",
+    "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+    "independent_redecode_performed": false
+  },
+  "semantic_disposition": {
+    "provisional_name": "4x4 all-zero UBYTE map",
+    "donor_hypothesis": "V6/Juke mTDATDDS geometry lead only",
+    "physical_identity": "unresolved",
+    "promotion": "not_supported",
+    "evidence_grade": "Reader-Verified as reported by WO70033/FND-000028"
+  }
+}
