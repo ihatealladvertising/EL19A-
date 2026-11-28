@@ -107,7 +107,7 @@ class ReaderTraceGraphTests(unittest.TestCase):
         warnings = validate_trace_graph(graph)
         self.assertEqual(len(graph["nodes"]), 23)
         self.assertEqual(len(graph["edges"]), 24)
-        self.assertEqual(len(graph["evidence"]), 3)
+        self.assertEqual(len(graph["evidence"]), 4)
         self.assertEqual(len(graph["unresolved_boundaries"]), 5)
         self.assertEqual(len(warnings), 1)
 
