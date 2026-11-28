@@ -1,0 +1,323 @@
+{
+  "work_order": "WO70046",
+  "method_version": "1.0",
+  "objective": "Test alphabetical ordering of VALUE CHARACTERISTIC symbol names when sorted by donor ROM address.",
+  "region": {
+    "start": "0x8000",
+    "end_inclusive": "0x97FF",
+    "subregion_size_bytes": 1024
+  },
+  "source_identity": {
+    "V6": {
+      "path": "EVIDENCE/64811000p2_m.a2l",
+      "size_bytes": 5513192,
+      "sha256": "6c1248fb0acf5e80a77ff470cf8e14cda97260b291a556f330967748a7b30a88",
+      "characteristics": 4456,
+      "kind_counts": {
+        "VALUE": 3953,
+        "CURVE": 442,
+        "MAP": 61
+      }
+    },
+    "Juke": {
+      "path": "EVIDENCE/RFCC_2XHK19BDF1.a2l",
+      "size_bytes": 3762808,
+      "sha256": "0ad173da11676ef6504bfde507f4c172c45ca3adda1d466a6b13dd61ee5a5d9d",
+      "characteristics": 7260,
+      "kind_counts": {
+        "VALUE": 6332,
+        "CURVE": 735,
+        "MAP": 193
+      }
+    }
+  },
+  "primary_population": {
+    "rule": "VALUE CHARACTERISTIC records only; one representative per unique ROM address; earliest source declaration line wins; other declarations at the same address are retained as duplicate aliases.",
+    "address_sort": "numeric ascending",
+    "adjacency": "case-sensitive ordinal comparison; left symbol <= right symbol",
+    "ascending_run": "maximal contiguous nondecreasing symbol-name sequence",
+    "V6": {
+      "raw_region_rows": 3021,
+      "unique_addresses": 2833,
+      "duplicate_address_groups": 73,
+      "rows_in_duplicate_groups": 261,
+      "extra_alias_rows": 188,
+      "n": 2833,
+      "pairs": 2832,
+      "ordered": 2826,
+      "adjacent_fraction": 0.9978813559322034,
+      "runs": 7,
+      "longest_run": 2075,
+      "longest_run_detail": {
+        "start_address": "0x081BC",
+        "end_address": "0x08EA0",
+        "first_symbol": "mA5TP1",
+        "last_symbol": "mZLMT",
+        "first_source_line": 2567,
+        "last_source_line": 22442
+      },
+      "spearman_rho": 0.5146109851774159,
+      "subregions_1KiB": [
+        {
+          "range": "0x08000-0x083FF",
+          "n": 423,
+          "ordered": 421,
+          "pairs": 422,
+          "fraction": 0.9976303317535545,
+          "runs": 2,
+          "max_run": 372
+        },
+        {
+          "range": "0x08400-0x087FF",
+          "n": 674,
+          "ordered": 673,
+          "pairs": 673,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 674
+        },
+        {
+          "range": "0x08800-0x08BFF",
+          "n": 656,
+          "ordered": 655,
+          "pairs": 655,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 656
+        },
+        {
+          "range": "0x08C00-0x08FFF",
+          "n": 512,
+          "ordered": 508,
+          "pairs": 511,
+          "fraction": 0.9941291585127201,
+          "runs": 4,
+          "max_run": 373
+        },
+        {
+          "range": "0x09000-0x093FF",
+          "n": 341,
+          "ordered": 340,
+          "pairs": 340,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 341
+        },
+        {
+          "range": "0x09400-0x097FF",
+          "n": 227,
+          "ordered": 224,
+          "pairs": 226,
+          "fraction": 0.9911504424778761,
+          "runs": 3,
+          "max_run": 207
+        }
+      ],
+      "sensitivity": {
+        "casefold_fraction": 0.9971751412429378,
+        "natural_sort_fraction": 0.9915254237288136,
+        "common_prefix": "m",
+        "prefix_stripped_fraction": 0.9978813559322034,
+        "nonascii_count": 0,
+        "malformed_count": 0,
+        "last_declaration_representative_fraction": 0.9763418079096046,
+        "lexicographic_first_representative_fraction": 0.9978813559322034,
+        "lexicographic_last_representative_fraction": 0.9763418079096046
+      },
+      "all_declarations_including_aliases": {
+        "n": 3021,
+        "pairs": 3020,
+        "ordered": 2941,
+        "adjacent_fraction": 0.973841059602649,
+        "runs": 80,
+        "longest_run": 603,
+        "longest_run_detail": {
+          "start_address": "0x08F8A",
+          "end_address": "0x0967E",
+          "first_symbol": "mABFAMPL",
+          "last_symbol": "mZLVSPLM0",
+          "first_source_line": 2588,
+          "last_source_line": 22449
+        }
+      },
+      "full_address_range": {
+        "unique_value_addresses": 3338,
+        "duplicate_address_groups": 173,
+        "rows_in_duplicate_groups": 788,
+        "adjacent_fraction": 0.9343721905903506,
+        "runs": 220,
+        "longest_run": 2075
+      }
+    },
+    "Juke": {
+      "raw_region_rows": 4907,
+      "unique_addresses": 4208,
+      "duplicate_address_groups": 130,
+      "rows_in_duplicate_groups": 829,
+      "extra_alias_rows": 699,
+      "n": 4208,
+      "pairs": 4207,
+      "ordered": 4202,
+      "adjacent_fraction": 0.9988115046351319,
+      "runs": 6,
+      "longest_run": 2949,
+      "longest_run_detail": {
+        "start_address": "0x08250",
+        "end_address": "0x08DD5",
+        "first_symbol": "mA5TP1",
+        "last_symbol": "mZLMT",
+        "first_source_line": 1129,
+        "last_source_line": 23029
+      },
+      "spearman_rho": 0.5209053612654888,
+      "subregions_1KiB": [
+        {
+          "range": "0x08000-0x083FF",
+          "n": 484,
+          "ordered": 482,
+          "pairs": 483,
+          "fraction": 0.9979296066252588,
+          "runs": 2,
+          "max_run": 432
+        },
+        {
+          "range": "0x08400-0x087FF",
+          "n": 1024,
+          "ordered": 1023,
+          "pairs": 1023,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 1024
+        },
+        {
+          "range": "0x08800-0x08BFF",
+          "n": 1023,
+          "ordered": 1022,
+          "pairs": 1022,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 1023
+        },
+        {
+          "range": "0x08C00-0x08FFF",
+          "n": 747,
+          "ordered": 744,
+          "pairs": 746,
+          "fraction": 0.9973190348525469,
+          "runs": 3,
+          "max_run": 470
+        },
+        {
+          "range": "0x09000-0x093FF",
+          "n": 512,
+          "ordered": 511,
+          "pairs": 511,
+          "fraction": 1,
+          "runs": 1,
+          "max_run": 512
+        },
+        {
+          "range": "0x09400-0x097FF",
+          "n": 418,
+          "ordered": 415,
+          "pairs": 417,
+          "fraction": 0.9952038369304557,
+          "runs": 3,
+          "max_run": 327
+        }
+      ],
+      "sensitivity": {
+        "casefold_fraction": 0.9985738055621584,
+        "natural_sort_fraction": 0.9947706203945804,
+        "common_prefix": "m",
+        "prefix_stripped_fraction": 0.9988115046351319,
+        "nonascii_count": 0,
+        "malformed_count": 0,
+        "last_declaration_representative_fraction": 0.9786070834323746,
+        "lexicographic_first_representative_fraction": 0.9988115046351319,
+        "lexicographic_last_representative_fraction": 0.9793201806512954
+      },
+      "all_declarations_including_aliases": {
+        "n": 4907,
+        "pairs": 4906,
+        "ordered": 4771,
+        "adjacent_fraction": 0.9724826742763962,
+        "runs": 136,
+        "longest_run": 976,
+        "longest_run_detail": {
+          "start_address": "0x08EEE",
+          "end_address": "0x0968C",
+          "first_symbol": "mA21",
+          "last_symbol": "mXPBAVMAX",
+          "first_source_line": 1119,
+          "last_source_line": 23004
+        }
+      },
+      "full_address_range": {
+        "unique_value_addresses": 4798,
+        "duplicate_address_groups": 243,
+        "rows_in_duplicate_groups": 1777,
+        "adjacent_fraction": 0.9966645820304357,
+        "runs": 17,
+        "longest_run": 2949
+      }
+    }
+  },
+  "null_model": {
+    "repetitions_per_test": 10000,
+    "method": "Global permutation of the primary symbol multiset; separate within-1KiB-block permutation preserving each address block's name multiset; fixed seeds; add-one empirical p-values.",
+    "V6": {
+      "seed": 20261128,
+      "block_count": 6,
+      "global": {
+        "adjacent_fraction_mean": 0.5001104166666667,
+        "p95": 0.509180790960452,
+        "longest_run_median": 6,
+        "p95_longest_run": 8,
+        "p99_longest_run": 8,
+        "p_adjacent_ge_observed": 0.00009999000099990002,
+        "p_longest_ge_observed": 0.00009999000099990002
+      },
+      "within_1KiB": {
+        "adjacent_fraction_mean": 0.5003869350282486,
+        "p95": 0.509180790960452,
+        "longest_run_median": 6,
+        "p95_longest_run": 8,
+        "p99_longest_run": 8,
+        "p_adjacent_ge_observed": 0.00009999000099990002,
+        "p_longest_ge_observed": 0.00009999000099990002
+      }
+    },
+    "Juke": {
+      "seed": 20361128,
+      "block_count": 6,
+      "global": {
+        "adjacent_fraction_mean": 0.4999216306156406,
+        "p95": 0.5072498217256952,
+        "longest_run_median": 7,
+        "p95_longest_run": 8,
+        "p99_longest_run": 9,
+        "p_adjacent_ge_observed": 0.00009999000099990002,
+        "p_longest_ge_observed": 0.00009999000099990002
+      },
+      "within_1KiB": {
+        "adjacent_fraction_mean": 0.5003282861896838,
+        "p95": 0.507725219854372,
+        "longest_run_median": 7,
+        "p95_longest_run": 8,
+        "p99_longest_run": 9,
+        "p_adjacent_ge_observed": 0.00009999000099990002,
+        "p_longest_ge_observed": 0.00009999000099990002
+      }
+    }
+  },
+  "interpretation": "Strong address-local alphabetical ordering is reproduced in both donors. The approximately 97% figure applies when all duplicate-address declarations are retained. Under the specified unique-address primary population, the result is 99.79% V6 and 99.88% Juke. The 80-run/603-symbol result reproduces exactly for V6 only; Juke all-row result is 136 runs and longest run 976. Spearman rho is moderate (~0.515-0.521), so the statistic is not a global linear address-to-name mapping.",
+  "permitted_use": "Provisional local donor search/alignment prior only. No EL19A target address, name, unit, scale, physical meaning, or family relationship may be inferred from this donor ordering.",
+  "row_level_tsv": {
+    "path": "EVIDENCE/WO70046_address_order_adjacency.tsv",
+    "sha256": "fbe222705899a6f93be6e21834b6caacb5ae668265799a6aeaeebe45b4cea91a",
+    "size_bytes": 858299,
+    "row_count": 7928,
+    "repository_publication": "PENDING — generated and available as a conversation download; repository commit blocked by the available GitHub file interface's lack of local-file upload."
+  }
+}
