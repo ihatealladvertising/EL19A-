@@ -329,8 +329,6 @@ def run_export(
             "warnings": graph_warnings,
             "base_fixture_preserved": True,
             "static_flow_evidence_ref": static_flow_evidence_ref,
-            "resolved_boundary_ids": resolved_boundary_ids,
-            "call_site_validation_recorded": record_call_site_validation,
         },
         "analysis_boundary": {
             "instruction_decoder_implemented_here": False,
@@ -339,6 +337,10 @@ def run_export(
             "query_transform_and_consumer_semantics_promoted": False,
         },
     }
+    if record_call_site_validation:
+        manifest["graph_validation"]["resolved_boundary_ids"] = resolved_boundary_ids
+        manifest["graph_validation"]["call_site_validation_recorded"] = True
+
     # The manifest intentionally contains the per-call JSON hash but not its
     # own hash, avoiding a recursive/self-referential digest.
     manifest_sha256 = _write_json(manifest_path, manifest)

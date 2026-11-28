@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — WO70044 production output publication release (2026-11-28)
+**Purpose:** Release the publication gate for the production Actions rerun of the validated 10F8A per-call workflow. The locked preflight run 46112147883 completed both 0F10E and 10F8A exports and retained artifacts but correctly refused publication under LOCKED. Follow-up regression run 46112237955 passed 155 tests (2 optional skips), including both new 10F8A provenance-resolution tests. WO70044 is the only active CLAIMED task; no other active claims or scope locks were present at release.
+**Lock released:** 2026-11-28T05:29:22.566Z — release solely to permit the production workflow to publish its hash-pinned outputs; WO70044 remains CLAIMED until report/output/register readback and closeout. The workflow serializes on `wo-register-main` and refuses publication if main advances.
+**State:** UNLOCKED
+
 **Integrator:** ChatGPT — WO70044 production-backed per-call trace for EL19A 0x10F8A (2026-11-28)
 **Purpose:** Serialize the target-specific production static-flow exporter/workflow extension and its evidence/report publication. Scope is the 0x10F8A graph call at 0x648D8 / sub_22FAC only; preserve the golden graph and existing 0x0F10E production outputs. No calibration XML, ROM, A2L, workbook, catalogue, or physical-semantic promotion is authorized.
 **Lock acquired:** 2026-11-28T05:19:12.386Z — latest main verified; prior gate state UNLOCKED; no active scope locks or CLAIMED work orders.

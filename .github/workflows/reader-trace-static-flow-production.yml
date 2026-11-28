@@ -71,7 +71,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: el19a-0f10e-production-static-flow
+          name: el19a-production-static-flow-0f10e-10f8a
           path: |
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json
             EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
