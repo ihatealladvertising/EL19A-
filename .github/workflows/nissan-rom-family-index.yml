@@ -17,6 +17,8 @@ on:
       - "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv"
       - "EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv"
       - "EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv"
+      - "EVIDENCE/mass dat scan/scan_results.tsv"
+      - "EVIDENCE/mass dat scan/file_inventory.tsv"
       - "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz"
 
 permissions:
@@ -54,8 +56,9 @@ jobs:
       - name: Commit durable master index and cross-reference outputs only while integration gate is unlocked
         shell: bash
         run: |
-          if ! grep -qE '^\*\*State:\*\* UNLOCKED$' CONTROL/INTEGRATION_STATUS.md; then
-            echo "Integration gate is LOCKED; generated results retained as a workflow artifact only."
+          latest_gate_state="$(awk '/^\*\*State:\*\*/ { print; exit }' CONTROL/INTEGRATION_STATUS.md)"
+          if [[ "$latest_gate_state" != "**State:** UNLOCKED" ]]; then
+            echo "Latest integration state is '$latest_gate_state'; generated results retained as a workflow artifact only."
             exit 0
           fi
           git fetch origin main
