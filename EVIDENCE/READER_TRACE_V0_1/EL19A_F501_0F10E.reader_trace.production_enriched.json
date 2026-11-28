@@ -1,0 +1,1079 @@
+{
+  "analysis_extensions": [
+    {
+      "adapter": "reader-trace-static-flow-adapter-v0.1",
+      "call_pc": "0x85B2E",
+      "evidence_ref": "ev:static-flow-production-0F10E",
+      "extension_id": "per-call-static-flow-0000F10E-00085B2E",
+      "function": "sub_85AF4",
+      "helper_ea": "0x22E10",
+      "helper_symbol": "sub_22E10",
+      "instruction_decode_performed": false,
+      "semantics_promoted": false,
+      "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+      "target_ea": "0x0000F10E"
+    }
+  ],
+  "artifact": {
+    "artifact_id": "rom:VERSA_f501.bin#bfe037e8e6c389e2",
+    "decoded_sha256": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+    "ecu_profile": "EL19A / MR18DE",
+    "md5": "46991697c502052752a2cabcb84c9e27",
+    "processor_family": "SH7058",
+    "processor_model": "SH705822N",
+    "source_path": "EVIDENCE/VERSA f501.bin"
+  },
+  "call_ref": {
+    "call_form": "indirect_jsr",
+    "call_id": "call:rom:VERSA_f501.bin#0x85B2E",
+    "call_pc": 547630,
+    "helper_ea": 142864
+  },
+  "coverage": {
+    "independent_redecode_performed": false,
+    "source_listing_sha256": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+    "start": "0x85B2A-0x85B30: pointer load, query load and delay-slot setup",
+    "status": "source_reported_complete_through_first_consumer",
+    "stop": "First consumer at 0x85B4A-0x85B52; alternate staging branch at 0x85B6E-0x85B7A"
+  },
+  "data_model_version": "sh705x-datamodel-v1.0.0",
+  "edges": [
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e01",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "from_node": "literal-pool-85d30",
+      "relation": "contains_pointer_to",
+      "to_node": "rom-table-0f10e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e02",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b2a",
+      "relation": "precedes_lookup_call",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e03",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "from_node": "ram-ffff84b8",
+      "relation": "read_as_query_source",
+      "to_node": "code-85b28"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e04",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b28",
+      "relation": "query_zero_extended_to_R5",
+      "to_node": "code-85b30"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e05",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "from_node": "code-85b2e",
+      "relation": "calls",
+      "to_node": "helper-22e10"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e06",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "helper-22e10",
+      "relation": "reads_lookup_payload",
+      "to_node": "rom-table-0f10e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e07",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "helper-22e10",
+      "relation": "returns_lookup_result_in_R0",
+      "to_node": "reg-r0-result"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e08",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "from_node": "ram-ffff37ae",
+      "relation": "read_by_first_consumer_zero_nonzero_test",
+      "to_node": "code-85b4a"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e09",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "ram-ffff29f6",
+      "relation": "read_in_alternate_staging_branch",
+      "to_node": "code-85b6e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e10",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b6e",
+      "relation": "copies_to_alternate_result_cell",
+      "to_node": "ram-ffff37ae"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e11",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "ram-ffff3614-bit7",
+      "relation": "lookup_precondition_bit7_clear",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e12",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "ram-ffff3615-bit7",
+      "relation": "lookup_precondition_bit7_set",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e13",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "ram-ffff99f0-bit6",
+      "relation": "selects_post_lookup_staging_branch",
+      "to_node": "code-85b4a"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e14",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b4a",
+      "relation": "sets_state_flag_when_result_zero",
+      "to_node": "ram-ffffa6fc"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e15",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b2a",
+      "relation": "loads_table_pointer_into_R4",
+      "to_node": "reg-r4-table"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e16",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "reg-r4-table",
+      "relation": "supplies_table_pointer_argument",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e17",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b30",
+      "relation": "zero_extends_query_into_R5",
+      "to_node": "reg-r5-query"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e18",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "reg-r5-query",
+      "relation": "supplies_unsigned_query_argument",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e19",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "reg-r0-result",
+      "relation": "copied_after_helper_return",
+      "to_node": "code-85b32"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e20",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b32",
+      "relation": "copies_R0_to_R2",
+      "to_node": "reg-r2-result"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e21",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "reg-r2-result",
+      "relation": "value_used_for_first_result_store",
+      "to_node": "code-85b34"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e22",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b34",
+      "relation": "stores_to",
+      "to_node": "ram-ffff29f6"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e23",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "reg-r2-result",
+      "relation": "value_used_for_second_result_copy",
+      "to_node": "code-85b38"
+    },
+    {
+      "basis": "reported_observation",
+      "confidence": "high",
+      "edge_id": "e24",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "from_node": "code-85b38",
+      "relation": "copies_to",
+      "to_node": "ram-ffff37ae"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-query-load-0000F10E-00085B2E-5-FFFF84B8",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-query-ram-FFFF84B8",
+      "relation": "RAM_origin_for_R5_reported_by_per_call_tracker",
+      "to_node": "static-flow-query-r5-00085B2E"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-query-arg-0000F10E-00085B2E-5-FFFF84B8",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-query-r5-00085B2E",
+      "relation": "R5_query_origin_at_exact_lookup_call",
+      "to_node": "code-85b2e"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-result-taint-r2-0000F10E-00085B2E",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E"
+      ],
+      "from_node": "code-85b2e",
+      "relation": "lookup_result_taint_reaches_R2_store_source_per_static_tracker",
+      "to_node": "static-flow-store-source-r2-0000F10E-00085B2E"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-tainted-store-r2-0000F10E-00085B2E-00085B3A-0",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-store-source-r2-0000F10E-00085B2E",
+      "relation": "tainted_store_source_register_used_by_store_instruction",
+      "to_node": "static-flow-store-00085B3A-FFFF29F6"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-store-target-0000F10E-00085B2E-00085B3A-0",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-store-00085B3A-FFFF29F6",
+      "relation": "static_tracker_store_targets_RAM_cell",
+      "to_node": "static-flow-dest-ram-FFFF29F6"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-tainted-store-r2-0000F10E-00085B2E-00085B40-1",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-store-source-r2-0000F10E-00085B2E",
+      "relation": "tainted_store_source_register_used_by_store_instruction",
+      "to_node": "static-flow-store-00085B40-FFFF37AE"
+    },
+    {
+      "basis": "derived",
+      "confidence": "medium",
+      "edge_id": "static-flow-store-target-0000F10E-00085B2E-00085B40-1",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "from_node": "static-flow-store-00085B40-FFFF37AE",
+      "relation": "static_tracker_store_targets_RAM_cell",
+      "to_node": "static-flow-dest-ram-FFFF37AE"
+    }
+  ],
+  "evidence": [
+    {
+      "anchor": "Target ROM identity and payload at 0x0F10E-0x0F11D as recorded in WO70013",
+      "evidence_class": "target_rom_identity_and_payload",
+      "evidence_id": "ev:rom-f501",
+      "extraction_method": "Target ROM identity and payload hash from the closed target-side trace report",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "status": "reported_verified"
+    },
+    {
+      "anchor": "Sections 2-4: pointer, call, query, helper, result stores, first consumer; exact Stage-16 listing SHA-256 not stated",
+      "evidence_class": "closed_target_reader_trace_report",
+      "evidence_id": "ev:wo70013",
+      "extraction_method": "Structured extraction from the closed WO report; not an independent re-decode of the listing",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "aaf49a7082a4279ffe46bee37e112a022036071e",
+      "source_path": "CONTROL/WO70013.md",
+      "status": "reported_verified"
+    },
+    {
+      "anchor": "Exact object, target reader/query, first consumer and unresolved semantic boundary",
+      "evidence_class": "canonical_finding_record",
+      "evidence_id": "ev:fnd-000026",
+      "extraction_method": "Cross-check against current finding record",
+      "hash_algorithm": "git_blob_sha1",
+      "source_hash": "6447a9360f62ac182b871636e6c043b252b009d3",
+      "source_path": "FINDINGS/records/FND-000026.md",
+      "status": "current"
+    },
+    {
+      "anchor": "WO70040 independent byte read of file offsets 0x0F10E-0x0F11D and 16-byte payload SHA-256 recomputation",
+      "evidence_class": "target_rom_identity_and_payload",
+      "evidence_id": "ev:rom-f501-payload-direct",
+      "extraction_method": "Direct read of the committed 1048576-byte flat ROM image; MD5, image SHA-256 and payload SHA-256 recomputed with Python hashlib",
+      "hash_algorithm": "sha256",
+      "source_hash": "bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a",
+      "source_path": "EVIDENCE/VERSA f501.bin",
+      "status": "direct_observation_verified"
+    },
+    {
+      "anchor": "Production full_rom_analysis cat_calls row for target 0x0F10E, call PC 0x85B2E and helper sub_22E10",
+      "evidence_class": "per_call_static_reader_flow",
+      "evidence_id": "ev:static-flow-production-0F10E",
+      "extraction_method": "Production build_static_indices.full_rom_analysis() after pinned Stage-16 member extraction and parse_listing() ROM-byte concordance",
+      "hash_algorithm": "sha256",
+      "source_hash": "d50e2cc991f326fb987ac720d15953bbd85692826ac1225c3134d261f37ca463",
+      "source_path": "EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json",
+      "status": "production_byte_concordant_tracker_output"
+    },
+    {
+      "anchor": "Stage-16 listing identity used to produce this static per-call flow document",
+      "evidence_class": "target_disassembly_listing",
+      "evidence_id": "ev:static-flow-stage16-listing",
+      "extraction_method": "Listing member SHA-256 supplied by the pinned reader_trace_listing_source extraction; this adapter does not decode instructions",
+      "hash_algorithm": "sha256",
+      "source_hash": "148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549",
+      "source_path": "EVIDENCE/EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_14_GBR_BASE_RESOLVED.zip#EL19A_Complete_Disassembly_ANNOTATED_V3_NEXT6_16_ALL_PENDING_ANNOTATIONS(1).lst",
+      "status": "identity_pinned_not_instruction_redecoded"
+    }
+  ],
+  "lookup_contract": {
+    "axis_model": {
+      "axis_storage": "not_stored_in_ROM",
+      "derived_index_15_coordinate": 240,
+      "kind": "implicit_uniform",
+      "point_count": 16,
+      "reconciliation_status": "wording_conflict_requires_source_recheck",
+      "reported_grid_notation": "0,16,...,224 (WO70013 wording)",
+      "reported_last_coordinate": 224,
+      "start": 0,
+      "step": 16
+    },
+    "evidence_refs": [
+      "ev:wo70013",
+      "ev:fnd-000026"
+    ],
+    "helper_node": "helper-22e10",
+    "interpolation": {
+      "helper": "sub_231C8",
+      "interval_index_derived_from_query": true,
+      "method": "linear_between_adjacent_points"
+    },
+    "low_range_behavior": "For q < 0xF0, helper derives interval index/fraction and interpolates adjacent UBYTE entries.",
+    "query_source_node": "ram-ffff84b8",
+    "query_type": {
+      "register": "R5",
+      "signed": false,
+      "source_pc": "0x85B28",
+      "storage": "uint8",
+      "zero_extend_pc": "0x85B30"
+    },
+    "upper_boundary": {
+      "behavior": "return_last_element",
+      "element_index": 15,
+      "operator": ">=",
+      "query_value": 240
+    }
+  },
+  "nodes": [
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 61710
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:rom-f501",
+        "ev:rom-f501-payload-direct",
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "kind": "rom_object",
+      "label": "EL19A ROM object 0x0F10E",
+      "node_id": "rom-table-0f10e",
+      "properties": {
+        "byte_extent": 16,
+        "dimensions": [
+          16,
+          1
+        ],
+        "payload_sha256": "366fa16acec8b8645e5fa4c3462601f7060e369b2a0bc7cc030f74b113003605",
+        "storage_type": "uint8"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 548144
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "rom_literal_pool",
+      "label": "off_85D30 contains pointer 0x0000F10E",
+      "node_id": "literal-pool-85d30",
+      "properties": {
+        "bytes_hex": "00 00 F1 0E",
+        "decoded_pointer": 61710
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547626
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B2A loads table pointer into R4",
+      "node_id": "code-85b2a",
+      "properties": {
+        "mnemonic": "mov.l off_85D30,r4",
+        "register_out": "R4"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547624
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B28 reads query source",
+      "node_id": "code-85b28",
+      "properties": {
+        "register_out": "R0",
+        "source": "UBYTE[FFFF84B8]"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547632
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B30 delay slot zero-extends query into R5",
+      "node_id": "code-85b30",
+      "properties": {
+        "delay_slot_of": "0x85B2E",
+        "mnemonic": "extu.b r0,r5",
+        "query_register": "R5"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547630
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B2E invokes lookup helper",
+      "node_id": "code-85b2e",
+      "properties": {
+        "argument_registers": {
+          "query": "R5",
+          "table": "R4"
+        },
+        "call_id": "call:rom:VERSA_f501.bin#0x85B2E",
+        "mnemonic": "jsr @r2"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 142864
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "kind": "lookup_helper",
+      "label": "sub_22E10",
+      "node_id": "helper-22e10",
+      "properties": {
+        "interpolation_helper": "sub_231C8",
+        "lookup_kind": "implicit_uniform_1d"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF84B8"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "kind": "ram_cell",
+      "label": "UBYTE query source FFFF84B8",
+      "node_id": "ram-ffff84b8",
+      "properties": {
+        "semantic_label": "Existing NTC_AN27_rescaled(ECT) label; no table physical role inferred",
+        "signed": false,
+        "value_role": "lookup_query",
+        "width_bits": 8
+      }
+    },
+    {
+      "address": null,
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "register",
+      "label": "R0 helper return value",
+      "node_id": "reg-r0-result",
+      "properties": {
+        "register": "R0",
+        "value_type": "uint8"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF29F6"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "ram_cell",
+      "label": "UBYTE result staging FFFF29F6",
+      "node_id": "ram-ffff29f6",
+      "properties": {
+        "role": "result_staging",
+        "signed": false,
+        "width_bits": 8
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF37AE"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "ram_cell",
+      "label": "UBYTE result staging FFFF37AE",
+      "node_id": "ram-ffff37ae",
+      "properties": {
+        "role": "result_staging",
+        "signed": false,
+        "width_bits": 8
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547658
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013",
+        "ev:fnd-000026"
+      ],
+      "kind": "consumer",
+      "label": "First meaningful consumer: zero/nonzero qualification",
+      "node_id": "code-85b4a",
+      "properties": {
+        "branch_condition": "zero/nonzero",
+        "function": "sub_85AF4",
+        "read_source": "UBYTE[FFFF37AE]"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547694
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "Alternate branch reads FFFF29F6 and copies to FFFF37AE",
+      "node_id": "code-85b6e",
+      "properties": {
+        "destination": "UBYTE[FFFF37AE]",
+        "source": "UBYTE[FFFF29F6]"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF3614"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "branch_condition",
+      "label": "Precondition FFFF3614.bit7 must be clear",
+      "node_id": "ram-ffff3614-bit7",
+      "properties": {
+        "bit": 7,
+        "required_value": 0,
+        "role": "lookup_gate"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF3615"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "branch_condition",
+      "label": "Precondition FFFF3615.bit7 must be set",
+      "node_id": "ram-ffff3615-bit7",
+      "properties": {
+        "bit": 7,
+        "required_value": 1,
+        "role": "lookup_gate"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF99F0"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "branch_condition",
+      "label": "Post-call selector FFFF99F0.bit6",
+      "node_id": "ram-ffff99f0-bit6",
+      "properties": {
+        "bit": 6,
+        "meaning": "unresolved",
+        "role": "result_staging_selector"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFFA6FC"
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "ram_cell",
+      "label": "UBYTE state flag FFFFA6FC",
+      "node_id": "ram-ffffa6fc",
+      "properties": {
+        "semantic_meaning": "unresolved",
+        "width_bits": 8,
+        "write_condition": "zero lookup result",
+        "written_value": 1
+      }
+    },
+    {
+      "address": null,
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "register",
+      "label": "R4 table pointer argument",
+      "node_id": "reg-r4-table",
+      "properties": {
+        "register": "R4",
+        "value": "0x0F10E"
+      }
+    },
+    {
+      "address": null,
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "register",
+      "label": "R5 unsigned query argument",
+      "node_id": "reg-r5-query",
+      "properties": {
+        "register": "R5",
+        "source": "UBYTE[FFFF84B8]"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547634
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B32 copies lookup return R0 to R2",
+      "node_id": "code-85b32",
+      "properties": {
+        "mnemonic": "mov r0,r2",
+        "register_in": "R0",
+        "register_out": "R2"
+      }
+    },
+    {
+      "address": null,
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "register",
+      "label": "R2 result value before RAM stores",
+      "node_id": "reg-r2-result",
+      "properties": {
+        "register": "R2",
+        "value_type": "uint8"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547636
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B34 store to FFFF29F6",
+      "node_id": "code-85b34",
+      "properties": {
+        "destination": "UBYTE[FFFF29F6]"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547640
+      },
+      "confidence": "high",
+      "evidence_refs": [
+        "ev:wo70013"
+      ],
+      "kind": "code_site",
+      "label": "0x85B38 copy to FFFF37AE",
+      "node_id": "code-85b38",
+      "properties": {
+        "destination": "UBYTE[FFFF37AE]"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF84B8"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "kind": "ram_cell",
+      "label": "Per-call query source FFFF84B8",
+      "node_id": "static-flow-query-ram-FFFF84B8",
+      "properties": {
+        "role": "query_origin_from_per_call_tracker"
+      }
+    },
+    {
+      "address": null,
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E"
+      ],
+      "kind": "register",
+      "label": "R5 per-call query origin at 0x85B2E",
+      "node_id": "static-flow-query-r5-00085B2E",
+      "properties": {
+        "origin_ram": "0xFFFF84B8",
+        "register": "R5",
+        "transform_unresolved": true
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547642
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "kind": "code_site",
+      "label": "Static-flow RAM store b to 0xFFFF29F6 at 0x85B3A",
+      "node_id": "static-flow-store-00085B3A-FFFF29F6",
+      "properties": {
+        "function": "sub_85AF4",
+        "instruction": "mov.b   r2, @(r0,r6)",
+        "source_register": "R2",
+        "taint_class": "taint",
+        "width": "b"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF29F6"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E"
+      ],
+      "kind": "ram_cell",
+      "label": "Static-flow destination RAM 0xFFFF29F6",
+      "node_id": "static-flow-dest-ram-FFFF29F6",
+      "properties": {
+        "role": "per_call_lookup_result_destination",
+        "width": "b"
+      }
+    },
+    {
+      "address": null,
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "kind": "register",
+      "label": "R2 tainted store source for exact lookup call 0x85B2E",
+      "node_id": "static-flow-store-source-r2-0000F10E-00085B2E",
+      "properties": {
+        "call_pc": "0x85B2E",
+        "intermediate_copy_transform_path_reconstructed": false,
+        "register": "R2",
+        "taint_proven_by_static_tracker": true,
+        "target_ea": "0x0000F10E"
+      }
+    },
+    {
+      "address": {
+        "space": "rom_ea",
+        "value": 547648
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E",
+        "ev:static-flow-stage16-listing"
+      ],
+      "kind": "code_site",
+      "label": "Static-flow RAM store b to 0xFFFF37AE at 0x85B40",
+      "node_id": "static-flow-store-00085B40-FFFF37AE",
+      "properties": {
+        "function": "sub_85AF4",
+        "instruction": "mov.b   r2, @(r0,r4)",
+        "source_register": "R2",
+        "taint_class": "taint",
+        "width": "b"
+      }
+    },
+    {
+      "address": {
+        "space": "ram_ea",
+        "value": "0xFFFF37AE"
+      },
+      "confidence": "medium",
+      "evidence_refs": [
+        "ev:static-flow-production-0F10E"
+      ],
+      "kind": "ram_cell",
+      "label": "Static-flow destination RAM 0xFFFF37AE",
+      "node_id": "static-flow-dest-ram-FFFF37AE",
+      "properties": {
+        "role": "per_call_lookup_result_destination",
+        "width": "b"
+      }
+    }
+  ],
+  "schema_version": "sh705x-reader-trace-graph-v0.1",
+  "semantic_disposition": {
+    "donor_hypothesis": "mTSTNGTM",
+    "evidence_grade": "Reader-Verified as recorded in FND-000026",
+    "physical_identity": "unresolved",
+    "promotion": "not_supported",
+    "provisional_name": "Cranking Fuel Value vs Coolant"
+  },
+  "target_object": {
+    "address_space": "rom_ea",
+    "byte_extent": 16,
+    "dimensions": [
+      16,
+      1
+    ],
+    "ea": 61710,
+    "object_ref": "candidate:EL19A:f501:0x0F10E",
+    "payload_hex": "FA FA 96 4B 3C 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D 2D",
+    "payload_sha256": "366fa16acec8b8645e5fa4c3462601f7060e369b2a0bc7cc030f74b113003605",
+    "storage_type": "uint8"
+  },
+  "trace_id": "trace:EL19A:f501:0x0F10E:call-0x85B2E:v0.1",
+  "unresolved_boundaries": [
+    {
+      "at_node": "code-85b2e",
+      "boundary_id": "listing-provenance",
+      "reason": "WO70013 cites the Stage-16 listing but does not record its exact SHA-256; this graph is not an independent listing re-decode.",
+      "required_evidence": "Exact Stage-16 LST path and SHA-256 plus bounded re-read of call/helper/consumer instruction ranges."
+    },
+    {
+      "at_node": "code-85b4a",
+      "boundary_id": "beyond-first-consumer",
+      "reason": "The bounded path reaches internal zero/nonzero qualification, not a named actuator, injector, fuel-quantity or physical output endpoint.",
+      "required_evidence": "Separately bounded target-side producer/consumer path to a demonstrated physical command or proven software output."
+    },
+    {
+      "at_node": "rom-table-0f10e",
+      "boundary_id": "physical-function-and-units",
+      "reason": "The provisional cranking-fuel label and donor mTSTNGTM hypothesis are not established by target-side reader and first-consumer evidence.",
+      "required_evidence": "Target-side semantic evidence linking query, downstream calculation and named output with compatible units/branches."
+    },
+    {
+      "at_node": "ram-ffff3614-bit7",
+      "boundary_id": "precondition-bit-meaning",
+      "reason": "FFFF3614.bit7 and FFFF3615.bit7 are traced as gating conditions, but their semantic names/roles are unproven.",
+      "required_evidence": "Producer and consumer provenance for both RAM bits."
+    },
+    {
+      "at_node": "helper-22e10",
+      "boundary_id": "grid-endpoint-wording",
+      "reason": "The report notation 0,16,...,224 conflicts with index-15 arithmetic at 240; preserve until exact helper instructions are re-read.",
+      "required_evidence": "Re-read sub_22E10/loc_2350C in the exact Stage-16 listing and verify query-to-index/fraction mapping and terminal coordinate."
+    }
+  ]
+}
