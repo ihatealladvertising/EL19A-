@@ -7,7 +7,7 @@
   "current_xml_baseline": "public/assets/aistudio/EL19A_merged_definition_v3_08a300db.xml",
   "current_xml_fragment": "EL19A_ignition_decoded_fragment_33ea8e67.xml",
   "discovery_staging": "CALIBRATIONS/discovered_tables_catalog.csv",
-  "legacy_cutoff_id": 65163,
+  "legacy_cutoff_id": 70038,
   "default_lease_hours": 24,
   "protected_generated_files": [
     "CONTROL/active_work_orders.md",
