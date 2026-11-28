@@ -26,12 +26,18 @@ MEMBER = "synthetic_stage16.lst"
 
 def make_listing():
     lines = []
-    helpers = ("sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8")
+    helpers = ("sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8", "sub_233CC", "sub_2340C", "sub_231C8")
     for index, helper in enumerate(helpers):
         start = 0x22000 + (index * 0x100)
         lines.append(f"{helper}:")
         lines.append(f"{start:08X}  2F 26  CODE  mov.l @r2,r15 ; synthetic helper")
         lines.append(f"{start + 2:08X}  65 2F  CODE  mov.l @r2,r5 ; synthetic helper")
+    lines.append("loc_23508:")
+    lines.append("00023508  90 07  CODE  mov.w word_23550,r0 ; h'E0")
+    lines.append("0002350A  65 5C  CODE  extu.b r5,r5")
+    lines.append("loc_2350C:")
+    lines.append("0002350C  90 0F  CODE  mov.w word_23550,r0 ; h'F0")
+    lines.append("0002350E  65 5C  CODE  extu.b r5,r5")
     call_pcs = (0x85B2E, 0x648D8, 0x5B3C0)
     for pc in call_pcs:
         lines.append("sub_90000:")
@@ -98,8 +104,12 @@ class ListingSourceTests(unittest.TestCase):
         records = parse_listing_records(make_listing())
         windows = extract_helper_and_call_windows(records)
         self.assertEqual(set(windows["helper_functions"]), {
-            "sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8"
+            "sub_22E10", "sub_22FAC", "sub_22B44", "sub_22DF8",
+            "sub_233CC", "sub_2340C", "sub_231C8",
         })
+        self.assertEqual(set(windows["helper_entry_points"]), {"loc_23508", "loc_2350C"})
+        self.assertEqual(windows["helper_entry_points"]["loc_23508"]["instructions"][0]["pc"], 0x23508)
+        self.assertEqual(windows["helper_entry_points"]["loc_2350C"]["instructions"][0]["pc"], 0x2350C)
         self.assertEqual(set(windows["call_sites"]), {"0x85B2E", "0x648D8", "0x5B3C0"})
         self.assertEqual(windows["helper_functions"]["sub_22B44"]["instruction_count"], 2)
         call = windows["call_sites"]["0x5B3C0"]
