@@ -1,0 +1,76 @@
+name: Nissan ROM Master Index & Structural Families
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "CONTROL/INTEGRATION_STATUS.md"
+      - "tools/nissan_rom_family_index.py"
+      - "tools/run_nissan_rom_family_index.py"
+      - "tools/nissan_sh705x_workbench.py"
+      - "tools/romraider_ref_index.py"
+      - "tools/sh705x_rom_loader.py"
+      - "tools/sh7058_cross_rom_scanner.py"
+      - "EVIDENCE/rr roms/**"
+      - "EVIDENCE/NISSAN_ROM_ID_CROSSWALK_2026-11-27.tsv"
+      - "EVIDENCE/NISSAN_ROM_VEHICLE_CATALOG_2026-11-27.tsv"
+      - "EVIDENCE/NISSAN_ECU_FID_CATALOG_2026-11-27.tsv"
+      - "EVIDENCE/NISSAN_DAT_DETAILED_SCAN_INDEX_2026-11-27.tsv"
+      - "EVIDENCE/NISSAN_BASE_TABLE_SET_2026-11-27/NISSAN_BASE_TABLE_OBJECTS_2026-11-27.tsv.gz"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nissan-rom-family-index-main
+  cancel-in-progress: false
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build scan inventory, reference index and relational family index
+        run: |
+          python3 tools/run_nissan_rom_family_index.py \
+            --scan-dir "EVIDENCE/rr roms" \
+            --out-dir "EVIDENCE/NISSAN_ROM_FAMILY_INDEX"
+      - name: Retain generated index bundle and per-ROM scan evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nissan-rom-family-index
+          path: EVIDENCE/NISSAN_ROM_FAMILY_INDEX/
+          if-no-files-found: error
+          retention-days: 90
+      - name: Commit durable master index and cross-reference outputs only while integration gate is unlocked
+        shell: bash
+        run: |
+          if ! grep -qE '^\*\*State:\*\* UNLOCKED$' CONTROL/INTEGRATION_STATUS.md; then
+            echo "Integration gate is LOCKED; generated results retained as a workflow artifact only."
+            exit 0
+          fi
+          git fetch origin main
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+            echo "main advanced during the scan; refusing to publish a stale index. Re-run against current main."
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add EVIDENCE/NISSAN_ROM_FAMILY_INDEX/*.tsv EVIDENCE/NISSAN_ROM_FAMILY_INDEX/*.json
+          git add EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/scan_inventory.tsv
+          git add EVIDENCE/NISSAN_ROM_FAMILY_INDEX/workbench/rr_roms_reference_index.json
+          if git diff --cached --quiet; then
+            echo "Index outputs are already current."
+          else
+            git commit -m "Build Nissan ROM master and structural-family index"
+            git push origin HEAD:main
+          fi
