@@ -61,6 +61,14 @@ The adapter preserves evidence grade by relationship:
 
 The input evidence references must already exist in the graph and identify the source output hashes and run/listing manifest. The adapter is idempotent by deterministic node/edge IDs. It should be used only after the existing index runs have passed their own ROM/listing concordance and provenance gates.
 
+## Exact-image helper contracts
+
+`tools/reader_trace_helper_profiles.py` holds a deliberately small, report-sourced helper registry. A profile is keyed by the exact tuple:
+
+`(processor_family, decoded_rom_sha256, helper_ea)`
+
+No name-only, nearby-address, cross-ROM or cross-CPU fallback is allowed. Current EL19A/f501 profiles cover `sub_22E10` (16-point implicit UBYTE), `sub_22FAC` (32-point explicit-axis UWORD), `sub_22B44` (two-axis UBYTE map) and `sub_22DF8` (8-point implicit UBYTE). Each attached profile carries its evidence refs, source listing hash if recorded, report-sourced basis and limitations. Missing required evidence causes attachment to fail. A successful attachment does not upgrade `reported_observation` to `direct_observation`.
+
 ## Golden-case caveat: EL19A 0x0F10E
 
 WO70013 describes the 16-point implicit grid as `0,16,...,224`, but 16 points at step 16 from zero give 240 at index 15. The reported `q >= 0xF0` terminal return is consistent with index 15 being 240. This graph records the discrepancy as unresolved. It also records `source_listing_sha256: null` and `independent_redecode_performed: false` because the closed report does not preserve the exact Stage-16 listing hash. Neither gap is silently filled.
