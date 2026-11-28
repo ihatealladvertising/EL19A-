@@ -37,13 +37,13 @@ _No active hex/key scope locks held._
 
 | WO | Declared Status | Effective State | Priority | Depends On | Title |
 |---|---|---|---|---|---|
-| [WO70040](WO70040.md) | `RESERVED` | READY | P1 | — | Reconstruct and evidence-audit the 0x0F10E reader-trace graph |
 | [WO70041](WO70041.md) | `RESERVED` | READY | P3 | — | Advisory audit of SH-2 reader-analysis reuse and test coverage |
 
 ## Recent Closed Structured Work Orders
 
 | WO | Lane | Priority | Owner | Closed/Claimed Timestamp | Title |
 |---|---|---|---|---|---|
+| [WO70040](WO70040.md) | `aistudio` | P1 | `aistudio-readertrace-worker1` | `2026-11-28T04:47:27Z` | Reconstruct and evidence-audit the 0x0F10E reader-trace graph |
 | [WO70039](WO70039.md) | `aistudio` | P1 | `aistudio-el19a-coordinator` | `2026-11-28T02:32:38Z` | Nissan master-ROM and structural-family index |
 | [WO70002](WO70002.md) | `aistudio` | P1 | `aistudio-el13a-diff` | `2026-11-24T03:34:07Z` | EL19A vs EL13A Same-FID Calibration Diff and Unmapped Target Discovery |
 | [WO70001](WO70001.md) | `aistudio` | P1 | `aistudio-governance-v4` | `2026-11-22T03:43:00Z` | Decentralized Work-Order Ownership, Partitioned Lanes, and CI Register Rebuilder |
