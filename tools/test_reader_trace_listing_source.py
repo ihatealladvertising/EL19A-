@@ -119,7 +119,7 @@ class ListingSourceTests(unittest.TestCase):
             extract_helper_and_call_windows(records)
 
     def test_duplicate_code_pc_is_rejected(self):
-        payload = make_listing() + b"00022E10  2F 26  CODE  mov.l @r2,r15\n"
+        payload = make_listing() + b"00022000  2F 26  CODE  mov.l @r2,r15\n"
         records = parse_listing_records(payload)
         with self.assertRaises(ListingSourceError):
             extract_helper_and_call_windows(records)
