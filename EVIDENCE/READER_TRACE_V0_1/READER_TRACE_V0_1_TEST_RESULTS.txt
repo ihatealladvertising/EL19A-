@@ -1,4 +1,4 @@
-Reader Trace v0.1 — geometry, exact-image helper profiles, indexer bridges and per-call static flow
+Reader Trace v0.1 — geometry, exact-image helper profiles, indexer bridges and production per-call static flow
 
 Golden graph fixtures:
   - EL19A 0x0F10E: 16-point UBYTE vector; 23 nodes / 24 edges / 5 unresolved boundaries.
@@ -12,14 +12,14 @@ Reader Trace-specific test counts:
   - test_reader_trace_helper_profiles.py: 13 exact-image helper-profile tests.
   - test_reader_trace_pipeline.py: 8 composed-pipeline tests.
   - test_reader_trace_listing_source.py: 8 pinned listing-source tests.
-  - test_reader_trace_static_flow_adapter.py: 18 new exact per-call static-flow adapter tests.
-  Total Reader Trace-specific tests: 85.
+  - test_reader_trace_static_flow_adapter.py: 19 exact per-call static-flow adapter tests, including explicit R2 store-source handling.
+  Total Reader Trace-specific tests: 86.
 
 Latest full regression:
-  GitHub Actions run: 46109906384
-  https://github.com/ihatealladvertising/EL19A-/actions/runs/46109906384
-  Implementation commit: b5595906829ec1828f6a793b5ab4b499e17ff744
-  Result: 152 tests run; 150 passed, 2 optional production checks skipped, zero failures.
+  GitHub Actions run: 46110829919
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46110829919
+  Tested commit: 416113b8a252033ed8c4c929a65ead1ac743dffc
+  Result: 153 tests run; 151 passed, 2 optional production checks skipped, zero failures.
   Compile step passed.
   Pinned Stage-16 archive/member verification and bounded helper/caller-window extraction passed.
   Synthetic regression step passed.
@@ -28,9 +28,47 @@ Per-call static-flow adapter:
   - tools/reader_trace_static_flow_adapter.py serializes raw build_static_indices.full_rom_analysis().cat_calls into deterministic JSON, preserving each table EA, reader PC, function/helper, query-origin tokens and destination stores.
   - Export pins the decoded ROM SHA-256, exact Stage-16 listing-member SHA-256 and listing path. The emitted JSON is itself SHA-256-pinned by the graph evidence record.
   - Graph enrichment selects only the exact target EA + call PC + helper EA. A table with multiple readers does not cause query/result data to be spread across calls.
-  - Query RAM origins and taint-proven R0 stores are represented as derived edges. Near-call stores remain heuristic and create unresolved boundaries; they are not linked as lookup-result value flow.
+  - Query RAM origins are represented as derived paths. Taint-proven stores use the explicit source-register operand parsed from their byte-concordant store instruction; the adapter does not assume R0.
+  - The production call's stores use R2 (mov.b r2, @(r0,r6) and mov.b r2, @(r0,r4)). The tracker proves these store values are tainted by the exact call; the intermediate copy/transform path into R2 is not reconstructed by this adapter.
+  - Near-call stores remain heuristic and create unresolved boundaries; they are not linked as lookup-result value flow.
   - Pipeline suppresses per-address aggregate query/result fields when exact per-call input is supplied. Calls without per-call input remain backward-compatible.
-  - Listing identity can populate graph coverage, but independent_redecode_performed remains false. No opcode decode or semantic promotion is claimed.
+  - Listing identity can populate graph coverage, but independent_redecode_performed remains false. No semantic promotion is claimed.
+
+Production per-call static-flow result — EL19A f501 / 0x0F10E:
+  Production workflow: 46110962817 (success)
+  https://github.com/ihatealladvertising/EL19A-/actions/runs/46110962817
+  Production output commit: dcb3adfb1c1c4cfafb72eb3419bf2c704b38b9a1
+  Serialized publication workflow commit: 43637f1c07eb4b3f5221ef2b2a5bbee38e1cc2eb
+
+  Input identity:
+    ROM bytes: 1,048,576
+    ROM MD5: 46991697c502052752a2cabcb84c9e27
+    ROM SHA-256: bfe037e8e6c389e2a90214047058eb6dc3bcaaaac5b5931bf98a3f5d9f64fd6a
+    Stage-16 listing member SHA-256: 148385bbec91f6a491dcaa403962836f709c2f273df9a17ec51f1dea5f7f4549
+    Parsed byte-concordant CODE rows: 306,688
+    discovered_tables_catalog.csv has no 0x0F10E row; the run used only the explicit address-only seed for this already-selected golden target. No geometry or semantic metadata was fabricated.
+
+  Exact per-call record:
+    Target EA: 0x0F10E
+    Matching reader rows: 1
+    Reader PC: 0x85B2E
+    Instruction bytes: 42 0B (jsr @r2)
+    Enclosing function: sub_85AF4
+    Helper: sub_22E10
+    Query origin: r5<-FFFF84B8
+    Taint-proven byte store 1: FFFF29F6 at 0x85B3A, instruction mov.b r2, @(r0,r6)
+    Taint-proven byte store 2: FFFF37AE at 0x85B40, instruction mov.b r2, @(r0,r4)
+
+  Published outputs:
+    EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_calls.json
+      SHA-256: d50e2cc991f326fb987ac720d15953bbd85692826ac1225c3134d261f37ca463
+    EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E_static_flow_manifest.json
+      Git blob SHA: 67f6d08ba291915214174f70d645e5873ebe7714
+    EVIDENCE/READER_TRACE_V0_1/EL19A_F501_0F10E.reader_trace.production_enriched.json
+      SHA-256: ba2d59170bd80cfe90b5fa7ea630d56b6c584959e72f9f117cb71a6ecfdd7d92
+      Graph: 30 nodes / 31 edges; validate_trace_graph passed with the pre-existing implicit-grid endpoint warning retained.
+
+  The production-enriched graph is a separate artifact. The original golden graph remains unchanged. The single validator warning is the existing 224/240 implicit-grid endpoint conflict; it remains unresolved and was not suppressed.
 
 Existing composed pipeline:
   tools/reader_trace_pipeline.py combines byte-concordant ROM read rows, conservative per-address summary evidence, optional exact per-call static flow, exact-image helper profile attachment and graph validation.
@@ -44,9 +82,12 @@ Geometry:
   - All graph edges retain evidence basis explicitly; report-derived edges are not represented as fresh instruction observations.
 
 Evidence and production boundary:
-  The 0x0F10E and 0x10F8A cases remain extracted from prior closed reports, not independent instruction re-decodes. The 0x0AFF2 graph cites the exact Stage-16 listing SHA recorded by WO70033, but its graph remains structured report extraction.
-  The new per-call adapter was tested against synthetic full_rom_analysis-shaped records; no production per-call static-flow document was generated or attached to a target graph in this implementation stage.
-  The new source-listing identity contract carries the pinned listing hash but does not itself decode instructions. Physical meanings, donor semantics, query-transform details and downstream value causality remain unpromoted.
+  The 0x0F10E and 0x10F8A cases retain their prior report-derived graph content; the new production-enriched 0x0F10E artifact adds byte-concordant static-tracker evidence for its exact reader call and stores. It does not claim a new independent semantic re-decode.
+  The 0x0AFF2 graph cites the exact Stage-16 listing SHA recorded by WO70033, but its graph remains structured report extraction.
+  Physical meanings, donor semantics, query-transform details, intermediate copy instructions for the R2-tainted stores and broader downstream value causality remain unpromoted.
+
+Findings disposition:
+  NOT REQUIRED for WO70043. The production call/helper/query/store identities agree with FND-000026, which already records the R0-to-R2 result copy and the two RAM destinations. This work adds provenance and the exact source-register-aware graph representation; it does not change the calibration object's structural identity, physical meaning, axes, scale, units or XML disposition. No FND/REC record was created or altered.
 
 Limit:
-  The implementation now has a graph contract, byte-concordant indexer adapter, exact per-call static-flow adapter/exporter, exact-image helper-profile attachment and composed pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
+  The implementation now has a graph contract, byte-concordant indexer adapter, exact per-call static-flow adapter/exporter, production-enriched graph, exact-image helper-profile attachment and composed pipeline. It is not yet a generalized instruction-level semantic reader tracer, whole-ROM CFG/interprocedural engine, or proof of physical calibration meaning.
