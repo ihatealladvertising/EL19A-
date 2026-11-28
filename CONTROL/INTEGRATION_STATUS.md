@@ -1,3 +1,8 @@
+**Integrator:** ChatGPT — final WO70044 integration release (2026-11-28)
+**Purpose:** Final report narrative, target outputs, test result and generated register all verified on main. WO70044 CLOSED; auto-register run 46112937250 passed and the updated WO record is read back in Recent Closed; no active claims/scope locks remain. Final production run 46112588137 and closeout regression run 46112824006 passed. No pending file publication remains in this work batch.
+**Lock released:** 2026-11-28T05:37:58.360Z — latest main 01de687c8f345262f880aa96714aa1158d22a9a0; closeout state verified.
+**State:** UNLOCKED
+
 **Integrator:** ChatGPT — WO70044 closeout narrative correction (2026-11-28)
 **Purpose:** Correct one stale sentence in the CLOSED WO70044 report to reflect the successful auto-register run 46112823979 and verified live-index/dashboard readback. No technical evidence or calibration interpretation changes.
 **Lock acquired:** 2026-11-28T05:37:08.414Z — latest main f27063c6aa8fcb540d7a83017fa331e45ba93cb1; prior gate state UNLOCKED; no active claims or scope locks.
